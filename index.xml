@@ -45,7 +45,25 @@
 &lt;pre&gt;&lt;code&gt;hugo new post/文章名称.md
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以使用Typora来编辑文章，就像我现在这样。&lt;/p&gt;
 &lt;h3 id=&#34;step5-部署到github&#34;&gt;Step5 部署到github&lt;/h3&gt;
-&lt;p&gt;进入自己的github，新建一个repository，注意名称要使用&lt;strong&gt;小写昵称.github.io&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;首先进入自己的github，新建一个repository，注意名称要使用&lt;strong&gt;小写昵称全名.github.io&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在终端执行：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;hugo --theme=diary --baseUrl=&amp;quot;https://gsemir0418.github.io/&amp;quot; --buildDrafts
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时在根目录下，hugo为我们生成了一个public文件夹，我们只需利用github将此文件夹上传到库中即可。&lt;/p&gt;
+&lt;p&gt;在public文件夹下，进行git初始化。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git init
+
+git add .
+
+git commit -m &amp;quot;v0&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时需要注册GitHub信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git config --global user.email &amp;quot;you@example.com&amp;quot;
+git config --global user.name &amp;quot;Your Name&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注册完成后再次提交即可。&lt;/p&gt;
+&lt;p&gt;关联远端git仓库：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git remote add orgin https://github.com/GSemir0418/gsemir0418.github.io.git
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时就可以将文件推上GitHub仓库：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git push -u orgin master
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最终按照提示进行登录验证即可，通过&lt;code&gt;https://gsemir0418.github.io&lt;/code&gt;实现远端访问个人博客。&lt;/p&gt;
 - https://gsemir0418.github.io/post/startblog/ - </description>
         </item>
     

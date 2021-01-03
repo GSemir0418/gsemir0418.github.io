@@ -458,13 +458,31 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 </code></pre><p>主题会自动下载至根目录下的<code>themes</code>文件夹中。下载完成后，启动hugo本地服务并指定该主题：</p>
 <pre><code>hugo server -t diary --buildDrafts
 </code></pre><p>可以通过访问<code>localhost:1313</code>进入本地部署的博客站点。可以看到，hugo已经为我们配置好了下载的主题。</p>
-<p><img src="img/image-20210103175858811.png" alt="image-20210103175858811"></p>
+<p><img src="../img/image-20210103175858811.png" alt="image-20210103175858811"></p>
 <h3 id="step4-新建博客">Step4 新建博客</h3>
 <p>同样，在终端中执行：</p>
 <pre><code>hugo new post/文章名称.md
 </code></pre><p>可以使用Typora来编辑文章，就像我现在这样。</p>
 <h3 id="step5-部署到github">Step5 部署到github</h3>
-<p>进入自己的github，新建一个repository，注意名称要使用<strong>小写昵称.github.io</strong></p>
+<p>首先进入自己的github，新建一个repository，注意名称要使用<strong>小写昵称全名.github.io</strong>。</p>
+<p>在终端执行：</p>
+<pre><code>hugo --theme=diary --baseUrl=&quot;https://gsemir0418.github.io/&quot; --buildDrafts
+</code></pre><p>此时在根目录下，hugo为我们生成了一个public文件夹，我们只需利用github将此文件夹上传到库中即可。</p>
+<p>在public文件夹下，进行git初始化。</p>
+<pre><code>git init
+
+git add .
+
+git commit -m &quot;v0&quot;
+</code></pre><p>此时需要注册GitHub信息</p>
+<pre><code>git config --global user.email &quot;you@example.com&quot;
+git config --global user.name &quot;Your Name&quot;
+</code></pre><p>注册完成后再次提交即可。</p>
+<p>关联远端git仓库：</p>
+<pre><code>git remote add orgin https://github.com/GSemir0418/gsemir0418.github.io.git
+</code></pre><p>此时就可以将文件推上GitHub仓库：</p>
+<pre><code>git push -u orgin master
+</code></pre><p>最终按照提示进行登录验证即可，通过<code>https://gsemir0418.github.io</code>实现远端访问个人博客。</p>
 
                     
                     <HR width="100%" id="EOF">
