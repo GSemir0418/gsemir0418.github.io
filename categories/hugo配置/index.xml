@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>hugo配置 on My New Hugo Site</title>
+    <title>hugo配置 on GSemir Blog</title>
     <link>https://gsemir0418.github.io/categories/hugo%E9%85%8D%E7%BD%AE/</link>
-    <description>Recent content in hugo配置 on My New Hugo Site</description>
+    <description>Recent content in hugo配置 on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 03 Jan 2021 16:41:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/hugo%E9%85%8D%E7%BD%AE/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>StartBlog</title>
-      <link>https://gsemir0418.github.io/post/startblog/</link>
+      <link>https://gsemir0418.github.io/posts/startblog/</link>
       <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/post/startblog/</guid>
+      <guid>https://gsemir0418.github.io/posts/startblog/</guid>
       <description>Step1 安装hugo  下载链接：https://github.com/gohugoio/hugo/releases
  选择最新版本进行安装（建议安装hugo_extended版本）。
 注意解压后需配置环境变量，可以使用version命令测试是否配置成功：

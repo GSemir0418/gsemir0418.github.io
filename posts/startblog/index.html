@@ -16,7 +16,54 @@
 
 
 
+<meta property="og:title" content="StartBlog" />
+<meta property="og:description" content="Step1 安装hugo  下载链接：https://github.com/gohugoio/hugo/releases
+ 选择最新版本进行安装（建议安装hugo_extended版本）。
+注意解压后需配置环境变量，可以使用version命令测试是否配置成功：
+hugo version Step2 新建博客站点 使用命令行，输入如下命令新建博客站点：
+hugo new site BLOGNAME Step3 下载并配置主题  主题下载链接：https://themes.gohugo.io/
+ 官网提供了许多主题供用户选择，按照主题下的安装配置说明进行主题的下载与配置。
+这里以Diary主题为例，首先在博客的根目录下，使用终端进行git初始化：
+git init 并执行：
+git submodule add https://github.com/AmazingRise/hugo-theme-diary.git themes/diary 主题会自动下载至根目录下的themes文件夹中。下载完成后，启动hugo本地服务并指定该主题：
+hugo server -t diary --buildDrafts 可以通过访问localhost:1313进入本地部署的博客站点。可以看到，hugo已经为我们配置好了下载的主题。
+Step4 新建博客 同样，在终端中执行：
+hugo new post/文章名称.md 可以使用Typora来编辑文章，就像我现在这样。
+Step5 部署到github 首先进入自己的github，新建一个repository，注意名称要使用小写昵称全名.github.io。
+在终端执行：
+hugo --theme=diary --baseUrl=&quot;https://gsemir0418.github.io/&quot; --buildDrafts 此时在根目录下，hugo为我们生成了一个public文件夹，我们只需利用github将此文件夹上传到库中即可。
+在public文件夹下，进行git初始化。
+git init git add . git commit -m &quot;v0&quot; 此时需要注册GitHub信息
+git config --global user.email &quot;you@example.com&quot; git config --global user." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/posts/startblog/" />
+<meta property="article:published_time" content="2021-01-03T16:41:51+08:00" />
+<meta property="article:modified_time" content="2021-01-03T16:41:51+08:00" /><meta property="og:site_name" content="My Blog" />
 
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="StartBlog"/>
+<meta name="twitter:description" content="Step1 安装hugo  下载链接：https://github.com/gohugoio/hugo/releases
+ 选择最新版本进行安装（建议安装hugo_extended版本）。
+注意解压后需配置环境变量，可以使用version命令测试是否配置成功：
+hugo version Step2 新建博客站点 使用命令行，输入如下命令新建博客站点：
+hugo new site BLOGNAME Step3 下载并配置主题  主题下载链接：https://themes.gohugo.io/
+ 官网提供了许多主题供用户选择，按照主题下的安装配置说明进行主题的下载与配置。
+这里以Diary主题为例，首先在博客的根目录下，使用终端进行git初始化：
+git init 并执行：
+git submodule add https://github.com/AmazingRise/hugo-theme-diary.git themes/diary 主题会自动下载至根目录下的themes文件夹中。下载完成后，启动hugo本地服务并指定该主题：
+hugo server -t diary --buildDrafts 可以通过访问localhost:1313进入本地部署的博客站点。可以看到，hugo已经为我们配置好了下载的主题。
+Step4 新建博客 同样，在终端中执行：
+hugo new post/文章名称.md 可以使用Typora来编辑文章，就像我现在这样。
+Step5 部署到github 首先进入自己的github，新建一个repository，注意名称要使用小写昵称全名.github.io。
+在终端执行：
+hugo --theme=diary --baseUrl=&quot;https://gsemir0418.github.io/&quot; --buildDrafts 此时在根目录下，hugo为我们生成了一个public文件夹，我们只需利用github将此文件夹上传到库中即可。
+在public文件夹下，进行git初始化。
+git init git add . git commit -m &quot;v0&quot; 此时需要注册GitHub信息
+git config --global user.email &quot;you@example.com&quot; git config --global user."/>
 
 
 
@@ -57,6 +104,24 @@
 
 
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'your client id',
+  clientSecret: 'your client secret',
+  repo: 'repo name',
+  owner: 'user',
+  admin: ['user'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
+
 
 
 
@@ -71,13 +136,59 @@
     <a class="a-block nav-head false" href="https://gsemir0418.github.io/">
     
         <div class="nav-title">
-            My New Hugo Site
+            GSemir Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            个人技术博客
         </div>
         
     </a>
 
     <div class="nav-link-list">
         
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                Archive
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories">
+                Categories
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags">
+                Tags
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/index.xml">
+                RSS Feed
+            </a>
+            
         
     </div>
 
@@ -87,12 +198,12 @@
         
 Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
 <br>
-Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
 <br>
 
 &copy;
 	
-	2021 My New Hugo Site
+	2021 GSemir Blog
 	
 
     </div>
@@ -108,7 +219,7 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 		
 		
 		
-		<center>- CATALOG -</center>
+		<center>- 目录 -</center>
 		
 		
 		<ul>
@@ -240,6 +351,48 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
             
             
             
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    Archive
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories">
+                    Categories
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags">
+                    Tags
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/index.xml">
+                    RSS Feed
+                </a>
+                
+            
             
             <div class="toc">
 
@@ -249,7 +402,7 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 		
 		
 		
-		<center>- CATALOG -</center>
+		<center>- 目录 -</center>
 		
 		
 		<ul>
@@ -370,7 +523,7 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
             </i>
         </button>
         <a ref="navTitle" class="navbar-brand" href="https://gsemir0418.github.io/">
-            My New Hugo Site
+            GSemir Blog
         </a>
         
         <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
@@ -387,7 +540,9 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 <div class="single-column-header-container" ref="pageHead"
      v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
     <a href="https://gsemir0418.github.io/">
-        <div class="single-column-header-title">My New Hugo Site</div>
+        <div class="single-column-header-title">GSemir Blog</div>
+        
+        <div class="single-column-header-subtitle">个人技术博客</div>
         
 
     </a>
@@ -486,7 +641,7 @@ git config --global user.name &quot;Your Name&quot;
 
                     
                     <HR width="100%" id="EOF">
-		    <p style="color:#777;">Last modified on 2021-01-03</p>
+		    <p style="color:#777;">最后修改于 2021-01-03</p>
                     
                 </div>
             </div>
@@ -496,19 +651,21 @@ git config --global user.name &quot;Your Name&quot;
 
                 
                 <a class="newer-posts">
-			Next<br>No newer posts.
+			下回<br>已经到头啦。
                 </a>
                 
                 
                 
                 <a class="older-posts">
-			Previous<br>No older posts.
+			上回<br>这是最旧的文章了。
                 </a>
                 
             </nav>
             <div class="post-comment-wrapper">
                 
 
+
+<div id="gitalk-container"></div>
 
 
 
@@ -523,12 +680,12 @@ git config --global user.name &quot;Your Name&quot;
             </div><div id="single-column-footer">
 Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
 <br>
-Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
 <br>
 
 &copy;
 	
-	2021 My New Hugo Site
+	2021 GSemir Blog
 	
 </div>
             </div>

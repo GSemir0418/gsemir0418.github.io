@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>My New Hugo Site</title>
+    <title>GSemir Blog</title>
     <link>https://gsemir0418.github.io/</link>
-    <description>Recent content on My New Hugo Site</description>
+    <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 03 Jan 2021 16:41:51 +0800</lastBuildDate>
@@ -13,11 +13,11 @@
     
         <item>
         <title>StartBlog</title>
-        <link>https://gsemir0418.github.io/post/startblog/</link>
+        <link>https://gsemir0418.github.io/posts/startblog/</link>
         <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
         
-        <guid>https://gsemir0418.github.io/post/startblog/</guid>
-        <description>My New Hugo Site https://gsemir0418.github.io/post/startblog/ -&lt;h3 id=&#34;step1-安装hugo&#34;&gt;Step1 安装hugo&lt;/h3&gt;
+        <guid>https://gsemir0418.github.io/posts/startblog/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/startblog/ -&lt;h3 id=&#34;step1-安装hugo&#34;&gt;Step1 安装hugo&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;下载链接：https://github.com/gohugoio/hugo/releases&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -64,7 +64,7 @@ git config --global user.name &amp;quot;Your Name&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时就可以将文件推上GitHub仓库：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;git push -u orgin master
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最终按照提示进行登录验证即可，通过&lt;code&gt;https://gsemir0418.github.io&lt;/code&gt;实现远端访问个人博客。&lt;/p&gt;
-- https://gsemir0418.github.io/post/startblog/ - </description>
+- https://gsemir0418.github.io/posts/startblog/ - </description>
         </item>
     
     
