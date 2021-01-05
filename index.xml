@@ -5,9 +5,76 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jan 2021 16:41:51 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Jan 2021 21:09:51 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>3dsMax技术文档</title>
+        <link>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
+        <pubDate>Sun, 03 Jan 2021 21:09:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/ -&lt;h1 id=&#34;1-3dsmax概述&#34;&gt;1. 3dsMax概述&lt;/h1&gt;
+&lt;p&gt;​		3dsMax是由&lt;code&gt;AutoDesk&lt;/code&gt;公司开发的&lt;strong&gt;三维模型与动画制作渲染软件&lt;/strong&gt;，它被广泛应用于多个领域，包括游戏设计、广告设计、建筑设计和影视制作等。其&lt;strong&gt;优点&lt;/strong&gt;是具有强大的材质编辑和灯光处理功能，并且相关的学习资源非常丰富。在后期的模型渲染上功能强大，能够得到逼真的模型。同其他建模软件相比，3dsMax创建的模型面片数量较少，占用空间小，模型的处理速度也比较快。本课题正是应用其强大的模型兼容性以及材质编辑功能，作为单体建筑模型&lt;strong&gt;后期纹理映射&lt;/strong&gt;和&lt;strong&gt;OBJ模型导出&lt;/strong&gt;的重要软件。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;2-3dsmax软件安装&#34;&gt;2. 3dsMax软件安装&lt;/h1&gt;
+&lt;p&gt;​		3dsMax软件发展至今，从最初的3D Studio MAX 1.0开始，其版本迭代更新二十余次，截至文章发布前，Autodesk公司已推出3dsMax 2021。考虑到兼容性、稳定性等问题，推荐安装&lt;code&gt;3dsMax 2016&lt;/code&gt;之后的版本。&lt;/p&gt;
+&lt;p&gt;​		本章以&lt;code&gt;3dsMax 2020&lt;/code&gt;软件安装为例，详细介绍软件安装的过程及注意事项。&lt;/p&gt;
+&lt;h2 id=&#34;step1-解压缩安装包&#34;&gt;Step1 解压缩安装包&lt;/h2&gt;
+&lt;p&gt;​		将安装包及注册机文件解压缩至目标文件夹，注意&lt;strong&gt;目标文件夹名称及路径应保证全英文&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;​		为防止安装破解过程中出现未知错误，建议&lt;strong&gt;安装前关闭所有杀毒软件&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;step2-安装软件&#34;&gt;Step2 安装软件&lt;/h2&gt;
+&lt;p&gt;​		进入安装包文件夹，右键单击&lt;code&gt;Setup.exe&lt;/code&gt;，选择以管理员身份运行；&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;在打开的窗口中选择&lt;code&gt;安装（在此计算机安装）&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;许可协议选择&lt;code&gt;我接受&lt;/code&gt;，单击&lt;code&gt;下一步&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;设置安装路径后，点击安装即可。&lt;strong&gt;注意路径仍要保证全英文&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;安装完成后，选择&lt;code&gt;立即启动&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;h2 id=&#34;step3-破解软件&#34;&gt;Step3 破解软件&lt;/h2&gt;
+&lt;p&gt;​		第一次进入软件后，选择&lt;code&gt;enter a serial number&lt;/code&gt;输入序列号。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​		选择 &lt;code&gt;I Agree&lt;/code&gt;我同意。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​		进入激活页面，选择&lt;code&gt;Activate&lt;/code&gt;激活。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​		在&lt;code&gt;Serial Number&lt;/code&gt;栏中填写序列号&lt;code&gt;666-69696969&lt;/code&gt;，单击&lt;code&gt;Next&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​		第一次会提醒”检测到无效的序列号“，此时选择&lt;code&gt;重新输入&lt;/code&gt;，将序列号再次输入即可。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​		当进入到激活选项窗口，复制&lt;code&gt;Request code&lt;/code&gt;请求码。右键单击安装包中的&lt;code&gt;xf-adesk20.exe&lt;/code&gt;破解工具，选择以管理员身份运行。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210103222250253.png&#34; alt=&#34;image-20210103222250253&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		将请求码复制到破解工具中的&lt;code&gt;Request&lt;/code&gt;栏后，先单击&lt;code&gt;Patch&lt;/code&gt;，再点击&lt;code&gt;Generate&lt;/code&gt;，复制Activation栏中自动生成的激活码。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210103222411949.png&#34; alt=&#34;image-20210103222411949&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		拿到激活码后，回到激活选项页面，选择&lt;code&gt;I have an activation code from Autodesk&lt;/code&gt;，把激活码复制到输入框后，点击&lt;code&gt;Next&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210103222438931.png&#34; alt=&#34;image-20210103222438931&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		激活完成，选择&lt;code&gt;Finish&lt;/code&gt;退出激活窗口。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​		至此，3dsMax 2020安装完成。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;3-fbx模型导入&#34;&gt;3. FBX模型导入&lt;/h1&gt;
+&lt;p&gt;​		导入FBX模型到3dmax有两种方法供大家参考。&lt;/p&gt;
+&lt;h2 id=&#34;31-拖拽导入&#34;&gt;3.1 拖拽导入&lt;/h2&gt;
+&lt;p&gt;​		直接将模型文件拖至任意视图窗口后，在弹出的选项中选择“导入文件”；&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210103224446456.png&#34; alt=&#34;image-20210103224446456&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;h2 id=&#34;32-选项导入&#34;&gt;3.2 选项导入&lt;/h2&gt;
+&lt;p&gt;​		单击菜单栏&lt;code&gt;文件&lt;/code&gt;选项，选择&lt;code&gt;导入&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​		在随后弹出来的导入选项中，&lt;strong&gt;注意将“动画”、“摄像机”及“灯光”选项取消勾选。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​		导入后效果如下图，此时每个构件都没有贴图，修改器属性均为“可编辑网格”。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210103224800108.png&#34; alt=&#34;image-20210103224800108&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;4-模型预处理&#34;&gt;4. 模型预处理&lt;/h1&gt;
+- https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/ - </description>
+        </item>
     
     
     
