@@ -5,7 +5,7 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jan 2021 21:09:51 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Jan 2021 16:41:51 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
         <item>
         <title>3dsMax技术文档</title>
         <link>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
-        <pubDate>Sun, 03 Jan 2021 21:09:51 +0800</pubDate>
+        <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
         
         <guid>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
         <description>GSemir Blog https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/ -&lt;h1 id=&#34;1-3dsmax概述&#34;&gt;1. 3dsMax概述&lt;/h1&gt;
@@ -23,10 +23,10 @@
 &lt;h1 id=&#34;2-3dsmax软件安装&#34;&gt;2. 3dsMax软件安装&lt;/h1&gt;
 &lt;p&gt;​		3dsMax软件发展至今，从最初的3D Studio MAX 1.0开始，其版本迭代更新二十余次，截至文章发布前，Autodesk公司已推出3dsMax 2021。考虑到兼容性、稳定性等问题，推荐安装&lt;code&gt;3dsMax 2016&lt;/code&gt;之后的版本。&lt;/p&gt;
 &lt;p&gt;​		本章以&lt;code&gt;3dsMax 2020&lt;/code&gt;软件安装为例，详细介绍软件安装的过程及注意事项。&lt;/p&gt;
-&lt;h2 id=&#34;step1-解压缩安装包&#34;&gt;Step1 解压缩安装包&lt;/h2&gt;
+&lt;h2 id=&#34;21-解压缩安装包&#34;&gt;2.1 解压缩安装包&lt;/h2&gt;
 &lt;p&gt;​		将安装包及注册机文件解压缩至目标文件夹，注意&lt;strong&gt;目标文件夹名称及路径应保证全英文&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;​		为防止安装破解过程中出现未知错误，建议&lt;strong&gt;安装前关闭所有杀毒软件&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id=&#34;step2-安装软件&#34;&gt;Step2 安装软件&lt;/h2&gt;
+&lt;h2 id=&#34;22-安装软件&#34;&gt;2.2 安装软件&lt;/h2&gt;
 &lt;p&gt;​		进入安装包文件夹，右键单击&lt;code&gt;Setup.exe&lt;/code&gt;，选择以管理员身份运行；&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​&lt;/p&gt;
@@ -37,7 +37,7 @@
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;安装完成后，选择&lt;code&gt;立即启动&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h2 id=&#34;step3-破解软件&#34;&gt;Step3 破解软件&lt;/h2&gt;
+&lt;h2 id=&#34;23-破解软件&#34;&gt;2.3 破解软件&lt;/h2&gt;
 &lt;p&gt;​		第一次进入软件后，选择&lt;code&gt;enter a serial number&lt;/code&gt;输入序列号。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		选择 &lt;code&gt;I Agree&lt;/code&gt;我同意。&lt;/p&gt;
@@ -57,6 +57,8 @@
 &lt;p&gt;​		激活完成，选择&lt;code&gt;Finish&lt;/code&gt;退出激活窗口。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		至此，3dsMax 2020安装完成。&lt;/p&gt;
+&lt;h2 id=&#34;24-修改软件语言&#34;&gt;2.4 修改软件语言&lt;/h2&gt;
+&lt;p&gt;​		3dsMax软件支持简体中文，切换中文版本也很简单，点击&lt;code&gt;开始&lt;/code&gt;，找到&lt;code&gt;Autodesk&lt;/code&gt;文件夹，选择&lt;code&gt;3dMax 2020 - simplified Chinese&lt;/code&gt;即可。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h1 id=&#34;3-fbx模型导入&#34;&gt;3. FBX模型导入&lt;/h1&gt;
 &lt;p&gt;​		导入FBX模型到3dmax有两种方法供大家参考。&lt;/p&gt;
@@ -73,7 +75,95 @@
 &lt;p&gt;&lt;img src=&#34;img/image-20210103224800108.png&#34; alt=&#34;image-20210103224800108&#34;&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h1 id=&#34;4-模型预处理&#34;&gt;4. 模型预处理&lt;/h1&gt;
+&lt;p&gt;​		正式贴图前，需要对模型进行初步处理，包括&lt;strong&gt;优化模型体量&lt;/strong&gt;以及构件分类命名，以提高后期平台开发过程中的显示性能，为展示功能的实现做准备。&lt;/p&gt;
+&lt;h2 id=&#34;41-模型优化&#34;&gt;4.1 模型优化&lt;/h2&gt;
+&lt;p&gt;​		模型优化主要是针对模型数量及面片数量较大的部分，以瓦片屋顶为例。由于瓦片模型数量多，面片数大，不方便后期的贴图及模型处理，因此首先选中一侧屋顶，在命令面板中选择&lt;code&gt;实用工具&lt;/code&gt;，依次点击&lt;code&gt;塌陷&lt;/code&gt;、&lt;code&gt;塌陷选定模型&lt;/code&gt;，使一侧的屋顶塌陷融合成一个整体。另外一侧屋顶可以以复制旋转的方式替代镜像的操作。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;h2 id=&#34;42-构件分类命名&#34;&gt;4.2 构件分类命名&lt;/h2&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;​		在revit建模过程中，对于每个族构件模型都进行了命名。由于revit导出的fbx模型，其构件信息包含一些无用字段，因此需要利用3dsMax软件进行构件再次分类命名，为展示平台的构件信息显示功能做准备，从而提升用户体验。&lt;/p&gt;
+&lt;p&gt;​		以门板族构件为例，可以根据其相对于建筑的不同方位与材质进行命名，如前部木制门板；&lt;/p&gt;
+&lt;p&gt;​		以屋顶为例，可以根据其结构特点结合当地命名习惯进行命名，如椽子、檩条等。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;5-贴图&#34;&gt;5 贴图&lt;/h1&gt;
+&lt;h2 id=&#34;51-整理贴图&#34;&gt;5.1 整理贴图&lt;/h2&gt;
+&lt;p&gt;​		根据点云数据及现场调研收集到的图像等信息，搜集整理各构件的纹理贴图，注意贴图的&lt;strong&gt;名称不能出现中文&lt;/strong&gt;，考虑到在网上下载的贴图有乱码的情况，因此建议将全部贴图&lt;strong&gt;重命名为拼音字母&lt;/strong&gt;。贴图的&lt;strong&gt;路径最好也不要出现中文&lt;/strong&gt;。正式贴图之前，建议将贴图素材统一整理到模型根目录下的/tietu文件夹中。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107104809527.png&#34; alt=&#34;image-20210107104809527&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;52-贴图步骤&#34;&gt;5.2 贴图步骤&lt;/h2&gt;
+&lt;p&gt;​		在3dmax界面下，按&lt;code&gt;M&lt;/code&gt;调出材质编辑器，将贴图素材用鼠标拖放至材质球上即可，贴图与材质球一一对应。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107105405290.png&#34; alt=&#34;image-20210107105405290&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		随后将附好材质的材质球直接拖至对应的模型构件上。在模型构件命令面板的修改器列表中，选择&lt;code&gt;UVW贴图&lt;/code&gt;（可以提前将此按钮添加到修改器集中，节约查找UVW贴图命令的操作），调整UVW属性中&lt;code&gt;贴图&lt;/code&gt;、&lt;code&gt;长宽高&lt;/code&gt;和&lt;code&gt;UVW向平铺&lt;/code&gt;等相关参数，使效果尽可能接近真实。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107105417385.png&#34; alt=&#34;image-20210107105417385&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		贴图过程中要&lt;strong&gt;及时保存&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;​		下图为贴图完成后的效果图。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107105428481.png&#34; alt=&#34;image-20210107105428481&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		模型纹理贴图完成后，还需将模型位置调整至中心坐标位置（视窗网格的中心）。可以按&lt;code&gt;G&lt;/code&gt;显示或者隐藏视窗网格。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107105443894.png&#34; alt=&#34;image-20210107105443894&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107105450400.png&#34; alt=&#34;image-20210107105450400&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;6-模型归档和导出&#34;&gt;6 模型归档和导出&lt;/h1&gt;
+&lt;h2 id=&#34;61-模型归档&#34;&gt;6.1 模型归档&lt;/h2&gt;
+&lt;p&gt;​		&lt;strong&gt;归档&lt;/strong&gt;，就是将当前场景中的模型文件、材质贴图及贴图路径整理出来，另存成为一个压缩包，方便模型的存储和传输。归档操作很简单，菜单栏中选择&lt;code&gt;文件&lt;/code&gt;→&lt;code&gt;归档&lt;/code&gt;即可；老版本（2017及之前）点击左上角图标→&lt;code&gt;另存为&lt;/code&gt;→&lt;code&gt;归档&lt;/code&gt;即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107105534632.png&#34; alt=&#34;image-20210107105534632&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		归档的模型解压缩并打开后，在3dsMax中浏览虽然是没有问题的，但在导出obj模型前，还需&lt;strong&gt;修改模型的路径&lt;/strong&gt;，否则导出的obj模型会出现材质丢失的情况。为避免这种情况产生，建议在完成模型贴图后，直接在本机导出所需的其他格式模型；若要对原模型进行存储或传输，需要归档后在另外的机器导出模型时，就要对模型的贴图路径进行重定向。&lt;/p&gt;
+&lt;p&gt;​		在右侧命令面板中，选择&lt;code&gt;实用工具&lt;/code&gt;选项（扳手的图标），点击&lt;code&gt;更多...&lt;/code&gt;选项。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107200949507.png&#34; alt=&#34;image-20210107200949507&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		在弹出来的窗口中选择&lt;code&gt;位图/光度学路径&lt;/code&gt;，点击确定。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107201059874.png&#34; alt=&#34;image-20210107201059874&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		随后在右侧命令面板会出现&lt;code&gt;路径编辑器&lt;/code&gt;选项，点击&lt;code&gt;编辑资源&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107201231060.png&#34; alt=&#34;image-20210107201231060&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		此时弹出&lt;code&gt;位图/光度学路径编辑器&lt;/code&gt;窗口，在这里将显示全部的贴图路径信息。点击&lt;code&gt;选择丢失的文件&lt;/code&gt;，我们会看到全部的文件都变为选中状态，说明全部贴图路径均发生了改变。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107201331968.png&#34; alt=&#34;image-20210107201331968&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		点击下方&lt;code&gt;...&lt;/code&gt;按钮，找到解压后模型贴图存放的文件夹，点击&lt;code&gt;使用路径&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​		之后点击&lt;code&gt;设置路径&lt;/code&gt;，将原路径修改为正确的路径。可以再次单击&lt;code&gt;选择丢失的文件&lt;/code&gt;，此时已没有文件被选中，说明全部路径已修改完成。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107202036510.png&#34; alt=&#34;image-20210107202036510&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;62-obj模型导出&#34;&gt;6.2 obj模型导出&lt;/h2&gt;
+&lt;p&gt;​		依次点击&lt;code&gt;文件&lt;/code&gt;、&lt;code&gt;导出&lt;/code&gt;，配置好导出路径（纯英文）及文件名后，保存类型选择&lt;code&gt;gw::OBJ-Exporter(*.OBJ)&lt;/code&gt;，单击&lt;code&gt;保存&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​		在弹出的窗口中，需要继续配置obj模型导出的参数。面需要改为&lt;code&gt;三角形&lt;/code&gt;，精度改为&lt;code&gt;5&lt;/code&gt;，材质导出选项中，勾选使用材质路径，并修改路径名为&lt;code&gt;./&lt;/code&gt;。配置完成后，点击&lt;code&gt;导出&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107215114429.png&#34; alt=&#34;image-20210107215114429&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		至此，obj模型文件、mtl材质文件以及贴图文件已成功导出。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​		由于3dsMax软件中obj模型导出模块的字符集与网页展示平台中的字符集不匹配，导致构件信息显示错误，出现乱码的情况。之前采用的是使用JavaScript数组对象存储模型构件信息，按构件id来匹配显示构件信息，虽然解决了上述问题，但既费时又费力。所以我们选择从根本上解决此问题——修改obj文件的字符集。方法有很多，这里采用&lt;code&gt;notepad++&lt;/code&gt;来处理字符编码的问题。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;官网：https://notepad-plus-plus.org/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;​		使用&lt;code&gt;notepad++&lt;/code&gt;打开obj文件，单击&lt;code&gt;编码&lt;/code&gt;，选择&lt;code&gt;转为UTF-8编码&lt;/code&gt;后，保存文件即可。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;h2 id=&#34;63-dae模型导出&#34;&gt;6.3 DAE模型导出&lt;/h2&gt;
+&lt;p&gt;​		DAE模型主要用于模型剖切模块，无需导出材质。导出步骤与上文相同，依次点击&lt;code&gt;文件&lt;/code&gt;、&lt;code&gt;导出&lt;/code&gt;，配置好导出路径（纯英文）及文件名后，保存类型选择&lt;code&gt;Autodesk Collada(*.DAE)&lt;/code&gt;，单击&lt;code&gt;保存&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​		在弹出的导出选项中，将动画、摄像机和灯光取消勾选。单击&lt;code&gt;确定&lt;/code&gt;即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210107221009764.png&#34; alt=&#34;image-20210107221009764&#34;&gt;&lt;/p&gt;
 - https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>Revit建模技术文档</title>
+        <link>https://gsemir0418.github.io/posts/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
+        <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/ -&lt;h1 id=&#34;1-revit概述&#34;&gt;1. Revit概述&lt;/h1&gt;
+&lt;h1 id=&#34;2安装软件&#34;&gt;2.安装软件&lt;/h1&gt;
+&lt;h1 id=&#34;3点云数据导入&#34;&gt;3.点云数据导入&lt;/h1&gt;
+&lt;h2 id=&#34;31-直接导入&#34;&gt;3.1 直接导入&lt;/h2&gt;
+&lt;h2 id=&#34;32-recap&#34;&gt;3.2 Recap&lt;/h2&gt;
+&lt;h1 id=&#34;4构件族与模型搭建&#34;&gt;4.构件族与模型搭建&lt;/h1&gt;
+&lt;h2 id=&#34;41-建模流程概述&#34;&gt;4.1 建模流程概述&lt;/h2&gt;
+&lt;h2 id=&#34;42-轴网布局&#34;&gt;4.2 轴网布局&lt;/h2&gt;
+&lt;h2 id=&#34;43-木框架搭建&#34;&gt;4.3 木框架搭建&lt;/h2&gt;
+&lt;h2 id=&#34;44-屋顶&#34;&gt;4.4 屋顶&lt;/h2&gt;
+&lt;h3 id=&#34;441-歇山式屋顶&#34;&gt;4.4.1 歇山式屋顶&lt;/h3&gt;
+&lt;h3 id=&#34;442-悬山式屋顶&#34;&gt;4.4.2 悬山式屋顶&lt;/h3&gt;
+&lt;h2 id=&#34;45-门板&#34;&gt;4.5 门板&lt;/h2&gt;
+&lt;h2 id=&#34;46-其他构件&#34;&gt;4.6 其他构件&lt;/h2&gt;
+&lt;h2 id=&#34;47-fbx模型导出&#34;&gt;4.7 FBX模型导出&lt;/h2&gt;
+&lt;h1 id=&#34;5绘制施工图纸&#34;&gt;5.绘制施工图纸&lt;/h1&gt;
+- https://gsemir0418.github.io/posts/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/ - </description>
         </item>
     
     
@@ -132,6 +222,20 @@ git config --global user.name &amp;quot;Your Name&amp;quot;
 &lt;pre&gt;&lt;code&gt;git push -u orgin master
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最终按照提示进行登录验证即可，通过&lt;code&gt;https://gsemir0418.github.io&lt;/code&gt;实现远端访问个人博客。&lt;/p&gt;
 - https://gsemir0418.github.io/posts/startblog/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>展示平台说明文档</title>
+        <link>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
+        <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/ -&lt;h1 id=&#34;1-turnjs翻页特效&#34;&gt;1. Turn.js翻页特效&lt;/h1&gt;
+&lt;h1 id=&#34;2模型单体展示页面&#34;&gt;2.模型单体展示页面&lt;/h1&gt;
+&lt;h1 id=&#34;3建筑展示平台&#34;&gt;3.建筑展示平台&lt;/h1&gt;
+- https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/ - </description>
         </item>
     
     

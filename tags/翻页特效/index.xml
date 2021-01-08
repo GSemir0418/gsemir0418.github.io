@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>翻页特效 on GSemir Blog</title>
+    <link>https://gsemir0418.github.io/tags/%E7%BF%BB%E9%A1%B5%E7%89%B9%E6%95%88/</link>
+    <description>Recent content in 翻页特效 on GSemir Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 03 Jan 2021 16:41:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E7%BF%BB%E9%A1%B5%E7%89%B9%E6%95%88/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>展示平台说明文档</title>
+      <link>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
+      <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
+      <description>1. Turn.js翻页特效 2.模型单体展示页面 3.建筑展示平台 </description>
+    </item>
+    
+  </channel>
+</rss>

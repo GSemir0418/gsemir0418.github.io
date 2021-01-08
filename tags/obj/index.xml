@@ -6,25 +6,25 @@
     <description>Recent content in obj on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jan 2021 21:09:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/obj/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Jan 2021 16:41:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/obj/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>3dsMax技术文档</title>
       <link>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
-      <pubDate>Sun, 03 Jan 2021 21:09:51 +0800</pubDate>
+      <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
       <description>1. 3dsMax概述 ​	3dsMax是由AutoDesk公司开发的三维模型与动画制作渲染软件，它被广泛应用于多个领域，包括游戏设计、广告设计、建筑设计和影视制作等。其优点是具有强大的材质编辑和灯光处理功能，并且相关的学习资源非常丰富。在后期的模型渲染上功能强大，能够得到逼真的模型。同其他建模软件相比，3dsMax创建的模型面片数量较少，占用空间小，模型的处理速度也比较快。本课题正是应用其强大的模型兼容性以及材质编辑功能，作为单体建筑模型后期纹理映射和OBJ模型导出的重要软件。
  2. 3dsMax软件安装 ​	3dsMax软件发展至今，从最初的3D Studio MAX 1.0开始，其版本迭代更新二十余次，截至文章发布前，Autodesk公司已推出3dsMax 2021。考虑到兼容性、稳定性等问题，推荐安装3dsMax 2016之后的版本。
 ​	本章以3dsMax 2020软件安装为例，详细介绍软件安装的过程及注意事项。
-Step1 解压缩安装包 ​	将安装包及注册机文件解压缩至目标文件夹，注意目标文件夹名称及路径应保证全英文。
+2.1 解压缩安装包 ​	将安装包及注册机文件解压缩至目标文件夹，注意目标文件夹名称及路径应保证全英文。
 ​	为防止安装破解过程中出现未知错误，建议安装前关闭所有杀毒软件。
-Step2 安装软件 ​	进入安装包文件夹，右键单击Setup.exe，选择以管理员身份运行；
+2.2 安装软件 ​	进入安装包文件夹，右键单击Setup.exe，选择以管理员身份运行；
 ​
 在打开的窗口中选择安装（在此计算机安装）。
 许可协议选择我接受，单击下一步。
 设置安装路径后，点击安装即可。注意路径仍要保证全英文。
 安装完成后，选择立即启动。
-Step3 破解软件 ​	第一次进入软件后，选择enter a serial number输入序列号。
+2.3 破解软件 ​	第一次进入软件后，选择enter a serial number输入序列号。
 ​	选择 I Agree我同意。
 ​	进入激活页面，选择Activate激活。
 ​	在Serial Number栏中填写序列号666-69696969，单击Next。
@@ -34,7 +34,7 @@ Step3 破解软件 ​	第一次进入软件后，选择enter a serial number输
 ​	拿到激活码后，回到激活选项页面，选择I have an activation code from Autodesk，把激活码复制到输入框后，点击Next。
 ​	激活完成，选择Finish退出激活窗口。
 ​	至此，3dsMax 2020安装完成。
- 3. FBX模型导入 ​	导入FBX模型到3dmax有两种方法供大家参考。</description>
+2.4 修改软件语言 ​	3dsMax软件支持简体中文，切换中文版本也很简单，点击开始，找到Autodesk文件夹，选择3dMax 2020 - simplified Chinese即可。</description>
     </item>
     
   </channel>
