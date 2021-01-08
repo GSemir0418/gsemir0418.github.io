@@ -6,11 +6,11 @@
     <description>Recent content in 3dmax on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jan 2021 16:41:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/3dmax/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Jan 2021 16:41:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/3dmax/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>3dsMax技术文档</title>
       <link>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
-      <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
+      <pubDate>Fri, 08 Jan 2021 16:41:51 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
       <description>1. 3dsMax概述 ​	3dsMax是由AutoDesk公司开发的三维模型与动画制作渲染软件，它被广泛应用于多个领域，包括游戏设计、广告设计、建筑设计和影视制作等。其优点是具有强大的材质编辑和灯光处理功能，并且相关的学习资源非常丰富。在后期的模型渲染上功能强大，能够得到逼真的模型。同其他建模软件相比，3dsMax创建的模型面片数量较少，占用空间小，模型的处理速度也比较快。本课题正是应用其强大的模型兼容性以及材质编辑功能，作为单体建筑模型后期纹理映射和OBJ模型导出的重要软件。

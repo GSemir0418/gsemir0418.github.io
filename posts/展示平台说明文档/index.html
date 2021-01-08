@@ -17,11 +17,31 @@
 
 
 <meta property="og:title" content="展示平台说明文档" />
-<meta property="og:description" content="1. Turn.js翻页特效 2.模型单体展示页面 3.建筑展示平台 " />
+<meta property="og:description" content="1. Turn.js翻页特效 2.模型展示页面 ​	模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需修改obj模型路径等简单操作即可实现模型展示demo。obj模型导出及注意事项见3dsMax技术文档。模板已发布到GitHub供读者学习参考：
+ https://github.com/GSemir0418/TemplateProjects
+ ​	下图为项目目录结构：
+​	其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。
+​	js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。
+2.1 更改网页名称 ​	在index.html文件中，修改&lt;title&gt;标签内的内容即可：
+&lt;title&gt;XXX村寨模型展示&lt;/title&gt;
+2.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
+​	在js/index.js文件中，修改15和16行的代码如下：
+//模型路径
+let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;;
+let obj1 = &#39;./models/testobj/lancuiting.obj&#39;;
+​	注意路径使用相对路径。
+2.3 控制模型体积 ​	js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：
+model1.scale.set(1.4, 1.4, 1.4);
+2.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
+//括号中的2为强度
+let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);
+//光源的位置
+dLight.position.set(500, 1000, 4000);
+3.建筑展示平台 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/" />
-<meta property="article:published_time" content="2021-01-03T16:41:51+08:00" />
-<meta property="article:modified_time" content="2021-01-03T16:41:51+08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-01-08T19:15:51+08:00" />
+<meta property="article:modified_time" content="2021-01-08T19:15:51+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -29,7 +49,27 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="展示平台说明文档"/>
-<meta name="twitter:description" content="1. Turn.js翻页特效 2.模型单体展示页面 3.建筑展示平台 "/>
+<meta name="twitter:description" content="1. Turn.js翻页特效 2.模型展示页面 ​	模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需修改obj模型路径等简单操作即可实现模型展示demo。obj模型导出及注意事项见3dsMax技术文档。模板已发布到GitHub供读者学习参考：
+ https://github.com/GSemir0418/TemplateProjects
+ ​	下图为项目目录结构：
+​	其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。
+​	js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。
+2.1 更改网页名称 ​	在index.html文件中，修改&lt;title&gt;标签内的内容即可：
+&lt;title&gt;XXX村寨模型展示&lt;/title&gt;
+2.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
+​	在js/index.js文件中，修改15和16行的代码如下：
+//模型路径
+let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;;
+let obj1 = &#39;./models/testobj/lancuiting.obj&#39;;
+​	注意路径使用相对路径。
+2.3 控制模型体积 ​	js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：
+model1.scale.set(1.4, 1.4, 1.4);
+2.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
+//括号中的2为强度
+let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);
+//光源的位置
+dLight.position.set(500, 1000, 4000);
+3.建筑展示平台 "/>
 
 
 
@@ -217,8 +257,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#2%e6%a8%a1%e5%9e%8b%e5%8d%95%e4%bd%93%e5%b1%95%e7%a4%ba%e9%a1%b5%e9%9d%a2" onclick="onNavClick(`#2模型单体展示页面-nav`)" id="2模型单体展示页面-nav">
-									2.模型单体展示页面
+								<a href="#2%e6%a8%a1%e5%9e%8b%e5%b1%95%e7%a4%ba%e9%a1%b5%e9%9d%a2" onclick="onNavClick(`#2模型展示页面-nav`)" id="2模型展示页面-nav">
+									2.模型展示页面
 								</a>
 							</li>
 						
@@ -231,6 +271,86 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 					
 						
 						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#21-%e6%9b%b4%e6%94%b9%e7%bd%91%e9%a1%b5%e5%90%8d%e7%a7%b0" onclick="onNavClick(`#21-更改网页名称-nav`)" id="21-更改网页名称-nav">
+									2.1 更改网页名称
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#22-%e4%bf%ae%e6%94%b9%e6%a8%a1%e5%9e%8b%e8%b7%af%e5%be%84" onclick="onNavClick(`#22-修改模型路径-nav`)" id="22-修改模型路径-nav">
+									2.2 修改模型路径
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#23-%e6%8e%a7%e5%88%b6%e6%a8%a1%e5%9e%8b%e4%bd%93%e7%a7%af" onclick="onNavClick(`#23-控制模型体积-nav`)" id="23-控制模型体积-nav">
+									2.3 控制模型体积
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#24-%e5%85%b6%e4%bb%96%e5%8f%af%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9" onclick="onNavClick(`#24-其他可配置选项-nav`)" id="24-其他可配置选项-nav">
+									2.4 其他可配置选项
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
 						
 						
 						
@@ -358,8 +478,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#2%e6%a8%a1%e5%9e%8b%e5%8d%95%e4%bd%93%e5%b1%95%e7%a4%ba%e9%a1%b5%e9%9d%a2" onclick="onNavClick(`#2模型单体展示页面-nav`)" id="2模型单体展示页面-nav">
-									2.模型单体展示页面
+								<a href="#2%e6%a8%a1%e5%9e%8b%e5%b1%95%e7%a4%ba%e9%a1%b5%e9%9d%a2" onclick="onNavClick(`#2模型展示页面-nav`)" id="2模型展示页面-nav">
+									2.模型展示页面
 								</a>
 							</li>
 						
@@ -372,6 +492,86 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 					
 						
 						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#21-%e6%9b%b4%e6%94%b9%e7%bd%91%e9%a1%b5%e5%90%8d%e7%a7%b0" onclick="onNavClick(`#21-更改网页名称-nav`)" id="21-更改网页名称-nav">
+									2.1 更改网页名称
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#22-%e4%bf%ae%e6%94%b9%e6%a8%a1%e5%9e%8b%e8%b7%af%e5%be%84" onclick="onNavClick(`#22-修改模型路径-nav`)" id="22-修改模型路径-nav">
+									2.2 修改模型路径
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#23-%e6%8e%a7%e5%88%b6%e6%a8%a1%e5%9e%8b%e4%bd%93%e7%a7%af" onclick="onNavClick(`#23-控制模型体积-nav`)" id="23-控制模型体积-nav">
+									2.3 控制模型体积
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#24-%e5%85%b6%e4%bb%96%e5%8f%af%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9" onclick="onNavClick(`#24-其他可配置选项-nav`)" id="24-其他可配置选项-nav">
+									2.4 其他可配置选项
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
 						
 						
 						
@@ -447,7 +647,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                     <div class="post-meta">
                         
                         <time itemprop="datePublished">
-                            2021-01-03 16:41
+                            2021-01-08 19:15
                         </time>
                         
 
@@ -477,12 +677,39 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 <div class="post-body" v-pre>
                 
                     <h1 id="1-turnjs翻页特效">1. Turn.js翻页特效</h1>
-<h1 id="2模型单体展示页面">2.模型单体展示页面</h1>
-<h1 id="3建筑展示平台">3.建筑展示平台</h1>
+<h1 id="2模型展示页面">2.模型展示页面</h1>
+<p>​		模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需修改obj模型路径等简单操作即可实现模型展示demo。obj模型导出及注意事项见<code>3dsMax技术文档</code>。模板已发布到GitHub供读者学习参考：</p>
+<blockquote>
+<p><a href="https://github.com/GSemir0418/TemplateProjects">https://github.com/GSemir0418/TemplateProjects</a></p>
+</blockquote>
+<p>​		下图为项目目录结构：</p>
+<p><img src="../img/image-20210108184425370.png" alt="image-20210108184425370"></p>
+<p>​		其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。</p>
+<p>​		js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。</p>
+<h2 id="21-更改网页名称">2.1 更改网页名称</h2>
+<p>​		在index.html文件中，修改<code>&lt;title&gt;</code>标签内的内容即可：</p>
+<pre><code>&lt;title&gt;XXX村寨模型展示&lt;/title&gt;
+</code></pre><h2 id="22-修改模型路径">2.2 修改模型路径</h2>
+<p>​		首先将obj模型拷贝至models文件夹下。</p>
+<p>​		在js/index.js文件中，修改15和16行的代码如下：</p>
+<pre><code>//模型路径
+let mat1 = './models/testobj/lancuiting.mtl';
+let obj1 = './models/testobj/lancuiting.obj';
+</code></pre><p>​		注意路径使用相对路径。</p>
+<h2 id="23-控制模型体积">2.3 控制模型体积</h2>
+<p>​		js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：</p>
+<pre><code>model1.scale.set(1.4, 1.4, 1.4);
+</code></pre><h2 id="24-其他可配置选项">2.4 其他可配置选项</h2>
+<p>​		如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：</p>
+<pre><code>//括号中的2为强度
+let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);
+//光源的位置
+dLight.position.set(500, 1000, 4000);
+</code></pre><h1 id="3建筑展示平台">3.建筑展示平台</h1>
 
                     
                     <HR width="100%" id="EOF">
-		    <p style="color:#777;">最后修改于 2021-01-03</p>
+		    <p style="color:#777;">最后修改于 2021-01-08</p>
                     
                 </div>
             </div>
@@ -491,14 +718,14 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
             <nav class="post-pagination">
 
                 
-                <a class="newer-posts" href="https://gsemir0418.github.io/posts/startblog/">
-			下回<br>StartBlog
+                <a class="newer-posts">
+			下回<br>已经到头啦。
                 </a>
                 
                 
                 
-                <a class="older-posts">
-			上回<br>这是最旧的文章了。
+                <a class="older-posts" href="https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">
+			上回<br>3dsMax技术文档
                 </a>
                 
             </nav>

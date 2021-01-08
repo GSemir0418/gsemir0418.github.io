@@ -6,11 +6,31 @@
     <description>Recent content in 研究生技术文档 on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jan 2021 16:41:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/%E7%A0%94%E7%A9%B6%E7%94%9F%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Jan 2021 19:15:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/%E7%A0%94%E7%A9%B6%E7%94%9F%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>展示平台说明文档</title>
+      <link>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
+      <pubDate>Fri, 08 Jan 2021 19:15:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
+      <description>1. Turn.js翻页特效 2.模型展示页面 ​	模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需修改obj模型路径等简单操作即可实现模型展示demo。obj模型导出及注意事项见3dsMax技术文档。模板已发布到GitHub供读者学习参考：
+ https://github.com/GSemir0418/TemplateProjects
+ ​	下图为项目目录结构：
+​	其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。
+​	js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。
+2.1 更改网页名称 ​	在index.html文件中，修改&amp;lt;title&amp;gt;标签内的内容即可：
+&amp;lt;title&amp;gt;XXX村寨模型展示&amp;lt;/title&amp;gt;2.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
+​	在js/index.js文件中，修改15和16行的代码如下：
+//模型路径let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;;let obj1 = &#39;./models/testobj/lancuiting.obj&#39;;​	注意路径使用相对路径。
+2.3 控制模型体积 ​	js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：
+model1.scale.set(1.4, 1.4, 1.4);2.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
+//括号中的2为强度let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);//光源的位置dLight.position.set(500, 1000, 4000);3.建筑展示平台 </description>
+    </item>
+    
     <item>
       <title>3dsMax技术文档</title>
       <link>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
-      <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
+      <pubDate>Fri, 08 Jan 2021 16:41:51 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
       <description>1. 3dsMax概述 ​	3dsMax是由AutoDesk公司开发的三维模型与动画制作渲染软件，它被广泛应用于多个领域，包括游戏设计、广告设计、建筑设计和影视制作等。其优点是具有强大的材质编辑和灯光处理功能，并且相关的学习资源非常丰富。在后期的模型渲染上功能强大，能够得到逼真的模型。同其他建模软件相比，3dsMax创建的模型面片数量较少，占用空间小，模型的处理速度也比较快。本课题正是应用其强大的模型兼容性以及材质编辑功能，作为单体建筑模型后期纹理映射和OBJ模型导出的重要软件。
@@ -44,15 +64,6 @@
       
       <guid>https://gsemir0418.github.io/posts/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
       <description>1. Revit概述 2.安装软件 3.点云数据导入 3.1 直接导入 3.2 Recap 4.构件族与模型搭建 4.1 建模流程概述 4.2 轴网布局 4.3 木框架搭建 4.4 屋顶 4.4.1 歇山式屋顶 4.4.2 悬山式屋顶 4.5 门板 4.6 其他构件 4.7 FBX模型导出 5.绘制施工图纸 </description>
-    </item>
-    
-    <item>
-      <title>展示平台说明文档</title>
-      <link>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
-      <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
-      <description>1. Turn.js翻页特效 2.模型单体展示页面 3.建筑展示平台 </description>
     </item>
     
   </channel>

@@ -5,16 +5,57 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jan 2021 16:41:51 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 08 Jan 2021 19:15:51 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     
         <item>
+        <title>展示平台说明文档</title>
+        <link>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
+        <pubDate>Fri, 08 Jan 2021 19:15:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/ -&lt;h1 id=&#34;1-turnjs翻页特效&#34;&gt;1. Turn.js翻页特效&lt;/h1&gt;
+&lt;h1 id=&#34;2模型展示页面&#34;&gt;2.模型展示页面&lt;/h1&gt;
+&lt;p&gt;​		模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需修改obj模型路径等简单操作即可实现模型展示demo。obj模型导出及注意事项见&lt;code&gt;3dsMax技术文档&lt;/code&gt;。模板已发布到GitHub供读者学习参考：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/GSemir0418/TemplateProjects&#34;&gt;https://github.com/GSemir0418/TemplateProjects&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;​		下图为项目目录结构：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img/image-20210108184425370.png&#34; alt=&#34;image-20210108184425370&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。&lt;/p&gt;
+&lt;p&gt;​		js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。&lt;/p&gt;
+&lt;h2 id=&#34;21-更改网页名称&#34;&gt;2.1 更改网页名称&lt;/h2&gt;
+&lt;p&gt;​		在index.html文件中，修改&lt;code&gt;&amp;lt;title&amp;gt;&lt;/code&gt;标签内的内容即可：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;title&amp;gt;XXX村寨模型展示&amp;lt;/title&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;22-修改模型路径&#34;&gt;2.2 修改模型路径&lt;/h2&gt;
+&lt;p&gt;​		首先将obj模型拷贝至models文件夹下。&lt;/p&gt;
+&lt;p&gt;​		在js/index.js文件中，修改15和16行的代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//模型路径
+let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;;
+let obj1 = &#39;./models/testobj/lancuiting.obj&#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​		注意路径使用相对路径。&lt;/p&gt;
+&lt;h2 id=&#34;23-控制模型体积&#34;&gt;2.3 控制模型体积&lt;/h2&gt;
+&lt;p&gt;​		js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;model1.scale.set(1.4, 1.4, 1.4);
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;24-其他可配置选项&#34;&gt;2.4 其他可配置选项&lt;/h2&gt;
+&lt;p&gt;​		如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//括号中的2为强度
+let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);
+//光源的位置
+dLight.position.set(500, 1000, 4000);
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;3建筑展示平台&#34;&gt;3.建筑展示平台&lt;/h1&gt;
+- https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/ - </description>
+        </item>
+    
+    
+    
+        <item>
         <title>3dsMax技术文档</title>
         <link>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
-        <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
+        <pubDate>Fri, 08 Jan 2021 16:41:51 +0800</pubDate>
         
         <guid>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
         <description>GSemir Blog https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/ -&lt;h1 id=&#34;1-3dsmax概述&#34;&gt;1. 3dsMax概述&lt;/h1&gt;
@@ -222,20 +263,6 @@ git config --global user.name &amp;quot;Your Name&amp;quot;
 &lt;pre&gt;&lt;code&gt;git push -u orgin master
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最终按照提示进行登录验证即可，通过&lt;code&gt;https://gsemir0418.github.io&lt;/code&gt;实现远端访问个人博客。&lt;/p&gt;
 - https://gsemir0418.github.io/posts/startblog/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>展示平台说明文档</title>
-        <link>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
-        <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/ -&lt;h1 id=&#34;1-turnjs翻页特效&#34;&gt;1. Turn.js翻页特效&lt;/h1&gt;
-&lt;h1 id=&#34;2模型单体展示页面&#34;&gt;2.模型单体展示页面&lt;/h1&gt;
-&lt;h1 id=&#34;3建筑展示平台&#34;&gt;3.建筑展示平台&lt;/h1&gt;
-- https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/ - </description>
         </item>
     
     
