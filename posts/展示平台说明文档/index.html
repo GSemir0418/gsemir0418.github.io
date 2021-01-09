@@ -17,31 +17,35 @@
 
 
 <meta property="og:title" content="展示平台说明文档" />
-<meta property="og:description" content="1. Turn.js翻页特效 2.模型展示页面 ​	模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需修改obj模型路径等简单操作即可实现模型展示demo。obj模型导出及注意事项见3dsMax技术文档。模板已发布到GitHub供读者学习参考：
+<meta property="og:description" content="1. 模型展示页面 ​	模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需修改obj模型路径等简单操作即可实现模型展示demo。obj模型导出及注意事项见3dsMax技术文档。模板已发布到GitHub供读者学习参考：
  https://github.com/GSemir0418/TemplateProjects
  ​	下图为项目目录结构：
 ​	其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。
 ​	js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。
-2.1 更改网页名称 ​	在index.html文件中，修改&lt;title&gt;标签内的内容即可：
+1.1 更改网页名称 ​	在index.html文件中，修改&lt;title&gt;标签内的内容即可：
 &lt;title&gt;XXX村寨模型展示&lt;/title&gt;
-2.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
+1.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
 ​	在js/index.js文件中，修改15和16行的代码如下：
 //模型路径
 let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;;
 let obj1 = &#39;./models/testobj/lancuiting.obj&#39;;
 ​	注意路径使用相对路径。
-2.3 控制模型体积 ​	js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：
+1.3 控制模型体积 ​	js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：
 model1.scale.set(1.4, 1.4, 1.4);
-2.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
+1.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
 //括号中的2为强度
 let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);
 //光源的位置
 dLight.position.set(500, 1000, 4000);
-3.建筑展示平台 " />
+ 2. Turn.js翻页特效 ​	展示平台的第一个模块是少数民族建筑特征分析。针对大量的图文资料，传统的页面布局得不到很好的展示与交互效果。为提高用户体验，选择类似书本翻页的形式作为展示图文视频资料的方式。Turn.js是一个JavaScript库，利用HTML5的所有优点，可以使内容呈现起来像一本真正的书或杂志。
+​	关于Turn.js的入门教程可以看siki学院的免费课程，也可以通过官网进行学习。
+ siki学院：http://www.sikiedu.com/course/517/tasks
+Turn.js官网：http://www.turnjs.com/
+ ​	由于少数民族建筑资料篇幅较多，文章内容比较复杂，且Turn.js并没有为用户提供书页模板，全部样式都是用户在CSS中定义的。考虑到书页制作的便捷性与美观性，选择PPT来制作展示书籍的内容，再以加载图片的方式将内容加载到网页端，实现具有翻页效果的少数民族建筑特征分析资料展示模块。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/" />
-<meta property="article:published_time" content="2021-01-08T19:15:51+08:00" />
-<meta property="article:modified_time" content="2021-01-08T19:15:51+08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-01-08T23:15:51+08:00" />
+<meta property="article:modified_time" content="2021-01-08T23:15:51+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -49,27 +53,31 @@ dLight.position.set(500, 1000, 4000);
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="展示平台说明文档"/>
-<meta name="twitter:description" content="1. Turn.js翻页特效 2.模型展示页面 ​	模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需修改obj模型路径等简单操作即可实现模型展示demo。obj模型导出及注意事项见3dsMax技术文档。模板已发布到GitHub供读者学习参考：
+<meta name="twitter:description" content="1. 模型展示页面 ​	模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需修改obj模型路径等简单操作即可实现模型展示demo。obj模型导出及注意事项见3dsMax技术文档。模板已发布到GitHub供读者学习参考：
  https://github.com/GSemir0418/TemplateProjects
  ​	下图为项目目录结构：
 ​	其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。
 ​	js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。
-2.1 更改网页名称 ​	在index.html文件中，修改&lt;title&gt;标签内的内容即可：
+1.1 更改网页名称 ​	在index.html文件中，修改&lt;title&gt;标签内的内容即可：
 &lt;title&gt;XXX村寨模型展示&lt;/title&gt;
-2.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
+1.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
 ​	在js/index.js文件中，修改15和16行的代码如下：
 //模型路径
 let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;;
 let obj1 = &#39;./models/testobj/lancuiting.obj&#39;;
 ​	注意路径使用相对路径。
-2.3 控制模型体积 ​	js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：
+1.3 控制模型体积 ​	js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：
 model1.scale.set(1.4, 1.4, 1.4);
-2.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
+1.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
 //括号中的2为强度
 let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);
 //光源的位置
 dLight.position.set(500, 1000, 4000);
-3.建筑展示平台 "/>
+ 2. Turn.js翻页特效 ​	展示平台的第一个模块是少数民族建筑特征分析。针对大量的图文资料，传统的页面布局得不到很好的展示与交互效果。为提高用户体验，选择类似书本翻页的形式作为展示图文视频资料的方式。Turn.js是一个JavaScript库，利用HTML5的所有优点，可以使内容呈现起来像一本真正的书或杂志。
+​	关于Turn.js的入门教程可以看siki学院的免费课程，也可以通过官网进行学习。
+ siki学院：http://www.sikiedu.com/course/517/tasks
+Turn.js官网：http://www.turnjs.com/
+ ​	由于少数民族建筑资料篇幅较多，文章内容比较复杂，且Turn.js并没有为用户提供书页模板，全部样式都是用户在CSS中定义的。考虑到书页制作的便捷性与美观性，选择PPT来制作展示书籍的内容，再以加载图片的方式将内容加载到网页端，实现具有翻页效果的少数民族建筑特征分析资料展示模块。"/>
 
 
 
@@ -239,26 +247,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#1-turnjs%e7%bf%bb%e9%a1%b5%e7%89%b9%e6%95%88" onclick="onNavClick(`#1-turnjs翻页特效-nav`)" id="1-turnjs翻页特效-nav">
-									1. Turn.js翻页特效
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#2%e6%a8%a1%e5%9e%8b%e5%b1%95%e7%a4%ba%e9%a1%b5%e9%9d%a2" onclick="onNavClick(`#2模型展示页面-nav`)" id="2模型展示页面-nav">
-									2.模型展示页面
+								<a href="#1-%e6%a8%a1%e5%9e%8b%e5%b1%95%e7%a4%ba%e9%a1%b5%e9%9d%a2" onclick="onNavClick(`#1-模型展示页面-nav`)" id="1-模型展示页面-nav">
+									1. 模型展示页面
 								</a>
 							</li>
 						
@@ -279,8 +269,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#21-%e6%9b%b4%e6%94%b9%e7%bd%91%e9%a1%b5%e5%90%8d%e7%a7%b0" onclick="onNavClick(`#21-更改网页名称-nav`)" id="21-更改网页名称-nav">
-									2.1 更改网页名称
+								<a href="#11-%e6%9b%b4%e6%94%b9%e7%bd%91%e9%a1%b5%e5%90%8d%e7%a7%b0" onclick="onNavClick(`#11-更改网页名称-nav`)" id="11-更改网页名称-nav">
+									1.1 更改网页名称
 								</a>
 							</li>
 						
@@ -297,8 +287,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#22-%e4%bf%ae%e6%94%b9%e6%a8%a1%e5%9e%8b%e8%b7%af%e5%be%84" onclick="onNavClick(`#22-修改模型路径-nav`)" id="22-修改模型路径-nav">
-									2.2 修改模型路径
+								<a href="#12-%e4%bf%ae%e6%94%b9%e6%a8%a1%e5%9e%8b%e8%b7%af%e5%be%84" onclick="onNavClick(`#12-修改模型路径-nav`)" id="12-修改模型路径-nav">
+									1.2 修改模型路径
 								</a>
 							</li>
 						
@@ -315,8 +305,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#23-%e6%8e%a7%e5%88%b6%e6%a8%a1%e5%9e%8b%e4%bd%93%e7%a7%af" onclick="onNavClick(`#23-控制模型体积-nav`)" id="23-控制模型体积-nav">
-									2.3 控制模型体积
+								<a href="#13-%e6%8e%a7%e5%88%b6%e6%a8%a1%e5%9e%8b%e4%bd%93%e7%a7%af" onclick="onNavClick(`#13-控制模型体积-nav`)" id="13-控制模型体积-nav">
+									1.3 控制模型体积
 								</a>
 							</li>
 						
@@ -333,8 +323,70 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#24-%e5%85%b6%e4%bb%96%e5%8f%af%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9" onclick="onNavClick(`#24-其他可配置选项-nav`)" id="24-其他可配置选项-nav">
-									2.4 其他可配置选项
+								<a href="#14-%e5%85%b6%e4%bb%96%e5%8f%af%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9" onclick="onNavClick(`#14-其他可配置选项-nav`)" id="14-其他可配置选项-nav">
+									1.4 其他可配置选项
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#2-turnjs%e7%bf%bb%e9%a1%b5%e7%89%b9%e6%95%88" onclick="onNavClick(`#2-turnjs翻页特效-nav`)" id="2-turnjs翻页特效-nav">
+									2. Turn.js翻页特效
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#21-%e5%9b%be%e6%96%87%e5%86%85%e5%ae%b9%e7%9a%84%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c" onclick="onNavClick(`#21-图文内容的准备工作-nav`)" id="21-图文内容的准备工作-nav">
+									2.1 图文内容的准备工作
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#22-%e7%bf%bb%e9%a1%b5%e6%95%88%e6%9e%9c%e7%9a%84%e5%ae%9e%e7%8e%b0" onclick="onNavClick(`#22-翻页效果的实现-nav`)" id="22-翻页效果的实现-nav">
+									2.2 翻页效果的实现
 								</a>
 							</li>
 						
@@ -357,6 +409,68 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							<li>
 								<a href="#3%e5%bb%ba%e7%ad%91%e5%b1%95%e7%a4%ba%e5%b9%b3%e5%8f%b0" onclick="onNavClick(`#3建筑展示平台-nav`)" id="3建筑展示平台-nav">
 									3.建筑展示平台
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#31-%e8%87%aa%e5%ae%9a%e4%b9%89%e4%b8%bb%e9%a1%b5%e6%a0%b7%e5%bc%8f" onclick="onNavClick(`#31-自定义主页样式-nav`)" id="31-自定义主页样式-nav">
+									3.1 自定义主页样式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#32-%e6%9b%bf%e6%8d%a2obj%e6%a8%a1%e5%9e%8b" onclick="onNavClick(`#32-替换obj模型-nav`)" id="32-替换obj模型-nav">
+									3.2 替换obj模型
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#33-%e5%85%b6%e4%bb%96%e5%8f%af%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9" onclick="onNavClick(`#33-其他可配置选项-nav`)" id="33-其他可配置选项-nav">
+									3.3 其他可配置选项
 								</a>
 							</li>
 						
@@ -460,26 +574,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#1-turnjs%e7%bf%bb%e9%a1%b5%e7%89%b9%e6%95%88" onclick="onNavClick(`#1-turnjs翻页特效-nav`)" id="1-turnjs翻页特效-nav">
-									1. Turn.js翻页特效
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#2%e6%a8%a1%e5%9e%8b%e5%b1%95%e7%a4%ba%e9%a1%b5%e9%9d%a2" onclick="onNavClick(`#2模型展示页面-nav`)" id="2模型展示页面-nav">
-									2.模型展示页面
+								<a href="#1-%e6%a8%a1%e5%9e%8b%e5%b1%95%e7%a4%ba%e9%a1%b5%e9%9d%a2" onclick="onNavClick(`#1-模型展示页面-nav`)" id="1-模型展示页面-nav">
+									1. 模型展示页面
 								</a>
 							</li>
 						
@@ -500,8 +596,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#21-%e6%9b%b4%e6%94%b9%e7%bd%91%e9%a1%b5%e5%90%8d%e7%a7%b0" onclick="onNavClick(`#21-更改网页名称-nav`)" id="21-更改网页名称-nav">
-									2.1 更改网页名称
+								<a href="#11-%e6%9b%b4%e6%94%b9%e7%bd%91%e9%a1%b5%e5%90%8d%e7%a7%b0" onclick="onNavClick(`#11-更改网页名称-nav`)" id="11-更改网页名称-nav">
+									1.1 更改网页名称
 								</a>
 							</li>
 						
@@ -518,8 +614,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#22-%e4%bf%ae%e6%94%b9%e6%a8%a1%e5%9e%8b%e8%b7%af%e5%be%84" onclick="onNavClick(`#22-修改模型路径-nav`)" id="22-修改模型路径-nav">
-									2.2 修改模型路径
+								<a href="#12-%e4%bf%ae%e6%94%b9%e6%a8%a1%e5%9e%8b%e8%b7%af%e5%be%84" onclick="onNavClick(`#12-修改模型路径-nav`)" id="12-修改模型路径-nav">
+									1.2 修改模型路径
 								</a>
 							</li>
 						
@@ -536,8 +632,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#23-%e6%8e%a7%e5%88%b6%e6%a8%a1%e5%9e%8b%e4%bd%93%e7%a7%af" onclick="onNavClick(`#23-控制模型体积-nav`)" id="23-控制模型体积-nav">
-									2.3 控制模型体积
+								<a href="#13-%e6%8e%a7%e5%88%b6%e6%a8%a1%e5%9e%8b%e4%bd%93%e7%a7%af" onclick="onNavClick(`#13-控制模型体积-nav`)" id="13-控制模型体积-nav">
+									1.3 控制模型体积
 								</a>
 							</li>
 						
@@ -554,8 +650,70 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#24-%e5%85%b6%e4%bb%96%e5%8f%af%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9" onclick="onNavClick(`#24-其他可配置选项-nav`)" id="24-其他可配置选项-nav">
-									2.4 其他可配置选项
+								<a href="#14-%e5%85%b6%e4%bb%96%e5%8f%af%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9" onclick="onNavClick(`#14-其他可配置选项-nav`)" id="14-其他可配置选项-nav">
+									1.4 其他可配置选项
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#2-turnjs%e7%bf%bb%e9%a1%b5%e7%89%b9%e6%95%88" onclick="onNavClick(`#2-turnjs翻页特效-nav`)" id="2-turnjs翻页特效-nav">
+									2. Turn.js翻页特效
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#21-%e5%9b%be%e6%96%87%e5%86%85%e5%ae%b9%e7%9a%84%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c" onclick="onNavClick(`#21-图文内容的准备工作-nav`)" id="21-图文内容的准备工作-nav">
+									2.1 图文内容的准备工作
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#22-%e7%bf%bb%e9%a1%b5%e6%95%88%e6%9e%9c%e7%9a%84%e5%ae%9e%e7%8e%b0" onclick="onNavClick(`#22-翻页效果的实现-nav`)" id="22-翻页效果的实现-nav">
+									2.2 翻页效果的实现
 								</a>
 							</li>
 						
@@ -578,6 +736,68 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							<li>
 								<a href="#3%e5%bb%ba%e7%ad%91%e5%b1%95%e7%a4%ba%e5%b9%b3%e5%8f%b0" onclick="onNavClick(`#3建筑展示平台-nav`)" id="3建筑展示平台-nav">
 									3.建筑展示平台
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#31-%e8%87%aa%e5%ae%9a%e4%b9%89%e4%b8%bb%e9%a1%b5%e6%a0%b7%e5%bc%8f" onclick="onNavClick(`#31-自定义主页样式-nav`)" id="31-自定义主页样式-nav">
+									3.1 自定义主页样式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#32-%e6%9b%bf%e6%8d%a2obj%e6%a8%a1%e5%9e%8b" onclick="onNavClick(`#32-替换obj模型-nav`)" id="32-替换obj模型-nav">
+									3.2 替换obj模型
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#33-%e5%85%b6%e4%bb%96%e5%8f%af%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9" onclick="onNavClick(`#33-其他可配置选项-nav`)" id="33-其他可配置选项-nav">
+									3.3 其他可配置选项
 								</a>
 							</li>
 						
@@ -647,7 +867,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                     <div class="post-meta">
                         
                         <time itemprop="datePublished">
-                            2021-01-08 19:15
+                            2021-01-08 23:15
                         </time>
                         
 
@@ -676,8 +896,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
                 <div class="post-body" v-pre>
                 
-                    <h1 id="1-turnjs翻页特效">1. Turn.js翻页特效</h1>
-<h1 id="2模型展示页面">2.模型展示页面</h1>
+                    <h1 id="1-模型展示页面">1. 模型展示页面</h1>
 <p>​		模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需修改obj模型路径等简单操作即可实现模型展示demo。obj模型导出及注意事项见<code>3dsMax技术文档</code>。模板已发布到GitHub供读者学习参考：</p>
 <blockquote>
 <p><a href="https://github.com/GSemir0418/TemplateProjects">https://github.com/GSemir0418/TemplateProjects</a></p>
@@ -686,26 +905,101 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p><img src="../img/image-20210108184425370.png" alt="image-20210108184425370"></p>
 <p>​		其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。</p>
 <p>​		js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。</p>
-<h2 id="21-更改网页名称">2.1 更改网页名称</h2>
+<h2 id="11-更改网页名称">1.1 更改网页名称</h2>
 <p>​		在index.html文件中，修改<code>&lt;title&gt;</code>标签内的内容即可：</p>
 <pre><code>&lt;title&gt;XXX村寨模型展示&lt;/title&gt;
-</code></pre><h2 id="22-修改模型路径">2.2 修改模型路径</h2>
+</code></pre><h2 id="12-修改模型路径">1.2 修改模型路径</h2>
 <p>​		首先将obj模型拷贝至models文件夹下。</p>
 <p>​		在js/index.js文件中，修改15和16行的代码如下：</p>
 <pre><code>//模型路径
 let mat1 = './models/testobj/lancuiting.mtl';
 let obj1 = './models/testobj/lancuiting.obj';
-</code></pre><p>​		注意路径使用相对路径。</p>
-<h2 id="23-控制模型体积">2.3 控制模型体积</h2>
+</code></pre><p>​		注意路径使用<strong>相对路径</strong>。</p>
+<h2 id="13-控制模型体积">1.3 控制模型体积</h2>
 <p>​		js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：</p>
 <pre><code>model1.scale.set(1.4, 1.4, 1.4);
-</code></pre><h2 id="24-其他可配置选项">2.4 其他可配置选项</h2>
+</code></pre><h2 id="14-其他可配置选项">1.4 其他可配置选项</h2>
 <p>​		如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：</p>
 <pre><code>//括号中的2为强度
 let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);
 //光源的位置
 dLight.position.set(500, 1000, 4000);
-</code></pre><h1 id="3建筑展示平台">3.建筑展示平台</h1>
+</code></pre><hr>
+<h1 id="2-turnjs翻页特效">2. Turn.js翻页特效</h1>
+<p>​		展示平台的第一个模块是<strong>少数民族建筑特征分析</strong>。针对大量的图文资料，传统的页面布局得不到很好的展示与交互效果。为提高用户体验，选择类似书本翻页的形式作为展示图文视频资料的方式。Turn.js是一个JavaScript库，利用HTML5的所有优点，可以使内容呈现起来像一本真正的书或杂志。</p>
+<p>​		关于Turn.js的入门教程可以看siki学院的免费课程，也可以通过官网进行学习。</p>
+<blockquote>
+<p>siki学院：http://www.sikiedu.com/course/517/tasks</p>
+<p>Turn.js官网：http://www.turnjs.com/</p>
+</blockquote>
+<p>​		由于少数民族建筑资料篇幅较多，文章内容比较复杂，且Turn.js并没有为用户提供书页模板，全部样式都是用户在CSS中定义的。考虑到书页制作的便捷性与美观性，选择PPT来制作展示书籍的内容，再以加载图片的方式将内容加载到网页端，实现具有翻页效果的少数民族建筑特征分析资料展示模块。</p>
+<p>整个模块的制作流程主要分两部分，<strong>图文内容的准备工作</strong>与<strong>翻页效果的实现</strong>。</p>
+<h2 id="21-图文内容的准备工作">2.1 图文内容的准备工作</h2>
+<p>​		PPT模板及主要实现代码已与平台源代码一同发布至GIthub供大家学习参考：</p>
+<blockquote>
+<p><a href="https://github.com/GSemir0418/TemplateProjects">https://github.com/GSemir0418/TemplateProjects</a></p>
+</blockquote>
+<p>​		模板的样式已经设计制作完成，包括封面的设计、内容的布局和字体的选择。也可以根据自己的审美，重新设计排版布局。注意页面设计中的方向要保证是纵向，具体尺寸取决于Turn.js中定义的宽和高。参考配置如下：</p>
+<p><img src="../img/image-20210109193919127.png" alt="image-20210109193919127"></p>
+<p>​		将撰写好的少数民族建筑特征分析图文资料复制到PPT模板中，进行排版布局后，完成图文内容的准备工作。</p>
+<p><!-- raw HTML omitted --></p>
+<p>​		点击右上角<code>文件</code>、<code>另存为</code>，设置导出路径后，考虑到网页端的加载效率，文件类型选择较小的<code>.jpg</code>。单击<code>保存</code>，</p>
+<p><!-- raw HTML omitted --></p>
+<p>​		在弹出的提示框中，选择<code>每张幻灯片</code>。</p>
+<p><img src="../img/image-20210109203901828.png" alt="image-20210109203901828"></p>
+<p>​		导出完成后如下图。</p>
+<p><!-- raw HTML omitted --></p>
+<p>​		为了加载图片的代码编写的简洁性，需要批量修改每张图片的名字。网上有很多批量修改文件名的方法，这里选择一款解压缩软件<code>好压</code>内置的<code>批量文件改名</code>功能，可以在<code>开始</code>菜单中找到。</p>
+<p><img src="../img/image-20210109204553287.png" alt="image-20210109204553287"></p>
+<p>​		首先根据提示，批量<code>添加</code>所有图片文件；在命名规则中填入<code>#</code>。单击<code>开始重命名</code>即可。</p>
+<p><!-- raw HTML omitted --></p>
+<p>​		至此，完成翻页效果的素材准备工作。</p>
+<h2 id="22-翻页效果的实现">2.2 翻页效果的实现</h2>
+<p>​		将图片文件夹重命名为英文名称，例如miao_img，将其拷贝到/ADP/turn_img路径下。批量加载的代码已写好，需要调整page/miao_turn_page.html中的几行代码：</p>
+<pre><code>//line 47 修改路径&quot;turn_img/miao_img&quot;
+&quot;&lt;img src=\&quot;../turn_img/miao_img/&quot; + i + &quot;.jpg\&quot; alt=\&quot; \&quot; width=\&quot;525\&quot; height=\&quot;700\&quot;&gt;\n&quot; +
+
+//line 100 修改路径&quot;turn_img/miao_img&quot;
+&lt;img src=&quot;../turn_img/miao_img/1.jpg&quot; alt=&quot; &quot; width=&quot;525&quot; height=&quot;700&quot; /&gt;
+</code></pre><p>​		加载完成后，根据实际页码，调整目录页数及跳转按钮的页码。</p>
+<pre><code>//line 89-91 pageTo(修改这里面的数字)
+&lt;a href=&quot;javascript:pageTo(1)&quot; class=&quot;btn btn-secondary&quot; role=&quot;button&quot;&gt;封面&lt;/a&gt;
+&lt;a href=&quot;javascript:pageTo(2)&quot; class=&quot;btn btn-secondary&quot; role=&quot;button&quot;&gt;目录&lt;/a&gt;
+&lt;a href=&quot;javascript:pageTo(72)&quot; class=&quot;btn btn-secondary&quot; role=&quot;button&quot;&gt;封底&lt;/a&gt;
+
+//line 112-119 pageTo(修改这里面的数字) 修改目录文字内容
+&lt;div class=&quot;list-group&quot; style=&quot;left: 50%&quot;&gt;
+    &lt;a href=&quot;javascript:pageTo(4)&quot;
+    class=&quot;list-group-item list-group-item-action&quot;&gt;1.村寨概述-1&lt;/a&gt;
+    &lt;a href=&quot;javascript:pageTo(40)&quot;
+    class=&quot;list-group-item list-group-item-action&quot;&gt;2.村落及居住建筑分析-37&lt;/a&gt;
+    &lt;a href=&quot;javascript:pageTo(56)&quot;
+    class=&quot;list-group-item list-group-item-action&quot;&gt;3.建筑遗传特征-53&lt;/a&gt;
+&lt;/div&gt;
+</code></pre><p>​		完成翻书效果展示少数民族建筑特征模块的制作。</p>
+<hr>
+<h1 id="3建筑展示平台">3.建筑展示平台</h1>
+<p>​		展示平台的第二部分是<strong>建筑结构体系展示部分</strong>，也是平台的核心部分。包括模型爆炸、构件动态拆分以及模型剖切三大功能模块。由于具体实现逻辑已封装完毕，只需修改模板中的几行代码即可。模板下载链接：</p>
+<blockquote>
+<p><a href="https://github.com/GSemir0418/TemplateProjects">https://github.com/GSemir0418/TemplateProjects</a></p>
+</blockquote>
+<h2 id="31-自定义主页样式">3.1 自定义主页样式</h2>
+<p>​		模板中的主页样式如下图：</p>
+
+<p><img src="../img/image-20210109213813039.png" alt="image-20210109213813039" style="zoom: 33%;" /></p>
+<p>​		文字部分及插图内容均可自定义，具体替换位置在根目录下的index.html中很明显，这里不再赘述。值得一提的是背景图片的修改路径，需要修改index_assets/css/main.css文件的1627行代码：</p>
+<pre><code>background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), url(&quot;../../index_images/bg.jpg&quot;);
+</code></pre><h2 id="32-替换obj模型">3.2 替换obj模型</h2>
+<p>​		首先将obj模型及DAE模型拷贝至models文件夹下。</p>
+<p>​		在js/miao_model1.js以及js/miao_model2.js文件中，修改变量mat1和obj1的值如下：</p>
+<pre><code>//模型路径
+let mat1 = '../models/testModel/objTest/objTest.mtl';
+let obj1 = '../models/testModel/objTest/objTest.obj';
+</code></pre><p>​		注意路径使用<strong>相对路径</strong>。</p>
+<p>​		模型剖切模块使用DAE格式的模型文件，在js/miao_simulation.js文件中，修改第28行代码：</p>
+<pre><code>loader.load( '../models/testModel/DAETest/DAEtest.DAE', function ( collada ) {
+</code></pre><h3 id="33-其他可配置选项">3.3 其他可配置选项</h3>
+<p>​		可参考本文第一章节中的部分内容。</p>
 
                     
                     <HR width="100%" id="EOF">
