@@ -23,12 +23,21 @@
 ​	其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。
 ​	js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。
 1.1 更改网页名称 ​	在index.html文件中，修改&lt;title&gt;标签内的内容即可：
-&lt;title&gt;XXX村寨模型展示&lt;/title&gt;1.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
+&lt;title&gt;XXX村寨模型展示&lt;/title&gt;
+1.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
 ​	在js/index.js文件中，修改15和16行的代码如下：
-//模型路径let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;;let obj1 = &#39;./models/testobj/lancuiting.obj&#39;;​	注意路径使用相对路径。
+//模型路径
+let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;;
+let obj1 = &#39;./models/testobj/lancuiting.obj&#39;;
+​	注意路径使用相对路径。
 1.3 控制模型体积 ​	js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：
-model1.scale.set(1.4, 1.4, 1.4);1.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
-//括号中的2为强度let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);//光源的位置dLight.position.set(500, 1000, 4000); 2. Turn.js翻页特效 ​	展示平台的第一个模块是少数民族建筑特征分析。针对大量的图文资料，传统的页面布局得不到很好的展示与交互效果。为提高用户体验，选择类似书本翻页的形式作为展示图文视频资料的方式。Turn.js是一个JavaScript库，利用HTML5的所有优点，可以使内容呈现起来像一本真正的书或杂志。
+model1.scale.set(1.4, 1.4, 1.4);
+1.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
+//括号中的2为强度
+let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);
+//光源的位置
+dLight.position.set(500, 1000, 4000);
+ 2. Turn.js翻页特效 ​	展示平台的第一个模块是少数民族建筑特征分析。针对大量的图文资料，传统的页面布局得不到很好的展示与交互效果。为提高用户体验，选择类似书本翻页的形式作为展示图文视频资料的方式。Turn.js是一个JavaScript库，利用HTML5的所有优点，可以使内容呈现起来像一本真正的书或杂志。
 ​	关于Turn.js的入门教程可以看siki学院的免费课程，也可以通过官网进行学习。
  siki学院：http://www.sikiedu.com/course/517/tasks
 Turn.js官网：http://www.turnjs.com/
@@ -51,12 +60,21 @@ Turn.js官网：http://www.turnjs.com/
 ​	其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。
 ​	js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。
 1.1 更改网页名称 ​	在index.html文件中，修改&lt;title&gt;标签内的内容即可：
-&lt;title&gt;XXX村寨模型展示&lt;/title&gt;1.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
+&lt;title&gt;XXX村寨模型展示&lt;/title&gt;
+1.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
 ​	在js/index.js文件中，修改15和16行的代码如下：
-//模型路径let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;;let obj1 = &#39;./models/testobj/lancuiting.obj&#39;;​	注意路径使用相对路径。
+//模型路径
+let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;;
+let obj1 = &#39;./models/testobj/lancuiting.obj&#39;;
+​	注意路径使用相对路径。
 1.3 控制模型体积 ​	js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：
-model1.scale.set(1.4, 1.4, 1.4);1.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
-//括号中的2为强度let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);//光源的位置dLight.position.set(500, 1000, 4000); 2. Turn.js翻页特效 ​	展示平台的第一个模块是少数民族建筑特征分析。针对大量的图文资料，传统的页面布局得不到很好的展示与交互效果。为提高用户体验，选择类似书本翻页的形式作为展示图文视频资料的方式。Turn.js是一个JavaScript库，利用HTML5的所有优点，可以使内容呈现起来像一本真正的书或杂志。
+model1.scale.set(1.4, 1.4, 1.4);
+1.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
+//括号中的2为强度
+let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);
+//光源的位置
+dLight.position.set(500, 1000, 4000);
+ 2. Turn.js翻页特效 ​	展示平台的第一个模块是少数民族建筑特征分析。针对大量的图文资料，传统的页面布局得不到很好的展示与交互效果。为提高用户体验，选择类似书本翻页的形式作为展示图文视频资料的方式。Turn.js是一个JavaScript库，利用HTML5的所有优点，可以使内容呈现起来像一本真正的书或杂志。
 ​	关于Turn.js的入门教程可以看siki学院的免费课程，也可以通过官网进行学习。
  siki学院：http://www.sikiedu.com/course/517/tasks
 Turn.js官网：http://www.turnjs.com/
@@ -885,7 +903,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p><a href="https://github.com/GSemir0418/TemplateProjects">https://github.com/GSemir0418/TemplateProjects</a></p>
 </blockquote>
 <p>​		下图为项目目录结构：</p>
-<p><img src="img/image-20210108184425370.png" alt="image-20210108184425370"></p>
+<p><img src="../img/image-20210108184425370.png" alt="image-20210108184425370"></p>
 <p>​		其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。</p>
 <p>​		js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。</p>
 <h2 id="11-更改网页名称">1.1 更改网页名称</h2>
@@ -923,17 +941,17 @@ dLight.position.set(500, 1000, 4000);
 <p><a href="https://github.com/GSemir0418/TemplateProjects">https://github.com/GSemir0418/TemplateProjects</a></p>
 </blockquote>
 <p>​		模板的样式已经设计制作完成，包括封面的设计、内容的布局和字体的选择。也可以根据自己的审美，重新设计排版布局。注意页面设计中的方向要保证是纵向，具体尺寸取决于Turn.js中定义的宽和高。参考配置如下：</p>
-<p><img src="img/image-20210109193919127.png" alt="image-20210109193919127"></p>
+<p><img src="../img/image-20210109193919127.png" alt="image-20210109193919127"></p>
 <p>​		将撰写好的少数民族建筑特征分析图文资料复制到PPT模板中，进行排版布局后，完成图文内容的准备工作。</p>
 <p><!-- raw HTML omitted --></p>
 <p>​		点击右上角<code>文件</code>、<code>另存为</code>，设置导出路径后，考虑到网页端的加载效率，文件类型选择较小的<code>.jpg</code>。单击<code>保存</code>，</p>
 <p><!-- raw HTML omitted --></p>
 <p>​		在弹出的提示框中，选择<code>每张幻灯片</code>。</p>
-<p><img src="img/image-20210109203901828.png" alt="image-20210109203901828"></p>
+<p><img src="../img/image-20210109203901828.png" alt="image-20210109203901828"></p>
 <p>​		导出完成后如下图。</p>
 <p><!-- raw HTML omitted --></p>
 <p>​		为了加载图片的代码编写的简洁性，需要批量修改每张图片的名字。网上有很多批量修改文件名的方法，这里选择一款解压缩软件<code>好压</code>内置的<code>批量文件改名</code>功能，可以在<code>开始</code>菜单中找到。</p>
-<p><img src="img/image-20210109204553287.png" alt="image-20210109204553287"></p>
+<p><img src="../img/image-20210109204553287.png" alt="image-20210109204553287"></p>
 <p>​		首先根据提示，批量<code>添加</code>所有图片文件；在命名规则中填入<code>#</code>。单击<code>开始重命名</code>即可。</p>
 <p><!-- raw HTML omitted --></p>
 <p>​		至此，完成翻页效果的素材准备工作。</p>
