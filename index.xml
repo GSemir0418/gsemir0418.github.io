@@ -5,9 +5,57 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 Jan 2021 23:15:51 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 18 Feb 2021 21:18:51 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>React简介</title>
+        <link>https://gsemir0418.github.io/posts/react%E7%AE%80%E4%BB%8B/</link>
+        <pubDate>Thu, 18 Feb 2021 21:18:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/react%E7%AE%80%E4%BB%8B/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/react%E7%AE%80%E4%BB%8B/ -&lt;h1 id=&#34;1react是什么&#34;&gt;1.React是什么&lt;/h1&gt;
+&lt;p&gt;用于构建&lt;strong&gt;用户界面&lt;/strong&gt;的JS库（操作DOM呈现页面）&lt;/p&gt;
+&lt;p&gt;是一个将数据渲染为HTML视图的开源的JavaScript库&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;官网：https://react.docschina.org/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;2谁开发的&#34;&gt;2.谁开发的&lt;/h1&gt;
+&lt;p&gt;Facebook&lt;/p&gt;
+&lt;h1 id=&#34;3为什么要学&#34;&gt;3.为什么要学&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;原生JS操作DOM&lt;strong&gt;繁琐、效率低&lt;/strong&gt;（&lt;strong&gt;DOM-API操作UI&lt;/strong&gt;）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用js直接操作DOM，浏览器会进行大量的&lt;strong&gt;重绘重排&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;原生js没有&lt;strong&gt;组件化&lt;/strong&gt;的编码方案，代码复用率低&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;模块化&lt;/strong&gt;是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;4react的特点&#34;&gt;4.React的特点&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;用&lt;strong&gt;组件化模式&lt;/strong&gt;、&lt;strong&gt;声明式编码&lt;/strong&gt;，提高开发效率及组件复用率&lt;/p&gt;
+&lt;p&gt;之前使用的是&lt;strong&gt;命令式编码&lt;/strong&gt;，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;React Native&lt;/strong&gt;中可以使用React语法进行&lt;strong&gt;移动端&lt;/strong&gt;开发。&lt;/p&gt;
+&lt;p&gt;React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;strong&gt;虚拟DOM&lt;/strong&gt;+优秀的&lt;strong&gt;Diffing算法&lt;/strong&gt;，尽量减少与真实DOM的交互&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程&lt;/p&gt;
+- https://gsemir0418.github.io/posts/react%E7%AE%80%E4%BB%8B/ - </description>
+        </item>
     
     
     

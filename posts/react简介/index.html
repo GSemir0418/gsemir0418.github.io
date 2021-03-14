@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head>
-<title>点云</title>
+<title>React简介</title>
 
 
 
@@ -16,10 +16,25 @@
 
 
 
-<meta property="og:title" content="点云" />
-<meta property="og:description" content="My HomePage Description" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://gsemir0418.github.io/tags/%E7%82%B9%E4%BA%91/" /><meta property="og:site_name" content="My Blog" />
+<meta property="og:title" content="React简介" />
+<meta property="og:description" content="1.React是什么 用于构建用户界面的JS库（操作DOM呈现页面）
+是一个将数据渲染为HTML视图的开源的JavaScript库
+ 官网：https://react.docschina.org/
+ 2.谁开发的 Facebook
+3.为什么要学   原生JS操作DOM繁琐、效率低（DOM-API操作UI）
+  使用js直接操作DOM，浏览器会进行大量的重绘重排
+  原生js没有组件化的编码方案，代码复用率低
+模块化是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。
+  4.React的特点   用组件化模式、声明式编码，提高开发效率及组件复用率
+之前使用的是命令式编码，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。
+  在React Native中可以使用React语法进行移动端开发。
+React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。
+  使用虚拟DOM&#43;优秀的Diffing算法，尽量减少与真实DOM的交互
+  ​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/posts/react%E7%AE%80%E4%BB%8B/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-02-18T21:18:51&#43;08:00" />
+<meta property="article:modified_time" content="2021-02-18T21:18:51&#43;08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -27,8 +42,21 @@
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="点云"/>
-<meta name="twitter:description" content="My HomePage Description"/>
+<meta name="twitter:title" content="React简介"/>
+<meta name="twitter:description" content="1.React是什么 用于构建用户界面的JS库（操作DOM呈现页面）
+是一个将数据渲染为HTML视图的开源的JavaScript库
+ 官网：https://react.docschina.org/
+ 2.谁开发的 Facebook
+3.为什么要学   原生JS操作DOM繁琐、效率低（DOM-API操作UI）
+  使用js直接操作DOM，浏览器会进行大量的重绘重排
+  原生js没有组件化的编码方案，代码复用率低
+模块化是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。
+  4.React的特点   用组件化模式、声明式编码，提高开发效率及组件复用率
+之前使用的是命令式编码，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。
+  在React Native中可以使用React语法进行移动端开发。
+React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。
+  使用虚拟DOM&#43;优秀的Diffing算法，尽量减少与真实DOM的交互
+  ​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程"/>
 
 
 
@@ -63,7 +91,29 @@
 
 
 
+  
+    <script src="https://gsemir0418.github.io//js/toc-collapse.js"></script>
+  
 
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'your client id',
+  clientSecret: 'your client secret',
+  repo: 'repo name',
+  owner: 'user',
+  admin: ['user'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
 
 
 
@@ -94,9 +144,11 @@
             
             
             
+                
             
             
-            <a class="a-block nav-link-item false" href="/posts">
+            
+            <a class="a-block nav-link-item active" href="/posts">
                 Archive
             </a>
             
@@ -114,11 +166,9 @@
             
             
             
-                
             
             
-            
-            <a class="a-block nav-link-item active" href="/tags">
+            <a class="a-block nav-link-item false" href="/tags">
                 Tags
             </a>
             
@@ -154,6 +204,96 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </div><div ref="extraContainer" class="extra-container">
     
     
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#1react%e6%98%af%e4%bb%80%e4%b9%88" onclick="onNavClick(`#1react是什么-nav`)" id="1react是什么-nav">
+									1.React是什么
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#2%e8%b0%81%e5%bc%80%e5%8f%91%e7%9a%84" onclick="onNavClick(`#2谁开发的-nav`)" id="2谁开发的-nav">
+									2.谁开发的
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#3%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e5%ad%a6" onclick="onNavClick(`#3为什么要学-nav`)" id="3为什么要学-nav">
+									3.为什么要学
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4react%e7%9a%84%e7%89%b9%e7%82%b9" onclick="onNavClick(`#4react的特点-nav`)" id="4react的特点-nav">
+									4.React的特点
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
     <div class="pagination">
         <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
             <i class="material-icons pagination-action-icon">
@@ -171,8 +311,6 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
         </a>
         
         
-        
-        
     </div>
 </div>
 <div class="single-column-drawer-container" ref="drawer"
@@ -185,9 +323,11 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
                 
                 
+                    
                 
                 
-                <a class="a-block drawer-menu-item false" href="/posts">
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
                     Archive
                 </a>
                 
@@ -205,11 +345,9 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
                 
                 
-                    
                 
                 
-                
-                <a class="a-block drawer-menu-item active" href="/tags">
+                <a class="a-block drawer-menu-item false" href="/tags">
                     Tags
                 </a>
                 
@@ -224,6 +362,96 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 </a>
                 
             
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#1react%e6%98%af%e4%bb%80%e4%b9%88" onclick="onNavClick(`#1react是什么-nav`)" id="1react是什么-nav">
+									1.React是什么
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#2%e8%b0%81%e5%bc%80%e5%8f%91%e7%9a%84" onclick="onNavClick(`#2谁开发的-nav`)" id="2谁开发的-nav">
+									2.谁开发的
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#3%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e5%ad%a6" onclick="onNavClick(`#3为什么要学-nav`)" id="3为什么要学-nav">
+									3.为什么要学
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4react%e7%9a%84%e7%89%b9%e7%82%b9" onclick="onNavClick(`#4react的特点-nav`)" id="4react的特点-nav">
+									4.React的特点
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
             
         </div>
     </div>
@@ -268,43 +496,126 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
             <div id="content">
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
-        <div class="post-item-wrapper post-item-wrapper-no-hover">
-            <div class="post-item post-item-no-gaps">
-                <div class="post-item-info-wrapper">
-                    <div class="post-item-title  post-item-title-small">
-                        <a href="https://gsemir0418.github.io/">GSemir Blog</a> / 点云
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    React简介
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2021-02-18 21:18
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/react%E5%85%A8%E5%AE%B6%E6%A1%B6">React全家桶</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
+                                &nbsp;
+                            
+                                <a href="/tags/react">React</a>
+                                &nbsp;
+                            
+                        
+                        
                     </div>
                 </div>
             </div>
-        </div><a href="/posts/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="a-block">
-            <div class="post-item-wrapper">
-                <div class="post-item post-item-no-gaps">
-                    <div class="post-item-info-wrapper">
-                        <div class="post-item-title">
-                            Revit建模技术文档
-                        </div>
-                        <div class="post-item-meta">
-    2021-01-03
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-    <span class="draft-label">草稿</span>
-    
-</div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h1 id="1react是什么">1.React是什么</h1>
+<p>用于构建<strong>用户界面</strong>的JS库（操作DOM呈现页面）</p>
+<p>是一个将数据渲染为HTML视图的开源的JavaScript库</p>
+<blockquote>
+<p>官网：https://react.docschina.org/</p>
+</blockquote>
+<h1 id="2谁开发的">2.谁开发的</h1>
+<p>Facebook</p>
+<h1 id="3为什么要学">3.为什么要学</h1>
+<ol>
+<li>
+<p>原生JS操作DOM<strong>繁琐、效率低</strong>（<strong>DOM-API操作UI</strong>）</p>
+</li>
+<li>
+<p>使用js直接操作DOM，浏览器会进行大量的<strong>重绘重排</strong></p>
+</li>
+<li>
+<p>原生js没有<strong>组件化</strong>的编码方案，代码复用率低</p>
+<p><strong>模块化</strong>是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。</p>
+</li>
+</ol>
+<h1 id="4react的特点">4.React的特点</h1>
+<ol>
+<li>
+<p>用<strong>组件化模式</strong>、<strong>声明式编码</strong>，提高开发效率及组件复用率</p>
+<p>之前使用的是<strong>命令式编码</strong>，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。</p>
+</li>
+<li>
+<p>在<strong>React Native</strong>中可以使用React语法进行<strong>移动端</strong>开发。</p>
+<p>React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。</p>
+</li>
+<li>
+<p>使用<strong>虚拟DOM</strong>+优秀的<strong>Diffing算法</strong>，尽量减少与真实DOM的交互</p>
+</li>
+</ol>
+<p><!-- raw HTML omitted --></p>
+<p>​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程</p>
 
-                    </div>
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">最后修改于 2021-02-18</p>
+                    
                 </div>
             </div>
-        </a></div>
-</div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts">
+			下回<br>已经到头啦。
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/">
+			上回<br>展示平台说明文档
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+<div id="gitalk-container"></div>
+
+
+
+
+
 
             </div>
+        </div>
+    </div>
+</div>
 
-
-<div id="single-column-footer">
+            </div><div id="single-column-footer">
 Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
 <br>
 移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
