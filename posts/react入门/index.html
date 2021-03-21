@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html><head>
+<title>React入门</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<meta property="og:title" content="React入门" />
+<meta property="og:description" content="1. React基本使用 1.1 js库引入（注意引入顺序） 1.react.development.js：react核心库
+2.react-dom.development.js：提供操作DOM的react扩展库
+3.babel.min.js：解析JSX语法代码转为js代码的库
+1.2 虚拟DOM的创建 1.2.1 关于虚拟DOM （1）本质上是object类型的一般对象
+（2）虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是react内部在用，无需真实DOM上那么多属性
+（3）虚拟DOM最终会被React转化为真实DOM，呈现在页面上
+1.2.2 创建的两种方式 （1）纯js方式
+const VDOM = React.createElement(&#39;标签名&#39;,{标签属性},&#39;标签内容&#39;) const VDOM = React.createElement(&#39;h1&#39;,{id:&#39;title&#39;},&#39;React.createElement(&#39;span&#39;,{},&#39;HELLO REACT!&#39;)&#39;) ​	可以看到，若遇标签嵌套情况，利用纯js来写非常复杂。
+（2）JSX方式
+​	是react 定义的一种类似于 XML 的 JS 扩展语法: JS &#43; XML。本质是React.createElement(&lsquo;标签名&rsquo;,{标签属性},&lsquo;标签内容&rsquo;)方法的语法糖，极大地简化了创建虚拟DOM过程。在利用JSX创建之前，需要将标签的type属性由默认的text/javascript改为text/babel。
+1）JSX创建虚拟DOM的写法如下：
+const VDOM = ( &lt;h1 id=&#34;title&#34;&gt; &lt;span&gt;hello,react&lt;/span&gt; &lt;/h1&gt; ) 2）JSX语法如下：
+1.遇到 &lt;开头的代码，以标签的语法解析：html 同名标签转换为 html 同名元素，其它标签需要特别解析：若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。
+2.遇到以 { 开头的代码，以 JS 语法解析: 标签中的 js 表达式必须用{ }包含
+3.只有一个根标签，若想在虚拟DOM中再新增标签，外面需要统一包一个标签
+4.标签必须闭合（自闭合也行）
+5.标签内样式的类名指定不要用class，要用className，例如6.标签中内联样式要用**style={{key:value}}**的形式去写，多个单词的要用小驼峰,例如style={{fontSize:&lsquo;29px&rsquo;}}
+1.3 渲染虚拟DOM 基本语法：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-03-20T23:11:51&#43;08:00" />
+<meta property="article:modified_time" content="2021-03-20T23:11:51&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="React入门"/>
+<meta name="twitter:description" content="1. React基本使用 1.1 js库引入（注意引入顺序） 1.react.development.js：react核心库
+2.react-dom.development.js：提供操作DOM的react扩展库
+3.babel.min.js：解析JSX语法代码转为js代码的库
+1.2 虚拟DOM的创建 1.2.1 关于虚拟DOM （1）本质上是object类型的一般对象
+（2）虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是react内部在用，无需真实DOM上那么多属性
+（3）虚拟DOM最终会被React转化为真实DOM，呈现在页面上
+1.2.2 创建的两种方式 （1）纯js方式
+const VDOM = React.createElement(&#39;标签名&#39;,{标签属性},&#39;标签内容&#39;) const VDOM = React.createElement(&#39;h1&#39;,{id:&#39;title&#39;},&#39;React.createElement(&#39;span&#39;,{},&#39;HELLO REACT!&#39;)&#39;) ​	可以看到，若遇标签嵌套情况，利用纯js来写非常复杂。
+（2）JSX方式
+​	是react 定义的一种类似于 XML 的 JS 扩展语法: JS &#43; XML。本质是React.createElement(&lsquo;标签名&rsquo;,{标签属性},&lsquo;标签内容&rsquo;)方法的语法糖，极大地简化了创建虚拟DOM过程。在利用JSX创建之前，需要将标签的type属性由默认的text/javascript改为text/babel。
+1）JSX创建虚拟DOM的写法如下：
+const VDOM = ( &lt;h1 id=&#34;title&#34;&gt; &lt;span&gt;hello,react&lt;/span&gt; &lt;/h1&gt; ) 2）JSX语法如下：
+1.遇到 &lt;开头的代码，以标签的语法解析：html 同名标签转换为 html 同名元素，其它标签需要特别解析：若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。
+2.遇到以 { 开头的代码，以 JS 语法解析: 标签中的 js 表达式必须用{ }包含
+3.只有一个根标签，若想在虚拟DOM中再新增标签，外面需要统一包一个标签
+4.标签必须闭合（自闭合也行）
+5.标签内样式的类名指定不要用class，要用className，例如6.标签中内联样式要用**style={{key:value}}**的形式去写，多个单词的要用小驼峰,例如style={{fontSize:&lsquo;29px&rsquo;}}
+1.3 渲染虚拟DOM 基本语法："/>
+
+
+
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="https://gsemir0418.github.io/scss/journal.min.5e8f3f653e9f6ce67bf72ff8ee6fee69decf7b5639a3ae7f8344750ad4e065b1.css" integrity="sha256-Xo8/ZT6fbOZ79y/47m/uad7Pe1Y5o65/g0R1CtTgZbE=" media="screen">
+
+
+
+<link rel="stylesheet" href="https://gsemir0418.github.io/scss/dark-mode.min.bdfa63b2e89903517dcbb1032b537d54cff3f425c19d008a78dfe49e6cd07ced.css" integrity="sha256-vfpjsuiZA1F9y7EDK1N9VM/z9CXBnQCKeN/knmzQfO0=" media="screen">
+
+
+<script src="https://gsemir0418.github.io//js/loadCSS.js"></script>
+<script>
+  loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+  
+    <script src="https://gsemir0418.github.io//js/toc-collapse.js"></script>
+  
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'your client id',
+  clientSecret: 'your client secret',
+  repo: 'repo name',
+  owner: 'user',
+  admin: ['user'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
+
+
+
+
+
+
+
+
+</head>
+<body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="https://gsemir0418.github.io/">
+    
+        <div class="nav-title">
+            GSemir Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            个人技术博客
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                Archive
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories">
+                Categories
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags">
+                Tags
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/index.xml">
+                RSS Feed
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 GSemir Blog
+	
+
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#1-react%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8" onclick="onNavClick(`#1-react基本使用-nav`)" id="1-react基本使用-nav">
+									1. React基本使用
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#11-js%e5%ba%93%e5%bc%95%e5%85%a5%e6%b3%a8%e6%84%8f%e5%bc%95%e5%85%a5%e9%a1%ba%e5%ba%8f" onclick="onNavClick(`#11-js库引入注意引入顺序-nav`)" id="11-js库引入注意引入顺序-nav">
+									1.1 js库引入（注意引入顺序）
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#12-%e8%99%9a%e6%8b%9fdom%e7%9a%84%e5%88%9b%e5%bb%ba" onclick="onNavClick(`#12-虚拟dom的创建-nav`)" id="12-虚拟dom的创建-nav">
+									1.2 虚拟DOM的创建
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#121-%e5%85%b3%e4%ba%8e%e8%99%9a%e6%8b%9fdom" onclick="onNavClick(`#121-关于虚拟dom-nav`)" id="121-关于虚拟dom-nav">
+									1.2.1 关于虚拟DOM
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#122-%e5%88%9b%e5%bb%ba%e7%9a%84%e4%b8%a4%e7%a7%8d%e6%96%b9%e5%bc%8f" onclick="onNavClick(`#122-创建的两种方式-nav`)" id="122-创建的两种方式-nav">
+									1.2.2 创建的两种方式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#13-%e6%b8%b2%e6%9f%93%e8%99%9a%e6%8b%9fdom" onclick="onNavClick(`#13-渲染虚拟dom-nav`)" id="13-渲染虚拟dom-nav">
+									1.3 渲染虚拟DOM
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#14-%e6%a8%a1%e5%9d%97%e4%b8%8e%e7%bb%84%e4%bb%b6%e7%9a%84%e7%90%86%e8%a7%a3" onclick="onNavClick(`#14-模块与组件的理解-nav`)" id="14-模块与组件的理解-nav">
+									1.4 模块与组件的理解
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e8%a1%a5%e5%85%85" onclick="onNavClick(`#补充-nav`)" id="补充-nav">
+									补充：
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a class="pagination-action" v-on:click="toggleDarkMode">
+            <i class="material-icons pagination-action-icon" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons pagination-action-icon" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    Archive
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories">
+                    Categories
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags">
+                    Tags
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/index.xml">
+                    RSS Feed
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#1-react%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8" onclick="onNavClick(`#1-react基本使用-nav`)" id="1-react基本使用-nav">
+									1. React基本使用
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#11-js%e5%ba%93%e5%bc%95%e5%85%a5%e6%b3%a8%e6%84%8f%e5%bc%95%e5%85%a5%e9%a1%ba%e5%ba%8f" onclick="onNavClick(`#11-js库引入注意引入顺序-nav`)" id="11-js库引入注意引入顺序-nav">
+									1.1 js库引入（注意引入顺序）
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#12-%e8%99%9a%e6%8b%9fdom%e7%9a%84%e5%88%9b%e5%bb%ba" onclick="onNavClick(`#12-虚拟dom的创建-nav`)" id="12-虚拟dom的创建-nav">
+									1.2 虚拟DOM的创建
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#121-%e5%85%b3%e4%ba%8e%e8%99%9a%e6%8b%9fdom" onclick="onNavClick(`#121-关于虚拟dom-nav`)" id="121-关于虚拟dom-nav">
+									1.2.1 关于虚拟DOM
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#122-%e5%88%9b%e5%bb%ba%e7%9a%84%e4%b8%a4%e7%a7%8d%e6%96%b9%e5%bc%8f" onclick="onNavClick(`#122-创建的两种方式-nav`)" id="122-创建的两种方式-nav">
+									1.2.2 创建的两种方式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#13-%e6%b8%b2%e6%9f%93%e8%99%9a%e6%8b%9fdom" onclick="onNavClick(`#13-渲染虚拟dom-nav`)" id="13-渲染虚拟dom-nav">
+									1.3 渲染虚拟DOM
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#14-%e6%a8%a1%e5%9d%97%e4%b8%8e%e7%bb%84%e4%bb%b6%e7%9a%84%e7%90%86%e8%a7%a3" onclick="onNavClick(`#14-模块与组件的理解-nav`)" id="14-模块与组件的理解-nav">
+									1.4 模块与组件的理解
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e8%a1%a5%e5%85%85" onclick="onNavClick(`#补充-nav`)" id="补充-nav">
+									补充：
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="https://gsemir0418.github.io/">
+            GSemir Blog
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
+            <i class="material-icons" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://gsemir0418.github.io/">
+        <div class="single-column-header-title">GSemir Blog</div>
+        
+        <div class="single-column-header-subtitle">个人技术博客</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    React入门
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2021-03-20 23:11
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/react%E5%85%A8%E5%AE%B6%E6%A1%B6">React全家桶</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
+                                &nbsp;
+                            
+                                <a href="/tags/react">React</a>
+                                &nbsp;
+                            
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h1 id="1-react基本使用">1. React基本使用</h1>
+<h2 id="11-js库引入注意引入顺序">1.1 js库引入（注意引入顺序）</h2>
+<p>1.react.development.js：react核心库</p>
+<p>2.react-dom.development.js：提供操作DOM的react扩展库</p>
+<p>3.babel.min.js：解析JSX语法代码转为js代码的库</p>
+<h2 id="12-虚拟dom的创建">1.2 虚拟DOM的创建</h2>
+<h3 id="121-关于虚拟dom">1.2.1 关于虚拟DOM</h3>
+<p>（1）本质上是object类型的<strong>一般对象</strong></p>
+<p>（2）虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是react内部在用，无需真实DOM上那么多属性</p>
+<p>（3）虚拟DOM最终会被React转化为真实DOM，呈现在页面上</p>
+<h3 id="122-创建的两种方式">1.2.2 创建的两种方式</h3>
+<p>（1）纯js方式</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#8b008b;font-weight:bold">const</span> VDOM = React.createElement(<span style="color:#cd5555">&#39;标签名&#39;</span>,{标签属性},<span style="color:#cd5555">&#39;标签内容&#39;</span>)
+
+<span style="color:#8b008b;font-weight:bold">const</span> VDOM = React.createElement(<span style="color:#cd5555">&#39;h1&#39;</span>,{id:<span style="color:#cd5555">&#39;title&#39;</span>},<span style="color:#cd5555">&#39;React.createElement(&#39;</span>span<span style="color:#cd5555">&#39;,{},&#39;</span>HELLO REACT!<span style="color:#cd5555">&#39;)&#39;</span>)
+</code></pre></div><p>​		可以看到，若遇标签嵌套情况，利用纯js来写非常复杂。</p>
+<p>（2）JSX方式</p>
+<p>​		是react 定义的一种类似于 XML 的 JS 扩展语法: JS + XML。本质是React.createElement(&lsquo;标签名&rsquo;,{标签属性},&lsquo;标签内容&rsquo;)方法的语法糖，极大地简化了创建虚拟DOM过程。<strong>在利用JSX创建之前，需要将<!-- raw HTML omitted -->标签的type属性由默认的text/javascript改为text/babel</strong>。</p>
+<p>1）JSX创建虚拟DOM的写法如下：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> VDOM = (
+    &lt;<span style="color:#8b008b;font-weight:bold">h1</span> <span style="color:#658b00">id</span>=<span style="color:#cd5555">&#34;title&#34;</span>&gt;
+    	&lt;<span style="color:#8b008b;font-weight:bold">span</span>&gt;hello,react&lt;/<span style="color:#8b008b;font-weight:bold">span</span>&gt;
+    &lt;/<span style="color:#8b008b;font-weight:bold">h1</span>&gt;
+)
+</code></pre></div><p>2）<strong>JSX语法</strong>如下：</p>
+<p>1.遇到 &lt;开头的代码，以标签的语法解析：html 同名标签转换为 html 同名元素，其它标签需要特别解析：若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。</p>
+<p>2.遇到以 { 开头的代码，以 JS 语法解析: <strong>标签中的 js 表达式必须用{ }包含</strong></p>
+<p>3.<strong>只有一个根标签</strong>，若想在虚拟DOM中再新增标签，外面需要统一包一个标签</p>
+<p>4.标签必须<strong>闭合</strong>（自闭合也行）</p>
+<p>5.标签内样式的类名指定不要用class，要用<strong>className</strong>，例如<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>6.标签中内联样式要用**style={{key:value}}**的形式去写，多个单词的要用小驼峰,例如style={{fontSize:&lsquo;29px&rsquo;}}</p>
+<h2 id="13-渲染虚拟dom">1.3 渲染虚拟DOM</h2>
+<p>基本语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">ReactDOM.render(VirtualDOM,containerDOM)
+ReactDOM.render(VDOM,<span style="color:#658b00">document</span>.getElementById(<span style="color:#cd5555">&#39;test&#39;</span>))
+</code></pre></div><h2 id="14-模块与组件的理解">1.4 模块与组件的理解</h2>
+<p>模块指的是向外提供特定功能的js程序，一般就是一个js文件，模块化是为了更好地复用js，简化js的编写，提高js运行效率。模块化只针对js；而组件指的是用来实现局部功能效果的代码和资源的集合（html、css、js、image、video等），组件化是为了复用编码，简化项目编码，提高运行效率</p>
+<p>1.5 jsx练习</p>
+<p><img src="../img/image-20210321123104572.png" alt="image-20210321123104572"></p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#8b008b;font-weight:bold">body</span>&gt;
+    &lt;<span style="color:#8b008b;font-weight:bold">div</span> <span style="color:#658b00">id</span>=<span style="color:#cd5555">&#34;test&#34;</span>&gt;&lt;/<span style="color:#8b008b;font-weight:bold">div</span>&gt;
+
+    &lt;<span style="color:#8b008b;font-weight:bold">script</span> <span style="color:#658b00">src</span>=<span style="color:#cd5555">&#34;../js/react.development.js&#34;</span>&gt;&lt;/<span style="color:#8b008b;font-weight:bold">script</span>&gt;
+    &lt;<span style="color:#8b008b;font-weight:bold">script</span> <span style="color:#658b00">src</span>=<span style="color:#cd5555">&#34;../js/react-dom.development.js&#34;</span>&gt;&lt;/<span style="color:#8b008b;font-weight:bold">script</span>&gt;
+    &lt;<span style="color:#8b008b;font-weight:bold">script</span> <span style="color:#658b00">src</span>=<span style="color:#cd5555">&#34;../js/babel.min.js&#34;</span>&gt;&lt;/<span style="color:#8b008b;font-weight:bold">script</span>&gt;
+
+    &lt;<span style="color:#8b008b;font-weight:bold">script</span> <span style="color:#658b00">type</span>=<span style="color:#cd5555">&#34;text/babel&#34;</span>&gt;
+    <span style="color:#228b22">/*
+</span><span style="color:#228b22">        一定注意区分【js语句（代码）】与【js表达式】
+</span><span style="color:#228b22">            1.表达式：一个表达式会产生一个值，可以放任何一个需要值的地方
+</span><span style="color:#228b22">                下面这些都是表达式
+</span><span style="color:#228b22">                a
+</span><span style="color:#228b22">                a+b
+</span><span style="color:#228b22">                demo(1)
+</span><span style="color:#228b22">                arr.map()//用来处理数组
+</span><span style="color:#228b22">                function test(){}//定义方法
+</span><span style="color:#228b22">            2.语句（代码）：控制代码走向，没有值
+</span><span style="color:#228b22">                if(){}
+</span><span style="color:#228b22">                for(){}
+</span><span style="color:#228b22">                switch(){case}
+</span><span style="color:#228b22">    */</span>
+        <span style="color:#228b22">//模拟一些数据
+</span><span style="color:#228b22"></span>        <span style="color:#8b008b;font-weight:bold">const</span> data = [<span style="color:#cd5555">&#39;Angular&#39;</span>, <span style="color:#cd5555">&#39;Vue&#39;</span>, <span style="color:#cd5555">&#39;React&#39;</span>]
+        <span style="color:#8b008b;font-weight:bold">const</span> data2 = [&lt;li&gt;Angular&lt;<span style="color:#a61717;background-color:#e3d2d2">/li&gt;, &lt;li&gt;Vue&lt;/li&gt;, &lt;li&gt;React&lt;/li&gt;]//React可以自动遍历数组</span>
+        <span style="color:#8b008b;font-weight:bold">const</span> obj = {name1:<span style="color:#cd5555">&#39;Angular&#39;</span>,name2:<span style="color:#cd5555">&#39;Vue&#39;</span>,name3:<span style="color:#cd5555">&#39;React&#39;</span>}<span style="color:#228b22">//对象不能作为React的节点
+</span><span style="color:#228b22"></span>        <span style="color:#228b22">//jsx创建虚拟DOM
+</span><span style="color:#228b22"></span>        <span style="color:#8b008b;font-weight:bold">const</span> VDOM = (
+            &lt;div&gt;
+                &lt;h1&gt;前端js框架列表&lt;<span style="color:#a61717;background-color:#e3d2d2">/h1&gt;</span>
+                &lt;ul&gt;
+                    {
+                        data.map((a,index)=&gt;{
+                            <span style="color:#8b008b;font-weight:bold">return</span> &lt;li key={index}&gt;{a}&lt;<span style="color:#1c7e71">/li&gt;/</span>/虚拟dom必须有唯一标识key
+                        })
+                    }
+                &lt;<span style="color:#a61717;background-color:#e3d2d2">/ul&gt;</span>
+            &lt;<span style="color:#a61717;background-color:#e3d2d2">/div&gt;</span>
+        )
+        ReactDOM.render(VDOM, <span style="color:#658b00">document</span>.getElementById(<span style="color:#cd5555">&#39;test&#39;</span>))
+    &lt;/<span style="color:#8b008b;font-weight:bold">script</span>&gt;
+&lt;/<span style="color:#8b008b;font-weight:bold">body</span>&gt;
+</code></pre></div><h2 id="补充">补充：</h2>
+<p>1）早期传输数据的两种格式</p>
+<p>​		最早使用XML来存储与传输数据的，XML即扩展标记语言 (Extensible Markup Language, XML) ，用于标记电子文件使其具有结构性的标记语言，可以用来标记数据、定义数据类型，是一种允许用户对自己的标记语言进行定义的源语言。典型写法如下</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#8b008b;font-weight:bold">&lt;student&gt;</span>
+  <span style="color:#8b008b;font-weight:bold">&lt;name&gt;</span>Tom<span style="color:#8b008b;font-weight:bold">&lt;/name&gt;</span>
+<span style="color:#8b008b;font-weight:bold">&lt;/student&gt;</span>
+</code></pre></div><p>​		后面改为利用JSON格式。JSON(JavaScript Object Notation)一种轻量级的数据交换格式，具有良好的可读和便于快速编写的特性。可在不同平台之间进行数据交换。主要是得益于JSON的两个重要方法：JSON.parse()和JSON.stringfy()，分别用来快速将JSON中的数据解析为数组和对象，以及快速把JS中的数组和对象转化为JSON字符串</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#a61717;background-color:#e3d2d2">&#39;name&#39;:&#39;gsq&#39;,&#39;age&#39;:26</span>}
+</code></pre></div><p>2）XML和JSON的优缺点对比</p>
+<p>(1)可读性两者基本相同，一边是建议的语法，一边是规范的标签形式，XML可读性较好些；
+(2)可扩展性方面差不多；
+(3)编码难度方面，不借助工具的话，XML较为复杂；
+(4)解码难度方面，XML的解析得考虑子节点父节点，让人头昏眼花，而JSON的解析难度几乎为0。
+(5)流行度方面，XML已经被业界广泛的使用，而JSON才刚刚开始，但是在Ajax这个特定的领域，未来的发展一定是XML让位于JSON。到时Ajax应该变成Ajaj(Asynchronous Javascript and JSON)了；
+(7)数据体积方面，JSON相对于XML来讲，数据的体积小，传递的速度更快些；
+(8)数据交互方面，JSON与JavaScript的交互更加方便，更容易解析处理，更好的数据交互； 
+(9)数据描述方面，JSON对数据的描述性比XML较差；
+(10)传输速度方面， JSON的速度要远远快于XML。</p>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">最后修改于 2021-03-20</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts">
+			下回<br>已经到头啦。
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://gsemir0418.github.io/posts/react%E7%AE%80%E4%BB%8B/">
+			上回<br>React简介
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+<div id="gitalk-container"></div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 GSemir Blog
+	
+</div>
+            </div>
+    <script>
+let app;
+
+app = new Vue({
+    el: '#app',
+    data: {
+        scrollY: 0,
+        navOpacity: 0,
+        isDrawerOpen: false,
+        mounted: false,
+        isDarkMode: false
+    },
+    methods: {
+            sgn(t, x) {
+                let k = 1. / (1. - 2 * t);
+                if (x <= t) return 0;
+                else if (x >= 1 - t) return 1;
+                else {
+                    return k * (x - t);
+                }
+            },
+            handleScroll() {
+                this.scrollY = window.scrollY;
+                this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+
+                if (this.navOpacity >= 1) {
+                    navBackground.style.opacity = 1;
+                    navTitle.style.opacity = 1;
+                } else {
+                    navBackground.style.opacity = 0;
+                    navTitle.style.opacity = 0;
+                }
+            },
+            handleResize() {
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+                extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
+            },
+            navBarHeight() {
+                return this.$refs.navBar.offsetHeight;
+            },
+            pageHeadHeight() {
+                return this.$refs.pageHead.offsetHeight;
+            },
+            toggleDrawer() {
+                this.isDrawerOpen = !this.isDrawerOpen;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            closeDrawer() {
+                this.isDrawerOpen = false;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            toggleDarkMode() {
+                this.isDarkMode = !this.isDarkMode;
+                if (this.isDarkMode==true){
+                    document.cookie = "night=1;path=/";
+                    document.body.classList.add("night");
+                } else {
+                    document.cookie = "night=0;path=/";
+                    document.body.classList.remove("night");
+                }
+            }
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+        window._nonDesktop = function () {
+            let check = false;
+            (function (a) {
+                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+            })(navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        };
+        
+        var night = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if (night==""){
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                
+            }
+        }else{
+            
+            if (night=="1") {
+                this.toggleDarkMode();
+            }
+        }
+    },
+    mounted() {
+        this.handleScroll();
+        this.handleResize();
+        this.mounted = true;
+
+        
+    },
+    destroyed() {
+        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
+    }
+});
+</script>
+
+<script src="https://gsemir0418.github.io//js/journal.js"></script>
+    </body>
+</html>

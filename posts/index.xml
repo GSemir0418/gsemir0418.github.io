@@ -6,7 +6,33 @@
     <description>Recent content in Posts on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 Feb 2021 21:18:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 Mar 2021 23:11:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>React入门</title>
+      <link>https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sat, 20 Mar 2021 23:11:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/</guid>
+      <description>1. React基本使用 1.1 js库引入（注意引入顺序） 1.react.development.js：react核心库
+2.react-dom.development.js：提供操作DOM的react扩展库
+3.babel.min.js：解析JSX语法代码转为js代码的库
+1.2 虚拟DOM的创建 1.2.1 关于虚拟DOM （1）本质上是object类型的一般对象
+（2）虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是react内部在用，无需真实DOM上那么多属性
+（3）虚拟DOM最终会被React转化为真实DOM，呈现在页面上
+1.2.2 创建的两种方式 （1）纯js方式
+const VDOM = React.createElement(&amp;#39;标签名&amp;#39;,{标签属性},&amp;#39;标签内容&amp;#39;) const VDOM = React.createElement(&amp;#39;h1&amp;#39;,{id:&amp;#39;title&amp;#39;},&amp;#39;React.createElement(&amp;#39;span&amp;#39;,{},&amp;#39;HELLO REACT!&amp;#39;)&amp;#39;) ​	可以看到，若遇标签嵌套情况，利用纯js来写非常复杂。
+（2）JSX方式
+​	是react 定义的一种类似于 XML 的 JS 扩展语法: JS + XML。本质是React.createElement(&amp;lsquo;标签名&amp;rsquo;,{标签属性},&amp;lsquo;标签内容&amp;rsquo;)方法的语法糖，极大地简化了创建虚拟DOM过程。在利用JSX创建之前，需要将标签的type属性由默认的text/javascript改为text/babel。
+1）JSX创建虚拟DOM的写法如下：
+const VDOM = ( &amp;lt;h1 id=&amp;#34;title&amp;#34;&amp;gt; &amp;lt;span&amp;gt;hello,react&amp;lt;/span&amp;gt; &amp;lt;/h1&amp;gt; ) 2）JSX语法如下：
+1.遇到 &amp;lt;开头的代码，以标签的语法解析：html 同名标签转换为 html 同名元素，其它标签需要特别解析：若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。
+2.遇到以 { 开头的代码，以 JS 语法解析: 标签中的 js 表达式必须用{ }包含
+3.只有一个根标签，若想在虚拟DOM中再新增标签，外面需要统一包一个标签
+4.标签必须闭合（自闭合也行）
+5.标签内样式的类名指定不要用class，要用className，例如6.标签中内联样式要用**style={{key:value}}**的形式去写，多个单词的要用小驼峰,例如style={{fontSize:&amp;lsquo;29px&amp;rsquo;}}
+1.3 渲染虚拟DOM 基本语法：</description>
+    </item>
+    
     <item>
       <title>React简介</title>
       <link>https://gsemir0418.github.io/posts/react%E7%AE%80%E4%BB%8B/</link>
@@ -101,21 +127,21 @@ Turn.js官网：http://www.turnjs.com/
       <description>Step1 安装hugo  下载链接：https://github.com/gohugoio/hugo/releases
  选择最新版本进行安装（建议安装hugo_extended版本）。
 注意解压后需配置环境变量，可以使用version命令测试是否配置成功：
-hugo version Step2 新建博客站点 使用命令行，输入如下命令新建博客站点：
-hugo new site BLOGNAME Step3 下载并配置主题  主题下载链接：https://themes.gohugo.io/
+hugo versionStep2 新建博客站点 使用命令行，输入如下命令新建博客站点：
+hugo new site BLOGNAMEStep3 下载并配置主题  主题下载链接：https://themes.gohugo.io/
  官网提供了许多主题供用户选择，按照主题下的安装配置说明进行主题的下载与配置。
 这里以Diary主题为例，首先在博客的根目录下，使用终端进行git初始化：
-git init 并执行：
-git submodule add https://github.com/AmazingRise/hugo-theme-diary.git themes/diary 主题会自动下载至根目录下的themes文件夹中。下载完成后，启动hugo本地服务并指定该主题：
-hugo server -t diary --buildDrafts 可以通过访问localhost:1313进入本地部署的博客站点。可以看到，hugo已经为我们配置好了下载的主题。
+git init并执行：
+git submodule add https://github.com/AmazingRise/hugo-theme-diary.git themes/diary主题会自动下载至根目录下的themes文件夹中。下载完成后，启动hugo本地服务并指定该主题：
+hugo server -t diary --buildDrafts可以通过访问localhost:1313进入本地部署的博客站点。可以看到，hugo已经为我们配置好了下载的主题。
 Step4 新建博客 同样，在终端中执行：
-hugo new post/文章名称.md 可以使用Typora来编辑文章，就像我现在这样。
+hugo new post/文章名称.md可以使用Typora来编辑文章，就像我现在这样。
 Step5 部署到github 首先进入自己的github，新建一个repository，注意名称要使用小写昵称全名.github.io。
 在终端执行：
-hugo --theme=diary --baseUrl=&amp;quot;https://gsemir0418.github.io/&amp;quot; --buildDrafts 此时在根目录下，hugo为我们生成了一个public文件夹，我们只需利用github将此文件夹上传到库中即可。
+hugo --theme=diary --baseUrl=&amp;quot;https://gsemir0418.github.io/&amp;quot; --buildDrafts此时在根目录下，hugo为我们生成了一个public文件夹，我们只需利用github将此文件夹上传到库中即可。
 在public文件夹下，进行git初始化。
-git init git add . git commit -m &amp;quot;v0&amp;quot; 此时需要注册GitHub信息
-git config --global user.email &amp;quot;you@example.com&amp;quot; git config --global user.</description>
+git initgit add .git commit -m &amp;quot;v0&amp;quot;此时需要注册GitHub信息
+git config --global user.email &amp;quot;you@example.com&amp;quot;git config --global user.</description>
     </item>
     
   </channel>
