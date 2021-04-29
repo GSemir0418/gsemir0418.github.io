@@ -6,7 +6,22 @@
     <description>Recent content in 前端 on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Mar 2021 23:11:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Apr 2021 23:11:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>React面向组件编程</title>
+      <link>https://gsemir0418.github.io/posts/react%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Thu, 29 Apr 2021 23:11:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/react%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/</guid>
+      <description>1 React定义组件 1.1 函数式组件  函数式组件适用于简单组件的定义，其首字母需大写，且虚拟DOM元素必须有结束标签 函数组件中的this指向为window，但babel编译后默认开启了严格模式，因此结果为undefined 返回的虚拟DOM元素只能有一个根元素 渲染函数式组件的过程：  React解析组件标签，找到了Demo组件 发现组件式使用函数定义的，随后调用该函数，将返回的虚拟DOM转为真实DOM。随后呈现在页面中    function Demo(){ console.log(this);//undefined 	return &amp;lt;h1&amp;gt;函数式组件，适用于简单组件的定义&amp;lt;/h1&amp;gt; } ReactDOM.render(&amp;lt;Demo/&amp;gt;,document.getElementById(&amp;#39;test&amp;#39;)) 1.2 类式组件   继承React.Component类，组件名首字母必须大写，且虚拟DOM元素必须有结束标签
+  必须有render()方法，且render方法必须有返回值，返回的虚拟DOM元素只能有一个根元素
+  渲染类式组件的过程
+1.React 内部会创建组件实例对象
+2.调用 render()得到虚拟 DOM, 并解析为真实 DOM
+3.插入到指定的页面元素内部
+  class MyComponent extends React.Component{ render(){ //render放在MyComponent的原型对象（React.Component）上，供实例使用 	//render中的this指向MyComponent实例对象（组件实例对象） 	console.log(&amp;#39;render方法中的this指向：&amp;#39;,this); return &amp;lt;h1&amp;gt;类式组件，适用于复杂组件的定义&amp;lt;/h1&amp;gt; } } ReactDOM.render(&amp;lt;MyComponent/&amp;gt;,document.getElementById(&amp;#39;test&amp;#39;))  2 组件实例三大属性 2.1 state 2.1.1 state基本使用 state 是组件对象最重要的属性，值是对象(可以包含多个 key-value 的组合)</description>
+    </item>
+    
     <item>
       <title>React入门</title>
       <link>https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/</link>
