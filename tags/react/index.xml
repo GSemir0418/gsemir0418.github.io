@@ -6,7 +6,18 @@
     <description>Recent content in React on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Apr 2021 23:11:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 May 2021 11:09:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>React组件生命周期</title>
+      <link>https://gsemir0418.github.io/posts/react%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</link>
+      <pubDate>Thu, 06 May 2021 11:09:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/react%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</guid>
+      <description>1 生命周期的理解 1.1 引出生命周期  需求：
+ 让指定的文本做显示* */* 隐藏的渐变动画 从完全可见，到彻底消失，耗时2S 点击“不活了”按钮从界面中卸载组件   源码及笔记如下：
+class Life extends React.Component { //只要页面发生更新，则说明是状态在驱动  state = { opacity: 0.5 } death = () =&amp;gt; { ReactDOM.unmountComponentAtNode(document.getElementById(&amp;#39;test&amp;#39;)) } //和render一样 是由React帮忙调用的 因此不用写成箭头函数的形式  //执行时机：组件挂载到页面后  componentDidMount() { //起个名字 挂到实例自身 方便清除时用  this.timer = setInterval(() =&amp;gt; { //获取状态值  let opacity = this.state.opacity //每次-0.1  opacity -= 0.1 if (opacity &amp;lt;= 0) opacity = 1 //设置新的透明度  this.</description>
+    </item>
+    
     <item>
       <title>React面向组件编程</title>
       <link>https://gsemir0418.github.io/posts/react%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/</link>
