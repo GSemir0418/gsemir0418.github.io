@@ -6,7 +6,75 @@
     <description>Recent content in Posts on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 06 May 2021 11:09:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Jun 2021 22:51:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>antdpro&#43;umi实战</title>
+      <link>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Tue, 08 Jun 2021 22:51:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
+      <description>本文通过一个todo list 的小项目演示，实现三个功能：
+ 列表功能，列出所以todo项； 添加新项，添加新的todo项； 更新项，更新现有的todo项状态，修改成待办、已完成或者取消  数据结构：
+{id : 1, // 唯一标识title : &amp;quot;完成antdpro实战&amp;quot;, // 待办事项标题status : 0 // 状态：0-待办，1-已完成，2-已取消}创建新项目 新建项目目录
+mkdir todo-listcd todo-list执行
+yarn create umi选择ant-design-pro、JavaScript、simple，完成项目的创建
+目录结构 ├── config # umi 配置，包含路由，构建等配置├── mock # 本地模拟数据├── public # 一些公共静态资源├── src│ ├── assets # 本地静态资源│ ├── components # 业务通用组件│ ├── e2e # 集成测试用例│ ├── layouts # 通用布局│ ├── models # 全局 dva model│ ├── pages # 业务页面入口和常用模板│ ├── services # 后台接口服务│ ├── utils # 工具库│ ├── locales # 国际化资源│ ├── global.</description>
+    </item>
+    
+    <item>
+      <title>可视化大屏实战</title>
+      <link>https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Sun, 09 May 2021 21:27:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/</guid>
+      <description>1.如何找素材 1.1 著名的设计网站
+Dribbble（搜索关键字：big screen）
+ https://dribbble.com
+ 站酷（关键字：大屏）
+ https://www.zcool.com.cn
+ 2.如何适配屏幕 1.整体的屏幕适配
+如果大屏很宽，就左右居中；屏幕很高，就上下居中。
+其中Wp为页面有效宽度，Hp为页面有效高度
+页面左右居中，上下居中，四周留白即可
+然后在head里用JS设置1rem=Wp/100
+2.每个div的适配
+每个div是要适配页面的，因此只能用rem而不是px
+举例：假设某div在设计稿中长100px，设计稿宽度1920px
+​	则该div在页面中长为100/1920*100rem
+可以在scss中写一个px()函数来计算100px对应的rem
+3.为什么要学   原生JS操作DOM繁琐、效率低（DOM-API操作UI）
+  使用js直接操作DOM，浏览器会进行大量的重绘重排
+  原生js没有组件化的编码方案，代码复用率低
+模块化是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。
+  4.React的特点   用组件化模式、声明式编码，提高开发效率及组件复用率
+之前使用的是命令式编码，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。
+  在React Native中可以使用React语法进行移动端开发。
+React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。
+  使用虚拟DOM+优秀的Diffing算法，尽量减少与真实DOM的交互
+  ​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程</description>
+    </item>
+    
+    <item>
+      <title>Hook</title>
+      <link>https://gsemir0418.github.io/posts/reacthooks/</link>
+      <pubDate>Fri, 07 May 2021 23:07:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/reacthooks/</guid>
+      <description>1 Hook简介 1.1 基本概念 Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使⽤ state 以及其他的 React 特性。
+1.2 React Hooks优势   函数组件不能使⽤state，⼀般只⽤于⼀些简单⽆交互的组件，⽤作信息展示，即我们上⾯说的傻⽠组件使⽤，如果需要交互更改状态等复杂逻辑时就需要使⽤class组件了
+React Hooks让我们更好的拥抱函数式编程，让函数式组件也能使⽤state功能，因为函数式组件⽐class组件更简洁好⽤，因为React Hooks的出现，相信未来我们会更多的使⽤函数式组件
+  副作⽤问题
+我们⼀般称数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤由于React Hooks的出现，我们可以使⽤useEffffect来处理组件副作⽤问题，所以我们的函数式组件也能进⾏副作⽤逻辑的处理了
+  有状态的逻辑重⽤组件
+  复杂的状态管理
+之前我们使⽤redux、dva、mobx第三⽅状态管理器来进⾏复杂的状态管理
+现在我们可以使⽤useReducer、useContext配合使⽤实现复杂状态管理，不⽤再依赖第三⽅状态管理器
+  开发效率和质量问题
+函数式组件⽐class组件简洁，开发的体验更好，效率更⾼同时应⽤的性能也更好
+   2 useState 2.1 定义 useState：组件状态管理钩⼦，使函数组件能够使⽤state
+2.2 基本使用 const [state,setState]=useState(initState)  state是要设置的状态 setState是更新state的⽅法，只是⼀个⽅法名，可以随意更改 initState是初始的state，可以是随意的数据类型，也可以是回调函数，但是函数必须是有返回值  2.3 实际应用 import React, { useState } from &amp;#39;react&amp;#39; export default function UseS() { const [count, setState] = useState(0) return ( &amp;lt;div&amp;gt; &amp;lt;div&amp;gt;你点击了{count}次&amp;lt;/div&amp;gt; &amp;lt;button onClick={() =&amp;gt; setState(count + 1)}&amp;gt;点 击&amp;lt;/button&amp;gt; &amp;lt;/div&amp;gt; ) }  3 useEffect 3.</description>
+    </item>
+    
     <item>
       <title>React组件生命周期</title>
       <link>https://gsemir0418.github.io/posts/react%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</link>

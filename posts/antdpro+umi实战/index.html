@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head>
-<title>StartBlog</title>
+<title>antdpro&#43;umi实战</title>
 
 
 
@@ -16,29 +16,17 @@
 
 
 
-<meta property="og:title" content="StartBlog" />
-<meta property="og:description" content="Step1 安装hugo  下载链接：https://github.com/gohugoio/hugo/releases
- 选择最新版本进行安装（建议安装hugo_extended版本）。
-注意解压后需配置环境变量，可以使用version命令测试是否配置成功：
-hugo versionStep2 新建博客站点 使用命令行，输入如下命令新建博客站点：
-hugo new site BLOGNAMEStep3 下载并配置主题  主题下载链接：https://themes.gohugo.io/
- 官网提供了许多主题供用户选择，按照主题下的安装配置说明进行主题的下载与配置。
-这里以Diary主题为例，首先在博客的根目录下，使用终端进行git初始化：
-git init并执行：
-git submodule add https://github.com/AmazingRise/hugo-theme-diary.git themes/diary主题会自动下载至根目录下的themes文件夹中。下载完成后，启动hugo本地服务并指定该主题：
-hugo server -t diary --buildDrafts可以通过访问localhost:1313进入本地部署的博客站点。可以看到，hugo已经为我们配置好了下载的主题。
-Step4 新建博客 同样，在终端中执行：
-hugo new post/文章名称.md可以使用Typora来编辑文章，就像我现在这样。
-Step5 部署到github 首先进入自己的github，新建一个repository，注意名称要使用小写昵称全名.github.io。
-在终端执行：
-hugo --theme=diary --baseUrl=&quot;https://gsemir0418.github.io/&quot; --buildDrafts此时在根目录下，hugo为我们生成了一个public文件夹，我们只需利用github将此文件夹上传到库中即可。
-在public文件夹下，进行git初始化。
-git initgit add .git commit -m &quot;v0&quot;此时需要注册GitHub信息
-git config --global user.email &quot;you@example.com&quot;git config --global user." />
+<meta property="og:title" content="antdpro&#43;umi实战" />
+<meta property="og:description" content="本文通过一个todo list 的小项目演示，实现三个功能：
+ 列表功能，列出所以todo项； 添加新项，添加新的todo项； 更新项，更新现有的todo项状态，修改成待办、已完成或者取消  数据结构：
+{id : 1, // 唯一标识title : &quot;完成antdpro实战&quot;, // 待办事项标题status : 0 // 状态：0-待办，1-已完成，2-已取消}创建新项目 新建项目目录
+mkdir todo-listcd todo-list执行
+yarn create umi选择ant-design-pro、JavaScript、simple，完成项目的创建
+目录结构 ├── config # umi 配置，包含路由，构建等配置├── mock # 本地模拟数据├── public # 一些公共静态资源├── src│ ├── assets # 本地静态资源│ ├── components # 业务通用组件│ ├── e2e # 集成测试用例│ ├── layouts # 通用布局│ ├── models # 全局 dva model│ ├── pages # 业务页面入口和常用模板│ ├── services # 后台接口服务│ ├── utils # 工具库│ ├── locales # 国际化资源│ ├── global." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://gsemir0418.github.io/posts/startblog/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-01-03T16:41:51&#43;08:00" />
-<meta property="article:modified_time" content="2021-01-03T16:41:51&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="og:url" content="https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-06-08T22:51:51&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-08T22:51:51&#43;08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -46,25 +34,13 @@ git config --global user.email &quot;you@example.com&quot;git config --global u
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="StartBlog"/>
-<meta name="twitter:description" content="Step1 安装hugo  下载链接：https://github.com/gohugoio/hugo/releases
- 选择最新版本进行安装（建议安装hugo_extended版本）。
-注意解压后需配置环境变量，可以使用version命令测试是否配置成功：
-hugo versionStep2 新建博客站点 使用命令行，输入如下命令新建博客站点：
-hugo new site BLOGNAMEStep3 下载并配置主题  主题下载链接：https://themes.gohugo.io/
- 官网提供了许多主题供用户选择，按照主题下的安装配置说明进行主题的下载与配置。
-这里以Diary主题为例，首先在博客的根目录下，使用终端进行git初始化：
-git init并执行：
-git submodule add https://github.com/AmazingRise/hugo-theme-diary.git themes/diary主题会自动下载至根目录下的themes文件夹中。下载完成后，启动hugo本地服务并指定该主题：
-hugo server -t diary --buildDrafts可以通过访问localhost:1313进入本地部署的博客站点。可以看到，hugo已经为我们配置好了下载的主题。
-Step4 新建博客 同样，在终端中执行：
-hugo new post/文章名称.md可以使用Typora来编辑文章，就像我现在这样。
-Step5 部署到github 首先进入自己的github，新建一个repository，注意名称要使用小写昵称全名.github.io。
-在终端执行：
-hugo --theme=diary --baseUrl=&quot;https://gsemir0418.github.io/&quot; --buildDrafts此时在根目录下，hugo为我们生成了一个public文件夹，我们只需利用github将此文件夹上传到库中即可。
-在public文件夹下，进行git初始化。
-git initgit add .git commit -m &quot;v0&quot;此时需要注册GitHub信息
-git config --global user.email &quot;you@example.com&quot;git config --global user."/>
+<meta name="twitter:title" content="antdpro&#43;umi实战"/>
+<meta name="twitter:description" content="本文通过一个todo list 的小项目演示，实现三个功能：
+ 列表功能，列出所以todo项； 添加新项，添加新的todo项； 更新项，更新现有的todo项状态，修改成待办、已完成或者取消  数据结构：
+{id : 1, // 唯一标识title : &quot;完成antdpro实战&quot;, // 待办事项标题status : 0 // 状态：0-待办，1-已完成，2-已取消}创建新项目 新建项目目录
+mkdir todo-listcd todo-list执行
+yarn create umi选择ant-design-pro、JavaScript、simple，完成项目的创建
+目录结构 ├── config # umi 配置，包含路由，构建等配置├── mock # 本地模拟数据├── public # 一些公共静态资源├── src│ ├── assets # 本地静态资源│ ├── components # 业务通用组件│ ├── e2e # 集成测试用例│ ├── layouts # 通用布局│ ├── models # 全局 dva model│ ├── pages # 业务页面入口和常用模板│ ├── services # 后台接口服务│ ├── utils # 工具库│ ├── locales # 国际化资源│ ├── global."/>
 
 
 
@@ -235,13 +211,69 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							
 								<ul class="collapse" data-toggle="collapse">
 							
+						
+						
+							<li>
+								<a href="#%e5%88%9b%e5%bb%ba%e6%96%b0%e9%a1%b9%e7%9b%ae" onclick="onNavClick(`#创建新项目-nav`)" id="创建新项目-nav">
+									创建新项目
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84" onclick="onNavClick(`#目录结构-nav`)" id="目录结构-nav">
+									目录结构
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%9c%ac%e5%9c%b0%e5%bc%80%e5%8f%91" onclick="onNavClick(`#本地开发-nav`)" id="本地开发-nav">
+									本地开发
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
 								<ul class="collapse" data-toggle="collapse">
 							
 						
 						
 							<li>
-								<a href="#step1-%e5%ae%89%e8%a3%85hugo" onclick="onNavClick(`#step1-安装hugo-nav`)" id="step1-安装hugo-nav">
-									Step1 安装hugo
+								<a href="#%e9%85%8d%e7%bd%ae%e8%b7%af%e7%94%b1" onclick="onNavClick(`#配置路由-nav`)" id="配置路由-nav">
+									配置路由
 								</a>
 							</li>
 						
@@ -258,80 +290,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#step2-%e6%96%b0%e5%bb%ba%e5%8d%9a%e5%ae%a2%e7%ab%99%e7%82%b9" onclick="onNavClick(`#step2-新建博客站点-nav`)" id="step2-新建博客站点-nav">
-									Step2 新建博客站点
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#step3-%e4%b8%8b%e8%bd%bd%e5%b9%b6%e9%85%8d%e7%bd%ae%e4%b8%bb%e9%a2%98" onclick="onNavClick(`#step3-下载并配置主题-nav`)" id="step3-下载并配置主题-nav">
-									Step3 下载并配置主题
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#step4-%e6%96%b0%e5%bb%ba%e5%8d%9a%e5%ae%a2" onclick="onNavClick(`#step4-新建博客-nav`)" id="step4-新建博客-nav">
-									Step4 新建博客
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#step5-%e9%83%a8%e7%bd%b2%e5%88%b0github" onclick="onNavClick(`#step5-部署到github-nav`)" id="step5-部署到github-nav">
-									Step5 部署到github
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e8%a1%a5%e5%85%85%e6%96%87%e7%ab%a0%e6%8f%92%e5%9b%be%e8%b7%af%e5%be%84%e9%85%8d%e7%bd%ae%e9%97%ae%e9%a2%98" onclick="onNavClick(`#补充文章插图路径配置问题-nav`)" id="补充文章插图路径配置问题-nav">
-									补充：文章插图路径配置问题
+								<a href="#%e6%b7%bb%e5%8a%a0%e7%a9%ba%e7%99%bd%e9%a1%b5%e9%9d%a2" onclick="onNavClick(`#添加空白页面-nav`)" id="添加空白页面-nav">
+									添加空白页面
 								</a>
 							</li>
 						
@@ -436,13 +396,69 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							
 								<ul class="collapse" data-toggle="collapse">
 							
+						
+						
+							<li>
+								<a href="#%e5%88%9b%e5%bb%ba%e6%96%b0%e9%a1%b9%e7%9b%ae" onclick="onNavClick(`#创建新项目-nav`)" id="创建新项目-nav">
+									创建新项目
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84" onclick="onNavClick(`#目录结构-nav`)" id="目录结构-nav">
+									目录结构
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%9c%ac%e5%9c%b0%e5%bc%80%e5%8f%91" onclick="onNavClick(`#本地开发-nav`)" id="本地开发-nav">
+									本地开发
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
 								<ul class="collapse" data-toggle="collapse">
 							
 						
 						
 							<li>
-								<a href="#step1-%e5%ae%89%e8%a3%85hugo" onclick="onNavClick(`#step1-安装hugo-nav`)" id="step1-安装hugo-nav">
-									Step1 安装hugo
+								<a href="#%e9%85%8d%e7%bd%ae%e8%b7%af%e7%94%b1" onclick="onNavClick(`#配置路由-nav`)" id="配置路由-nav">
+									配置路由
 								</a>
 							</li>
 						
@@ -459,80 +475,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#step2-%e6%96%b0%e5%bb%ba%e5%8d%9a%e5%ae%a2%e7%ab%99%e7%82%b9" onclick="onNavClick(`#step2-新建博客站点-nav`)" id="step2-新建博客站点-nav">
-									Step2 新建博客站点
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#step3-%e4%b8%8b%e8%bd%bd%e5%b9%b6%e9%85%8d%e7%bd%ae%e4%b8%bb%e9%a2%98" onclick="onNavClick(`#step3-下载并配置主题-nav`)" id="step3-下载并配置主题-nav">
-									Step3 下载并配置主题
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#step4-%e6%96%b0%e5%bb%ba%e5%8d%9a%e5%ae%a2" onclick="onNavClick(`#step4-新建博客-nav`)" id="step4-新建博客-nav">
-									Step4 新建博客
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#step5-%e9%83%a8%e7%bd%b2%e5%88%b0github" onclick="onNavClick(`#step5-部署到github-nav`)" id="step5-部署到github-nav">
-									Step5 部署到github
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e8%a1%a5%e5%85%85%e6%96%87%e7%ab%a0%e6%8f%92%e5%9b%be%e8%b7%af%e5%be%84%e9%85%8d%e7%bd%ae%e9%97%ae%e9%a2%98" onclick="onNavClick(`#补充文章插图路径配置问题-nav`)" id="补充文章插图路径配置问题-nav">
-									补充：文章插图路径配置问题
+								<a href="#%e6%b7%bb%e5%8a%a0%e7%a9%ba%e7%99%bd%e9%a1%b5%e9%9d%a2" onclick="onNavClick(`#添加空白页面-nav`)" id="添加空白页面-nav">
+									添加空白页面
 								</a>
 							</li>
 						
@@ -597,25 +541,28 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
             >
                 <div class="post-title">
-                    StartBlog
+                    antdpro&#43;umi实战
                     
                     <div class="post-meta">
                         
                         <time itemprop="datePublished">
-                            2021-01-03 16:41
+                            2021-06-08 22:51
                         </time>
                         
 
                         
                             <i class="material-icons" style="">folder</i>
-                                <a href="/categories/hugo%E9%85%8D%E7%BD%AE">hugo配置</a>
+                                <a href="/categories/react%E5%85%A8%E5%AE%B6%E6%A1%B6">React全家桶</a>
                                 &nbsp;
                         
 
                         
                             <i class="material-icons" style="">label</i>
                             
-                                <a href="/tags/hugo">hugo</a>
+                                <a href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
+                                &nbsp;
+                            
+                                <a href="/tags/react">React</a>
                                 &nbsp;
                             
                         
@@ -628,65 +575,96 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
                 <div class="post-body" v-pre>
                 
-                    <h3 id="step1-安装hugo">Step1 安装hugo</h3>
-<blockquote>
-<p>下载链接：https://github.com/gohugoio/hugo/releases</p>
-</blockquote>
-<p>选择最新版本进行安装（建议安装<code>hugo_extended</code>版本）。</p>
-<p>注意解压后需配置环境变量，可以使用version命令测试是否配置成功：</p>
-<pre><code>hugo version
-</code></pre><h3 id="step2-新建博客站点">Step2 新建博客站点</h3>
-<p>使用命令行，输入如下命令新建博客站点：</p>
-<pre><code>hugo new site BLOGNAME
-</code></pre><h3 id="step3-下载并配置主题">Step3 下载并配置主题</h3>
-<blockquote>
-<p>主题下载链接：https://themes.gohugo.io/</p>
-</blockquote>
-<p>官网提供了许多主题供用户选择，按照主题下的安装配置说明进行主题的下载与配置。</p>
-<p>这里以Diary主题为例，首先在博客的根目录下，使用终端进行git初始化：</p>
-<pre><code>git init
-</code></pre><p>并执行：</p>
-<pre><code>git submodule add https://github.com/AmazingRise/hugo-theme-diary.git themes/diary
-</code></pre><p>主题会自动下载至根目录下的<code>themes</code>文件夹中。下载完成后，启动hugo本地服务并指定该主题：</p>
-<pre><code>hugo server -t diary --buildDrafts
-</code></pre><p>可以通过访问<code>localhost:1313</code>进入本地部署的博客站点。可以看到，hugo已经为我们配置好了下载的主题。</p>
-<p><img src="./image-20210103175858811.png" alt="image-20210103175858811"></p>
-<h3 id="step4-新建博客">Step4 新建博客</h3>
-<p>同样，在终端中执行：</p>
-<pre><code>hugo new post/文章名称.md
-</code></pre><p>可以使用Typora来编辑文章，就像我现在这样。</p>
-<h3 id="step5-部署到github">Step5 部署到github</h3>
-<p>首先进入自己的github，新建一个repository，注意名称要使用<strong>小写昵称全名.github.io</strong>。</p>
-<p>在终端执行：</p>
-<pre><code>hugo --theme=diary --baseUrl=&quot;https://gsemir0418.github.io/&quot; --buildDrafts
-</code></pre><p>此时在根目录下，hugo为我们生成了一个public文件夹，我们只需利用github将此文件夹上传到库中即可。</p>
-<p>在public文件夹下，进行git初始化。</p>
-<pre><code>git init
+                    <p>本文通过一个todo list 的小项目演示，实现三个功能：</p>
+<ol>
+<li>列表功能，列出所以todo项；</li>
+<li>添加新项，添加新的todo项；</li>
+<li>更新项，更新现有的todo项状态，修改成待办、已完成或者取消</li>
+</ol>
+<p>数据结构：</p>
+<pre><code>{
+	id : 1, // 唯一标识
+	title : &quot;完成antdpro实战&quot;, // 待办事项标题
+	status : 0 // 状态：0-待办，1-已完成，2-已取消
+}
+</code></pre><h2 id="创建新项目">创建新项目</h2>
+<p>新建项目目录</p>
+<pre><code>mkdir todo-list
+cd todo-list
+</code></pre><p>执行</p>
+<pre><code>yarn create umi
+</code></pre><p>选择ant-design-pro、JavaScript、simple，完成项目的创建</p>
+<h2 id="目录结构">目录结构</h2>
+<pre><code>├── config                   # umi 配置，包含路由，构建等配置
+├── mock                     # 本地模拟数据
+├── public                   # 一些公共静态资源
+├── src
+│   ├── assets               # 本地静态资源
+│   ├── components           # 业务通用组件
+│   ├── e2e                  # 集成测试用例
+│   ├── layouts              # 通用布局
+│   ├── models               # 全局 dva model
+│   ├── pages                # 业务页面入口和常用模板
+│   ├── services             # 后台接口服务
+│   ├── utils                # 工具库
+│   ├── locales              # 国际化资源
+│   ├── global.less          # 全局样式
+│   └── global.jsx            # 全局 JS
+├── tests                    # 测试工具
+├── README.md
+└── package.json
+</code></pre><p>其中，mock、models、pages、services将是我们的主要目录。</p>
+<h2 id="本地开发">本地开发</h2>
+<p>安装依赖</p>
+<pre><code>yarn install
+</code></pre><p>运行</p>
+<pre><code>yarn start
+</code></pre><p>浏览器打开http://localhost:8000看到如下界面</p>
+<p>这就是脚手架为我们建好的框架，一个欢迎页面，一个空白的二级页面和一个查询表格，实际开发中我们要删掉这些页面，然后建立自己的业务界面。</p>
+<h3 id="配置路由">配置路由</h3>
+<pre><code>... 
+routes: [
+        {
+          path: '/',
+          component: '../layouts/BasicLayout',
+          authority: ['admin', 'user'],
+          routes: [
+            {
+              path: '/',
+              redirect: '/welcome',
+            },
+            {
+              path: '/todo',// url中path部分
+              name: 'todo', // 名称，国际化菜单配置根据这个名称来配置，如果不配置将直菜单将直接显示这个名称
+              icon: 'unordered-list',// 菜单图标名称
+              component:'./todo'// 组件（页面）,路径相对于src/pages
+            },
+           ...
+  ],
+...
+</code></pre><h3 id="添加空白页面">添加空白页面</h3>
+<p>在src/pages下新建目录todo,在todo目录下新建空白index.jsx文件，代码如下：</p>
+<pre><code>import React from 'react';
+import { PageContainer } from '@ant-design/pro-layout';
 
-git add .
 
-git commit -m &quot;v0&quot;
-</code></pre><p>此时需要注册GitHub信息</p>
-<pre><code>git config --global user.email &quot;you@example.com&quot;
-git config --global user.name &quot;Your Name&quot;
-</code></pre><p>注册完成后再次提交即可。</p>
-<p>关联远端git仓库：</p>
-<pre><code>git remote add orgin https://github.com/GSemir0418/gsemir0418.github.io.git
-</code></pre><p>此时就可以将文件推上GitHub仓库：</p>
-<pre><code>git push -u orgin master
-</code></pre><p>最终按照提示进行登录验证即可，通过<code>https://gsemir0418.github.io</code>实现远端访问个人博客。</p>
-<h3 id="补充文章插图路径配置问题">补充：文章插图路径配置问题</h3>
-<p>在生成发布版本时，插图路径总是需要在文章对应生成的html文档中进行逐条修改，费时费力。所以在最初的插图路径上需要做进一步调整，具体操作如下：</p>
-<p>文章中的插图路径设定为</p>
-<blockquote>
-<p>./图片名.png</p>
-</blockquote>
-<p>插图实际保存至<strong>文章同名文件夹</strong>内即可。</p>
-<p>**注意：**不过这样会导致文章内的插图是丢失状态，但可以解决发布包的插图正常显示，且方便插图的管理。</p>
+class TodoPage extends Component {
 
+    componentWillMount() { }
+
+    render() {
+        return (
+            &lt;PageHeaderWrapper&gt;
+                &lt;div&gt;空白面&lt;/div&gt;
+            &lt;/PageHeaderWrapper&gt;);
+    }
+}
+
+export default TodoPage
+</code></pre>
                     
                     <HR width="100%" id="EOF">
-		    <p style="color:#777;">最后修改于 2021-01-03</p>
+		    <p style="color:#777;">最后修改于 2021-06-08</p>
                     
                 </div>
             </div>
@@ -695,14 +673,14 @@ git config --global user.name &quot;Your Name&quot;
             <nav class="post-pagination">
 
                 
-                <a class="newer-posts" href="https://gsemir0418.github.io/posts/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">
-			下回<br>Revit建模技术文档
+                <a class="newer-posts">
+			下回<br>已经到头啦。
                 </a>
                 
                 
                 
-                <a class="older-posts">
-			上回<br>这是最旧的文章了。
+                <a class="older-posts" href="https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/">
+			上回<br>可视化大屏实战
                 </a>
                 
             </nav>

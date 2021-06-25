@@ -6,11 +6,11 @@
     <description>Recent content in Tags on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 06 May 2021 11:09:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Jun 2021 22:51:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>React</title>
       <link>https://gsemir0418.github.io/tags/react/</link>
-      <pubDate>Thu, 06 May 2021 11:09:51 +0800</pubDate>
+      <pubDate>Tue, 08 Jun 2021 22:51:51 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/tags/react/</guid>
       <description></description>
@@ -19,9 +19,18 @@
     <item>
       <title>前端</title>
       <link>https://gsemir0418.github.io/tags/%E5%89%8D%E7%AB%AF/</link>
-      <pubDate>Thu, 06 May 2021 11:09:51 +0800</pubDate>
+      <pubDate>Tue, 08 Jun 2021 22:51:51 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/tags/%E5%89%8D%E7%AB%AF/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>可视化</title>
+      <link>https://gsemir0418.github.io/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/</link>
+      <pubDate>Sun, 09 May 2021 21:27:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/</guid>
       <description></description>
     </item>
     

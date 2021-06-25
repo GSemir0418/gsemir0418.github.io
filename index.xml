@@ -5,9 +5,298 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 06 May 2021 11:09:51 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 08 Jun 2021 22:51:51 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>antdpro&#43;umi实战</title>
+        <link>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Tue, 08 Jun 2021 22:51:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ -&lt;p&gt;本文通过一个todo list 的小项目演示，实现三个功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;列表功能，列出所以todo项；&lt;/li&gt;
+&lt;li&gt;添加新项，添加新的todo项；&lt;/li&gt;
+&lt;li&gt;更新项，更新现有的todo项状态，修改成待办、已完成或者取消&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;数据结构：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+	id : 1, // 唯一标识
+	title : &amp;quot;完成antdpro实战&amp;quot;, // 待办事项标题
+	status : 0 // 状态：0-待办，1-已完成，2-已取消
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;创建新项目&#34;&gt;创建新项目&lt;/h2&gt;
+&lt;p&gt;新建项目目录&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mkdir todo-list
+cd todo-list
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;执行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yarn create umi
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;选择ant-design-pro、JavaScript、simple，完成项目的创建&lt;/p&gt;
+&lt;h2 id=&#34;目录结构&#34;&gt;目录结构&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;├── config                   # umi 配置，包含路由，构建等配置
+├── mock                     # 本地模拟数据
+├── public                   # 一些公共静态资源
+├── src
+│   ├── assets               # 本地静态资源
+│   ├── components           # 业务通用组件
+│   ├── e2e                  # 集成测试用例
+│   ├── layouts              # 通用布局
+│   ├── models               # 全局 dva model
+│   ├── pages                # 业务页面入口和常用模板
+│   ├── services             # 后台接口服务
+│   ├── utils                # 工具库
+│   ├── locales              # 国际化资源
+│   ├── global.less          # 全局样式
+│   └── global.jsx            # 全局 JS
+├── tests                    # 测试工具
+├── README.md
+└── package.json
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其中，mock、models、pages、services将是我们的主要目录。&lt;/p&gt;
+&lt;h2 id=&#34;本地开发&#34;&gt;本地开发&lt;/h2&gt;
+&lt;p&gt;安装依赖&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yarn install
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;运行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yarn start
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;浏览器打开http://localhost:8000看到如下界面&lt;/p&gt;
+&lt;p&gt;这就是脚手架为我们建好的框架，一个欢迎页面，一个空白的二级页面和一个查询表格，实际开发中我们要删掉这些页面，然后建立自己的业务界面。&lt;/p&gt;
+&lt;h3 id=&#34;配置路由&#34;&gt;配置路由&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;... 
+routes: [
+        {
+          path: &#39;/&#39;,
+          component: &#39;../layouts/BasicLayout&#39;,
+          authority: [&#39;admin&#39;, &#39;user&#39;],
+          routes: [
+            {
+              path: &#39;/&#39;,
+              redirect: &#39;/welcome&#39;,
+            },
+            {
+              path: &#39;/todo&#39;,// url中path部分
+              name: &#39;todo&#39;, // 名称，国际化菜单配置根据这个名称来配置，如果不配置将直菜单将直接显示这个名称
+              icon: &#39;unordered-list&#39;,// 菜单图标名称
+              component:&#39;./todo&#39;// 组件（页面）,路径相对于src/pages
+            },
+           ...
+  ],
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;添加空白页面&#34;&gt;添加空白页面&lt;/h3&gt;
+&lt;p&gt;在src/pages下新建目录todo,在todo目录下新建空白index.jsx文件，代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import React from &#39;react&#39;;
+import { PageContainer } from &#39;@ant-design/pro-layout&#39;;
+
+
+class TodoPage extends Component {
+
+    componentWillMount() { }
+
+    render() {
+        return (
+            &amp;lt;PageHeaderWrapper&amp;gt;
+                &amp;lt;div&amp;gt;空白面&amp;lt;/div&amp;gt;
+            &amp;lt;/PageHeaderWrapper&amp;gt;);
+    }
+}
+
+export default TodoPage
+&lt;/code&gt;&lt;/pre&gt;- https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>可视化大屏实战</title>
+        <link>https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Sun, 09 May 2021 21:27:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/ -&lt;h1 id=&#34;1如何找素材&#34;&gt;1.如何找素材&lt;/h1&gt;
+&lt;p&gt;1.1 著名的设计网站&lt;/p&gt;
+&lt;p&gt;Dribbble（搜索关键字：big screen）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://dribbble.com&#34;&gt;https://dribbble.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;站酷（关键字：大屏）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.zcool.com.cn&#34;&gt;https://www.zcool.com.cn&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;2如何适配屏幕&#34;&gt;2.如何适配屏幕&lt;/h1&gt;
+&lt;p&gt;1.整体的屏幕适配&lt;/p&gt;
+&lt;p&gt;如果大屏很宽，就左右居中；屏幕很高，就上下居中。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gsemir0418.github.io/image-20210510084113259.png&#34; alt=&#34;image-20210510084113259&#34;&gt;&lt;/p&gt;
+&lt;p&gt;其中Wp为页面有效宽度，Hp为页面有效高度&lt;/p&gt;
+&lt;p&gt;页面左右居中，上下居中，四周留白即可&lt;/p&gt;
+&lt;p&gt;然后在head里用JS设置1rem=Wp/100&lt;/p&gt;
+&lt;p&gt;2.每个div的适配&lt;/p&gt;
+&lt;p&gt;每个div是要适配页面的，因此只能用rem而不是px&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gsemir0418.github.io/image-20210510084513077.png&#34; alt=&#34;image-20210510084513077&#34;&gt;&lt;/p&gt;
+&lt;p&gt;举例：假设某div在设计稿中长100px，设计稿宽度1920px&lt;/p&gt;
+&lt;p&gt;​	则该div在页面中长为100/1920*100rem&lt;/p&gt;
+&lt;p&gt;可以在scss中写一个px()函数来计算100px对应的rem&lt;/p&gt;
+&lt;h1 id=&#34;3为什么要学&#34;&gt;3.为什么要学&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;原生JS操作DOM&lt;strong&gt;繁琐、效率低&lt;/strong&gt;（&lt;strong&gt;DOM-API操作UI&lt;/strong&gt;）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用js直接操作DOM，浏览器会进行大量的&lt;strong&gt;重绘重排&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;原生js没有&lt;strong&gt;组件化&lt;/strong&gt;的编码方案，代码复用率低&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;模块化&lt;/strong&gt;是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;4react的特点&#34;&gt;4.React的特点&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;用&lt;strong&gt;组件化模式&lt;/strong&gt;、&lt;strong&gt;声明式编码&lt;/strong&gt;，提高开发效率及组件复用率&lt;/p&gt;
+&lt;p&gt;之前使用的是&lt;strong&gt;命令式编码&lt;/strong&gt;，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;React Native&lt;/strong&gt;中可以使用React语法进行&lt;strong&gt;移动端&lt;/strong&gt;开发。&lt;/p&gt;
+&lt;p&gt;React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;strong&gt;虚拟DOM&lt;/strong&gt;+优秀的&lt;strong&gt;Diffing算法&lt;/strong&gt;，尽量减少与真实DOM的交互&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程&lt;/p&gt;
+- https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>Hook</title>
+        <link>https://gsemir0418.github.io/posts/reacthooks/</link>
+        <pubDate>Fri, 07 May 2021 23:07:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/reacthooks/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/reacthooks/ -&lt;h1 id=&#34;1-hook简介&#34;&gt;1 Hook简介&lt;/h1&gt;
+&lt;h2 id=&#34;11-基本概念&#34;&gt;1.1 基本概念&lt;/h2&gt;
+&lt;p&gt;Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使⽤ state 以及其他的 React 特性。&lt;/p&gt;
+&lt;h2 id=&#34;12-react-hooks优势&#34;&gt;1.2 React Hooks优势&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;函数组件不能使⽤state，⼀般只⽤于⼀些简单⽆交互的组件，⽤作信息展示，即我们上⾯说的傻⽠组件使⽤，如果需要交互更改状态等复杂逻辑时就需要使⽤class组件了&lt;/p&gt;
+&lt;p&gt;React Hooks让我们更好的拥抱函数式编程，让函数式组件也能使⽤state功能，因为函数式组件⽐class组件更简洁好⽤，因为React Hooks的出现，相信未来我们会更多的使⽤函数式组件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;副作⽤问题&lt;/p&gt;
+&lt;p&gt;我们⼀般称数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤由于React Hooks的出现，我们可以使⽤useEffffect来处理组件副作⽤问题，所以我们的函数式组件也能进⾏副作⽤逻辑的处理了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;有状态的逻辑重⽤组件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;复杂的状态管理&lt;/p&gt;
+&lt;p&gt;之前我们使⽤redux、dva、mobx第三⽅状态管理器来进⾏复杂的状态管理&lt;/p&gt;
+&lt;p&gt;现在我们可以使⽤useReducer、useContext配合使⽤实现复杂状态管理，不⽤再依赖第三⽅状态管理器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;开发效率和质量问题&lt;/p&gt;
+&lt;p&gt;函数式组件⽐class组件简洁，开发的体验更好，效率更⾼同时应⽤的性能也更好&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;2-usestate&#34;&gt;2 useState&lt;/h1&gt;
+&lt;h2 id=&#34;21-定义&#34;&gt;2.1 定义&lt;/h2&gt;
+&lt;p&gt;useState：组件状态管理钩⼦，使函数组件能够使⽤state&lt;/p&gt;
+&lt;h2 id=&#34;22-基本使用&#34;&gt;2.2 基本使用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [state,setState]=useState(initState)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;state是要设置的状态&lt;/li&gt;
+&lt;li&gt;setState是更新state的⽅法，只是⼀个⽅法名，可以随意更改&lt;/li&gt;
+&lt;li&gt;initState是初始的state，可以是随意的数据类型，也可以是回调函数，但是函数必须是有返回值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;23-实际应用&#34;&gt;2.3 实际应用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React, { useState } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; UseS() {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [count, setState] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;你点击了{count}次&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setState(count + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;点 击&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+    )
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h1 id=&#34;3-useeffect&#34;&gt;3 useEffect&lt;/h1&gt;
+&lt;h2 id=&#34;31-定义&#34;&gt;3.1 定义&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;useEffffect：副作⽤处理钩⼦&lt;/li&gt;
+&lt;li&gt;数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤。⽽useEffffect就是为了处理这些副作⽤⽽⽣的&lt;/li&gt;
+&lt;li&gt;useEffffect也是componentDidMount、componentDidUpdate和componentWillUnmount这⼏个⽣命周期⽅法的统⼀&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;32-基本使用&#34;&gt;3.2 基本使用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;useEffect(callback,array)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;callback：回调函数，作⽤是处理副作⽤逻辑。可以返回⼀个函数，⽤作清理&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
+	&lt;span style=&#34;color:#228b22&#34;&gt;//副作⽤逻辑
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	xxxxxx
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; ()=&amp;gt;{
+		&lt;span style=&#34;color:#228b22&#34;&gt;//清理副作⽤需要清理的内容
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#228b22&#34;&gt;//类似于componentWillUnmount，组件渲染和组件卸载前执⾏的代码
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	}
+},[array])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;array(可选参数)：数组，⽤于控制useEffffect的执⾏。分三种情况&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;空数组，则只会执⾏⼀次（即初次渲染render）,相当于componentDidMount&lt;/li&gt;
+&lt;li&gt;⾮空数组，useEffffect会在数组发⽣改变后执⾏，相当于componentDidUpdate&lt;/li&gt;
+&lt;li&gt;不填array这个数组，useEffffect每次渲染都会执⾏&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;33-实际应用&#34;&gt;3.3 实际应用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { useState, useEffect } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; UseE = () =&amp;gt; {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [count, setState] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+
+    useEffect(() =&amp;gt; {
+        &lt;span style=&#34;color:#228b22&#34;&gt;//更新⻚⾯标题
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.title = &lt;span style=&#34;color:#cd5555&#34;&gt;`您点击了&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;count&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;次了哦`&lt;/span&gt;
+    }, [count])
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;你点击了{count}次&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setState(count + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;点 击&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+    )
+}
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; UseE;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h1 id=&#34;4-usecontext&#34;&gt;4 useContext&lt;/h1&gt;
+&lt;h2 id=&#34;41-定义&#34;&gt;4.1 定义&lt;/h2&gt;
+&lt;p&gt;context就是⽤来更⽅便的实现全局数据共享的，但是由于他并不是那么好⽤，所以我们⼀般会使⽤第三⽅状态管理器来实现全局数据共享&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;redux&lt;/li&gt;
+&lt;li&gt;dva&lt;/li&gt;
+&lt;li&gt;mobx&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;是针对context上下⽂提出的⼀个Hooks提出的⼀个API，它接受React.createContext()的返回值作为参数，即context对象，并返回最近的context&lt;/p&gt;
+&lt;p&gt;使⽤useContext是不需要再使⽤Provider和Consumer的&lt;/p&gt;
+&lt;p&gt;当最近的context更新时，那么使⽤该context的hook将会重新渲染&lt;/p&gt;
+&lt;h2 id=&#34;42-基本使用&#34;&gt;4.2 基本使用&lt;/h2&gt;
+&lt;p&gt;store.js中创建数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Context = React.createContext({ age: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;18&amp;#39;&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;jerry&amp;#39;&lt;/span&gt; })
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; Context
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;组件中使用useContext接收数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React, { useContext } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; Context from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./store&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; UseC = () =&amp;gt; {
+    &lt;span style=&#34;color:#228b22&#34;&gt;//使⽤useContext
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; ctx = useContext(Context)
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;姓名&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;：&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h2&lt;/span&gt;&amp;gt;{ctx.name}&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h2&lt;/span&gt;&amp;gt;年龄&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;：&lt;/span&gt;{ctx.age}岁&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+    )
+}
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; UseC
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/reacthooks/ - </description>
+        </item>
     
     
     
@@ -90,7 +379,7 @@
 &lt;hr&gt;
 &lt;h1 id=&#34;2-react生命周期旧&#34;&gt;2 React生命周期（旧）&lt;/h1&gt;
 &lt;h2 id=&#34;21-react生命周期图旧&#34;&gt;2.1 React生命周期图（旧）&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;D:%5C%E5%AD%A6%E4%B9%A0%5Cblog%5Cblogs-backup%5Ccontent%5Cposts%5Cimg%5Creact%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%97%A7).png&#34; alt=&#34;react生命周期(旧)&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;.%5Creact%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%97%A7).png&#34; alt=&#34;react生命周期(旧)&#34;&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Count &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
         &lt;span style=&#34;color:#228b22&#34;&gt;//构造器
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        constructor(props) {
@@ -225,9 +514,9 @@
 &lt;/ol&gt;
 &lt;p&gt;​    	1. constructor()&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; 2. componentWillMount() 
-
+   
  3. render()
-
+   
  4. **componentDidMount**()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;​        		一般在此钩子中做一些初始化的事：开启定时器，发送网络请求、订阅消息&lt;/p&gt;
@@ -249,7 +538,7 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;23-react生命周期图新&#34;&gt;2.3 React生命周期图（新）&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;D:%5C%E5%AD%A6%E4%B9%A0%5Cblog%5Cblogs-backup%5Ccontent%5Cposts%5Cimg%5Creact%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%96%B0).png&#34; alt=&#34;react生命周期(新)&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;.%5Creact%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%96%B0).png&#34; alt=&#34;react生命周期(新)&#34;&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Count &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
         &lt;span style=&#34;color:#228b22&#34;&gt;//构造器
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        constructor(props) {
@@ -329,9 +618,9 @@
 &lt;p&gt;生命周期的三个阶段（新）&lt;/p&gt;
 &lt;p&gt;1.初始化阶段: 由 ReactDOM.render()触发&amp;mdash;初次渲染&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;  1. constructor() 
-
+  
  2. **getDerivedStateFromProps**() 
-
+  
  3. render() 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;​		4. &lt;strong&gt;componentDidMount&lt;/strong&gt;() 即将出生的那一刻&lt;/p&gt;
@@ -345,9 +634,8 @@
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;卸载组件: 由 ReactDOM.unmountComponentAtNode()触发&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;componentWillUnmount&lt;/strong&gt;() 即将离去的那一刻&lt;/li&gt;
-&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;1. **componentWillUnmount**() 即将离去的那一刻
+&lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;25-新旧生命周期对比&#34;&gt;2.5 新旧生命周期对比&lt;/h2&gt;
@@ -1177,7 +1465,7 @@ ReactDOM.render(VDOM,&lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;14-模块与组件的理解&#34;&gt;1.4 模块与组件的理解&lt;/h2&gt;
 &lt;p&gt;模块指的是向外提供特定功能的js程序，一般就是一个js文件，模块化是为了更好地复用js，简化js的编写，提高js运行效率。模块化只针对js；而组件指的是用来实现局部功能效果的代码和资源的集合（html、css、js、image、video等），组件化是为了复用编码，简化项目编码，提高运行效率&lt;/p&gt;
 &lt;p&gt;1.5 jsx练习&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;D:%5C%E5%AD%A6%E4%B9%A0%5Cblog%5Cblogs-backup%5Ccontent%5Cposts%5Cimg%5Cimage-20210321123104572.png&#34; alt=&#34;image-20210321123104572&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;.%5Cimage-20210321123104572.png&#34; alt=&#34;image-20210321123104572&#34;&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;body&lt;/span&gt;&amp;gt;
     &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;id&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;test&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
 
@@ -1303,7 +1591,7 @@ ReactDOM.render(VDOM,&lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span
 &lt;p&gt;&lt;a href=&#34;https://github.com/GSemir0418/TemplateProjects&#34;&gt;https://github.com/GSemir0418/TemplateProjects&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;​		下图为项目目录结构：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210108184425370.png&#34; alt=&#34;image-20210108184425370&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210108184425370.png&#34; alt=&#34;image-20210108184425370&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。&lt;/p&gt;
 &lt;p&gt;​		js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。&lt;/p&gt;
 &lt;h2 id=&#34;11-更改网页名称&#34;&gt;1.1 更改网页名称&lt;/h2&gt;
@@ -1341,17 +1629,17 @@ dLight.position.set(500, 1000, 4000);
 &lt;p&gt;&lt;a href=&#34;https://github.com/GSemir0418/TemplateProjects&#34;&gt;https://github.com/GSemir0418/TemplateProjects&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;​		模板的样式已经设计制作完成，包括封面的设计、内容的布局和字体的选择。也可以根据自己的审美，重新设计排版布局。注意页面设计中的方向要保证是纵向，具体尺寸取决于Turn.js中定义的宽和高。参考配置如下：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210109193919127.png&#34; alt=&#34;image-20210109193919127&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210109193919127.png&#34; alt=&#34;image-20210109193919127&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		将撰写好的少数民族建筑特征分析图文资料复制到PPT模板中，进行排版布局后，完成图文内容的准备工作。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		点击右上角&lt;code&gt;文件&lt;/code&gt;、&lt;code&gt;另存为&lt;/code&gt;，设置导出路径后，考虑到网页端的加载效率，文件类型选择较小的&lt;code&gt;.jpg&lt;/code&gt;。单击&lt;code&gt;保存&lt;/code&gt;，&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		在弹出的提示框中，选择&lt;code&gt;每张幻灯片&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210109203901828.png&#34; alt=&#34;image-20210109203901828&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210109203901828.png&#34; alt=&#34;image-20210109203901828&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		导出完成后如下图。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		为了加载图片的代码编写的简洁性，需要批量修改每张图片的名字。网上有很多批量修改文件名的方法，这里选择一款解压缩软件&lt;code&gt;好压&lt;/code&gt;内置的&lt;code&gt;批量文件改名&lt;/code&gt;功能，可以在&lt;code&gt;开始&lt;/code&gt;菜单中找到。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210109204553287.png&#34; alt=&#34;image-20210109204553287&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210109204553287.png&#34; alt=&#34;image-20210109204553287&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		首先根据提示，批量&lt;code&gt;添加&lt;/code&gt;所有图片文件；在命名规则中填入&lt;code&gt;#&lt;/code&gt;。单击&lt;code&gt;开始重命名&lt;/code&gt;即可。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		至此，完成翻页效果的素材准备工作。&lt;/p&gt;
@@ -1443,11 +1731,11 @@ let obj1 = &#39;../models/testModel/objTest/objTest.obj&#39;;
 &lt;p&gt;​		第一次会提醒”检测到无效的序列号“，此时选择&lt;code&gt;重新输入&lt;/code&gt;，将序列号再次输入即可。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		当进入到激活选项窗口，复制&lt;code&gt;Request code&lt;/code&gt;请求码。右键单击安装包中的&lt;code&gt;xf-adesk20.exe&lt;/code&gt;破解工具，选择以管理员身份运行。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210103222250253.png&#34; alt=&#34;image-20210103222250253&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210103222250253.png&#34; alt=&#34;image-20210103222250253&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		将请求码复制到破解工具中的&lt;code&gt;Request&lt;/code&gt;栏后，先单击&lt;code&gt;Patch&lt;/code&gt;，再点击&lt;code&gt;Generate&lt;/code&gt;，复制Activation栏中自动生成的激活码。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210103222411949.png&#34; alt=&#34;image-20210103222411949&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210103222411949.png&#34; alt=&#34;image-20210103222411949&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		拿到激活码后，回到激活选项页面，选择&lt;code&gt;I have an activation code from Autodesk&lt;/code&gt;，把激活码复制到输入框后，点击&lt;code&gt;Next&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210103222438931.png&#34; alt=&#34;image-20210103222438931&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210103222438931.png&#34; alt=&#34;image-20210103222438931&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		激活完成，选择&lt;code&gt;Finish&lt;/code&gt;退出激活窗口。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		至此，3dsMax 2020安装完成。&lt;/p&gt;
@@ -1458,7 +1746,7 @@ let obj1 = &#39;../models/testModel/objTest/objTest.obj&#39;;
 &lt;p&gt;​		导入FBX模型到3dmax有两种方法供大家参考。&lt;/p&gt;
 &lt;h2 id=&#34;31-拖拽导入&#34;&gt;3.1 拖拽导入&lt;/h2&gt;
 &lt;p&gt;​		直接将模型文件拖至任意视图窗口后，在弹出的选项中选择“导入文件”；&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210103224446456.png&#34; alt=&#34;image-20210103224446456&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210103224446456.png&#34; alt=&#34;image-20210103224446456&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;h2 id=&#34;32-选项导入&#34;&gt;3.2 选项导入&lt;/h2&gt;
 &lt;p&gt;​		单击菜单栏&lt;code&gt;文件&lt;/code&gt;选项，选择&lt;code&gt;导入&lt;/code&gt;。&lt;/p&gt;
@@ -1466,7 +1754,7 @@ let obj1 = &#39;../models/testModel/objTest/objTest.obj&#39;;
 &lt;p&gt;​		在随后弹出来的导入选项中，&lt;strong&gt;注意将“动画”、“摄像机”及“灯光”选项取消勾选。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		导入后效果如下图，此时每个构件都没有贴图，修改器属性均为“可编辑网格”。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210103224800108.png&#34; alt=&#34;image-20210103224800108&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210103224800108.png&#34; alt=&#34;image-20210103224800108&#34;&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h1 id=&#34;4-模型预处理&#34;&gt;4. 模型预处理&lt;/h1&gt;
 &lt;p&gt;​		正式贴图前，需要对模型进行初步处理，包括&lt;strong&gt;优化模型体量&lt;/strong&gt;以及构件分类命名，以提高后期平台开发过程中的显示性能，为展示功能的实现做准备。&lt;/p&gt;
@@ -1482,41 +1770,41 @@ let obj1 = &#39;../models/testModel/objTest/objTest.obj&#39;;
 &lt;h1 id=&#34;5-贴图&#34;&gt;5 贴图&lt;/h1&gt;
 &lt;h2 id=&#34;51-整理贴图&#34;&gt;5.1 整理贴图&lt;/h2&gt;
 &lt;p&gt;​		根据点云数据及现场调研收集到的图像等信息，搜集整理各构件的纹理贴图，注意贴图的&lt;strong&gt;名称不能出现中文&lt;/strong&gt;，考虑到在网上下载的贴图有乱码的情况，因此建议将全部贴图&lt;strong&gt;重命名为拼音字母&lt;/strong&gt;。贴图的&lt;strong&gt;路径最好也不要出现中文&lt;/strong&gt;。正式贴图之前，建议将贴图素材统一整理到模型根目录下的/tietu文件夹中。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107104809527.png&#34; alt=&#34;image-20210107104809527&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107104809527.png&#34; alt=&#34;image-20210107104809527&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;52-贴图步骤&#34;&gt;5.2 贴图步骤&lt;/h2&gt;
 &lt;p&gt;​		在3dmax界面下，按&lt;code&gt;M&lt;/code&gt;调出材质编辑器，将贴图素材用鼠标拖放至材质球上即可，贴图与材质球一一对应。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107105405290.png&#34; alt=&#34;image-20210107105405290&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107105405290.png&#34; alt=&#34;image-20210107105405290&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		随后将附好材质的材质球直接拖至对应的模型构件上。在模型构件命令面板的修改器列表中，选择&lt;code&gt;UVW贴图&lt;/code&gt;（可以提前将此按钮添加到修改器集中，节约查找UVW贴图命令的操作），调整UVW属性中&lt;code&gt;贴图&lt;/code&gt;、&lt;code&gt;长宽高&lt;/code&gt;和&lt;code&gt;UVW向平铺&lt;/code&gt;等相关参数，使效果尽可能接近真实。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107105417385.png&#34; alt=&#34;image-20210107105417385&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107105417385.png&#34; alt=&#34;image-20210107105417385&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		贴图过程中要&lt;strong&gt;及时保存&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;​		下图为贴图完成后的效果图。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107105428481.png&#34; alt=&#34;image-20210107105428481&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107105428481.png&#34; alt=&#34;image-20210107105428481&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		模型纹理贴图完成后，还需将模型位置调整至中心坐标位置（视窗网格的中心）。可以按&lt;code&gt;G&lt;/code&gt;显示或者隐藏视窗网格。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107105443894.png&#34; alt=&#34;image-20210107105443894&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107105450400.png&#34; alt=&#34;image-20210107105450400&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107105443894.png&#34; alt=&#34;image-20210107105443894&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107105450400.png&#34; alt=&#34;image-20210107105450400&#34;&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h1 id=&#34;6-模型归档和导出&#34;&gt;6 模型归档和导出&lt;/h1&gt;
 &lt;h2 id=&#34;61-模型归档&#34;&gt;6.1 模型归档&lt;/h2&gt;
 &lt;p&gt;​		&lt;strong&gt;归档&lt;/strong&gt;，就是将当前场景中的模型文件、材质贴图及贴图路径整理出来，另存成为一个压缩包，方便模型的存储和传输。归档操作很简单，菜单栏中选择&lt;code&gt;文件&lt;/code&gt;→&lt;code&gt;归档&lt;/code&gt;即可；老版本（2017及之前）点击左上角图标→&lt;code&gt;另存为&lt;/code&gt;→&lt;code&gt;归档&lt;/code&gt;即可。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107105534632.png&#34; alt=&#34;image-20210107105534632&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107105534632.png&#34; alt=&#34;image-20210107105534632&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		归档的模型解压缩并打开后，在3dsMax中浏览虽然是没有问题的，但在导出obj模型前，还需&lt;strong&gt;修改模型的路径&lt;/strong&gt;，否则导出的obj模型会出现材质丢失的情况。为避免这种情况产生，建议在完成模型贴图后，直接在本机导出所需的其他格式模型；若要对原模型进行存储或传输，需要归档后在另外的机器导出模型时，就要对模型的贴图路径进行重定向。&lt;/p&gt;
 &lt;p&gt;​		在右侧命令面板中，选择&lt;code&gt;实用工具&lt;/code&gt;选项（扳手的图标），点击&lt;code&gt;更多...&lt;/code&gt;选项。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107200949507.png&#34; alt=&#34;image-20210107200949507&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107200949507.png&#34; alt=&#34;image-20210107200949507&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		在弹出来的窗口中选择&lt;code&gt;位图/光度学路径&lt;/code&gt;，点击确定。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107201059874.png&#34; alt=&#34;image-20210107201059874&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107201059874.png&#34; alt=&#34;image-20210107201059874&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		随后在右侧命令面板会出现&lt;code&gt;路径编辑器&lt;/code&gt;选项，点击&lt;code&gt;编辑资源&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107201231060.png&#34; alt=&#34;image-20210107201231060&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107201231060.png&#34; alt=&#34;image-20210107201231060&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		此时弹出&lt;code&gt;位图/光度学路径编辑器&lt;/code&gt;窗口，在这里将显示全部的贴图路径信息。点击&lt;code&gt;选择丢失的文件&lt;/code&gt;，我们会看到全部的文件都变为选中状态，说明全部贴图路径均发生了改变。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107201331968.png&#34; alt=&#34;image-20210107201331968&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107201331968.png&#34; alt=&#34;image-20210107201331968&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		点击下方&lt;code&gt;...&lt;/code&gt;按钮，找到解压后模型贴图存放的文件夹，点击&lt;code&gt;使用路径&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		之后点击&lt;code&gt;设置路径&lt;/code&gt;，将原路径修改为正确的路径。可以再次单击&lt;code&gt;选择丢失的文件&lt;/code&gt;，此时已没有文件被选中，说明全部路径已修改完成。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107202036510.png&#34; alt=&#34;image-20210107202036510&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107202036510.png&#34; alt=&#34;image-20210107202036510&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;62-obj模型导出&#34;&gt;6.2 obj模型导出&lt;/h2&gt;
 &lt;p&gt;​		依次点击&lt;code&gt;文件&lt;/code&gt;、&lt;code&gt;导出&lt;/code&gt;，配置好导出路径（纯英文）及文件名后，保存类型选择&lt;code&gt;gw::OBJ-Exporter(*.OBJ)&lt;/code&gt;，单击&lt;code&gt;保存&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		在弹出的窗口中，需要继续配置obj模型导出的参数。面需要改为&lt;code&gt;三角形&lt;/code&gt;，精度改为&lt;code&gt;5&lt;/code&gt;，材质导出选项中，勾选使用材质路径，并修改路径名为&lt;code&gt;./&lt;/code&gt;。配置完成后，点击&lt;code&gt;导出&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107215114429.png&#34; alt=&#34;image-20210107215114429&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107215114429.png&#34; alt=&#34;image-20210107215114429&#34;&gt;&lt;/p&gt;
 &lt;p&gt;​		至此，obj模型文件、mtl材质文件以及贴图文件已成功导出。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		由于3dsMax软件中obj模型导出模块的字符集与网页展示平台中的字符集不匹配，导致构件信息显示错误，出现乱码的情况。之前采用的是使用JavaScript数组对象存储模型构件信息，按构件id来匹配显示构件信息，虽然解决了上述问题，但既费时又费力。所以我们选择从根本上解决此问题——修改obj文件的字符集。方法有很多，这里采用&lt;code&gt;notepad++&lt;/code&gt;来处理字符编码的问题。&lt;/p&gt;
@@ -1529,7 +1817,7 @@ let obj1 = &#39;../models/testModel/objTest/objTest.obj&#39;;
 &lt;p&gt;​		DAE模型主要用于模型剖切模块，无需导出材质。导出步骤与上文相同，依次点击&lt;code&gt;文件&lt;/code&gt;、&lt;code&gt;导出&lt;/code&gt;，配置好导出路径（纯英文）及文件名后，保存类型选择&lt;code&gt;Autodesk Collada(*.DAE)&lt;/code&gt;，单击&lt;code&gt;保存&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;​		在弹出的导出选项中，将动画、摄像机和灯光取消勾选。单击&lt;code&gt;确定&lt;/code&gt;即可。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210107221009764.png&#34; alt=&#34;image-20210107221009764&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210107221009764.png&#34; alt=&#34;image-20210107221009764&#34;&gt;&lt;/p&gt;
 - https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/ - </description>
         </item>
     
@@ -1558,64 +1846,6 @@ let obj1 = &#39;../models/testModel/objTest/objTest.obj&#39;;
 &lt;h2 id=&#34;47-fbx模型导出&#34;&gt;4.7 FBX模型导出&lt;/h2&gt;
 &lt;h1 id=&#34;5绘制施工图纸&#34;&gt;5.绘制施工图纸&lt;/h1&gt;
 - https://gsemir0418.github.io/posts/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>StartBlog</title>
-        <link>https://gsemir0418.github.io/posts/startblog/</link>
-        <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/startblog/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/startblog/ -&lt;h3 id=&#34;step1-安装hugo&#34;&gt;Step1 安装hugo&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;下载链接：https://github.com/gohugoio/hugo/releases&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;选择最新版本进行安装（建议安装&lt;code&gt;hugo_extended&lt;/code&gt;版本）。&lt;/p&gt;
-&lt;p&gt;注意解压后需配置环境变量，可以使用version命令测试是否配置成功：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hugo version
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;step2-新建博客站点&#34;&gt;Step2 新建博客站点&lt;/h3&gt;
-&lt;p&gt;使用命令行，输入如下命令新建博客站点：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hugo new site BLOGNAME
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;step3-下载并配置主题&#34;&gt;Step3 下载并配置主题&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;主题下载链接：https://themes.gohugo.io/&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;官网提供了许多主题供用户选择，按照主题下的安装配置说明进行主题的下载与配置。&lt;/p&gt;
-&lt;p&gt;这里以Diary主题为例，首先在博客的根目录下，使用终端进行git初始化：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git init
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;并执行：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git submodule add https://github.com/AmazingRise/hugo-theme-diary.git themes/diary
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;主题会自动下载至根目录下的&lt;code&gt;themes&lt;/code&gt;文件夹中。下载完成后，启动hugo本地服务并指定该主题：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hugo server -t diary --buildDrafts
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以通过访问&lt;code&gt;localhost:1313&lt;/code&gt;进入本地部署的博客站点。可以看到，hugo已经为我们配置好了下载的主题。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/image-20210103175858811.png&#34; alt=&#34;image-20210103175858811&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;step4-新建博客&#34;&gt;Step4 新建博客&lt;/h3&gt;
-&lt;p&gt;同样，在终端中执行：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hugo new post/文章名称.md
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以使用Typora来编辑文章，就像我现在这样。&lt;/p&gt;
-&lt;h3 id=&#34;step5-部署到github&#34;&gt;Step5 部署到github&lt;/h3&gt;
-&lt;p&gt;首先进入自己的github，新建一个repository，注意名称要使用&lt;strong&gt;小写昵称全名.github.io&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;在终端执行：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hugo --theme=diary --baseUrl=&amp;quot;https://gsemir0418.github.io/&amp;quot; --buildDrafts
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时在根目录下，hugo为我们生成了一个public文件夹，我们只需利用github将此文件夹上传到库中即可。&lt;/p&gt;
-&lt;p&gt;在public文件夹下，进行git初始化。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git init
-
-git add .
-
-git commit -m &amp;quot;v0&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时需要注册GitHub信息&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git config --global user.email &amp;quot;you@example.com&amp;quot;
-git config --global user.name &amp;quot;Your Name&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注册完成后再次提交即可。&lt;/p&gt;
-&lt;p&gt;关联远端git仓库：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git remote add orgin https://github.com/GSemir0418/gsemir0418.github.io.git
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时就可以将文件推上GitHub仓库：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git push -u orgin master
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最终按照提示进行登录验证即可，通过&lt;code&gt;https://gsemir0418.github.io&lt;/code&gt;实现远端访问个人博客。&lt;/p&gt;
-- https://gsemir0418.github.io/posts/startblog/ - </description>
         </item>
     
     

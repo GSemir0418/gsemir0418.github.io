@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head>
-<title>Posts</title>
+<title>可视化大屏实战</title>
 
 
 
@@ -16,10 +16,36 @@
 
 
 
-<meta property="og:title" content="Posts" />
-<meta property="og:description" content="My HomePage Description" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://gsemir0418.github.io/posts/" /><meta property="og:site_name" content="My Blog" />
+<meta property="og:title" content="可视化大屏实战" />
+<meta property="og:description" content="1.如何找素材 1.1 著名的设计网站
+Dribbble（搜索关键字：big screen）
+ https://dribbble.com
+ 站酷（关键字：大屏）
+ https://www.zcool.com.cn
+ 2.如何适配屏幕 1.整体的屏幕适配
+如果大屏很宽，就左右居中；屏幕很高，就上下居中。
+其中Wp为页面有效宽度，Hp为页面有效高度
+页面左右居中，上下居中，四周留白即可
+然后在head里用JS设置1rem=Wp/100
+2.每个div的适配
+每个div是要适配页面的，因此只能用rem而不是px
+举例：假设某div在设计稿中长100px，设计稿宽度1920px
+​	则该div在页面中长为100/1920*100rem
+可以在scss中写一个px()函数来计算100px对应的rem
+3.为什么要学   原生JS操作DOM繁琐、效率低（DOM-API操作UI）
+  使用js直接操作DOM，浏览器会进行大量的重绘重排
+  原生js没有组件化的编码方案，代码复用率低
+模块化是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。
+  4.React的特点   用组件化模式、声明式编码，提高开发效率及组件复用率
+之前使用的是命令式编码，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。
+  在React Native中可以使用React语法进行移动端开发。
+React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。
+  使用虚拟DOM&#43;优秀的Diffing算法，尽量减少与真实DOM的交互
+  ​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-05-09T21:27:51&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-09T21:27:51&#43;08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -27,8 +53,32 @@
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
-<meta name="twitter:description" content="My HomePage Description"/>
+<meta name="twitter:title" content="可视化大屏实战"/>
+<meta name="twitter:description" content="1.如何找素材 1.1 著名的设计网站
+Dribbble（搜索关键字：big screen）
+ https://dribbble.com
+ 站酷（关键字：大屏）
+ https://www.zcool.com.cn
+ 2.如何适配屏幕 1.整体的屏幕适配
+如果大屏很宽，就左右居中；屏幕很高，就上下居中。
+其中Wp为页面有效宽度，Hp为页面有效高度
+页面左右居中，上下居中，四周留白即可
+然后在head里用JS设置1rem=Wp/100
+2.每个div的适配
+每个div是要适配页面的，因此只能用rem而不是px
+举例：假设某div在设计稿中长100px，设计稿宽度1920px
+​	则该div在页面中长为100/1920*100rem
+可以在scss中写一个px()函数来计算100px对应的rem
+3.为什么要学   原生JS操作DOM繁琐、效率低（DOM-API操作UI）
+  使用js直接操作DOM，浏览器会进行大量的重绘重排
+  原生js没有组件化的编码方案，代码复用率低
+模块化是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。
+  4.React的特点   用组件化模式、声明式编码，提高开发效率及组件复用率
+之前使用的是命令式编码，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。
+  在React Native中可以使用React语法进行移动端开发。
+React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。
+  使用虚拟DOM&#43;优秀的Diffing算法，尽量减少与真实DOM的交互
+  ​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程"/>
 
 
 
@@ -63,7 +113,29 @@
 
 
 
+  
+    <script src="https://gsemir0418.github.io//js/toc-collapse.js"></script>
+  
 
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'your client id',
+  clientSecret: 'your client secret',
+  repo: 'repo name',
+  owner: 'user',
+  admin: ['user'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
 
 
 
@@ -154,6 +226,96 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </div><div ref="extraContainer" class="extra-container">
     
     
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#1%e5%a6%82%e4%bd%95%e6%89%be%e7%b4%a0%e6%9d%90" onclick="onNavClick(`#1如何找素材-nav`)" id="1如何找素材-nav">
+									1.如何找素材
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#2%e5%a6%82%e4%bd%95%e9%80%82%e9%85%8d%e5%b1%8f%e5%b9%95" onclick="onNavClick(`#2如何适配屏幕-nav`)" id="2如何适配屏幕-nav">
+									2.如何适配屏幕
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#3%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e5%ad%a6" onclick="onNavClick(`#3为什么要学-nav`)" id="3为什么要学-nav">
+									3.为什么要学
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4react%e7%9a%84%e7%89%b9%e7%82%b9" onclick="onNavClick(`#4react的特点-nav`)" id="4react的特点-nav">
+									4.React的特点
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
     <div class="pagination">
         <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
             <i class="material-icons pagination-action-icon">
@@ -169,24 +331,6 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 brightness_7
             </i>
         </a>
-        
-        
-        
-            <div class="pagination-indicator">
-                <span style="text-align: center">
-                    1<br><div style="display: inline-block; transform: rotate(-28deg)">-</div><br>2
-                </span>
-            </div>
-            
-            
-
-            
-            <a class="pagination-action" href="/posts/page/2/">
-                <i class="material-icons pagination-action-icon">
-                    chevron_right
-                </i>
-            </a>
-            
         
         
     </div>
@@ -241,6 +385,96 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
             
             
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#1%e5%a6%82%e4%bd%95%e6%89%be%e7%b4%a0%e6%9d%90" onclick="onNavClick(`#1如何找素材-nav`)" id="1如何找素材-nav">
+									1.如何找素材
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#2%e5%a6%82%e4%bd%95%e9%80%82%e9%85%8d%e5%b1%8f%e5%b9%95" onclick="onNavClick(`#2如何适配屏幕-nav`)" id="2如何适配屏幕-nav">
+									2.如何适配屏幕
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#3%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e5%ad%a6" onclick="onNavClick(`#3为什么要学-nav`)" id="3为什么要学-nav">
+									3.为什么要学
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4react%e7%9a%84%e7%89%b9%e7%82%b9" onclick="onNavClick(`#4react的特点-nav`)" id="4react的特点-nav">
+									4.React的特点
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
         </div>
     </div>
 </div>
@@ -284,291 +518,144 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
             <div id="content">
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
-        
-            <a class="a-block">
-                <div class="post-item-wrapper post-item-wrapper-no-hover">
-                    <div class="post-item post-item-no-gaps">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title post-item-title-small year">
-                                2021
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
+        <div class="post">
             
-            <a href="/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-gaps">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                antdpro&#43;umi实战
-                            </div>
-                            <div class="post-item-meta">
-    2021-06-08
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-    <span class="draft-label">草稿</span>
-    
-</div>
+            
+            
 
-                        </div>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-gaps">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                可视化大屏实战
-                            </div>
-                            <div class="post-item-meta">
-    2021-05-09
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-    <span class="draft-label">草稿</span>
-    
-</div>
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    可视化大屏实战
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2021-05-09 21:27
+                        </time>
+                        
 
-                        </div>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="/posts/reacthooks/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-gaps">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Hook
-                            </div>
-                            <div class="post-item-meta">
-    2021-05-07
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-    <span class="draft-label">草稿</span>
-    
-</div>
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F">可视化大屏</a>
+                                &nbsp;
+                        
 
-                        </div>
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96">可视化</a>
+                                &nbsp;
+                            
+                                <a href="/tags/react">react</a>
+                                &nbsp;
+                            
+                        
+                        
                     </div>
                 </div>
-            </a>
+            </div>
             
-            <a href="/posts/react%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-gaps">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                React组件生命周期
-                            </div>
-                            <div class="post-item-meta">
-    2021-05-06
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-    <span class="draft-label">草稿</span>
-    
-</div>
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h1 id="1如何找素材">1.如何找素材</h1>
+<p>1.1 著名的设计网站</p>
+<p>Dribbble（搜索关键字：big screen）</p>
+<blockquote>
+<p><a href="https://dribbble.com">https://dribbble.com</a></p>
+</blockquote>
+<p>站酷（关键字：大屏）</p>
+<blockquote>
+<p><a href="https://www.zcool.com.cn">https://www.zcool.com.cn</a></p>
+</blockquote>
+<h1 id="2如何适配屏幕">2.如何适配屏幕</h1>
+<p>1.整体的屏幕适配</p>
+<p>如果大屏很宽，就左右居中；屏幕很高，就上下居中。</p>
+<p><img src="/image-20210510084113259.png" alt="image-20210510084113259"></p>
+<p>其中Wp为页面有效宽度，Hp为页面有效高度</p>
+<p>页面左右居中，上下居中，四周留白即可</p>
+<p>然后在head里用JS设置1rem=Wp/100</p>
+<p>2.每个div的适配</p>
+<p>每个div是要适配页面的，因此只能用rem而不是px</p>
+<p><img src="/image-20210510084513077.png" alt="image-20210510084513077"></p>
+<p>举例：假设某div在设计稿中长100px，设计稿宽度1920px</p>
+<p>​	则该div在页面中长为100/1920*100rem</p>
+<p>可以在scss中写一个px()函数来计算100px对应的rem</p>
+<h1 id="3为什么要学">3.为什么要学</h1>
+<ol>
+<li>
+<p>原生JS操作DOM<strong>繁琐、效率低</strong>（<strong>DOM-API操作UI</strong>）</p>
+</li>
+<li>
+<p>使用js直接操作DOM，浏览器会进行大量的<strong>重绘重排</strong></p>
+</li>
+<li>
+<p>原生js没有<strong>组件化</strong>的编码方案，代码复用率低</p>
+<p><strong>模块化</strong>是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。</p>
+</li>
+</ol>
+<h1 id="4react的特点">4.React的特点</h1>
+<ol>
+<li>
+<p>用<strong>组件化模式</strong>、<strong>声明式编码</strong>，提高开发效率及组件复用率</p>
+<p>之前使用的是<strong>命令式编码</strong>，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。</p>
+</li>
+<li>
+<p>在<strong>React Native</strong>中可以使用React语法进行<strong>移动端</strong>开发。</p>
+<p>React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。</p>
+</li>
+<li>
+<p>使用<strong>虚拟DOM</strong>+优秀的<strong>Diffing算法</strong>，尽量减少与真实DOM的交互</p>
+</li>
+</ol>
+<p><!-- raw HTML omitted --></p>
+<p>​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程</p>
 
-                        </div>
-                    </div>
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">最后修改于 2021-05-09</p>
+                    
                 </div>
-            </a>
+            </div>
             
-            <a href="/posts/react%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-gaps">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                React面向组件编程
-                            </div>
-                            <div class="post-item-meta">
-    2021-04-29
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-    <span class="draft-label">草稿</span>
-    
-</div>
+            
+            <nav class="post-pagination">
 
-                        </div>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="/posts/react%E5%85%A5%E9%97%A8/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-gaps">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                React入门
-                            </div>
-                            <div class="post-item-meta">
-    2021-03-20
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-    <span class="draft-label">草稿</span>
-    
-</div>
+                
+                <a class="newer-posts" href="https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/">
+			下回<br>antdpro&#43;umi实战
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://gsemir0418.github.io/posts/reacthooks/">
+			上回<br>Hook
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
 
-                        </div>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="/posts/react%E7%AE%80%E4%BB%8B/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-gaps">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                React简介
-                            </div>
-                            <div class="post-item-meta">
-    2021-02-18
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-    <span class="draft-label">草稿</span>
-    
-</div>
 
-                        </div>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-gaps">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                展示平台说明文档
-                            </div>
-                            <div class="post-item-meta">
-    2021-01-08
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-    <span class="draft-label">草稿</span>
-    
-</div>
+<div id="gitalk-container"></div>
 
-                        </div>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-gaps">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                3dsMax技术文档
-                            </div>
-                            <div class="post-item-meta">
-    2021-01-08
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-    <span class="draft-label">草稿</span>
-    
-</div>
 
-                        </div>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="/posts/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" class="a-block">
-                <div class="post-item-wrapper">
-                    <div class="post-item post-item-no-gaps">
-                        <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                Revit建模技术文档
-                            </div>
-                            <div class="post-item-meta">
-    2021-01-03
-    &emsp;
-    
-    
-    
-    &emsp;
-    
-    <span class="draft-label">草稿</span>
-    
-</div>
 
-                        </div>
-                    </div>
-                </div>
-            </a>
-            
-        
-    </div>
-</div>
+
 
 
             </div>
-
-<div class="pagination">
-    
-    <a class="pagination-action" style="opacity:0">
-    
-        <i class="material-icons pagination-action-icon">
-            chevron_left
-        </i>
-    </a>
-
-        <div class="pagination-indicator">
-            <span>1/2</span>
         </div>
-
-        
-        <a class="pagination-action" href="/posts/page/2/"
-           style="opacity:1">
-        
-                <i class="material-icons pagination-action-icon">
-                    chevron_right
-                </i>
-            </a>
+    </div>
 </div>
 
-
-<div id="single-column-footer">
+            </div><div id="single-column-footer">
 Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
 <br>
 移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
