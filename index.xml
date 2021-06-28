@@ -5,21 +5,535 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Jun 2021 22:51:51 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 28 Jun 2021 09:30:55 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     
         <item>
+        <title>Array常用方法整理</title>
+        <link>https://gsemir0418.github.io/posts/array/</link>
+        <pubDate>Mon, 28 Jun 2021 09:30:55 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/array/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/array/ -&lt;h4 id=&#34;arrayprototypemap&#34;&gt;&lt;code&gt;Array.prototype.map()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5 id=&#34;1关键词遍历&#34;&gt;1.关键词：遍历&lt;/h5&gt;
+&lt;h5 id=&#34;2是否修改原数组false&#34;&gt;2.是否修改原数组：&lt;code&gt;false&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;3返回值&#34;&gt;3.返回值：&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;newArray[]&lt;/code&gt;，回调函数的结果组成了新数组的每一个元素。&lt;/p&gt;
+&lt;h5 id=&#34;4语法&#34;&gt;4.语法：&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; new_array = arr.map((currentValue, index, array) =&amp;gt; {
+	&lt;span style=&#34;color:#228b22&#34;&gt;// callback
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;currentValue&lt;/code&gt;：callback数组中正在处理的当前元素；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;index&lt;/code&gt;：可选，callback数组中正在处理的当前元素的索引；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;array&lt;/code&gt;：可选，map方法调用的数组，几乎不用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;5描述&#34;&gt;5.描述&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;map&lt;/code&gt; 方法会给原数组中的每个元素都按顺序调用一次  &lt;code&gt;callback&lt;/code&gt; 函数。&lt;code&gt;callback&lt;/code&gt; 每次执行后的返回值（包括&lt;code&gt;undefined&lt;/code&gt;）组合起来形成一个新数组。 &lt;code&gt;callback&lt;/code&gt; 函数只会在有值的索引上被调用；那些从来没被赋过值或者使用 &lt;code&gt;delete&lt;/code&gt; 删除的索引则不会被调用。&lt;/p&gt;
+&lt;p&gt;因为&lt;code&gt;map&lt;/code&gt;生成一个新数组，当你不打算使用返回的新数组却使用&lt;code&gt;map&lt;/code&gt;是违背设计初衷的，请用&lt;code&gt;forEach&lt;/code&gt;或者&lt;code&gt;for-of&lt;/code&gt;替代。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;callback&lt;/code&gt; 函数会被自动传入三个参数：数组元素，元素索引，原数组本身。&lt;/p&gt;
+&lt;h5 id=&#34;6示例&#34;&gt;6.示例&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 求数组中每个元素的平方根
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; arr = [&lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;16&lt;/span&gt;]
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; newArr = arr.map(&lt;span style=&#34;color:#658b00&#34;&gt;Math&lt;/span&gt;.sqrt)&lt;span style=&#34;color:#228b22&#34;&gt;// [2, 3, 4]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#228b22&#34;&gt;// 使用map重新格式化数组中的对象
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; arr = [
+    { key:&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, value:&lt;span style=&#34;color:#b452cd&#34;&gt;10&lt;/span&gt; },
+    { key:&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, value:&lt;span style=&#34;color:#b452cd&#34;&gt;20&lt;/span&gt; }
+]
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; newArr = arr.map((item) =&amp;gt; {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; rObj={}
+    rObj[item.key] = item.value
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; rObj
+})&lt;span style=&#34;color:#228b22&#34;&gt;// [{ 1:10 },{ 2:20 }]
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;arrayprototypepop&#34;&gt;&lt;code&gt;Array.prototype.pop()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5 id=&#34;1关键词删除&#34;&gt;1.关键词：删除&lt;/h5&gt;
+&lt;h5 id=&#34;2是否修改原数组true&#34;&gt;2.是否修改原数组：&lt;code&gt;true&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;3返回值-1&#34;&gt;3.返回值：&lt;/h5&gt;
+&lt;p&gt;从数组中删除的元素(当数组为空时返回&lt;code&gt;undefined&lt;/code&gt;)&lt;/p&gt;
+&lt;h5 id=&#34;4语法-1&#34;&gt;4.语法：&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;arr.pop()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;5描述-1&#34;&gt;5.描述：&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;pop&lt;/code&gt; 方法从一个数组中删除并返回最后一个元素。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pop&lt;/code&gt; 方法有意具有通用性。该方法和&lt;code&gt;call()&lt;/code&gt;或&lt;code&gt;apply()&lt;/code&gt; 一起使用时，可应用在类似数组的对象上。&lt;code&gt;pop&lt;/code&gt;方法根据 &lt;code&gt;length&lt;/code&gt;属性来确定最后一个元素的位置。如果不包含&lt;code&gt;length&lt;/code&gt;属性或&lt;code&gt;length&lt;/code&gt;属性不能被转成一个数值，会将&lt;code&gt;length&lt;/code&gt;置为0，并返回&lt;code&gt;undefined&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果你在一个空数组上调用 pop()，它返回&lt;code&gt;undefined&lt;/code&gt;。&lt;/p&gt;
+&lt;h5 id=&#34;6示例-1&#34;&gt;6.示例&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; arr = [&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;]
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; poped = arr.pop()
+&lt;span style=&#34;color:#228b22&#34;&gt;// arr = [1, 2]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// poped = 3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;arrayprototypefill&#34;&gt;&lt;code&gt;Array.prototype.fill()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5 id=&#34;1关键词修改填充&#34;&gt;1.关键词：修改、填充&lt;/h5&gt;
+&lt;h5 id=&#34;2是否修改原数组true-1&#34;&gt;2.是否修改原数组：&lt;code&gt;true&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;3返回值-2&#34;&gt;3.返回值：&lt;/h5&gt;
+&lt;p&gt;修改后的数组&lt;/p&gt;
+&lt;h5 id=&#34;4语法-2&#34;&gt;4.语法：&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;arr.fill(value, start, end)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;value&lt;/code&gt;：用来填充数组元素的值&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;start&lt;/code&gt; ：可选，起始索引，默认值为0&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;end&lt;/code&gt; ：可选，终止索引，默认值为 &lt;code&gt;this.length&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;5描述-2&#34;&gt;5.描述：&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;fill&lt;/code&gt; 方法接受三个参数 &lt;code&gt;value&lt;/code&gt;, &lt;code&gt;start&lt;/code&gt; 以及 &lt;code&gt;end&lt;/code&gt;。 &lt;code&gt;start&lt;/code&gt; 和&lt;code&gt;end&lt;/code&gt; 参数是可选的, 其默认值分别为 &lt;code&gt;0&lt;/code&gt; 和 &lt;code&gt;this&lt;/code&gt; 对象的 &lt;code&gt;length &lt;/code&gt;属性值。&lt;/p&gt;
+&lt;p&gt;如果 &lt;code&gt;start&lt;/code&gt; 是个负数, 则开始索引会被自动计算成为 &lt;code&gt;length+start&lt;/code&gt;, 其中 &lt;code&gt;length&lt;/code&gt; 是 &lt;code&gt;this&lt;/code&gt; 对象的 &lt;code&gt;length &lt;/code&gt;属性值。如果 &lt;code&gt;end&lt;/code&gt; 是个负数, 则结束索引会被自动计算成为 &lt;code&gt;length+end&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;当一个对象被传递给 &lt;code&gt;fill&lt;/code&gt;方法的时候, 填充数组的是这个对象的引用。&lt;/p&gt;
+&lt;h5 id=&#34;6示例-2&#34;&gt;6.示例：&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;[&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;].fill(&lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;);               &lt;span style=&#34;color:#228b22&#34;&gt;// [4, 4, 4]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;[&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;].fill(&lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;);            &lt;span style=&#34;color:#228b22&#34;&gt;// [1, 4, 4]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;[&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;].fill(&lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;);         &lt;span style=&#34;color:#228b22&#34;&gt;// [1, 4, 3]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;[&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;].fill(&lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;);         &lt;span style=&#34;color:#228b22&#34;&gt;// [1, 2, 3]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;[&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;].fill(&lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;);         &lt;span style=&#34;color:#228b22&#34;&gt;// [1, 2, 3]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;[&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;].fill(&lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;, -&lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;, -&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;);       &lt;span style=&#34;color:#228b22&#34;&gt;// [4, 2, 3]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;[&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;].fill(&lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;NaN&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;NaN&lt;/span&gt;);     &lt;span style=&#34;color:#228b22&#34;&gt;// [1, 2, 3]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;[&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;].fill(&lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;);         &lt;span style=&#34;color:#228b22&#34;&gt;// [1, 2, 3]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Array&lt;/span&gt;(&lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;).fill(&lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;);                &lt;span style=&#34;color:#228b22&#34;&gt;// [4, 4, 4]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;[].fill.call({ length: &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt; }, &lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;);  
+&lt;span style=&#34;color:#228b22&#34;&gt;// {0: 4, 1: 4, 2: 4, length: 3}
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#228b22&#34;&gt;// Objects by reference.
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; arr = &lt;span style=&#34;color:#658b00&#34;&gt;Array&lt;/span&gt;(&lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;).fill({}) &lt;span style=&#34;color:#228b22&#34;&gt;// [{}, {}, {}];
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;arr[&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;].hi = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;hi&amp;#34;&lt;/span&gt;; &lt;span style=&#34;color:#228b22&#34;&gt;// [{ hi: &amp;#34;hi&amp;#34; }, { hi: &amp;#34;hi&amp;#34; }, { hi: &amp;#34;hi&amp;#34; }]
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;arrayprototypefind&#34;&gt;&lt;code&gt;Array.prototype.find()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5 id=&#34;1关键词查找&#34;&gt;1.关键词：查找&lt;/h5&gt;
+&lt;h5 id=&#34;2是否修改原数组false-1&#34;&gt;2.是否修改原数组：&lt;code&gt;false&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;3返回值-3&#34;&gt;3.返回值：&lt;/h5&gt;
+&lt;p&gt;数组中第一个满足所提供测试函数的元素的值，否则返回&lt;code&gt;undefined&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&#34;4语法-3&#34;&gt;4.语法：&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;arr.find((element, index, array) =&amp;gt; {
+	&lt;span style=&#34;color:#228b22&#34;&gt;// callback
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;element&lt;/code&gt;：当前遍历到的元素&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;index&lt;/code&gt;：可选，当前遍历到的索引&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;array&lt;/code&gt;：可选，数组本身，基本用不到&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;5描述-3&#34;&gt;5.描述：&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;find&lt;/code&gt;方法对数组中的每一项元素执行一次 &lt;code&gt;callback&lt;/code&gt; 函数，直至有一个 callback 返回 &lt;code&gt;true&lt;/code&gt;。当找到了这样一个元素后，该方法会立即返回这个元素的值，否则返回&lt;code&gt;undefined&lt;/code&gt;。注意 &lt;code&gt;callback &lt;/code&gt;函数会为数组中的每个索引调用即从 &lt;code&gt;0 &lt;/code&gt;到 &lt;code&gt;length - 1&lt;/code&gt;，而不仅仅是那些被赋值的索引，这意味着对于稀疏数组来说，该方法的效率要低于那些只遍历有值的索引的方法。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;find&lt;/code&gt;方法不会改变数组。&lt;/p&gt;
+&lt;h5 id=&#34;6示例-3&#34;&gt;6.示例&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; inventory = [
+    {name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;apples&amp;#39;&lt;/span&gt;, quantity: &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;},
+    {name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;bananas&amp;#39;&lt;/span&gt;, quantity: &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;},
+    {name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;cherries&amp;#39;&lt;/span&gt;, quantity: &lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;}
+]
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; result = inventory.find(fruit =&amp;gt; {
+    fruit.name === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;cherries&amp;#39;&lt;/span&gt;
+})
+
+console.log(result); 
+&lt;span style=&#34;color:#228b22&#34;&gt;// { name: &amp;#39;cherries&amp;#39;, quantity: 5 }
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;arrayprototypejoin&#34;&gt;&lt;code&gt;Array.prototype.join()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5 id=&#34;1关键词连接&#34;&gt;1.关键词：连接&lt;/h5&gt;
+&lt;h5 id=&#34;2是否修改原数组false-2&#34;&gt;2.是否修改原数组：&lt;code&gt;false&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;3返回值-4&#34;&gt;3.返回值：&lt;/h5&gt;
+&lt;p&gt;一个所有数组元素连接的字符串。如果 &lt;code&gt;arr.length&lt;/code&gt; 为0，则返回空字符串&lt;/p&gt;
+&lt;h5 id=&#34;4语法-4&#34;&gt;4.语法：&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;arr.join(分隔符)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;5描述-4&#34;&gt;5.描述：&lt;/h5&gt;
+&lt;p&gt;所有的数组元素被转换成字符串，再用一个分隔符将这些字符串连接起来。&lt;/p&gt;
+&lt;p&gt;如果一个元素为 &lt;code&gt;undefined&lt;/code&gt; 或 &lt;code&gt;null&lt;/code&gt;，它会被转换为空字符串。&lt;/p&gt;
+&lt;h5 id=&#34;6示例-4&#34;&gt;6.示例：&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; a = [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Wind&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Rain&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Fire&amp;#39;&lt;/span&gt;];
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; myVar1 = a.join();      
+&lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#34;Wind,Rain,Fire&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; myVar2 = a.join(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;);  
+&lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#34;Wind, Rain, Fire&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; myVar3 = a.join(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39; + &amp;#39;&lt;/span&gt;); 
+&lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#34;Wind + Rain + Fire&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; myVar4 = a.join(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;);    
+&lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#34;WindRainFire&amp;#34;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;arrayprototypepush&#34;&gt;&lt;code&gt;Array.prototype.push()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5 id=&#34;1关键词添加&#34;&gt;1.关键词：添加&lt;/h5&gt;
+&lt;h5 id=&#34;2是否修改原数组true-2&#34;&gt;2.是否修改原数组：true&lt;/h5&gt;
+&lt;h5 id=&#34;3返回值-5&#34;&gt;3.返回值：&lt;/h5&gt;
+&lt;p&gt;当调用该方法时，新的&lt;code&gt;length&lt;/code&gt;属性值将被返回。&lt;/p&gt;
+&lt;h5 id=&#34;4语法-5&#34;&gt;4.语法：&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;arr.push(element1, ..., elementN)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;5描述-5&#34;&gt;5.描述：&lt;/h5&gt;
+&lt;p&gt;push方法将值追加到数组中。&lt;/p&gt;
+&lt;p&gt;唯一的原生类数组（array-like）对象是&lt;code&gt;Strings&lt;/code&gt;，尽管如此，它们并不适用该方法，因为字符串是不可改变的。&lt;/p&gt;
+&lt;h5 id=&#34;6示例-5&#34;&gt;6.示例&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 添加元素到数组
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; sports = [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;soccer&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;baseball&amp;#34;&lt;/span&gt;];
+&lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#34;soccer&amp;#34;, &amp;#34;baseball&amp;#34;, &amp;#34;football&amp;#34;, &amp;#34;swimming&amp;#34;]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; total = sports.push(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;football&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;swimming&amp;#34;&lt;/span&gt;);
+&lt;span style=&#34;color:#228b22&#34;&gt;// 4 
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#228b22&#34;&gt;// 合并两个数组
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; vegetables = [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;parsnip&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;potato&amp;#39;&lt;/span&gt;];
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; moreVegs = [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;celery&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;beetroot&amp;#39;&lt;/span&gt;];
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 将第二个数组融合进第一个数组
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 相当于 vegetables.push(&amp;#39;celery&amp;#39;, &amp;#39;beetroot&amp;#39;);
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Array&lt;/span&gt;.prototype.push.apply(vegetables, moreVegs);
+
+console.log(vegetables); 
+&lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#39;parsnip&amp;#39;, &amp;#39;potato&amp;#39;, &amp;#39;celery&amp;#39;, &amp;#39;beetroot&amp;#39;]
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;arrayprototypesome&#34;&gt;&lt;code&gt;Array.prototype.some()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5 id=&#34;1关键词查找-1&#34;&gt;1.关键词：查找&lt;/h5&gt;
+&lt;h5 id=&#34;2是否修改原数组false-3&#34;&gt;2.是否修改原数组：&lt;code&gt;false&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;3返回值-6&#34;&gt;3.返回值：&lt;/h5&gt;
+&lt;p&gt;数组中有至少一个元素通过回调函数的测试就会返回**&lt;code&gt;true&lt;/code&gt;**；所有元素都没有通过回调函数的测试返回值才会为&lt;code&gt;false&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&#34;4语法-6&#34;&gt;4.语法：&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;arr.some((element, index, array) =&amp;gt; {
+	&lt;span style=&#34;color:#228b22&#34;&gt;// callback
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;element&lt;/code&gt;:数组中正在处理的元素。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;index&lt;/code&gt; :可选，数组中正在处理的元素的索引值。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;array&lt;/code&gt;：可选，几乎不用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;5描述-6&#34;&gt;5.描述：&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;some()&lt;/code&gt; 为数组中的每一个元素执行一次 &lt;code&gt;callback&lt;/code&gt; 函数，直到找到一个使得 callback 返回一个“真值”（即可转换为布尔值 true 的值）。如果找到了这样一个值，&lt;code&gt;some()&lt;/code&gt; 将会立即返回 &lt;code&gt;true&lt;/code&gt;。否则，&lt;code&gt;some()&lt;/code&gt; 返回 &lt;code&gt;false&lt;/code&gt;。&lt;code&gt;callback&lt;/code&gt; 只会在那些”有值“的索引上被调用，不会在那些被删除或从来未被赋值的索引上调用。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;callback&lt;/code&gt; 被调用时传入三个参数：元素的值，元素的索引，被遍历的数组。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;some()&lt;/code&gt; 被调用时不会改变数组。&lt;/p&gt;
+&lt;h5 id=&#34;6示例-6&#34;&gt;6.示例&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 使用箭头函数测试数组元素的值
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;[&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;8&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;].some(x =&amp;gt; x &amp;gt; &lt;span style=&#34;color:#b452cd&#34;&gt;10&lt;/span&gt;);  &lt;span style=&#34;color:#228b22&#34;&gt;// false
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;[&lt;span style=&#34;color:#b452cd&#34;&gt;12&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;8&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;].some(x =&amp;gt; x &amp;gt; &lt;span style=&#34;color:#b452cd&#34;&gt;10&lt;/span&gt;); &lt;span style=&#34;color:#228b22&#34;&gt;// true
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#228b22&#34;&gt;// 判断数组元素中是否存在某个值，可以用include()代替
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; fruits = [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;apple&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;banana&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;mango&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;guava&amp;#39;&lt;/span&gt;];
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; checkAvailability(arr, val) {
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; arr.some(arrVal =&amp;gt; val === arrVal);
+}
+
+checkAvailability(fruits, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;kela&amp;#39;&lt;/span&gt;);   &lt;span style=&#34;color:#228b22&#34;&gt;// false
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;checkAvailability(fruits, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;banana&amp;#39;&lt;/span&gt;); &lt;span style=&#34;color:#228b22&#34;&gt;// true
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;arrayprototypesort&#34;&gt;&lt;code&gt;Array.prototype.sort()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5 id=&#34;1关键词排序&#34;&gt;1.关键词：排序&lt;/h5&gt;
+&lt;h5 id=&#34;2是否修改原数组true-3&#34;&gt;2.是否修改原数组：&lt;code&gt;true&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;3返回值-7&#34;&gt;3.返回值：&lt;/h5&gt;
+&lt;p&gt;排序后的数组。请注意，数组已原地排序，并且不进行复制。&lt;/p&gt;
+&lt;h5 id=&#34;4语法-7&#34;&gt;4.语法：&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;arr.sort([compareFunction])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;compareFunction&lt;/code&gt; 可选&lt;/p&gt;
+&lt;p&gt;用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的各个字符的Unicode位点进行排序。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;firstEl&lt;/code&gt;第一个用于比较的元素。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;	secondEl&lt;/code&gt;第二个用于比较的元素。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;5描述-7&#34;&gt;5.描述：&lt;/h5&gt;
+&lt;p&gt;如果没有指明 &lt;code&gt;compareFunction&lt;/code&gt; ，那么元素会按照转换为的字符串的诸个字符的Unicode位点进行排序。例如 &amp;ldquo;Banana&amp;rdquo; 会被排列到 &amp;ldquo;cherry&amp;rdquo; 之前。当数字按由小到大排序时，9 出现在 80 之前，但因为（没有指明 &lt;code&gt;compareFunction&lt;/code&gt;），比较的数字会先被转换为字符串，所以在Unicode顺序上 &amp;ldquo;80&amp;rdquo; 要比 &amp;ldquo;9&amp;rdquo; 要靠前。&lt;/p&gt;
+&lt;p&gt;如果指明了 &lt;code&gt;compareFunction&lt;/code&gt; ，那么数组会按照调用该函数的返回值排序。即 a 和 b 是两个将要被比较的元素：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果 &lt;code&gt;compareFunction(a, b)&lt;/code&gt; 小于 0 ，那么 a 会被排列到 b 之前；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果 &lt;code&gt;compareFunction(a, b)&lt;/code&gt; 等于 0 ， a 和 b 的相对位置不变。备注： ECMAScript 标准并不保证这一行为，而且也不是所有浏览器都会遵守（例如 Mozilla 在 2003 年之前的版本）；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果 &lt;code&gt;compareFunction(a, b)&lt;/code&gt; 大于 0 ， b 会被排列到 a 之前。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;compareFunction(a, b)&lt;/code&gt; 必须总是对相同的输入返回相同的比较结果，否则排序的结果将是不确定的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;6示例-7&#34;&gt;6.示例&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 对象按某个属性排序
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/array/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>React入门</title>
+        <link>https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/</link>
+        <pubDate>Fri, 25 Jun 2021 23:11:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/ -&lt;h1 id=&#34;1react是什么&#34;&gt;1.React是什么&lt;/h1&gt;
+&lt;p&gt;用于构建&lt;strong&gt;用户界面&lt;/strong&gt;的JS库（操作DOM呈现页面）&lt;/p&gt;
+&lt;p&gt;是一个将数据渲染为HTML视图的开源的JavaScript库&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;官网：https://react.docschina.org/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;2谁开发的&#34;&gt;2.谁开发的&lt;/h1&gt;
+&lt;p&gt;Facebook&lt;/p&gt;
+&lt;h1 id=&#34;3为什么要学&#34;&gt;3.为什么要学&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;原生JS操作DOM&lt;strong&gt;繁琐、效率低&lt;/strong&gt;（&lt;strong&gt;DOM-API操作UI&lt;/strong&gt;）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用js直接操作DOM，浏览器会进行大量的&lt;strong&gt;重绘重排&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;原生js没有&lt;strong&gt;组件化&lt;/strong&gt;的编码方案，代码复用率低&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;模块化&lt;/strong&gt;是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;4react的特点&#34;&gt;4.React的特点&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;用&lt;strong&gt;组件化模式&lt;/strong&gt;、&lt;strong&gt;声明式编码&lt;/strong&gt;，提高开发效率及组件复用率&lt;/p&gt;
+&lt;p&gt;之前使用的是&lt;strong&gt;命令式编码&lt;/strong&gt;，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;React Native&lt;/strong&gt;中可以使用React语法进行&lt;strong&gt;移动端&lt;/strong&gt;开发。&lt;/p&gt;
+&lt;p&gt;React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;strong&gt;虚拟DOM&lt;/strong&gt;+优秀的&lt;strong&gt;Diffing算法&lt;/strong&gt;，尽量减少与真实DOM的交互&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程&lt;/p&gt;
+&lt;h1 id=&#34;5-react基本使用&#34;&gt;5. React基本使用&lt;/h1&gt;
+&lt;h2 id=&#34;51-js库引入注意引入顺序&#34;&gt;5.1 js库引入（注意引入顺序）&lt;/h2&gt;
+&lt;p&gt;1.react.development.js：react核心库&lt;/p&gt;
+&lt;p&gt;2.react-dom.development.js：提供操作DOM的react扩展库&lt;/p&gt;
+&lt;p&gt;3.babel.min.js：解析JSX语法代码转为js代码的库&lt;/p&gt;
+&lt;h2 id=&#34;52-虚拟dom的创建&#34;&gt;5.2 虚拟DOM的创建&lt;/h2&gt;
+&lt;h3 id=&#34;521-关于虚拟dom&#34;&gt;5.2.1 关于虚拟DOM&lt;/h3&gt;
+&lt;p&gt;（1）本质上是object类型的&lt;strong&gt;一般对象&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;（2）虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是react内部在用，无需真实DOM上那么多属性&lt;/p&gt;
+&lt;p&gt;（3）虚拟DOM最终会被React转化为真实DOM，呈现在页面上&lt;/p&gt;
+&lt;h3 id=&#34;522-创建的两种方式&#34;&gt;5.2.2 创建的两种方式&lt;/h3&gt;
+&lt;p&gt;（1）纯js方式&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; VDOM = React.createElement(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;标签名&amp;#39;&lt;/span&gt;,{标签属性},&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;标签内容&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; VDOM = React.createElement(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;h1&amp;#39;&lt;/span&gt;,{id:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;},&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;React.createElement(&amp;#39;&lt;/span&gt;span&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;,{},&amp;#39;&lt;/span&gt;HELLO REACT!&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;)&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;​		可以看到，若遇标签嵌套情况，利用纯js来写非常复杂。&lt;/p&gt;
+&lt;p&gt;（2）JSX方式&lt;/p&gt;
+&lt;p&gt;​		是react 定义的一种类似于 XML 的 JS 扩展语法: JS + XML。本质是React.createElement(&amp;lsquo;标签名&amp;rsquo;,{标签属性},&amp;lsquo;标签内容&amp;rsquo;)方法的语法糖，极大地简化了创建虚拟DOM过程。&lt;strong&gt;在利用JSX创建之前，需要将&lt;!-- raw HTML omitted --&gt;标签的type属性由默认的text/javascript改为text/babel&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;1）JSX创建虚拟DOM的写法如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; VDOM = (
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h1&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;id&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;title&amp;#34;&lt;/span&gt;&amp;gt;
+    	&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;span&lt;/span&gt;&amp;gt;hello,react&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;span&lt;/span&gt;&amp;gt;
+    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h1&lt;/span&gt;&amp;gt;
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2）&lt;strong&gt;JSX语法&lt;/strong&gt;如下：&lt;/p&gt;
+&lt;p&gt;1.遇到 &amp;lt;开头的代码，以标签的语法解析：html 同名标签转换为 html 同名元素，其它标签需要特别解析：若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。&lt;/p&gt;
+&lt;p&gt;2.遇到以 { 开头的代码，以 JS 语法解析: &lt;strong&gt;标签中的 js 表达式必须用{ }包含&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;3.&lt;strong&gt;只有一个根标签&lt;/strong&gt;，若想在虚拟DOM中再新增标签，外面需要统一包一个标签&lt;/p&gt;
+&lt;p&gt;4.标签必须&lt;strong&gt;闭合&lt;/strong&gt;（自闭合也行）&lt;/p&gt;
+&lt;p&gt;5.标签内样式的类名指定不要用class，要用&lt;strong&gt;className&lt;/strong&gt;，例如&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;6.标签中内联样式要用**style={{key:value}}**的形式去写，多个单词的要用小驼峰,例如style={{fontSize:&amp;lsquo;29px&amp;rsquo;}}&lt;/p&gt;
+&lt;h2 id=&#34;53-渲染虚拟dom&#34;&gt;5.3 渲染虚拟DOM&lt;/h2&gt;
+&lt;p&gt;基本语法：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;ReactDOM.render(VirtualDOM,containerDOM)
+ReactDOM.render(VDOM,&lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;54-模块与组件的理解&#34;&gt;5.4 模块与组件的理解&lt;/h2&gt;
+&lt;p&gt;模块指的是向外提供特定功能的js程序，一般就是一个js文件，模块化是为了更好地复用js，简化js的编写，提高js运行效率。模块化只针对js；而组件指的是用来实现局部功能效果的代码和资源的集合（html、css、js、image、video等），组件化是为了复用编码，简化项目编码，提高运行效率&lt;/p&gt;
+&lt;p&gt;1.5 jsx练习&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;.%5Cimage-20210321123104572.png&#34; alt=&#34;image-20210321123104572&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;body&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;id&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;test&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;src&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;../js/react.development.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;src&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;../js/react-dom.development.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;src&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;../js/babel.min.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
+
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;type&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;text/babel&amp;#34;&lt;/span&gt;&amp;gt;
+    &lt;span style=&#34;color:#228b22&#34;&gt;/*
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;        一定注意区分【js语句（代码）】与【js表达式】
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;            1.表达式：一个表达式会产生一个值，可以放任何一个需要值的地方
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                下面这些都是表达式
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                a
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                a+b
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                demo(1)
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                arr.map()//用来处理数组
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                function test(){}//定义方法
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;            2.语句（代码）：控制代码走向，没有值
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                if(){}
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                for(){}
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                switch(){case}
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;    */&lt;/span&gt;
+        &lt;span style=&#34;color:#228b22&#34;&gt;//模拟一些数据
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; data = [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Angular&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Vue&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;React&amp;#39;&lt;/span&gt;]
+        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; data2 = [&amp;lt;li&amp;gt;Angular&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/li&amp;gt;, &amp;lt;li&amp;gt;Vue&amp;lt;/li&amp;gt;, &amp;lt;li&amp;gt;React&amp;lt;/li&amp;gt;]//React可以自动遍历数组&lt;/span&gt;
+        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = {name1:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Angular&amp;#39;&lt;/span&gt;,name2:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Vue&amp;#39;&lt;/span&gt;,name3:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;React&amp;#39;&lt;/span&gt;}&lt;span style=&#34;color:#228b22&#34;&gt;//对象不能作为React的节点
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#228b22&#34;&gt;//jsx创建虚拟DOM
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; VDOM = (
+            &amp;lt;div&amp;gt;
+                &amp;lt;h1&amp;gt;前端js框架列表&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/h1&amp;gt;&lt;/span&gt;
+                &amp;lt;ul&amp;gt;
+                    {
+                        data.map((a,index)=&amp;gt;{
+                            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &amp;lt;li key={index}&amp;gt;{a}&amp;lt;&lt;span style=&#34;color:#1c7e71&#34;&gt;/li&amp;gt;/&lt;/span&gt;/虚拟dom必须有唯一标识key
+                        })
+                    }
+                &amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/ul&amp;gt;&lt;/span&gt;
+            &amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/div&amp;gt;&lt;/span&gt;
+        )
+        ReactDOM.render(VDOM, &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
+    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;body&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;补充&#34;&gt;补充：&lt;/h2&gt;
+&lt;p&gt;1）早期传输数据的两种格式&lt;/p&gt;
+&lt;p&gt;​		最早使用XML来存储与传输数据的，XML即扩展标记语言 (Extensible Markup Language, XML) ，用于标记电子文件使其具有结构性的标记语言，可以用来标记数据、定义数据类型，是一种允许用户对自己的标记语言进行定义的源语言。典型写法如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;student&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Tom&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/student&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;​		后面改为利用JSON格式。JSON(JavaScript Object Notation)一种轻量级的数据交换格式，具有良好的可读和便于快速编写的特性。可在不同平台之间进行数据交换。主要是得益于JSON的两个重要方法：JSON.parse()和JSON.stringfy()，分别用来快速将JSON中的数据解析为数组和对象，以及快速把JS中的数组和对象转化为JSON字符串&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&amp;#39;name&amp;#39;:&amp;#39;gsq&amp;#39;,&amp;#39;age&amp;#39;:26&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2）XML和JSON的优缺点对比&lt;/p&gt;
+&lt;p&gt;(1)可读性两者基本相同，一边是建议的语法，一边是规范的标签形式，XML可读性较好些；
+(2)可扩展性方面差不多；
+(3)编码难度方面，不借助工具的话，XML较为复杂；
+(4)解码难度方面，XML的解析得考虑子节点父节点，让人头昏眼花，而JSON的解析难度几乎为0。
+(5)流行度方面，XML已经被业界广泛的使用，而JSON才刚刚开始，但是在Ajax这个特定的领域，未来的发展一定是XML让位于JSON。到时Ajax应该变成Ajaj(Asynchronous Javascript and JSON)了；
+(7)数据体积方面，JSON相对于XML来讲，数据的体积小，传递的速度更快些；
+(8)数据交互方面，JSON与JavaScript的交互更加方便，更容易解析处理，更好的数据交互； 
+(9)数据描述方面，JSON对数据的描述性比XML较差；
+(10)传输速度方面， JSON的速度要远远快于XML。&lt;/p&gt;
+- https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>初识Hooks</title>
+        <link>https://gsemir0418.github.io/posts/reacthooks/</link>
+        <pubDate>Fri, 25 Jun 2021 23:07:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/reacthooks/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/reacthooks/ -&lt;h1 id=&#34;1-hook简介&#34;&gt;1 Hook简介&lt;/h1&gt;
+&lt;h2 id=&#34;11-基本概念&#34;&gt;1.1 基本概念&lt;/h2&gt;
+&lt;p&gt;Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使⽤ state 以及其他的 React 特性。&lt;/p&gt;
+&lt;h2 id=&#34;12-react-hooks优势&#34;&gt;1.2 React Hooks优势&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;函数组件不能使⽤state，⼀般只⽤于⼀些简单⽆交互的组件，⽤作信息展示，即我们上⾯说的傻⽠组件使⽤，如果需要交互更改状态等复杂逻辑时就需要使⽤class组件了&lt;/p&gt;
+&lt;p&gt;React Hooks让我们更好的拥抱函数式编程，让函数式组件也能使⽤state功能，因为函数式组件⽐class组件更简洁好⽤，因为React Hooks的出现，相信未来我们会更多的使⽤函数式组件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;副作⽤问题&lt;/p&gt;
+&lt;p&gt;我们⼀般称数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤由于React Hooks的出现，我们可以使⽤useEffect来处理组件副作⽤问题，所以我们的函数式组件也能进⾏副作⽤逻辑的处理了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;有状态的逻辑重⽤组件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;复杂的状态管理&lt;/p&gt;
+&lt;p&gt;之前我们使⽤redux、dva、mobx第三⽅状态管理器来进⾏复杂的状态管理&lt;/p&gt;
+&lt;p&gt;现在我们可以使⽤useReducer、useContext配合使⽤实现复杂状态管理，不⽤再依赖第三⽅状态管理器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;开发效率和质量问题&lt;/p&gt;
+&lt;p&gt;函数式组件⽐class组件简洁，开发的体验更好，效率更⾼同时应⽤的性能也更好&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;2-usestate&#34;&gt;2 useState&lt;/h1&gt;
+&lt;h2 id=&#34;21-定义&#34;&gt;2.1 定义&lt;/h2&gt;
+&lt;p&gt;useState：组件状态管理钩⼦，使函数组件能够使⽤state&lt;/p&gt;
+&lt;h2 id=&#34;22-基本使用&#34;&gt;2.2 基本使用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [state,setState]=useState(initState)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;state是要设置的状态&lt;/li&gt;
+&lt;li&gt;setState是更新state的⽅法，只是⼀个⽅法名，可以随意更改&lt;/li&gt;
+&lt;li&gt;initState是初始的state，可以是随意的数据类型，也可以是回调函数，但是函数必须是有返回值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;23-实际应用&#34;&gt;2.3 实际应用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React, { useState } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; UseS() {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [count, setState] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;你点击了{count}次&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setState(count + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;点 击&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+    )
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h1 id=&#34;3-useeffect&#34;&gt;3 useEffect&lt;/h1&gt;
+&lt;h2 id=&#34;31-定义&#34;&gt;3.1 定义&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;useEffect：副作⽤处理钩⼦&lt;/li&gt;
+&lt;li&gt;数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤。⽽useEffect就是为了处理这些副作⽤⽽⽣的&lt;/li&gt;
+&lt;li&gt;useEffect也是componentDidMount、componentDidUpdate和componentWillUnmount这⼏个⽣命周期⽅法的统⼀&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;32-基本使用&#34;&gt;3.2 基本使用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;useEffect(callback,array)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;callback：回调函数，作⽤是处理副作⽤逻辑。可以返回⼀个函数，⽤作清理&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
+	&lt;span style=&#34;color:#228b22&#34;&gt;//副作⽤逻辑
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	xxxxxx
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; ()=&amp;gt;{
+		&lt;span style=&#34;color:#228b22&#34;&gt;//清理副作⽤需要清理的内容
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#228b22&#34;&gt;//类似于componentWillUnmount，组件渲染和组件卸载前执⾏的代码
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	}
+},[array])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;array(可选参数)：数组，⽤于控制useEffect的执⾏。分三种情况&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;空数组，则只会执⾏⼀次（即初次渲染render）,相当于componentDidMount&lt;/li&gt;
+&lt;li&gt;⾮空数组，useEffect会在数组发⽣改变后执⾏，相当于componentDidUpdate&lt;/li&gt;
+&lt;li&gt;不填array这个数组，useEffect每次渲染都会执⾏&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;33-实际应用&#34;&gt;3.3 实际应用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { useState, useEffect } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; UseE = () =&amp;gt; {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [count, setState] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+
+    useEffect(() =&amp;gt; {
+        &lt;span style=&#34;color:#228b22&#34;&gt;//更新⻚⾯标题
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.title = &lt;span style=&#34;color:#cd5555&#34;&gt;`您点击了&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;count&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;次了哦`&lt;/span&gt;
+    }, [count])
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;你点击了{count}次&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setState(count + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;点 击&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+    )
+}
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; UseE;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h1 id=&#34;4-usecontext&#34;&gt;4 useContext&lt;/h1&gt;
+&lt;h2 id=&#34;41-定义&#34;&gt;4.1 定义&lt;/h2&gt;
+&lt;p&gt;context就是⽤来更⽅便的实现全局数据共享的，但是由于他并不是那么好⽤，所以我们⼀般会使⽤第三⽅状态管理器来实现全局数据共享&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;redux&lt;/li&gt;
+&lt;li&gt;dva&lt;/li&gt;
+&lt;li&gt;mobx&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;是针对context上下⽂提出的⼀个Hooks提出的⼀个API，它接受React.createContext()的返回值作为参数，即context对象，并返回最近的context&lt;/p&gt;
+&lt;p&gt;使⽤useContext是不需要再使⽤Provider和Consumer的&lt;/p&gt;
+&lt;p&gt;当最近的context更新时，那么使⽤该context的hook将会重新渲染&lt;/p&gt;
+&lt;h2 id=&#34;42-基本使用&#34;&gt;4.2 基本使用&lt;/h2&gt;
+&lt;p&gt;store.js中创建数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Context = React.createContext({ age: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;18&amp;#39;&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;jerry&amp;#39;&lt;/span&gt; })
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; Context
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;组件中使用useContext接收数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React, { useContext } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; Context from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./store&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; UseC = () =&amp;gt; {
+    &lt;span style=&#34;color:#228b22&#34;&gt;//使⽤useContext
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; ctx = useContext(Context)
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;姓名&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;：&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h2&lt;/span&gt;&amp;gt;{ctx.name}&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h2&lt;/span&gt;&amp;gt;年龄&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;：&lt;/span&gt;{ctx.age}岁&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+    )
+}
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; UseC
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/reacthooks/ - </description>
+        </item>
+    
+    
+    
+        <item>
         <title>antdpro&#43;umi实战</title>
         <link>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</link>
-        <pubDate>Tue, 08 Jun 2021 22:51:51 +0800</pubDate>
+        <pubDate>Fri, 25 Jun 2021 22:51:51 +0800</pubDate>
         
         <guid>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
         <description>GSemir Blog https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ -&lt;p&gt;本文通过一个todo list 的小项目演示，实现三个功能：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;列表功能，列出所以todo项；&lt;/li&gt;
+&lt;li&gt;列表功能，列出所有todo项；&lt;/li&gt;
 &lt;li&gt;添加新项，添加新的todo项；&lt;/li&gt;
 &lt;li&gt;更新项，更新现有的todo项状态，修改成待办、已完成或者取消&lt;/li&gt;
 &lt;/ol&gt;
@@ -109,204 +623,340 @@ export default TodoPage
     
     
         <item>
-        <title>可视化大屏实战</title>
-        <link>https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/</link>
-        <pubDate>Sun, 09 May 2021 21:27:51 +0800</pubDate>
+        <title>Node文件模块</title>
+        <link>https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</link>
+        <pubDate>Fri, 25 Jun 2021 14:40:55 +0800</pubDate>
         
-        <guid>https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/ -&lt;h1 id=&#34;1如何找素材&#34;&gt;1.如何找素材&lt;/h1&gt;
-&lt;p&gt;1.1 著名的设计网站&lt;/p&gt;
-&lt;p&gt;Dribbble（搜索关键字：big screen）&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://dribbble.com&#34;&gt;https://dribbble.com&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;站酷（关键字：大屏）&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.zcool.com.cn&#34;&gt;https://www.zcool.com.cn&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;2如何适配屏幕&#34;&gt;2.如何适配屏幕&lt;/h1&gt;
-&lt;p&gt;1.整体的屏幕适配&lt;/p&gt;
-&lt;p&gt;如果大屏很宽，就左右居中；屏幕很高，就上下居中。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://gsemir0418.github.io/image-20210510084113259.png&#34; alt=&#34;image-20210510084113259&#34;&gt;&lt;/p&gt;
-&lt;p&gt;其中Wp为页面有效宽度，Hp为页面有效高度&lt;/p&gt;
-&lt;p&gt;页面左右居中，上下居中，四周留白即可&lt;/p&gt;
-&lt;p&gt;然后在head里用JS设置1rem=Wp/100&lt;/p&gt;
-&lt;p&gt;2.每个div的适配&lt;/p&gt;
-&lt;p&gt;每个div是要适配页面的，因此只能用rem而不是px&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://gsemir0418.github.io/image-20210510084513077.png&#34; alt=&#34;image-20210510084513077&#34;&gt;&lt;/p&gt;
-&lt;p&gt;举例：假设某div在设计稿中长100px，设计稿宽度1920px&lt;/p&gt;
-&lt;p&gt;​	则该div在页面中长为100/1920*100rem&lt;/p&gt;
-&lt;p&gt;可以在scss中写一个px()函数来计算100px对应的rem&lt;/p&gt;
-&lt;h1 id=&#34;3为什么要学&#34;&gt;3.为什么要学&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;原生JS操作DOM&lt;strong&gt;繁琐、效率低&lt;/strong&gt;（&lt;strong&gt;DOM-API操作UI&lt;/strong&gt;）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;使用js直接操作DOM，浏览器会进行大量的&lt;strong&gt;重绘重排&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;原生js没有&lt;strong&gt;组件化&lt;/strong&gt;的编码方案，代码复用率低&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;模块化&lt;/strong&gt;是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;4react的特点&#34;&gt;4.React的特点&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;用&lt;strong&gt;组件化模式&lt;/strong&gt;、&lt;strong&gt;声明式编码&lt;/strong&gt;，提高开发效率及组件复用率&lt;/p&gt;
-&lt;p&gt;之前使用的是&lt;strong&gt;命令式编码&lt;/strong&gt;，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;在&lt;strong&gt;React Native&lt;/strong&gt;中可以使用React语法进行&lt;strong&gt;移动端&lt;/strong&gt;开发。&lt;/p&gt;
-&lt;p&gt;React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;使用&lt;strong&gt;虚拟DOM&lt;/strong&gt;+优秀的&lt;strong&gt;Diffing算法&lt;/strong&gt;，尽量减少与真实DOM的交互&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程&lt;/p&gt;
-- https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>Hook</title>
-        <link>https://gsemir0418.github.io/posts/reacthooks/</link>
-        <pubDate>Fri, 07 May 2021 23:07:51 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/reacthooks/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/reacthooks/ -&lt;h1 id=&#34;1-hook简介&#34;&gt;1 Hook简介&lt;/h1&gt;
-&lt;h2 id=&#34;11-基本概念&#34;&gt;1.1 基本概念&lt;/h2&gt;
-&lt;p&gt;Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使⽤ state 以及其他的 React 特性。&lt;/p&gt;
-&lt;h2 id=&#34;12-react-hooks优势&#34;&gt;1.2 React Hooks优势&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;函数组件不能使⽤state，⼀般只⽤于⼀些简单⽆交互的组件，⽤作信息展示，即我们上⾯说的傻⽠组件使⽤，如果需要交互更改状态等复杂逻辑时就需要使⽤class组件了&lt;/p&gt;
-&lt;p&gt;React Hooks让我们更好的拥抱函数式编程，让函数式组件也能使⽤state功能，因为函数式组件⽐class组件更简洁好⽤，因为React Hooks的出现，相信未来我们会更多的使⽤函数式组件&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;副作⽤问题&lt;/p&gt;
-&lt;p&gt;我们⼀般称数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤由于React Hooks的出现，我们可以使⽤useEffffect来处理组件副作⽤问题，所以我们的函数式组件也能进⾏副作⽤逻辑的处理了&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;有状态的逻辑重⽤组件&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;复杂的状态管理&lt;/p&gt;
-&lt;p&gt;之前我们使⽤redux、dva、mobx第三⽅状态管理器来进⾏复杂的状态管理&lt;/p&gt;
-&lt;p&gt;现在我们可以使⽤useReducer、useContext配合使⽤实现复杂状态管理，不⽤再依赖第三⽅状态管理器&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;开发效率和质量问题&lt;/p&gt;
-&lt;p&gt;函数式组件⽐class组件简洁，开发的体验更好，效率更⾼同时应⽤的性能也更好&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h1 id=&#34;2-usestate&#34;&gt;2 useState&lt;/h1&gt;
-&lt;h2 id=&#34;21-定义&#34;&gt;2.1 定义&lt;/h2&gt;
-&lt;p&gt;useState：组件状态管理钩⼦，使函数组件能够使⽤state&lt;/p&gt;
-&lt;h2 id=&#34;22-基本使用&#34;&gt;2.2 基本使用&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [state,setState]=useState(initState)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;state是要设置的状态&lt;/li&gt;
-&lt;li&gt;setState是更新state的⽅法，只是⼀个⽅法名，可以随意更改&lt;/li&gt;
-&lt;li&gt;initState是初始的state，可以是随意的数据类型，也可以是回调函数，但是函数必须是有返回值&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;23-实际应用&#34;&gt;2.3 实际应用&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React, { useState } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; UseS() {
-    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [count, setState] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
-    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;你点击了{count}次&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setState(count + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;点 击&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-    )
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
-&lt;h1 id=&#34;3-useeffect&#34;&gt;3 useEffect&lt;/h1&gt;
-&lt;h2 id=&#34;31-定义&#34;&gt;3.1 定义&lt;/h2&gt;
+        <guid>https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/ -&lt;h1 id=&#34;1-待办事项命令行程序需求&#34;&gt;1 待办事项命令行程序需求&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;useEffffect：副作⽤处理钩⼦&lt;/li&gt;
-&lt;li&gt;数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤。⽽useEffffect就是为了处理这些副作⽤⽽⽣的&lt;/li&gt;
-&lt;li&gt;useEffffect也是componentDidMount、componentDidUpdate和componentWillUnmount这⼏个⽣命周期⽅法的统⼀&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;32-基本使用&#34;&gt;3.2 基本使用&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;useEffect(callback,array)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;callback：回调函数，作⽤是处理副作⽤逻辑。可以返回⼀个函数，⽤作清理&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
-	&lt;span style=&#34;color:#228b22&#34;&gt;//副作⽤逻辑
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	xxxxxx
-	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; ()=&amp;gt;{
-		&lt;span style=&#34;color:#228b22&#34;&gt;//清理副作⽤需要清理的内容
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#228b22&#34;&gt;//类似于componentWillUnmount，组件渲染和组件卸载前执⾏的代码
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	}
-},[array])
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;array(可选参数)：数组，⽤于控制useEffffect的执⾏。分三种情况&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;功能：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;空数组，则只会执⾏⼀次（即初次渲染render）,相当于componentDidMount&lt;/li&gt;
-&lt;li&gt;⾮空数组，useEffffect会在数组发⽣改变后执⾏，相当于componentDidUpdate&lt;/li&gt;
-&lt;li&gt;不填array这个数组，useEffffect每次渲染都会执⾏&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可以列出所有的todo；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;新增、编辑、删除todo；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改todo状态为已完成/未完成&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;33-实际应用&#34;&gt;3.3 实际应用&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { useState, useEffect } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; UseE = () =&amp;gt; {
-    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [count, setState] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;命令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;t
+t add 任务名
+t clear
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;2-创建命令行项目&#34;&gt;2 创建命令行项目&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;空文件夹下，执行：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;yarn init -y
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-y&lt;/code&gt;表示跳过交互式对话（确定版本等信息），根据默认值生成&lt;code&gt;package.json&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建&lt;code&gt;index.js&lt;/code&gt;，引入&lt;code&gt;commanderjs&lt;/code&gt;库，添加&lt;code&gt;add&lt;/code&gt;和&lt;code&gt;clear&lt;/code&gt;子命令：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; program = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;commander&amp;#39;&lt;/span&gt;);
 
-    useEffect(() =&amp;gt; {
-        &lt;span style=&#34;color:#228b22&#34;&gt;//更新⻚⾯标题
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.title = &lt;span style=&#34;color:#cd5555&#34;&gt;`您点击了&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;count&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;次了哦`&lt;/span&gt;
-    }, [count])
-    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;你点击了{count}次&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setState(count + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;点 击&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-    )
-}
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; UseE;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
-&lt;h1 id=&#34;4-usecontext&#34;&gt;4 useContext&lt;/h1&gt;
-&lt;h2 id=&#34;41-定义&#34;&gt;4.1 定义&lt;/h2&gt;
-&lt;p&gt;context就是⽤来更⽅便的实现全局数据共享的，但是由于他并不是那么好⽤，所以我们⼀般会使⽤第三⽅状态管理器来实现全局数据共享&lt;/p&gt;
+program
+	.option(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;-x,--xxx&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;desc of x&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// x选项 即在node index命令后输入的选项
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;program
+	.command(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;add&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 子命令
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.description(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;add a task&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 子命令描述
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.action((...args) =&amp;gt; { &lt;span style=&#34;color:#228b22&#34;&gt;//拿到用户输入的所有字符串参数
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; words = args.slice(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;,-&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;).join(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 由于最后一个参数默认是command对象，因此需要对参数进行预处理
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	})
+program
+	.command(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 子命令
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.description(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;clear all tasks&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 子命令描述
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.action(() =&amp;gt; {
+    	&lt;span style=&#34;color:#228b22&#34;&gt;// 执行clear操作
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	})
+
+program.parse(process.argv);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;3-实现创建任务功能&#34;&gt;3 实现创建任务功能&lt;/h1&gt;
+&lt;p&gt;一般命令行程序的入口文件为&lt;code&gt;cli.js&lt;/code&gt;，而&lt;code&gt;index.js&lt;/code&gt;中写主要功能实现，因此将index重命名为&lt;code&gt;cli.js&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;31-nodejs读取文件api&#34;&gt;3.1 &lt;code&gt;nodejs&lt;/code&gt;读取文件api：&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210625131432414.png&#34; alt=&#34;image-20210625131432414&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;fs.readFile(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/etc/passwd&amp;#39;&lt;/span&gt;, (err, data) =&amp;gt; {
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (err) &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;throw&lt;/span&gt; err;
+  console.log(data);
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;回调会传入两个参数 &lt;code&gt;(err, data)&lt;/code&gt;，其中 &lt;code&gt;data&lt;/code&gt; 是文件的内容。&lt;/p&gt;
+&lt;p&gt;如果没有指定 &lt;code&gt;encoding&lt;/code&gt;，则返回原始的 buffer。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;options&lt;/code&gt; 中的当&lt;code&gt;flag&lt;/code&gt; 选项采用字符串时，可用以下标志：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;redux&lt;/li&gt;
-&lt;li&gt;dva&lt;/li&gt;
-&lt;li&gt;mobx&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;a&#39;&lt;/code&gt; - 打开文件用于追加。如果文件不存在，则创建该文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;ax&#39;&lt;/code&gt; - 与 &lt;code&gt;&#39;a&#39;&lt;/code&gt; 相似，但如果路径已存在则失败。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;a+&#39;&lt;/code&gt; - 打开文件用于读取和追加。如果文件不存在，则创建该文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;ax+&#39;&lt;/code&gt; - 与 &lt;code&gt;&#39;a+&#39;&lt;/code&gt; 相似，但如果路径已存在则失败。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;as&#39;&lt;/code&gt; - 以同步模式打开文件用于追加。如果文件不存在，则创建该文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;as+&#39;&lt;/code&gt; - 以同步模式打开文件用于读取和追加。如果文件不存在，则创建该文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;r&#39;&lt;/code&gt; - 打开文件用于读取。如果文件不存在，则出现异常。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;r+&#39;&lt;/code&gt; - 打开文件用于读取和写入。如果文件不存在，则出现异常。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;rs+&#39;&lt;/code&gt; - 以同步模式打开文件用于读取和写入。指示操作系统绕过本地的文件系统缓存。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;是针对context上下⽂提出的⼀个Hooks提出的⼀个API，它接受React.createContext()的返回值作为参数，即context对象，并返回最近的context&lt;/p&gt;
-&lt;p&gt;使⽤useContext是不需要再使⽤Provider和Consumer的&lt;/p&gt;
-&lt;p&gt;当最近的context更新时，那么使⽤该context的hook将会重新渲染&lt;/p&gt;
-&lt;h2 id=&#34;42-基本使用&#34;&gt;4.2 基本使用&lt;/h2&gt;
-&lt;p&gt;store.js中创建数据&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Context = React.createContext({ age: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;18&amp;#39;&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;jerry&amp;#39;&lt;/span&gt; })
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; Context
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;组件中使用useContext接收数据&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React, { useContext } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; Context from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./store&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; UseC = () =&amp;gt; {
-    &lt;span style=&#34;color:#228b22&#34;&gt;//使⽤useContext
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; ctx = useContext(Context)
-    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;姓名&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;：&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h2&lt;/span&gt;&amp;gt;{ctx.name}&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h2&lt;/span&gt;&amp;gt;年龄&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;：&lt;/span&gt;{ctx.age}岁&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-    )
+&lt;h2 id=&#34;32-获取home路径下的todo文件&#34;&gt;3.2 获取home路径下的.todo文件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;nodejs&lt;/code&gt;获取系统home目录路径：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; homedir = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;os&amp;#39;&lt;/span&gt;).homedir()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;nodejs&lt;/code&gt;获取用户home目录路径，如果未获取到，则使用系统home路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; home = process.env.HOME || homedir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;处理路径格式问题，以适配任意系统：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; p = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;path&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; dbPath = p.join(home,&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;.todo&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;33-nodejs写文件api&#34;&gt;3.3 &lt;code&gt;nodejs&lt;/code&gt;写文件api&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210625133113444.png&#34; alt=&#34;image-20210625133113444&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;34-创建任务功能初步实现&#34;&gt;3.4 创建任务功能初步实现&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fs = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;)
+module.exports.add = (title) =&amp;gt; {
+	fs.readFile(dbPath, {flag:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;a+&amp;#39;&lt;/span&gt;}, (error,data) =&amp;gt; {
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt;(error) { console.log(error) }
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; {
+			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; list
+            &lt;span style=&#34;color:#228b22&#34;&gt;// 如果文件是空的，则创建一个数组来存数据
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;try&lt;/span&gt; {
+              	&lt;span style=&#34;color:#228b22&#34;&gt;// 尝试让list等于data中的数据
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;				list = JSON.parse(data.toString())&lt;span style=&#34;color:#228b22&#34;&gt;// 字符串=&amp;gt;数组对象
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;			} &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;catch&lt;/span&gt;(error2) {
+                &lt;span style=&#34;color:#228b22&#34;&gt;// 如果出错（说明data为空，解析失败），则让list成为空数组
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;				list = []
+			}
+            &lt;span style=&#34;color:#228b22&#34;&gt;// 在list中添加一个任务
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; task = { title, done:&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt; }
+			list.push(task)
+			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; string = JSON.stringfy(list)&lt;span style=&#34;color:#228b22&#34;&gt;// 数组对象=&amp;gt;字符串
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;// 储存任务到文件
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;			fs.writeFile(dbPath, string+&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;, (error3) =&amp;gt; {
+				&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt;(error3){ console.log(error) }
+			})
+		}
+	})
 }
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; UseC
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/reacthooks/ - </description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;35-优化代码&#34;&gt;3.5 优化代码&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;理清功能需求，从而&lt;strong&gt;面向接口&lt;/strong&gt;编程，最终优化结果：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; db = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./db.js&amp;#39;&lt;/span&gt;)
+module.exports.add = (title) =&amp;gt; {
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 读取之前的任务
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; list = db.read()
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 添加一个title任务
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  list.push({ title, done: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt; })
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 存储任务到文件
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  db.write(list)
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;创建&lt;code&gt;db&lt;/code&gt;对象，内置读写两个接口，并使用&lt;code&gt;Promise&lt;/code&gt;进行封装，db.js:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; db = {
+    &lt;span style=&#34;color:#228b22&#34;&gt;// 读文件接口
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    read(path = dbPath) {&lt;span style=&#34;color:#228b22&#34;&gt;// 指定默认参数
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Promise&lt;/span&gt;((resolve, reject) =&amp;gt; {
+            &lt;span style=&#34;color:#228b22&#34;&gt;// 读取之前的任务
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            fs.readFile(path, { flag: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;a+&amp;#39;&lt;/span&gt; }, (error, data) =&amp;gt; {
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (error) &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; reject(error)
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; list
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;try&lt;/span&gt; {
+                    list = JSON.parse(data.toString())
+
+                } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;catch&lt;/span&gt; (error) {
+                    list = []
+                    &lt;span style=&#34;color:#228b22&#34;&gt;// 这是个异步函数，list不能直接返回，因为这是存在于回调函数中的
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                }
+                resolve(list)&lt;span style=&#34;color:#228b22&#34;&gt;// 如果成功了，则解析并返回list给外面
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            })
+        })
+    },
+	&lt;span style=&#34;color:#228b22&#34;&gt;// 写文件接口
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    write(list, path = dbPath) {&lt;span style=&#34;color:#228b22&#34;&gt;// 指定默认参数
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Promise&lt;/span&gt;((resolve, reject) =&amp;gt; {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; string = JSON.stringify(list)
+            fs.writeFile(path, string + &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;, (error) =&amp;gt; {
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (error)  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; reject(error) 
+                &lt;span style=&#34;color:#228b22&#34;&gt;// return表示如果到这个if里面的话就终止，不用往后面走了
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                resolve()
+            })
+        })
+    }
+}
+module.exports = db
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;4实现其他功能&#34;&gt;4.实现其他功能&lt;/h1&gt;
+&lt;h2 id=&#34;41-清除全部任务&#34;&gt;4.1 清除全部任务&lt;/h2&gt;
+&lt;p&gt;实际上就是写一个空数组将其覆盖即可，同样也是异步的:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;module.exports.clear = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;async&lt;/span&gt; () =&amp;gt; {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;await&lt;/span&gt; db.write([])
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;42-交互列表及交互功能实现&#34;&gt;4.2 交互列表及交互功能实现&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;引入制作命令行交互功能的库：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; inquirer = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;inquirer&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;用户在执行&lt;code&gt;node cli&lt;/code&gt;命令时，进入交互界面，则需要对用户输入的命令条数进行判断
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;process.argv&lt;/code&gt;能够获取到用户输入的参数数组，在&lt;code&gt;cli.js&lt;/code&gt;中对其长度进行判断：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (process.argv.length === &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;) {
+	api.showAll()
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;在&lt;code&gt;index.js&lt;/code&gt;中编写主要实现逻辑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;module.exports.showAll = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;async&lt;/span&gt; () =&amp;gt; {
+    &lt;span style=&#34;color:#228b22&#34;&gt;// 读取之前的任务
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; list = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;await&lt;/span&gt; db.read()
+    &lt;span style=&#34;color:#228b22&#34;&gt;// 打印之前的任务，并变为可操作列表
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    printTasks(list)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;交互列表首页：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; printTasks(list) {
+    inquirer&lt;span style=&#34;color:#228b22&#34;&gt;// 制作控制台交互功能的库
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        .prompt({
+            type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;list&amp;#39;&lt;/span&gt;,
+            name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#228b22&#34;&gt;// 
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;请选择你想操作的任务：&amp;#39;&lt;/span&gt;,
+            choices: [
+                { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;退出&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;-1&amp;#39;&lt;/span&gt; },
+                ...list.map((task, index) =&amp;gt; { &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { name: &lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;task.done ? &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;[x]&amp;#39;&lt;/span&gt; : &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;[_]&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;index + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;task.title&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;, value: index.toString() } }),
+                { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;+创建任务&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;-2&amp;#39;&lt;/span&gt; }
+            ]
+        }).then(answer =&amp;gt; {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; index = &lt;span style=&#34;color:#658b00&#34;&gt;parseInt&lt;/span&gt;(answer.index)&lt;span style=&#34;color:#228b22&#34;&gt;// 把选中的index转换成数字
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (index &amp;gt;= &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;) {
+                &lt;span style=&#34;color:#228b22&#34;&gt;// 说明选中了一个任务，继续进入操作列表
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                askForAction(list, index)
+            } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (index === -&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;) {
+                &lt;span style=&#34;color:#228b22&#34;&gt;// 说明选择的是创建任务
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                askForCreate(list, index)
+            }
+        })
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;选中任务时的操作列表：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; askForAction(list, index) {
+    inquirer.prompt({
+        type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;list&amp;#39;&lt;/span&gt;,
+        name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;action&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#228b22&#34;&gt;// 用户选中后返回的value的名称
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;请选择操作&amp;#39;&lt;/span&gt;,
+        choices: [
+            { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;退出&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;quit&amp;#39;&lt;/span&gt; },
+            { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;已完成&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;markAsDone&amp;#39;&lt;/span&gt; },
+            { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;未完成&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;markAsUnDone&amp;#39;&lt;/span&gt; },
+            { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;修改标题&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;updateTitle&amp;#39;&lt;/span&gt; },
+            { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;删除任务&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;remove&amp;#39;&lt;/span&gt; },
+        ],
+    }).then(answer =&amp;gt; {
+        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;switch&lt;/span&gt; (answer.action) {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;markAsDone&amp;#39;&lt;/span&gt;:
+                list[index].done = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;
+                db.write(list)
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;markAsUnDone&amp;#39;&lt;/span&gt;:
+                list[index].done = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt;
+                db.write(list)
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;updateTitle&amp;#39;&lt;/span&gt;:
+                &lt;span style=&#34;color:#228b22&#34;&gt;// 更新标题需要一个输入框
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                inquirer.prompt({
+                    type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;input&amp;#39;&lt;/span&gt;,
+                    name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;,
+                    message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;设置新标题：&amp;#39;&lt;/span&gt;,
+                    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt;: list[index].title&lt;span style=&#34;color:#228b22&#34;&gt;// 默认值为原标题
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                }).then(answer1 =&amp;gt; {
+                    list[index].title = answer1.title
+                    db.write(list)
+                })
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;remove&amp;#39;&lt;/span&gt;:
+                list.splice(index, &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
+                db.write(list)
+                console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;删除成功！&amp;#39;&lt;/span&gt;)
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;
+        }
+    })
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;选择创建任务时的操作：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; askForCreate(list) {
+    inquirer.prompt({
+        type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;input&amp;#39;&lt;/span&gt;,
+        name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;,
+        message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;输入任务标题：&amp;#39;&lt;/span&gt;
+    }).then(answer =&amp;gt; {
+        list.push({ title: answer.title, done: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt; })
+        db.write(list)
+    })
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;5-发布至npm&#34;&gt;5 发布至npm&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;修改&lt;code&gt;package.json&lt;/code&gt;，添加&lt;code&gt;”bin“&lt;/code&gt;，指定命令行程序最终命令是什么；添加”files“，声明哪些文件在发布时是有用的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;bin&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;:&lt;/span&gt;{
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;#34;t&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;cli.js&amp;#34;&lt;/span&gt;
+}&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;files&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;:&lt;/span&gt;[ &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;*.js&amp;#34;&lt;/span&gt; ]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;在&lt;code&gt;cli.js&lt;/code&gt;第一行加入&lt;code&gt;shebang&lt;/code&gt;，告诉命令行使用什么来运行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;#!/usr/bin/env node
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;正式发布前，需要使用yrm或nrm将淘宝源修改为原始源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;nrm ls
+nrm use npm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;登录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;npm adduser / yarn login
+yarn publish / npm publish
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;下载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;yarn global add node-todo-gsq 
+npm i -g node-todo-gsq
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;卸载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;yarn global remove node-todo-gsq
+npm uninstall -g node-todo-gsq
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;升级&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;yarn upgrade node-todo-gsq
+npm update node-todo-gsq
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;或安装时指定版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;npm i -g node-todo-gsq@0.0.3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/ - </description>
         </item>
     
     
     
         <item>
         <title>React组件生命周期</title>
-        <link>https://gsemir0418.github.io/posts/react%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</link>
-        <pubDate>Thu, 06 May 2021 11:09:51 +0800</pubDate>
+        <link>https://gsemir0418.github.io/posts/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</link>
+        <pubDate>Fri, 25 Jun 2021 11:09:51 +0800</pubDate>
         
-        <guid>https://gsemir0418.github.io/posts/react%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/react%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/ -&lt;h1 id=&#34;1-生命周期的理解&#34;&gt;1 生命周期的理解&lt;/h1&gt;
+        <guid>https://gsemir0418.github.io/posts/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/ -&lt;h1 id=&#34;1-生命周期的理解&#34;&gt;1 生命周期的理解&lt;/h1&gt;
 &lt;h2 id=&#34;11-引出生命周期&#34;&gt;1.1 引出生命周期&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;需求：&lt;/p&gt;
@@ -641,18 +1291,18 @@ export default TodoPage
 &lt;h2 id=&#34;25-新旧生命周期对比&#34;&gt;2.5 新旧生命周期对比&lt;/h2&gt;
 &lt;p&gt;即将在18版本废除三个钩子（willmount，willupdate，willreceiveprops）&lt;/p&gt;
 &lt;p&gt;新增了两个钩子（getDerivedStateFromProps，getSnapshotBeforeUpdate）&lt;/p&gt;
-- https://gsemir0418.github.io/posts/react%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/ - </description>
+- https://gsemir0418.github.io/posts/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/ - </description>
         </item>
     
     
     
         <item>
-        <title>React面向组件编程</title>
-        <link>https://gsemir0418.github.io/posts/react%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/</link>
+        <title>React基础</title>
+        <link>https://gsemir0418.github.io/posts/react%E5%9F%BA%E7%A1%80/</link>
         <pubDate>Thu, 29 Apr 2021 23:11:51 +0800</pubDate>
         
-        <guid>https://gsemir0418.github.io/posts/react%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/react%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/ -&lt;h1 id=&#34;1-react定义组件&#34;&gt;1 React定义组件&lt;/h1&gt;
+        <guid>https://gsemir0418.github.io/posts/react%E5%9F%BA%E7%A1%80/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/react%E5%9F%BA%E7%A1%80/ -&lt;h1 id=&#34;1-react定义组件&#34;&gt;1 React定义组件&lt;/h1&gt;
 &lt;h2 id=&#34;11-函数式组件&#34;&gt;1.1 函数式组件&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;函数式组件适用于简单组件的定义，其首字母需大写，且虚拟DOM元素必须有结束标签&lt;/li&gt;
@@ -1416,165 +2066,7 @@ console.log(sum(&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;sp
     }
 }
 console.log(sum2(&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)(&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;)(&lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;));
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/react%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>React入门</title>
-        <link>https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/</link>
-        <pubDate>Sat, 20 Mar 2021 23:11:51 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/ -&lt;h1 id=&#34;1-react基本使用&#34;&gt;1. React基本使用&lt;/h1&gt;
-&lt;h2 id=&#34;11-js库引入注意引入顺序&#34;&gt;1.1 js库引入（注意引入顺序）&lt;/h2&gt;
-&lt;p&gt;1.react.development.js：react核心库&lt;/p&gt;
-&lt;p&gt;2.react-dom.development.js：提供操作DOM的react扩展库&lt;/p&gt;
-&lt;p&gt;3.babel.min.js：解析JSX语法代码转为js代码的库&lt;/p&gt;
-&lt;h2 id=&#34;12-虚拟dom的创建&#34;&gt;1.2 虚拟DOM的创建&lt;/h2&gt;
-&lt;h3 id=&#34;121-关于虚拟dom&#34;&gt;1.2.1 关于虚拟DOM&lt;/h3&gt;
-&lt;p&gt;（1）本质上是object类型的&lt;strong&gt;一般对象&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;（2）虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是react内部在用，无需真实DOM上那么多属性&lt;/p&gt;
-&lt;p&gt;（3）虚拟DOM最终会被React转化为真实DOM，呈现在页面上&lt;/p&gt;
-&lt;h3 id=&#34;122-创建的两种方式&#34;&gt;1.2.2 创建的两种方式&lt;/h3&gt;
-&lt;p&gt;（1）纯js方式&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; VDOM = React.createElement(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;标签名&amp;#39;&lt;/span&gt;,{标签属性},&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;标签内容&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; VDOM = React.createElement(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;h1&amp;#39;&lt;/span&gt;,{id:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;},&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;React.createElement(&amp;#39;&lt;/span&gt;span&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;,{},&amp;#39;&lt;/span&gt;HELLO REACT!&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;)&amp;#39;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;​		可以看到，若遇标签嵌套情况，利用纯js来写非常复杂。&lt;/p&gt;
-&lt;p&gt;（2）JSX方式&lt;/p&gt;
-&lt;p&gt;​		是react 定义的一种类似于 XML 的 JS 扩展语法: JS + XML。本质是React.createElement(&amp;lsquo;标签名&amp;rsquo;,{标签属性},&amp;lsquo;标签内容&amp;rsquo;)方法的语法糖，极大地简化了创建虚拟DOM过程。&lt;strong&gt;在利用JSX创建之前，需要将&lt;!-- raw HTML omitted --&gt;标签的type属性由默认的text/javascript改为text/babel&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;1）JSX创建虚拟DOM的写法如下：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; VDOM = (
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h1&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;id&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;title&amp;#34;&lt;/span&gt;&amp;gt;
-    	&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;span&lt;/span&gt;&amp;gt;hello,react&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;span&lt;/span&gt;&amp;gt;
-    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h1&lt;/span&gt;&amp;gt;
-)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2）&lt;strong&gt;JSX语法&lt;/strong&gt;如下：&lt;/p&gt;
-&lt;p&gt;1.遇到 &amp;lt;开头的代码，以标签的语法解析：html 同名标签转换为 html 同名元素，其它标签需要特别解析：若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。&lt;/p&gt;
-&lt;p&gt;2.遇到以 { 开头的代码，以 JS 语法解析: &lt;strong&gt;标签中的 js 表达式必须用{ }包含&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;3.&lt;strong&gt;只有一个根标签&lt;/strong&gt;，若想在虚拟DOM中再新增标签，外面需要统一包一个标签&lt;/p&gt;
-&lt;p&gt;4.标签必须&lt;strong&gt;闭合&lt;/strong&gt;（自闭合也行）&lt;/p&gt;
-&lt;p&gt;5.标签内样式的类名指定不要用class，要用&lt;strong&gt;className&lt;/strong&gt;，例如&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;6.标签中内联样式要用**style={{key:value}}**的形式去写，多个单词的要用小驼峰,例如style={{fontSize:&amp;lsquo;29px&amp;rsquo;}}&lt;/p&gt;
-&lt;h2 id=&#34;13-渲染虚拟dom&#34;&gt;1.3 渲染虚拟DOM&lt;/h2&gt;
-&lt;p&gt;基本语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;ReactDOM.render(VirtualDOM,containerDOM)
-ReactDOM.render(VDOM,&lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;14-模块与组件的理解&#34;&gt;1.4 模块与组件的理解&lt;/h2&gt;
-&lt;p&gt;模块指的是向外提供特定功能的js程序，一般就是一个js文件，模块化是为了更好地复用js，简化js的编写，提高js运行效率。模块化只针对js；而组件指的是用来实现局部功能效果的代码和资源的集合（html、css、js、image、video等），组件化是为了复用编码，简化项目编码，提高运行效率&lt;/p&gt;
-&lt;p&gt;1.5 jsx练习&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;.%5Cimage-20210321123104572.png&#34; alt=&#34;image-20210321123104572&#34;&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;body&lt;/span&gt;&amp;gt;
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;id&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;test&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;src&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;../js/react.development.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;src&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;../js/react-dom.development.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;src&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;../js/babel.min.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
-
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;type&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;text/babel&amp;#34;&lt;/span&gt;&amp;gt;
-    &lt;span style=&#34;color:#228b22&#34;&gt;/*
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;        一定注意区分【js语句（代码）】与【js表达式】
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;            1.表达式：一个表达式会产生一个值，可以放任何一个需要值的地方
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                下面这些都是表达式
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                a
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                a+b
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                demo(1)
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                arr.map()//用来处理数组
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                function test(){}//定义方法
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;            2.语句（代码）：控制代码走向，没有值
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                if(){}
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                for(){}
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                switch(){case}
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;    */&lt;/span&gt;
-        &lt;span style=&#34;color:#228b22&#34;&gt;//模拟一些数据
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; data = [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Angular&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Vue&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;React&amp;#39;&lt;/span&gt;]
-        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; data2 = [&amp;lt;li&amp;gt;Angular&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/li&amp;gt;, &amp;lt;li&amp;gt;Vue&amp;lt;/li&amp;gt;, &amp;lt;li&amp;gt;React&amp;lt;/li&amp;gt;]//React可以自动遍历数组&lt;/span&gt;
-        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = {name1:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Angular&amp;#39;&lt;/span&gt;,name2:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Vue&amp;#39;&lt;/span&gt;,name3:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;React&amp;#39;&lt;/span&gt;}&lt;span style=&#34;color:#228b22&#34;&gt;//对象不能作为React的节点
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#228b22&#34;&gt;//jsx创建虚拟DOM
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; VDOM = (
-            &amp;lt;div&amp;gt;
-                &amp;lt;h1&amp;gt;前端js框架列表&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/h1&amp;gt;&lt;/span&gt;
-                &amp;lt;ul&amp;gt;
-                    {
-                        data.map((a,index)=&amp;gt;{
-                            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &amp;lt;li key={index}&amp;gt;{a}&amp;lt;&lt;span style=&#34;color:#1c7e71&#34;&gt;/li&amp;gt;/&lt;/span&gt;/虚拟dom必须有唯一标识key
-                        })
-                    }
-                &amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/ul&amp;gt;&lt;/span&gt;
-            &amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/div&amp;gt;&lt;/span&gt;
-        )
-        ReactDOM.render(VDOM, &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
-    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
-&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;body&lt;/span&gt;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;补充&#34;&gt;补充：&lt;/h2&gt;
-&lt;p&gt;1）早期传输数据的两种格式&lt;/p&gt;
-&lt;p&gt;​		最早使用XML来存储与传输数据的，XML即扩展标记语言 (Extensible Markup Language, XML) ，用于标记电子文件使其具有结构性的标记语言，可以用来标记数据、定义数据类型，是一种允许用户对自己的标记语言进行定义的源语言。典型写法如下&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;student&amp;gt;&lt;/span&gt;
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Tom&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/student&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;​		后面改为利用JSON格式。JSON(JavaScript Object Notation)一种轻量级的数据交换格式，具有良好的可读和便于快速编写的特性。可在不同平台之间进行数据交换。主要是得益于JSON的两个重要方法：JSON.parse()和JSON.stringfy()，分别用来快速将JSON中的数据解析为数组和对象，以及快速把JS中的数组和对象转化为JSON字符串&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&amp;#39;name&amp;#39;:&amp;#39;gsq&amp;#39;,&amp;#39;age&amp;#39;:26&lt;/span&gt;}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2）XML和JSON的优缺点对比&lt;/p&gt;
-&lt;p&gt;(1)可读性两者基本相同，一边是建议的语法，一边是规范的标签形式，XML可读性较好些；
-(2)可扩展性方面差不多；
-(3)编码难度方面，不借助工具的话，XML较为复杂；
-(4)解码难度方面，XML的解析得考虑子节点父节点，让人头昏眼花，而JSON的解析难度几乎为0。
-(5)流行度方面，XML已经被业界广泛的使用，而JSON才刚刚开始，但是在Ajax这个特定的领域，未来的发展一定是XML让位于JSON。到时Ajax应该变成Ajaj(Asynchronous Javascript and JSON)了；
-(7)数据体积方面，JSON相对于XML来讲，数据的体积小，传递的速度更快些；
-(8)数据交互方面，JSON与JavaScript的交互更加方便，更容易解析处理，更好的数据交互； 
-(9)数据描述方面，JSON对数据的描述性比XML较差；
-(10)传输速度方面， JSON的速度要远远快于XML。&lt;/p&gt;
-- https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>React简介</title>
-        <link>https://gsemir0418.github.io/posts/react%E7%AE%80%E4%BB%8B/</link>
-        <pubDate>Thu, 18 Feb 2021 21:18:51 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/react%E7%AE%80%E4%BB%8B/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/react%E7%AE%80%E4%BB%8B/ -&lt;h1 id=&#34;1react是什么&#34;&gt;1.React是什么&lt;/h1&gt;
-&lt;p&gt;用于构建&lt;strong&gt;用户界面&lt;/strong&gt;的JS库（操作DOM呈现页面）&lt;/p&gt;
-&lt;p&gt;是一个将数据渲染为HTML视图的开源的JavaScript库&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;官网：https://react.docschina.org/&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;2谁开发的&#34;&gt;2.谁开发的&lt;/h1&gt;
-&lt;p&gt;Facebook&lt;/p&gt;
-&lt;h1 id=&#34;3为什么要学&#34;&gt;3.为什么要学&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;原生JS操作DOM&lt;strong&gt;繁琐、效率低&lt;/strong&gt;（&lt;strong&gt;DOM-API操作UI&lt;/strong&gt;）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;使用js直接操作DOM，浏览器会进行大量的&lt;strong&gt;重绘重排&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;原生js没有&lt;strong&gt;组件化&lt;/strong&gt;的编码方案，代码复用率低&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;模块化&lt;/strong&gt;是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;4react的特点&#34;&gt;4.React的特点&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;用&lt;strong&gt;组件化模式&lt;/strong&gt;、&lt;strong&gt;声明式编码&lt;/strong&gt;，提高开发效率及组件复用率&lt;/p&gt;
-&lt;p&gt;之前使用的是&lt;strong&gt;命令式编码&lt;/strong&gt;，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;在&lt;strong&gt;React Native&lt;/strong&gt;中可以使用React语法进行&lt;strong&gt;移动端&lt;/strong&gt;开发。&lt;/p&gt;
-&lt;p&gt;React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;使用&lt;strong&gt;虚拟DOM&lt;/strong&gt;+优秀的&lt;strong&gt;Diffing算法&lt;/strong&gt;，尽量减少与真实DOM的交互&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程&lt;/p&gt;
-- https://gsemir0418.github.io/posts/react%E7%AE%80%E4%BB%8B/ - </description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/react%E5%9F%BA%E7%A1%80/ - </description>
         </item>
     
     

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head>
-<title>Hook</title>
+<title>初识Hooks</title>
 
 
 
@@ -16,12 +16,12 @@
 
 
 
-<meta property="og:title" content="Hook" />
+<meta property="og:title" content="初识Hooks" />
 <meta property="og:description" content="1 Hook简介 1.1 基本概念 Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使⽤ state 以及其他的 React 特性。
 1.2 React Hooks优势   函数组件不能使⽤state，⼀般只⽤于⼀些简单⽆交互的组件，⽤作信息展示，即我们上⾯说的傻⽠组件使⽤，如果需要交互更改状态等复杂逻辑时就需要使⽤class组件了
 React Hooks让我们更好的拥抱函数式编程，让函数式组件也能使⽤state功能，因为函数式组件⽐class组件更简洁好⽤，因为React Hooks的出现，相信未来我们会更多的使⽤函数式组件
   副作⽤问题
-我们⼀般称数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤由于React Hooks的出现，我们可以使⽤useEffffect来处理组件副作⽤问题，所以我们的函数式组件也能进⾏副作⽤逻辑的处理了
+我们⼀般称数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤由于React Hooks的出现，我们可以使⽤useEffect来处理组件副作⽤问题，所以我们的函数式组件也能进⾏副作⽤逻辑的处理了
   有状态的逻辑重⽤组件
   复杂的状态管理
 之前我们使⽤redux、dva、mobx第三⽅状态管理器来进⾏复杂的状态管理
@@ -32,8 +32,8 @@ React Hooks让我们更好的拥抱函数式编程，让函数式组件也能使
 2.2 基本使用 const [state,setState]=useState(initState)  state是要设置的状态 setState是更新state的⽅法，只是⼀个⽅法名，可以随意更改 initState是初始的state，可以是随意的数据类型，也可以是回调函数，但是函数必须是有返回值  2.3 实际应用 import React, { useState } from &#39;react&#39; export default function UseS() { const [count, setState] = useState(0) return ( &lt;div&gt; &lt;div&gt;你点击了{count}次&lt;/div&gt; &lt;button onClick={() =&gt; setState(count &#43; 1)}&gt;点 击&lt;/button&gt; &lt;/div&gt; ) }  3 useEffect 3." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/reacthooks/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-05-07T23:07:51&#43;08:00" />
-<meta property="article:modified_time" content="2021-05-07T23:07:51&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-06-25T23:07:51&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-25T23:07:51&#43;08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -41,12 +41,12 @@ React Hooks让我们更好的拥抱函数式编程，让函数式组件也能使
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Hook"/>
+<meta name="twitter:title" content="初识Hooks"/>
 <meta name="twitter:description" content="1 Hook简介 1.1 基本概念 Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使⽤ state 以及其他的 React 特性。
 1.2 React Hooks优势   函数组件不能使⽤state，⼀般只⽤于⼀些简单⽆交互的组件，⽤作信息展示，即我们上⾯说的傻⽠组件使⽤，如果需要交互更改状态等复杂逻辑时就需要使⽤class组件了
 React Hooks让我们更好的拥抱函数式编程，让函数式组件也能使⽤state功能，因为函数式组件⽐class组件更简洁好⽤，因为React Hooks的出现，相信未来我们会更多的使⽤函数式组件
   副作⽤问题
-我们⼀般称数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤由于React Hooks的出现，我们可以使⽤useEffffect来处理组件副作⽤问题，所以我们的函数式组件也能进⾏副作⽤逻辑的处理了
+我们⼀般称数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤由于React Hooks的出现，我们可以使⽤useEffect来处理组件副作⽤问题，所以我们的函数式组件也能进⾏副作⽤逻辑的处理了
   有状态的逻辑重⽤组件
   复杂的状态管理
 之前我们使⽤redux、dva、mobx第三⽅状态管理器来进⾏复杂的状态管理
@@ -919,18 +919,18 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
             >
                 <div class="post-title">
-                    Hook
+                    初识Hooks
                     
                     <div class="post-meta">
                         
                         <time itemprop="datePublished">
-                            2021-05-07 23:07
+                            2021-06-25 23:07
                         </time>
                         
 
                         
                             <i class="material-icons" style="">folder</i>
-                                <a href="/categories/react%E5%85%A8%E5%AE%B6%E6%A1%B6">React全家桶</a>
+                                <a href="/categories/b%E7%AB%99react%E7%AC%94%E8%AE%B0">B站React笔记</a>
                                 &nbsp;
                         
 
@@ -940,7 +940,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                                 <a href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
                                 &nbsp;
                             
-                                <a href="/tags/react">React</a>
+                                <a href="/tags/react%E5%9F%BA%E7%A1%80">React基础</a>
                                 &nbsp;
                             
                         
@@ -964,7 +964,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </li>
 <li>
 <p>副作⽤问题</p>
-<p>我们⼀般称数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤由于React Hooks的出现，我们可以使⽤useEffffect来处理组件副作⽤问题，所以我们的函数式组件也能进⾏副作⽤逻辑的处理了</p>
+<p>我们⼀般称数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤由于React Hooks的出现，我们可以使⽤useEffect来处理组件副作⽤问题，所以我们的函数式组件也能进⾏副作⽤逻辑的处理了</p>
 </li>
 <li>
 <p>有状态的逻辑重⽤组件</p>
@@ -1005,9 +1005,9 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <h1 id="3-useeffect">3 useEffect</h1>
 <h2 id="31-定义">3.1 定义</h2>
 <ul>
-<li>useEffffect：副作⽤处理钩⼦</li>
-<li>数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤。⽽useEffffect就是为了处理这些副作⽤⽽⽣的</li>
-<li>useEffffect也是componentDidMount、componentDidUpdate和componentWillUnmount这⼏个⽣命周期⽅法的统⼀</li>
+<li>useEffect：副作⽤处理钩⼦</li>
+<li>数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤。⽽useEffect就是为了处理这些副作⽤⽽⽣的</li>
+<li>useEffect也是componentDidMount、componentDidUpdate和componentWillUnmount这⼏个⽣命周期⽅法的统⼀</li>
 </ul>
 <h2 id="32-基本使用">3.2 基本使用</h2>
 <div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">useEffect(callback,array)
@@ -1020,11 +1020,11 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </span><span style="color:#228b22"></span>		<span style="color:#228b22">//类似于componentWillUnmount，组件渲染和组件卸载前执⾏的代码
 </span><span style="color:#228b22"></span>	}
 },[array])
-</code></pre></div><p>array(可选参数)：数组，⽤于控制useEffffect的执⾏。分三种情况</p>
+</code></pre></div><p>array(可选参数)：数组，⽤于控制useEffect的执⾏。分三种情况</p>
 <ul>
 <li>空数组，则只会执⾏⼀次（即初次渲染render）,相当于componentDidMount</li>
-<li>⾮空数组，useEffffect会在数组发⽣改变后执⾏，相当于componentDidUpdate</li>
-<li>不填array这个数组，useEffffect每次渲染都会执⾏</li>
+<li>⾮空数组，useEffect会在数组发⽣改变后执⾏，相当于componentDidUpdate</li>
+<li>不填array这个数组，useEffect每次渲染都会执⾏</li>
 </ul>
 <h2 id="33-实际应用">3.3 实际应用</h2>
 <div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">import</span> { useState, useEffect } from <span style="color:#cd5555">&#39;react&#39;</span>
@@ -1074,7 +1074,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </code></pre></div>
                     
                     <HR width="100%" id="EOF">
-		    <p style="color:#777;">最后修改于 2021-05-07</p>
+		    <p style="color:#777;">最后修改于 2021-06-25</p>
                     
                 </div>
             </div>
@@ -1083,14 +1083,14 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
             <nav class="post-pagination">
 
                 
-                <a class="newer-posts" href="https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E5%AE%9E%E6%88%98/">
-			下回<br>可视化大屏实战
+                <a class="newer-posts" href="https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/">
+			下回<br>React入门
                 </a>
                 
                 
                 
-                <a class="older-posts" href="https://gsemir0418.github.io/posts/react%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
-			上回<br>React组件生命周期
+                <a class="older-posts" href="https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/">
+			上回<br>antdpro&#43;umi实战
                 </a>
                 
             </nav>

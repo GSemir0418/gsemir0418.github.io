@@ -17,28 +17,34 @@
 
 
 <meta property="og:title" content="React入门" />
-<meta property="og:description" content="1. React基本使用 1.1 js库引入（注意引入顺序） 1.react.development.js：react核心库
+<meta property="og:description" content="1.React是什么 用于构建用户界面的JS库（操作DOM呈现页面）
+是一个将数据渲染为HTML视图的开源的JavaScript库
+ 官网：https://react.docschina.org/
+ 2.谁开发的 Facebook
+3.为什么要学   原生JS操作DOM繁琐、效率低（DOM-API操作UI）
+  使用js直接操作DOM，浏览器会进行大量的重绘重排
+  原生js没有组件化的编码方案，代码复用率低
+模块化是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。
+  4.React的特点   用组件化模式、声明式编码，提高开发效率及组件复用率
+之前使用的是命令式编码，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。
+  在React Native中可以使用React语法进行移动端开发。
+React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。
+  使用虚拟DOM&#43;优秀的Diffing算法，尽量减少与真实DOM的交互
+  ​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程
+5. React基本使用 5.1 js库引入（注意引入顺序） 1.react.development.js：react核心库
 2.react-dom.development.js：提供操作DOM的react扩展库
 3.babel.min.js：解析JSX语法代码转为js代码的库
-1.2 虚拟DOM的创建 1.2.1 关于虚拟DOM （1）本质上是object类型的一般对象
+5.2 虚拟DOM的创建 5.2.1 关于虚拟DOM （1）本质上是object类型的一般对象
 （2）虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是react内部在用，无需真实DOM上那么多属性
 （3）虚拟DOM最终会被React转化为真实DOM，呈现在页面上
-1.2.2 创建的两种方式 （1）纯js方式
+5.2.2 创建的两种方式 （1）纯js方式
 const VDOM = React.createElement(&#39;标签名&#39;,{标签属性},&#39;标签内容&#39;) const VDOM = React.createElement(&#39;h1&#39;,{id:&#39;title&#39;},&#39;React.createElement(&#39;span&#39;,{},&#39;HELLO REACT!&#39;)&#39;) ​	可以看到，若遇标签嵌套情况，利用纯js来写非常复杂。
 （2）JSX方式
-​	是react 定义的一种类似于 XML 的 JS 扩展语法: JS &#43; XML。本质是React.createElement(&lsquo;标签名&rsquo;,{标签属性},&lsquo;标签内容&rsquo;)方法的语法糖，极大地简化了创建虚拟DOM过程。在利用JSX创建之前，需要将标签的type属性由默认的text/javascript改为text/babel。
-1）JSX创建虚拟DOM的写法如下：
-const VDOM = ( &lt;h1 id=&#34;title&#34;&gt; &lt;span&gt;hello,react&lt;/span&gt; &lt;/h1&gt; ) 2）JSX语法如下：
-1.遇到 &lt;开头的代码，以标签的语法解析：html 同名标签转换为 html 同名元素，其它标签需要特别解析：若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。
-2.遇到以 { 开头的代码，以 JS 语法解析: 标签中的 js 表达式必须用{ }包含
-3.只有一个根标签，若想在虚拟DOM中再新增标签，外面需要统一包一个标签
-4.标签必须闭合（自闭合也行）
-5.标签内样式的类名指定不要用class，要用className，例如6.标签中内联样式要用**style={{key:value}}**的形式去写，多个单词的要用小驼峰,例如style={{fontSize:&lsquo;29px&rsquo;}}
-1.3 渲染虚拟DOM 基本语法：" />
+​	是react 定义的一种类似于 XML 的 JS 扩展语法: JS &#43; XML。本质是React." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-03-20T23:11:51&#43;08:00" />
-<meta property="article:modified_time" content="2021-03-20T23:11:51&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-06-25T23:11:51&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-25T23:11:51&#43;08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -47,24 +53,30 @@ const VDOM = ( &lt;h1 id=&#34;title&#34;&gt; &lt;span&gt;hello,react&lt;/span&gt
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="React入门"/>
-<meta name="twitter:description" content="1. React基本使用 1.1 js库引入（注意引入顺序） 1.react.development.js：react核心库
+<meta name="twitter:description" content="1.React是什么 用于构建用户界面的JS库（操作DOM呈现页面）
+是一个将数据渲染为HTML视图的开源的JavaScript库
+ 官网：https://react.docschina.org/
+ 2.谁开发的 Facebook
+3.为什么要学   原生JS操作DOM繁琐、效率低（DOM-API操作UI）
+  使用js直接操作DOM，浏览器会进行大量的重绘重排
+  原生js没有组件化的编码方案，代码复用率低
+模块化是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。
+  4.React的特点   用组件化模式、声明式编码，提高开发效率及组件复用率
+之前使用的是命令式编码，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。
+  在React Native中可以使用React语法进行移动端开发。
+React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。
+  使用虚拟DOM&#43;优秀的Diffing算法，尽量减少与真实DOM的交互
+  ​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程
+5. React基本使用 5.1 js库引入（注意引入顺序） 1.react.development.js：react核心库
 2.react-dom.development.js：提供操作DOM的react扩展库
 3.babel.min.js：解析JSX语法代码转为js代码的库
-1.2 虚拟DOM的创建 1.2.1 关于虚拟DOM （1）本质上是object类型的一般对象
+5.2 虚拟DOM的创建 5.2.1 关于虚拟DOM （1）本质上是object类型的一般对象
 （2）虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是react内部在用，无需真实DOM上那么多属性
 （3）虚拟DOM最终会被React转化为真实DOM，呈现在页面上
-1.2.2 创建的两种方式 （1）纯js方式
+5.2.2 创建的两种方式 （1）纯js方式
 const VDOM = React.createElement(&#39;标签名&#39;,{标签属性},&#39;标签内容&#39;) const VDOM = React.createElement(&#39;h1&#39;,{id:&#39;title&#39;},&#39;React.createElement(&#39;span&#39;,{},&#39;HELLO REACT!&#39;)&#39;) ​	可以看到，若遇标签嵌套情况，利用纯js来写非常复杂。
 （2）JSX方式
-​	是react 定义的一种类似于 XML 的 JS 扩展语法: JS &#43; XML。本质是React.createElement(&lsquo;标签名&rsquo;,{标签属性},&lsquo;标签内容&rsquo;)方法的语法糖，极大地简化了创建虚拟DOM过程。在利用JSX创建之前，需要将标签的type属性由默认的text/javascript改为text/babel。
-1）JSX创建虚拟DOM的写法如下：
-const VDOM = ( &lt;h1 id=&#34;title&#34;&gt; &lt;span&gt;hello,react&lt;/span&gt; &lt;/h1&gt; ) 2）JSX语法如下：
-1.遇到 &lt;开头的代码，以标签的语法解析：html 同名标签转换为 html 同名元素，其它标签需要特别解析：若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。
-2.遇到以 { 开头的代码，以 JS 语法解析: 标签中的 js 表达式必须用{ }包含
-3.只有一个根标签，若想在虚拟DOM中再新增标签，外面需要统一包一个标签
-4.标签必须闭合（自闭合也行）
-5.标签内样式的类名指定不要用class，要用className，例如6.标签中内联样式要用**style={{key:value}}**的形式去写，多个单词的要用小驼峰,例如style={{fontSize:&lsquo;29px&rsquo;}}
-1.3 渲染虚拟DOM 基本语法："/>
+​	是react 定义的一种类似于 XML 的 JS 扩展语法: JS &#43; XML。本质是React."/>
 
 
 
@@ -234,8 +246,80 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#1-react%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8" onclick="onNavClick(`#1-react基本使用-nav`)" id="1-react基本使用-nav">
-									1. React基本使用
+								<a href="#1react%e6%98%af%e4%bb%80%e4%b9%88" onclick="onNavClick(`#1react是什么-nav`)" id="1react是什么-nav">
+									1.React是什么
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#2%e8%b0%81%e5%bc%80%e5%8f%91%e7%9a%84" onclick="onNavClick(`#2谁开发的-nav`)" id="2谁开发的-nav">
+									2.谁开发的
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#3%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e5%ad%a6" onclick="onNavClick(`#3为什么要学-nav`)" id="3为什么要学-nav">
+									3.为什么要学
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4react%e7%9a%84%e7%89%b9%e7%82%b9" onclick="onNavClick(`#4react的特点-nav`)" id="4react的特点-nav">
+									4.React的特点
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#5-react%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8" onclick="onNavClick(`#5-react基本使用-nav`)" id="5-react基本使用-nav">
+									5. React基本使用
 								</a>
 							</li>
 						
@@ -256,8 +340,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#11-js%e5%ba%93%e5%bc%95%e5%85%a5%e6%b3%a8%e6%84%8f%e5%bc%95%e5%85%a5%e9%a1%ba%e5%ba%8f" onclick="onNavClick(`#11-js库引入注意引入顺序-nav`)" id="11-js库引入注意引入顺序-nav">
-									1.1 js库引入（注意引入顺序）
+								<a href="#51-js%e5%ba%93%e5%bc%95%e5%85%a5%e6%b3%a8%e6%84%8f%e5%bc%95%e5%85%a5%e9%a1%ba%e5%ba%8f" onclick="onNavClick(`#51-js库引入注意引入顺序-nav`)" id="51-js库引入注意引入顺序-nav">
+									5.1 js库引入（注意引入顺序）
 								</a>
 							</li>
 						
@@ -274,8 +358,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#12-%e8%99%9a%e6%8b%9fdom%e7%9a%84%e5%88%9b%e5%bb%ba" onclick="onNavClick(`#12-虚拟dom的创建-nav`)" id="12-虚拟dom的创建-nav">
-									1.2 虚拟DOM的创建
+								<a href="#52-%e8%99%9a%e6%8b%9fdom%e7%9a%84%e5%88%9b%e5%bb%ba" onclick="onNavClick(`#52-虚拟dom的创建-nav`)" id="52-虚拟dom的创建-nav">
+									5.2 虚拟DOM的创建
 								</a>
 							</li>
 						
@@ -296,8 +380,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#121-%e5%85%b3%e4%ba%8e%e8%99%9a%e6%8b%9fdom" onclick="onNavClick(`#121-关于虚拟dom-nav`)" id="121-关于虚拟dom-nav">
-									1.2.1 关于虚拟DOM
+								<a href="#521-%e5%85%b3%e4%ba%8e%e8%99%9a%e6%8b%9fdom" onclick="onNavClick(`#521-关于虚拟dom-nav`)" id="521-关于虚拟dom-nav">
+									5.2.1 关于虚拟DOM
 								</a>
 							</li>
 						
@@ -314,8 +398,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#122-%e5%88%9b%e5%bb%ba%e7%9a%84%e4%b8%a4%e7%a7%8d%e6%96%b9%e5%bc%8f" onclick="onNavClick(`#122-创建的两种方式-nav`)" id="122-创建的两种方式-nav">
-									1.2.2 创建的两种方式
+								<a href="#522-%e5%88%9b%e5%bb%ba%e7%9a%84%e4%b8%a4%e7%a7%8d%e6%96%b9%e5%bc%8f" onclick="onNavClick(`#522-创建的两种方式-nav`)" id="522-创建的两种方式-nav">
+									5.2.2 创建的两种方式
 								</a>
 							</li>
 						
@@ -336,8 +420,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#13-%e6%b8%b2%e6%9f%93%e8%99%9a%e6%8b%9fdom" onclick="onNavClick(`#13-渲染虚拟dom-nav`)" id="13-渲染虚拟dom-nav">
-									1.3 渲染虚拟DOM
+								<a href="#53-%e6%b8%b2%e6%9f%93%e8%99%9a%e6%8b%9fdom" onclick="onNavClick(`#53-渲染虚拟dom-nav`)" id="53-渲染虚拟dom-nav">
+									5.3 渲染虚拟DOM
 								</a>
 							</li>
 						
@@ -354,8 +438,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#14-%e6%a8%a1%e5%9d%97%e4%b8%8e%e7%bb%84%e4%bb%b6%e7%9a%84%e7%90%86%e8%a7%a3" onclick="onNavClick(`#14-模块与组件的理解-nav`)" id="14-模块与组件的理解-nav">
-									1.4 模块与组件的理解
+								<a href="#54-%e6%a8%a1%e5%9d%97%e4%b8%8e%e7%bb%84%e4%bb%b6%e7%9a%84%e7%90%86%e8%a7%a3" onclick="onNavClick(`#54-模块与组件的理解-nav`)" id="54-模块与组件的理解-nav">
+									5.4 模块与组件的理解
 								</a>
 							</li>
 						
@@ -477,8 +561,80 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#1-react%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8" onclick="onNavClick(`#1-react基本使用-nav`)" id="1-react基本使用-nav">
-									1. React基本使用
+								<a href="#1react%e6%98%af%e4%bb%80%e4%b9%88" onclick="onNavClick(`#1react是什么-nav`)" id="1react是什么-nav">
+									1.React是什么
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#2%e8%b0%81%e5%bc%80%e5%8f%91%e7%9a%84" onclick="onNavClick(`#2谁开发的-nav`)" id="2谁开发的-nav">
+									2.谁开发的
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#3%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e5%ad%a6" onclick="onNavClick(`#3为什么要学-nav`)" id="3为什么要学-nav">
+									3.为什么要学
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4react%e7%9a%84%e7%89%b9%e7%82%b9" onclick="onNavClick(`#4react的特点-nav`)" id="4react的特点-nav">
+									4.React的特点
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#5-react%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8" onclick="onNavClick(`#5-react基本使用-nav`)" id="5-react基本使用-nav">
+									5. React基本使用
 								</a>
 							</li>
 						
@@ -499,8 +655,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#11-js%e5%ba%93%e5%bc%95%e5%85%a5%e6%b3%a8%e6%84%8f%e5%bc%95%e5%85%a5%e9%a1%ba%e5%ba%8f" onclick="onNavClick(`#11-js库引入注意引入顺序-nav`)" id="11-js库引入注意引入顺序-nav">
-									1.1 js库引入（注意引入顺序）
+								<a href="#51-js%e5%ba%93%e5%bc%95%e5%85%a5%e6%b3%a8%e6%84%8f%e5%bc%95%e5%85%a5%e9%a1%ba%e5%ba%8f" onclick="onNavClick(`#51-js库引入注意引入顺序-nav`)" id="51-js库引入注意引入顺序-nav">
+									5.1 js库引入（注意引入顺序）
 								</a>
 							</li>
 						
@@ -517,8 +673,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#12-%e8%99%9a%e6%8b%9fdom%e7%9a%84%e5%88%9b%e5%bb%ba" onclick="onNavClick(`#12-虚拟dom的创建-nav`)" id="12-虚拟dom的创建-nav">
-									1.2 虚拟DOM的创建
+								<a href="#52-%e8%99%9a%e6%8b%9fdom%e7%9a%84%e5%88%9b%e5%bb%ba" onclick="onNavClick(`#52-虚拟dom的创建-nav`)" id="52-虚拟dom的创建-nav">
+									5.2 虚拟DOM的创建
 								</a>
 							</li>
 						
@@ -539,8 +695,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#121-%e5%85%b3%e4%ba%8e%e8%99%9a%e6%8b%9fdom" onclick="onNavClick(`#121-关于虚拟dom-nav`)" id="121-关于虚拟dom-nav">
-									1.2.1 关于虚拟DOM
+								<a href="#521-%e5%85%b3%e4%ba%8e%e8%99%9a%e6%8b%9fdom" onclick="onNavClick(`#521-关于虚拟dom-nav`)" id="521-关于虚拟dom-nav">
+									5.2.1 关于虚拟DOM
 								</a>
 							</li>
 						
@@ -557,8 +713,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#122-%e5%88%9b%e5%bb%ba%e7%9a%84%e4%b8%a4%e7%a7%8d%e6%96%b9%e5%bc%8f" onclick="onNavClick(`#122-创建的两种方式-nav`)" id="122-创建的两种方式-nav">
-									1.2.2 创建的两种方式
+								<a href="#522-%e5%88%9b%e5%bb%ba%e7%9a%84%e4%b8%a4%e7%a7%8d%e6%96%b9%e5%bc%8f" onclick="onNavClick(`#522-创建的两种方式-nav`)" id="522-创建的两种方式-nav">
+									5.2.2 创建的两种方式
 								</a>
 							</li>
 						
@@ -579,8 +735,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#13-%e6%b8%b2%e6%9f%93%e8%99%9a%e6%8b%9fdom" onclick="onNavClick(`#13-渲染虚拟dom-nav`)" id="13-渲染虚拟dom-nav">
-									1.3 渲染虚拟DOM
+								<a href="#53-%e6%b8%b2%e6%9f%93%e8%99%9a%e6%8b%9fdom" onclick="onNavClick(`#53-渲染虚拟dom-nav`)" id="53-渲染虚拟dom-nav">
+									5.3 渲染虚拟DOM
 								</a>
 							</li>
 						
@@ -597,8 +753,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#14-%e6%a8%a1%e5%9d%97%e4%b8%8e%e7%bb%84%e4%bb%b6%e7%9a%84%e7%90%86%e8%a7%a3" onclick="onNavClick(`#14-模块与组件的理解-nav`)" id="14-模块与组件的理解-nav">
-									1.4 模块与组件的理解
+								<a href="#54-%e6%a8%a1%e5%9d%97%e4%b8%8e%e7%bb%84%e4%bb%b6%e7%9a%84%e7%90%86%e8%a7%a3" onclick="onNavClick(`#54-模块与组件的理解-nav`)" id="54-模块与组件的理解-nav">
+									5.4 模块与组件的理解
 								</a>
 							</li>
 						
@@ -686,13 +842,13 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                     <div class="post-meta">
                         
                         <time itemprop="datePublished">
-                            2021-03-20 23:11
+                            2021-06-25 23:11
                         </time>
                         
 
                         
                             <i class="material-icons" style="">folder</i>
-                                <a href="/categories/react%E5%85%A8%E5%AE%B6%E6%A1%B6">React全家桶</a>
+                                <a href="/categories/b%E7%AB%99react%E7%AC%94%E8%AE%B0">B站React笔记</a>
                                 &nbsp;
                         
 
@@ -702,7 +858,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                                 <a href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
                                 &nbsp;
                             
-                                <a href="/tags/react">React</a>
+                                <a href="/tags/react%E5%9F%BA%E7%A1%80">React基础</a>
                                 &nbsp;
                             
                         
@@ -715,17 +871,54 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
                 <div class="post-body" v-pre>
                 
-                    <h1 id="1-react基本使用">1. React基本使用</h1>
-<h2 id="11-js库引入注意引入顺序">1.1 js库引入（注意引入顺序）</h2>
+                    <h1 id="1react是什么">1.React是什么</h1>
+<p>用于构建<strong>用户界面</strong>的JS库（操作DOM呈现页面）</p>
+<p>是一个将数据渲染为HTML视图的开源的JavaScript库</p>
+<blockquote>
+<p>官网：https://react.docschina.org/</p>
+</blockquote>
+<h1 id="2谁开发的">2.谁开发的</h1>
+<p>Facebook</p>
+<h1 id="3为什么要学">3.为什么要学</h1>
+<ol>
+<li>
+<p>原生JS操作DOM<strong>繁琐、效率低</strong>（<strong>DOM-API操作UI</strong>）</p>
+</li>
+<li>
+<p>使用js直接操作DOM，浏览器会进行大量的<strong>重绘重排</strong></p>
+</li>
+<li>
+<p>原生js没有<strong>组件化</strong>的编码方案，代码复用率低</p>
+<p><strong>模块化</strong>是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。</p>
+</li>
+</ol>
+<h1 id="4react的特点">4.React的特点</h1>
+<ol>
+<li>
+<p>用<strong>组件化模式</strong>、<strong>声明式编码</strong>，提高开发效率及组件复用率</p>
+<p>之前使用的是<strong>命令式编码</strong>，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。</p>
+</li>
+<li>
+<p>在<strong>React Native</strong>中可以使用React语法进行<strong>移动端</strong>开发。</p>
+<p>React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。</p>
+</li>
+<li>
+<p>使用<strong>虚拟DOM</strong>+优秀的<strong>Diffing算法</strong>，尽量减少与真实DOM的交互</p>
+</li>
+</ol>
+<p><!-- raw HTML omitted --></p>
+<p>​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程</p>
+<h1 id="5-react基本使用">5. React基本使用</h1>
+<h2 id="51-js库引入注意引入顺序">5.1 js库引入（注意引入顺序）</h2>
 <p>1.react.development.js：react核心库</p>
 <p>2.react-dom.development.js：提供操作DOM的react扩展库</p>
 <p>3.babel.min.js：解析JSX语法代码转为js代码的库</p>
-<h2 id="12-虚拟dom的创建">1.2 虚拟DOM的创建</h2>
-<h3 id="121-关于虚拟dom">1.2.1 关于虚拟DOM</h3>
+<h2 id="52-虚拟dom的创建">5.2 虚拟DOM的创建</h2>
+<h3 id="521-关于虚拟dom">5.2.1 关于虚拟DOM</h3>
 <p>（1）本质上是object类型的<strong>一般对象</strong></p>
 <p>（2）虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是react内部在用，无需真实DOM上那么多属性</p>
 <p>（3）虚拟DOM最终会被React转化为真实DOM，呈现在页面上</p>
-<h3 id="122-创建的两种方式">1.2.2 创建的两种方式</h3>
+<h3 id="522-创建的两种方式">5.2.2 创建的两种方式</h3>
 <p>（1）纯js方式</p>
 <div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#8b008b;font-weight:bold">const</span> VDOM = React.createElement(<span style="color:#cd5555">&#39;标签名&#39;</span>,{标签属性},<span style="color:#cd5555">&#39;标签内容&#39;</span>)
 
@@ -746,11 +939,11 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>4.标签必须<strong>闭合</strong>（自闭合也行）</p>
 <p>5.标签内样式的类名指定不要用class，要用<strong>className</strong>，例如<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>6.标签中内联样式要用**style={{key:value}}**的形式去写，多个单词的要用小驼峰,例如style={{fontSize:&lsquo;29px&rsquo;}}</p>
-<h2 id="13-渲染虚拟dom">1.3 渲染虚拟DOM</h2>
+<h2 id="53-渲染虚拟dom">5.3 渲染虚拟DOM</h2>
 <p>基本语法：</p>
 <div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">ReactDOM.render(VirtualDOM,containerDOM)
 ReactDOM.render(VDOM,<span style="color:#658b00">document</span>.getElementById(<span style="color:#cd5555">&#39;test&#39;</span>))
-</code></pre></div><h2 id="14-模块与组件的理解">1.4 模块与组件的理解</h2>
+</code></pre></div><h2 id="54-模块与组件的理解">5.4 模块与组件的理解</h2>
 <p>模块指的是向外提供特定功能的js程序，一般就是一个js文件，模块化是为了更好地复用js，简化js的编写，提高js运行效率。模块化只针对js；而组件指的是用来实现局部功能效果的代码和资源的集合（html、css、js、image、video等），组件化是为了复用编码，简化项目编码，提高运行效率</p>
 <p>1.5 jsx练习</p>
 <p><img src=".%5Cimage-20210321123104572.png" alt="image-20210321123104572"></p>
@@ -817,7 +1010,7 @@ ReactDOM.render(VDOM,<span style="color:#658b00">document</span>.getElementById(
 
                     
                     <HR width="100%" id="EOF">
-		    <p style="color:#777;">最后修改于 2021-03-20</p>
+		    <p style="color:#777;">最后修改于 2021-06-25</p>
                     
                 </div>
             </div>
@@ -826,14 +1019,14 @@ ReactDOM.render(VDOM,<span style="color:#658b00">document</span>.getElementById(
             <nav class="post-pagination">
 
                 
-                <a class="newer-posts" href="https://gsemir0418.github.io/posts/react%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/">
-			下回<br>React面向组件编程
+                <a class="newer-posts" href="https://gsemir0418.github.io/posts/array/">
+			下回<br>Array常用方法整理
                 </a>
                 
                 
                 
-                <a class="older-posts" href="https://gsemir0418.github.io/posts/react%E7%AE%80%E4%BB%8B/">
-			上回<br>React简介
+                <a class="older-posts" href="https://gsemir0418.github.io/posts/reacthooks/">
+			上回<br>初识Hooks
                 </a>
                 
             </nav>
