@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on GSemir Blog</title>
+    <link>https://gsemir0418.github.io/tags/mysql/</link>
+    <description>Recent content in MySQL on GSemir Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 02 Jul 2021 11:01:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sequelize ORM</title>
+      <link>https://gsemir0418.github.io/posts/sequelize.js/</link>
+      <pubDate>Fri, 02 Jul 2021 11:01:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/sequelize.js/</guid>
+      <description>1 MySQL数据类型 MySQL支持的数据类型比较少，主要有五种类型：
+ 数字类型 字符串类型 时间和日期类型 JSON类型 其他特殊类型   id 可以指定类型为serial序列，时间格式最好使用ISO 8601格式，即2021-07-02T11:01:55+08:00
+ 2 Sequelize使用  官方文档：   sequelize.org/master/manual/getting-started.html
+  安装：  yarn add sequelizeyarn add mysql2 使用：  // 引入 const { Sequelize, Model, DataTypes } = require(&amp;#39;sequelize&amp;#39;) // 创建sequelize连接 const sequelize = new Sequelize(&amp;#39;gsq&amp;#39;, &amp;#39;root&amp;#39;, &amp;#39;12345&amp;#39;, { host: &amp;#39;localhost&amp;#39;, dialect: &amp;#39;mysql&amp;#39;, }) // 创建User模型 class User extends Model { } // 初始化User表 User.</description>
+    </item>
+    
+    <item>
+      <title>Node.js连接数据库</title>
+      <link>https://gsemir0418.github.io/posts/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Fri, 02 Jul 2021 09:24:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>1 安装mysql依赖包 yarn add mysql2 创建mysql连接 创建连接前，确保容器是开启状态。新建test.js文件。
+ 引入mysql模块  const mysql = require(&amp;#39;mysql&amp;#39;)  创建连接  const connection = mysql.createConnection({ host: &amp;#39;localhost&amp;#39;, // 老版本的docker需要填ip  user: &amp;#39;root&amp;#39;, password: &amp;#39;12345&amp;#39; }) connection.connect();  创建数据库  // 创建数据库 connection.query(&amp;#39;CREATE DATABASE IF NOT EXISTS gsq DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_unicode_520_ci;&amp;#39;, (error, results, fields) =&amp;gt; { if (error) throw error; console.log(results) }) 创建名为gsq的数据库（数据库不存在的情况下），并指定默认字符集为utf8mb4(mysql对于utf-8字符集支持不佳)
+ 创建数据表  // 选择数据库 connection.query(&amp;#39;use gsq;&amp;#39;) // 创建表 connection.</description>
+    </item>
+    
+    <item>
+      <title>Docker安装MySQL</title>
+      <link>https://gsemir0418.github.io/posts/docker%E5%AE%89%E8%A3%85mysql/</link>
+      <pubDate>Fri, 02 Jul 2021 08:36:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/docker%E5%AE%89%E8%A3%85mysql/</guid>
+      <description>1 win10安装Docker  https://hub.docker.com/
+ 注册登录并下载安装Docker Desktop。
+ 启用Hyper-V  右键Windows按钮并选择“应用和功能”，选择相关设置中的“程序和功能”，选择“启用或关闭Windows功能”，选择Hyper-V，单机确定。
+ 启用CPU的虚拟化  进入BIOS界面，找到Virtualization Technology选项，将disabled改为enabled。
+ 更新WSL2  如果出现WSL 2 installation is incomplete的报错，则需要更新WSL 2。
+ https://aka.ms/wsl2kernel
+ 根据文档下载最新包，安装重启即可。
+2 Docker安装MySQL docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:8.0.25 其中name是容器的名字；-e是环境变量，配置的MYSQL_ROOT_PASSWORD是mysql密码；-p是端口映射，左侧是本机端口号，右侧是虚拟机端口号；-d表示程序持续运行；最后指定mysql的版本号为8.0.25。
+安装完成后，在docker desktop中可以发现mysql1的容器已开启，或者在命令行输入docker ps查看全部在运行的容器。
+3 Docker常用命令 docker ps 查看容器运行状态
+docker start mysql1 启动mysql1容器
+docker kill mysql1 关闭容器mysql1
+docker container run mysql1 开启刚刚关掉的容器
+docker rm mysql1 删除容器，必要时可加-f选项
+docker run xxx 启动新容器</description>
+    </item>
+    
+  </channel>
+</rss>
