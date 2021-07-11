@@ -86,5 +86,20 @@ class Life extends React.Component { //只要页面发生更新，则说明是�
   class MyComponent extends React.Component{ render(){ //render放在MyComponent的原型对象（React.Component）上，供实例使用 	//render中的this指向MyComponent实例对象（组件实例对象） 	console.log(&amp;#39;render方法中的this指向：&amp;#39;,this); return &amp;lt;h1&amp;gt;类式组件，适用于复杂组件的定义&amp;lt;/h1&amp;gt; } } ReactDOM.render(&amp;lt;MyComponent/&amp;gt;,document.getElementById(&amp;#39;test&amp;#39;))  2 组件实例三大属性 2.1 state 2.1.1 state基本使用 state 是组件对象最重要的属性，值是对象(可以包含多个 key-value 的组合)</description>
     </item>
     
+    <item>
+      <title>React Hooks全解</title>
+      <link>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</guid>
+      <description>1.useState 使用状态 const [n, setN] = React.useState(0) const [user, setUser] = React.useState({name:&amp;#39;F&amp;#39;}) 注意事项1：不可局部更新 const [user, setUser] = useState({name:&amp;#39;Jack&amp;#39;,age:18}) setState({ name:&amp;#39;Sam&amp;#39; })   结果得到的是{name:&amp;lsquo;Sam&amp;rsquo;}，age属性消失了
+  （可以在之前加上&amp;hellip;user，表示复制user的全部属性到这个新对象中）
+  说明对于state不能部分setState，因为setState不会帮我们合并属性
+  实际上React中所有hooks都不能自动合并属性，需要我们自己去操作
+  注意事项2：地址要变 setState(obj)如果obj地址不变，那么React就认为数据没有变化
+const [user, setUser] = useState({name:&amp;#39;Jack&amp;#39;,age:18}) user.name = &amp;#39;Sam&amp;#39; setState(user)  表面上我们先改变了user对象的name属性（实际上也确实改变了），再将user对象setState进去，setState之后的user对象并没有改变。 对于React来说，对象还是user（地址没变），因此React不认为user改变了，依然加载的是原来的user。 上一个例子，是在setState中创建了一个新对象，因此React会直接加载新的对象（这也反映了setState并不会直接修改state，而是生成一个新的state）  useState接受函数 const [state, setState] = useState(() =&amp;gt; { return initState }) 该函数返回初始state，且只执行一次，节约反复更新渲染组件时js引擎的解析时间（首次渲染时会解析，再次更新组件时js就不会解析这个匿名函数了）
+setState接受函数 const [n, setN] = useState(0) setN(n + 1) setN(n + 1) 虽然运行了两次setN，但运行结果为1，并不是预想中的2，原因同样是由于setN并不会改变n的值，n始终为0</description>
+    </item>
+    
   </channel>
 </rss>

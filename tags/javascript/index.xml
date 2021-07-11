@@ -6,18 +6,63 @@
     <description>Recent content in JavaScript on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Jun 2021 09:30:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Jul 2021 17:30:59 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Object常用方法整理</title>
+      <link>https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <pubDate>Wed, 07 Jul 2021 17:30:59 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>Object.assign()   用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象
+  语法：
+Object.assign(target, ...sources) target目标对象；source源对象
+  如果目标对象中的属性具有相同的键，则属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的属性。
+  只会拷贝源对象自身的并且可枚举的属性到目标对象。
+  为了将属性定义（包括其可枚举性）复制到原型，应使用Object.getOwnPropertyDescriptor()和Object.defineProperty()。深拷贝？
+  示例：
+// 复制一个对象 const obj = { a: 1 }; const copy = Object.assign({}, obj); console.log(copy); // { a: 1 }  // 合并对象 const o1 = { a: 1 }; const o2 = { b: 2 }; const o3 = { c: 3 }; const obj = Object.assign(o1, o2, o3); console.</description>
+    </item>
+    
+    <item>
+      <title>String常用方法整理</title>
+      <link>https://gsemir0418.github.io/posts/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <pubDate>Mon, 05 Jul 2021 13:29:15 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>String.prototype.match()   根据传入的正则表达式的检索字符串并返回结果
+  语法：
+str.match(regexp)   例子
+   String.prototype.search()   根据传入的正则表达式寻找符合的字符位置
+  语法
+str.search(regexp)   如果匹配，则返回首次匹配项的索引；反之返回-1
+  例子：
+const str = &amp;#39;hello World&amp;#39; str.search(/[A-Z]/g)// 6 str.search(/[.]/g)// -1   String.prototype.chatAt()   从一个字符串中返回指定index的字符
+  语法
+str.chartAt(index) 若没有提供index，则默认使用0
+  例子
+const str = &amp;#39;ABCD&amp;#39; str.charAt(1)// &amp;#34;B&amp;#34;   String.prototype.indexOf()   查询字符串对象中第一次出现指定值的索引
+  语法：
+str.indexOf(searchValue, fromIndex)fromIndex可选，表示开始查找的位置，默认为0，若指定为负数，则等价于传入0；若大于str.length，则必反回-1
+indexOf区分大小写</description>
+    </item>
+    
     <item>
       <title>Array常用方法整理</title>
       <link>https://gsemir0418.github.io/posts/array/</link>
       <pubDate>Mon, 28 Jun 2021 09:30:55 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/posts/array/</guid>
-      <description>Array.prototype.map() 1.关键词：遍历 2.是否修改原数组：false 3.返回值： newArray[]，回调函数的结果组成了新数组的每一个元素。
-4.语法： var new_array = arr.map((currentValue, index, array) =&amp;gt; { // callback })  currentValue：callback数组中正在处理的当前元素； index：可选，callback数组中正在处理的当前元素的索引； array：可选，map方法调用的数组，几乎不用  5.描述 map 方法会给原数组中的每个元素都按顺序调用一次 callback 函数。callback 每次执行后的返回值（包括undefined）组合起来形成一个新数组。 callback 函数只会在有值的索引上被调用；那些从来没被赋过值或者使用 delete 删除的索引则不会被调用。
+      <description>Array.prototype.map() 1.关键词：遍历
+2.是否修改原数组：false
+3.返回值：
+newArray[]，回调函数的结果组成了新数组的每一个元素。
+4.语法：
+var new_array = arr.map((currentValue, index, array) =&amp;gt; { // callback })  currentValue：callback数组中正在处理的当前元素； index：可选，callback数组中正在处理的当前元素的索引； array：可选，map方法调用的数组，几乎不用  5.描述
+map 方法会给原数组中的每个元素都按顺序调用一次 callback 函数。callback 每次执行后的返回值（包括undefined）组合起来形成一个新数组。 callback 函数只会在有值的索引上被调用；那些从来没被赋过值或者使用 delete 删除的索引则不会被调用。
 因为map生成一个新数组，当你不打算使用返回的新数组却使用map是违背设计初衷的，请用forEach或者for-of替代。
 callback 函数会被自动传入三个参数：数组元素，元素索引，原数组本身。
-6.示例 // 求数组中每个元素的平方根 const arr = [4, 9, 16] const newArr = arr.map(Math.sqrt)// [2, 3, 4]  // 使用map重新格式化数组中的对象 const arr = [ { key:1, value:10 }, { key:2, value:20 } ] const newArr = arr.</description>
+6.示例
+// 求数组中每个元素的平方根 const arr = [4, 9, 16] const newArr = arr.map(Math.sqrt)// [2, 3, 4]  // 使用map重新格式化数组中的对象 const arr = [ { key:1, value:10 }, { key:2, value:20 } ] const newArr = arr.</description>
     </item>
     
   </channel>

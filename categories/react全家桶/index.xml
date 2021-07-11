@@ -1,25 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>React全家桶 on GSemir Blog</title>
-    <link>https://gsemir0418.github.io/categories/react%E5%85%A8%E5%AE%B6%E6%A1%B6/</link>
-    <description>Recent content in React全家桶 on GSemir Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 25 Jun 2021 22:51:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/react%E5%85%A8%E5%AE%B6%E6%A1%B6/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>antdpro&#43;umi实战</title>
-      <link>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</link>
-      <pubDate>Fri, 25 Jun 2021 22:51:51 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
-      <description>本文通过一个todo list 的小项目演示，实现三个功能：
- 列表功能，列出所有todo项； 添加新项，添加新的todo项； 更新项，更新现有的todo项状态，修改成待办、已完成或者取消  数据结构：
-{id : 1, // 唯一标识title : &amp;quot;完成antdpro实战&amp;quot;, // 待办事项标题status : 0 // 状态：0-待办，1-已完成，2-已取消}创建新项目 新建项目目录
-mkdir todo-listcd todo-list执行
-yarn create umi选择ant-design-pro、JavaScript、simple，完成项目的创建
-目录结构 ├── config # umi 配置，包含路由，构建等配置├── mock # 本地模拟数据├── public # 一些公共静态资源├── src│ ├── assets # 本地静态资源│ ├── components # 业务通用组件│ ├── e2e # 集成测试用例│ ├── layouts # 通用布局│ ├── models # 全局 dva model│ ├── pages # 业务页面入口和常用模板│ ├── services # 后台接口服务│ ├── utils # 工具库│ ├── locales # 国际化资源│ ├── global.</description>
-    </item>
-    
-  </channel>
-</rss>

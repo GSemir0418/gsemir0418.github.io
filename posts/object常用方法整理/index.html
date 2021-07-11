@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html><head>
+<title>Object常用方法整理</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<meta property="og:title" content="Object常用方法整理" />
+<meta property="og:description" content="Object.assign()   用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象
+  语法：
+Object.assign(target, ...sources) target目标对象；source源对象
+  如果目标对象中的属性具有相同的键，则属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的属性。
+  只会拷贝源对象自身的并且可枚举的属性到目标对象。
+  为了将属性定义（包括其可枚举性）复制到原型，应使用Object.getOwnPropertyDescriptor()和Object.defineProperty()。深拷贝？
+  示例：
+// 复制一个对象 const obj = { a: 1 }; const copy = Object.assign({}, obj); console.log(copy); // { a: 1 }  // 合并对象 const o1 = { a: 1 }; const o2 = { b: 2 }; const o3 = { c: 3 }; const obj = Object.assign(o1, o2, o3); console." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-07T17:30:59&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-07T17:30:59&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Object常用方法整理"/>
+<meta name="twitter:description" content="Object.assign()   用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象
+  语法：
+Object.assign(target, ...sources) target目标对象；source源对象
+  如果目标对象中的属性具有相同的键，则属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的属性。
+  只会拷贝源对象自身的并且可枚举的属性到目标对象。
+  为了将属性定义（包括其可枚举性）复制到原型，应使用Object.getOwnPropertyDescriptor()和Object.defineProperty()。深拷贝？
+  示例：
+// 复制一个对象 const obj = { a: 1 }; const copy = Object.assign({}, obj); console.log(copy); // { a: 1 }  // 合并对象 const o1 = { a: 1 }; const o2 = { b: 2 }; const o3 = { c: 3 }; const obj = Object.assign(o1, o2, o3); console."/>
+
+
+
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="https://gsemir0418.github.io/scss/journal.min.5e8f3f653e9f6ce67bf72ff8ee6fee69decf7b5639a3ae7f8344750ad4e065b1.css" integrity="sha256-Xo8/ZT6fbOZ79y/47m/uad7Pe1Y5o65/g0R1CtTgZbE=" media="screen">
+
+
+
+<link rel="stylesheet" href="https://gsemir0418.github.io/scss/dark-mode.min.bdfa63b2e89903517dcbb1032b537d54cff3f425c19d008a78dfe49e6cd07ced.css" integrity="sha256-vfpjsuiZA1F9y7EDK1N9VM/z9CXBnQCKeN/knmzQfO0=" media="screen">
+
+
+<script src="https://gsemir0418.github.io//js/loadCSS.js"></script>
+<script>
+  loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+  
+    <script src="https://gsemir0418.github.io//js/toc-collapse.js"></script>
+  
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'your client id',
+  clientSecret: 'your client secret',
+  repo: 'repo name',
+  owner: 'user',
+  admin: ['user'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
+
+
+
+
+
+
+
+
+</head>
+<body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="https://gsemir0418.github.io/">
+    
+        <div class="nav-title">
+            GSemir Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            个人技术博客
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                Archive
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories">
+                Categories
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags">
+                Tags
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/index.xml">
+                RSS Feed
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 GSemir Blog
+	
+
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectassign" onclick="onNavClick(`#objectassign-nav`)" id="objectassign-nav">
+									Object.assign()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectis" onclick="onNavClick(`#objectis-nav`)" id="objectis-nav">
+									Object.is()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectkey" onclick="onNavClick(`#objectkey-nav`)" id="objectkey-nav">
+									Object.key()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectgetownpropertynames" onclick="onNavClick(`#objectgetownpropertynames-nav`)" id="objectgetownpropertynames-nav">
+									Object.getOwnPropertyNames()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectvalues" onclick="onNavClick(`#objectvalues-nav`)" id="objectvalues-nav">
+									Object.values()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a class="pagination-action" v-on:click="toggleDarkMode">
+            <i class="material-icons pagination-action-icon" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons pagination-action-icon" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    Archive
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories">
+                    Categories
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags">
+                    Tags
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/index.xml">
+                    RSS Feed
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectassign" onclick="onNavClick(`#objectassign-nav`)" id="objectassign-nav">
+									Object.assign()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectis" onclick="onNavClick(`#objectis-nav`)" id="objectis-nav">
+									Object.is()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectkey" onclick="onNavClick(`#objectkey-nav`)" id="objectkey-nav">
+									Object.key()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectgetownpropertynames" onclick="onNavClick(`#objectgetownpropertynames-nav`)" id="objectgetownpropertynames-nav">
+									Object.getOwnPropertyNames()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectvalues" onclick="onNavClick(`#objectvalues-nav`)" id="objectvalues-nav">
+									Object.values()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="https://gsemir0418.github.io/">
+            GSemir Blog
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
+            <i class="material-icons" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://gsemir0418.github.io/">
+        <div class="single-column-header-title">GSemir Blog</div>
+        
+        <div class="single-column-header-subtitle">个人技术博客</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    Object常用方法整理
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2021-07-07 17:30
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86">JS基础知识整理</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
+                                &nbsp;
+                            
+                                <a href="/tags/javascript">JavaScript</a>
+                                &nbsp;
+                            
+                                <a href="/tags/object">Object</a>
+                                &nbsp;
+                            
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h1 id="objectassign">Object.assign()</h1>
+<ul>
+<li>
+<p>用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#658b00">Object</span>.assign(target, ...sources)
+</code></pre></div><p><code>target</code>目标对象；<code>source</code>源对象</p>
+</li>
+<li>
+<p>如果目标对象中的属性具有相同的键，则属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的属性。</p>
+</li>
+<li>
+<p>只会拷贝源对象自身的并且可枚举的属性到目标对象。</p>
+</li>
+<li>
+<p>为了将属性定义（包括其可枚举性）复制到原型，应使用<code>Object.getOwnPropertyDescriptor()</code>和<code>Object.defineProperty()</code>。深拷贝？</p>
+</li>
+<li>
+<p>示例：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 复制一个对象
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> obj = { a: <span style="color:#b452cd">1</span> };
+<span style="color:#8b008b;font-weight:bold">const</span> copy = <span style="color:#658b00">Object</span>.assign({}, obj);
+console.log(copy); <span style="color:#228b22">// { a: 1 }
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 合并对象
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> o1 = { a: <span style="color:#b452cd">1</span> };
+<span style="color:#8b008b;font-weight:bold">const</span> o2 = { b: <span style="color:#b452cd">2</span> };
+<span style="color:#8b008b;font-weight:bold">const</span> o3 = { c: <span style="color:#b452cd">3</span> };
+
+<span style="color:#8b008b;font-weight:bold">const</span> obj = <span style="color:#658b00">Object</span>.assign(o1, o2, o3);
+console.log(obj); <span style="color:#228b22">// { a: 1, b: 2, c: 3 }
+</span><span style="color:#228b22"></span>console.log(o1);  <span style="color:#228b22">// { a: 1, b: 2, c: 3 }, 注意目标对象自身也会改变。
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 合并具有相同属性的对象
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> o1 = { a: <span style="color:#b452cd">1</span>, b: <span style="color:#b452cd">1</span>, c: <span style="color:#b452cd">1</span> };
+<span style="color:#8b008b;font-weight:bold">const</span> o2 = { b: <span style="color:#b452cd">2</span>, c: <span style="color:#b452cd">2</span> };
+<span style="color:#8b008b;font-weight:bold">const</span> o3 = { c: <span style="color:#b452cd">3</span> };
+
+<span style="color:#8b008b;font-weight:bold">const</span> obj = <span style="color:#658b00">Object</span>.assign({}, o1, o2, o3);
+console.log(obj); <span style="color:#228b22">// { a: 1, b: 2, c: 3 }
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 继承属性和不可枚举属性是不能拷贝的
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> obj = <span style="color:#658b00">Object</span>.create({foo: <span style="color:#b452cd">1</span>}, { <span style="color:#228b22">// foo 是个继承属性。
+</span><span style="color:#228b22"></span>    bar: {
+        value: <span style="color:#b452cd">2</span>  <span style="color:#228b22">// bar 是个不可枚举属性。
+</span><span style="color:#228b22"></span>    },
+    baz: {
+        value: <span style="color:#b452cd">3</span>,
+        enumerable: <span style="color:#8b008b;font-weight:bold">true</span>  <span style="color:#228b22">// baz 是个自身可枚举属性。
+</span><span style="color:#228b22"></span>    }
+});
+
+<span style="color:#8b008b;font-weight:bold">const</span> copy = <span style="color:#658b00">Object</span>.assign({}, obj);
+console.log(copy); <span style="color:#228b22">// { baz: 3 }
+</span></code></pre></div></li>
+<li>
+<p>深拷贝问题</p>
+<p>针对深拷贝，需要使用其他办法，因为 <code>Object.assign()</code>拷贝的是属性值。假如源对象的属性值是一个对象的引用，那么它也只指向那个引用。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">let</span> obj = { a: <span style="color:#b452cd">0</span> , b: { c: <span style="color:#b452cd">0</span>}}; 
+<span style="color:#8b008b;font-weight:bold">let</span> copy = <span style="color:#658b00">Object</span>.assign({}, obj1); 
+console.log(JSON.stringify(obj2)); <span style="color:#228b22">// { a: 0, b: { c: 0}} 
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 改变源对象属性值，拷贝的属性值不变
+</span><span style="color:#228b22"></span>obj.a = <span style="color:#b452cd">1</span>; 
+console.log(JSON.stringify(obj)); <span style="color:#228b22">// { a: 1, b: { c: 0}} 
+</span><span style="color:#228b22"></span>console.log(JSON.stringify(copy)); <span style="color:#228b22">// { a: 0, b: { c: 0}} 
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 改变拷贝的属性值，也不会改变源对象的属性值
+</span><span style="color:#228b22"></span>copy.a = <span style="color:#b452cd">2</span>; 
+console.log(JSON.stringify(obj)); <span style="color:#228b22">// { a: 1, b: { c: 0}} 
+</span><span style="color:#228b22"></span>console.log(JSON.stringify(copy)); <span style="color:#228b22">// { a: 2, b: { c: 0}}
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 改变拷贝对象中的深层属性值，将会彻底改变该属性值
+</span><span style="color:#228b22"></span>copy.b.c = <span style="color:#b452cd">3</span>; 
+console.log(JSON.stringify(obj)); <span style="color:#228b22">// { a: 1, b: { c: 3}} 
+</span><span style="color:#228b22"></span>console.log(JSON.stringify(copy)); <span style="color:#228b22">// { a: 2, b: { c: 3}} 
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// Deep Clone 
+</span><span style="color:#228b22"></span>obj = { a: <span style="color:#b452cd">0</span> , b: { c: <span style="color:#b452cd">0</span>}}; 
+<span style="color:#8b008b;font-weight:bold">let</span> depClone = JSON.parse(JSON.stringify(obj1)); 
+obj.a = <span style="color:#b452cd">4</span>; 
+obj.b.c = <span style="color:#b452cd">4</span>; 
+console.log(JSON.stringify(depClone)); <span style="color:#228b22">// { a: 0, b: { c: 0}}
+</span></code></pre></div></li>
+</ul>
+<h1 id="objectis">Object.is()</h1>
+<ul>
+<li>
+<p>判断两个值是否是相同的值，返回布尔值</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#658b00">Object</span>.is(value1, value2)
+</code></pre></div></li>
+<li>
+<p>在以下情况下，返回<code>true</code></p>
+<ul>
+<li>两个值均为<code>undefined</code>、<code>null</code>、<code>true</code>或<code>false</code></li>
+<li>两个值都是由相同个字符按照相同顺序组成的字符串</li>
+<li>两个值都指向同一个对象</li>
+<li>两个值都是数字并且
+<ul>
+<li>都是正零<code>+0</code>或负零<code>-0</code></li>
+<li>都是<code>NaN</code></li>
+<li>都是除零和<code>NaN</code>外的其它同一个数字</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>与<code>==</code>运算符的区别</p>
+<p>这种相等性判断逻辑和传统的 <code>==</code>运算不同，<code>==</code>运算符会对它两边的操作数做隐式类型转换（如果它们类型不同），然后才进行相等性比较，（所以才会有类似 <code>&quot;&quot; == false</code> 返回 <code>true</code> 的现象），但 <code>Object.is</code> 不会做这种类型转换。<code>Object.is()</code>比较严格。</p>
+<p>这与<code>===</code>运算符的判定方式也不一样。<code>===</code>运算符（和<code>==</code>运算符）将数字值 <code>-0</code> 和 <code>+0</code> 视为相等，并认为 <code>Number.NaN</code>不等于<code>NaN</code>。</p>
+</li>
+<li>
+<p>示例：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#658b00">Object</span>.is(<span style="color:#cd5555">&#39;foo&#39;</span>, <span style="color:#cd5555">&#39;foo&#39;</span>);     <span style="color:#228b22">// true
+</span><span style="color:#228b22"></span><span style="color:#658b00">Object</span>.is(<span style="color:#658b00">window</span>, <span style="color:#658b00">window</span>);   <span style="color:#228b22">// true
+</span><span style="color:#228b22"></span>
+<span style="color:#658b00">Object</span>.is(<span style="color:#cd5555">&#39;foo&#39;</span>, <span style="color:#cd5555">&#39;bar&#39;</span>);     <span style="color:#228b22">// false
+</span><span style="color:#228b22"></span><span style="color:#658b00">Object</span>.is([], []);           <span style="color:#228b22">// false 与两个对象同理 指向不同
+</span><span style="color:#228b22"></span>
+<span style="color:#8b008b;font-weight:bold">const</span> foo = { a: <span style="color:#b452cd">1</span> };
+<span style="color:#8b008b;font-weight:bold">const</span> bar = { a: <span style="color:#b452cd">1</span> };
+<span style="color:#658b00">Object</span>.is(foo, foo);         <span style="color:#228b22">// true
+</span><span style="color:#228b22"></span><span style="color:#658b00">Object</span>.is(foo, bar);         <span style="color:#228b22">// false 指向不同
+</span><span style="color:#228b22"></span>
+<span style="color:#658b00">Object</span>.is(<span style="color:#8b008b;font-weight:bold">null</span>, <span style="color:#8b008b;font-weight:bold">null</span>);       <span style="color:#228b22">// true
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 特例
+</span><span style="color:#228b22"></span><span style="color:#658b00">Object</span>.is(<span style="color:#b452cd">0</span>, -<span style="color:#b452cd">0</span>);            <span style="color:#228b22">// false
+</span><span style="color:#228b22"></span><span style="color:#658b00">Object</span>.is(<span style="color:#b452cd">0</span>, +<span style="color:#b452cd">0</span>);            <span style="color:#228b22">// true
+</span><span style="color:#228b22"></span><span style="color:#658b00">Object</span>.is(-<span style="color:#b452cd">0</span>, -<span style="color:#b452cd">0</span>);           <span style="color:#228b22">// true
+</span><span style="color:#228b22"></span><span style="color:#658b00">Object</span>.is(<span style="color:#8b008b;font-weight:bold">NaN</span>, <span style="color:#b452cd">0</span>/<span style="color:#b452cd">0</span>);         <span style="color:#228b22">// true
+</span></code></pre></div></li>
+</ul>
+<h1 id="objectkey">Object.key()</h1>
+<ul>
+<li>
+<p>会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用<code>for...in</code>循环遍历该对象时返回的顺序一致。</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#658b00">Object</span>.keys(obj)
+</code></pre></div></li>
+<li>
+<p>返回一个表示给定对象的所有可枚举属性的字符串数组</p>
+</li>
+<li>
+<p>示例：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 对于简单的数组
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> arr = [<span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#cd5555">&#39;b&#39;</span>, <span style="color:#cd5555">&#39;c&#39;</span>];
+console.log(<span style="color:#658b00">Object</span>.keys(arr)); <span style="color:#228b22">// console: [&#39;0&#39;, &#39;1&#39;, &#39;2&#39;]
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 类数组对象
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> obj = { <span style="color:#b452cd">0</span>: <span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#b452cd">1</span>: <span style="color:#cd5555">&#39;b&#39;</span>, <span style="color:#b452cd">2</span>: <span style="color:#cd5555">&#39;c&#39;</span> };
+console.log(<span style="color:#658b00">Object</span>.keys(obj)); <span style="color:#228b22">// console: [&#39;0&#39;, &#39;1&#39;, &#39;2&#39;]
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// key的顺序随机的对象，会排序后返回
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> anObj = { <span style="color:#b452cd">100</span>: <span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#b452cd">2</span>: <span style="color:#cd5555">&#39;b&#39;</span>, <span style="color:#b452cd">7</span>: <span style="color:#cd5555">&#39;c&#39;</span> };
+console.log(<span style="color:#658b00">Object</span>.keys(anObj)); <span style="color:#228b22">// console: [&#39;2&#39;, &#39;7&#39;, &#39;100&#39;]
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// getFoo是一个不可枚举的属性
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">let</span> myObj = <span style="color:#658b00">Object</span>.create({}, {
+  getFoo: {
+    value: <span style="color:#8b008b;font-weight:bold">function</span> () { <span style="color:#8b008b;font-weight:bold">return</span> <span style="color:#8b008b;font-weight:bold">this</span>.foo; }
+  } 
+});
+myObj.foo = <span style="color:#b452cd">1</span>;<span style="color:#228b22">// myObj = { foo: 1, getFoo: funtion }
+</span><span style="color:#228b22"></span>console.log(<span style="color:#658b00">Object</span>.keys(myObj)); <span style="color:#228b22">// console: [&#39;foo&#39;]
+</span></code></pre></div></li>
+</ul>
+<h1 id="objectgetownpropertynames">Object.getOwnPropertyNames()</h1>
+<ul>
+<li>
+<p>与Object.keys()方法类似，但更强大。</p>
+</li>
+<li>
+<p>返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）组成的数组。</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#658b00">Object</span>.getOwnPropertyNames(obj)
+</code></pre></div></li>
+<li>
+<p>示例：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 对于简单的数组
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> arr = [<span style="color:#cd5555">&#34;a&#34;</span>, <span style="color:#cd5555">&#34;b&#34;</span>, <span style="color:#cd5555">&#34;c&#34;</span>];
+console.log(<span style="color:#658b00">Object</span>.getOwnPropertyNames(arr).sort()); <span style="color:#228b22">// [&#34;0&#34;, &#34;1&#34;, &#34;2&#34;, &#34;length&#34;] // 居然还有length...
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 类数组对象
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">var</span> obj = { <span style="color:#b452cd">0</span>: <span style="color:#cd5555">&#34;a&#34;</span>, <span style="color:#b452cd">1</span>: <span style="color:#cd5555">&#34;b&#34;</span>, <span style="color:#b452cd">2</span>: <span style="color:#cd5555">&#34;c&#34;</span>};
+console.log(<span style="color:#658b00">Object</span>.getOwnPropertyNames(obj).sort()); <span style="color:#228b22">// [&#34;0&#34;, &#34;1&#34;, &#34;2&#34;]
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 使用Array.forEach输出属性名和属性值
+</span><span style="color:#228b22"></span><span style="color:#658b00">Object</span>.getOwnPropertyNames(obj).forEach(<span style="color:#8b008b;font-weight:bold">function</span>(val, idx, array) {
+  console.log(val + <span style="color:#cd5555">&#34; -&gt; &#34;</span> + obj[val]);
+});
+<span style="color:#228b22">// 输出
+</span><span style="color:#228b22">// 0 -&gt; a
+</span><span style="color:#228b22">// 1 -&gt; b
+</span><span style="color:#228b22">// 2 -&gt; c
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">//不可枚举属性
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">var</span> my_obj = <span style="color:#658b00">Object</span>.create({}, {
+  getFoo: {
+    value: <span style="color:#8b008b;font-weight:bold">function</span>() { <span style="color:#8b008b;font-weight:bold">return</span> <span style="color:#8b008b;font-weight:bold">this</span>.foo; },
+    enumerable: <span style="color:#8b008b;font-weight:bold">false</span>
+  }
+});
+my_obj.foo = <span style="color:#b452cd">1</span>;
+
+console.log(<span style="color:#658b00">Object</span>.getOwnPropertyNames(my_obj).sort()); <span style="color:#228b22">// [&#34;foo&#34;, &#34;getFoo&#34;]
+</span></code></pre></div></li>
+</ul>
+<h1 id="objectvalues">Object.values()</h1>
+<ul>
+<li>
+<p>会返回一个给定对象自身的所有可枚举属性值的数组，值的顺序与使用<code>for...in</code>循环的顺序相同（区别在于<code>for...in</code>循环枚举原型链中的属性）。与<code>Object.keys()</code>十分相似。</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#658b00">Object</span>.values(obj)
+</code></pre></div></li>
+<li>
+<p>示例：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 对于一般对象
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> obj = { foo: <span style="color:#cd5555">&#39;bar&#39;</span>, baz: <span style="color:#b452cd">42</span> };
+console.log(<span style="color:#658b00">Object</span>.values(obj)); <span style="color:#228b22">// [&#39;bar&#39;, 42]
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 对于类数组对象
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> obj = { <span style="color:#b452cd">0</span>: <span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#b452cd">1</span>: <span style="color:#cd5555">&#39;b&#39;</span>, <span style="color:#b452cd">2</span>: <span style="color:#cd5555">&#39;c&#39;</span> };
+console.log(<span style="color:#658b00">Object</span>.values(obj)); <span style="color:#228b22">// [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 键顺序随机的类数组对象
+</span><span style="color:#228b22">// 键的数字顺序决定返回值在数组中的顺序 
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> an_obj = { <span style="color:#b452cd">100</span>: <span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#b452cd">2</span>: <span style="color:#cd5555">&#39;b&#39;</span>, <span style="color:#b452cd">7</span>: <span style="color:#cd5555">&#39;c&#39;</span> };
+console.log(<span style="color:#658b00">Object</span>.values(an_obj)); <span style="color:#228b22">// [&#39;b&#39;, &#39;c&#39;, &#39;a&#39;]
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// getFoo是一个不可枚举属性
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">let</span> my_obj = <span style="color:#658b00">Object</span>.create({}, { getFoo: { value: <span style="color:#8b008b;font-weight:bold">function</span>() { <span style="color:#8b008b;font-weight:bold">return</span> <span style="color:#8b008b;font-weight:bold">this</span>.foo; } } });
+my_obj.foo = <span style="color:#cd5555">&#39;bar&#39;</span>;
+console.log(<span style="color:#658b00">Object</span>.values(my_obj)); <span style="color:#228b22">// [&#39;bar&#39;]
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 非对象作为参数将被强制转换为对象 
+</span><span style="color:#228b22"></span>console.log(<span style="color:#658b00">Object</span>.values(<span style="color:#cd5555">&#39;foo&#39;</span>)); <span style="color:#228b22">// [&#39;f&#39;, &#39;o&#39;, &#39;o&#39;]
+</span></code></pre></div></li>
+</ul>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">最后修改于 2021-07-07</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/">
+			下回<br>NodeStream模块
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://gsemir0418.github.io/posts/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">
+			上回<br>String常用方法整理
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+<div id="gitalk-container"></div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 GSemir Blog
+	
+</div>
+            </div>
+    <script>
+let app;
+
+app = new Vue({
+    el: '#app',
+    data: {
+        scrollY: 0,
+        navOpacity: 0,
+        isDrawerOpen: false,
+        mounted: false,
+        isDarkMode: false
+    },
+    methods: {
+            sgn(t, x) {
+                let k = 1. / (1. - 2 * t);
+                if (x <= t) return 0;
+                else if (x >= 1 - t) return 1;
+                else {
+                    return k * (x - t);
+                }
+            },
+            handleScroll() {
+                this.scrollY = window.scrollY;
+                this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+
+                if (this.navOpacity >= 1) {
+                    navBackground.style.opacity = 1;
+                    navTitle.style.opacity = 1;
+                } else {
+                    navBackground.style.opacity = 0;
+                    navTitle.style.opacity = 0;
+                }
+            },
+            handleResize() {
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+                extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
+            },
+            navBarHeight() {
+                return this.$refs.navBar.offsetHeight;
+            },
+            pageHeadHeight() {
+                return this.$refs.pageHead.offsetHeight;
+            },
+            toggleDrawer() {
+                this.isDrawerOpen = !this.isDrawerOpen;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            closeDrawer() {
+                this.isDrawerOpen = false;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            toggleDarkMode() {
+                this.isDarkMode = !this.isDarkMode;
+                if (this.isDarkMode==true){
+                    document.cookie = "night=1;path=/";
+                    document.body.classList.add("night");
+                } else {
+                    document.cookie = "night=0;path=/";
+                    document.body.classList.remove("night");
+                }
+            }
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+        window._nonDesktop = function () {
+            let check = false;
+            (function (a) {
+                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+            })(navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        };
+        
+        var night = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if (night==""){
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                
+            }
+        }else{
+            
+            if (night=="1") {
+                this.toggleDarkMode();
+            }
+        }
+    },
+    mounted() {
+        this.handleScroll();
+        this.handleResize();
+        this.mounted = true;
+
+        
+    },
+    destroyed() {
+        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
+    }
+});
+</script>
+
+<script src="https://gsemir0418.github.io//js/journal.js"></script>
+    </body>
+</html>

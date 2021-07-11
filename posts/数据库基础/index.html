@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html><head>
+<title>数据库基础</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<meta property="og:title" content="数据库基础" />
+<meta property="og:description" content="1 第一二三范式 1 第一范式 1NF   定义：字段不可再分
+  举例：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段
+即user表里应有left_eye和right_eye，而不能存为一个字段
+  缺点：
+​	这是一个学生选课表，没有违反第一范式，但是存在如下问题：
+​	数据冗余、创建系时插入异常、删除学生会导致系消失、学生转系时改动多处
+​	结论：第一范式不够强
+  2 第二范式 2NF   定义：
+ 在1NF的基础上，要有键（键可由多个字段组合） 所有字段必须分别完全依赖于键 如果键是多个字段组合，则不允许部分依赖于该键    依赖关系：
+ 给出键，就能唯一确定字段的值 如给出学号，就能唯一确定姓名，反之则不行 则称姓名依赖于学号    不满足第二范式的地方：
+ 上表的键为（学号、课名） 但存在部份依赖：姓名依赖与学号    改进：
+ 选课表（学号，课名，分数） 学生表（学号，姓名，系名，系主任）    3 第三范式 3NF   定义：
+ 一个表里不能有两层依赖 给出学号，就能确定系名——系名依赖于学号 给出系名，就能确定系主任——系主任依赖与系名 所以，系主任间接依赖于学号    解决办法：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-05T08:57:20&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-05T08:57:20&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据库基础"/>
+<meta name="twitter:description" content="1 第一二三范式 1 第一范式 1NF   定义：字段不可再分
+  举例：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段
+即user表里应有left_eye和right_eye，而不能存为一个字段
+  缺点：
+​	这是一个学生选课表，没有违反第一范式，但是存在如下问题：
+​	数据冗余、创建系时插入异常、删除学生会导致系消失、学生转系时改动多处
+​	结论：第一范式不够强
+  2 第二范式 2NF   定义：
+ 在1NF的基础上，要有键（键可由多个字段组合） 所有字段必须分别完全依赖于键 如果键是多个字段组合，则不允许部分依赖于该键    依赖关系：
+ 给出键，就能唯一确定字段的值 如给出学号，就能唯一确定姓名，反之则不行 则称姓名依赖于学号    不满足第二范式的地方：
+ 上表的键为（学号、课名） 但存在部份依赖：姓名依赖与学号    改进：
+ 选课表（学号，课名，分数） 学生表（学号，姓名，系名，系主任）    3 第三范式 3NF   定义：
+ 一个表里不能有两层依赖 给出学号，就能确定系名——系名依赖于学号 给出系名，就能确定系主任——系主任依赖与系名 所以，系主任间接依赖于学号    解决办法："/>
+
+
+
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="https://gsemir0418.github.io/scss/journal.min.5e8f3f653e9f6ce67bf72ff8ee6fee69decf7b5639a3ae7f8344750ad4e065b1.css" integrity="sha256-Xo8/ZT6fbOZ79y/47m/uad7Pe1Y5o65/g0R1CtTgZbE=" media="screen">
+
+
+
+<link rel="stylesheet" href="https://gsemir0418.github.io/scss/dark-mode.min.bdfa63b2e89903517dcbb1032b537d54cff3f425c19d008a78dfe49e6cd07ced.css" integrity="sha256-vfpjsuiZA1F9y7EDK1N9VM/z9CXBnQCKeN/knmzQfO0=" media="screen">
+
+
+<script src="https://gsemir0418.github.io//js/loadCSS.js"></script>
+<script>
+  loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+  
+    <script src="https://gsemir0418.github.io//js/toc-collapse.js"></script>
+  
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'your client id',
+  clientSecret: 'your client secret',
+  repo: 'repo name',
+  owner: 'user',
+  admin: ['user'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
+
+
+
+
+
+
+
+
+</head>
+<body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="https://gsemir0418.github.io/">
+    
+        <div class="nav-title">
+            GSemir Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            个人技术博客
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                Archive
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories">
+                Categories
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags">
+                Tags
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/index.xml">
+                RSS Feed
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 GSemir Blog
+	
+
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#1-%e7%ac%ac%e4%b8%80%e4%ba%8c%e4%b8%89%e8%8c%83%e5%bc%8f" onclick="onNavClick(`#1-第一二三范式-nav`)" id="1-第一二三范式-nav">
+									1 第一二三范式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#1-%e7%ac%ac%e4%b8%80%e8%8c%83%e5%bc%8f-1nf" onclick="onNavClick(`#1-第一范式-1nf-nav`)" id="1-第一范式-1nf-nav">
+									1 第一范式 1NF
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#2-%e7%ac%ac%e4%ba%8c%e8%8c%83%e5%bc%8f-2nf" onclick="onNavClick(`#2-第二范式-2nf-nav`)" id="2-第二范式-2nf-nav">
+									2 第二范式 2NF
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#3-%e7%ac%ac%e4%b8%89%e8%8c%83%e5%bc%8f-3nf" onclick="onNavClick(`#3-第三范式-3nf-nav`)" id="3-第三范式-3nf-nav">
+									3 第三范式 3NF
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4-bc%e8%8c%83%e5%bc%8f" onclick="onNavClick(`#4-bc范式-nav`)" id="4-bc范式-nav">
+									4 BC范式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#2-%e8%ae%be%e8%ae%a1%e8%a1%a8" onclick="onNavClick(`#2-设计表-nav`)" id="2-设计表-nav">
+									2 设计表
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#1-%e6%95%b0%e6%8d%ae%e5%ba%93%e8%ae%be%e8%ae%a1%e7%bb%8f%e9%aa%8c" onclick="onNavClick(`#1-数据库设计经验-nav`)" id="1-数据库设计经验-nav">
+									1 数据库设计经验
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#2-%e4%b8%80%e5%af%b9%e4%b8%80" onclick="onNavClick(`#2-一对一-nav`)" id="2-一对一-nav">
+									2 一对一
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#3-%e4%b8%80%e5%af%b9%e5%a4%9a" onclick="onNavClick(`#3-一对多-nav`)" id="3-一对多-nav">
+									3 一对多
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4-%e5%a4%9a%e5%af%b9%e5%a4%9a" onclick="onNavClick(`#4-多对多-nav`)" id="4-多对多-nav">
+									4 多对多
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#5-%e4%bb%80%e4%b9%88%e6%97%b6%e5%80%99%e5%bb%ba%e5%85%b3%e8%81%94%e8%a1%a8" onclick="onNavClick(`#5-什么时候建关联表-nav`)" id="5-什么时候建关联表-nav">
+									5 什么时候建关联表
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#3-join%e6%8a%8a%e8%a1%a8%e8%bf%9e%e6%8e%a5%e8%b5%b7%e6%9d%a5" onclick="onNavClick(`#3-join把表连接起来-nav`)" id="3-join把表连接起来-nav">
+									3 JOIN把表连接起来
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4-%e7%bc%93%e5%ad%98%e5%ad%97%e6%ae%b5" onclick="onNavClick(`#4-缓存字段-nav`)" id="4-缓存字段-nav">
+									4 缓存字段
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#5-%e4%ba%8b%e5%8a%a1" onclick="onNavClick(`#5-事务-nav`)" id="5-事务-nav">
+									5 事务
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#6-mysql%e5%82%a8%e5%ad%98%e5%bc%95%e6%93%8e" onclick="onNavClick(`#6-mysql储存引擎-nav`)" id="6-mysql储存引擎-nav">
+									6 MySQL储存引擎
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#7-%e7%b4%a2%e5%bc%95" onclick="onNavClick(`#7-索引-nav`)" id="7-索引-nav">
+									7 索引
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a class="pagination-action" v-on:click="toggleDarkMode">
+            <i class="material-icons pagination-action-icon" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons pagination-action-icon" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    Archive
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories">
+                    Categories
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags">
+                    Tags
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/index.xml">
+                    RSS Feed
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#1-%e7%ac%ac%e4%b8%80%e4%ba%8c%e4%b8%89%e8%8c%83%e5%bc%8f" onclick="onNavClick(`#1-第一二三范式-nav`)" id="1-第一二三范式-nav">
+									1 第一二三范式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#1-%e7%ac%ac%e4%b8%80%e8%8c%83%e5%bc%8f-1nf" onclick="onNavClick(`#1-第一范式-1nf-nav`)" id="1-第一范式-1nf-nav">
+									1 第一范式 1NF
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#2-%e7%ac%ac%e4%ba%8c%e8%8c%83%e5%bc%8f-2nf" onclick="onNavClick(`#2-第二范式-2nf-nav`)" id="2-第二范式-2nf-nav">
+									2 第二范式 2NF
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#3-%e7%ac%ac%e4%b8%89%e8%8c%83%e5%bc%8f-3nf" onclick="onNavClick(`#3-第三范式-3nf-nav`)" id="3-第三范式-3nf-nav">
+									3 第三范式 3NF
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4-bc%e8%8c%83%e5%bc%8f" onclick="onNavClick(`#4-bc范式-nav`)" id="4-bc范式-nav">
+									4 BC范式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#2-%e8%ae%be%e8%ae%a1%e8%a1%a8" onclick="onNavClick(`#2-设计表-nav`)" id="2-设计表-nav">
+									2 设计表
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#1-%e6%95%b0%e6%8d%ae%e5%ba%93%e8%ae%be%e8%ae%a1%e7%bb%8f%e9%aa%8c" onclick="onNavClick(`#1-数据库设计经验-nav`)" id="1-数据库设计经验-nav">
+									1 数据库设计经验
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#2-%e4%b8%80%e5%af%b9%e4%b8%80" onclick="onNavClick(`#2-一对一-nav`)" id="2-一对一-nav">
+									2 一对一
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#3-%e4%b8%80%e5%af%b9%e5%a4%9a" onclick="onNavClick(`#3-一对多-nav`)" id="3-一对多-nav">
+									3 一对多
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4-%e5%a4%9a%e5%af%b9%e5%a4%9a" onclick="onNavClick(`#4-多对多-nav`)" id="4-多对多-nav">
+									4 多对多
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#5-%e4%bb%80%e4%b9%88%e6%97%b6%e5%80%99%e5%bb%ba%e5%85%b3%e8%81%94%e8%a1%a8" onclick="onNavClick(`#5-什么时候建关联表-nav`)" id="5-什么时候建关联表-nav">
+									5 什么时候建关联表
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#3-join%e6%8a%8a%e8%a1%a8%e8%bf%9e%e6%8e%a5%e8%b5%b7%e6%9d%a5" onclick="onNavClick(`#3-join把表连接起来-nav`)" id="3-join把表连接起来-nav">
+									3 JOIN把表连接起来
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4-%e7%bc%93%e5%ad%98%e5%ad%97%e6%ae%b5" onclick="onNavClick(`#4-缓存字段-nav`)" id="4-缓存字段-nav">
+									4 缓存字段
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#5-%e4%ba%8b%e5%8a%a1" onclick="onNavClick(`#5-事务-nav`)" id="5-事务-nav">
+									5 事务
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#6-mysql%e5%82%a8%e5%ad%98%e5%bc%95%e6%93%8e" onclick="onNavClick(`#6-mysql储存引擎-nav`)" id="6-mysql储存引擎-nav">
+									6 MySQL储存引擎
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#7-%e7%b4%a2%e5%bc%95" onclick="onNavClick(`#7-索引-nav`)" id="7-索引-nav">
+									7 索引
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="https://gsemir0418.github.io/">
+            GSemir Blog
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
+            <i class="material-icons" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://gsemir0418.github.io/">
+        <div class="single-column-header-title">GSemir Blog</div>
+        
+        <div class="single-column-header-subtitle">个人技术博客</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    数据库基础
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2021-07-05 08:57
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/nodejs%E5%85%A8%E8%A7%A3">Nodejs全解</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/nodejs">nodejs</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                &nbsp;
+                            
+                                <a href="/tags/mysql">MySQL</a>
+                                &nbsp;
+                            
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h1 id="1-第一二三范式">1 第一二三范式</h1>
+<h2 id="1-第一范式-1nf">1 第一范式 1NF</h2>
+<ul>
+<li>
+<p><strong>定义</strong>：字段不可再分</p>
+</li>
+<li>
+<p><strong>举例</strong>：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段</p>
+<p>即user表里应有<code>left_eye</code>和<code>right_eye</code>，而不能存为一个字段</p>
+</li>
+<li>
+<p><strong>缺点</strong>：</p>
+<p><img src="./sjk1.png" alt="image-20210705105007465"></p>
+<p>​	这是一个学生选课表，没有违反第一范式，但是存在如下问题：</p>
+<p>​	数据冗余、创建系时插入异常、删除学生会导致系消失、学生转系时改动多处</p>
+<p>​	结论：第一范式不够强</p>
+</li>
+</ul>
+<h2 id="2-第二范式-2nf">2 第二范式 2NF</h2>
+<ul>
+<li>
+<p><strong>定义</strong>：</p>
+<ul>
+<li>在1NF的基础上，要有键（键可由多个字段组合）</li>
+<li>所有字段必须分别<strong>完全依赖</strong>于键</li>
+<li>如果键是多个字段组合，则<strong>不允许部分依赖</strong>于该键</li>
+</ul>
+</li>
+<li>
+<p><strong>依赖关系</strong>：</p>
+<ul>
+<li>给出键，就能唯一确定字段的值</li>
+<li>如给出学号，就能唯一确定姓名，反之则不行</li>
+<li>则称姓名依赖于学号</li>
+</ul>
+</li>
+<li>
+<p><strong>不满足第二范式的地方</strong>：</p>
+<ul>
+<li>上表的键为（学号、课名）</li>
+<li>但存在部份依赖：姓名依赖与学号</li>
+</ul>
+</li>
+<li>
+<p><strong>改进</strong>：</p>
+<ul>
+<li>选课表（<strong>学号</strong>，<strong>课名</strong>，分数）</li>
+<li>学生表（<strong>学号</strong>，姓名，系名，系主任）</li>
+</ul>
+<p><img src="./sjk2.png" alt="image-20210705105710705"></p>
+</li>
+</ul>
+<h2 id="3-第三范式-3nf">3 第三范式 3NF</h2>
+<ul>
+<li>
+<p><strong>定义</strong>：</p>
+<ul>
+<li>一个表里不能有两层依赖</li>
+<li>给出学号，就能确定系名——系名依赖于学号</li>
+<li>给出系名，就能确定系主任——系主任依赖与系名</li>
+<li>所以，系主任<strong>间接依赖</strong>于学号</li>
+</ul>
+</li>
+<li>
+<p><strong>解决办法</strong>：</p>
+<ul>
+<li>把系名和系主任单独建表</li>
+</ul>
+<p><img src="./sjk3.png" alt="image-20210705110014247"></p>
+</li>
+</ul>
+<h2 id="4-bc范式">4 BC范式</h2>
+<ul>
+<li>键中的属性也不存在间接依赖</li>
+</ul>
+<h1 id="2-设计表">2 设计表</h1>
+<h2 id="1-数据库设计经验">1 数据库设计经验</h2>
+<ul>
+<li>
+<p><strong>高内聚</strong></p>
+<ul>
+<li>把相关字段放到一起，不相关的单独建表</li>
+<li>如果两个字段能够单独建表，那就单独建表</li>
+</ul>
+</li>
+<li>
+<p><strong>低耦合</strong></p>
+<ul>
+<li>如果两个表之间有弱关系
+<ul>
+<li>一对一可放在一个表，也可两个表加外键</li>
+<li>一对多一般用外键</li>
+<li>多对多一般建中间表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-一对一">2 一对一</h2>
+<ul>
+<li>
+<p>假设一个学生只能加入一个班级</p>
+</li>
+<li>
+<p>可以把班级放在学生表中</p>
+<ul>
+<li>学生id：1001，姓名：小明，班级id：4002</li>
+<li>班级id：4002，名称：入门1班</li>
+</ul>
+</li>
+<li>
+<p>也可以单独建立关联表</p>
+<ul>
+<li>学生id：1001，姓名：小明</li>
+<li>学生班级关联表：id：2003，学生id：1001，班级id：4002</li>
+<li>班级id：4002，名称：入门1班</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-一对多">3 一对多</h2>
+<ul>
+<li>假设一个作者能写多本书</li>
+<li>可以把书放到作者表里
+<ul>
+<li>某些DBMS支持数组，可以存两个id到一个字段</li>
+<li>作者id：1001，姓名：大牛，books：[2001，2002]</li>
+<li>如果不支持数组，就不能这样做了</li>
+</ul>
+</li>
+<li>单独建立关系表（推荐）
+<ul>
+<li>作者id：1001，姓名：大牛</li>
+<li>出版图书表：：id：2001，作者id：1001，书id：4002，出版社id：xxx</li>
+<li>出版图书表：：id：2002，作者id：1001，书id：4003，出版社id：xxx</li>
+<li>书id：4002，名称：js入门</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-多对多">4 多对多</h2>
+<ul>
+<li>假设一个学生可以加入多个班级，每个班级也能有多个学生</li>
+<li>把班级放到学生表中：DBMS支持数组的话可以，否则不可以</li>
+<li>单独建立关系表（推荐）：
+<ul>
+<li>学生id：1001，姓名：小明</li>
+<li>学生班级关系表：id：2001，学生id：1001，班级id：4002，有效期：xxx</li>
+<li>学生班级关系表：id：2002，学生id：1001，班级id：4003，有效期：xxx</li>
+<li>班级id：4002，名称：入门班</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-什么时候建关联表">5 什么时候建关联表</h2>
+<ul>
+<li>当关联自身存在属性时
+<ul>
+<li>比如关联的有效期，有效期为一年</li>
+<li>比如关联的级别，店铺会员分为vip1-6</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-join把表连接起来">3 JOIN把表连接起来</h1>
+<ul>
+<li>连接表
+<ul>
+<li>inner join</li>
+<li>left join：会保留右边的null，以保证左边都显示</li>
+<li>right join：会保留左边的null，以保证右边都显示</li>
+<li>full outer join：保留两边的null，以保证两边都显示</li>
+</ul>
+</li>
+<li>看图巧记</li>
+</ul>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/29234064">图解 SQL 里的各种 JOIN - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<p><img src="./sjk4.png" alt="image-20210706153805324"></p>
+<ul>
+<li><strong>语法</strong></li>
+</ul>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#8b008b;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>A.PK<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">AS</span><span style="color:#bbb"> </span>A_PK,<span style="color:#bbb"> </span>B.PK<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">AS</span><span style="color:#bbb"> </span>B_PK,<span style="color:#bbb">
+</span><span style="color:#bbb">	</span>A.VALUE<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">AS</span><span style="color:#bbb"> </span>A_VALUE,<span style="color:#bbb"> </span>B.VALUE<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">AS</span><span style="color:#bbb"> </span>B_VALUE<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">FROM</span><span style="color:#bbb"> </span>Table_AA<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">INNER</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">JOIN</span><span style="color:#bbb"> </span>Table_BB<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">ON</span><span style="color:#bbb"> </span>A.PK<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>B.PK<span style="color:#bbb">
+</span></code></pre></div><ul>
+<li><strong>尝试</strong>（以inner join为例）：</li>
+</ul>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql">//<span style="color:#bbb"> </span><span style="color:#a61717;background-color:#e3d2d2">用</span>docker启动mysql<span style="color:#a61717;background-color:#e3d2d2">，或者重新</span>docker<span style="color:#bbb"> </span>run一遍<span style="color:#bbb">
+</span><span style="color:#bbb"></span>docker<span style="color:#bbb"> </span>container<span style="color:#bbb"> </span>start<span style="color:#bbb"> </span>mysql1<span style="color:#bbb">
+</span><span style="color:#bbb"></span>//<span style="color:#bbb"> </span><span style="color:#a61717;background-color:#e3d2d2">进入</span>mysql<span style="color:#bbb">
+</span><span style="color:#bbb"></span>docker<span style="color:#bbb"> </span>exec<span style="color:#bbb"> </span>-it<span style="color:#bbb"> </span>mysql1<span style="color:#bbb"> </span>bash<span style="color:#bbb">
+</span><span style="color:#bbb"></span>mysql<span style="color:#bbb"> </span>-u<span style="color:#bbb"> </span>root<span style="color:#bbb"> </span>-p<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#b452cd">123456</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span>//<span style="color:#bbb"> </span><span style="color:#a61717;background-color:#e3d2d2">创建数据库</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">create</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">database</span><span style="color:#bbb"> </span>db1<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">character</span><span style="color:#bbb"> </span><span style="color:#00688b;font-weight:bold">set</span><span style="color:#bbb"> </span>utf8mb4<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">collate</span><span style="color:#bbb"> </span>utf8mb4_unicode_ci;<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">show</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">databases</span>;<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">use</span><span style="color:#bbb"> </span>db1;<span style="color:#bbb">
+</span><span style="color:#bbb"></span>//<span style="color:#bbb"> </span><span style="color:#a61717;background-color:#e3d2d2">创建表</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">create</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">table</span><span style="color:#bbb"> </span><span style="color:#008b45">users</span>(id<span style="color:#bbb"> </span>serial,name<span style="color:#bbb"> </span><span style="color:#00688b;font-weight:bold">text</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">create</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">table</span><span style="color:#bbb"> </span><span style="color:#008b45">staffs</span>(id<span style="color:#bbb"> </span>serial,name<span style="color:#bbb"> </span><span style="color:#00688b;font-weight:bold">text</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">create</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">table</span><span style="color:#bbb"> </span><span style="color:#008b45">orders</span>(id<span style="color:#bbb"> </span>serial,user_id<span style="color:#bbb"> </span><span style="color:#00688b;font-weight:bold">bigint</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">unsigned</span>,staff_id<span style="color:#bbb"> </span><span style="color:#00688b;font-weight:bold">bigint</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">unsigned</span><span style="color:#bbb"> </span>amount<span style="color:#bbb"> </span><span style="color:#00688b;font-weight:bold">int</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">unsigned</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span>//<span style="color:#bbb"> </span><span style="color:#a61717;background-color:#e3d2d2">创建记录</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">insert</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">into</span><span style="color:#bbb"> </span><span style="color:#008b45">users</span><span style="color:#bbb"> </span>(name)<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">values</span><span style="color:#bbb"> </span>(<span style="color:#cd5555">&#39;XiaoMing&#39;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span>+----+----------+<span style="color:#bbb">
+</span><span style="color:#bbb"></span>|<span style="color:#bbb"> </span>id<span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>name<span style="color:#bbb">     </span>|<span style="color:#bbb">
+</span><span style="color:#bbb"></span>+----+----------+<span style="color:#bbb">
+</span><span style="color:#bbb"></span>|<span style="color:#bbb">  </span><span style="color:#b452cd">1</span><span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>XiaoMing<span style="color:#bbb"> </span>|<span style="color:#bbb">
+</span><span style="color:#bbb"></span>+----+----------+<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">insert</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">into</span><span style="color:#bbb"> </span><span style="color:#008b45">staffs</span><span style="color:#bbb"> </span>(name)<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">values</span><span style="color:#bbb"> </span>(<span style="color:#cd5555">&#39;XiaoHong&#39;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span>+----+----------+<span style="color:#bbb">
+</span><span style="color:#bbb"></span>|<span style="color:#bbb"> </span>id<span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>name<span style="color:#bbb">     </span>|<span style="color:#bbb">
+</span><span style="color:#bbb"></span>+----+----------+<span style="color:#bbb">
+</span><span style="color:#bbb"></span>|<span style="color:#bbb">  </span><span style="color:#b452cd">1</span><span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>XiaoHong<span style="color:#bbb"> </span>|<span style="color:#bbb">
+</span><span style="color:#bbb"></span>+----+----------+<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">insert</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">into</span><span style="color:#bbb"> </span><span style="color:#008b45">users</span><span style="color:#bbb"> </span>(user_id,<span style="color:#bbb"> </span>staff_id,<span style="color:#bbb"> </span>amount)<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">values</span><span style="color:#bbb"> </span>(<span style="color:#b452cd">1</span>,<span style="color:#b452cd">1</span>,<span style="color:#b452cd">100</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span>+----+---------+----------+--------+<span style="color:#bbb">
+</span><span style="color:#bbb"></span>|<span style="color:#bbb"> </span>id<span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>user_id<span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>staff_id<span style="color:#bbb"> </span>|<span style="color:#bbb"> </span>amount<span style="color:#bbb"> </span>|<span style="color:#bbb">
+</span><span style="color:#bbb"></span>+----+---------+----------+--------+<span style="color:#bbb">
+</span><span style="color:#bbb"></span>|<span style="color:#bbb">  </span><span style="color:#b452cd">1</span><span style="color:#bbb"> </span>|<span style="color:#bbb">       </span><span style="color:#b452cd">1</span><span style="color:#bbb"> </span>|<span style="color:#bbb">        </span><span style="color:#b452cd">2</span><span style="color:#bbb"> </span>|<span style="color:#bbb">    </span><span style="color:#b452cd">100</span><span style="color:#bbb"> </span>|<span style="color:#bbb">
+</span><span style="color:#bbb"></span>+----+---------+----------+--------+<span style="color:#bbb">
+</span><span style="color:#bbb"></span>//<span style="color:#bbb"> </span><span style="color:#a61717;background-color:#e3d2d2">使用</span>inner<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">join</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">select</span><span style="color:#bbb"> </span>users.name<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">as</span><span style="color:#bbb"> </span>unname,orders.amount<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">as</span><span style="color:#bbb"> </span>amount<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">from</span><span style="color:#bbb"> </span>users<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">inner</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">join</span><span style="color:#bbb"> </span>orders<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">on</span><span style="color:#bbb"> </span>users.id=orders.<span style="color:#8b008b;font-weight:bold">user</span>.id;<span style="color:#bbb">
+</span><span style="color:#bbb"></span>//<span style="color:#bbb"> </span><span style="color:#a61717;background-color:#e3d2d2">得到</span>XiaoMing<span style="color:#bbb"> </span><span style="color:#b452cd">100</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span>+----------+--------+<span style="color:#bbb">
+</span><span style="color:#bbb"></span>|<span style="color:#bbb"> </span>uname<span style="color:#bbb">    </span>|<span style="color:#bbb"> </span>amount<span style="color:#bbb"> </span>|<span style="color:#bbb">
+</span><span style="color:#bbb"></span>+----------+--------+<span style="color:#bbb">
+</span><span style="color:#bbb"></span>|<span style="color:#bbb"> </span>XiaoMing<span style="color:#bbb"> </span>|<span style="color:#bbb">    </span><span style="color:#b452cd">100</span><span style="color:#bbb"> </span>|<span style="color:#bbb">
+</span><span style="color:#bbb"></span>+----------+--------+<span style="color:#bbb">
+</span></code></pre></div><h1 id="4-缓存字段">4 缓存字段</h1>
+<ul>
+<li>
+<p>假设一个博客blog包含多个评论comments</p>
+</li>
+<li>
+<p>如何获取博客的评论数</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#8b008b;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">count</span>(id)<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">from</span><span style="color:#bbb"> </span>comments<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">where</span><span style="color:#bbb"> </span>blog_id=<span style="color:#b452cd">1</span><span style="color:#bbb">
+</span></code></pre></div></li>
+<li>
+<p>更好的办法是在blog表中添加<code>comment_count</code>字段，每次添加comment则+1，每次删除comment则-1</p>
+</li>
+<li>
+<p>这样就可以快速获取博客的评论数，约定缓存字段均使用<code>_count</code>结尾</p>
+</li>
+</ul>
+<h1 id="5-事务">5 事务</h1>
+<ul>
+<li>
+<p>有些操作必须一次完成</p>
+<ul>
+<li>用户评论之后，<strong>首先</strong>要在comments表中新增记录，<strong>其次</strong>在blogs表将对应的comment_count+1</li>
+<li>如果第一步执行了，第二步没有执行，那么数据就乱了</li>
+</ul>
+</li>
+<li>
+<p>使用事务</p>
+<blockquote>
+<p><a href="https://www.runoob.com/mysql/mysql-transaction.html">MySQL 事务 | 菜鸟教程 (runoob.com)</a></p>
+</blockquote>
+</li>
+</ul>
+<h1 id="6-mysql储存引擎">6 MySQL储存引擎</h1>
+<ul>
+<li>
+<p>命令</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#8b008b;font-weight:bold">show</span><span style="color:#bbb"> </span>engines;<span style="color:#bbb">
+</span></code></pre></div></li>
+<li>
+<p>常见</p>
+<ul>
+<li>innoDB-默认，是事务型数据库的首选，支持事务，遵循ACID、支持行锁和外键；</li>
+<li>MyISAM-拥有较高的插入查询速度，但不支持事务</li>
+<li>Memory-内存中，快速访问数据</li>
+<li>Archive-只支持insert和select</li>
+</ul>
+</li>
+</ul>
+<h1 id="7-索引">7 索引</h1>
+<ul>
+<li>
+<p>语法</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#8b008b;font-weight:bold">create</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">unique</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">index</span><span style="color:#bbb"> </span>index1<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">on</span><span style="color:#bbb"> </span>users(name(<span style="color:#b452cd">100</span>));<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">show</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">index</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">in</span><span style="color:#bbb"> </span>users;<span style="color:#bbb">
+</span></code></pre></div><blockquote>
+<p><a href="https://www.runoob.com/mysql/mysql-index.html">MySQL 索引 | 菜鸟教程 (runoob.com)</a></p>
+</blockquote>
+</li>
+<li>
+<p>用途</p>
+<ul>
+<li>提高搜索效率</li>
+<li>where xxx &gt; 100 那么我们可以创建xxx的索引</li>
+<li>where xxx &gt; 100 and yyy &gt; 200，可以创建xxx，yyy的索引</li>
+</ul>
+</li>
+</ul>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">最后修改于 2021-07-05</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="https://gsemir0418.github.io/posts/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">
+			下回<br>String常用方法整理
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://gsemir0418.github.io/posts/sequelize.js/">
+			上回<br>Sequelize ORM
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+<div id="gitalk-container"></div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 GSemir Blog
+	
+</div>
+            </div>
+    <script>
+let app;
+
+app = new Vue({
+    el: '#app',
+    data: {
+        scrollY: 0,
+        navOpacity: 0,
+        isDrawerOpen: false,
+        mounted: false,
+        isDarkMode: false
+    },
+    methods: {
+            sgn(t, x) {
+                let k = 1. / (1. - 2 * t);
+                if (x <= t) return 0;
+                else if (x >= 1 - t) return 1;
+                else {
+                    return k * (x - t);
+                }
+            },
+            handleScroll() {
+                this.scrollY = window.scrollY;
+                this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+
+                if (this.navOpacity >= 1) {
+                    navBackground.style.opacity = 1;
+                    navTitle.style.opacity = 1;
+                } else {
+                    navBackground.style.opacity = 0;
+                    navTitle.style.opacity = 0;
+                }
+            },
+            handleResize() {
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+                extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
+            },
+            navBarHeight() {
+                return this.$refs.navBar.offsetHeight;
+            },
+            pageHeadHeight() {
+                return this.$refs.pageHead.offsetHeight;
+            },
+            toggleDrawer() {
+                this.isDrawerOpen = !this.isDrawerOpen;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            closeDrawer() {
+                this.isDrawerOpen = false;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            toggleDarkMode() {
+                this.isDarkMode = !this.isDarkMode;
+                if (this.isDarkMode==true){
+                    document.cookie = "night=1;path=/";
+                    document.body.classList.add("night");
+                } else {
+                    document.cookie = "night=0;path=/";
+                    document.body.classList.remove("night");
+                }
+            }
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+        window._nonDesktop = function () {
+            let check = false;
+            (function (a) {
+                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+            })(navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        };
+        
+        var night = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if (night==""){
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                
+            }
+        }else{
+            
+            if (night=="1") {
+                this.toggleDarkMode();
+            }
+        }
+    },
+    mounted() {
+        this.handleScroll();
+        this.handleResize();
+        this.mounted = true;
+
+        
+    },
+    destroyed() {
+        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
+    }
+});
+</script>
+
+<script src="https://gsemir0418.github.io//js/journal.js"></script>
+    </body>
+</html>

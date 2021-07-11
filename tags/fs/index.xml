@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fs on GSemir Blog</title>
+    <link>https://gsemir0418.github.io/tags/fs/</link>
+    <description>Recent content in fs on GSemir Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 25 Jun 2021 14:40:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/fs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Node文件模块</title>
+      <link>https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Fri, 25 Jun 2021 14:40:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</guid>
+      <description>1 待办事项命令行程序需求   功能：
+  可以列出所有的todo；
+  新增、编辑、删除todo；
+  修改todo状态为已完成/未完成
+    命令
+t t add 任务名 t clear   2 创建命令行项目  空文件夹下，执行：  yarn init -y -y表示跳过交互式对话（确定版本等信息），根据默认值生成package.json
+ 创建index.js，引入commanderjs库，添加add和clear子命令：  const program = require(&amp;#39;commander&amp;#39;); program .option(&amp;#39;-x,--xxx&amp;#39;, &amp;#39;desc of x&amp;#39;)// x选项 即在node index命令后输入的选项 program .command(&amp;#39;add&amp;#39;)// 子命令 	.description(&amp;#39;add a task&amp;#39;)// 子命令描述 	.action((...args) =&amp;gt; { //拿到用户输入的所有字符串参数  const words = args.slice(0,-1).join(&amp;#39; &amp;#39;)// 由于最后一个参数默认是command对象，因此需要对参数进行预处理 	}) program .</description>
+    </item>
+    
+  </channel>
+</rss>

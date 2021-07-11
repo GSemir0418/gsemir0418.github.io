@@ -6,95 +6,54 @@
     <description>Recent content in 前端 on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Jul 2021 11:01:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Jul 2021 16:47:33 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Sequelize ORM</title>
-      <link>https://gsemir0418.github.io/posts/sequelize.js/</link>
-      <pubDate>Fri, 02 Jul 2021 11:01:55 +0800</pubDate>
+      <title>Umi-Request配置</title>
+      <link>https://gsemir0418.github.io/posts/umi-request%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Fri, 09 Jul 2021 16:47:33 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/sequelize.js/</guid>
-      <description>1 MySQL数据类型 MySQL支持的数据类型比较少，主要有五种类型：
- 数字类型 字符串类型 时间和日期类型 JSON类型 其他特殊类型   id 可以指定类型为serial序列，时间格式最好使用ISO 8601格式，即2021-07-02T11:01:55+08:00
- 2 Sequelize使用  官方文档：   sequelize.org/master/manual/getting-started.html
-  安装：  yarn add sequelizeyarn add mysql2 使用：  // 引入 const { Sequelize, Model, DataTypes } = require(&amp;#39;sequelize&amp;#39;) // 创建sequelize连接 const sequelize = new Sequelize(&amp;#39;gsq&amp;#39;, &amp;#39;root&amp;#39;, &amp;#39;12345&amp;#39;, { host: &amp;#39;localhost&amp;#39;, dialect: &amp;#39;mysql&amp;#39;, }) // 创建User模型 class User extends Model { } // 初始化User表 User.</description>
+      <guid>https://gsemir0418.github.io/posts/umi-request%E9%85%8D%E7%BD%AE/</guid>
+      <description>utils/request.js
+/** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request */ import { extend } from &amp;#39;umi-request&amp;#39;; import { notification } from &amp;#39;antd&amp;#39;; const codeMessage = { 200: &amp;#39;服务器成功返回请求的数据。&amp;#39;, 201: &amp;#39;新建或修改数据成功。&amp;#39;, 202: &amp;#39;一个请求已经进入后台排队（异步任务）。&amp;#39;, 204: &amp;#39;删除数据成功。&amp;#39;, 400: &amp;#39;发出的请求有错误，服务器没有进行新建或修改数据的操作。&amp;#39;, 401: &amp;#39;用户没有权限（令牌、用户名、密码错误）。&amp;#39;, 403: &amp;#39;用户得到授权，但是访问是被禁止的。&amp;#39;, 404: &amp;#39;发出的请求针对的是不存在的记录，服务器没有进行操作。&amp;#39;, 406: &amp;#39;请求的格式不可得。&amp;#39;, 410: &amp;#39;请求的资源被永久删除，且不会再得到的。&amp;#39;, 422: &amp;#39;当创建一个对象时，发生一个验证错误。&amp;#39;, 500: &amp;#39;服务器发生错误，请检查服务器。&amp;#39;, 502: &amp;#39;网关错误。&amp;#39;, 503: &amp;#39;服务不可用，服务器暂时过载或维护。&amp;#39;, 504: &amp;#39;网关超时。&amp;#39;, }; /** 异常处理程序 */ const errorHandler = (error) =&amp;gt; { const { response } = error; if (response &amp;amp;&amp;amp; response.</description>
     </item>
     
     <item>
-      <title>Node.js连接数据库</title>
-      <link>https://gsemir0418.github.io/posts/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
-      <pubDate>Fri, 02 Jul 2021 09:24:55 +0800</pubDate>
+      <title>Object常用方法整理</title>
+      <link>https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <pubDate>Wed, 07 Jul 2021 17:30:59 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
-      <description>1 安装mysql依赖包 yarn add mysql2 创建mysql连接 创建连接前，确保容器是开启状态。新建test.js文件。
- 引入mysql模块  const mysql = require(&amp;#39;mysql&amp;#39;)  创建连接  const connection = mysql.createConnection({ host: &amp;#39;localhost&amp;#39;, // 老版本的docker需要填ip  user: &amp;#39;root&amp;#39;, password: &amp;#39;12345&amp;#39; }) connection.connect();  创建数据库  // 创建数据库 connection.query(&amp;#39;CREATE DATABASE IF NOT EXISTS gsq DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_unicode_520_ci;&amp;#39;, (error, results, fields) =&amp;gt; { if (error) throw error; console.log(results) }) 创建名为gsq的数据库（数据库不存在的情况下），并指定默认字符集为utf8mb4(mysql对于utf-8字符集支持不佳)
- 创建数据表  // 选择数据库 connection.query(&amp;#39;use gsq;&amp;#39;) // 创建表 connection.</description>
+      <guid>https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>Object.assign()   用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象
+  语法：
+Object.assign(target, ...sources) target目标对象；source源对象
+  如果目标对象中的属性具有相同的键，则属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的属性。
+  只会拷贝源对象自身的并且可枚举的属性到目标对象。
+  为了将属性定义（包括其可枚举性）复制到原型，应使用Object.getOwnPropertyDescriptor()和Object.defineProperty()。深拷贝？
+  示例：
+// 复制一个对象 const obj = { a: 1 }; const copy = Object.assign({}, obj); console.log(copy); // { a: 1 }  // 合并对象 const o1 = { a: 1 }; const o2 = { b: 2 }; const o3 = { c: 3 }; const obj = Object.assign(o1, o2, o3); console.</description>
     </item>
     
     <item>
-      <title>Docker安装MySQL</title>
-      <link>https://gsemir0418.github.io/posts/docker%E5%AE%89%E8%A3%85mysql/</link>
-      <pubDate>Fri, 02 Jul 2021 08:36:55 +0800</pubDate>
+      <title>String常用方法整理</title>
+      <link>https://gsemir0418.github.io/posts/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <pubDate>Mon, 05 Jul 2021 13:29:15 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/docker%E5%AE%89%E8%A3%85mysql/</guid>
-      <description>1 win10安装Docker  https://hub.docker.com/
- 注册登录并下载安装Docker Desktop。
- 启用Hyper-V  右键Windows按钮并选择“应用和功能”，选择相关设置中的“程序和功能”，选择“启用或关闭Windows功能”，选择Hyper-V，单机确定。
- 启用CPU的虚拟化  进入BIOS界面，找到Virtualization Technology选项，将disabled改为enabled。
- 更新WSL2  如果出现WSL 2 installation is incomplete的报错，则需要更新WSL 2。
- https://aka.ms/wsl2kernel
- 根据文档下载最新包，安装重启即可。
-2 Docker安装MySQL docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:8.0.25 其中name是容器的名字；-e是环境变量，配置的MYSQL_ROOT_PASSWORD是mysql密码；-p是端口映射，左侧是本机端口号，右侧是虚拟机端口号；-d表示程序持续运行；最后指定mysql的版本号为8.0.25。
-安装完成后，在docker desktop中可以发现mysql1的容器已开启，或者在命令行输入docker ps查看全部在运行的容器。
-3 Docker常用命令 docker ps 查看容器运行状态
-docker start mysql1 启动mysql1容器
-docker kill mysql1 关闭容器mysql1
-docker container run mysql1 开启刚刚关掉的容器
-docker rm mysql1 删除容器，必要时可加-f选项
-docker run xxx 启动新容器</description>
-    </item>
-    
-    <item>
-      <title>NodeHTTP模块</title>
-      <link>https://gsemir0418.github.io/posts/nodehttp%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Wed, 30 Jun 2021 09:55:55 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/posts/nodehttp%E6%A8%A1%E5%9D%97/</guid>
-      <description>0 准备工作 1 ts-node-dev  当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用，但非常适合用来学习  安装
-npm -g i ts-node-dev要用npm安装 ，用yarn安装的话使用时会报错。。无法识别“ts-node-dev”命令，不知道为什么。
-2 VSCode配置 配置自动保存与保存后自动格式化：
-ctrl shift p打开首选项：打开设置(ui)，AutoSave修改为onFocusChange，搜索format，勾选Format On Save开启保存后自动格式化。
-3 curl  GET请求：curl -v url POST请求：curl -v -d “name=gsq&amp;quot; url 设置请求头：-H &#39;Content-Type:application/json&#39; 设置动词：-X PUT JSON请求：curl -d &#39;{&amp;quot;name&amp;quot;:&amp;quot;bob&amp;quot;}&#39; -H &#39;Content-Type:application/json&#39; url 后面会用到curl来构造请求  1 创建项目  初始化项目：  yarn init -y 安装@types/node声明文件  yarn add --dev @types/node 新建index.ts  // 引入http模块 import * as http from &amp;#39;http&amp;#39; // 用http创建server const server = http.</description>
-    </item>
-    
-    <item>
-      <title>调试Nodejs</title>
-      <link>https://gsemir0418.github.io/posts/%E8%B0%83%E8%AF%95nodejs/</link>
-      <pubDate>Wed, 30 Jun 2021 09:40:55 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/posts/%E8%B0%83%E8%AF%95nodejs/</guid>
-      <description>1 VSCode调试Node.js 在launch.json中添加配置
-{ // 使用 IntelliSense 了解相关属性。 // 悬停以查看现有属性的描述。 // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387 &amp;#34;version&amp;#34;: &amp;#34;0.2.0&amp;#34;, &amp;#34;configurations&amp;#34;: [ { &amp;#34;type&amp;#34;: &amp;#34;pwa-node&amp;#34;, &amp;#34;request&amp;#34;: &amp;#34;launch&amp;#34;,// 会用node来启动 &amp;#34;name&amp;#34;: &amp;#34;cli add task&amp;#34;, &amp;#34;skipFiles&amp;#34;: [ &amp;#34;&amp;lt;node_internals&amp;gt;/**&amp;#34; ], &amp;#34;program&amp;#34;: &amp;#34;${workspaceFolder}\\cli.js&amp;#34;,// 入口文件 &amp;#34;args&amp;#34;: [&amp;#34;add&amp;#34;,&amp;#34;task&amp;#34;,&amp;#34;200&amp;#34;]// 参数 } ] } 点击启动即可在调试控制台查看运行情况
-2 命令行结合Chrome调试Node.js 命令行中输入
-node --inspect-brk cli add task2 打开浏览器，F12检查页面，几秒钟后上方会出现node图标，点进去即可对node程序进行调试了。</description>
-    </item>
-    
-    <item>
-      <title>单元测试之文件模块</title>
-      <link>https://gsemir0418.github.io/posts/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B9%8B%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Tue, 29 Jun 2021 08:43:55 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/posts/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B9%8B%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</guid>
-      <description>安装jest
-yarn add -dev jest在package.json中添加test命令
-&amp;#34;scripts&amp;#34;:{ &amp;#34;test&amp;#34;:&amp;#34;jest&amp;#34; } 新建__tests__文件夹，单元测试文件一般命名为xx.unit.js或者xx.spec.js，下面是测试示例，测试db中的read和write是否为方法：
-const db = require(&amp;#39;../db.js&amp;#39;) describe(&amp;#39;db&amp;#39;, () =&amp;gt; { it(&amp;#39;read is a function&amp;#39;, () =&amp;gt; { expect(db.read instanceof Function).toBe(true) }) it(&amp;#39;write is a function&amp;#39;, () =&amp;gt; { expect(db.write instanceof Function).toBe(true) }) }) 运行
-yarn test一般单元测试为白盒测试，知道代码是怎么编写的
-单元测试不应该与外界打交道，不能操作硬盘、网络等
-单元测试的对象是函数
-功能测试的对象是模块
-集成测试的对象是系统
-在__test__同级目录下创建__mocks__，新建fs.js，在test文件开头就要写
-jest.mock(&#39;&#39;)未完待续。。。 </description>
+      <guid>https://gsemir0418.github.io/posts/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>String.prototype.match()   根据传入的正则表达式的检索字符串并返回结果
+  语法：
+str.match(regexp)   例子
+   String.prototype.search()   根据传入的正则表达式寻找符合的字符位置
+  语法
+str.search(regexp)   如果匹配，则返回首次匹配项的索引；反之返回-1
+  例子：
+const str = &amp;#39;hello World&amp;#39; str.search(/[A-Z]/g)// 6 str.search(/[.]/g)// -1   String.prototype.chatAt()   从一个字符串中返回指定index的字符
+  语法
+str.chartAt(index) 若没有提供index，则默认使用0
+  例子
+const str = &amp;#39;ABCD&amp;#39; str.charAt(1)// &amp;#34;B&amp;#34;   String.prototype.indexOf()   查询字符串对象中第一次出现指定值的索引
+  语法：
+str.indexOf(searchValue, fromIndex)fromIndex可选，表示开始查找的位置，默认为0，若指定为负数，则等价于传入0；若大于str.length，则必反回-1
+indexOf区分大小写</description>
     </item>
     
     <item>
@@ -103,11 +62,17 @@ jest.mock(&#39;&#39;)未完待续。。。 </description>
       <pubDate>Mon, 28 Jun 2021 09:30:55 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/posts/array/</guid>
-      <description>Array.prototype.map() 1.关键词：遍历 2.是否修改原数组：false 3.返回值： newArray[]，回调函数的结果组成了新数组的每一个元素。
-4.语法： var new_array = arr.map((currentValue, index, array) =&amp;gt; { // callback })  currentValue：callback数组中正在处理的当前元素； index：可选，callback数组中正在处理的当前元素的索引； array：可选，map方法调用的数组，几乎不用  5.描述 map 方法会给原数组中的每个元素都按顺序调用一次 callback 函数。callback 每次执行后的返回值（包括undefined）组合起来形成一个新数组。 callback 函数只会在有值的索引上被调用；那些从来没被赋过值或者使用 delete 删除的索引则不会被调用。
+      <description>Array.prototype.map() 1.关键词：遍历
+2.是否修改原数组：false
+3.返回值：
+newArray[]，回调函数的结果组成了新数组的每一个元素。
+4.语法：
+var new_array = arr.map((currentValue, index, array) =&amp;gt; { // callback })  currentValue：callback数组中正在处理的当前元素； index：可选，callback数组中正在处理的当前元素的索引； array：可选，map方法调用的数组，几乎不用  5.描述
+map 方法会给原数组中的每个元素都按顺序调用一次 callback 函数。callback 每次执行后的返回值（包括undefined）组合起来形成一个新数组。 callback 函数只会在有值的索引上被调用；那些从来没被赋过值或者使用 delete 删除的索引则不会被调用。
 因为map生成一个新数组，当你不打算使用返回的新数组却使用map是违背设计初衷的，请用forEach或者for-of替代。
 callback 函数会被自动传入三个参数：数组元素，元素索引，原数组本身。
-6.示例 // 求数组中每个元素的平方根 const arr = [4, 9, 16] const newArr = arr.map(Math.sqrt)// [2, 3, 4]  // 使用map重新格式化数组中的对象 const arr = [ { key:1, value:10 }, { key:2, value:20 } ] const newArr = arr.</description>
+6.示例
+// 求数组中每个元素的平方根 const arr = [4, 9, 16] const newArr = arr.map(Math.sqrt)// [2, 3, 4]  // 使用map重新格式化数组中的对象 const arr = [ { key:1, value:10 }, { key:2, value:20 } ] const newArr = arr.</description>
     </item>
     
     <item>
@@ -178,21 +143,6 @@ yarn create umi选择ant-design-pro、JavaScript、simple，完成项目的创�
     </item>
     
     <item>
-      <title>Node文件模块</title>
-      <link>https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Fri, 25 Jun 2021 14:40:55 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</guid>
-      <description>1 待办事项命令行程序需求   功能：
-  可以列出所有的todo；
-  新增、编辑、删除todo；
-  修改todo状态为已完成/未完成
-    命令
-t t add 任务名 t clear   2 创建命令行项目  空文件夹下，执行：  yarn init -y -y表示跳过交互式对话（确定版本等信息），根据默认值生成package.json
- 创建index.js，引入commanderjs库，添加add和clear子命令：  const program = require(&amp;#39;commander&amp;#39;); program .option(&amp;#39;-x,--xxx&amp;#39;, &amp;#39;desc of x&amp;#39;)// x选项 即在node index命令后输入的选项 program .command(&amp;#39;add&amp;#39;)// 子命令 	.description(&amp;#39;add a task&amp;#39;)// 子命令描述 	.action((...args) =&amp;gt; { //拿到用户输入的所有字符串参数  const words = args.slice(0,-1).join(&amp;#39; &amp;#39;)// 由于最后一个参数默认是command对象，因此需要对参数进行预处理 	}) program .</description>
-    </item>
-    
-    <item>
       <title>React组件生命周期</title>
       <link>https://gsemir0418.github.io/posts/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</link>
       <pubDate>Fri, 25 Jun 2021 11:09:51 +0800</pubDate>
@@ -248,6 +198,21 @@ const clientWidth = document.</description>
 2.调用 render()得到虚拟 DOM, 并解析为真实 DOM
 3.插入到指定的页面元素内部
   class MyComponent extends React.Component{ render(){ //render放在MyComponent的原型对象（React.Component）上，供实例使用 	//render中的this指向MyComponent实例对象（组件实例对象） 	console.log(&amp;#39;render方法中的this指向：&amp;#39;,this); return &amp;lt;h1&amp;gt;类式组件，适用于复杂组件的定义&amp;lt;/h1&amp;gt; } } ReactDOM.render(&amp;lt;MyComponent/&amp;gt;,document.getElementById(&amp;#39;test&amp;#39;))  2 组件实例三大属性 2.1 state 2.1.1 state基本使用 state 是组件对象最重要的属性，值是对象(可以包含多个 key-value 的组合)</description>
+    </item>
+    
+    <item>
+      <title>React Hooks全解</title>
+      <link>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</guid>
+      <description>1.useState 使用状态 const [n, setN] = React.useState(0) const [user, setUser] = React.useState({name:&amp;#39;F&amp;#39;}) 注意事项1：不可局部更新 const [user, setUser] = useState({name:&amp;#39;Jack&amp;#39;,age:18}) setState({ name:&amp;#39;Sam&amp;#39; })   结果得到的是{name:&amp;lsquo;Sam&amp;rsquo;}，age属性消失了
+  （可以在之前加上&amp;hellip;user，表示复制user的全部属性到这个新对象中）
+  说明对于state不能部分setState，因为setState不会帮我们合并属性
+  实际上React中所有hooks都不能自动合并属性，需要我们自己去操作
+  注意事项2：地址要变 setState(obj)如果obj地址不变，那么React就认为数据没有变化
+const [user, setUser] = useState({name:&amp;#39;Jack&amp;#39;,age:18}) user.name = &amp;#39;Sam&amp;#39; setState(user)  表面上我们先改变了user对象的name属性（实际上也确实改变了），再将user对象setState进去，setState之后的user对象并没有改变。 对于React来说，对象还是user（地址没变），因此React不认为user改变了，依然加载的是原来的user。 上一个例子，是在setState中创建了一个新对象，因此React会直接加载新的对象（这也反映了setState并不会直接修改state，而是生成一个新的state）  useState接受函数 const [state, setState] = useState(() =&amp;gt; { return initState }) 该函数返回初始state，且只执行一次，节约反复更新渲染组件时js引擎的解析时间（首次渲染时会解析，再次更新组件时js就不会解析这个匿名函数了）
+setState接受函数 const [n, setN] = useState(0) setN(n + 1) setN(n + 1) 虽然运行了两次setN，但运行结果为1，并不是预想中的2，原因同样是由于setN并不会改变n的值，n始终为0</description>
     </item>
     
   </channel>

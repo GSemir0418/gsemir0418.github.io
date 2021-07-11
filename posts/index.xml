@@ -6,7 +6,89 @@
     <description>Recent content in Posts on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Jul 2021 11:01:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Jul 2021 16:47:33 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Umi-Request配置</title>
+      <link>https://gsemir0418.github.io/posts/umi-request%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Fri, 09 Jul 2021 16:47:33 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/umi-request%E9%85%8D%E7%BD%AE/</guid>
+      <description>utils/request.js
+/** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request */ import { extend } from &amp;#39;umi-request&amp;#39;; import { notification } from &amp;#39;antd&amp;#39;; const codeMessage = { 200: &amp;#39;服务器成功返回请求的数据。&amp;#39;, 201: &amp;#39;新建或修改数据成功。&amp;#39;, 202: &amp;#39;一个请求已经进入后台排队（异步任务）。&amp;#39;, 204: &amp;#39;删除数据成功。&amp;#39;, 400: &amp;#39;发出的请求有错误，服务器没有进行新建或修改数据的操作。&amp;#39;, 401: &amp;#39;用户没有权限（令牌、用户名、密码错误）。&amp;#39;, 403: &amp;#39;用户得到授权，但是访问是被禁止的。&amp;#39;, 404: &amp;#39;发出的请求针对的是不存在的记录，服务器没有进行操作。&amp;#39;, 406: &amp;#39;请求的格式不可得。&amp;#39;, 410: &amp;#39;请求的资源被永久删除，且不会再得到的。&amp;#39;, 422: &amp;#39;当创建一个对象时，发生一个验证错误。&amp;#39;, 500: &amp;#39;服务器发生错误，请检查服务器。&amp;#39;, 502: &amp;#39;网关错误。&amp;#39;, 503: &amp;#39;服务不可用，服务器暂时过载或维护。&amp;#39;, 504: &amp;#39;网关超时。&amp;#39;, }; /** 异常处理程序 */ const errorHandler = (error) =&amp;gt; { const { response } = error; if (response &amp;amp;&amp;amp; response.</description>
+    </item>
+    
+    <item>
+      <title>NodeStream模块</title>
+      <link>https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Thu, 08 Jul 2021 14:07:04 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/</guid>
+      <description>如果多人同时访问服务器中的此文件，则内存占用爆炸
+11.8内存占用
+可读的流传给可写的流
+文件&amp;ndash;&amp;gt;网络</description>
+    </item>
+    
+    <item>
+      <title>Object常用方法整理</title>
+      <link>https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <pubDate>Wed, 07 Jul 2021 17:30:59 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>Object.assign()   用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象
+  语法：
+Object.assign(target, ...sources) target目标对象；source源对象
+  如果目标对象中的属性具有相同的键，则属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的属性。
+  只会拷贝源对象自身的并且可枚举的属性到目标对象。
+  为了将属性定义（包括其可枚举性）复制到原型，应使用Object.getOwnPropertyDescriptor()和Object.defineProperty()。深拷贝？
+  示例：
+// 复制一个对象 const obj = { a: 1 }; const copy = Object.assign({}, obj); console.log(copy); // { a: 1 }  // 合并对象 const o1 = { a: 1 }; const o2 = { b: 2 }; const o3 = { c: 3 }; const obj = Object.assign(o1, o2, o3); console.</description>
+    </item>
+    
+    <item>
+      <title>String常用方法整理</title>
+      <link>https://gsemir0418.github.io/posts/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <pubDate>Mon, 05 Jul 2021 13:29:15 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>String.prototype.match()   根据传入的正则表达式的检索字符串并返回结果
+  语法：
+str.match(regexp)   例子
+   String.prototype.search()   根据传入的正则表达式寻找符合的字符位置
+  语法
+str.search(regexp)   如果匹配，则返回首次匹配项的索引；反之返回-1
+  例子：
+const str = &amp;#39;hello World&amp;#39; str.search(/[A-Z]/g)// 6 str.search(/[.]/g)// -1   String.prototype.chatAt()   从一个字符串中返回指定index的字符
+  语法
+str.chartAt(index) 若没有提供index，则默认使用0
+  例子
+const str = &amp;#39;ABCD&amp;#39; str.charAt(1)// &amp;#34;B&amp;#34;   String.prototype.indexOf()   查询字符串对象中第一次出现指定值的索引
+  语法：
+str.indexOf(searchValue, fromIndex)fromIndex可选，表示开始查找的位置，默认为0，若指定为负数，则等价于传入0；若大于str.length，则必反回-1
+indexOf区分大小写</description>
+    </item>
+    
+    <item>
+      <title>数据库基础</title>
+      <link>https://gsemir0418.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 05 Jul 2021 08:57:20 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</guid>
+      <description>1 第一二三范式 1 第一范式 1NF   定义：字段不可再分
+  举例：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段
+即user表里应有left_eye和right_eye，而不能存为一个字段
+  缺点：
+​	这是一个学生选课表，没有违反第一范式，但是存在如下问题：
+​	数据冗余、创建系时插入异常、删除学生会导致系消失、学生转系时改动多处
+​	结论：第一范式不够强
+  2 第二范式 2NF   定义：
+ 在1NF的基础上，要有键（键可由多个字段组合） 所有字段必须分别完全依赖于键 如果键是多个字段组合，则不允许部分依赖于该键    依赖关系：
+ 给出键，就能唯一确定字段的值 如给出学号，就能唯一确定姓名，反之则不行 则称姓名依赖于学号    不满足第二范式的地方：
+ 上表的键为（学号、课名） 但存在部份依赖：姓名依赖与学号    改进：
+ 选课表（学号，课名，分数） 学生表（学号，姓名，系名，系主任）    3 第三范式 3NF   定义：
+ 一个表里不能有两层依赖 给出学号，就能确定系名——系名依赖于学号 给出系名，就能确定系主任——系主任依赖与系名 所以，系主任间接依赖于学号    解决办法：</description>
+    </item>
+    
     <item>
       <title>Sequelize ORM</title>
       <link>https://gsemir0418.github.io/posts/sequelize.js/</link>
@@ -64,7 +146,10 @@ docker run xxx 启动新容器</description>
 const a = p.a
 const b = p.b
 等同于
-const {a:a,b:b} = p</description>
+const {a:a,b:b} = p
+  对象中添加属性，可以利用Object.assign()将其复制到一个对象中，
+const obj = { a:1, b:2 } const c = { pn_detail:[1, 2, 3] } Object.assign(c, obj)// { pn_detail:[1, 2, 3], a:1, b:2 }   在对象中取出指定的values
+  </description>
     </item>
     
     <item>
@@ -117,11 +202,17 @@ jest.mock(&#39;&#39;)未完待续。。。 </description>
       <pubDate>Mon, 28 Jun 2021 09:30:55 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/posts/array/</guid>
-      <description>Array.prototype.map() 1.关键词：遍历 2.是否修改原数组：false 3.返回值： newArray[]，回调函数的结果组成了新数组的每一个元素。
-4.语法： var new_array = arr.map((currentValue, index, array) =&amp;gt; { // callback })  currentValue：callback数组中正在处理的当前元素； index：可选，callback数组中正在处理的当前元素的索引； array：可选，map方法调用的数组，几乎不用  5.描述 map 方法会给原数组中的每个元素都按顺序调用一次 callback 函数。callback 每次执行后的返回值（包括undefined）组合起来形成一个新数组。 callback 函数只会在有值的索引上被调用；那些从来没被赋过值或者使用 delete 删除的索引则不会被调用。
+      <description>Array.prototype.map() 1.关键词：遍历
+2.是否修改原数组：false
+3.返回值：
+newArray[]，回调函数的结果组成了新数组的每一个元素。
+4.语法：
+var new_array = arr.map((currentValue, index, array) =&amp;gt; { // callback })  currentValue：callback数组中正在处理的当前元素； index：可选，callback数组中正在处理的当前元素的索引； array：可选，map方法调用的数组，几乎不用  5.描述
+map 方法会给原数组中的每个元素都按顺序调用一次 callback 函数。callback 每次执行后的返回值（包括undefined）组合起来形成一个新数组。 callback 函数只会在有值的索引上被调用；那些从来没被赋过值或者使用 delete 删除的索引则不会被调用。
 因为map生成一个新数组，当你不打算使用返回的新数组却使用map是违背设计初衷的，请用forEach或者for-of替代。
 callback 函数会被自动传入三个参数：数组元素，元素索引，原数组本身。
-6.示例 // 求数组中每个元素的平方根 const arr = [4, 9, 16] const newArr = arr.map(Math.sqrt)// [2, 3, 4]  // 使用map重新格式化数组中的对象 const arr = [ { key:1, value:10 }, { key:2, value:20 } ] const newArr = arr.</description>
+6.示例
+// 求数组中每个元素的平方根 const arr = [4, 9, 16] const newArr = arr.map(Math.sqrt)// [2, 3, 4]  // 使用map重新格式化数组中的对象 const arr = [ { key:1, value:10 }, { key:2, value:20 } ] const newArr = arr.</description>
     </item>
     
     <item>
@@ -351,6 +442,21 @@ hugo --theme=diary --baseUrl=&amp;quot;https://gsemir0418.github.io/&amp;quot; -
 在public文件夹下，进行git初始化。
 git initgit add .git commit -m &amp;quot;v0&amp;quot;此时需要注册GitHub信息
 git config --global user.email &amp;quot;you@example.com&amp;quot;git config --global user.</description>
+    </item>
+    
+    <item>
+      <title>React Hooks全解</title>
+      <link>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</guid>
+      <description>1.useState 使用状态 const [n, setN] = React.useState(0) const [user, setUser] = React.useState({name:&amp;#39;F&amp;#39;}) 注意事项1：不可局部更新 const [user, setUser] = useState({name:&amp;#39;Jack&amp;#39;,age:18}) setState({ name:&amp;#39;Sam&amp;#39; })   结果得到的是{name:&amp;lsquo;Sam&amp;rsquo;}，age属性消失了
+  （可以在之前加上&amp;hellip;user，表示复制user的全部属性到这个新对象中）
+  说明对于state不能部分setState，因为setState不会帮我们合并属性
+  实际上React中所有hooks都不能自动合并属性，需要我们自己去操作
+  注意事项2：地址要变 setState(obj)如果obj地址不变，那么React就认为数据没有变化
+const [user, setUser] = useState({name:&amp;#39;Jack&amp;#39;,age:18}) user.name = &amp;#39;Sam&amp;#39; setState(user)  表面上我们先改变了user对象的name属性（实际上也确实改变了），再将user对象setState进去，setState之后的user对象并没有改变。 对于React来说，对象还是user（地址没变），因此React不认为user改变了，依然加载的是原来的user。 上一个例子，是在setState中创建了一个新对象，因此React会直接加载新的对象（这也反映了setState并不会直接修改state，而是生成一个新的state）  useState接受函数 const [state, setState] = useState(() =&amp;gt; { return initState }) 该函数返回初始state，且只执行一次，节约反复更新渲染组件时js引擎的解析时间（首次渲染时会解析，再次更新组件时js就不会解析这个匿名函数了）
+setState接受函数 const [n, setN] = useState(0) setN(n + 1) setN(n + 1) 虽然运行了两次setN，但运行结果为1，并不是预想中的2，原因同样是由于setN并不会改变n的值，n始终为0</description>
     </item>
     
   </channel>

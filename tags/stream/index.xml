@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>stream on GSemir Blog</title>
+    <link>https://gsemir0418.github.io/tags/stream/</link>
+    <description>Recent content in stream on GSemir Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 08 Jul 2021 14:07:04 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/stream/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NodeStream模块</title>
+      <link>https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Thu, 08 Jul 2021 14:07:04 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/</guid>
+      <description>如果多人同时访问服务器中的此文件，则内存占用爆炸
+11.8内存占用
+可读的流传给可写的流
+文件&amp;ndash;&amp;gt;网络</description>
+    </item>
+    
+  </channel>
+</rss>
