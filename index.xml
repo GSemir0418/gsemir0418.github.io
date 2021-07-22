@@ -282,7 +282,38 @@ console.log(JSON.stringify(depClone)); &lt;span style=&#34;color:#228b22&#34;&gt
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;NaN&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;/&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;);         &lt;span style=&#34;color:#228b22&#34;&gt;// true
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;objectkey&#34;&gt;Object.key()&lt;/h1&gt;
+&lt;h1 id=&#34;objectprototypehasownproperty&#34;&gt;Object.prototype.hasOwnProperty()&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;判断对象自身属性中是否具有指定属性（是否有指定的键）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;obj.hasOwnProperty(prop)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;prop&lt;/code&gt;要检测的属性的&lt;code&gt;String&lt;/code&gt;字符串形式表示的名称，或者&lt;code&gt;Symbol&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;所有继承了&lt;code&gt;Object&lt;/code&gt;的对象都会继承到 &lt;code&gt;hasOwnProperty&lt;/code&gt; 方法。这个方法可以用来检测一个对象是否含有特定的自身属性；和&lt;code&gt;in&lt;/code&gt;运算符不同，该方法会忽略掉那些从原型链上继承到的属性。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;即使属性的值是 &lt;code&gt;null&lt;/code&gt; 或 &lt;code&gt;undefined&lt;/code&gt;，只要属性存在，&lt;code&gt;hasOwnProperty&lt;/code&gt; 依旧会返回 &lt;code&gt;true&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;o = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;();
+o.hasOwnProperty(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;prop&amp;#39;&lt;/span&gt;); &lt;span style=&#34;color:#228b22&#34;&gt;// 返回 false
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;o.prop = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;exists&amp;#39;&lt;/span&gt;;
+o.hasOwnProperty(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;prop&amp;#39;&lt;/span&gt;); &lt;span style=&#34;color:#228b22&#34;&gt;// 返回 true
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#228b22&#34;&gt;// 对待自身属性和继承属性的区别：
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;o = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;();
+o.prop = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;exists&amp;#39;&lt;/span&gt;;
+o.hasOwnProperty(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;prop&amp;#39;&lt;/span&gt;);             &lt;span style=&#34;color:#228b22&#34;&gt;// 返回 true
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;o.hasOwnProperty(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;toString&amp;#39;&lt;/span&gt;);         &lt;span style=&#34;color:#228b22&#34;&gt;// 返回 false
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;o.hasOwnProperty(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hasOwnProperty&amp;#39;&lt;/span&gt;);   &lt;span style=&#34;color:#228b22&#34;&gt;// 返回 false
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;objectkeys&#34;&gt;Object.keys()&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用&lt;code&gt;for...in&lt;/code&gt;循环遍历该对象时返回的顺序一致。&lt;/p&gt;
@@ -392,6 +423,51 @@ console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.values
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
 &lt;span style=&#34;color:#228b22&#34;&gt;// 非对象作为参数将被强制转换为对象 
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.values(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;)); &lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#39;f&amp;#39;, &amp;#39;o&amp;#39;, &amp;#39;o&amp;#39;]
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;objectgetownpropertydescriptor&#34;&gt;Object.getOwnPropertyDescriptor()&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;方法返回指定对象中的一个自有属性对应的属性描述符。（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyDescriptor(obj, prop)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;obj&lt;/code&gt;需要查找的目标对象；&lt;code&gt;prop&lt;/code&gt;目标对象内的属性名称&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果指定的属性存在于对象上，则返回其属性描述符对象（property descriptor），否则返回&lt;code&gt;undefined&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在 Javascript 中， &lt;code&gt;属性&lt;/code&gt;由一个字符串类型的“名字”（name）和一个“属性描述符”（property descriptor）对象构成。一个属性描述符是一个记录，由下面属性当中的某些组成的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;value&lt;/code&gt;：该属性的值&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;writable&lt;/code&gt;：当且仅当属性的值可以被改变时为&lt;code&gt;true&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;get&lt;/code&gt;：获取该属性的访问器函数（getter）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;set&lt;/code&gt;：获取该属性的设置器函数（setter）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;configurable&lt;/code&gt;：当且仅当指定对象的属性描述可以被改变或者属性可被删除时，为&lt;code&gt;true&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;eunmerable&lt;/code&gt;：当且仅当指定对象的属性可以被枚举出时，为&lt;code&gt;true&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; o = { get foo() { &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#b452cd&#34;&gt;17&lt;/span&gt;; } };
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; d = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyDescriptor(o, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;foo&amp;#34;&lt;/span&gt;);
+&lt;span style=&#34;color:#228b22&#34;&gt;// d {
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   configurable: true,
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   enumerable: true,
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   get: /*the getter function*/,
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   set: undefined
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// }
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; o = { bar: &lt;span style=&#34;color:#b452cd&#34;&gt;42&lt;/span&gt; };
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; d = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyDescriptor(o, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;bar&amp;#34;&lt;/span&gt;);
+&lt;span style=&#34;color:#228b22&#34;&gt;// d {
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   configurable: true,
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   enumerable: true,
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   value: 42,
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   writable: true
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// }
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 - https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/ - </description>

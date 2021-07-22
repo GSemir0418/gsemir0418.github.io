@@ -508,6 +508,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
+								<a href="#arrayprototypeindexof" onclick="onNavClick(`#arrayprototypeindexof-nav`)" id="arrayprototypeindexof-nav">
+									Array.prototype.indexOf()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
 								<a href="#arrayprototypereduce" onclick="onNavClick(`#arrayprototypereduce-nav`)" id="arrayprototypereduce-nav">
 									Array.prototype.reduce()
 								</a>
@@ -903,6 +921,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							<li>
 								<a href="#arrayprototypeforeach" onclick="onNavClick(`#arrayprototypeforeach-nav`)" id="arrayprototypeforeach-nav">
 									Array.prototype.forEach()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#arrayprototypeindexof" onclick="onNavClick(`#arrayprototypeindexof-nav`)" id="arrayprototypeindexof-nav">
+									Array.prototype.indexOf()
 								</a>
 							</li>
 						
@@ -1447,16 +1483,44 @@ console.log(filterItems(<span style="color:#cd5555">&#39;ap&#39;</span>)); <span
 </span><span style="color:#228b22">// arr = [&#34;a&#34;, &#34;b&#34;]
 </span></code></pre></div><h1 id="arrayprototypeforeach"><code>Array.prototype.forEach()</code></h1>
 <p>1.关键词：遍历</p>
-<p>2.是否修改原数组：</p>
+<p>2.是否修改原数组：<code>depends</code></p>
 <p>3.返回值：<code>undefined</code></p>
 <p>4.语法：</p>
 <div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.forEach((currentValue, index, array) =&gt;{
     <span style="color:#228b22">// callback
 </span><span style="color:#228b22"></span>})
 </code></pre></div><p>5.描述：</p>
+<p>针对每一个元素执行提供的函数。forEach适合于你并不打算改变数据，而只是想用数据做一些事情：比如存入数据库或则打印出来。</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
-</code></pre></div><h1 id="arrayprototypereduce"><code>Array.prototype.reduce()</code></h1>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 打印元素
+</span><span style="color:#228b22"></span>[<span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#cd5555">&#39;b&#39;</span>, <span style="color:#cd5555">&#39;c&#39;</span>].forEach(i =&gt; {
+    console.log(i)
+})
+
+<span style="color:#228b22">// 复制一个对象
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">function</span> copy(obj) {
+  <span style="color:#8b008b;font-weight:bold">var</span> copy = <span style="color:#658b00">Object</span>.create(<span style="color:#658b00">Object</span>.getPrototypeOf(obj));
+  <span style="color:#8b008b;font-weight:bold">var</span> propNames = <span style="color:#658b00">Object</span>.getOwnPropertyNames(obj);
+
+  propNames.forEach(<span style="color:#8b008b;font-weight:bold">function</span>(name) {
+    <span style="color:#8b008b;font-weight:bold">var</span> desc = <span style="color:#658b00">Object</span>.getOwnPropertyDescriptor(obj, name);
+    <span style="color:#658b00">Object</span>.defineProperty(copy, name, desc);
+  });
+
+  <span style="color:#8b008b;font-weight:bold">return</span> copy;
+}
+
+<span style="color:#8b008b;font-weight:bold">var</span> obj1 = { a: <span style="color:#b452cd">1</span>, b: <span style="color:#b452cd">2</span> };
+<span style="color:#8b008b;font-weight:bold">var</span> obj2 = copy(obj1); <span style="color:#228b22">// obj2 looks like obj1 now
+</span></code></pre></div><h1 id="arrayprototypeindexof"><code>Array.prototype.indexOf()</code></h1>
+<p>1.关键词：查找</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：索引位置或<code>-1</code></p>
+<p>4.语法：</p>
+<pre><code>
+</code></pre><p>5.描述：</p>
+<p>6.示例：</p>
+<h1 id="arrayprototypereduce"><code>Array.prototype.reduce()</code></h1>
 <p>1.关键词：</p>
 <p>2.是否修改原数组：``</p>
 <p>3.返回值：</p>

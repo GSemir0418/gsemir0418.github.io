@@ -250,8 +250,26 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#objectkey" onclick="onNavClick(`#objectkey-nav`)" id="objectkey-nav">
-									Object.key()
+								<a href="#objectprototypehasownproperty" onclick="onNavClick(`#objectprototypehasownproperty-nav`)" id="objectprototypehasownproperty-nav">
+									Object.prototype.hasOwnProperty()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectkeys" onclick="onNavClick(`#objectkeys-nav`)" id="objectkeys-nav">
+									Object.keys()
 								</a>
 							</li>
 						
@@ -288,6 +306,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							<li>
 								<a href="#objectvalues" onclick="onNavClick(`#objectvalues-nav`)" id="objectvalues-nav">
 									Object.values()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectgetownpropertydescriptor" onclick="onNavClick(`#objectgetownpropertydescriptor-nav`)" id="objectgetownpropertydescriptor-nav">
+									Object.getOwnPropertyDescriptor()
 								</a>
 							</li>
 						
@@ -427,8 +463,26 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#objectkey" onclick="onNavClick(`#objectkey-nav`)" id="objectkey-nav">
-									Object.key()
+								<a href="#objectprototypehasownproperty" onclick="onNavClick(`#objectprototypehasownproperty-nav`)" id="objectprototypehasownproperty-nav">
+									Object.prototype.hasOwnProperty()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectkeys" onclick="onNavClick(`#objectkeys-nav`)" id="objectkeys-nav">
+									Object.keys()
 								</a>
 							</li>
 						
@@ -465,6 +519,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							<li>
 								<a href="#objectvalues" onclick="onNavClick(`#objectvalues-nav`)" id="objectvalues-nav">
 									Object.values()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#objectgetownpropertydescriptor" onclick="onNavClick(`#objectgetownpropertydescriptor-nav`)" id="objectgetownpropertydescriptor-nav">
+									Object.getOwnPropertyDescriptor()
 								</a>
 							</li>
 						
@@ -704,7 +776,38 @@ console.log(JSON.stringify(depClone)); <span style="color:#228b22">// { a: 0, b:
 </span><span style="color:#228b22"></span><span style="color:#658b00">Object</span>.is(<span style="color:#8b008b;font-weight:bold">NaN</span>, <span style="color:#b452cd">0</span>/<span style="color:#b452cd">0</span>);         <span style="color:#228b22">// true
 </span></code></pre></div></li>
 </ul>
-<h1 id="objectkey">Object.key()</h1>
+<h1 id="objectprototypehasownproperty">Object.prototype.hasOwnProperty()</h1>
+<ul>
+<li>
+<p>判断对象自身属性中是否具有指定属性（是否有指定的键）</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">obj.hasOwnProperty(prop)
+</code></pre></div><p><code>prop</code>要检测的属性的<code>String</code>字符串形式表示的名称，或者<code>Symbol</code></p>
+</li>
+<li>
+<p>所有继承了<code>Object</code>的对象都会继承到 <code>hasOwnProperty</code> 方法。这个方法可以用来检测一个对象是否含有特定的自身属性；和<code>in</code>运算符不同，该方法会忽略掉那些从原型链上继承到的属性。</p>
+</li>
+<li>
+<p>即使属性的值是 <code>null</code> 或 <code>undefined</code>，只要属性存在，<code>hasOwnProperty</code> 依旧会返回 <code>true</code>。</p>
+</li>
+<li>
+<p>示例：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">o = <span style="color:#8b008b;font-weight:bold">new</span> <span style="color:#658b00">Object</span>();
+o.hasOwnProperty(<span style="color:#cd5555">&#39;prop&#39;</span>); <span style="color:#228b22">// 返回 false
+</span><span style="color:#228b22"></span>o.prop = <span style="color:#cd5555">&#39;exists&#39;</span>;
+o.hasOwnProperty(<span style="color:#cd5555">&#39;prop&#39;</span>); <span style="color:#228b22">// 返回 true
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 对待自身属性和继承属性的区别：
+</span><span style="color:#228b22"></span>o = <span style="color:#8b008b;font-weight:bold">new</span> <span style="color:#658b00">Object</span>();
+o.prop = <span style="color:#cd5555">&#39;exists&#39;</span>;
+o.hasOwnProperty(<span style="color:#cd5555">&#39;prop&#39;</span>);             <span style="color:#228b22">// 返回 true
+</span><span style="color:#228b22"></span>o.hasOwnProperty(<span style="color:#cd5555">&#39;toString&#39;</span>);         <span style="color:#228b22">// 返回 false
+</span><span style="color:#228b22"></span>o.hasOwnProperty(<span style="color:#cd5555">&#39;hasOwnProperty&#39;</span>);   <span style="color:#228b22">// 返回 false
+</span></code></pre></div></li>
+</ul>
+<h1 id="objectkeys">Object.keys()</h1>
 <ul>
 <li>
 <p>会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用<code>for...in</code>循环遍历该对象时返回的顺序一致。</p>
@@ -814,6 +917,51 @@ console.log(<span style="color:#658b00">Object</span>.values(my_obj)); <span sty
 </span><span style="color:#228b22"></span>
 <span style="color:#228b22">// 非对象作为参数将被强制转换为对象 
 </span><span style="color:#228b22"></span>console.log(<span style="color:#658b00">Object</span>.values(<span style="color:#cd5555">&#39;foo&#39;</span>)); <span style="color:#228b22">// [&#39;f&#39;, &#39;o&#39;, &#39;o&#39;]
+</span></code></pre></div></li>
+</ul>
+<h1 id="objectgetownpropertydescriptor">Object.getOwnPropertyDescriptor()</h1>
+<ul>
+<li>
+<p>方法返回指定对象中的一个自有属性对应的属性描述符。（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#658b00">Object</span>.getOwnPropertyDescriptor(obj, prop)
+</code></pre></div><p><code>obj</code>需要查找的目标对象；<code>prop</code>目标对象内的属性名称</p>
+</li>
+<li>
+<p>如果指定的属性存在于对象上，则返回其属性描述符对象（property descriptor），否则返回<code>undefined</code></p>
+</li>
+<li>
+<p>在 Javascript 中， <code>属性</code>由一个字符串类型的“名字”（name）和一个“属性描述符”（property descriptor）对象构成。一个属性描述符是一个记录，由下面属性当中的某些组成的：</p>
+<ul>
+<li><code>value</code>：该属性的值</li>
+<li><code>writable</code>：当且仅当属性的值可以被改变时为<code>true</code></li>
+<li><code>get</code>：获取该属性的访问器函数（getter）</li>
+<li><code>set</code>：获取该属性的设置器函数（setter）</li>
+<li><code>configurable</code>：当且仅当指定对象的属性描述可以被改变或者属性可被删除时，为<code>true</code></li>
+<li><code>eunmerable</code>：当且仅当指定对象的属性可以被枚举出时，为<code>true</code></li>
+</ul>
+</li>
+<li>
+<p>示例：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">var</span> o = { get foo() { <span style="color:#8b008b;font-weight:bold">return</span> <span style="color:#b452cd">17</span>; } };
+<span style="color:#8b008b;font-weight:bold">var</span> d = <span style="color:#658b00">Object</span>.getOwnPropertyDescriptor(o, <span style="color:#cd5555">&#34;foo&#34;</span>);
+<span style="color:#228b22">// d {
+</span><span style="color:#228b22">//   configurable: true,
+</span><span style="color:#228b22">//   enumerable: true,
+</span><span style="color:#228b22">//   get: /*the getter function*/,
+</span><span style="color:#228b22">//   set: undefined
+</span><span style="color:#228b22">// }
+</span><span style="color:#228b22"></span>
+<span style="color:#8b008b;font-weight:bold">var</span> o = { bar: <span style="color:#b452cd">42</span> };
+<span style="color:#8b008b;font-weight:bold">var</span> d = <span style="color:#658b00">Object</span>.getOwnPropertyDescriptor(o, <span style="color:#cd5555">&#34;bar&#34;</span>);
+<span style="color:#228b22">// d {
+</span><span style="color:#228b22">//   configurable: true,
+</span><span style="color:#228b22">//   enumerable: true,
+</span><span style="color:#228b22">//   value: 42,
+</span><span style="color:#228b22">//   writable: true
+</span><span style="color:#228b22">// }
 </span></code></pre></div></li>
 </ul>
 

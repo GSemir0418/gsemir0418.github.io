@@ -499,16 +499,44 @@ console.log(filterItems(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ap&am
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// arr = [&amp;#34;a&amp;#34;, &amp;#34;b&amp;#34;]
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;arrayprototypeforeach&#34;&gt;&lt;code&gt;Array.prototype.forEach()&lt;/code&gt;&lt;/h1&gt;
 &lt;p&gt;1.关键词：遍历&lt;/p&gt;
-&lt;p&gt;2.是否修改原数组：&lt;/p&gt;
+&lt;p&gt;2.是否修改原数组：&lt;code&gt;depends&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;3.返回值：&lt;code&gt;undefined&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;4.语法：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;arr.forEach((currentValue, index, array) =&amp;gt;{
     &lt;span style=&#34;color:#228b22&#34;&gt;// callback
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;})
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;5.描述：&lt;/p&gt;
+&lt;p&gt;针对每一个元素执行提供的函数。forEach适合于你并不打算改变数据，而只是想用数据做一些事情：比如存入数据库或则打印出来。&lt;/p&gt;
 &lt;p&gt;6.示例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;arrayprototypereduce&#34;&gt;&lt;code&gt;Array.prototype.reduce()&lt;/code&gt;&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 打印元素
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;[&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;].forEach(i =&amp;gt; {
+    console.log(i)
+})
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 复制一个对象
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; copy(obj) {
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; copy = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.create(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getPrototypeOf(obj));
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; propNames = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyNames(obj);
+
+  propNames.forEach(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt;(name) {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; desc = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyDescriptor(obj, name);
+    &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.defineProperty(copy, name, desc);
+  });
+
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; copy;
+}
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; obj1 = { a: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, b: &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt; };
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; obj2 = copy(obj1); &lt;span style=&#34;color:#228b22&#34;&gt;// obj2 looks like obj1 now
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;arrayprototypeindexof&#34;&gt;&lt;code&gt;Array.prototype.indexOf()&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;1.关键词：查找&lt;/p&gt;
+&lt;p&gt;2.是否修改原数组：&lt;code&gt;false&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;3.返回值：索引位置或&lt;code&gt;-1&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;4.语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;5.描述：&lt;/p&gt;
+&lt;p&gt;6.示例：&lt;/p&gt;
+&lt;h1 id=&#34;arrayprototypereduce&#34;&gt;&lt;code&gt;Array.prototype.reduce()&lt;/code&gt;&lt;/h1&gt;
 &lt;p&gt;1.关键词：&lt;/p&gt;
 &lt;p&gt;2.是否修改原数组：``&lt;/p&gt;
 &lt;p&gt;3.返回值：&lt;/p&gt;
