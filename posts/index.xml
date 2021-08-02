@@ -6,7 +6,23 @@
     <description>Recent content in Posts on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Jul 2021 16:47:33 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Jul 2021 20:54:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Node技术架构</title>
+      <link>https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/</link>
+      <pubDate>Thu, 29 Jul 2021 20:54:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/</guid>
+      <description>1 Node.js概述 1.1 Node.js不是什么  不是web框架（Flask，Spring） 不是编程语言（Python，PHP）  1.2 Node.js是什么  是一个平台  将多种技术组合起来 让JavaScript也能调用系统接口，开发后端应用   Node.js搭建技术  V8引擎 libuv C/C++实现的c-ares（解析dns域名）、http-parser（解析http）、OpenSSL（加密解密）、zlib（数据压缩）等库    2 Node.js技术架构  https://github.com/yjhjstz/deep-into-node
+ 2.1 Node.js bindings   背景
+ Node.js用C++对http_parser进行封装，使它符合某些要求（统一数据类型等），封装的文件叫做http_parser_bindings.cpp 用Node.js提供的编译工具将其编译为.node文件 JS代码可以直接require这个.node文件 这样JS就能调用C++库，中间的桥梁就是binding 由于Node.js提供了很多binding，所以加个s 这就是bindings    JS与C++交互
+ http://nodejs.cn/api/addons.html#addons_function_arguments
+   C++调用JS回调
+ http://nodejs.cn/api/addons.html#addons_callbacks
+   2.2 libuv   背景
+ 每个系统上的异步I/O（系统与外界（硬盘文件、打印机、网络请求）交互）都不一样 比如FreeBSD系统上有kqueue、Linux上有epoll、Windows上有IOCP Ryan为了一个跨平台的异步I/O库，开始写libuv libuv会根据系统自动选择合适的方案    功能</description>
+    </item>
+    
     <item>
       <title>Umi-Request配置</title>
       <link>https://gsemir0418.github.io/posts/umi-request%E9%85%8D%E7%BD%AE/</link>
@@ -23,10 +39,14 @@
       <pubDate>Thu, 08 Jul 2021 14:07:04 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/</guid>
-      <description>如果多人同时访问服务器中的此文件，则内存占用爆炸
-11.8内存占用
-可读的流传给可写的流
-文件&amp;ndash;&amp;gt;网络</description>
+      <description>1.三个示例引入Stream 1.1 创建流 // 引入fs模块 const fs = require(&amp;#39;fs&amp;#39;) // 利用fs创建流 const stream = fs.createWriteStream(&amp;#39;./big_file.txt&amp;#39;) // 写数据 for (let i = 0; i &amp;lt; 100000; i++) { stream.write(`这是第${i}行内容，我们需要很多很多内容\n`) } // 关闭流 stream.end() console.log(&amp;#39;done&amp;#39;) //命令行执行 node 1.js   分析
+ 流程：打开流，多次往里面塞内容，关闭流 看起来就是可以多次写，没什么大不了的 最终得到一个100M左右的文件    Stream是水流，但默认没有水
+  stream.write可以让水流中有水（数据）
+  每次写入的数据片段叫做chunk（块）
+  产生数据的一端叫做source
+  接收数据的一端叫做sink
+  图（（（（
+1.2 浏览器直接读取文件 // 引入文件模块 const fs = require(&amp;#39;fs&amp;#39;) // 引入http模块 const http = require(&amp;#39;http&amp;#39;) // 开启服务器 const server = http.</description>
     </item>
     
     <item>
@@ -309,6 +329,21 @@ class Life extends React.Component { //只要页面发生更新，则说明是�
     </item>
     
     <item>
+      <title>React Hooks全解</title>
+      <link>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</link>
+      <pubDate>Tue, 01 Jun 2021 17:02:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</guid>
+      <description>1.useState 使用状态 const [n, setN] = React.useState(0) const [user, setUser] = React.useState({name:&amp;#39;F&amp;#39;}) 注意事项1：不可局部更新 const [user, setUser] = useState({name:&amp;#39;Jack&amp;#39;,age:18}) setState({ name:&amp;#39;Sam&amp;#39; })   结果得到的是{name:&amp;lsquo;Sam&amp;rsquo;}，age属性消失了
+  （可以在之前加上&amp;hellip;user，表示复制user的全部属性到这个新对象中）
+  说明对于state不能部分setState，因为setState不会帮我们合并属性
+  实际上React中所有hooks都不能自动合并属性，需要我们自己去操作
+  注意事项2：地址要变 setState(obj)如果obj地址不变，那么React就认为数据没有变化
+const [user, setUser] = useState({name:&amp;#39;Jack&amp;#39;,age:18}) user.name = &amp;#39;Sam&amp;#39; setState(user)  表面上我们先改变了user对象的name属性（实际上也确实改变了），再将user对象setState进去，setState之后的user对象并没有改变。 对于React来说，对象还是user（地址没变），因此React不认为user改变了，依然加载的是原来的user。 上一个例子，是在setState中创建了一个新对象，因此React会直接加载新的对象（这也反映了setState并不会直接修改state，而是生成一个新的state）  useState接受函数 const [state, setState] = useState(() =&amp;gt; { return initState }) 该函数返回初始state，且只执行一次，节约反复更新渲染组件时js引擎的解析时间（首次渲染时会解析，再次更新组件时js就不会解析这个匿名函数了）
+setState接受函数 const [n, setN] = useState(0) setN(n + 1) setN(n + 1) 虽然运行了两次setN，但运行结果为1，并不是预想中的2，原因同样是由于setN并不会改变n的值，n始终为0</description>
+    </item>
+    
+    <item>
       <title>可视化大屏技术</title>
       <link>https://gsemir0418.github.io/posts/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E6%8A%80%E6%9C%AF/</link>
       <pubDate>Fri, 28 May 2021 09:30:55 +0800</pubDate>
@@ -442,21 +477,6 @@ hugo --theme=diary --baseUrl=&amp;quot;https://gsemir0418.github.io/&amp;quot; -
 在public文件夹下，进行git初始化。
 git initgit add .git commit -m &amp;quot;v0&amp;quot;此时需要注册GitHub信息
 git config --global user.email &amp;quot;you@example.com&amp;quot;git config --global user.</description>
-    </item>
-    
-    <item>
-      <title>React Hooks全解</title>
-      <link>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</guid>
-      <description>1.useState 使用状态 const [n, setN] = React.useState(0) const [user, setUser] = React.useState({name:&amp;#39;F&amp;#39;}) 注意事项1：不可局部更新 const [user, setUser] = useState({name:&amp;#39;Jack&amp;#39;,age:18}) setState({ name:&amp;#39;Sam&amp;#39; })   结果得到的是{name:&amp;lsquo;Sam&amp;rsquo;}，age属性消失了
-  （可以在之前加上&amp;hellip;user，表示复制user的全部属性到这个新对象中）
-  说明对于state不能部分setState，因为setState不会帮我们合并属性
-  实际上React中所有hooks都不能自动合并属性，需要我们自己去操作
-  注意事项2：地址要变 setState(obj)如果obj地址不变，那么React就认为数据没有变化
-const [user, setUser] = useState({name:&amp;#39;Jack&amp;#39;,age:18}) user.name = &amp;#39;Sam&amp;#39; setState(user)  表面上我们先改变了user对象的name属性（实际上也确实改变了），再将user对象setState进去，setState之后的user对象并没有改变。 对于React来说，对象还是user（地址没变），因此React不认为user改变了，依然加载的是原来的user。 上一个例子，是在setState中创建了一个新对象，因此React会直接加载新的对象（这也反映了setState并不会直接修改state，而是生成一个新的state）  useState接受函数 const [state, setState] = useState(() =&amp;gt; { return initState }) 该函数返回初始state，且只执行一次，节约反复更新渲染组件时js引擎的解析时间（首次渲染时会解析，再次更新组件时js就不会解析这个匿名函数了）
-setState接受函数 const [n, setN] = useState(0) setN(n + 1) setN(n + 1) 虽然运行了两次setN，但运行结果为1，并不是预想中的2，原因同样是由于setN并不会改变n的值，n始终为0</description>
     </item>
     
   </channel>

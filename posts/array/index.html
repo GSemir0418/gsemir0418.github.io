@@ -526,6 +526,78 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
+								<a href="#arrayprototypelastindexof" onclick="onNavClick(`#arrayprototypelastindexof-nav`)" id="arrayprototypelastindexof-nav">
+									Array.prototype.lastIndexOf()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#arrayprototypereverse" onclick="onNavClick(`#arrayprototypereverse-nav`)" id="arrayprototypereverse-nav">
+									Array.prototype.reverse()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#arrayprototypeunshift" onclick="onNavClick(`#arrayprototypeunshift-nav`)" id="arrayprototypeunshift-nav">
+									Array.prototype.unshift()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#arrayprototypeincludes" onclick="onNavClick(`#arrayprototypeincludes-nav`)" id="arrayprototypeincludes-nav">
+									Array.prototype.includes()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
 								<a href="#arrayprototypereduce" onclick="onNavClick(`#arrayprototypereduce-nav`)" id="arrayprototypereduce-nav">
 									Array.prototype.reduce()
 								</a>
@@ -544,8 +616,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#%e6%9c%aa%e5%ae%8c%e5%be%85%e7%bb%ad" onclick="onNavClick(`#未完待续-nav`)" id="未完待续-nav">
-									未完待续。。。。
+								<a href="#arrayprototypereduce-1" onclick="onNavClick(`#arrayprototypereduce-1-nav`)" id="arrayprototypereduce-1-nav">
+									Array.prototype.reduce()
 								</a>
 							</li>
 						
@@ -955,6 +1027,78 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
+								<a href="#arrayprototypelastindexof" onclick="onNavClick(`#arrayprototypelastindexof-nav`)" id="arrayprototypelastindexof-nav">
+									Array.prototype.lastIndexOf()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#arrayprototypereverse" onclick="onNavClick(`#arrayprototypereverse-nav`)" id="arrayprototypereverse-nav">
+									Array.prototype.reverse()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#arrayprototypeunshift" onclick="onNavClick(`#arrayprototypeunshift-nav`)" id="arrayprototypeunshift-nav">
+									Array.prototype.unshift()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#arrayprototypeincludes" onclick="onNavClick(`#arrayprototypeincludes-nav`)" id="arrayprototypeincludes-nav">
+									Array.prototype.includes()
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
 								<a href="#arrayprototypereduce" onclick="onNavClick(`#arrayprototypereduce-nav`)" id="arrayprototypereduce-nav">
 									Array.prototype.reduce()
 								</a>
@@ -973,8 +1117,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#%e6%9c%aa%e5%ae%8c%e5%be%85%e7%bb%ad" onclick="onNavClick(`#未完待续-nav`)" id="未完待续-nav">
-									未完待续。。。。
+								<a href="#arrayprototypereduce-1" onclick="onNavClick(`#arrayprototypereduce-1-nav`)" id="arrayprototypereduce-1-nav">
+									Array.prototype.reduce()
 								</a>
 							</li>
 						
@@ -1517,10 +1661,100 @@ console.log(filterItems(<span style="color:#cd5555">&#39;ap&#39;</span>)); <span
 <p>2.是否修改原数组：<code>false</code></p>
 <p>3.返回值：索引位置或<code>-1</code></p>
 <p>4.语法：</p>
-<pre><code>
-</code></pre><p>5.描述：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.indexOf(searchElement, fromIndex)
+</code></pre></div><p><code>searchElement</code>要查找的元素</p>
+<p><code>fromIndex</code>可选，开始查找的位置，若是负值则从末尾开始抵消</p>
+<p>5.描述：</p>
+<p>每个元素实际上都做<code>===</code>（strict equality）来判断</p>
 <p>6.示例：</p>
-<h1 id="arrayprototypereduce"><code>Array.prototype.reduce()</code></h1>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 找出指定元素出现的所有位置
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">var</span> indices = [];
+<span style="color:#8b008b;font-weight:bold">var</span> array = [<span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#cd5555">&#39;b&#39;</span>, <span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#cd5555">&#39;c&#39;</span>, <span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#cd5555">&#39;d&#39;</span>];
+<span style="color:#8b008b;font-weight:bold">var</span> element = <span style="color:#cd5555">&#39;a&#39;</span>;
+<span style="color:#8b008b;font-weight:bold">var</span> idx = array.indexOf(element);
+<span style="color:#8b008b;font-weight:bold">while</span> (idx != -<span style="color:#b452cd">1</span>) {
+  indices.push(idx);
+  idx = array.indexOf(element, idx + <span style="color:#b452cd">1</span>);
+}
+console.log(indices);
+<span style="color:#228b22">// [0, 2, 4]
+</span></code></pre></div><h1 id="arrayprototypelastindexof"><code>Array.prototype.lastIndexOf()</code></h1>
+<p>1.关键词：查找</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：数组中该元素最后一次出现的索引，如未找到返回-1</p>
+<p>4.语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.lastIndexOf(searchElement, fromIndex)
+</code></pre></div><p><code>searchElement</code>被查找的元素。</p>
+<p><code>fromIndex</code> 可选，从此位置开始逆向查找。默认为数组的长度减 1(<code>arr.length - 1</code>)，即整个数组都被查找。如果该值大于或等于数组的长度，则整个数组会被查找。如果为负值，将其视为从数组末尾向前的偏移。即使该值为负，数组仍然会被从后向前查找。如果该值为负时，其绝对值大于数组长度，则方法返回 -1，即数组不会被查找</p>
+<p>5.描述：</p>
+<p>每个元素实际上都做<code>===</code>（strict equality）来判断</p>
+<p>6.示例：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+</code></pre></div><h1 id="arrayprototypereverse"><code>Array.prototype.reverse()</code></h1>
+<p>1.关键词：反转</p>
+<p>2.是否修改原数组：<code>true</code></p>
+<p>3.返回值：颠倒后的数组</p>
+<p>4.语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.reverse()
+</code></pre></div><p>5.描述：</p>
+<p><code>reverse</code> 方法颠倒数组中元素的位置，改变了数组，并返回该数组的引用</p>
+<p>也可应用于类数组对象</p>
+<p>6.示例：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 反转数组
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> a = [<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>];
+a.reverse(); 
+console.log(a); <span style="color:#228b22">// [3, 2, 1]
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 反转类数组对象
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> a = {<span style="color:#b452cd">0</span>:<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>:<span style="color:#b452cd">3</span>, <span style="color:#b452cd">4</span>:<span style="color:#b452cd">5</span>, length:<span style="color:#b452cd">3</span>}
+<span style="color:#658b00">Array</span>.prototype.reverse.call(a)
+<span style="color:#228b22">// {0:5, 2:3, 4:1, length:3}
+</span><span style="color:#228b22">// 对象中必须包含反应对象属性长度的属性length，否则不会发生任何改变
+</span></code></pre></div><h1 id="arrayprototypeunshift"><code>Array.prototype.unshift()</code></h1>
+<p>1.关键词：添加</p>
+<p>2.是否修改原数组：<code>true</code></p>
+<p>3.返回值：该数组的新长度</p>
+<p>4.语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.unshift(element1, ..., elementN)
+</code></pre></div><p>5.描述：</p>
+<p><strong><code>unshift()</code></strong> 方法将一个或多个元素添加到数组的<strong>开头</strong>，并返回该数组的新长度(该方法修改原有数组)。</p>
+<p><code>unshift</code> 特意被设计成具有<strong>通用性</strong>；这个方法能够通过<code>call</code>或者<code>apply</code>方法作用于类数组对象上。不过对于没有 length 属性（代表从0开始的一系列连续的数字属性的最后一个）的对象，调用该方法可能没有任何意义。</p>
+<p>6.示例：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 在数组前添加元素
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">let</span> arr = [<span style="color:#b452cd">4</span>,<span style="color:#b452cd">5</span>,<span style="color:#b452cd">6</span>];
+arr.unshift(<span style="color:#b452cd">1</span>,<span style="color:#b452cd">2</span>,<span style="color:#b452cd">3</span>);
+console.log(arr); <span style="color:#228b22">// [1, 2, 3, 4, 5, 6]
+</span><span style="color:#228b22"></span>
+arr.unshift([-<span style="color:#b452cd">4</span>, -<span style="color:#b452cd">3</span>]); <span style="color:#228b22">// the new array length is 4
+</span><span style="color:#228b22">// arr is [[-4, -3], 4, 5, 6]
+</span></code></pre></div><h1 id="arrayprototypeincludes"><code>Array.prototype.includes()</code></h1>
+<p>1.关键词：查找</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：<code>Boolean</code></p>
+<p>4.语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.includes(value, fromIndex)
+</code></pre></div><p><code>value</code>要查找的元素值（区分大小写）</p>
+<p><code>fromIndex</code>可选，开始索引，若为负值，则按升序从 <code>array.length + fromIndex</code> 的索引开始搜 （即使从末尾开始往前跳 <code>fromIndex</code> 的绝对值个索引，然后往后搜寻）。<code>formIndex</code>的不同情况见示例，默认为 0</p>
+<p>5.描述：</p>
+<p>用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回false。</p>
+<p>对象数组不能使用，但适用于类对象数组</p>
+<p>6.示例：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>].includes(<span style="color:#b452cd">3</span>, <span style="color:#b452cd">3</span>);  <span style="color:#228b22">// false
+</span><span style="color:#228b22"></span>[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>].includes(<span style="color:#b452cd">3</span>, -<span style="color:#b452cd">1</span>); <span style="color:#228b22">// true
+</span><span style="color:#228b22"></span>[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#8b008b;font-weight:bold">NaN</span>].includes(<span style="color:#8b008b;font-weight:bold">NaN</span>); <span style="color:#228b22">// true
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 如果 fromIndex 大于等于数组的长度，则会返回 false，且该数组不会被搜索。
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">var</span> arr = [<span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#cd5555">&#39;b&#39;</span>, <span style="color:#cd5555">&#39;c&#39;</span>];
+arr.includes(<span style="color:#cd5555">&#39;c&#39;</span>, <span style="color:#b452cd">3</span>);   <span style="color:#228b22">// false
+</span><span style="color:#228b22"></span>arr.includes(<span style="color:#cd5555">&#39;c&#39;</span>, <span style="color:#b452cd">100</span>); <span style="color:#228b22">// false
+</span><span style="color:#228b22"></span>
+<span style="color:#228b22">// 计算出的索引小于 0
+</span><span style="color:#228b22">// 如果 fromIndex 为负值，计算出的索引将作为开始搜索searchElement的位置。如果计算出的索引小于 0，则整个数组都会被搜索。
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">var</span> arr = [<span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#cd5555">&#39;b&#39;</span>, <span style="color:#cd5555">&#39;c&#39;</span>];
+<span style="color:#228b22">// 3 - 100 = -97
+</span><span style="color:#228b22"></span>arr.includes(<span style="color:#cd5555">&#39;a&#39;</span>, -<span style="color:#b452cd">100</span>); <span style="color:#228b22">// true
+</span><span style="color:#228b22"></span>arr.includes(<span style="color:#cd5555">&#39;a&#39;</span>, -<span style="color:#b452cd">2</span>); <span style="color:#228b22">// false
+</span></code></pre></div><h1 id="arrayprototypereduce"><code>Array.prototype.reduce()</code></h1>
 <p>1.关键词：</p>
 <p>2.是否修改原数组：``</p>
 <p>3.返回值：</p>
@@ -1529,8 +1763,16 @@ console.log(filterItems(<span style="color:#cd5555">&#39;ap&#39;</span>)); <span
 </code></pre></div><p>5.描述：</p>
 <p>6.示例：</p>
 <div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
-</code></pre></div><h1 id="未完待续">未完待续。。。。</h1>
-
+</code></pre></div><h1 id="arrayprototypereduce-1"><code>Array.prototype.reduce()</code></h1>
+<p>1.关键词：</p>
+<p>2.是否修改原数组：``</p>
+<p>3.返回值：</p>
+<p>4.语法：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+</code></pre></div><p>5.描述：</p>
+<p>6.示例：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+</code></pre></div>
                     
                     <HR width="100%" id="EOF">
 		    <p style="color:#777;">最后修改于 2021-06-28</p>

@@ -6,17 +6,37 @@
     <description>Recent content in Nodejs全解 on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Jul 2021 14:07:04 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/nodejs%E5%85%A8%E8%A7%A3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Jul 2021 20:54:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/nodejs%E5%85%A8%E8%A7%A3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Node技术架构</title>
+      <link>https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/</link>
+      <pubDate>Thu, 29 Jul 2021 20:54:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/</guid>
+      <description>1 Node.js概述 1.1 Node.js不是什么  不是web框架（Flask，Spring） 不是编程语言（Python，PHP）  1.2 Node.js是什么  是一个平台  将多种技术组合起来 让JavaScript也能调用系统接口，开发后端应用   Node.js搭建技术  V8引擎 libuv C/C++实现的c-ares（解析dns域名）、http-parser（解析http）、OpenSSL（加密解密）、zlib（数据压缩）等库    2 Node.js技术架构  https://github.com/yjhjstz/deep-into-node
+ 2.1 Node.js bindings   背景
+ Node.js用C++对http_parser进行封装，使它符合某些要求（统一数据类型等），封装的文件叫做http_parser_bindings.cpp 用Node.js提供的编译工具将其编译为.node文件 JS代码可以直接require这个.node文件 这样JS就能调用C++库，中间的桥梁就是binding 由于Node.js提供了很多binding，所以加个s 这就是bindings    JS与C++交互
+ http://nodejs.cn/api/addons.html#addons_function_arguments
+   C++调用JS回调
+ http://nodejs.cn/api/addons.html#addons_callbacks
+   2.2 libuv   背景
+ 每个系统上的异步I/O（系统与外界（硬盘文件、打印机、网络请求）交互）都不一样 比如FreeBSD系统上有kqueue、Linux上有epoll、Windows上有IOCP Ryan为了一个跨平台的异步I/O库，开始写libuv libuv会根据系统自动选择合适的方案    功能</description>
+    </item>
+    
     <item>
       <title>NodeStream模块</title>
       <link>https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/</link>
       <pubDate>Thu, 08 Jul 2021 14:07:04 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/</guid>
-      <description>如果多人同时访问服务器中的此文件，则内存占用爆炸
-11.8内存占用
-可读的流传给可写的流
-文件&amp;ndash;&amp;gt;网络</description>
+      <description>1.三个示例引入Stream 1.1 创建流 // 引入fs模块 const fs = require(&amp;#39;fs&amp;#39;) // 利用fs创建流 const stream = fs.createWriteStream(&amp;#39;./big_file.txt&amp;#39;) // 写数据 for (let i = 0; i &amp;lt; 100000; i++) { stream.write(`这是第${i}行内容，我们需要很多很多内容\n`) } // 关闭流 stream.end() console.log(&amp;#39;done&amp;#39;) //命令行执行 node 1.js   分析
+ 流程：打开流，多次往里面塞内容，关闭流 看起来就是可以多次写，没什么大不了的 最终得到一个100M左右的文件    Stream是水流，但默认没有水
+  stream.write可以让水流中有水（数据）
+  每次写入的数据片段叫做chunk（块）
+  产生数据的一端叫做source
+  接收数据的一端叫做sink
+  图（（（（
+1.2 浏览器直接读取文件 // 引入文件模块 const fs = require(&amp;#39;fs&amp;#39;) // 引入http模块 const http = require(&amp;#39;http&amp;#39;) // 开启服务器 const server = http.</description>
     </item>
     
     <item>
