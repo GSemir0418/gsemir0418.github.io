@@ -40,7 +40,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;2-nodejs技术架构&#34;&gt;2 Node.js技术架构&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&#34;.%5Cnode1.png&#34; alt=&#34;image-20210730103247379&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./node1.png&#34; alt=&#34;image-20210730103247379&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/yjhjstz/deep-into-node&#34;&gt;https://github.com/yjhjstz/deep-into-node&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -139,7 +139,7 @@
 &lt;p&gt;顺序示意图&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;.%5Cnode2.png&#34; alt=&#34;image-20210730110930457&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./node2.png&#34; alt=&#34;image-20210730110930457&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://juejin.cn/post/6844903582538399752&#34;&gt;https://juejin.cn/post/6844903582538399752&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -179,9 +179,9 @@
 &lt;li&gt;用&lt;code&gt;Node.js标准库&lt;/code&gt;简化JS代码&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;26-nodejs工作流程&#34;&gt;2.6 Node.js工作流程&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;.%5Cnode3.png&#34; alt=&#34;image-20210730131938322&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./node3.png&#34; alt=&#34;image-20210730131938322&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;27-nodejs-api&#34;&gt;2.7 Node.js API&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;.%5Cnode4.png&#34; alt=&#34;image-20210730133449418&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./node4.png&#34; alt=&#34;image-20210730133449418&#34;&gt;&lt;/p&gt;
 - https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/ - </description>
         </item>
     
