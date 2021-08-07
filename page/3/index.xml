@@ -5,9 +5,336 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Jul 2021 20:54:55 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 06 Aug 2021 17:33:55 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>React Hooks全解</title>
+        <link>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</link>
+        <pubDate>Tue, 01 Jun 2021 17:02:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/ -&lt;h1 id=&#34;1usestate&#34;&gt;1.useState&lt;/h1&gt;
+&lt;h2 id=&#34;使用状态&#34;&gt;使用状态&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [n, setN] = React.useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [user, setUser] = React.useState({name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;F&amp;#39;&lt;/span&gt;})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;注意事项1不可局部更新&#34;&gt;注意事项1：不可局部更新&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [user, setUser] = useState({name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;,age:&lt;span style=&#34;color:#b452cd&#34;&gt;18&lt;/span&gt;})
+
+setState({
+	name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Sam&amp;#39;&lt;/span&gt;
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;结果得到的是{name:&amp;lsquo;Sam&amp;rsquo;}，age属性消失了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;（可以在之前加上&amp;hellip;user，表示复制user的全部属性到这个新对象中）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;说明对于state不能部分setState，因为setState&lt;strong&gt;不会帮我们合并属性&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;实际上React中所有hooks都不能自动合并属性，需要我们自己去操作&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;注意事项2地址要变&#34;&gt;注意事项2：地址要变&lt;/h2&gt;
+&lt;p&gt;setState(obj)如果obj地址不变，那么React就认为数据没有变化&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [user, setUser] = useState({name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;,age:&lt;span style=&#34;color:#b452cd&#34;&gt;18&lt;/span&gt;})
+
+user.name = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Sam&amp;#39;&lt;/span&gt;
+
+setState(user)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;表面上我们先改变了user对象的name属性（实际上也确实改变了），再将user对象setState进去，setState之后的user对象并没有改变。&lt;/li&gt;
+&lt;li&gt;对于React来说，对象还是user（地址没变），因此React不认为user改变了，依然加载的是原来的user。&lt;/li&gt;
+&lt;li&gt;上一个例子，是在setState中创建了一个新对象，因此React会直接加载新的对象（这也反映了&lt;strong&gt;setState并不会直接修改state，而是生成一个新的state&lt;/strong&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;usestate接受函数&#34;&gt;useState接受函数&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [state, setState] = useState(() =&amp;gt; {
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; initState
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;该函数返回初始state，且只执行一次，节约反复更新渲染组件时js引擎的解析时间（首次渲染时会解析，再次更新组件时js就不会解析这个匿名函数了）&lt;/p&gt;
+&lt;h2 id=&#34;setstate接受函数&#34;&gt;setState接受函数&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [n, setN] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+
+setN(n + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
+
+setN(n + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;虽然运行了两次setN，但运行结果为1，并不是预想中的2，原因同样是由于setN并不会改变n的值，n始终为0&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;setN(i =&amp;gt; i + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;传入函数的方式并&lt;strong&gt;没有直接传入state进行计算&lt;/strong&gt;，仅仅是一个&lt;strong&gt;形式化的操作&lt;/strong&gt;而已，建议优先选用此种方式进行setState&lt;/p&gt;
+&lt;h1 id=&#34;2usereducer&#34;&gt;2.useReducer&lt;/h1&gt;
+&lt;h2 id=&#34;用来践行fluxredux的思想&#34;&gt;(用来践行Flux/Redux的思想)&lt;/h2&gt;
+&lt;h2 id=&#34;1创建初始值initialstate&#34;&gt;1.创建初始值initialState&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; initial = { n = &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2创建所有操作reducerstateaction&#34;&gt;2.创建所有操作reducer(state,action)&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; reducer = (state, action) =&amp;gt;{&lt;span style=&#34;color:#228b22&#34;&gt;//旧状态，操作的类型
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt;(action.type === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;add&amp;#39;&lt;/span&gt;){
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { n: state.n+action.number}
+	}&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt;(action.type === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;mult&amp;#39;&lt;/span&gt;){
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { n: state.n*&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt; }
+	}&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt;{
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;throw&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Error&lt;/span&gt;(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;unknown type&amp;#39;&lt;/span&gt;)
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3传给usereducer得到读和写api调用写type--操作类型-&#34;&gt;3.传给useReducer，得到读和写API，调用写（{type : &amp;lsquo;操作类型&amp;rsquo; }）&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; App(){
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [state, dispatch] = useReducer(reducer,initial)
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; onClick = ()=&amp;gt;{
+		dispatch({type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;add&amp;#39;&lt;/span&gt;, number : &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;})&lt;span style=&#34;color:#228b22&#34;&gt;//参数为action对象
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	}
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4总的来说usereducer是usestate的复杂版&#34;&gt;4.总的来说，useReducer是useState的复杂版&lt;/h2&gt;
+&lt;h1 id=&#34;3usecontext&#34;&gt;3.useContext&lt;/h1&gt;
+&lt;h2 id=&#34;1上下文是局部的全局变量&#34;&gt;1.上下文是局部的全局变量&lt;/h2&gt;
+&lt;h2 id=&#34;2使用方法&#34;&gt;2.使用方法&lt;/h2&gt;
+&lt;p&gt;1.使用C = createContext(initial)创建上下文&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; C = createContext(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2.使用&amp;lt;C.Provider/&amp;gt;圈定作用域&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [n, setN] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+
+&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;C.Provider&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={{n, setN}}&amp;gt;&lt;span style=&#34;color:#228b22&#34;&gt;//将state和setState作为对象值传入上下文C中
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt;/&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;C.Provider&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;3.在作用域内使用useContext(C)来使用上下文&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; {n, setN} = useContext(C)
+
+onClick = () =&amp;gt;{setN(n =&amp;gt; n + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3注意事项&#34;&gt;3.注意事项&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;不是响应式&lt;/strong&gt;的&lt;/li&gt;
+&lt;li&gt;在一个模块中将C里面的值改变，另一个模块不会感知到这个变化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;4useeffect&#34;&gt;4.useEffect&lt;/h1&gt;
+&lt;h2 id=&#34;1副作用&#34;&gt;1.副作用&lt;/h2&gt;
+&lt;p&gt;实际上叫做afterRender更好，每次render后运行&lt;/p&gt;
+&lt;p&gt;（对环境的改变即为副作用，如修改document.title&lt;/p&gt;
+&lt;p&gt;但我们不一定非要把副作用放在useEffect里&lt;/p&gt;
+&lt;h2 id=&#34;2用途&#34;&gt;2.用途&lt;/h2&gt;
+&lt;p&gt;1.替代componentDidMount使用，[ ]作为第二个参数，表示除第一次渲染后执行外，之后不会再执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
+	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;第一次渲染后执行&amp;#39;&lt;/span&gt;)
+},[])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当第二个参数为空时，表示组件的任何状态变化后都会执行，包括第一次渲染后&lt;/p&gt;
+&lt;p&gt;2.替代componentDidUpdate使用，可指定依赖，当n变化是执行，包括第一次渲染后&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
+	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;n变化后执行&amp;#39;&lt;/span&gt;)
+},[n])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;3.替代componentWillUnmount使用，通过return&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; id = setInterval(() =&amp;gt;{
+		console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
+    },&lt;span style=&#34;color:#b452cd&#34;&gt;2000&lt;/span&gt;)
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; () =&amp;gt;{&lt;span style=&#34;color:#658b00&#34;&gt;window&lt;/span&gt;.clearInterval(id)}
+  },[])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以上三种用途可同时存在&lt;/p&gt;
+&lt;h2 id=&#34;3特点&#34;&gt;3.特点&lt;/h2&gt;
+&lt;p&gt;如果同时存在多个useEffect，会&lt;strong&gt;按照出现次序执行&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;5uselayouteffect&#34;&gt;5.useLayoutEffect&lt;/h1&gt;
+&lt;h2 id=&#34;布局副作用&#34;&gt;布局副作用&lt;/h2&gt;
+&lt;p&gt;会在浏览器渲染前（屏幕像素改变之前）执行&lt;/p&gt;
+&lt;h2 id=&#34;特点&#34;&gt;特点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;useLayoutEffect&lt;strong&gt;总是比&lt;/strong&gt;useEffect要先执行&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;useLayoutEffect中的任务最好确实影响了Layout&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;经验&#34;&gt;经验&lt;/h2&gt;
+&lt;p&gt;为了用户体验，优先使用useEffect（先将画面渲染给用户，再进行副作用）&lt;/p&gt;
+&lt;h1 id=&#34;6usememo&#34;&gt;6.useMemo&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;React中默认有多余的render，导致依赖其他状态的无关组件会被再次执行渲染&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以使用React.memo(Child)将无关组件进行封装&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Child2 = React.memo(Child)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Bug：但如果Child的props中有接收到的是函数时，但随着父组件的执行渲染，函数表达虽然没变，但此时地址改变了，故仍被再次执行，导致Child仍再次渲染&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用useMemo封装此函数解决这个问题：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; onClickChild = useMemo(() =&amp;gt;{
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; () =&amp;gt;{ ...}
+},[m])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;特点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;第一个参数是()=&amp;gt;value&lt;/p&gt;
+&lt;p&gt;第二个参数是依赖[m,n]&lt;/p&gt;
+&lt;p&gt;只有当依赖变化时，才会计算出新的value；如果依赖不变，那就重用之前的value&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;与Vue2中的computed相似&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一般先memo组件，再useMemo函数&lt;/p&gt;
+&lt;h1 id=&#34;7usecallback&#34;&gt;7.useCallBack&lt;/h1&gt;
+&lt;p&gt;如果value是个函数，useMemo就要写成：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useMemo( () = &amp;gt; (x) =&amp;gt;{console.log(x) } )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;写起来很复杂，因此使用useCallback解决&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; onClickChild = useCallback ( (x) = &amp;gt; { log(x) }, [m] )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;8useref&#34;&gt;8.useRef&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果需要一个值，在组件不断render时保持不变，用useRef&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;初始化：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; count = useRef(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;读取：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;count.current
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;也可以将ref作为属性绑定到元素上，使用此ref能够引用到组件对应的DOM对象，类似document.getElementById&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;9forwardref&#34;&gt;9.forwardRef&lt;/h1&gt;
+&lt;p&gt;由于props无法传递ref属性，导致不能直接在子组件上定义ref&lt;/p&gt;
+&lt;p&gt;可以使用forwarRef将组件封装成新组件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Button2 = React.forwardRef((props,ref)=&amp;gt;{
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;ref&lt;/span&gt;={ref} {&lt;span style=&#34;color:#658b00&#34;&gt;...props&lt;/span&gt;}/&amp;gt;
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;实际上只是允许了子组件接受一个新参数ref&lt;/p&gt;
+&lt;h1 id=&#34;10替代redux&#34;&gt;10.替代Redux&lt;/h1&gt;
+&lt;p&gt;1.将数据集中在store对象&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; store = {
+	user:&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;,
+	books:&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;,
+	movies:&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2.将所有操作集中在reducer&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; reducer = (state, action) =&amp;gt; {
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;switch&lt;/span&gt; (action.type) {
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;setUser&amp;#34;&lt;/span&gt;:
+			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { ...state, user: action.user };
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;setBooks&amp;#34;&lt;/span&gt;:
+			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { ...state, books: action.books };
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;setMovies&amp;#34;&lt;/span&gt;:
+			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { ...state, movies: action.movies };
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt;:
+			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;throw&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Error&lt;/span&gt;();
+	}
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;3.创建Context&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Context = React.createContext(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;4.创建对数据的读写API（只能写在函数组件中）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [state, dispatch] = useReducer(reducer, store)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;5.将第四步的内容放到第三步的Context（把读写API赋值给Context.Provider）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Context.Provider&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={{state,dispatch}}&amp;gt;
+	...
+&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Context.Provider&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;6.用Context.Provider将Context提供给所有组件（包起来）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Context.Provider&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={{state,dispatch}}&amp;gt;
+	&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;User&lt;/span&gt;/&amp;gt;
+	&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Books&lt;/span&gt;/&amp;gt;
+	&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Movies&lt;/span&gt;/&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Context.Provider&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;7.各个组件用useContext获取读写API&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; User() {
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { state, dispatch } = useContext(Context);
+	useEffect(() =&amp;gt; {
+		ajax(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;/user&amp;#34;&lt;/span&gt;).then(user =&amp;gt; {
+		dispatch({ type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;setUser&amp;#34;&lt;/span&gt;, user: user });
+		});
+	}, [ ]);
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+	&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+		&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h1&lt;/span&gt;&amp;gt;个人信息&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h1&lt;/span&gt;&amp;gt;
+			&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;name: {state.user ? state.user.name : &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;}&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+	)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;8.模块化&lt;/p&gt;
+&lt;p&gt;![priceless-jennings-gyls6 - CodeSandbox - Google Chrome 2021_6_2 14_29_21](article_img/priceless-jennings-gyls6 - CodeSandbox - Google Chrome 2021_6_2 14_29_21-1622626575090.png)&lt;/p&gt;
+&lt;h1 id=&#34;11自定义hooks&#34;&gt;11.自定义hooks&lt;/h1&gt;
+&lt;p&gt;index.jsx:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; ReactDOM from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react-dom&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; useList from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;./hooks/useList&amp;#34;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; App() {
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { list, deleteIndex, addItem } = useList();
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;className&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;App&amp;#34;&lt;/span&gt;&amp;gt;
+      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h1&lt;/span&gt;&amp;gt;List&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h1&lt;/span&gt;&amp;gt;
+      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;
+        &lt;span style=&#34;color:#658b00&#34;&gt;type&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;submit&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; {
+          addItem(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;jack&amp;#34;&lt;/span&gt;);
+        }}
+      &amp;gt;
+        添加
+      &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
+      {list ? (
+        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;ol&lt;/span&gt;&amp;gt;
+          {list.map((item, index) =&amp;gt; (
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;li&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;key&lt;/span&gt;={item.id}&amp;gt;
+              {item.name}
+              &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;
+                &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; {
+                  deleteIndex(index);
+                }}
+              &amp;gt;
+                删除
+              &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
+            &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;li&lt;/span&gt;&amp;gt;
+          ))}
+        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;ol&lt;/span&gt;&amp;gt;
+      ) : (
+        &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;加载中...&amp;#34;&lt;/span&gt;
+      )}
+    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+  );
+}
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; rootElement = &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;root&amp;#34;&lt;/span&gt;);
+ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt; /&amp;gt;, rootElement);
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;hooks/useList.js:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { useState, useEffect } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react&amp;#34;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; useList = () =&amp;gt; {
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [list, setList] = useState(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;);
+  useEffect(() =&amp;gt; {
+    ajax(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;/list&amp;#34;&lt;/span&gt;).then((list) =&amp;gt; {
+      setList(list);
+    });
+  }, []); &lt;span style=&#34;color:#228b22&#34;&gt;// [] 确保只在第一次运行
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; {
+    list: list,
+    addItem: (name) =&amp;gt; {
+      setList([...list, { id: &lt;span style=&#34;color:#658b00&#34;&gt;Math&lt;/span&gt;.random(), name: name }]);
+      &lt;span style=&#34;color:#228b22&#34;&gt;//先复制一遍之前的list，再z后面写一个新的对象即可
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    },
+    deleteIndex: (index) =&amp;gt; {
+      setList(list.slice(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;, index).concat(list.slice(index + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)));
+      &lt;span style=&#34;color:#228b22&#34;&gt;//截取从开头到被删对象的部分数组（不包括被删对象）
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      &lt;span style=&#34;color:#228b22&#34;&gt;//截取从被删对象下一个开始到最后的部分数组
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      &lt;span style=&#34;color:#228b22&#34;&gt;//通过concat将两个数组合并
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    }
+  };
+};
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; useList;
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; ajax() {
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Promise&lt;/span&gt;((resolve, reject) =&amp;gt; {
+    setTimeout(() =&amp;gt; {
+      resolve([
+        { id: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Frank&amp;#34;&lt;/span&gt; },
+        { id: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Jack&amp;#34;&lt;/span&gt; },
+        { id: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Alice&amp;#34;&lt;/span&gt; },
+        { id: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Bob&amp;#34;&lt;/span&gt; }
+      ]);
+    }, &lt;span style=&#34;color:#b452cd&#34;&gt;2000&lt;/span&gt;);
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/ - </description>
+        </item>
     
     
     

@@ -19,8 +19,7 @@
   每次写入的数据片段叫做chunk（块）
   产生数据的一端叫做source
   接收数据的一端叫做sink
-  图（（（（
-1.2 浏览器直接读取文件 // 引入文件模块 const fs = require(&amp;#39;fs&amp;#39;) // 引入http模块 const http = require(&amp;#39;http&amp;#39;) // 开启服务器 const server = http.</description>
+  1.2 浏览器直接读取文件 // 引入文件模块 const fs = require(&amp;#39;fs&amp;#39;) // 引入http模块 const http = require(&amp;#39;http&amp;#39;) // 开启服务器 const server = http.</description>
     </item>
     
   </channel>

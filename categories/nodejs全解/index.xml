@@ -6,7 +6,22 @@
     <description>Recent content in Nodejs全解 on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Jul 2021 20:54:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/nodejs%E5%85%A8%E8%A7%A3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Aug 2021 17:33:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/nodejs%E5%85%A8%E8%A7%A3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Node进程与线程</title>
+      <link>https://gsemir0418.github.io/posts/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Fri, 06 Aug 2021 17:33:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
+      <description>1 进程 1.1 进程 Process  场景  notepad.exe是一个程序，不是进程 双击notepad.exe时，操作系统会开启一个进程   定义  进程是程序的执行实例 程序在CPU上执行时的活动叫做进程   特点  一个进程可以创建另一个进程（父进程和子进程）例如Chrome浏览器的网页和插件 通过任务管理器可以看到进程    1.2 了解CPU   特点：
+ 一个单核CPU，在一个时刻，只能做一件事情 如何让用户同时看电影、听音乐、写代码呢 答案是在不同进程中快速切换（CPU频率） 以渣男交多个女朋友举例    多程序并发执行时
+ 多个程序在宏观上并行，微观上串行 每个进程会出现执行-暂停-执行的规律 多个进程之前会出现抢资源（如打印机队列）的现象    进程的两个状态：运行态与非运行态
+  进程队列示意
+  1.3 阻塞   等待执行的进程中
+ 都是非运行态 一些（A）在等待CPU资源 另一些（B）在等待I/O完成（如文件读取） 如果这时把CPU资源分配给B进程，B还是在等I/O（不占用CPU） B进程就是阻塞进程 因此，分派程序只会把CPU分配给非阻塞进程 比如和女朋友排队买饭，但她中途去厕所了，那么如果排到你们了就会让你去后面重新排队    进程的三个状态：运行，就绪，阻塞
+  2 线程 2.</description>
+    </item>
+    
     <item>
       <title>Node技术架构</title>
       <link>https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/</link>
@@ -35,8 +50,7 @@
   每次写入的数据片段叫做chunk（块）
   产生数据的一端叫做source
   接收数据的一端叫做sink
-  图（（（（
-1.2 浏览器直接读取文件 // 引入文件模块 const fs = require(&amp;#39;fs&amp;#39;) // 引入http模块 const http = require(&amp;#39;http&amp;#39;) // 开启服务器 const server = http.</description>
+  1.2 浏览器直接读取文件 // 引入文件模块 const fs = require(&amp;#39;fs&amp;#39;) // 引入http模块 const http = require(&amp;#39;http&amp;#39;) // 开启服务器 const server = http.</description>
     </item>
     
     <item>

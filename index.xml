@@ -5,9 +5,317 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Jul 2021 20:54:55 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 06 Aug 2021 17:33:55 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>Node进程与线程</title>
+        <link>https://gsemir0418.github.io/posts/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
+        <pubDate>Fri, 06 Aug 2021 17:33:55 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/ -&lt;h1 id=&#34;1-进程&#34;&gt;1 进程&lt;/h1&gt;
+&lt;h2 id=&#34;11-进程-process&#34;&gt;1.1 进程 Process&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;场景
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;notepad.exe&lt;/code&gt;是一个&lt;strong&gt;程序&lt;/strong&gt;，不是进程&lt;/li&gt;
+&lt;li&gt;双击notepad.exe时，操作系统会开启一个&lt;strong&gt;进程&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;定义
+&lt;ul&gt;
+&lt;li&gt;进程是程序的&lt;strong&gt;执行实例&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;程序在CPU上&lt;strong&gt;执行时的活动&lt;/strong&gt;叫做进程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;特点
+&lt;ul&gt;
+&lt;li&gt;一个进程可以创建另一个进程（父进程和子进程）例如Chrome浏览器的网页和插件&lt;/li&gt;
+&lt;li&gt;通过任务管理器可以看到进程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;12-了解cpu&#34;&gt;1.2 了解CPU&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个单核CPU，在一个时刻，只能做一件事情&lt;/li&gt;
+&lt;li&gt;如何让用户同时看电影、听音乐、写代码呢&lt;/li&gt;
+&lt;li&gt;答案是在不同进程中&lt;strong&gt;快速切换&lt;/strong&gt;（CPU频率）&lt;/li&gt;
+&lt;li&gt;以渣男交多个女朋友举例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多程序并发执行时&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;多个程序在&lt;strong&gt;宏观上并行，微观上串行&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;每个进程会出现&lt;strong&gt;执行-暂停-执行&lt;/strong&gt;的规律&lt;/li&gt;
+&lt;li&gt;多个进程之前会出现抢资源（如打印机队列）的现象&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;进程的两个状态：运行态与非运行态&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./process1.png&#34; alt=&#34;image-20210805104328732&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;进程队列示意&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./process2.png&#34; alt=&#34;image-20210805104451902&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;13-阻塞&#34;&gt;1.3 阻塞&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;等待执行的进程中&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;都是非运行态&lt;/li&gt;
+&lt;li&gt;一些（A）在等待CPU资源&lt;/li&gt;
+&lt;li&gt;另一些（B）在等待I/O完成（如文件读取）&lt;/li&gt;
+&lt;li&gt;如果这时把CPU资源分配给B进程，B还是在等I/O（不占用CPU）&lt;/li&gt;
+&lt;li&gt;B进程就是阻塞进程&lt;/li&gt;
+&lt;li&gt;因此，分派程序只会把CPU分配给非阻塞进程&lt;/li&gt;
+&lt;li&gt;比如和女朋友排队买饭，但她中途去厕所了，那么如果排到你们了就会让你去后面重新排队&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;进程的三个状态：&lt;strong&gt;运行&lt;/strong&gt;，&lt;strong&gt;就绪&lt;/strong&gt;，&lt;strong&gt;阻塞&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./process3.png&#34; alt=&#34;image-20210805105749846&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;2-线程&#34;&gt;2 线程&lt;/h1&gt;
+&lt;h2 id=&#34;21-线程引入&#34;&gt;2.1 线程引入&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;分阶段
+&lt;ul&gt;
+&lt;li&gt;过去在面向进程设计的系统中，进程是程序的基本执行实体&lt;/li&gt;
+&lt;li&gt;在面向线程设计的系统中，进程本身不是基本运行单位，而是&lt;strong&gt;线程的容器&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;引入原因
+&lt;ul&gt;
+&lt;li&gt;进程是程序的基本执行实体，也是资源（内存等）分配的基本实体&lt;/li&gt;
+&lt;li&gt;导致进程的创建、切换、销毁太消耗CPU时间了&lt;/li&gt;
+&lt;li&gt;于是引入线程，&lt;strong&gt;线程作为执行的基本实体&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;而&lt;strong&gt;进程只作为资源分配的基本实体&lt;/strong&gt;（不管执行了）&lt;/li&gt;
+&lt;li&gt;例如领导与员工们，&lt;strong&gt;领导负责申请、调配资源，员工们负责执行&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;22-线程thread&#34;&gt;2.2 线程Thread&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;概念
+&lt;ul&gt;
+&lt;li&gt;CPU&lt;strong&gt;调度和执行&lt;/strong&gt;的&lt;strong&gt;最小单元&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;一个进程中&lt;strong&gt;至少&lt;/strong&gt;有一个线程&lt;/li&gt;
+&lt;li&gt;一个进程中的线程共享该进程的所有资源&lt;/li&gt;
+&lt;li&gt;进程的第一个线程叫做初始化线程&lt;/li&gt;
+&lt;li&gt;线程的调度可以由操作系统负责，也可以由用户自己负责&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;举例
+&lt;ul&gt;
+&lt;li&gt;浏览器进程中有渲染引擎、V8引擎、存储模块、网络模块、用户界面模块等&lt;/li&gt;
+&lt;li&gt;每个模块都可以放在一个线程里&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;分析：子进程 VS 线程
+&lt;ul&gt;
+&lt;li&gt;优先使用&lt;strong&gt;线程&lt;/strong&gt;，除非需要新的资源分配&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;3-nodejs进程控制&#34;&gt;3 Node.js进程控制&lt;/h1&gt;
+&lt;h2 id=&#34;31-child_process模块&#34;&gt;3.1 child_process模块&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;目的&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;子进程的运行结果存储在系统缓存中（最大200kb）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;等待子进程运行结束后，主进程再用回调函数读取子进程的运行结果（error,stdout,stderr）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; child_process = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;child_process&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; {exec} = child_process
+
+exec(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls&amp;#39;&lt;/span&gt;, (error, stdout, stderr)=&amp;gt;{
+	console.log(error) &lt;span style=&#34;color:#228b22&#34;&gt;// null
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	console.log(stdout) &lt;span style=&#34;color:#228b22&#34;&gt;// 标准输出
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	console.log(stderr) &lt;span style=&#34;color:#228b22&#34;&gt;// 错误内容
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;32-api&#34;&gt;3.2 API&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;API-exec&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;exec(cmd, options, fn)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;execute的缩写，用于执行bash命令&lt;/li&gt;
+&lt;li&gt;同步版本：execSync，不用回调，直接const result = execSync&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;流&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;返回流（不用回调，可以监听stdout流的data事件）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; child_process = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;child_process&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; {exec} = child_process
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; child = exec(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls -l&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#228b22&#34;&gt;// 监听stdout的data事件
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;child.stdout.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;, (chunk) =&amp;gt; {
+	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;得到了一次数据&amp;#39;&lt;/span&gt;)
+	console.log(chunk)
+})
+&lt;span style=&#34;color:#228b22&#34;&gt;// 监听stderr
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;child.stderr.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Promise&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;可以使其Promise化（util.promisify）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; util = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;util&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; child_process = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;child_process&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { exec } = child_process
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; exec2 = util.promisify(exec)
+
+exec2(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls -l&amp;#39;&lt;/span&gt;).then(data =&amp;gt; {
+	console.log(data.stdout)
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;options常用选项（exec第二个参数，execFile第三个参数）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;cwd：执行命令的路径&lt;/li&gt;
+&lt;li&gt;env：环境变量&lt;/li&gt;
+&lt;li&gt;shell：用什么命令行程序执行&lt;/li&gt;
+&lt;li&gt;maxBuffer：最大缓存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;exec(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls&amp;#39;&lt;/span&gt;, {
+	cwd : &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;C:\\&amp;#39;&lt;/span&gt;,
+	env : {NODE_ENV : &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;development&amp;#39;&lt;/span&gt;},
+	maxBuffer : &lt;span style=&#34;color:#b452cd&#34;&gt;1024&lt;/span&gt;*&lt;span style=&#34;color:#b452cd&#34;&gt;2024&lt;/span&gt;
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;存在的问题&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;存在cmd被注入的风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 当接受用户输入时，以&amp;#39;&amp;amp;&amp;amp;&amp;#39;开头，接着输入一条危险指令
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; userInput = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;. &amp;amp;&amp;amp; rm -rf /&amp;#39;&lt;/span&gt;
+exec2(&lt;span style=&#34;color:#cd5555&#34;&gt;`ls &lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;userInput&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;).then(data)...
+&lt;span style=&#34;color:#228b22&#34;&gt;// 那么命令行就会执行&amp;#39;ls&amp;#39;命令和&amp;#39;rm -rf /&amp;#39;命令
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;推荐使用&lt;code&gt;execFile&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;执行特定的程序&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;命令行的参数要用数组形式传入，无法注入&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;同步版本：execFileSync&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { execFile } = child_process
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; userInput = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;. &amp;amp;&amp;amp; pwd&amp;#39;&lt;/span&gt;
+execFile(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls&amp;#39;&lt;/span&gt;, [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;-la&amp;#39;&lt;/span&gt;, userInput], (error, stdout) =&amp;gt; {
+    console.log(error)
+    console.log(stdout)
+})
+&lt;span style=&#34;color:#228b22&#34;&gt;// 结果会报错，不会将&amp;#39;&amp;amp;&amp;amp;&amp;#39;作为连接号解析
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;支持流&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; child = execFile(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls&amp;#39;&lt;/span&gt;, [userInput])
+child.stdout.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;, chunk =&amp;gt; {
+    console.log(chunk)
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API-spawn&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;spawn&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用法与execFile方法类似&lt;/li&gt;
+&lt;li&gt;区别在于没有回调函数，只能通过流事件获取结果&lt;/li&gt;
+&lt;li&gt;没有最大200kb的限制（因为是流）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; child = spawn(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls&amp;#39;&lt;/span&gt;, [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;], { cwd : &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;C:\\&amp;#39;&lt;/span&gt; })
+child.stdout.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;, chunk =&amp;gt; {
+    console.log(chunk.toString())
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;能用spawn就不要用execFile&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API-fork&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;fork&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建一个子进程，执行Node脚本&lt;/li&gt;
+&lt;li&gt;fork(&#39;./child.js&#39;)相当于执行spawn(&amp;lsquo;node&amp;rsquo;,[&#39;./child.js&#39;])&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;能用fork，就别用其他的了&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;会多出一个message事件，用于父子通信&lt;/li&gt;
+&lt;li&gt;会多出一个send方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// n.js主进程
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; n = child_process.fork(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./child.js&amp;#39;&lt;/span&gt;)
+n.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;, m =&amp;gt; {
+	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;PARENT got message:&amp;#39;&lt;/span&gt;, m)
+})
+n.send({ hello: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt; })&lt;span style=&#34;color:#228b22&#34;&gt;// 父进程给子进程传值
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#228b22&#34;&gt;// child.js子进程
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;process.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;, m =&amp;gt; {
+	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;CHILD got message:&amp;#39;&lt;/span&gt;, m)
+})
+process.send({ foo: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;bar&amp;#39;&lt;/span&gt; })&lt;span style=&#34;color:#228b22&#34;&gt;// 子进程给父进程传值
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;4-nodejs线程&#34;&gt;4 Node.js线程&lt;/h1&gt;
+&lt;p&gt;太新了 官方文档建议用子进程。。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://nodejs.org/api/worker_threads.html#worker_threads_worker_threads&#34;&gt;https://nodejs.org/api/worker_threads.html#worker_threads_worker_threads&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+- https://gsemir0418.github.io/posts/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/ - </description>
+        </item>
     
     
     
@@ -347,7 +655,7 @@ console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;done&amp;#39;&lt;
 &lt;p&gt;接收数据的一端叫做sink&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;图（（（（&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./stream1.png&#34; alt=&#34;image-20210803164712797&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;12-浏览器直接读取文件&#34;&gt;1.2 浏览器直接读取文件&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 引入文件模块
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fs = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;)
@@ -409,7 +717,7 @@ server.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8888&lt;/span&gt;)
 &lt;span style=&#34;color:#228b22&#34;&gt;// 等价于
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;a.pipe(b)
 b.pipe(c)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;管道图）））））））&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;./stream2.png&#34; alt=&#34;image-20210803164747769&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;管道实际上是事件的封装&lt;/p&gt;
@@ -422,6 +730,18 @@ b.pipe(c)
 	stream2.end()
 })
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果需要自定义的方式去使用流的话，那么事件监听是个不错的选择。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;14-总结&#34;&gt;1.4 总结&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;流（stream）&lt;/code&gt;是一种&lt;strong&gt;在 Node.js 中处理流式数据的抽象接口&lt;/strong&gt;。 stream 模块提供了一些基础的 API，用于构建实现了流接口的对象。&lt;/li&gt;
+&lt;li&gt;Node.js 提供了多种流对象。 例如，发送到 HTTP 服务器的请求和 process.stdout 都是流的实例。&lt;/li&gt;
+&lt;li&gt;优势：
+&lt;ul&gt;
+&lt;li&gt;非阻塞式的数据处理方式可提升效率&lt;/li&gt;
+&lt;li&gt;chunk数据分块可节省内存&lt;/li&gt;
+&lt;li&gt;管道可提升扩展性，方便组合&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;2-stream对象的原型链&#34;&gt;2 Stream对象的原型链&lt;/h1&gt;
@@ -438,6 +758,312 @@ b.pipe(c)
 &lt;li&gt;Stream对象都继承了&lt;code&gt;EventEmitter&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;3-支持的事件和方法&#34;&gt;3 支持的事件和方法&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;./stream3.png&#34; alt=&#34;image-20210803164814707&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;data&lt;/code&gt;事件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;stream.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;, chunk =&amp;gt; {
+	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;读取了一次数据&amp;#39;&lt;/span&gt;)
+	console.log(chunk)&lt;span style=&#34;color:#228b22&#34;&gt;// 每次读取的数据片段（Buffer二进制）
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;end&lt;/code&gt;事件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;stream.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;end&amp;#39;&lt;/span&gt;, () =&amp;gt; {
+	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;数据读完了&amp;#39;&lt;/span&gt;)
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;error事件：文件丢失，文件权限问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;**&lt;code&gt;drain&lt;/code&gt;**事件：之前拥堵的水流现在已经干涸了&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当写的速度远远小于读的速度时，数据在管道中会出现拥堵的现象&lt;/li&gt;
+&lt;li&gt;面试常考&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;cork()&lt;/code&gt;：强制把所有写入的数据都缓冲到内存中，用到再学&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;4-stream分类&#34;&gt;4 Stream分类&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;名称&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;特点&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Readable&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;可读&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Writable&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;可写&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Duplex&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;可读可写（双向）默认情况下，读和写是两条互相独立的通道&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Transform&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;可读可写（变化）例如babel，写es6，读到es5，流相当于转换器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;img src=&#34;./stream4.png&#34; alt=&#34;image-20210803171028687&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;5-readable和writable的特点&#34;&gt;5 Readable和Writable的特点&lt;/h1&gt;
+&lt;h2 id=&#34;51-readable-stream&#34;&gt;5.1 Readable Stream&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;静止态paused和流动态flowing&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;默认处于paused态&lt;/li&gt;
+&lt;li&gt;添加data事件监听（或pipe），就变为flowing态&lt;/li&gt;
+&lt;li&gt;删除data事件监听（或pipe），就变为paused态&lt;/li&gt;
+&lt;li&gt;pause()可以将流变为paused&lt;/li&gt;
+&lt;li&gt;resume()可以将它变为flowing&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;stream.pipe(reponse)
+stream.pause()&lt;span style=&#34;color:#228b22&#34;&gt;// 静止态
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;setTimeOut(() =&amp;gt; {
+	stream.resume()&lt;span style=&#34;color:#228b22&#34;&gt;// 3s后恢复为流动态
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;}, &lt;span style=&#34;color:#b452cd&#34;&gt;3000&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;52-writable-stream&#34;&gt;5.2 Writable Stream&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;drain流干了事件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;表示可以加点水了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;我们调用stream.write(chunk)的时候，可能会得到false&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;false的意思就是写的太频繁了，数据积压了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;这个时候我们就不能再write了，要监听drain&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;等drain事件触发了，我们才能继续write&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://nodejs.org/api/stream.html#stream_event_drain&#34;&gt;https://nodejs.org/api/stream.html#stream_event_drain&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fs = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; writeOneMillionTimes(writer, data) {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; i = &lt;span style=&#34;color:#b452cd&#34;&gt;1000000&lt;/span&gt;
+    write()
+
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; write() {
+        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; ok = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color:#228b22&#34;&gt;//默认可以写
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;do&lt;/span&gt; {
+            i--
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (i === &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;) {
+                &lt;span style=&#34;color:#228b22&#34;&gt;// 最后一次写
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                writer.write(data)
+            } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; {
+                &lt;span style=&#34;color:#228b22&#34;&gt;// 如果i不为0，则说明还继续写
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                &lt;span style=&#34;color:#228b22&#34;&gt;// 向writer中写数据的同时，把值给ok，进入下一次判断
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                ok = writer.write(data)
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (ok === &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt;) {
+                    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;不能再写了&amp;#39;&lt;/span&gt;)
+                }
+            }
+        } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;while&lt;/span&gt; (i &amp;gt; &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; &amp;amp;&amp;amp; ok)
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;// 如果ok不为true（写不进去值了）
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (i &amp;gt; &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;) {
+            &lt;span style=&#34;color:#228b22&#34;&gt;// 就监听writer的drain事件
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            writer.once(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;drain&amp;#39;&lt;/span&gt;, () =&amp;gt; {
+                console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;干涸了，可以写了&amp;#39;&lt;/span&gt;)
+                &lt;span style=&#34;color:#228b22&#34;&gt;// 如果drain事件触发了，则继续写
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                write()
+            })
+        }
+    }
+}
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; writer = fs.createWriteStream(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./big_file.txt&amp;#39;&lt;/span&gt;)
+
+writeOneMillionTimes(writer, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hello world&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;finish事件
+&lt;ul&gt;
+&lt;li&gt;调用stream.end()之后，触发finish事件&lt;/li&gt;
+&lt;li&gt;缓冲区数据都已经传给底层系统之后，触发finish事件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;6-创建流&#34;&gt;6 创建流&lt;/h1&gt;
+&lt;h2 id=&#34;61-创建writable-stream&#34;&gt;6.1 创建Writable Stream&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { Writable } = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; outStream = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; Writable({
+    write(chunk, encoding, callback) {
+        console.log(chunk.toString())
+        callback()
+    }
+})
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// process.stdin是一个用户输入stream
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;process.stdin.pipe(outStream)
+&lt;span style=&#34;color:#228b22&#34;&gt;// 用监听事件改写
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// process.stdin.on(&amp;#39;data&amp;#39;, chunk =&amp;gt; {
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//     outStream.write(chunk)
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// })
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;62-创建readable-stream&#34;&gt;6.2 创建Readable Stream&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { Readable } = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; inStream = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; Readable()
+
+inStream.push(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;ABCDEFGH&amp;#34;&lt;/span&gt;)
+inStream.push(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;IJKLMNOP&amp;#39;&lt;/span&gt;)
+inStream.push(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 等同于inStream.pipe(process.stdout)
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;inStream.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;, chunk =&amp;gt; {
+    process.stdout.write(chunk)
+    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;写了一次数据&amp;#39;&lt;/span&gt;)
+})
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 这个流是先推再读 不管读没读 都推进去了 不推荐 
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { Readable } = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; inStream = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; Readable({
+    read(size) {
+        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;char&lt;/span&gt; = &lt;span style=&#34;color:#658b00&#34;&gt;String&lt;/span&gt;.fromCharCode(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.currentCharCode++)
+        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.push(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;char&lt;/span&gt;)
+        console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;`推了&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;char&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;)
+        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.currentCharCode &amp;gt; &lt;span style=&#34;color:#b452cd&#34;&gt;90&lt;/span&gt;) {&lt;span style=&#34;color:#228b22&#34;&gt;// Z
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.push(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
+        }
+    }
+})
+
+inStream.currentCharCode = &lt;span style=&#34;color:#b452cd&#34;&gt;65&lt;/span&gt; &lt;span style=&#34;color:#228b22&#34;&gt;// A
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+inStream.pipe(process.stdout)&lt;span style=&#34;color:#228b22&#34;&gt;// d
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;63-创建duplex流&#34;&gt;6.3 创建duplex流&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { Duplex } = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;stream&amp;#34;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; inoutStream = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; Duplex({
+	write(chunk, encoding, callback) {
+		console.log(chunk.toString());
+		callback();
+	},
+	read(size) {
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.push(&lt;span style=&#34;color:#658b00&#34;&gt;String&lt;/span&gt;.fromCharCode(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.currentCharCode++));
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.currentCharCode &amp;gt; &lt;span style=&#34;color:#b452cd&#34;&gt;90&lt;/span&gt;) {
+			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.push(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;);
+		}
+	}
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;64-创建transfrom流&#34;&gt;6.4 创建transfrom流&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { Transform } = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;stream&amp;#34;&lt;/span&gt;);
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; upperCaseTr = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; Transform({
+	transform(chunk, encoding, callback) {
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.push(chunk.toString().toUpperCase());
+		callback();
+	}
+});
+&lt;span style=&#34;color:#228b22&#34;&gt;// 将用户输入的字符传到transform流中进行大写处理，再打印输出出来
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;process.stdin.pipe(upperCaseTr).pipe(process.stdout);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;内置的transform流（压缩文件）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fs = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;fs&amp;#34;&lt;/span&gt;);
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; zlib = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;zlib&amp;#34;&lt;/span&gt;);
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; file = process.argv[&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;];&lt;span style=&#34;color:#228b22&#34;&gt;// 获取用户传的第二个参数（路径）
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+fs.createReadStream(file)
+	&lt;span style=&#34;color:#228b22&#34;&gt;// 每读一点数据，就传给Gzip压缩
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.pipe(zlib.createGzip())
+	&lt;span style=&#34;color:#228b22&#34;&gt;// 没完成一次chunk的传输，就打印输出一个&amp;#39;.&amp;#39;
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;data&amp;#34;&lt;/span&gt;, () =&amp;gt; process.stdout.write(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt;))
+	&lt;span style=&#34;color:#228b22&#34;&gt;// 将数据保存在以.gz结尾的文件中
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.pipe(fs.createWriteStream(file + &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;.gz&amp;#34;&lt;/span&gt;))
+	&lt;span style=&#34;color:#228b22&#34;&gt;// 传输完成，输出&amp;#39;Done&amp;#39;
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;finish&amp;#34;&lt;/span&gt;, () =&amp;gt; console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Done&amp;#34;&lt;/span&gt;));
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// node gzip.js ./big_file.txt
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;单独封装transform流&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fs = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;fs&amp;#34;&lt;/span&gt;);
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; zlib = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;zlib&amp;#34;&lt;/span&gt;);
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; file = process.argv[&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;];
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { Transform } = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;stream&amp;#34;&lt;/span&gt;);
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; reportProgress = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; Transform({
+	transform(chunk, encoding, callback) {
+      process.stdout.write(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt;);
+        &lt;span style=&#34;color:#228b22&#34;&gt;// this.push(chunk)是一样的
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#228b22&#34;&gt;// 因为callback总是会运行，所以将chunk写到callback第二个参数，继续传输
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      callback(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;, chunk);&lt;span style=&#34;color:#228b22&#34;&gt;// 第一个参数表示当出错的时候传null
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	}
+});
+fs.createReadStream(file)
+	.pipe(zlib.createGzip())
+	&lt;span style=&#34;color:#228b22&#34;&gt;// 说明，我们可以对数据进行无限次的处理，只需用pipe连接一个transform流即可
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.pipe(reportProgress)
+	.pipe(fs.createWriteStream(file + &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;.gz&amp;#34;&lt;/span&gt;))
+	.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;finish&amp;#34;&lt;/span&gt;, () =&amp;gt; console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Done&amp;#34;&lt;/span&gt;));
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// node gzip.js ./big_file.txt
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;加密并压缩&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 引入node自带的crypto加密模块
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; crypto = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;crypto&amp;#34;&lt;/span&gt;);
+&lt;span style=&#34;color:#228b22&#34;&gt;// ..
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;fs.createReadStream(file)
+	&lt;span style=&#34;color:#228b22&#34;&gt;// 使用crypto对文件使用aes192方式加密
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.pipe(crypto.createCipher(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;aes192&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;123456&amp;#34;&lt;/span&gt;))
+	&lt;span style=&#34;color:#228b22&#34;&gt;// 注意应先加密再压缩
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.pipe(zlib.createGzip())
+	.pipe(reportProgress)
+	.pipe(fs.createWriteStream(file + &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;.gz&amp;#34;&lt;/span&gt;))
+	.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;finish&amp;#34;&lt;/span&gt;, () =&amp;gt; console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Done&amp;#34;&lt;/span&gt;));
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;7-nodejs中的stream&#34;&gt;7 Node.js中的Stream&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;./stream5.png&#34; alt=&#34;image-20210803215605939&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;8-参考&#34;&gt;8 参考&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Node&amp;rsquo;s Stream&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://jscomplete.com/learn/node-beyond-basics/node-streams&#34;&gt;https://jscomplete.com/learn/node-beyond-basics/node-streams&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Node.js Stream 文档&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://nodejs.cn/api/stream.html&#34;&gt;http://nodejs.cn/api/stream.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;面试&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://juejin.im/post/5b421b5ee51d45198651159b&#34;&gt;https://juejin.im/post/5b421b5ee51d45198651159b&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 - https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/ - </description>
         </item>
     
@@ -1610,34 +2236,6 @@ connection.end()
 &lt;/li&gt;
 &lt;/ul&gt;
 - https://gsemir0418.github.io/posts/docker%E5%AE%89%E8%A3%85mysql/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>杂七杂八</title>
-        <link>https://gsemir0418.github.io/posts/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/</link>
-        <pubDate>Wed, 30 Jun 2021 16:25:00 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/ -&lt;p&gt;const {a, b} = p// 在p中取出同名属性a和b，&lt;/p&gt;
-&lt;p&gt;等同于&lt;/p&gt;
-&lt;p&gt;const a = p.a&lt;/p&gt;
-&lt;p&gt;const b = p.b&lt;/p&gt;
-&lt;p&gt;等同于&lt;/p&gt;
-&lt;p&gt;const {a:a,b:b} = p&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;对象中添加属性，可以利用&lt;code&gt;Object.assign()&lt;/code&gt;将其复制到一个对象中，&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = { a:&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, b:&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt; }
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; c = { pn_detail:[&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;] }
-&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.assign(c, obj)&lt;span style=&#34;color:#228b22&#34;&gt;// { pn_detail:[1, 2, 3], a:1, b:2 }
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;在对象中取出指定的values&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-- https://gsemir0418.github.io/posts/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/ - </description>
         </item>
     
     

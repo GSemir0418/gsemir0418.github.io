@@ -23,8 +23,7 @@
   每次写入的数据片段叫做chunk（块）
   产生数据的一端叫做source
   接收数据的一端叫做sink
-  图（（（（
-1.2 浏览器直接读取文件 // 引入文件模块 const fs = require(&#39;fs&#39;) // 引入http模块 const http = require(&#39;http&#39;) // 开启服务器 const server = http." />
+  1.2 浏览器直接读取文件 // 引入文件模块 const fs = require(&#39;fs&#39;) // 引入http模块 const http = require(&#39;http&#39;) // 开启服务器 const server = http." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-07-08T14:07:04&#43;08:00" />
@@ -43,8 +42,7 @@
   每次写入的数据片段叫做chunk（块）
   产生数据的一端叫做source
   接收数据的一端叫做sink
-  图（（（（
-1.2 浏览器直接读取文件 // 引入文件模块 const fs = require(&#39;fs&#39;) // 引入http模块 const http = require(&#39;http&#39;) // 开启服务器 const server = http."/>
+  1.2 浏览器直接读取文件 // 引入文件模块 const fs = require(&#39;fs&#39;) // 引入http模块 const http = require(&#39;http&#39;) // 开启服务器 const server = http."/>
 
 
 
@@ -287,6 +285,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 						
+						
+						
+							<li>
+								<a href="#14-%e6%80%bb%e7%bb%93" onclick="onNavClick(`#14-总结-nav`)" id="14-总结-nav">
+									1.4 总结
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
 							
 								</ul>
 							
@@ -314,6 +330,220 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							<li>
 								<a href="#3-%e6%94%af%e6%8c%81%e7%9a%84%e4%ba%8b%e4%bb%b6%e5%92%8c%e6%96%b9%e6%b3%95" onclick="onNavClick(`#3-支持的事件和方法-nav`)" id="3-支持的事件和方法-nav">
 									3 支持的事件和方法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4-stream%e5%88%86%e7%b1%bb" onclick="onNavClick(`#4-stream分类-nav`)" id="4-stream分类-nav">
+									4 Stream分类
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#5-readable%e5%92%8cwritable%e7%9a%84%e7%89%b9%e7%82%b9" onclick="onNavClick(`#5-readable和writable的特点-nav`)" id="5-readable和writable的特点-nav">
+									5 Readable和Writable的特点
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#51-readable-stream" onclick="onNavClick(`#51-readable-stream-nav`)" id="51-readable-stream-nav">
+									5.1 Readable Stream
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#52-writable-stream" onclick="onNavClick(`#52-writable-stream-nav`)" id="52-writable-stream-nav">
+									5.2 Writable Stream
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#6-%e5%88%9b%e5%bb%ba%e6%b5%81" onclick="onNavClick(`#6-创建流-nav`)" id="6-创建流-nav">
+									6 创建流
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#61-%e5%88%9b%e5%bb%bawritable-stream" onclick="onNavClick(`#61-创建writable-stream-nav`)" id="61-创建writable-stream-nav">
+									6.1 创建Writable Stream
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#62-%e5%88%9b%e5%bb%bareadable-stream" onclick="onNavClick(`#62-创建readable-stream-nav`)" id="62-创建readable-stream-nav">
+									6.2 创建Readable Stream
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#63-%e5%88%9b%e5%bb%baduplex%e6%b5%81" onclick="onNavClick(`#63-创建duplex流-nav`)" id="63-创建duplex流-nav">
+									6.3 创建duplex流
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#64-%e5%88%9b%e5%bb%batransfrom%e6%b5%81" onclick="onNavClick(`#64-创建transfrom流-nav`)" id="64-创建transfrom流-nav">
+									6.4 创建transfrom流
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#7-nodejs%e4%b8%ad%e7%9a%84stream" onclick="onNavClick(`#7-nodejs中的stream-nav`)" id="7-nodejs中的stream-nav">
+									7 Node.js中的Stream
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#8-%e5%8f%82%e8%80%83" onclick="onNavClick(`#8-参考-nav`)" id="8-参考-nav">
+									8 参考
 								</a>
 							</li>
 						
@@ -490,6 +720,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 						
+						
+						
+							<li>
+								<a href="#14-%e6%80%bb%e7%bb%93" onclick="onNavClick(`#14-总结-nav`)" id="14-总结-nav">
+									1.4 总结
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
 							
 								</ul>
 							
@@ -517,6 +765,220 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							<li>
 								<a href="#3-%e6%94%af%e6%8c%81%e7%9a%84%e4%ba%8b%e4%bb%b6%e5%92%8c%e6%96%b9%e6%b3%95" onclick="onNavClick(`#3-支持的事件和方法-nav`)" id="3-支持的事件和方法-nav">
 									3 支持的事件和方法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#4-stream%e5%88%86%e7%b1%bb" onclick="onNavClick(`#4-stream分类-nav`)" id="4-stream分类-nav">
+									4 Stream分类
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#5-readable%e5%92%8cwritable%e7%9a%84%e7%89%b9%e7%82%b9" onclick="onNavClick(`#5-readable和writable的特点-nav`)" id="5-readable和writable的特点-nav">
+									5 Readable和Writable的特点
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#51-readable-stream" onclick="onNavClick(`#51-readable-stream-nav`)" id="51-readable-stream-nav">
+									5.1 Readable Stream
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#52-writable-stream" onclick="onNavClick(`#52-writable-stream-nav`)" id="52-writable-stream-nav">
+									5.2 Writable Stream
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#6-%e5%88%9b%e5%bb%ba%e6%b5%81" onclick="onNavClick(`#6-创建流-nav`)" id="6-创建流-nav">
+									6 创建流
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#61-%e5%88%9b%e5%bb%bawritable-stream" onclick="onNavClick(`#61-创建writable-stream-nav`)" id="61-创建writable-stream-nav">
+									6.1 创建Writable Stream
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#62-%e5%88%9b%e5%bb%bareadable-stream" onclick="onNavClick(`#62-创建readable-stream-nav`)" id="62-创建readable-stream-nav">
+									6.2 创建Readable Stream
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#63-%e5%88%9b%e5%bb%baduplex%e6%b5%81" onclick="onNavClick(`#63-创建duplex流-nav`)" id="63-创建duplex流-nav">
+									6.3 创建duplex流
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#64-%e5%88%9b%e5%bb%batransfrom%e6%b5%81" onclick="onNavClick(`#64-创建transfrom流-nav`)" id="64-创建transfrom流-nav">
+									6.4 创建transfrom流
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#7-nodejs%e4%b8%ad%e7%9a%84stream" onclick="onNavClick(`#7-nodejs中的stream-nav`)" id="7-nodejs中的stream-nav">
+									7 Node.js中的Stream
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#8-%e5%8f%82%e8%80%83" onclick="onNavClick(`#8-参考-nav`)" id="8-参考-nav">
+									8 参考
 								</a>
 							</li>
 						
@@ -657,7 +1119,7 @@ console.log(<span style="color:#cd5555">&#39;done&#39;</span>)
 <p>接收数据的一端叫做sink</p>
 </li>
 </ul>
-<p>图（（（（</p>
+<p><img src="./stream1.png" alt="image-20210803164712797"></p>
 <h2 id="12-浏览器直接读取文件">1.2 浏览器直接读取文件</h2>
 <div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 引入文件模块
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> fs = require(<span style="color:#cd5555">&#39;fs&#39;</span>)
@@ -719,7 +1181,7 @@ server.listen(<span style="color:#b452cd">8888</span>)
 <span style="color:#228b22">// 等价于
 </span><span style="color:#228b22"></span>a.pipe(b)
 b.pipe(c)
-</code></pre></div><p>管道图）））））））</p>
+</code></pre></div><p><img src="./stream2.png" alt="image-20210803164747769"></p>
 </li>
 <li>
 <p>管道实际上是事件的封装</p>
@@ -732,6 +1194,18 @@ b.pipe(c)
 	stream2.end()
 })
 </code></pre></div><p>如果需要自定义的方式去使用流的话，那么事件监听是个不错的选择。</p>
+</li>
+</ul>
+<h2 id="14-总结">1.4 总结</h2>
+<ul>
+<li><code>流（stream）</code>是一种<strong>在 Node.js 中处理流式数据的抽象接口</strong>。 stream 模块提供了一些基础的 API，用于构建实现了流接口的对象。</li>
+<li>Node.js 提供了多种流对象。 例如，发送到 HTTP 服务器的请求和 process.stdout 都是流的实例。</li>
+<li>优势：
+<ul>
+<li>非阻塞式的数据处理方式可提升效率</li>
+<li>chunk数据分块可节省内存</li>
+<li>管道可提升扩展性，方便组合</li>
+</ul>
 </li>
 </ul>
 <h1 id="2-stream对象的原型链">2 Stream对象的原型链</h1>
@@ -748,6 +1222,312 @@ b.pipe(c)
 <li>Stream对象都继承了<code>EventEmitter</code></li>
 </ul>
 <h1 id="3-支持的事件和方法">3 支持的事件和方法</h1>
+<p><img src="./stream3.png" alt="image-20210803164814707"></p>
+<ul>
+<li>
+<p><code>data</code>事件</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">stream.on(<span style="color:#cd5555">&#39;data&#39;</span>, chunk =&gt; {
+	console.log(<span style="color:#cd5555">&#39;读取了一次数据&#39;</span>)
+	console.log(chunk)<span style="color:#228b22">// 每次读取的数据片段（Buffer二进制）
+</span><span style="color:#228b22"></span>})
+</code></pre></div></li>
+<li>
+<p><code>end</code>事件</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">stream.on(<span style="color:#cd5555">&#39;end&#39;</span>, () =&gt; {
+	console.log(<span style="color:#cd5555">&#39;数据读完了&#39;</span>)
+})
+</code></pre></div></li>
+<li>
+<p>error事件：文件丢失，文件权限问题</p>
+</li>
+<li>
+<p>**<code>drain</code>**事件：之前拥堵的水流现在已经干涸了</p>
+<ul>
+<li>当写的速度远远小于读的速度时，数据在管道中会出现拥堵的现象</li>
+<li>面试常考</li>
+</ul>
+</li>
+<li>
+<p><code>cork()</code>：强制把所有写入的数据都缓冲到内存中，用到再学</p>
+</li>
+</ul>
+<h1 id="4-stream分类">4 Stream分类</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Readable</td>
+<td style="text-align:center">可读</td>
+</tr>
+<tr>
+<td style="text-align:center">Writable</td>
+<td style="text-align:center">可写</td>
+</tr>
+<tr>
+<td style="text-align:center">Duplex</td>
+<td style="text-align:center">可读可写（双向）默认情况下，读和写是两条互相独立的通道</td>
+</tr>
+<tr>
+<td style="text-align:center">Transform</td>
+<td style="text-align:center">可读可写（变化）例如babel，写es6，读到es5，流相当于转换器</td>
+</tr>
+</tbody>
+</table>
+<p><img src="./stream4.png" alt="image-20210803171028687"></p>
+<h1 id="5-readable和writable的特点">5 Readable和Writable的特点</h1>
+<h2 id="51-readable-stream">5.1 Readable Stream</h2>
+<ul>
+<li>
+<p>静止态paused和流动态flowing</p>
+<ul>
+<li>默认处于paused态</li>
+<li>添加data事件监听（或pipe），就变为flowing态</li>
+<li>删除data事件监听（或pipe），就变为paused态</li>
+<li>pause()可以将流变为paused</li>
+<li>resume()可以将它变为flowing</li>
+</ul>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">stream.pipe(reponse)
+stream.pause()<span style="color:#228b22">// 静止态
+</span><span style="color:#228b22"></span>setTimeOut(() =&gt; {
+	stream.resume()<span style="color:#228b22">// 3s后恢复为流动态
+</span><span style="color:#228b22"></span>}, <span style="color:#b452cd">3000</span>)
+</code></pre></div></li>
+</ul>
+<h2 id="52-writable-stream">5.2 Writable Stream</h2>
+<ul>
+<li>
+<p>drain流干了事件</p>
+<ul>
+<li>
+<p>表示可以加点水了</p>
+</li>
+<li>
+<p>我们调用stream.write(chunk)的时候，可能会得到false</p>
+</li>
+<li>
+<p>false的意思就是写的太频繁了，数据积压了</p>
+</li>
+<li>
+<p>这个时候我们就不能再write了，要监听drain</p>
+</li>
+<li>
+<p>等drain事件触发了，我们才能继续write</p>
+</li>
+<li>
+<blockquote>
+<p><a href="https://nodejs.org/api/stream.html#stream_event_drain">https://nodejs.org/api/stream.html#stream_event_drain</a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> fs = require(<span style="color:#cd5555">&#39;fs&#39;</span>)
+
+<span style="color:#8b008b;font-weight:bold">function</span> writeOneMillionTimes(writer, data) {
+    <span style="color:#8b008b;font-weight:bold">let</span> i = <span style="color:#b452cd">1000000</span>
+    write()
+
+    <span style="color:#8b008b;font-weight:bold">function</span> write() {
+        <span style="color:#8b008b;font-weight:bold">let</span> ok = <span style="color:#8b008b;font-weight:bold">true</span> <span style="color:#228b22">//默认可以写
+</span><span style="color:#228b22"></span>        <span style="color:#8b008b;font-weight:bold">do</span> {
+            i--
+            <span style="color:#8b008b;font-weight:bold">if</span> (i === <span style="color:#b452cd">0</span>) {
+                <span style="color:#228b22">// 最后一次写
+</span><span style="color:#228b22"></span>                writer.write(data)
+            } <span style="color:#8b008b;font-weight:bold">else</span> {
+                <span style="color:#228b22">// 如果i不为0，则说明还继续写
+</span><span style="color:#228b22"></span>                <span style="color:#228b22">// 向writer中写数据的同时，把值给ok，进入下一次判断
+</span><span style="color:#228b22"></span>                ok = writer.write(data)
+                <span style="color:#8b008b;font-weight:bold">if</span> (ok === <span style="color:#8b008b;font-weight:bold">false</span>) {
+                    console.log(<span style="color:#cd5555">&#39;不能再写了&#39;</span>)
+                }
+            }
+        } <span style="color:#8b008b;font-weight:bold">while</span> (i &gt; <span style="color:#b452cd">0</span> &amp;&amp; ok)
+
+        <span style="color:#228b22">// 如果ok不为true（写不进去值了）
+</span><span style="color:#228b22"></span>        <span style="color:#8b008b;font-weight:bold">if</span> (i &gt; <span style="color:#b452cd">0</span>) {
+            <span style="color:#228b22">// 就监听writer的drain事件
+</span><span style="color:#228b22"></span>            writer.once(<span style="color:#cd5555">&#39;drain&#39;</span>, () =&gt; {
+                console.log(<span style="color:#cd5555">&#39;干涸了，可以写了&#39;</span>)
+                <span style="color:#228b22">// 如果drain事件触发了，则继续写
+</span><span style="color:#228b22"></span>                write()
+            })
+        }
+    }
+}
+
+<span style="color:#8b008b;font-weight:bold">const</span> writer = fs.createWriteStream(<span style="color:#cd5555">&#39;./big_file.txt&#39;</span>)
+
+writeOneMillionTimes(writer, <span style="color:#cd5555">&#39;hello world&#39;</span>)
+</code></pre></div><ul>
+<li>finish事件
+<ul>
+<li>调用stream.end()之后，触发finish事件</li>
+<li>缓冲区数据都已经传给底层系统之后，触发finish事件</li>
+</ul>
+</li>
+</ul>
+<h1 id="6-创建流">6 创建流</h1>
+<h2 id="61-创建writable-stream">6.1 创建Writable Stream</h2>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> { Writable } = require(<span style="color:#cd5555">&#39;stream&#39;</span>)
+
+<span style="color:#8b008b;font-weight:bold">const</span> outStream = <span style="color:#8b008b;font-weight:bold">new</span> Writable({
+    write(chunk, encoding, callback) {
+        console.log(chunk.toString())
+        callback()
+    }
+})
+
+<span style="color:#228b22">// process.stdin是一个用户输入stream
+</span><span style="color:#228b22"></span>process.stdin.pipe(outStream)
+<span style="color:#228b22">// 用监听事件改写
+</span><span style="color:#228b22">// process.stdin.on(&#39;data&#39;, chunk =&gt; {
+</span><span style="color:#228b22">//     outStream.write(chunk)
+</span><span style="color:#228b22">// })
+</span></code></pre></div><h2 id="62-创建readable-stream">6.2 创建Readable Stream</h2>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> { Readable } = require(<span style="color:#cd5555">&#39;stream&#39;</span>)
+
+<span style="color:#8b008b;font-weight:bold">const</span> inStream = <span style="color:#8b008b;font-weight:bold">new</span> Readable()
+
+inStream.push(<span style="color:#cd5555">&#34;ABCDEFGH&#34;</span>)
+inStream.push(<span style="color:#cd5555">&#39;IJKLMNOP&#39;</span>)
+inStream.push(<span style="color:#8b008b;font-weight:bold">null</span>)
+
+<span style="color:#228b22">// 等同于inStream.pipe(process.stdout)
+</span><span style="color:#228b22"></span>inStream.on(<span style="color:#cd5555">&#39;data&#39;</span>, chunk =&gt; {
+    process.stdout.write(chunk)
+    console.log(<span style="color:#cd5555">&#39;写了一次数据&#39;</span>)
+})
+
+<span style="color:#228b22">// 这个流是先推再读 不管读没读 都推进去了 不推荐 
+</span></code></pre></div><div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> { Readable } = require(<span style="color:#cd5555">&#39;stream&#39;</span>)
+
+<span style="color:#8b008b;font-weight:bold">const</span> inStream = <span style="color:#8b008b;font-weight:bold">new</span> Readable({
+    read(size) {
+        <span style="color:#8b008b;font-weight:bold">const</span> <span style="color:#8b008b;font-weight:bold">char</span> = <span style="color:#658b00">String</span>.fromCharCode(<span style="color:#8b008b;font-weight:bold">this</span>.currentCharCode++)
+        <span style="color:#8b008b;font-weight:bold">this</span>.push(<span style="color:#8b008b;font-weight:bold">char</span>)
+        console.log(<span style="color:#cd5555">`推了</span><span style="color:#cd5555">${</span><span style="color:#8b008b;font-weight:bold">char</span><span style="color:#cd5555">}</span><span style="color:#cd5555">`</span>)
+        <span style="color:#8b008b;font-weight:bold">if</span> (<span style="color:#8b008b;font-weight:bold">this</span>.currentCharCode &gt; <span style="color:#b452cd">90</span>) {<span style="color:#228b22">// Z
+</span><span style="color:#228b22"></span>            <span style="color:#8b008b;font-weight:bold">this</span>.push(<span style="color:#8b008b;font-weight:bold">null</span>)
+        }
+    }
+})
+
+inStream.currentCharCode = <span style="color:#b452cd">65</span> <span style="color:#228b22">// A
+</span><span style="color:#228b22"></span>
+inStream.pipe(process.stdout)<span style="color:#228b22">// d
+</span></code></pre></div><h2 id="63-创建duplex流">6.3 创建duplex流</h2>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> { Duplex } = require(<span style="color:#cd5555">&#34;stream&#34;</span>)
+
+<span style="color:#8b008b;font-weight:bold">const</span> inoutStream = <span style="color:#8b008b;font-weight:bold">new</span> Duplex({
+	write(chunk, encoding, callback) {
+		console.log(chunk.toString());
+		callback();
+	},
+	read(size) {
+		<span style="color:#8b008b;font-weight:bold">this</span>.push(<span style="color:#658b00">String</span>.fromCharCode(<span style="color:#8b008b;font-weight:bold">this</span>.currentCharCode++));
+		<span style="color:#8b008b;font-weight:bold">if</span> (<span style="color:#8b008b;font-weight:bold">this</span>.currentCharCode &gt; <span style="color:#b452cd">90</span>) {
+			<span style="color:#8b008b;font-weight:bold">this</span>.push(<span style="color:#8b008b;font-weight:bold">null</span>);
+		}
+	}
+});
+</code></pre></div><h2 id="64-创建transfrom流">6.4 创建transfrom流</h2>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> { Transform } = require(<span style="color:#cd5555">&#34;stream&#34;</span>);
+
+<span style="color:#8b008b;font-weight:bold">const</span> upperCaseTr = <span style="color:#8b008b;font-weight:bold">new</span> Transform({
+	transform(chunk, encoding, callback) {
+		<span style="color:#8b008b;font-weight:bold">this</span>.push(chunk.toString().toUpperCase());
+		callback();
+	}
+});
+<span style="color:#228b22">// 将用户输入的字符传到transform流中进行大写处理，再打印输出出来
+</span><span style="color:#228b22"></span>process.stdin.pipe(upperCaseTr).pipe(process.stdout);
+</code></pre></div><ul>
+<li>
+<p>内置的transform流（压缩文件）</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> fs = require(<span style="color:#cd5555">&#34;fs&#34;</span>);
+<span style="color:#8b008b;font-weight:bold">const</span> zlib = require(<span style="color:#cd5555">&#34;zlib&#34;</span>);
+<span style="color:#8b008b;font-weight:bold">const</span> file = process.argv[<span style="color:#b452cd">2</span>];<span style="color:#228b22">// 获取用户传的第二个参数（路径）
+</span><span style="color:#228b22"></span>
+fs.createReadStream(file)
+	<span style="color:#228b22">// 每读一点数据，就传给Gzip压缩
+</span><span style="color:#228b22"></span>	.pipe(zlib.createGzip())
+	<span style="color:#228b22">// 没完成一次chunk的传输，就打印输出一个&#39;.&#39;
+</span><span style="color:#228b22"></span>	.on(<span style="color:#cd5555">&#34;data&#34;</span>, () =&gt; process.stdout.write(<span style="color:#cd5555">&#34;.&#34;</span>))
+	<span style="color:#228b22">// 将数据保存在以.gz结尾的文件中
+</span><span style="color:#228b22"></span>	.pipe(fs.createWriteStream(file + <span style="color:#cd5555">&#34;.gz&#34;</span>))
+	<span style="color:#228b22">// 传输完成，输出&#39;Done&#39;
+</span><span style="color:#228b22"></span>	.on(<span style="color:#cd5555">&#34;finish&#34;</span>, () =&gt; console.log(<span style="color:#cd5555">&#34;Done&#34;</span>));
+
+<span style="color:#228b22">// node gzip.js ./big_file.txt
+</span></code></pre></div></li>
+<li>
+<p>单独封装transform流</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> fs = require(<span style="color:#cd5555">&#34;fs&#34;</span>);
+<span style="color:#8b008b;font-weight:bold">const</span> zlib = require(<span style="color:#cd5555">&#34;zlib&#34;</span>);
+<span style="color:#8b008b;font-weight:bold">const</span> file = process.argv[<span style="color:#b452cd">2</span>];
+<span style="color:#8b008b;font-weight:bold">const</span> { Transform } = require(<span style="color:#cd5555">&#34;stream&#34;</span>);
+
+<span style="color:#8b008b;font-weight:bold">const</span> reportProgress = <span style="color:#8b008b;font-weight:bold">new</span> Transform({
+	transform(chunk, encoding, callback) {
+      process.stdout.write(<span style="color:#cd5555">&#34;.&#34;</span>);
+        <span style="color:#228b22">// this.push(chunk)是一样的
+</span><span style="color:#228b22"></span>        <span style="color:#228b22">// 因为callback总是会运行，所以将chunk写到callback第二个参数，继续传输
+</span><span style="color:#228b22"></span>      callback(<span style="color:#8b008b;font-weight:bold">null</span>, chunk);<span style="color:#228b22">// 第一个参数表示当出错的时候传null
+</span><span style="color:#228b22"></span>	}
+});
+fs.createReadStream(file)
+	.pipe(zlib.createGzip())
+	<span style="color:#228b22">// 说明，我们可以对数据进行无限次的处理，只需用pipe连接一个transform流即可
+</span><span style="color:#228b22"></span>	.pipe(reportProgress)
+	.pipe(fs.createWriteStream(file + <span style="color:#cd5555">&#34;.gz&#34;</span>))
+	.on(<span style="color:#cd5555">&#34;finish&#34;</span>, () =&gt; console.log(<span style="color:#cd5555">&#34;Done&#34;</span>));
+
+<span style="color:#228b22">// node gzip.js ./big_file.txt
+</span></code></pre></div></li>
+<li>
+<p>加密并压缩</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 引入node自带的crypto加密模块
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> crypto = require(<span style="color:#cd5555">&#34;crypto&#34;</span>);
+<span style="color:#228b22">// ..
+</span><span style="color:#228b22"></span>fs.createReadStream(file)
+	<span style="color:#228b22">// 使用crypto对文件使用aes192方式加密
+</span><span style="color:#228b22"></span>	.pipe(crypto.createCipher(<span style="color:#cd5555">&#34;aes192&#34;</span>, <span style="color:#cd5555">&#34;123456&#34;</span>))
+	<span style="color:#228b22">// 注意应先加密再压缩
+</span><span style="color:#228b22"></span>	.pipe(zlib.createGzip())
+	.pipe(reportProgress)
+	.pipe(fs.createWriteStream(file + <span style="color:#cd5555">&#34;.gz&#34;</span>))
+	.on(<span style="color:#cd5555">&#34;finish&#34;</span>, () =&gt; console.log(<span style="color:#cd5555">&#34;Done&#34;</span>));
+</code></pre></div></li>
+</ul>
+<h1 id="7-nodejs中的stream">7 Node.js中的Stream</h1>
+<p><img src="./stream5.png" alt="image-20210803215605939"></p>
+<h1 id="8-参考">8 参考</h1>
+<ul>
+<li>
+<p>Node&rsquo;s Stream</p>
+<blockquote>
+<p><a href="https://jscomplete.com/learn/node-beyond-basics/node-streams">https://jscomplete.com/learn/node-beyond-basics/node-streams</a></p>
+</blockquote>
+</li>
+<li>
+<p>Node.js Stream 文档</p>
+<blockquote>
+<p><a href="http://nodejs.cn/api/stream.html">http://nodejs.cn/api/stream.html</a></p>
+</blockquote>
+</li>
+<li>
+<p>面试</p>
+<blockquote>
+<p><a href="https://juejin.im/post/5b421b5ee51d45198651159b">https://juejin.im/post/5b421b5ee51d45198651159b</a></p>
+</blockquote>
+</li>
+</ul>
 
                     
                     <HR width="100%" id="EOF">
