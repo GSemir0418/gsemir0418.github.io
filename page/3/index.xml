@@ -5,9 +5,781 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Aug 2021 17:33:55 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 15 Aug 2021 22:02:28 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>antdpro&#43;umi实战</title>
+        <link>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Fri, 25 Jun 2021 22:51:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ -&lt;p&gt;本文通过一个todo list 的小项目演示，实现三个功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;列表功能，列出所有todo项；&lt;/li&gt;
+&lt;li&gt;添加新项，添加新的todo项；&lt;/li&gt;
+&lt;li&gt;更新项，更新现有的todo项状态，修改成待办、已完成或者取消&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;数据结构：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+	id : 1, // 唯一标识
+	title : &amp;quot;完成antdpro实战&amp;quot;, // 待办事项标题
+	status : 0 // 状态：0-待办，1-已完成，2-已取消
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;创建新项目&#34;&gt;创建新项目&lt;/h2&gt;
+&lt;p&gt;新建项目目录&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mkdir todo-list
+cd todo-list
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;执行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yarn create umi
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;选择ant-design-pro、JavaScript、simple，完成项目的创建&lt;/p&gt;
+&lt;h2 id=&#34;目录结构&#34;&gt;目录结构&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;├── config                   # umi 配置，包含路由，构建等配置
+├── mock                     # 本地模拟数据
+├── public                   # 一些公共静态资源
+├── src
+│   ├── assets               # 本地静态资源
+│   ├── components           # 业务通用组件
+│   ├── e2e                  # 集成测试用例
+│   ├── layouts              # 通用布局
+│   ├── models               # 全局 dva model
+│   ├── pages                # 业务页面入口和常用模板
+│   ├── services             # 后台接口服务
+│   ├── utils                # 工具库
+│   ├── locales              # 国际化资源
+│   ├── global.less          # 全局样式
+│   └── global.jsx            # 全局 JS
+├── tests                    # 测试工具
+├── README.md
+└── package.json
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其中，mock、models、pages、services将是我们的主要目录。&lt;/p&gt;
+&lt;h2 id=&#34;本地开发&#34;&gt;本地开发&lt;/h2&gt;
+&lt;p&gt;安装依赖&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yarn install
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;运行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yarn start
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;浏览器打开http://localhost:8000看到如下界面&lt;/p&gt;
+&lt;p&gt;这就是脚手架为我们建好的框架，一个欢迎页面，一个空白的二级页面和一个查询表格，实际开发中我们要删掉这些页面，然后建立自己的业务界面。&lt;/p&gt;
+&lt;h3 id=&#34;配置路由&#34;&gt;配置路由&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;... 
+routes: [
+        {
+          path: &#39;/&#39;,
+          component: &#39;../layouts/BasicLayout&#39;,
+          authority: [&#39;admin&#39;, &#39;user&#39;],
+          routes: [
+            {
+              path: &#39;/&#39;,
+              redirect: &#39;/welcome&#39;,
+            },
+            {
+              path: &#39;/todo&#39;,// url中path部分
+              name: &#39;todo&#39;, // 名称，国际化菜单配置根据这个名称来配置，如果不配置将直菜单将直接显示这个名称
+              icon: &#39;unordered-list&#39;,// 菜单图标名称
+              component:&#39;./todo&#39;// 组件（页面）,路径相对于src/pages
+            },
+           ...
+  ],
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;添加空白页面&#34;&gt;添加空白页面&lt;/h3&gt;
+&lt;p&gt;在src/pages下新建目录todo,在todo目录下新建空白index.jsx文件，代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import React from &#39;react&#39;;
+import { PageContainer } from &#39;@ant-design/pro-layout&#39;;
+
+
+class TodoPage extends Component {
+
+    componentWillMount() { }
+
+    render() {
+        return (
+            &amp;lt;PageHeaderWrapper&amp;gt;
+                &amp;lt;div&amp;gt;空白面&amp;lt;/div&amp;gt;
+            &amp;lt;/PageHeaderWrapper&amp;gt;);
+    }
+}
+
+export default TodoPage
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;未完待续&#34;&gt;未完待续。。。&lt;/h1&gt;
+- https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>Node文件模块</title>
+        <link>https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</link>
+        <pubDate>Fri, 25 Jun 2021 14:40:55 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/ -&lt;h1 id=&#34;1-待办事项命令行程序需求&#34;&gt;1 待办事项命令行程序需求&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;可以列出所有的todo；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;新增、编辑、删除todo；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改todo状态为已完成/未完成&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;命令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;t
+t add 任务名
+t clear
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;2-创建命令行项目&#34;&gt;2 创建命令行项目&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;空文件夹下，执行：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;yarn init -y
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-y&lt;/code&gt;表示跳过交互式对话（确定版本等信息），根据默认值生成&lt;code&gt;package.json&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建&lt;code&gt;index.js&lt;/code&gt;，引入&lt;code&gt;commanderjs&lt;/code&gt;库，添加&lt;code&gt;add&lt;/code&gt;和&lt;code&gt;clear&lt;/code&gt;子命令：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; program = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;commander&amp;#39;&lt;/span&gt;);
+
+program
+	.option(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;-x,--xxx&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;desc of x&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// x选项 即在node index命令后输入的选项
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;program
+	.command(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;add&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 子命令
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.description(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;add a task&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 子命令描述
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.action((...args) =&amp;gt; { &lt;span style=&#34;color:#228b22&#34;&gt;//拿到用户输入的所有字符串参数
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; words = args.slice(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;,-&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;).join(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 由于最后一个参数默认是command对象，因此需要对参数进行预处理
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	})
+program
+	.command(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 子命令
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.description(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;clear all tasks&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 子命令描述
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.action(() =&amp;gt; {
+    	&lt;span style=&#34;color:#228b22&#34;&gt;// 执行clear操作
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	})
+
+program.parse(process.argv);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;3-实现创建任务功能&#34;&gt;3 实现创建任务功能&lt;/h1&gt;
+&lt;p&gt;一般命令行程序的入口文件为&lt;code&gt;cli.js&lt;/code&gt;，而&lt;code&gt;index.js&lt;/code&gt;中写主要功能实现，因此将index重命名为&lt;code&gt;cli.js&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;31-nodejs读取文件api&#34;&gt;3.1 &lt;code&gt;nodejs&lt;/code&gt;读取文件api：&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210625131432414.png&#34; alt=&#34;image-20210625131432414&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;fs.readFile(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/etc/passwd&amp;#39;&lt;/span&gt;, (err, data) =&amp;gt; {
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (err) &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;throw&lt;/span&gt; err;
+  console.log(data);
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;回调会传入两个参数 &lt;code&gt;(err, data)&lt;/code&gt;，其中 &lt;code&gt;data&lt;/code&gt; 是文件的内容。&lt;/p&gt;
+&lt;p&gt;如果没有指定 &lt;code&gt;encoding&lt;/code&gt;，则返回原始的 buffer。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;options&lt;/code&gt; 中的当&lt;code&gt;flag&lt;/code&gt; 选项采用字符串时，可用以下标志：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&#39;a&#39;&lt;/code&gt; - 打开文件用于追加。如果文件不存在，则创建该文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;ax&#39;&lt;/code&gt; - 与 &lt;code&gt;&#39;a&#39;&lt;/code&gt; 相似，但如果路径已存在则失败。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;a+&#39;&lt;/code&gt; - 打开文件用于读取和追加。如果文件不存在，则创建该文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;ax+&#39;&lt;/code&gt; - 与 &lt;code&gt;&#39;a+&#39;&lt;/code&gt; 相似，但如果路径已存在则失败。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;as&#39;&lt;/code&gt; - 以同步模式打开文件用于追加。如果文件不存在，则创建该文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;as+&#39;&lt;/code&gt; - 以同步模式打开文件用于读取和追加。如果文件不存在，则创建该文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;r&#39;&lt;/code&gt; - 打开文件用于读取。如果文件不存在，则出现异常。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;r+&#39;&lt;/code&gt; - 打开文件用于读取和写入。如果文件不存在，则出现异常。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#39;rs+&#39;&lt;/code&gt; - 以同步模式打开文件用于读取和写入。指示操作系统绕过本地的文件系统缓存。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;32-获取home路径下的todo文件&#34;&gt;3.2 获取home路径下的.todo文件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;nodejs&lt;/code&gt;获取系统home目录路径：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; homedir = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;os&amp;#39;&lt;/span&gt;).homedir()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;nodejs&lt;/code&gt;获取用户home目录路径，如果未获取到，则使用系统home路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; home = process.env.HOME || homedir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;处理路径格式问题，以适配任意系统：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; p = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;path&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; dbPath = p.join(home,&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;.todo&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;33-nodejs写文件api&#34;&gt;3.3 &lt;code&gt;nodejs&lt;/code&gt;写文件api&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;./image-20210625133113444.png&#34; alt=&#34;image-20210625133113444&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;34-创建任务功能初步实现&#34;&gt;3.4 创建任务功能初步实现&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fs = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;)
+module.exports.add = (title) =&amp;gt; {
+	fs.readFile(dbPath, {flag:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;a+&amp;#39;&lt;/span&gt;}, (error,data) =&amp;gt; {
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt;(error) { console.log(error) }
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; {
+			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; list
+            &lt;span style=&#34;color:#228b22&#34;&gt;// 如果文件是空的，则创建一个数组来存数据
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;try&lt;/span&gt; {
+              	&lt;span style=&#34;color:#228b22&#34;&gt;// 尝试让list等于data中的数据
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;				list = JSON.parse(data.toString())&lt;span style=&#34;color:#228b22&#34;&gt;// 字符串=&amp;gt;数组对象
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;			} &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;catch&lt;/span&gt;(error2) {
+                &lt;span style=&#34;color:#228b22&#34;&gt;// 如果出错（说明data为空，解析失败），则让list成为空数组
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;				list = []
+			}
+            &lt;span style=&#34;color:#228b22&#34;&gt;// 在list中添加一个任务
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; task = { title, done:&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt; }
+			list.push(task)
+			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; string = JSON.stringfy(list)&lt;span style=&#34;color:#228b22&#34;&gt;// 数组对象=&amp;gt;字符串
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;// 储存任务到文件
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;			fs.writeFile(dbPath, string+&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;, (error3) =&amp;gt; {
+				&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt;(error3){ console.log(error) }
+			})
+		}
+	})
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;35-优化代码&#34;&gt;3.5 优化代码&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;理清功能需求，从而&lt;strong&gt;面向接口&lt;/strong&gt;编程，最终优化结果：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; db = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./db.js&amp;#39;&lt;/span&gt;)
+module.exports.add = (title) =&amp;gt; {
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 读取之前的任务
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; list = db.read()
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 添加一个title任务
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  list.push({ title, done: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt; })
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 存储任务到文件
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  db.write(list)
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;创建&lt;code&gt;db&lt;/code&gt;对象，内置读写两个接口，并使用&lt;code&gt;Promise&lt;/code&gt;进行封装，db.js:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; db = {
+    &lt;span style=&#34;color:#228b22&#34;&gt;// 读文件接口
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    read(path = dbPath) {&lt;span style=&#34;color:#228b22&#34;&gt;// 指定默认参数
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Promise&lt;/span&gt;((resolve, reject) =&amp;gt; {
+            &lt;span style=&#34;color:#228b22&#34;&gt;// 读取之前的任务
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            fs.readFile(path, { flag: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;a+&amp;#39;&lt;/span&gt; }, (error, data) =&amp;gt; {
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (error) &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; reject(error)
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; list
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;try&lt;/span&gt; {
+                    list = JSON.parse(data.toString())
+
+                } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;catch&lt;/span&gt; (error) {
+                    list = []
+                    &lt;span style=&#34;color:#228b22&#34;&gt;// 这是个异步函数，list不能直接返回，因为这是存在于回调函数中的
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                }
+                resolve(list)&lt;span style=&#34;color:#228b22&#34;&gt;// 如果成功了，则解析并返回list给外面
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            })
+        })
+    },
+	&lt;span style=&#34;color:#228b22&#34;&gt;// 写文件接口
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    write(list, path = dbPath) {&lt;span style=&#34;color:#228b22&#34;&gt;// 指定默认参数
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Promise&lt;/span&gt;((resolve, reject) =&amp;gt; {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; string = JSON.stringify(list)
+            fs.writeFile(path, string + &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;, (error) =&amp;gt; {
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (error)  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; reject(error) 
+                &lt;span style=&#34;color:#228b22&#34;&gt;// return表示如果到这个if里面的话就终止，不用往后面走了
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                resolve()
+            })
+        })
+    }
+}
+module.exports = db
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;4实现其他功能&#34;&gt;4.实现其他功能&lt;/h1&gt;
+&lt;h2 id=&#34;41-清除全部任务&#34;&gt;4.1 清除全部任务&lt;/h2&gt;
+&lt;p&gt;实际上就是写一个空数组将其覆盖即可，同样也是异步的:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;module.exports.clear = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;async&lt;/span&gt; () =&amp;gt; {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;await&lt;/span&gt; db.write([])
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;42-交互列表及交互功能实现&#34;&gt;4.2 交互列表及交互功能实现&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;引入制作命令行交互功能的库：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; inquirer = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;inquirer&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;用户在执行&lt;code&gt;node cli&lt;/code&gt;命令时，进入交互界面，则需要对用户输入的命令条数进行判断
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;process.argv&lt;/code&gt;能够获取到用户输入的参数数组，在&lt;code&gt;cli.js&lt;/code&gt;中对其长度进行判断：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (process.argv.length === &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;) {
+	api.showAll()
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;在&lt;code&gt;index.js&lt;/code&gt;中编写主要实现逻辑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;module.exports.showAll = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;async&lt;/span&gt; () =&amp;gt; {
+    &lt;span style=&#34;color:#228b22&#34;&gt;// 读取之前的任务
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; list = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;await&lt;/span&gt; db.read()
+    &lt;span style=&#34;color:#228b22&#34;&gt;// 打印之前的任务，并变为可操作列表
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    printTasks(list)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;交互列表首页：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; printTasks(list) {
+    inquirer&lt;span style=&#34;color:#228b22&#34;&gt;// 制作控制台交互功能的库
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        .prompt({
+            type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;list&amp;#39;&lt;/span&gt;,
+            name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#228b22&#34;&gt;// 
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;请选择你想操作的任务：&amp;#39;&lt;/span&gt;,
+            choices: [
+                { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;退出&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;-1&amp;#39;&lt;/span&gt; },
+                ...list.map((task, index) =&amp;gt; { &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { name: &lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;task.done ? &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;[x]&amp;#39;&lt;/span&gt; : &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;[_]&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;index + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;task.title&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;, value: index.toString() } }),
+                { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;+创建任务&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;-2&amp;#39;&lt;/span&gt; }
+            ]
+        }).then(answer =&amp;gt; {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; index = &lt;span style=&#34;color:#658b00&#34;&gt;parseInt&lt;/span&gt;(answer.index)&lt;span style=&#34;color:#228b22&#34;&gt;// 把选中的index转换成数字
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (index &amp;gt;= &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;) {
+                &lt;span style=&#34;color:#228b22&#34;&gt;// 说明选中了一个任务，继续进入操作列表
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                askForAction(list, index)
+            } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (index === -&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;) {
+                &lt;span style=&#34;color:#228b22&#34;&gt;// 说明选择的是创建任务
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                askForCreate(list, index)
+            }
+        })
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;选中任务时的操作列表：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; askForAction(list, index) {
+    inquirer.prompt({
+        type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;list&amp;#39;&lt;/span&gt;,
+        name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;action&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#228b22&#34;&gt;// 用户选中后返回的value的名称
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;请选择操作&amp;#39;&lt;/span&gt;,
+        choices: [
+            { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;退出&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;quit&amp;#39;&lt;/span&gt; },
+            { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;已完成&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;markAsDone&amp;#39;&lt;/span&gt; },
+            { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;未完成&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;markAsUnDone&amp;#39;&lt;/span&gt; },
+            { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;修改标题&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;updateTitle&amp;#39;&lt;/span&gt; },
+            { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;删除任务&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;remove&amp;#39;&lt;/span&gt; },
+        ],
+    }).then(answer =&amp;gt; {
+        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;switch&lt;/span&gt; (answer.action) {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;markAsDone&amp;#39;&lt;/span&gt;:
+                list[index].done = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;
+                db.write(list)
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;markAsUnDone&amp;#39;&lt;/span&gt;:
+                list[index].done = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt;
+                db.write(list)
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;updateTitle&amp;#39;&lt;/span&gt;:
+                &lt;span style=&#34;color:#228b22&#34;&gt;// 更新标题需要一个输入框
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                inquirer.prompt({
+                    type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;input&amp;#39;&lt;/span&gt;,
+                    name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;,
+                    message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;设置新标题：&amp;#39;&lt;/span&gt;,
+                    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt;: list[index].title&lt;span style=&#34;color:#228b22&#34;&gt;// 默认值为原标题
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                }).then(answer1 =&amp;gt; {
+                    list[index].title = answer1.title
+                    db.write(list)
+                })
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;remove&amp;#39;&lt;/span&gt;:
+                list.splice(index, &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
+                db.write(list)
+                console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;删除成功！&amp;#39;&lt;/span&gt;)
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;
+        }
+    })
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;选择创建任务时的操作：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; askForCreate(list) {
+    inquirer.prompt({
+        type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;input&amp;#39;&lt;/span&gt;,
+        name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;,
+        message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;输入任务标题：&amp;#39;&lt;/span&gt;
+    }).then(answer =&amp;gt; {
+        list.push({ title: answer.title, done: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt; })
+        db.write(list)
+    })
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;5-发布至npm&#34;&gt;5 发布至npm&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;修改&lt;code&gt;package.json&lt;/code&gt;，添加&lt;code&gt;”bin“&lt;/code&gt;，指定命令行程序最终命令是什么；添加”files“，声明哪些文件在发布时是有用的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;bin&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;:&lt;/span&gt;{
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;#34;t&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;cli.js&amp;#34;&lt;/span&gt;
+}&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;files&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;:&lt;/span&gt;[ &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;*.js&amp;#34;&lt;/span&gt; ]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;在&lt;code&gt;cli.js&lt;/code&gt;第一行加入&lt;code&gt;shebang&lt;/code&gt;，告诉命令行使用什么来运行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;#!/usr/bin/env node
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;正式发布前，需要使用yrm或nrm将淘宝源修改为原始源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;nrm ls
+nrm use npm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;登录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;npm adduser / yarn login
+yarn publish / npm publish
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;下载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;yarn global add node-todo-gsq 
+npm i -g node-todo-gsq
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;卸载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;yarn global remove node-todo-gsq
+npm uninstall -g node-todo-gsq
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;升级&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;yarn upgrade node-todo-gsq
+npm update node-todo-gsq
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;或安装时指定版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;npm i -g node-todo-gsq@0.0.3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>React组件生命周期</title>
+        <link>https://gsemir0418.github.io/posts/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</link>
+        <pubDate>Fri, 25 Jun 2021 11:09:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/ -&lt;h1 id=&#34;1-生命周期的理解&#34;&gt;1 生命周期的理解&lt;/h1&gt;
+&lt;h2 id=&#34;11-引出生命周期&#34;&gt;1.1 引出生命周期&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;需求：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;让指定的文本做显示* */* 隐藏的渐变动画&lt;/li&gt;
+&lt;li&gt;从完全可见，到彻底消失，耗时2S&lt;/li&gt;
+&lt;li&gt;点击“不活了”按钮从界面中卸载组件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;源码及笔记如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Life &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+        &lt;span style=&#34;color:#228b22&#34;&gt;//只要页面发生更新，则说明是状态在驱动
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        state = {
+            opacity: &lt;span style=&#34;color:#b452cd&#34;&gt;0.5&lt;/span&gt;
+        }
+
+        death = () =&amp;gt; {
+            ReactDOM.unmountComponentAtNode(&lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//和render一样 是由React帮忙调用的 因此不用写成箭头函数的形式
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#228b22&#34;&gt;//执行时机：组件挂载到页面后
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentDidMount() {
+            &lt;span style=&#34;color:#228b22&#34;&gt;//起个名字 挂到实例自身 方便清除时用
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.timer = setInterval(() =&amp;gt; {
+                &lt;span style=&#34;color:#228b22&#34;&gt;//获取状态值
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; opacity = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.state.opacity
+                &lt;span style=&#34;color:#228b22&#34;&gt;//每次-0.1
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                opacity -= &lt;span style=&#34;color:#b452cd&#34;&gt;0.1&lt;/span&gt;
+                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (opacity &amp;lt;= &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;) opacity = &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;
+                &lt;span style=&#34;color:#228b22&#34;&gt;//设置新的透明度
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.setState({ opacity })
+            }, &lt;span style=&#34;color:#b452cd&#34;&gt;200&lt;/span&gt;)
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//执行时机：组件将要被卸载
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentWillUnmount() {
+            clearInterval(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.timer)
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//执行时机：初始化渲染、状态更新后
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        render() {
+            &lt;span style=&#34;color:#228b22&#34;&gt;//如果将定时器函数放到render中，那么由于定时器中更新了state值，render函数就会不断被调用
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;//从而形成无限递归
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;// setInterval(() =&amp;gt; {
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;//     //获取状态值
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;//     let opacity = this.state.opacity
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;//     //每次-0.1
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;//     opacity -= 0.1
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;//     if (opacity &amp;lt;= 0) opacity = 1
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;//     //设置新的透明度
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;//     this.setState({ opacity })
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;// }, 200)
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+                &amp;lt;div&amp;gt;
+                    &amp;lt;h2 style={{ opacity: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.state.opacity }}&amp;gt;React学不会怎么办&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/h2&amp;gt;&lt;/span&gt;
+                    &amp;lt;button onClick={&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.death}&amp;gt;不活了&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/button&amp;gt;&lt;/span&gt;
+                &amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/div&amp;gt;&lt;/span&gt;
+            )
+        }
+    }
+    ReactDOM.render(&amp;lt;Life /&amp;gt;, &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;12-生命周期的理解&#34;&gt;1.2 生命周期的理解&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;合适的时间节点做合适的事&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;组件从创建到死亡它会经历一些特定的阶段。&lt;/li&gt;
+&lt;li&gt;React 组件中包含一系列勾子函数(生命周期回调函数), 会在特定的时刻调用。&lt;/li&gt;
+&lt;li&gt;我们在定义组件时，会在特定的生命周期回调函数中，做特定的工作。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;2-react生命周期旧&#34;&gt;2 React生命周期（旧）&lt;/h1&gt;
+&lt;h2 id=&#34;21-react生命周期图旧&#34;&gt;2.1 React生命周期图（旧）&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;.%5Creact%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%97%A7).png&#34; alt=&#34;react生命周期(旧)&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Count &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+        &lt;span style=&#34;color:#228b22&#34;&gt;//构造器
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        constructor(props) {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;super&lt;/span&gt;(props)
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---constructor&amp;#39;&lt;/span&gt;);
+            &lt;span style=&#34;color:#228b22&#34;&gt;//初始化状态
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.state = { count: &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; }
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//组件将要挂载的钩子
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentWillMount() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---componentWillMount&amp;#39;&lt;/span&gt;);
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//组件是否更新的钩子 相当于&amp;#34;阀门&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        shouldComponentUpdate() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---shouldComponentUpdate&amp;#39;&lt;/span&gt;);
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//组件将要更新的钩子
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentWillUpdate() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---componentWillUpdate&amp;#39;&lt;/span&gt;);
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;// 加一事件的回调
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        add = () =&amp;gt; {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { count } = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.state
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.setState({ count: count + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt; })
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//强制更新组件的回调
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        force = () =&amp;gt; {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.forceUpdate()
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//组件更新完毕的钩子
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentDidUpdate() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---componentDidUpdate&amp;#39;&lt;/span&gt;);
+        }
+
+        render() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---render&amp;#39;&lt;/span&gt;);
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { count } = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.state
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+                &amp;lt;div&amp;gt;
+                    &amp;lt;h2&amp;gt;当前求和为&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;：&lt;/span&gt;{count}&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/h2&amp;gt;&lt;/span&gt;
+                    &amp;lt;button onClick={&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.add}&amp;gt;点我+&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/button&amp;gt;&lt;/span&gt;
+                    &amp;lt;button onClick={&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.death}&amp;gt;卸载组件&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/button&amp;gt;&lt;/span&gt;
+                    &amp;lt;button onClick={&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.force}&amp;gt;不更新状态&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;，&lt;/span&gt;只是强制更新一下组件&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/button&amp;gt;&lt;/span&gt;
+                &amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/div&amp;gt;&lt;/span&gt;
+            )
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//组件挂载完毕的钩子
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentDidMount() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---componentDidMount&amp;#39;&lt;/span&gt;);
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//组件将要卸载的钩子
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentWillUnmount() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---conponentWillUnmount&amp;#39;&lt;/span&gt;);
+        }
+
+        death = () =&amp;gt; {
+            ReactDOM.unmountComponentAtNode(&lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
+        }
+    }
+
+    &lt;span style=&#34;color:#228b22&#34;&gt;//父组件A
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; A &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+        &lt;span style=&#34;color:#228b22&#34;&gt;//初始化状态
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        state = {
+            carName: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;奔驰&amp;#39;&lt;/span&gt;
+        }
+
+        changeCar = () =&amp;gt; {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.setState({ carName: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;奥迪&amp;#39;&lt;/span&gt; })
+        }
+
+        render() {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+                &amp;lt;div&amp;gt;
+                    &amp;lt;div&amp;gt;我是A组件&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/div&amp;gt;&lt;/span&gt;
+                    &amp;lt;button onClick={&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.changeCar}&amp;gt;点我切换汽车信息&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/button&amp;gt;&lt;/span&gt;
+                    &amp;lt;B carName={&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.state.carName} /&amp;gt;
+                &amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/div&amp;gt;&lt;/span&gt;
+            )
+        }
+    }
+
+    &lt;span style=&#34;color:#228b22&#34;&gt;//子组件B
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; B &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//第一次打开界面 发现其未运行 点击按钮后才会运行此钩子
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#228b22&#34;&gt;//改名为componentWillReceiveNewProps更为准确
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#228b22&#34;&gt;//组件将要接收新的props的钩子
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentWillReceiveProps() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;B---componentWillReceiveProps&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.props);
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//控制组件更新的阀门
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        shouldComponentUpdate() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;B---shouldComponentUpdate&amp;#39;&lt;/span&gt;);
+            &lt;span style=&#34;color:#228b22&#34;&gt;//只要写了此钩子 必须return一个布尔值
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//组件将要更新的钩子
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentWillUpdate() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;B---componentWillUpdate&amp;#39;&lt;/span&gt;);
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//组件更新完毕的钩子
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentDidUpdate() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;B---componentDidUpdate&amp;#39;&lt;/span&gt;);
+        }
+
+        render() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;B---render&amp;#39;&lt;/span&gt;);
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+                &amp;lt;div&amp;gt;我是B组件&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;，&lt;/span&gt;接受到的汽车是{&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.props.carName}&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/div&amp;gt;&lt;/span&gt;
+            )
+        }
+    }
+
+    ReactDOM.render(&amp;lt;Count /&amp;gt;, &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;22-总结生命周期旧&#34;&gt;2.2 总结生命周期（旧）&lt;/h2&gt;
+&lt;p&gt;生命周期的三个阶段（旧）:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;初始化阶段: 由 ReactDOM.render()触发&amp;mdash;初次渲染&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​    	1. constructor()&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 2. componentWillMount() 
+   
+ 3. render()
+   
+ 4. **componentDidMount**()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;​        		一般在此钩子中做一些初始化的事：开启定时器，发送网络请求、订阅消息&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;更新阶段: 由组件内部 this.setSate()或父组件重新 render 触发&lt;/p&gt;
+&lt;p&gt;​	1. shouldComponentUpdate()&lt;/p&gt;
+&lt;p&gt;​    2. componentWillUpdate()&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 3. **render**()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​    		4. componentDidUpdate()&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;卸载组件: 由 ReactDOM.unmountComponentAtNode()触发&lt;/p&gt;
+&lt;p&gt;​    1. &lt;strong&gt;componentWillUnmount&lt;/strong&gt;()&lt;/p&gt;
+&lt;p&gt;​        	一般做一些收尾的事：关闭定时器、取消订阅消息&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;23-react生命周期图新&#34;&gt;2.3 React生命周期图（新）&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;.%5Creact%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%96%B0).png&#34; alt=&#34;react生命周期(新)&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Count &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+        &lt;span style=&#34;color:#228b22&#34;&gt;//构造器
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        constructor(props) {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;super&lt;/span&gt;(props)
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---constructor&amp;#39;&lt;/span&gt;);
+            &lt;span style=&#34;color:#228b22&#34;&gt;//初始化状态
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.state = { count: &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; }
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//通过props获取派生状态对象
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;static&lt;/span&gt; getDerivedStateFromProps(props, state) {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---getDerivedStateFromProps&amp;#39;&lt;/span&gt;, props, state);
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//必须有返回值，返回值可以是null也可以是state对象
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;//return {count:2}//会覆盖初始化的state，且影响更新过程，setState方法失效（因为横跨挂载和更新过程）
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#228b22&#34;&gt;//return props //可以接收props作为参数并返回 使得state值在任何时候都取决于props
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//在更新之前获取快照
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        getSnapshotBeforeUpdate() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---getSnapshotBeforeUpdate&amp;#39;&lt;/span&gt;);
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;atguigu&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//返回null或者snapshot值（任何值）
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//组件是否更新的钩子 相当于&amp;#34;阀门&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        shouldComponentUpdate() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---shouldComponentUpdate&amp;#39;&lt;/span&gt;);
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;// 加一事件的回调
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        add = () =&amp;gt; {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { count } = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.state
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.setState({ count: count + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt; })
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//强制更新组件的回调
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        force = () =&amp;gt; {
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.forceUpdate()
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//组件更新完毕的钩子
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#228b22&#34;&gt;//默认接收两个参数，分别是prevProps，prevState和snapshot值（例如滚轮位置）
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentDidUpdate(prevProps, prevState, snapshot) {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---componentDidUpdate&amp;#39;&lt;/span&gt;, prevProps, prevState, snapshot);
+        }
+
+        render() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---render&amp;#39;&lt;/span&gt;);
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { count } = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.state
+            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+                &amp;lt;div&amp;gt;
+                    &amp;lt;h2&amp;gt;当前求和为&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;：&lt;/span&gt;{count}&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/h2&amp;gt;&lt;/span&gt;
+                    &amp;lt;button onClick={&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.add}&amp;gt;点我+&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/button&amp;gt;&lt;/span&gt;
+                    &amp;lt;button onClick={&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.death}&amp;gt;卸载组件&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/button&amp;gt;&lt;/span&gt;
+                    &amp;lt;button onClick={&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.force}&amp;gt;不更新状态&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;，&lt;/span&gt;只是强制更新一下组件&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/button&amp;gt;&lt;/span&gt;
+                &amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/div&amp;gt;&lt;/span&gt;
+            )
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//组件挂载完毕的钩子
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentDidMount() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---componentDidMount&amp;#39;&lt;/span&gt;);
+        }
+
+        &lt;span style=&#34;color:#228b22&#34;&gt;//组件将要卸载的钩子
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        componentWillUnmount() {
+            console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Count---conponentWillUnmount&amp;#39;&lt;/span&gt;);
+        }
+
+        death = () =&amp;gt; {
+            ReactDOM.unmountComponentAtNode(&lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
+        }
+    }
+
+    ReactDOM.render(&amp;lt;Count count={&lt;span style=&#34;color:#b452cd&#34;&gt;199&lt;/span&gt;} /&amp;gt;, &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;24-总结生命周期新&#34;&gt;2.4 总结生命周期（新）&lt;/h2&gt;
+&lt;p&gt;生命周期的三个阶段（新）&lt;/p&gt;
+&lt;p&gt;1.初始化阶段: 由 ReactDOM.render()触发&amp;mdash;初次渲染&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  1. constructor() 
+  
+ 2. **getDerivedStateFromProps**() 
+  
+ 3. render() 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;​		4. &lt;strong&gt;componentDidMount&lt;/strong&gt;() 即将出生的那一刻&lt;/p&gt;
+&lt;p&gt;2.更新阶段: 由组件内部 this.setSate()或父组件重新 render 触发&lt;/p&gt;
+&lt;p&gt;​    	1. getDerivedStateFromProps ()&lt;/p&gt;
+&lt;p&gt;​    	2. shouldComponentUpdate()&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 3. **render**() 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;​    	4. &lt;strong&gt;getSnapshotBeforeUpdate&lt;/strong&gt;()&lt;/p&gt;
+&lt;p&gt;​    	5. componentDidUpdate()&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;卸载组件: 由 ReactDOM.unmountComponentAtNode()触发&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. **componentWillUnmount**() 即将离去的那一刻
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;25-新旧生命周期对比&#34;&gt;2.5 新旧生命周期对比&lt;/h2&gt;
+&lt;p&gt;即将在18版本废除三个钩子（willmount，willupdate，willreceiveprops）&lt;/p&gt;
+&lt;p&gt;新增了两个钩子（getDerivedStateFromProps，getSnapshotBeforeUpdate）&lt;/p&gt;
+- https://gsemir0418.github.io/posts/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/ - </description>
+        </item>
     
     
     
@@ -19,11 +791,11 @@
         <guid>https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</guid>
         <description>GSemir Blog https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/ -&lt;h1 id=&#34;1usestate&#34;&gt;1.useState&lt;/h1&gt;
 &lt;h2 id=&#34;使用状态&#34;&gt;使用状态&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [n, setN] = React.useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [n, setN] = React.useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
 
 &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [user, setUser] = React.useState({name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;F&amp;#39;&lt;/span&gt;})
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;注意事项1不可局部更新&#34;&gt;注意事项1：不可局部更新&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [user, setUser] = useState({name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;,age:&lt;span style=&#34;color:#b452cd&#34;&gt;18&lt;/span&gt;})
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [user, setUser] = useState({name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;,age:&lt;span style=&#34;color:#b452cd&#34;&gt;18&lt;/span&gt;})
 
 setState({
 	name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Sam&amp;#39;&lt;/span&gt;
@@ -44,7 +816,7 @@ setState({
 &lt;/ul&gt;
 &lt;h2 id=&#34;注意事项2地址要变&#34;&gt;注意事项2：地址要变&lt;/h2&gt;
 &lt;p&gt;setState(obj)如果obj地址不变，那么React就认为数据没有变化&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [user, setUser] = useState({name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;,age:&lt;span style=&#34;color:#b452cd&#34;&gt;18&lt;/span&gt;})
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [user, setUser] = useState({name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;,age:&lt;span style=&#34;color:#b452cd&#34;&gt;18&lt;/span&gt;})
 
 user.name = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Sam&amp;#39;&lt;/span&gt;
 
@@ -55,25 +827,25 @@ setState(user)
 &lt;li&gt;上一个例子，是在setState中创建了一个新对象，因此React会直接加载新的对象（这也反映了&lt;strong&gt;setState并不会直接修改state，而是生成一个新的state&lt;/strong&gt;）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;usestate接受函数&#34;&gt;useState接受函数&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [state, setState] = useState(() =&amp;gt; {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [state, setState] = useState(() =&amp;gt; {
 	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; initState
 })
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;该函数返回初始state，且只执行一次，节约反复更新渲染组件时js引擎的解析时间（首次渲染时会解析，再次更新组件时js就不会解析这个匿名函数了）&lt;/p&gt;
 &lt;h2 id=&#34;setstate接受函数&#34;&gt;setState接受函数&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [n, setN] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [n, setN] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
 
 setN(n + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
 
 setN(n + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;虽然运行了两次setN，但运行结果为1，并不是预想中的2，原因同样是由于setN并不会改变n的值，n始终为0&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;setN(i =&amp;gt; i + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;setN(i =&amp;gt; i + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;传入函数的方式并&lt;strong&gt;没有直接传入state进行计算&lt;/strong&gt;，仅仅是一个&lt;strong&gt;形式化的操作&lt;/strong&gt;而已，建议优先选用此种方式进行setState&lt;/p&gt;
 &lt;h1 id=&#34;2usereducer&#34;&gt;2.useReducer&lt;/h1&gt;
 &lt;h2 id=&#34;用来践行fluxredux的思想&#34;&gt;(用来践行Flux/Redux的思想)&lt;/h2&gt;
 &lt;h2 id=&#34;1创建初始值initialstate&#34;&gt;1.创建初始值initialState&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; initial = { n = &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; }
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; initial = { n = &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2创建所有操作reducerstateaction&#34;&gt;2.创建所有操作reducer(state,action)&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; reducer = (state, action) =&amp;gt;{&lt;span style=&#34;color:#228b22&#34;&gt;//旧状态，操作的类型
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; reducer = (state, action) =&amp;gt;{&lt;span style=&#34;color:#228b22&#34;&gt;//旧状态，操作的类型
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt;(action.type === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;add&amp;#39;&lt;/span&gt;){
 		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { n: state.n+action.number}
 	}&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt;(action.type === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;mult&amp;#39;&lt;/span&gt;){
@@ -83,7 +855,7 @@ setN(n + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
 	}
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3传给usereducer得到读和写api调用写type--操作类型-&#34;&gt;3.传给useReducer，得到读和写API，调用写（{type : &amp;lsquo;操作类型&amp;rsquo; }）&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; App(){
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; App(){
 	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [state, dispatch] = useReducer(reducer,initial)
 	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; onClick = ()=&amp;gt;{
 		dispatch({type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;add&amp;#39;&lt;/span&gt;, number : &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;})&lt;span style=&#34;color:#228b22&#34;&gt;//参数为action对象
@@ -95,15 +867,15 @@ setN(n + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
 &lt;h2 id=&#34;1上下文是局部的全局变量&#34;&gt;1.上下文是局部的全局变量&lt;/h2&gt;
 &lt;h2 id=&#34;2使用方法&#34;&gt;2.使用方法&lt;/h2&gt;
 &lt;p&gt;1.使用C = createContext(initial)创建上下文&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; C = createContext(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; C = createContext(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2.使用&amp;lt;C.Provider/&amp;gt;圈定作用域&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [n, setN] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [n, setN] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
 
 &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;C.Provider&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={{n, setN}}&amp;gt;&lt;span style=&#34;color:#228b22&#34;&gt;//将state和setState作为对象值传入上下文C中
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt;/&amp;gt;
 &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;C.Provider&lt;/span&gt;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;3.在作用域内使用useContext(C)来使用上下文&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; {n, setN} = useContext(C)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; {n, setN} = useContext(C)
 
 onClick = () =&amp;gt;{setN(n =&amp;gt; n + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3注意事项&#34;&gt;3.注意事项&lt;/h2&gt;
@@ -118,16 +890,16 @@ onClick = () =&amp;gt;{setN(n =&amp;gt; n + &lt;span style=&#34;color:#b452cd&#3
 &lt;p&gt;但我们不一定非要把副作用放在useEffect里&lt;/p&gt;
 &lt;h2 id=&#34;2用途&#34;&gt;2.用途&lt;/h2&gt;
 &lt;p&gt;1.替代componentDidMount使用，[ ]作为第二个参数，表示除第一次渲染后执行外，之后不会再执行&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
 	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;第一次渲染后执行&amp;#39;&lt;/span&gt;)
 },[])
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当第二个参数为空时，表示组件的任何状态变化后都会执行，包括第一次渲染后&lt;/p&gt;
 &lt;p&gt;2.替代componentDidUpdate使用，可指定依赖，当n变化是执行，包括第一次渲染后&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
 	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;n变化后执行&amp;#39;&lt;/span&gt;)
 },[n])
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;3.替代componentWillUnmount使用，通过return&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
     &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; id = setInterval(() =&amp;gt;{
 		console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
     },&lt;span style=&#34;color:#b452cd&#34;&gt;2000&lt;/span&gt;)
@@ -155,12 +927,12 @@ onClick = () =&amp;gt;{setN(n =&amp;gt; n + &lt;span style=&#34;color:#b452cd&#3
 &lt;li&gt;React中默认有多余的render，导致依赖其他状态的无关组件会被再次执行渲染&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;可以使用React.memo(Child)将无关组件进行封装&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Child2 = React.memo(Child)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Child2 = React.memo(Child)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;Bug：但如果Child的props中有接收到的是函数时，但随着父组件的执行渲染，函数表达虽然没变，但此时地址改变了，故仍被再次执行，导致Child仍再次渲染&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;使用useMemo封装此函数解决这个问题：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; onClickChild = useMemo(() =&amp;gt;{
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; onClickChild = useMemo(() =&amp;gt;{
 	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; () =&amp;gt;{ ...}
 },[m])
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
@@ -173,9 +945,9 @@ onClick = () =&amp;gt;{setN(n =&amp;gt; n + &lt;span style=&#34;color:#b452cd&#3
 &lt;p&gt;一般先memo组件，再useMemo函数&lt;/p&gt;
 &lt;h1 id=&#34;7usecallback&#34;&gt;7.useCallBack&lt;/h1&gt;
 &lt;p&gt;如果value是个函数，useMemo就要写成：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useMemo( () = &amp;gt; (x) =&amp;gt;{console.log(x) } )
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useMemo( () = &amp;gt; (x) =&amp;gt;{console.log(x) } )
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;写起来很复杂，因此使用useCallback解决&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; onClickChild = useCallback ( (x) = &amp;gt; { log(x) }, [m] )
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; onClickChild = useCallback ( (x) = &amp;gt; { log(x) }, [m] )
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;8useref&#34;&gt;8.useRef&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -185,30 +957,30 @@ onClick = () =&amp;gt;{setN(n =&amp;gt; n + &lt;span style=&#34;color:#b452cd&#3
 &lt;p&gt;初始化：&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; count = useRef(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; count = useRef(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;读取：&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;count.current
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;count.current
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;也可以将ref作为属性绑定到元素上，使用此ref能够引用到组件对应的DOM对象，类似document.getElementById&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;9forwardref&#34;&gt;9.forwardRef&lt;/h1&gt;
 &lt;p&gt;由于props无法传递ref属性，导致不能直接在子组件上定义ref&lt;/p&gt;
 &lt;p&gt;可以使用forwarRef将组件封装成新组件&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Button2 = React.forwardRef((props,ref)=&amp;gt;{
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Button2 = React.forwardRef((props,ref)=&amp;gt;{
 	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;ref&lt;/span&gt;={ref} {&lt;span style=&#34;color:#658b00&#34;&gt;...props&lt;/span&gt;}/&amp;gt;
 })
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;实际上只是允许了子组件接受一个新参数ref&lt;/p&gt;
 &lt;h1 id=&#34;10替代redux&#34;&gt;10.替代Redux&lt;/h1&gt;
 &lt;p&gt;1.将数据集中在store对象&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; store = {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; store = {
 	user:&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;,
 	books:&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;,
 	movies:&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2.将所有操作集中在reducer&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; reducer = (state, action) =&amp;gt; {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; reducer = (state, action) =&amp;gt; {
 	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;switch&lt;/span&gt; (action.type) {
 		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;setUser&amp;#34;&lt;/span&gt;:
 			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { ...state, user: action.user };
@@ -221,21 +993,21 @@ onClick = () =&amp;gt;{setN(n =&amp;gt; n + &lt;span style=&#34;color:#b452cd&#3
 	}
 };
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;3.创建Context&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Context = React.createContext(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Context = React.createContext(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;4.创建对数据的读写API（只能写在函数组件中）&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [state, dispatch] = useReducer(reducer, store)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [state, dispatch] = useReducer(reducer, store)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;5.将第四步的内容放到第三步的Context（把读写API赋值给Context.Provider）&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Context.Provider&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={{state,dispatch}}&amp;gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Context.Provider&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={{state,dispatch}}&amp;gt;
 	...
 &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Context.Provider&lt;/span&gt;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;6.用Context.Provider将Context提供给所有组件（包起来）&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Context.Provider&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={{state,dispatch}}&amp;gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Context.Provider&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={{state,dispatch}}&amp;gt;
 	&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;User&lt;/span&gt;/&amp;gt;
 	&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Books&lt;/span&gt;/&amp;gt;
 	&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Movies&lt;/span&gt;/&amp;gt;
 &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Context.Provider&lt;/span&gt;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;7.各个组件用useContext获取读写API&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; User() {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; User() {
 	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { state, dispatch } = useContext(Context);
 	useEffect(() =&amp;gt; {
 		ajax(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;/user&amp;#34;&lt;/span&gt;).then(user =&amp;gt; {
@@ -253,7 +1025,7 @@ onClick = () =&amp;gt;{setN(n =&amp;gt; n + &lt;span style=&#34;color:#b452cd&#3
 &lt;p&gt;![priceless-jennings-gyls6 - CodeSandbox - Google Chrome 2021_6_2 14_29_21](article_img/priceless-jennings-gyls6 - CodeSandbox - Google Chrome 2021_6_2 14_29_21-1622626575090.png)&lt;/p&gt;
 &lt;h1 id=&#34;11自定义hooks&#34;&gt;11.自定义hooks&lt;/h1&gt;
 &lt;p&gt;index.jsx:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react&amp;#34;&lt;/span&gt;;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react&amp;#34;&lt;/span&gt;;
 &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; ReactDOM from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react-dom&amp;#34;&lt;/span&gt;;
 &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; useList from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;./hooks/useList&amp;#34;&lt;/span&gt;;
 
@@ -296,7 +1068,7 @@ onClick = () =&amp;gt;{setN(n =&amp;gt; n + &lt;span style=&#34;color:#b452cd&#3
 ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt; /&amp;gt;, rootElement);
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;hooks/useList.js:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { useState, useEffect } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react&amp;#34;&lt;/span&gt;;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { useState, useEffect } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react&amp;#34;&lt;/span&gt;;
 
 &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; useList = () =&amp;gt; {
   &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [list, setList] = useState(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;);
@@ -404,7 +1176,7 @@ ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&
 &lt;/ol&gt;
 &lt;h2 id=&#34;32-大屏适配&#34;&gt;3.2 大屏适配&lt;/h2&gt;
 &lt;p&gt;基于大屏适配公式，计算页面尺寸。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; clientWidth = &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.documentElement.clientWidth
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; clientWidth = &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.documentElement.clientWidth
 &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; clientHeight = &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.documentElement.clientHeight
 	&lt;span style=&#34;color:#658b00&#34;&gt;window&lt;/span&gt;.pageWidth =
 		clientWidth / clientHeight &amp;gt; &lt;span style=&#34;color:#b452cd&#34;&gt;16&lt;/span&gt; / &lt;span style=&#34;color:#b452cd&#34;&gt;9&lt;/span&gt;
@@ -421,7 +1193,7 @@ ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&
 &lt;h3 id=&#34;1-边框制作&#34;&gt;1 边框制作&lt;/h3&gt;
 &lt;p&gt;利用css中&lt;code&gt;box-shadow&lt;/code&gt;可以无限叠加的机制，在原来边框的基础上，四角分别叠加两层不同颜色的边框阴影，实现边框效果的制作。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;./ksh4.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;box-shadow&lt;/span&gt;: 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;box-shadow&lt;/span&gt;: 
 &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;20px&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;-18px&lt;/span&gt; #&lt;span style=&#34;color:#008b45;text-decoration:underline&#34;&gt;133661&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;-20px&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;-18px&lt;/span&gt; #&lt;span style=&#34;color:#008b45;text-decoration:underline&#34;&gt;0e325f&lt;/span&gt;,
 &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;20px&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;-18px&lt;/span&gt; #&lt;span style=&#34;color:#008b45;text-decoration:underline&#34;&gt;0e325f&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;-20px&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;-18px&lt;/span&gt; #&lt;span style=&#34;color:#008b45;text-decoration:underline&#34;&gt;0e325f&lt;/span&gt;, 
 &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;10px&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;-8px&lt;/span&gt; #&lt;span style=&#34;color:#008b45;text-decoration:underline&#34;&gt;164b88&lt;/span&gt;,&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;-10px&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;-8px&lt;/span&gt; #&lt;span style=&#34;color:#008b45;text-decoration:underline&#34;&gt;0d4483&lt;/span&gt;,
@@ -429,7 +1201,7 @@ ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-霓虹字体&#34;&gt;2 霓虹字体&lt;/h3&gt;
 &lt;p&gt;通过&lt;code&gt;@keyframes&lt;/code&gt;编写文本阴影动画，实现标题文本的霓虹闪烁的特效。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;./ksh5.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;@&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;keyframes&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;shining&lt;/span&gt; {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;@&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;keyframes&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;shining&lt;/span&gt; {
 	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; {
         &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;text-shadow&lt;/span&gt;: &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#b452cd&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;px&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;rgba&lt;/span&gt;(&lt;span style=&#34;color:#b452cd&#34;&gt;182&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;211&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;207&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;0.9&lt;/span&gt;),
         &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#b452cd&#34;&gt;30&lt;/span&gt;&lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;px&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;rgba&lt;/span&gt;(&lt;span style=&#34;color:#b452cd&#34;&gt;182&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;211&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;207&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;0.3&lt;/span&gt;), &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#b452cd&#34;&gt;12&lt;/span&gt;&lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;px&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;rgba&lt;/span&gt;(&lt;span style=&#34;color:#b452cd&#34;&gt;15&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;115&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;223&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;0.5&lt;/span&gt;),
@@ -451,7 +1223,7 @@ ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&
 &lt;p&gt;&lt;img src=&#34;./khs6.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;36-实时更新数据&#34;&gt;3.6 实时更新数据&lt;/h2&gt;
 &lt;p&gt;实时更新数据由于没有实际后端数据，因此使用定时器与随机数的方式模拟实时数据的更新。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;setInterval(() =&amp;gt; {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;setInterval(() =&amp;gt; {
 	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; newData = [
 		{ name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;甲&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#658b00&#34;&gt;Math&lt;/span&gt;.random() * &lt;span style=&#34;color:#b452cd&#34;&gt;10&lt;/span&gt; },
 		{ name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;乙&amp;#39;&lt;/span&gt;, value: &lt;span style=&#34;color:#658b00&#34;&gt;Math&lt;/span&gt;.random() * &lt;span style=&#34;color:#b452cd&#34;&gt;10&lt;/span&gt; },
@@ -484,7 +1256,7 @@ ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; Demo(){
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; Demo(){
 	console.log(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;);&lt;span style=&#34;color:#228b22&#34;&gt;//undefined
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &amp;lt;h1&amp;gt;函数式组件&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;，&lt;/span&gt;适用于简单组件的定义&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/h1&amp;gt;&lt;/span&gt;
 }
@@ -504,7 +1276,7 @@ ReactDOM.render(&amp;lt;Demo/&amp;gt;,&lt;span style=&#34;color:#658b00&#34;&gt;
 &lt;p&gt;3.插入到指定的页面元素内部&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; MyComponent &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component{
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; MyComponent &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component{
 	render(){
 	&lt;span style=&#34;color:#228b22&#34;&gt;//render放在MyComponent的原型对象（React.Component）上，供实例使用
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#228b22&#34;&gt;//render中的this指向MyComponent实例对象（组件实例对象）
@@ -527,7 +1299,7 @@ ReactDOM.render(&amp;lt;MyComponent/&amp;gt;,&lt;span style=&#34;color:#658b00&#
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;代码如下：（无效）&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Weather &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Weather &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
 	constructor(props) {
 		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;super&lt;/span&gt;(props)
 		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.state = { isHot: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt; }&lt;span style=&#34;color:#228b22&#34;&gt;//this指向当前类的实例对象
@@ -565,7 +1337,7 @@ ReactDOM.render(&amp;lt;Weather /&amp;gt;, &lt;span style=&#34;color:#658b00&#34
 &lt;p&gt;状态数据，不能直接修改或更新，需要在方法中使用**this.setState({})**来修改，修改后代码如下：&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Weather &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Weather &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
 
     &lt;span style=&#34;color:#228b22&#34;&gt;//构造器调用几次？————1次
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    constructor(props) {
@@ -596,7 +1368,7 @@ ReactDOM.render(&amp;lt;Weather /&amp;gt;, &lt;span style=&#34;color:#658b00&#34
 }
 ReactDOM.render(&amp;lt;Weather /&amp;gt;, &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;213-state的简写方式&#34;&gt;2.1.3 state的简写方式：&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Weather &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Weather &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
     &lt;span style=&#34;color:#228b22&#34;&gt;//初始化状态
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;//利用类的特性，可以直接写赋值语句，表示在该类的每一个实例对象中添加state属性
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    state = { isHot: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt;, wind: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;微风&amp;#39;&lt;/span&gt; }
@@ -620,7 +1392,7 @@ ReactDOM.render(&amp;lt;Weather/&amp;gt;, &lt;span style=&#34;color:#658b00&#34;
 &lt;blockquote&gt;
 &lt;p&gt;需求：自定义用来显示一个人员信息的组件&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Person &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Person &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
     render() {
         &lt;span style=&#34;color:#228b22&#34;&gt;//console.log(this);//均指向实例对象
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#228b22&#34;&gt;//this.props.name = &amp;#34;haha&amp;#34;会报错，因为props是只读的
@@ -653,7 +1425,7 @@ ReactDOM.render(&amp;lt;Person name=&lt;span style=&#34;color:#cd5555&#34;&gt;&a
 &lt;li&gt;年龄为字符串类型，且为数字类型，默认值为 18&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&amp;lt;!--&lt;/span&gt; 引入propstype&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;，&lt;/span&gt;用来对props进行限制&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;（&lt;/span&gt;其实就是弹出一些警告&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;）&lt;/span&gt; --&amp;gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&amp;lt;!--&lt;/span&gt; 引入propstype&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;，&lt;/span&gt;用来对props进行限制&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;（&lt;/span&gt;其实就是弹出一些警告&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;）&lt;/span&gt; --&amp;gt;
 &amp;lt;script src=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;../js/prop-types.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/script&amp;gt;&lt;/span&gt;
 ...
 	&lt;span style=&#34;color:#228b22&#34;&gt;//对标签属性进行类型、必要性等的限制
@@ -673,7 +1445,7 @@ ReactDOM.render(&amp;lt;Person name=&lt;span style=&#34;color:#cd5555&#34;&gt;&a
 &lt;blockquote&gt;
 &lt;p&gt;若要给类的原型对象自身加属性，用static关键字&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Person &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Person &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
     &lt;span style=&#34;color:#228b22&#34;&gt;//对标签属性进行类型、必要性等的限制
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;static&lt;/span&gt; propTypes = {&lt;span style=&#34;color:#228b22&#34;&gt;//此处的p小写
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        name: PropTypes.string.isRequired,&lt;span style=&#34;color:#228b22&#34;&gt;//别忘逗号和P和T都大写
@@ -700,7 +1472,7 @@ ReactDOM.render(&amp;lt;Person name=&lt;span style=&#34;color:#cd5555&#34;&gt;&a
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;224-类式组件中的构造器与props&#34;&gt;2.2.4 类式组件中的构造器与props&lt;/h3&gt;
 &lt;p&gt;类中的构造器可以省略&lt;/p&gt;
 &lt;p&gt;如果写了构造器，同时接受props并传递给super，那么就可以通过this.props访问实例对象的props了（几乎用不到）&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;constructor(props) {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;constructor(props) {
     &lt;span style=&#34;color:#228b22&#34;&gt;//构造器是否接受props，是否传递给super，取决于：
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;//是否希望在构造器中通过this访问props（即访问每个实例对象的props）
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;//一般能不写就不写
@@ -709,7 +1481,7 @@ ReactDOM.render(&amp;lt;Person name=&lt;span style=&#34;color:#cd5555&#34;&gt;&a
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;225-函数组件使用props&#34;&gt;2.2.5 函数组件使用props&lt;/h3&gt;
 &lt;p&gt;函数组件因为自身能够传参，因此可以使用props属性&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//函数组件因为自身能够传参，因此可以使用props属性
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//函数组件因为自身能够传参，因此可以使用props属性
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; Person(props) {
     &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; {name,gender,age} = props
     &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
@@ -746,7 +1518,7 @@ ReactDOM.render(&amp;lt;Person age={&lt;span style=&#34;color:#b452cd&#34;&gt;18
 &lt;/ol&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;231-字符串形式的ref&#34;&gt;2.3.1 字符串形式的ref&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Demo &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Demo &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
     render() {
         console.log(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;);
         &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
@@ -768,7 +1540,7 @@ ReactDOM.render(&amp;lt;Person age={&lt;span style=&#34;color:#b452cd&#34;&gt;18
 }
 ReactDOM.render(&amp;lt;Demo /&amp;gt;, &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;232-回调函数形式的ref&#34;&gt;2.3.2 回调函数形式的ref&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Demo &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Demo &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
     render() {
         console.log(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;);
         &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
@@ -792,7 +1564,7 @@ ReactDOM.render(&amp;lt;Demo /&amp;gt;, &lt;span style=&#34;color:#658b00&#34;&g
 &lt;li&gt;初始化时，ref的回调会执行一次。但是当更新组件时，ref的回调会执行两次，分别返回null和currentNode，因为每次渲染时都会创建一个新的函数实例，所以React清空旧的ref并设置新的。&lt;/li&gt;
 &lt;li&gt;可以定义成class的绑定函数的方法来解决，但一般就用内联就可以了，多此一举。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Demo &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Demo &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
     state = { isHot: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt; }
     &lt;span style=&#34;color:#228b22&#34;&gt;//不用管它 只是为了更新组件方便些
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    changeWeather = () =&amp;gt; {
@@ -840,7 +1612,7 @@ ReactDOM.render(&amp;lt;Demo /&amp;gt;, &lt;span style=&#34;color:#658b00&#34;&g
 &lt;li&gt;React.createRef()调用后，返回一个容器，该容器可以存储被ref所标识的节点&lt;/li&gt;
 &lt;li&gt;一个容器只能存一个节点&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Demo &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Demo &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
     &lt;span style=&#34;color:#228b22&#34;&gt;/*
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;    React.createRef()调用后，返回一个容器
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;    该容器可以存储被ref所标识的节点
@@ -877,7 +1649,7 @@ ReactDOM.render(&amp;lt;Demo /&amp;gt;, &lt;span style=&#34;color:#658b00&#34;&g
 &lt;ul&gt;
 &lt;li&gt;当发生事件的元素正好是我们要操作的元素，就可以省略ref，例如下面的失去焦点事件&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Demo &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Demo &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
     &lt;span style=&#34;color:#228b22&#34;&gt;//创建ref容器
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    myRef1 = React.createRef()
     render() {
@@ -909,7 +1681,7 @@ ReactDOM.render(&amp;lt;Demo /&amp;gt;, &lt;span style=&#34;color:#658b00&#34;&g
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;31-非受控组件&#34;&gt;3.1 非受控组件&lt;/h2&gt;
 &lt;p&gt;输入类型的DOM（表单），对其值现用现取（username.value）的组件，称其为非受控组件&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Login &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Login &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
     handleSubmit = () =&amp;gt; {
         event.preventDefault()&lt;span style=&#34;color:#228b22&#34;&gt;//阻止表单的默认提交动作
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt;{username,password} = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;
@@ -968,7 +1740,7 @@ ReactDOM.render(&amp;lt;Login /&amp;gt;, document.getElementById(&#39;test&#39;)
 &lt;h1 id=&#34;4-高阶函数以及函数柯里化&#34;&gt;4 高阶函数以及函数柯里化&lt;/h1&gt;
 &lt;p&gt;上文中的方法过于冗杂，不适于输入项较多的表单&lt;/p&gt;
 &lt;p&gt;可以只写一个函数，通过表单项&lt;strong&gt;回调函数的参数&lt;/strong&gt;来界定保存的数据&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Login &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Login &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
     &lt;span style=&#34;color:#228b22&#34;&gt;//初始化状态
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    state = {
         username: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
@@ -1011,7 +1783,7 @@ ReactDOM.render(&amp;lt;Login /&amp;gt;, &lt;span style=&#34;color:#658b00&#34;&
 &lt;h2 id=&#34;42-不使用柯里化的写法&#34;&gt;4.2 不使用柯里化的写法&lt;/h2&gt;
 &lt;p&gt;直接将返回值中的回调函数写成内联的形式，并传出event对象.&lt;/p&gt;
 &lt;p&gt;柯里化的核心点在于，事件的回调必须是一个函数。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Login &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Login &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;extends&lt;/span&gt; React.Component {
     &lt;span style=&#34;color:#228b22&#34;&gt;//初始化状态
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    state = {
         username: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,
@@ -1051,7 +1823,7 @@ ReactDOM.render(&amp;lt;Login /&amp;gt;, &lt;span style=&#34;color:#658b00&#34;&
 &lt;li&gt;类中所定义的方法，都是放在类的原型对象上，供实例去使用&lt;/li&gt;
 &lt;li&gt;类中允许直接写赋值语句&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//创建一个Person类
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//创建一个Person类
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Person {
     &lt;span style=&#34;color:#228b22&#34;&gt;//构造器方法
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    constructor(name, age) {
@@ -1126,7 +1898,7 @@ console.log(c1);&lt;span style=&#34;color:#228b22&#34;&gt;//可以利用此特�
 &lt;li&gt;onclick（js动态绑定）&lt;/li&gt;
 &lt;li&gt;直接在标签上绑定（行内绑定）&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&amp;lt;button id=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;btn1&amp;#34;&lt;/span&gt;&amp;gt;按钮1&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/button&amp;gt;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&amp;lt;button id=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;btn1&amp;#34;&lt;/span&gt;&amp;gt;按钮1&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/button&amp;gt;&lt;/span&gt;
 &amp;lt;button id=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;btn2&amp;#34;&lt;/span&gt;&amp;gt;按钮2&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/button&amp;gt;&lt;/span&gt;
 &amp;lt;button onclick=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;demo()&amp;#34;&lt;/span&gt;&amp;gt;按钮3&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/button&amp;gt;&lt;/span&gt;
 &amp;lt;script&amp;gt;
@@ -1147,7 +1919,7 @@ console.log(c1);&lt;span style=&#34;color:#228b22&#34;&gt;//可以利用此特�
 	&lt;span style=&#34;color:#228b22&#34;&gt;//react推荐使用方法3
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/script&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3-类中方法的this指向&#34;&gt;3 类中方法的this指向&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Student{
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;class&lt;/span&gt; Student{
     constructor(name,age){
         &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.name = name
         &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.age = age
@@ -1182,7 +1954,7 @@ demo2()
 &lt;li&gt;复制对象（深复制）&lt;/li&gt;
 &lt;li&gt;复制一个对象的同时修改器属性&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; arr1 = [&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;7&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;9&lt;/span&gt;]    
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; arr1 = [&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;7&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;9&lt;/span&gt;]    
 &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; arr2 = [&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;6&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;8&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;10&lt;/span&gt;]    
 
 &lt;span style=&#34;color:#228b22&#34;&gt;//1.展开一个数组
@@ -1214,13 +1986,13 @@ p1.name = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;zs&amp;#39;&lt;/spa
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; p3 = {...p1,name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;gsqzs&amp;#39;&lt;/span&gt;}
 console.log(p3);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;5 对象相关知识&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; a = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; a = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;
 &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = {} &lt;span style=&#34;color:#228b22&#34;&gt;//需求是将其变成{name:&amp;#39;tom&amp;#39;}
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 不可直接obj.a = &amp;#34;tom&amp;#34;
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;obj[a] = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;tom&amp;#34;&lt;/span&gt;
 console.log(obj)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;6 显示函数柯里化&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//正常写法
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//正常写法
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; sum(a, b, c) {
 	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; a + b + c
 }

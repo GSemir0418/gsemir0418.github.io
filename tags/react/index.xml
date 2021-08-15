@@ -6,7 +6,16 @@
     <description>Recent content in React on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Jul 2021 16:47:33 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Aug 2021 22:15:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>useState原理</title>
+      <link>https://gsemir0418.github.io/posts/usestate%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Sat, 07 Aug 2021 22:15:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/usestate%E5%8E%9F%E7%90%86/</guid>
+      <description>1 useState简单实现 1.1 示例  点击按钮，结果+1  import React from &amp;#34;react&amp;#34;; import ReactDOM from &amp;#34;react-dom&amp;#34;; const rootElement = document.getElementById(&amp;#34;root&amp;#34;); function App() { const [n, setN] = React.useState(0); return ( &amp;lt;div className=&amp;#34;App&amp;#34;&amp;gt; &amp;lt;p&amp;gt;{n}&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; &amp;lt;button onClick={() =&amp;gt; setN(n + 1)}&amp;gt;+1&amp;lt;/button&amp;gt; &amp;lt;/p&amp;gt; &amp;lt;/div&amp;gt; ); } ReactDOM.render(&amp;lt;App /&amp;gt;, rootElement);  运行过程分析  首次render&amp;lt;App/&amp;gt;，调用App()方法，得到虚拟DOM，React会生成真实DOM 用户单击button，调用setN(n+1)，并再次render&amp;lt;App/&amp;gt;，调用App()方法，得到新的虚拟DOM，经过DOM Diff运算，React会更新真实DOM 每次调用App()，都会运行useState(0)   执行setN的时候会发生什么？n会变吗？App()会重新执行吗？  setN一定会修改某个数据x，而不是直接修改n，并将n+1存入x setN一定会触发&amp;lt;App/&amp;gt;重新渲染   每次重新执行App()时，都会执行useState(o)，那么n每次的值会有不同吗（即不为0）  每次n的值都会不同，说明useState肯定会从x读取n的最新值，而不是简单的初始化n为0   x  每个组件有自己的数据x，即state    1.</description>
+    </item>
+    
     <item>
       <title>Umi-Request配置</title>
       <link>https://gsemir0418.github.io/posts/umi-request%E9%85%8D%E7%BD%AE/</link>
@@ -78,10 +87,10 @@ React Hooks让我们更好的拥抱函数式编程，让函数式组件也能使
       <guid>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
       <description>本文通过一个todo list 的小项目演示，实现三个功能：
  列表功能，列出所有todo项； 添加新项，添加新的todo项； 更新项，更新现有的todo项状态，修改成待办、已完成或者取消  数据结构：
-{id : 1, // 唯一标识title : &amp;quot;完成antdpro实战&amp;quot;, // 待办事项标题status : 0 // 状态：0-待办，1-已完成，2-已取消}创建新项目 新建项目目录
-mkdir todo-listcd todo-list执行
-yarn create umi选择ant-design-pro、JavaScript、simple，完成项目的创建
-目录结构 ├── config # umi 配置，包含路由，构建等配置├── mock # 本地模拟数据├── public # 一些公共静态资源├── src│ ├── assets # 本地静态资源│ ├── components # 业务通用组件│ ├── e2e # 集成测试用例│ ├── layouts # 通用布局│ ├── models # 全局 dva model│ ├── pages # 业务页面入口和常用模板│ ├── services # 后台接口服务│ ├── utils # 工具库│ ├── locales # 国际化资源│ ├── global.</description>
+{ id : 1, // 唯一标识 title : &amp;quot;完成antdpro实战&amp;quot;, // 待办事项标题 status : 0 // 状态：0-待办，1-已完成，2-已取消 } 创建新项目 新建项目目录
+mkdir todo-list cd todo-list 执行
+yarn create umi 选择ant-design-pro、JavaScript、simple，完成项目的创建
+目录结构 ├── config # umi 配置，包含路由，构建等配置 ├── mock # 本地模拟数据 ├── public # 一些公共静态资源 ├── src │ ├── assets # 本地静态资源 │ ├── components # 业务通用组件 │ ├── e2e # 集成测试用例 │ ├── layouts # 通用布局 │ ├── models # 全局 dva model │ ├── pages # 业务页面入口和常用模板 │ ├── services # 后台接口服务 │ ├── utils # 工具库 │ ├── locales # 国际化资源 │ ├── global.</description>
     </item>
     
     <item>

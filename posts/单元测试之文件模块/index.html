@@ -18,20 +18,20 @@
 
 <meta property="og:title" content="单元测试之文件模块" />
 <meta property="og:description" content="安装jest
-yarn add -dev jest在package.json中添加test命令
+yarn add -dev jest 在package.json中添加test命令
 &#34;scripts&#34;:{ &#34;test&#34;:&#34;jest&#34; } 新建__tests__文件夹，单元测试文件一般命名为xx.unit.js或者xx.spec.js，下面是测试示例，测试db中的read和write是否为方法：
 const db = require(&#39;../db.js&#39;) describe(&#39;db&#39;, () =&gt; { it(&#39;read is a function&#39;, () =&gt; { expect(db.read instanceof Function).toBe(true) }) it(&#39;write is a function&#39;, () =&gt; { expect(db.write instanceof Function).toBe(true) }) }) 运行
-yarn test一般单元测试为白盒测试，知道代码是怎么编写的
+yarn test 一般单元测试为白盒测试，知道代码是怎么编写的
 单元测试不应该与外界打交道，不能操作硬盘、网络等
 单元测试的对象是函数
 功能测试的对象是模块
 集成测试的对象是系统
 在__test__同级目录下创建__mocks__，新建fs.js，在test文件开头就要写
-jest.mock(&#39;&#39;)未完待续。。。 " />
+jest.mock(&#39;&#39;) 未完待续。。。 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B9%8B%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-06-29T08:43:55&#43;08:00" />
-<meta property="article:modified_time" content="2021-06-29T08:43:55&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-06-29T08:43:55+08:00" />
+<meta property="article:modified_time" content="2021-06-29T08:43:55+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -41,16 +41,16 @@ jest.mock(&#39;&#39;)未完待续。。。 " />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="单元测试之文件模块"/>
 <meta name="twitter:description" content="安装jest
-yarn add -dev jest在package.json中添加test命令
+yarn add -dev jest 在package.json中添加test命令
 &#34;scripts&#34;:{ &#34;test&#34;:&#34;jest&#34; } 新建__tests__文件夹，单元测试文件一般命名为xx.unit.js或者xx.spec.js，下面是测试示例，测试db中的read和write是否为方法：
 const db = require(&#39;../db.js&#39;) describe(&#39;db&#39;, () =&gt; { it(&#39;read is a function&#39;, () =&gt; { expect(db.read instanceof Function).toBe(true) }) it(&#39;write is a function&#39;, () =&gt; { expect(db.write instanceof Function).toBe(true) }) }) 运行
-yarn test一般单元测试为白盒测试，知道代码是怎么编写的
+yarn test 一般单元测试为白盒测试，知道代码是怎么编写的
 单元测试不应该与外界打交道，不能操作硬盘、网络等
 单元测试的对象是函数
 功能测试的对象是模块
 集成测试的对象是系统
 在__test__同级目录下创建__mocks__，新建fs.js，在test文件开头就要写
-jest.mock(&#39;&#39;)未完待续。。。 "/>
+jest.mock(&#39;&#39;) 未完待续。。。 "/>
 
 
 
@@ -428,11 +428,11 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                     <p>安装<code>jest</code></p>
 <pre><code>yarn add -dev jest
 </code></pre><p>在<code>package.json</code>中添加<code>test</code>命令</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#cd5555">&#34;scripts&#34;</span><span style="color:#a61717;background-color:#e3d2d2">:</span>{
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#cd5555">&#34;scripts&#34;</span><span style="color:#a61717;background-color:#e3d2d2">:</span>{
 	<span style="color:#8b008b;font-weight:bold">&#34;test&#34;</span>:<span style="color:#cd5555">&#34;jest&#34;</span>
 }
 </code></pre></div><p>新建<code>__tests__</code>文件夹，单元测试文件一般命名为<code>xx.unit.js</code>或者<code>xx.spec.js</code>，下面是测试示例，测试db中的read和write是否为方法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> db = require(<span style="color:#cd5555">&#39;../db.js&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> db = require(<span style="color:#cd5555">&#39;../db.js&#39;</span>)
 describe(<span style="color:#cd5555">&#39;db&#39;</span>, () =&gt; {
 	it(<span style="color:#cd5555">&#39;read is a function&#39;</span>, () =&gt; {
 		expect(db.read <span style="color:#8b008b;font-weight:bold">instanceof</span> <span style="color:#658b00">Function</span>).toBe(<span style="color:#8b008b;font-weight:bold">true</span>)

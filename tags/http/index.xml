@@ -14,10 +14,10 @@
       
       <guid>https://gsemir0418.github.io/posts/nodehttp%E6%A8%A1%E5%9D%97/</guid>
       <description>0 准备工作 1 ts-node-dev  当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用，但非常适合用来学习  安装
-npm -g i ts-node-dev要用npm安装 ，用yarn安装的话使用时会报错。。无法识别“ts-node-dev”命令，不知道为什么。
+npm -g i ts-node-dev 要用npm安装 ，用yarn安装的话使用时会报错。。无法识别“ts-node-dev”命令，不知道为什么。
 2 VSCode配置 配置自动保存与保存后自动格式化：
 ctrl shift p打开首选项：打开设置(ui)，AutoSave修改为onFocusChange，搜索format，勾选Format On Save开启保存后自动格式化。
-3 curl  GET请求：curl -v url POST请求：curl -v -d “name=gsq&amp;quot; url 设置请求头：-H &#39;Content-Type:application/json&#39; 设置动词：-X PUT JSON请求：curl -d &#39;{&amp;quot;name&amp;quot;:&amp;quot;bob&amp;quot;}&#39; -H &#39;Content-Type:application/json&#39; url 后面会用到curl来构造请求  1 创建项目  初始化项目：  yarn init -y 安装@types/node声明文件  yarn add --dev @types/node 新建index.ts  // 引入http模块 import * as http from &amp;#39;http&amp;#39; // 用http创建server const server = http.</description>
+3 curl  GET请求：curl -v url POST请求：curl -v -d “name=gsq&amp;quot; url 设置请求头：-H &#39;Content-Type:application/json&#39; 设置动词：-X PUT JSON请求：curl -d &#39;{&amp;quot;name&amp;quot;:&amp;quot;bob&amp;quot;}&#39; -H &#39;Content-Type:application/json&#39; url 后面会用到curl来构造请求  1 创建项目  初始化项目：  yarn init -y  安装@types/node声明文件  yarn add --dev @types/node  新建index.ts  // 引入http模块 import * as http from &amp;#39;http&amp;#39; // 用http创建server const server = http.</description>
     </item>
     
   </channel>

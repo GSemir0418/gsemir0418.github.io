@@ -19,12 +19,12 @@
 ​	其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。
 ​	js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。
 1.1 更改网页名称 ​	在index.html文件中，修改&amp;lt;title&amp;gt;标签内的内容即可：
-&amp;lt;title&amp;gt;XXX村寨模型展示&amp;lt;/title&amp;gt;1.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
+&amp;lt;title&amp;gt;XXX村寨模型展示&amp;lt;/title&amp;gt; 1.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
 ​	在js/index.js文件中，修改15和16行的代码如下：
-//模型路径let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;;let obj1 = &#39;./models/testobj/lancuiting.obj&#39;;​	注意路径使用相对路径。
+//模型路径 let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;; let obj1 = &#39;./models/testobj/lancuiting.obj&#39;; ​	注意路径使用相对路径。
 1.3 控制模型体积 ​	js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：
-model1.scale.set(1.4, 1.4, 1.4);1.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
-//括号中的2为强度let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);//光源的位置dLight.position.set(500, 1000, 4000); 2. Turn.js翻页特效 ​	展示平台的第一个模块是少数民族建筑特征分析。针对大量的图文资料，传统的页面布局得不到很好的展示与交互效果。为提高用户体验，选择类似书本翻页的形式作为展示图文视频资料的方式。Turn.js是一个JavaScript库，利用HTML5的所有优点，可以使内容呈现起来像一本真正的书或杂志。
+model1.scale.set(1.4, 1.4, 1.4); 1.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
+//括号中的2为强度 let dLight = new THREE.DirectionalLight(0xFFFFFF, 2); //光源的位置 dLight.position.set(500, 1000, 4000);  2. Turn.js翻页特效 ​	展示平台的第一个模块是少数民族建筑特征分析。针对大量的图文资料，传统的页面布局得不到很好的展示与交互效果。为提高用户体验，选择类似书本翻页的形式作为展示图文视频资料的方式。Turn.js是一个JavaScript库，利用HTML5的所有优点，可以使内容呈现起来像一本真正的书或杂志。
 ​	关于Turn.js的入门教程可以看siki学院的免费课程，也可以通过官网进行学习。
  siki学院：http://www.sikiedu.com/course/517/tasks
 Turn.js官网：http://www.turnjs.com/

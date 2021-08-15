@@ -34,8 +34,8 @@ docker rm mysql1 删除容器，必要时可加-f选项
 docker run xxx 启动新容器" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/docker%E5%AE%89%E8%A3%85mysql/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-07-02T08:36:55&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-02T08:36:55&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-07-02T08:36:55+08:00" />
+<meta property="article:modified_time" content="2021-07-02T08:36:55+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -647,7 +647,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </blockquote>
 <p>根据文档下载最新包，安装重启即可。</p>
 <h1 id="2-docker安装mysql">2 Docker安装MySQL</h1>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --name mysql1 -e <span style="color:#00688b">MYSQL_ROOT_PASSWORD</span>=<span style="color:#b452cd">123456</span> -p 3306:3306 -d mysql:8.0.25
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --name mysql1 -e <span style="color:#00688b">MYSQL_ROOT_PASSWORD</span>=<span style="color:#b452cd">123456</span> -p 3306:3306 -d mysql:8.0.25
 </code></pre></div><p>其中<code>name</code>是容器的名字；<code>-e</code>是环境变量，配置的<code>MYSQL_ROOT_PASSWORD</code>是mysql密码；<code>-p</code>是端口映射，左侧是本机端口号，右侧是虚拟机端口号；<code>-d</code>表示程序持续运行；最后指定mysql的版本号为<code>8.0.25</code>。</p>
 <p>安装完成后，在docker desktop中可以发现mysql1的容器已开启，或者在命令行输入docker ps查看全部在运行的容器。</p>
 <h1 id="3-docker常用命令">3 Docker常用命令</h1>

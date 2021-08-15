@@ -26,7 +26,7 @@ str.chartAt(index) 若没有提供index，则默认使用0
   例子
 const str = &amp;#39;ABCD&amp;#39; str.charAt(1)// &amp;#34;B&amp;#34;   String.prototype.indexOf()   查询字符串对象中第一次出现指定值的索引
   语法：
-str.indexOf(searchValue, fromIndex)fromIndex可选，表示开始查找的位置，默认为0，若指定为负数，则等价于传入0；若大于str.length，则必反回-1
+str.indexOf(searchValue, fromIndex) fromIndex可选，表示开始查找的位置，默认为0，若指定为负数，则等价于传入0；若大于str.length，则必反回-1
 indexOf区分大小写</description>
     </item>
     

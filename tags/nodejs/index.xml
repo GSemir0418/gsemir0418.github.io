@@ -83,7 +83,7 @@
       <description>1 MySQL数据类型 MySQL支持的数据类型比较少，主要有五种类型：
  数字类型 字符串类型 时间和日期类型 JSON类型 其他特殊类型   id 可以指定类型为serial序列，时间格式最好使用ISO 8601格式，即2021-07-02T11:01:55+08:00
  2 Sequelize使用  官方文档：   sequelize.org/master/manual/getting-started.html
-  安装：  yarn add sequelizeyarn add mysql2 使用：  // 引入 const { Sequelize, Model, DataTypes } = require(&amp;#39;sequelize&amp;#39;) // 创建sequelize连接 const sequelize = new Sequelize(&amp;#39;gsq&amp;#39;, &amp;#39;root&amp;#39;, &amp;#39;12345&amp;#39;, { host: &amp;#39;localhost&amp;#39;, dialect: &amp;#39;mysql&amp;#39;, }) // 创建User模型 class User extends Model { } // 初始化User表 User.</description>
+  安装：  yarn add sequelize yarn add mysql2  使用：  // 引入 const { Sequelize, Model, DataTypes } = require(&amp;#39;sequelize&amp;#39;) // 创建sequelize连接 const sequelize = new Sequelize(&amp;#39;gsq&amp;#39;, &amp;#39;root&amp;#39;, &amp;#39;12345&amp;#39;, { host: &amp;#39;localhost&amp;#39;, dialect: &amp;#39;mysql&amp;#39;, }) // 创建User模型 class User extends Model { } // 初始化User表 User.</description>
     </item>
     
     <item>
@@ -92,7 +92,7 @@
       <pubDate>Fri, 02 Jul 2021 09:24:55 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/posts/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
-      <description>1 安装mysql依赖包 yarn add mysql2 创建mysql连接 创建连接前，确保容器是开启状态。新建test.js文件。
+      <description>1 安装mysql依赖包 yarn add mysql 2 创建mysql连接 创建连接前，确保容器是开启状态。新建test.js文件。
  引入mysql模块  const mysql = require(&amp;#39;mysql&amp;#39;)  创建连接  const connection = mysql.createConnection({ host: &amp;#39;localhost&amp;#39;, // 老版本的docker需要填ip  user: &amp;#39;root&amp;#39;, password: &amp;#39;12345&amp;#39; }) connection.connect();  创建数据库  // 创建数据库 connection.query(&amp;#39;CREATE DATABASE IF NOT EXISTS gsq DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_unicode_520_ci;&amp;#39;, (error, results, fields) =&amp;gt; { if (error) throw error; console.log(results) }) 创建名为gsq的数据库（数据库不存在的情况下），并指定默认字符集为utf8mb4(mysql对于utf-8字符集支持不佳)
  创建数据表  // 选择数据库 connection.query(&amp;#39;use gsq;&amp;#39;) // 创建表 connection.</description>
     </item>
@@ -127,10 +127,10 @@ docker run xxx 启动新容器</description>
       
       <guid>https://gsemir0418.github.io/posts/nodehttp%E6%A8%A1%E5%9D%97/</guid>
       <description>0 准备工作 1 ts-node-dev  当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用，但非常适合用来学习  安装
-npm -g i ts-node-dev要用npm安装 ，用yarn安装的话使用时会报错。。无法识别“ts-node-dev”命令，不知道为什么。
+npm -g i ts-node-dev 要用npm安装 ，用yarn安装的话使用时会报错。。无法识别“ts-node-dev”命令，不知道为什么。
 2 VSCode配置 配置自动保存与保存后自动格式化：
 ctrl shift p打开首选项：打开设置(ui)，AutoSave修改为onFocusChange，搜索format，勾选Format On Save开启保存后自动格式化。
-3 curl  GET请求：curl -v url POST请求：curl -v -d “name=gsq&amp;quot; url 设置请求头：-H &#39;Content-Type:application/json&#39; 设置动词：-X PUT JSON请求：curl -d &#39;{&amp;quot;name&amp;quot;:&amp;quot;bob&amp;quot;}&#39; -H &#39;Content-Type:application/json&#39; url 后面会用到curl来构造请求  1 创建项目  初始化项目：  yarn init -y 安装@types/node声明文件  yarn add --dev @types/node 新建index.ts  // 引入http模块 import * as http from &amp;#39;http&amp;#39; // 用http创建server const server = http.</description>
+3 curl  GET请求：curl -v url POST请求：curl -v -d “name=gsq&amp;quot; url 设置请求头：-H &#39;Content-Type:application/json&#39; 设置动词：-X PUT JSON请求：curl -d &#39;{&amp;quot;name&amp;quot;:&amp;quot;bob&amp;quot;}&#39; -H &#39;Content-Type:application/json&#39; url 后面会用到curl来构造请求  1 创建项目  初始化项目：  yarn init -y  安装@types/node声明文件  yarn add --dev @types/node  新建index.ts  // 引入http模块 import * as http from &amp;#39;http&amp;#39; // 用http创建server const server = http.</description>
     </item>
     
     <item>
@@ -152,16 +152,16 @@ node --inspect-brk cli add task2 打开浏览器，F12检查页面，几秒钟�
       
       <guid>https://gsemir0418.github.io/posts/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B9%8B%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</guid>
       <description>安装jest
-yarn add -dev jest在package.json中添加test命令
+yarn add -dev jest 在package.json中添加test命令
 &amp;#34;scripts&amp;#34;:{ &amp;#34;test&amp;#34;:&amp;#34;jest&amp;#34; } 新建__tests__文件夹，单元测试文件一般命名为xx.unit.js或者xx.spec.js，下面是测试示例，测试db中的read和write是否为方法：
 const db = require(&amp;#39;../db.js&amp;#39;) describe(&amp;#39;db&amp;#39;, () =&amp;gt; { it(&amp;#39;read is a function&amp;#39;, () =&amp;gt; { expect(db.read instanceof Function).toBe(true) }) it(&amp;#39;write is a function&amp;#39;, () =&amp;gt; { expect(db.write instanceof Function).toBe(true) }) }) 运行
-yarn test一般单元测试为白盒测试，知道代码是怎么编写的
+yarn test 一般单元测试为白盒测试，知道代码是怎么编写的
 单元测试不应该与外界打交道，不能操作硬盘、网络等
 单元测试的对象是函数
 功能测试的对象是模块
 集成测试的对象是系统
 在__test__同级目录下创建__mocks__，新建fs.js，在test文件开头就要写
-jest.mock(&#39;&#39;)未完待续。。。 </description>
+jest.mock(&#39;&#39;) 未完待续。。。 </description>
     </item>
     
     <item>

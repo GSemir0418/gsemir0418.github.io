@@ -26,8 +26,8 @@ const [user, setUser] = useState({name:&#39;Jack&#39;,age:18}) user.name = &#39;
 setState接受函数 const [n, setN] = useState(0) setN(n &#43; 1) setN(n &#43; 1) 虽然运行了两次setN，但运行结果为1，并不是预想中的2，原因同样是由于setN并不会改变n的值，n始终为0" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/%E6%96%B9%E6%96%B9%E7%9A%84hooks/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-06-01T17:02:51&#43;08:00" />
-<meta property="article:modified_time" content="2021-06-01T17:02:51&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-06-01T17:02:51+08:00" />
+<meta property="article:modified_time" content="2021-06-01T17:02:51+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -1546,11 +1546,11 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
                     <h1 id="1usestate">1.useState</h1>
 <h2 id="使用状态">使用状态</h2>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [n, setN] = React.useState(<span style="color:#b452cd">0</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [n, setN] = React.useState(<span style="color:#b452cd">0</span>)
 
 <span style="color:#8b008b;font-weight:bold">const</span> [user, setUser] = React.useState({name:<span style="color:#cd5555">&#39;F&#39;</span>})
 </code></pre></div><h2 id="注意事项1不可局部更新">注意事项1：不可局部更新</h2>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [user, setUser] = useState({name:<span style="color:#cd5555">&#39;Jack&#39;</span>,age:<span style="color:#b452cd">18</span>})
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [user, setUser] = useState({name:<span style="color:#cd5555">&#39;Jack&#39;</span>,age:<span style="color:#b452cd">18</span>})
 
 setState({
 	name:<span style="color:#cd5555">&#39;Sam&#39;</span>
@@ -1571,7 +1571,7 @@ setState({
 </ul>
 <h2 id="注意事项2地址要变">注意事项2：地址要变</h2>
 <p>setState(obj)如果obj地址不变，那么React就认为数据没有变化</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [user, setUser] = useState({name:<span style="color:#cd5555">&#39;Jack&#39;</span>,age:<span style="color:#b452cd">18</span>})
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [user, setUser] = useState({name:<span style="color:#cd5555">&#39;Jack&#39;</span>,age:<span style="color:#b452cd">18</span>})
 
 user.name = <span style="color:#cd5555">&#39;Sam&#39;</span>
 
@@ -1582,25 +1582,25 @@ setState(user)
 <li>上一个例子，是在setState中创建了一个新对象，因此React会直接加载新的对象（这也反映了<strong>setState并不会直接修改state，而是生成一个新的state</strong>）</li>
 </ul>
 <h2 id="usestate接受函数">useState接受函数</h2>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [state, setState] = useState(() =&gt; {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [state, setState] = useState(() =&gt; {
 	<span style="color:#8b008b;font-weight:bold">return</span> initState
 })
 </code></pre></div><p>该函数返回初始state，且只执行一次，节约反复更新渲染组件时js引擎的解析时间（首次渲染时会解析，再次更新组件时js就不会解析这个匿名函数了）</p>
 <h2 id="setstate接受函数">setState接受函数</h2>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [n, setN] = useState(<span style="color:#b452cd">0</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [n, setN] = useState(<span style="color:#b452cd">0</span>)
 
 setN(n + <span style="color:#b452cd">1</span>)
 
 setN(n + <span style="color:#b452cd">1</span>)
 </code></pre></div><p>虽然运行了两次setN，但运行结果为1，并不是预想中的2，原因同样是由于setN并不会改变n的值，n始终为0</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">setN(i =&gt; i + <span style="color:#b452cd">1</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">setN(i =&gt; i + <span style="color:#b452cd">1</span>)
 </code></pre></div><p>传入函数的方式并<strong>没有直接传入state进行计算</strong>，仅仅是一个<strong>形式化的操作</strong>而已，建议优先选用此种方式进行setState</p>
 <h1 id="2usereducer">2.useReducer</h1>
 <h2 id="用来践行fluxredux的思想">(用来践行Flux/Redux的思想)</h2>
 <h2 id="1创建初始值initialstate">1.创建初始值initialState</h2>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> initial = { n = <span style="color:#b452cd">0</span> }
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> initial = { n = <span style="color:#b452cd">0</span> }
 </code></pre></div><h2 id="2创建所有操作reducerstateaction">2.创建所有操作reducer(state,action)</h2>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> reducer = (state, action) =&gt;{<span style="color:#228b22">//旧状态，操作的类型
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> reducer = (state, action) =&gt;{<span style="color:#228b22">//旧状态，操作的类型
 </span><span style="color:#228b22"></span>	<span style="color:#8b008b;font-weight:bold">if</span>(action.type === <span style="color:#cd5555">&#39;add&#39;</span>){
 		<span style="color:#8b008b;font-weight:bold">return</span> { n: state.n+action.number}
 	}<span style="color:#8b008b;font-weight:bold">else</span> <span style="color:#8b008b;font-weight:bold">if</span>(action.type === <span style="color:#cd5555">&#39;mult&#39;</span>){
@@ -1610,7 +1610,7 @@ setN(n + <span style="color:#b452cd">1</span>)
 	}
 }
 </code></pre></div><h2 id="3传给usereducer得到读和写api调用写type--操作类型-">3.传给useReducer，得到读和写API，调用写（{type : &lsquo;操作类型&rsquo; }）</h2>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">function</span> App(){
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">function</span> App(){
 	<span style="color:#8b008b;font-weight:bold">const</span> [state, dispatch] = useReducer(reducer,initial)
 	<span style="color:#8b008b;font-weight:bold">const</span> onClick = ()=&gt;{
 		dispatch({type: <span style="color:#cd5555">&#39;add&#39;</span>, number : <span style="color:#b452cd">2</span>})<span style="color:#228b22">//参数为action对象
@@ -1622,15 +1622,15 @@ setN(n + <span style="color:#b452cd">1</span>)
 <h2 id="1上下文是局部的全局变量">1.上下文是局部的全局变量</h2>
 <h2 id="2使用方法">2.使用方法</h2>
 <p>1.使用C = createContext(initial)创建上下文</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> C = createContext(<span style="color:#8b008b;font-weight:bold">null</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> C = createContext(<span style="color:#8b008b;font-weight:bold">null</span>)
 </code></pre></div><p>2.使用&lt;C.Provider/&gt;圈定作用域</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [n, setN] = useState(<span style="color:#b452cd">0</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [n, setN] = useState(<span style="color:#b452cd">0</span>)
 
 &lt;<span style="color:#8b008b;font-weight:bold">C.Provider</span> <span style="color:#658b00">value</span>={{n, setN}}&gt;<span style="color:#228b22">//将state和setState作为对象值传入上下文C中
 </span><span style="color:#228b22"></span>	&lt;<span style="color:#8b008b;font-weight:bold">App</span>/&gt;
 &lt;/<span style="color:#8b008b;font-weight:bold">C.Provider</span>&gt;
 </code></pre></div><p>3.在作用域内使用useContext(C)来使用上下文</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> {n, setN} = useContext(C)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> {n, setN} = useContext(C)
 
 onClick = () =&gt;{setN(n =&gt; n + <span style="color:#b452cd">1</span>)}
 </code></pre></div><h2 id="3注意事项">3.注意事项</h2>
@@ -1645,16 +1645,16 @@ onClick = () =&gt;{setN(n =&gt; n + <span style="color:#b452cd">1</span>)}
 <p>但我们不一定非要把副作用放在useEffect里</p>
 <h2 id="2用途">2.用途</h2>
 <p>1.替代componentDidMount使用，[ ]作为第二个参数，表示除第一次渲染后执行外，之后不会再执行</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">useEffect(() =&gt;{
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">useEffect(() =&gt;{
 	console.log(<span style="color:#cd5555">&#39;第一次渲染后执行&#39;</span>)
 },[])
 </code></pre></div><p>当第二个参数为空时，表示组件的任何状态变化后都会执行，包括第一次渲染后</p>
 <p>2.替代componentDidUpdate使用，可指定依赖，当n变化是执行，包括第一次渲染后</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">useEffect(() =&gt;{
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">useEffect(() =&gt;{
 	console.log(<span style="color:#cd5555">&#39;n变化后执行&#39;</span>)
 },[n])
 </code></pre></div><p>3.替代componentWillUnmount使用，通过return</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">useEffect(() =&gt;{
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">useEffect(() =&gt;{
     <span style="color:#8b008b;font-weight:bold">const</span> id = setInterval(() =&gt;{
 		console.log(<span style="color:#cd5555">&#39;hi&#39;</span>)
     },<span style="color:#b452cd">2000</span>)
@@ -1682,12 +1682,12 @@ onClick = () =&gt;{setN(n =&gt; n + <span style="color:#b452cd">1</span>)}
 <li>React中默认有多余的render，导致依赖其他状态的无关组件会被再次执行渲染</li>
 </ul>
 <p>可以使用React.memo(Child)将无关组件进行封装</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> Child2 = React.memo(Child)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> Child2 = React.memo(Child)
 </code></pre></div><ul>
 <li>Bug：但如果Child的props中有接收到的是函数时，但随着父组件的执行渲染，函数表达虽然没变，但此时地址改变了，故仍被再次执行，导致Child仍再次渲染</li>
 </ul>
 <p>使用useMemo封装此函数解决这个问题：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> onClickChild = useMemo(() =&gt;{
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> onClickChild = useMemo(() =&gt;{
 	<span style="color:#8b008b;font-weight:bold">return</span> () =&gt;{ ...}
 },[m])
 </code></pre></div><ul>
@@ -1700,9 +1700,9 @@ onClick = () =&gt;{setN(n =&gt; n + <span style="color:#b452cd">1</span>)}
 <p>一般先memo组件，再useMemo函数</p>
 <h1 id="7usecallback">7.useCallBack</h1>
 <p>如果value是个函数，useMemo就要写成：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">useMemo( () = &gt; (x) =&gt;{console.log(x) } )
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">useMemo( () = &gt; (x) =&gt;{console.log(x) } )
 </code></pre></div><p>写起来很复杂，因此使用useCallback解决</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> onClickChild = useCallback ( (x) = &gt; { log(x) }, [m] )
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> onClickChild = useCallback ( (x) = &gt; { log(x) }, [m] )
 </code></pre></div><h1 id="8useref">8.useRef</h1>
 <ul>
 <li>
@@ -1712,30 +1712,30 @@ onClick = () =&gt;{setN(n =&gt; n + <span style="color:#b452cd">1</span>)}
 <p>初始化：</p>
 </li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> count = useRef(<span style="color:#b452cd">0</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> count = useRef(<span style="color:#b452cd">0</span>)
 </code></pre></div><ul>
 <li>读取：</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">count.current
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">count.current
 </code></pre></div><ul>
 <li>也可以将ref作为属性绑定到元素上，使用此ref能够引用到组件对应的DOM对象，类似document.getElementById</li>
 </ul>
 <h1 id="9forwardref">9.forwardRef</h1>
 <p>由于props无法传递ref属性，导致不能直接在子组件上定义ref</p>
 <p>可以使用forwarRef将组件封装成新组件</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> Button2 = React.forwardRef((props,ref)=&gt;{
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> Button2 = React.forwardRef((props,ref)=&gt;{
 	<span style="color:#8b008b;font-weight:bold">return</span> &lt;<span style="color:#8b008b;font-weight:bold">button</span> <span style="color:#658b00">ref</span>={ref} {<span style="color:#658b00">...props</span>}/&gt;
 })
 </code></pre></div><p>实际上只是允许了子组件接受一个新参数ref</p>
 <h1 id="10替代redux">10.替代Redux</h1>
 <p>1.将数据集中在store对象</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> store = {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> store = {
 	user:<span style="color:#8b008b;font-weight:bold">null</span>,
 	books:<span style="color:#8b008b;font-weight:bold">null</span>,
 	movies:<span style="color:#8b008b;font-weight:bold">null</span>
 }
 </code></pre></div><p>2.将所有操作集中在reducer</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> reducer = (state, action) =&gt; {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> reducer = (state, action) =&gt; {
 	<span style="color:#8b008b;font-weight:bold">switch</span> (action.type) {
 		<span style="color:#8b008b;font-weight:bold">case</span> <span style="color:#cd5555">&#34;setUser&#34;</span>:
 			<span style="color:#8b008b;font-weight:bold">return</span> { ...state, user: action.user };
@@ -1748,21 +1748,21 @@ onClick = () =&gt;{setN(n =&gt; n + <span style="color:#b452cd">1</span>)}
 	}
 };
 </code></pre></div><p>3.创建Context</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> Context = React.createContext(<span style="color:#8b008b;font-weight:bold">null</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> Context = React.createContext(<span style="color:#8b008b;font-weight:bold">null</span>)
 </code></pre></div><p>4.创建对数据的读写API（只能写在函数组件中）</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [state, dispatch] = useReducer(reducer, store)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">const</span> [state, dispatch] = useReducer(reducer, store)
 </code></pre></div><p>5.将第四步的内容放到第三步的Context（把读写API赋值给Context.Provider）</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">&lt;<span style="color:#8b008b;font-weight:bold">Context.Provider</span> <span style="color:#658b00">value</span>={{state,dispatch}}&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">&lt;<span style="color:#8b008b;font-weight:bold">Context.Provider</span> <span style="color:#658b00">value</span>={{state,dispatch}}&gt;
 	...
 &lt;/<span style="color:#8b008b;font-weight:bold">Context.Provider</span>&gt;
 </code></pre></div><p>6.用Context.Provider将Context提供给所有组件（包起来）</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">&lt;<span style="color:#8b008b;font-weight:bold">Context.Provider</span> <span style="color:#658b00">value</span>={{state,dispatch}}&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">&lt;<span style="color:#8b008b;font-weight:bold">Context.Provider</span> <span style="color:#658b00">value</span>={{state,dispatch}}&gt;
 	&lt;<span style="color:#8b008b;font-weight:bold">User</span>/&gt;
 	&lt;<span style="color:#8b008b;font-weight:bold">Books</span>/&gt;
 	&lt;<span style="color:#8b008b;font-weight:bold">Movies</span>/&gt;
 &lt;/<span style="color:#8b008b;font-weight:bold">Context.Provider</span>&gt;
 </code></pre></div><p>7.各个组件用useContext获取读写API</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">function</span> User() {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">function</span> User() {
 	<span style="color:#8b008b;font-weight:bold">const</span> { state, dispatch } = useContext(Context);
 	useEffect(() =&gt; {
 		ajax(<span style="color:#cd5555">&#34;/user&#34;</span>).then(user =&gt; {
@@ -1780,7 +1780,7 @@ onClick = () =&gt;{setN(n =&gt; n + <span style="color:#b452cd">1</span>)}
 <p>![priceless-jennings-gyls6 - CodeSandbox - Google Chrome 2021_6_2 14_29_21](article_img/priceless-jennings-gyls6 - CodeSandbox - Google Chrome 2021_6_2 14_29_21-1622626575090.png)</p>
 <h1 id="11自定义hooks">11.自定义hooks</h1>
 <p>index.jsx:</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">import</span> React from <span style="color:#cd5555">&#34;react&#34;</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">import</span> React from <span style="color:#cd5555">&#34;react&#34;</span>;
 <span style="color:#8b008b;font-weight:bold">import</span> ReactDOM from <span style="color:#cd5555">&#34;react-dom&#34;</span>;
 <span style="color:#8b008b;font-weight:bold">import</span> useList from <span style="color:#cd5555">&#34;./hooks/useList&#34;</span>;
 
@@ -1823,7 +1823,7 @@ onClick = () =&gt;{setN(n =&gt; n + <span style="color:#b452cd">1</span>)}
 ReactDOM.render(&lt;<span style="color:#8b008b;font-weight:bold">App</span> /&gt;, rootElement);
 
 </code></pre></div><p>hooks/useList.js:</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">import</span> { useState, useEffect } from <span style="color:#cd5555">&#34;react&#34;</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#8b008b;font-weight:bold">import</span> { useState, useEffect } from <span style="color:#cd5555">&#34;react&#34;</span>;
 
 <span style="color:#8b008b;font-weight:bold">const</span> useList = () =&gt; {
   <span style="color:#8b008b;font-weight:bold">const</span> [list, setList] = useState(<span style="color:#8b008b;font-weight:bold">null</span>);

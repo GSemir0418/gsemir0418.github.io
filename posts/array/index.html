@@ -30,8 +30,8 @@ callback 函数会被自动传入三个参数：数组元素，元素索引，�
 // 求数组中每个元素的平方根 const arr = [4, 9, 16] const newArr = arr.map(Math.sqrt)// [2, 3, 4]  // 使用map重新格式化数组中的对象 const arr = [ { key:1, value:10 }, { key:2, value:20 } ] const newArr = arr." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/array/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-06-28T09:30:55&#43;08:00" />
-<meta property="article:modified_time" content="2021-06-28T09:30:55&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-06-28T09:30:55+08:00" />
+<meta property="article:modified_time" content="2021-06-28T09:30:55+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -1226,7 +1226,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>3.返回值：</p>
 <p><code>newArray[]</code>，回调函数的结果组成了新数组的每一个元素。</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">var</span> new_array = arr.map((currentValue, index, array) =&gt; {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">var</span> new_array = arr.map((currentValue, index, array) =&gt; {
 	<span style="color:#228b22">// callback
 </span><span style="color:#228b22"></span>})
 </code></pre></div><ul>
@@ -1239,7 +1239,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>因为<code>map</code>生成一个新数组，当你不打算使用返回的新数组却使用<code>map</code>是违背设计初衷的，请用<code>forEach</code>或者<code>for-of</code>替代。</p>
 <p><code>callback</code> 函数会被自动传入三个参数：数组元素，元素索引，原数组本身。</p>
 <p>6.示例</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 求数组中每个元素的平方根
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 求数组中每个元素的平方根
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> arr = [<span style="color:#b452cd">4</span>, <span style="color:#b452cd">9</span>, <span style="color:#b452cd">16</span>]
 <span style="color:#8b008b;font-weight:bold">const</span> newArr = arr.map(<span style="color:#658b00">Math</span>.sqrt)<span style="color:#228b22">// [2, 3, 4]
 </span><span style="color:#228b22"></span>
@@ -1259,13 +1259,13 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>3.返回值：</p>
 <p>从数组中删除的元素(当数组为空时返回<code>undefined</code>)</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.pop()
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.pop()
 </code></pre></div><p>5.描述：</p>
 <p><code>pop</code> 方法从一个数组中删除并返回最后一个元素。</p>
 <p><code>pop</code> 方法有意具有通用性。该方法和<code>call()</code>或<code>apply()</code> 一起使用时，可应用在类似数组的对象上。<code>pop</code>方法根据 <code>length</code>属性来确定最后一个元素的位置。如果不包含<code>length</code>属性或<code>length</code>属性不能被转成一个数值，会将<code>length</code>置为0，并返回<code>undefined</code>。</p>
 <p>如果你在一个空数组上调用 pop()，它返回<code>undefined</code>。</p>
 <p>6.示例</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> arr = [<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>]
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> arr = [<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>]
 <span style="color:#8b008b;font-weight:bold">const</span> poped = arr.pop()
 <span style="color:#228b22">// arr = [1, 2]
 </span><span style="color:#228b22">// poped = 3
@@ -1275,7 +1275,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>3.返回值：</p>
 <p>修改后的数组</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.fill(value, start, end)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.fill(value, start, end)
 </code></pre></div><ul>
 <li><code>value</code>：用来填充数组元素的值</li>
 <li><code>start</code> ：可选，起始索引，默认值为0</li>
@@ -1286,7 +1286,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>如果 <code>start</code> 是个负数, 则开始索引会被自动计算成为 <code>length+start</code>, 其中 <code>length</code> 是 <code>this</code> 对象的 <code>length </code>属性值。如果 <code>end</code> 是个负数, 则结束索引会被自动计算成为 <code>length+end</code>。</p>
 <p>当一个对象被传递给 <code>fill</code>方法的时候, 填充数组的是这个对象的引用。</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>].fill(<span style="color:#b452cd">4</span>);               <span style="color:#228b22">// [4, 4, 4]
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>].fill(<span style="color:#b452cd">4</span>);               <span style="color:#228b22">// [4, 4, 4]
 </span><span style="color:#228b22"></span>[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>].fill(<span style="color:#b452cd">4</span>, <span style="color:#b452cd">1</span>);            <span style="color:#228b22">// [1, 4, 4]
 </span><span style="color:#228b22"></span>[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>].fill(<span style="color:#b452cd">4</span>, <span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>);         <span style="color:#228b22">// [1, 4, 3]
 </span><span style="color:#228b22"></span>[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>].fill(<span style="color:#b452cd">4</span>, <span style="color:#b452cd">1</span>, <span style="color:#b452cd">1</span>);         <span style="color:#228b22">// [1, 2, 3]
@@ -1307,7 +1307,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>3.返回值：</p>
 <p>数组中第一个满足所提供测试函数的元素的值，否则返回<code>undefined</code></p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.find((element, index, array) =&gt; {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.find((element, index, array) =&gt; {
 	<span style="color:#228b22">// callback
 </span><span style="color:#228b22"></span>})
 </code></pre></div><ul>
@@ -1319,7 +1319,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p><code>find</code>方法对数组中的每一项元素执行一次 <code>callback</code> 函数，直至有一个 callback 返回 <code>true</code>。当找到了这样一个元素后，该方法会立即返回这个元素的值，否则返回<code>undefined</code>。注意 <code>callback </code>函数会为数组中的每个索引调用即从 <code>0 </code>到 <code>length - 1</code>，而不仅仅是那些被赋值的索引，这意味着对于稀疏数组来说，该方法的效率要低于那些只遍历有值的索引的方法。</p>
 <p><code>find</code>方法不会改变数组。</p>
 <p>6.示例</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> inventory = [
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> inventory = [
     {name: <span style="color:#cd5555">&#39;apples&#39;</span>, quantity: <span style="color:#b452cd">2</span>},
     {name: <span style="color:#cd5555">&#39;bananas&#39;</span>, quantity: <span style="color:#b452cd">0</span>},
     {name: <span style="color:#cd5555">&#39;cherries&#39;</span>, quantity: <span style="color:#b452cd">5</span>}
@@ -1337,12 +1337,12 @@ console.log(result);
 <p>3.返回值：</p>
 <p>一个所有数组元素连接的字符串。如果 <code>arr.length</code> 为0，则返回空字符串</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.join(分隔符)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.join(分隔符)
 </code></pre></div><p>5.描述：</p>
 <p>所有的数组元素被转换成字符串，再用一个分隔符将这些字符串连接起来。</p>
 <p>如果一个元素为 <code>undefined</code> 或 <code>null</code>，它会被转换为空字符串。</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">var</span> a = [<span style="color:#cd5555">&#39;Wind&#39;</span>, <span style="color:#cd5555">&#39;Rain&#39;</span>, <span style="color:#cd5555">&#39;Fire&#39;</span>];
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">var</span> a = [<span style="color:#cd5555">&#39;Wind&#39;</span>, <span style="color:#cd5555">&#39;Rain&#39;</span>, <span style="color:#cd5555">&#39;Fire&#39;</span>];
 <span style="color:#8b008b;font-weight:bold">var</span> myVar1 = a.join();      
 <span style="color:#228b22">// &#34;Wind,Rain,Fire&#34;
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">var</span> myVar2 = a.join(<span style="color:#cd5555">&#39;, &#39;</span>);  
@@ -1357,12 +1357,12 @@ console.log(result);
 <p>3.返回值：</p>
 <p>当调用该方法时，新的<code>length</code>属性值将被返回。</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.push(element1, ..., elementN)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.push(element1, ..., elementN)
 </code></pre></div><p>5.描述：</p>
 <p>push方法将值追加到数组中。</p>
 <p>唯一的原生类数组（array-like）对象是<code>Strings</code>，尽管如此，它们并不适用该方法，因为字符串是不可改变的。</p>
 <p>6.示例</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 添加元素到数组
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 添加元素到数组
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> sports = [<span style="color:#cd5555">&#34;soccer&#34;</span>, <span style="color:#cd5555">&#34;baseball&#34;</span>];
 <span style="color:#228b22">// [&#34;soccer&#34;, &#34;baseball&#34;, &#34;football&#34;, &#34;swimming&#34;]
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> total = sports.push(<span style="color:#cd5555">&#34;football&#34;</span>, <span style="color:#cd5555">&#34;swimming&#34;</span>);
@@ -1384,7 +1384,7 @@ console.log(vegetables);
 <p>3.返回值：</p>
 <p>数组中有至少一个元素通过回调函数的测试就会返回**<code>true</code>**；所有元素都没有通过回调函数的测试返回值才会为<code>false</code></p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.some((element, index, array) =&gt; {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.some((element, index, array) =&gt; {
 	<span style="color:#228b22">// callback
 </span><span style="color:#228b22"></span>})
 </code></pre></div><ul>
@@ -1397,7 +1397,7 @@ console.log(vegetables);
 <p><code>callback</code> 被调用时传入三个参数：元素的值，元素的索引，被遍历的数组。</p>
 <p><code>some()</code> 被调用时不会改变数组。</p>
 <p>6.示例</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 使用箭头函数测试数组元素的值
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 使用箭头函数测试数组元素的值
 </span><span style="color:#228b22"></span>[<span style="color:#b452cd">2</span>, <span style="color:#b452cd">5</span>, <span style="color:#b452cd">8</span>, <span style="color:#b452cd">1</span>, <span style="color:#b452cd">4</span>].some(x =&gt; x &gt; <span style="color:#b452cd">10</span>);  <span style="color:#228b22">// false
 </span><span style="color:#228b22"></span>[<span style="color:#b452cd">12</span>, <span style="color:#b452cd">5</span>, <span style="color:#b452cd">8</span>, <span style="color:#b452cd">1</span>, <span style="color:#b452cd">4</span>].some(x =&gt; x &gt; <span style="color:#b452cd">10</span>); <span style="color:#228b22">// true
 </span><span style="color:#228b22"></span>
@@ -1416,7 +1416,7 @@ checkAvailability(fruits, <span style="color:#cd5555">&#39;kela&#39;</span>);   
 <p>3.返回值：</p>
 <p>排序后的数组。请注意，数组已原地排序，并且不进行复制。</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.sort([compareFunction])
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.sort([compareFunction])
 </code></pre></div><p><code>compareFunction</code> 可选</p>
 <p>用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的各个字符的Unicode位点进行排序。</p>
 <ul>
@@ -1445,7 +1445,7 @@ checkAvailability(fruits, <span style="color:#cd5555">&#39;kela&#39;</span>);   
 </li>
 </ul>
 <p>6.示例</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 数组升序排列
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 数组升序排列
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> nums = [<span style="color:#b452cd">4</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">5</span>, <span style="color:#b452cd">1</span>, <span style="color:#b452cd">3</span>]
 nums.sort((a, b) =&gt; a - b)
 <span style="color:#228b22">// [1, 2, 3, 4, 5]
@@ -1474,14 +1474,14 @@ nums.sort((a, b) =&gt; a - b)
 <p>2.是否修改原数组：<code>false</code></p>
 <p>3.返回值：数组内全部成员都通过了测试，则返回<code>true</code>，否则返回<code>false</code></p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.every((element, index, array) =&gt; {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.every((element, index, array) =&gt; {
 	<span style="color:#228b22">// callback
 </span><span style="color:#228b22"></span>})
 </code></pre></div><p>5.描述：</p>
 <p><code>every</code> 方法为数组中的每个元素执行一次 <code>callback</code> 函数，直到它找到一个会使 <code>callback</code> 返回<code>falsy</code>的元素。如果发现了一个这样的元素，<code>every</code> 方法将会立即返回 <code>false</code>。否则，<code>callback</code> 为每一个元素返回 <code>true</code>，<code>every</code> 就会返回 <code>true</code>。</p>
 <p>若传入一个空数组，则直接返回<code>true</code></p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 检测所有数组元素是否都大于10
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 检测所有数组元素是否都大于10
 </span><span style="color:#228b22"></span>[<span style="color:#b452cd">12</span>, <span style="color:#b452cd">5</span>, <span style="color:#b452cd">6</span>, <span style="color:#b452cd">10</span>].every(x =&gt; x &gt;= <span style="color:#b452cd">10</span>) <span style="color:#228b22">// false
 </span><span style="color:#228b22"></span>[<span style="color:#b452cd">12</span>, <span style="color:#b452cd">78</span>, <span style="color:#b452cd">70</span>, <span style="color:#b452cd">10</span>].every(x =&gt; x &gt;= <span style="color:#b452cd">10</span>) <span style="color:#228b22">// true
 </span></code></pre></div><h1 id="arrayprototypeshift"><code>Array.prototype.shift()</code></h1>
@@ -1489,11 +1489,11 @@ nums.sort((a, b) =&gt; a - b)
 <p>2.是否修改原数组：<code>true</code></p>
 <p>3.返回值：返回删除的元素，如果数组为空则返回<code>undefined</code></p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.shift()
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.shift()
 </code></pre></div><p>5.描述：</p>
 <p>删除数组第一个元素，即索引为0的元素，并返回被移除的元素</p>
 <p>6.示例</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> arr = [<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>]
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> arr = [<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>]
 arr.shift()<span style="color:#228b22">// 1
 </span><span style="color:#228b22"></span>arr:[<span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>]
 </code></pre></div><h1 id="arrayprototypepop-1"><code>Array.prototype.pop()</code></h1>
@@ -1501,11 +1501,11 @@ arr.shift()<span style="color:#228b22">// 1
 <p>2.是否修改原数组：<code>true</code></p>
 <p>3.返回值：返回删除的元素，如果数组为空则返回<code>undefined</code></p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.pop()
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.pop()
 </code></pre></div><p>5.描述：</p>
 <p>删除并返回数组最后一个元素</p>
 <p>6.示例</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> arr = [<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>]
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> arr = [<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>]
 arr.pop()<span style="color:#228b22">// 3
 </span><span style="color:#228b22"></span>arr:[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>]
 </code></pre></div><h1 id="arrayprototypeslice"><code>Array.prototype.slice()</code></h1>
@@ -1513,13 +1513,13 @@ arr.pop()<span style="color:#228b22">// 3
 <p>2.是否修改原数组：<code>false</code></p>
 <p>3.返回值：一个含有被提取元素的新数组</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.slice(begin, end)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.slice(begin, end)
 </code></pre></div><p><code>begin</code>可选，默认从0开始，如果是负数，表示从原数组的倒数第几个元素开始提取。如果大于原数组的长度，返回空数组；</p>
 <p><code>end</code>可选，默认到原数组末尾。返回的数组中不包括指定位置的元素，如果是负数，表示在原数组中的倒数几个元素结束抽取，如果大于数组长度，也会一直提取到数组末尾。</p>
 <p>5.描述：</p>
 <p><code>slice</code>不会修改原数组，只会返回一个浅复制（如果改变两个数组任意一个，则另一个不会受影响）了原数组中部分元素的一个新数组。</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">var</span> fruits = [<span style="color:#cd5555">&#39;Banana&#39;</span>, <span style="color:#cd5555">&#39;Orange&#39;</span>, <span style="color:#cd5555">&#39;Lemon&#39;</span>, <span style="color:#cd5555">&#39;Apple&#39;</span>, <span style="color:#cd5555">&#39;Mango&#39;</span>];
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">var</span> fruits = [<span style="color:#cd5555">&#39;Banana&#39;</span>, <span style="color:#cd5555">&#39;Orange&#39;</span>, <span style="color:#cd5555">&#39;Lemon&#39;</span>, <span style="color:#cd5555">&#39;Apple&#39;</span>, <span style="color:#cd5555">&#39;Mango&#39;</span>];
 <span style="color:#8b008b;font-weight:bold">var</span> citrus = fruits.slice(<span style="color:#b452cd">1</span>, <span style="color:#b452cd">3</span>);
 
 <span style="color:#228b22">// fruits contains [&#39;Banana&#39;, &#39;Orange&#39;, &#39;Lemon&#39;, &#39;Apple&#39;, &#39;Mango&#39;]
@@ -1529,11 +1529,11 @@ arr.pop()<span style="color:#228b22">// 3
 <p>2.是否修改原数组：<code>false</code></p>
 <p>3.返回值：合并后的新数组</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.concat(arr/value,...)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.concat(arr/value,...)
 </code></pre></div><p>5.描述：</p>
 <p>将数组或值连接成新数组。如果省略了参数，则concat会返回一个它所调用的已存在的数组的浅拷贝（只会复制对象引用）。</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 连接两个数组
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 连接两个数组
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">var</span> alpha = [<span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#cd5555">&#39;b&#39;</span>, <span style="color:#cd5555">&#39;c&#39;</span>];
 <span style="color:#8b008b;font-weight:bold">var</span> numeric = [<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>];
 alpha.concat(numeric);<span style="color:#228b22">// [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, 1, 2, 3]
@@ -1566,13 +1566,13 @@ alpha.concat(numeric);<span style="color:#228b22">// [&#39;a&#39;, &#39;b&#39;, 
 <p>2.是否修改原数组：<code>false</code></p>
 <p>3.返回值：一个新的，由通过测试的元素组成的新数组，可能为空数组</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.filter((item, index, array) =&gt; {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.filter((item, index, array) =&gt; {
 	<span style="color:#228b22">// callback
 </span><span style="color:#228b22"></span>})
 </code></pre></div><p>5.描述：</p>
 <p><code>filter</code> 为数组中的每个元素调用一次 <code>callback</code> 函数，并利用所有使得 <code>callback</code> 返回<code>true</code>或<code>等价于 true</code>（即除 <code>false</code>、<code>0</code>、<code>&quot;&quot;</code>、<code>null</code>、<code>undefined</code> 和 <code>NaN</code> 以外皆为真值） 的值的元素创建一个新数组。</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 筛选大于10的元素
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 筛选大于10的元素
 </span><span style="color:#228b22"></span>[<span style="color:#b452cd">5</span> ,<span style="color:#b452cd">11</span>, <span style="color:#b452cd">180</span>, <span style="color:#b452cd">6</span>].fillter(i =&gt; i &gt; <span style="color:#b452cd">10</span>)<span style="color:#228b22">// [11, 180]
 </span><span style="color:#228b22"></span>
 <span style="color:#228b22">// 在数组中搜索
@@ -1589,7 +1589,7 @@ console.log(filterItems(<span style="color:#cd5555">&#39;ap&#39;</span>)); <span
 <p>2.是否修改原数组：<code>true</code></p>
 <p>3.返回值：由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.splice(start, deleteCount, item1, ...)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.splice(start, deleteCount, item1, ...)
 </code></pre></div><ul>
 <li>
 <p><code>start</code>表示修改的开始位置<code>（index）</code>，若大于数组长度，则从数组末尾开始添加内容；若为负值，则表示从数组末位开始的第几位<code>（从1开始）</code>；如果负数的绝对值大于数组的长度，则表示开始位置为第0位。</p>
@@ -1604,7 +1604,7 @@ console.log(filterItems(<span style="color:#cd5555">&#39;ap&#39;</span>)); <span
 <p>5.描述：</p>
 <p>如果添加进数组的元素个数不等于被删除的元素个数，数组的长度会发生相应的改变。</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> arr = [<span style="color:#cd5555">&#34;a&#34;</span>, <span style="color:#cd5555">&#34;b&#34;</span>, <span style="color:#cd5555">&#34;c&#34;</span>, <span style="color:#cd5555">&#34;d&#34;</span>, <span style="color:#cd5555">&#34;e&#34;</span>]
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> arr = [<span style="color:#cd5555">&#34;a&#34;</span>, <span style="color:#cd5555">&#34;b&#34;</span>, <span style="color:#cd5555">&#34;c&#34;</span>, <span style="color:#cd5555">&#34;d&#34;</span>, <span style="color:#cd5555">&#34;e&#34;</span>]
 
 <span style="color:#228b22">// 从第二位开始删除0个元素，插入”f“
 </span><span style="color:#228b22"></span>arr.splice(<span style="color:#b452cd">2</span>, <span style="color:#b452cd">0</span>, <span style="color:#cd5555">&#34;f&#34;</span>) <span style="color:#228b22">// []
@@ -1630,13 +1630,13 @@ console.log(filterItems(<span style="color:#cd5555">&#39;ap&#39;</span>)); <span
 <p>2.是否修改原数组：<code>depends</code></p>
 <p>3.返回值：<code>undefined</code></p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.forEach((currentValue, index, array) =&gt;{
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.forEach((currentValue, index, array) =&gt;{
     <span style="color:#228b22">// callback
 </span><span style="color:#228b22"></span>})
 </code></pre></div><p>5.描述：</p>
 <p>针对每一个元素执行提供的函数。forEach适合于你并不打算改变数据，而只是想用数据做一些事情：比如存入数据库或则打印出来。</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 打印元素
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 打印元素
 </span><span style="color:#228b22"></span>[<span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#cd5555">&#39;b&#39;</span>, <span style="color:#cd5555">&#39;c&#39;</span>].forEach(i =&gt; {
     console.log(i)
 })
@@ -1661,13 +1661,13 @@ console.log(filterItems(<span style="color:#cd5555">&#39;ap&#39;</span>)); <span
 <p>2.是否修改原数组：<code>false</code></p>
 <p>3.返回值：索引位置或<code>-1</code></p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.indexOf(searchElement, fromIndex)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.indexOf(searchElement, fromIndex)
 </code></pre></div><p><code>searchElement</code>要查找的元素</p>
 <p><code>fromIndex</code>可选，开始查找的位置，若是负值则从末尾开始抵消</p>
 <p>5.描述：</p>
 <p>每个元素实际上都做<code>===</code>（strict equality）来判断</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 找出指定元素出现的所有位置
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 找出指定元素出现的所有位置
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">var</span> indices = [];
 <span style="color:#8b008b;font-weight:bold">var</span> array = [<span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#cd5555">&#39;b&#39;</span>, <span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#cd5555">&#39;c&#39;</span>, <span style="color:#cd5555">&#39;a&#39;</span>, <span style="color:#cd5555">&#39;d&#39;</span>];
 <span style="color:#8b008b;font-weight:bold">var</span> element = <span style="color:#cd5555">&#39;a&#39;</span>;
@@ -1683,24 +1683,24 @@ console.log(indices);
 <p>2.是否修改原数组：<code>false</code></p>
 <p>3.返回值：数组中该元素最后一次出现的索引，如未找到返回-1</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.lastIndexOf(searchElement, fromIndex)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.lastIndexOf(searchElement, fromIndex)
 </code></pre></div><p><code>searchElement</code>被查找的元素。</p>
 <p><code>fromIndex</code> 可选，从此位置开始逆向查找。默认为数组的长度减 1(<code>arr.length - 1</code>)，即整个数组都被查找。如果该值大于或等于数组的长度，则整个数组会被查找。如果为负值，将其视为从数组末尾向前的偏移。即使该值为负，数组仍然会被从后向前查找。如果该值为负时，其绝对值大于数组长度，则方法返回 -1，即数组不会被查找</p>
 <p>5.描述：</p>
 <p>每个元素实际上都做<code>===</code>（strict equality）来判断</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
 </code></pre></div><h1 id="arrayprototypereverse"><code>Array.prototype.reverse()</code></h1>
 <p>1.关键词：反转</p>
 <p>2.是否修改原数组：<code>true</code></p>
 <p>3.返回值：颠倒后的数组</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.reverse()
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.reverse()
 </code></pre></div><p>5.描述：</p>
 <p><code>reverse</code> 方法颠倒数组中元素的位置，改变了数组，并返回该数组的引用</p>
 <p>也可应用于类数组对象</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 反转数组
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 反转数组
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> a = [<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>];
 a.reverse(); 
 console.log(a); <span style="color:#228b22">// [3, 2, 1]
@@ -1715,12 +1715,12 @@ console.log(a); <span style="color:#228b22">// [3, 2, 1]
 <p>2.是否修改原数组：<code>true</code></p>
 <p>3.返回值：该数组的新长度</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.unshift(element1, ..., elementN)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.unshift(element1, ..., elementN)
 </code></pre></div><p>5.描述：</p>
 <p><strong><code>unshift()</code></strong> 方法将一个或多个元素添加到数组的<strong>开头</strong>，并返回该数组的新长度(该方法修改原有数组)。</p>
 <p><code>unshift</code> 特意被设计成具有<strong>通用性</strong>；这个方法能够通过<code>call</code>或者<code>apply</code>方法作用于类数组对象上。不过对于没有 length 属性（代表从0开始的一系列连续的数字属性的最后一个）的对象，调用该方法可能没有任何意义。</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 在数组前添加元素
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 在数组前添加元素
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">let</span> arr = [<span style="color:#b452cd">4</span>,<span style="color:#b452cd">5</span>,<span style="color:#b452cd">6</span>];
 arr.unshift(<span style="color:#b452cd">1</span>,<span style="color:#b452cd">2</span>,<span style="color:#b452cd">3</span>);
 console.log(arr); <span style="color:#228b22">// [1, 2, 3, 4, 5, 6]
@@ -1732,14 +1732,14 @@ arr.unshift([-<span style="color:#b452cd">4</span>, -<span style="color:#b452cd"
 <p>2.是否修改原数组：<code>false</code></p>
 <p>3.返回值：<code>Boolean</code></p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.includes(value, fromIndex)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.includes(value, fromIndex)
 </code></pre></div><p><code>value</code>要查找的元素值（区分大小写）</p>
 <p><code>fromIndex</code>可选，开始索引，若为负值，则按升序从 <code>array.length + fromIndex</code> 的索引开始搜 （即使从末尾开始往前跳 <code>fromIndex</code> 的绝对值个索引，然后往后搜寻）。<code>formIndex</code>的不同情况见示例，默认为 0</p>
 <p>5.描述：</p>
 <p>用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回false。</p>
 <p>对象数组不能使用，但适用于类对象数组</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>].includes(<span style="color:#b452cd">3</span>, <span style="color:#b452cd">3</span>);  <span style="color:#228b22">// false
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>].includes(<span style="color:#b452cd">3</span>, <span style="color:#b452cd">3</span>);  <span style="color:#228b22">// false
 </span><span style="color:#228b22"></span>[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#b452cd">3</span>].includes(<span style="color:#b452cd">3</span>, -<span style="color:#b452cd">1</span>); <span style="color:#228b22">// true
 </span><span style="color:#228b22"></span>[<span style="color:#b452cd">1</span>, <span style="color:#b452cd">2</span>, <span style="color:#8b008b;font-weight:bold">NaN</span>].includes(<span style="color:#8b008b;font-weight:bold">NaN</span>); <span style="color:#228b22">// true
 </span><span style="color:#228b22"></span>
@@ -1759,19 +1759,19 @@ arr.includes(<span style="color:#cd5555">&#39;c&#39;</span>, <span style="color:
 <p>2.是否修改原数组：``</p>
 <p>3.返回值：</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
 </code></pre></div><p>5.描述：</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
 </code></pre></div><h1 id="arrayprototypereduce-1"><code>Array.prototype.reduce()</code></h1>
 <p>1.关键词：</p>
 <p>2.是否修改原数组：``</p>
 <p>3.返回值：</p>
 <p>4.语法：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
 </code></pre></div><p>5.描述：</p>
 <p>6.示例：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
 </code></pre></div>
                     
                     <HR width="100%" id="EOF">

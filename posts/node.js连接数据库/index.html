@@ -17,13 +17,13 @@
 
 
 <meta property="og:title" content="Node.js连接数据库" />
-<meta property="og:description" content="1 安装mysql依赖包 yarn add mysql2 创建mysql连接 创建连接前，确保容器是开启状态。新建test.js文件。
+<meta property="og:description" content="1 安装mysql依赖包 yarn add mysql 2 创建mysql连接 创建连接前，确保容器是开启状态。新建test.js文件。
  引入mysql模块  const mysql = require(&#39;mysql&#39;)  创建连接  const connection = mysql.createConnection({ host: &#39;localhost&#39;, // 老版本的docker需要填ip  user: &#39;root&#39;, password: &#39;12345&#39; }) connection.connect();  创建数据库  // 创建数据库 connection.query(&#39;CREATE DATABASE IF NOT EXISTS gsq DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_unicode_520_ci;&#39;, (error, results, fields) =&gt; { if (error) throw error; console.log(results) }) 创建名为gsq的数据库（数据库不存在的情况下），并指定默认字符集为utf8mb4(mysql对于utf-8字符集支持不佳)
  创建数据表  // 选择数据库 connection.query(&#39;use gsq;&#39;) // 创建表 connection." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-07-02T09:24:55&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-02T09:24:55&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-07-02T09:24:55+08:00" />
+<meta property="article:modified_time" content="2021-07-02T09:24:55+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -32,7 +32,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Node.js连接数据库"/>
-<meta name="twitter:description" content="1 安装mysql依赖包 yarn add mysql2 创建mysql连接 创建连接前，确保容器是开启状态。新建test.js文件。
+<meta name="twitter:description" content="1 安装mysql依赖包 yarn add mysql 2 创建mysql连接 创建连接前，确保容器是开启状态。新建test.js文件。
  引入mysql模块  const mysql = require(&#39;mysql&#39;)  创建连接  const connection = mysql.createConnection({ host: &#39;localhost&#39;, // 老版本的docker需要填ip  user: &#39;root&#39;, password: &#39;12345&#39; }) connection.connect();  创建数据库  // 创建数据库 connection.query(&#39;CREATE DATABASE IF NOT EXISTS gsq DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_unicode_520_ci;&#39;, (error, results, fields) =&gt; { if (error) throw error; console.log(results) }) 创建名为gsq的数据库（数据库不存在的情况下），并指定默认字符集为utf8mb4(mysql对于utf-8字符集支持不佳)
  创建数据表  // 选择数据库 connection.query(&#39;use gsq;&#39;) // 创建表 connection."/>
 
@@ -488,11 +488,11 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <ul>
 <li>引入<code>mysql</code>模块</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> mysql = require(<span style="color:#cd5555">&#39;mysql&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> mysql = require(<span style="color:#cd5555">&#39;mysql&#39;</span>)
 </code></pre></div><ul>
 <li>创建连接</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> connection = mysql.createConnection({
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> connection = mysql.createConnection({
     host: <span style="color:#cd5555">&#39;localhost&#39;</span>, <span style="color:#228b22">// 老版本的docker需要填ip
 </span><span style="color:#228b22"></span>    user: <span style="color:#cd5555">&#39;root&#39;</span>,
     password: <span style="color:#cd5555">&#39;12345&#39;</span>
@@ -501,7 +501,7 @@ connection.connect();
 </code></pre></div><ul>
 <li>创建数据库</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 创建数据库
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 创建数据库
 </span><span style="color:#228b22"></span>connection.query(<span style="color:#cd5555">&#39;CREATE DATABASE IF NOT EXISTS gsq DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_unicode_520_ci;&#39;</span>, (error, results, fields) =&gt; {
     <span style="color:#8b008b;font-weight:bold">if</span> (error) <span style="color:#8b008b;font-weight:bold">throw</span> error;
     console.log(results)
@@ -510,7 +510,7 @@ connection.connect();
 <ul>
 <li>创建数据表</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 选择数据库
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 选择数据库
 </span><span style="color:#228b22"></span>connection.query(<span style="color:#cd5555">&#39;use gsq;&#39;</span>)
 <span style="color:#228b22">// 创建表
 </span><span style="color:#228b22"></span>connection.query(<span style="color:#cd5555">`CREATE TABLE IF NOT EXISTS user(

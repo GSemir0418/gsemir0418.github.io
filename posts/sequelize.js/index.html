@@ -20,11 +20,11 @@
 <meta property="og:description" content="1 MySQL数据类型 MySQL支持的数据类型比较少，主要有五种类型：
  数字类型 字符串类型 时间和日期类型 JSON类型 其他特殊类型   id 可以指定类型为serial序列，时间格式最好使用ISO 8601格式，即2021-07-02T11:01:55&#43;08:00
  2 Sequelize使用  官方文档：   sequelize.org/master/manual/getting-started.html
-  安装：  yarn add sequelizeyarn add mysql2 使用：  // 引入 const { Sequelize, Model, DataTypes } = require(&#39;sequelize&#39;) // 创建sequelize连接 const sequelize = new Sequelize(&#39;gsq&#39;, &#39;root&#39;, &#39;12345&#39;, { host: &#39;localhost&#39;, dialect: &#39;mysql&#39;, }) // 创建User模型 class User extends Model { } // 初始化User表 User." />
+  安装：  yarn add sequelize yarn add mysql2  使用：  // 引入 const { Sequelize, Model, DataTypes } = require(&#39;sequelize&#39;) // 创建sequelize连接 const sequelize = new Sequelize(&#39;gsq&#39;, &#39;root&#39;, &#39;12345&#39;, { host: &#39;localhost&#39;, dialect: &#39;mysql&#39;, }) // 创建User模型 class User extends Model { } // 初始化User表 User." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/sequelize.js/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-07-02T11:01:55&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-02T11:01:55&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-07-02T11:01:55+08:00" />
+<meta property="article:modified_time" content="2021-07-02T11:01:55+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -36,7 +36,7 @@
 <meta name="twitter:description" content="1 MySQL数据类型 MySQL支持的数据类型比较少，主要有五种类型：
  数字类型 字符串类型 时间和日期类型 JSON类型 其他特殊类型   id 可以指定类型为serial序列，时间格式最好使用ISO 8601格式，即2021-07-02T11:01:55&#43;08:00
  2 Sequelize使用  官方文档：   sequelize.org/master/manual/getting-started.html
-  安装：  yarn add sequelizeyarn add mysql2 使用：  // 引入 const { Sequelize, Model, DataTypes } = require(&#39;sequelize&#39;) // 创建sequelize连接 const sequelize = new Sequelize(&#39;gsq&#39;, &#39;root&#39;, &#39;12345&#39;, { host: &#39;localhost&#39;, dialect: &#39;mysql&#39;, }) // 创建User模型 class User extends Model { } // 初始化User表 User."/>
+  安装：  yarn add sequelize yarn add mysql2  使用：  // 引入 const { Sequelize, Model, DataTypes } = require(&#39;sequelize&#39;) // 创建sequelize连接 const sequelize = new Sequelize(&#39;gsq&#39;, &#39;root&#39;, &#39;12345&#39;, { host: &#39;localhost&#39;, dialect: &#39;mysql&#39;, }) // 创建User模型 class User extends Model { } // 初始化User表 User."/>
 
 
 
@@ -510,7 +510,7 @@ yarn add mysql2
 </code></pre><ul>
 <li>使用：</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 引入
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 引入
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> { Sequelize, Model, DataTypes } = require(<span style="color:#cd5555">&#39;sequelize&#39;</span>)
 <span style="color:#228b22">// 创建sequelize连接
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> sequelize = <span style="color:#8b008b;font-weight:bold">new</span> Sequelize(<span style="color:#cd5555">&#39;gsq&#39;</span>, <span style="color:#cd5555">&#39;root&#39;</span>, <span style="color:#cd5555">&#39;12345&#39;</span>, {
@@ -542,7 +542,7 @@ yarn add mysql2
 <ul>
 <li>查询全部数据：</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">async</span> <span style="color:#8b008b;font-weight:bold">function</span> findAll() {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">async</span> <span style="color:#8b008b;font-weight:bold">function</span> findAll() {
     <span style="color:#8b008b;font-weight:bold">const</span> users = <span style="color:#8b008b;font-weight:bold">await</span> User.findAll()
     console.log(JSON.stringify(users))
     sequelize.close()
@@ -551,7 +551,7 @@ findAll()
 </code></pre></div><ul>
 <li>根据id删除数据：</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">async</span> <span style="color:#8b008b;font-weight:bold">function</span> deleteById() {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">async</span> <span style="color:#8b008b;font-weight:bold">function</span> deleteById() {
     User.destroy({
         where: {
             id: <span style="color:#b452cd">1</span>

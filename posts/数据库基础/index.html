@@ -32,8 +32,8 @@
  一个表里不能有两层依赖 给出学号，就能确定系名——系名依赖于学号 给出系名，就能确定系主任——系主任依赖与系名 所以，系主任间接依赖于学号    解决办法：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-07-05T08:57:20&#43;08:00" />
-<meta property="article:modified_time" content="2021-07-05T08:57:20&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-07-05T08:57:20+08:00" />
+<meta property="article:modified_time" content="2021-07-05T08:57:20+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -1183,14 +1183,14 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <ul>
 <li><strong>语法</strong></li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#8b008b;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>A.PK<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">AS</span><span style="color:#bbb"> </span>A_PK,<span style="color:#bbb"> </span>B.PK<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">AS</span><span style="color:#bbb"> </span>B_PK,<span style="color:#bbb">
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#8b008b;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>A.PK<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">AS</span><span style="color:#bbb"> </span>A_PK,<span style="color:#bbb"> </span>B.PK<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">AS</span><span style="color:#bbb"> </span>B_PK,<span style="color:#bbb">
 </span><span style="color:#bbb">	</span>A.VALUE<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">AS</span><span style="color:#bbb"> </span>A_VALUE,<span style="color:#bbb"> </span>B.VALUE<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">AS</span><span style="color:#bbb"> </span>B_VALUE<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">FROM</span><span style="color:#bbb"> </span>Table_AA<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">INNER</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">JOIN</span><span style="color:#bbb"> </span>Table_BB<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">ON</span><span style="color:#bbb"> </span>A.PK<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>B.PK<span style="color:#bbb">
 </span></code></pre></div><ul>
 <li><strong>尝试</strong>（以inner join为例）：</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql">//<span style="color:#bbb"> </span><span style="color:#a61717;background-color:#e3d2d2">用</span>docker启动mysql<span style="color:#a61717;background-color:#e3d2d2">，或者重新</span>docker<span style="color:#bbb"> </span>run一遍<span style="color:#bbb">
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql">//<span style="color:#bbb"> </span><span style="color:#a61717;background-color:#e3d2d2">用</span>docker启动mysql<span style="color:#a61717;background-color:#e3d2d2">，或者重新</span>docker<span style="color:#bbb"> </span>run一遍<span style="color:#bbb">
 </span><span style="color:#bbb"></span>docker<span style="color:#bbb"> </span>container<span style="color:#bbb"> </span>start<span style="color:#bbb"> </span>mysql1<span style="color:#bbb">
 </span><span style="color:#bbb"></span>//<span style="color:#bbb"> </span><span style="color:#a61717;background-color:#e3d2d2">进入</span>mysql<span style="color:#bbb">
 </span><span style="color:#bbb"></span>docker<span style="color:#bbb"> </span>exec<span style="color:#bbb"> </span>-it<span style="color:#bbb"> </span>mysql1<span style="color:#bbb"> </span>bash<span style="color:#bbb">
@@ -1240,7 +1240,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </li>
 <li>
 <p>如何获取博客的评论数</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#8b008b;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">count</span>(id)<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">from</span><span style="color:#bbb"> </span>comments<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">where</span><span style="color:#bbb"> </span>blog_id=<span style="color:#b452cd">1</span><span style="color:#bbb">
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#8b008b;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">count</span>(id)<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">from</span><span style="color:#bbb"> </span>comments<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">where</span><span style="color:#bbb"> </span>blog_id=<span style="color:#b452cd">1</span><span style="color:#bbb">
 </span></code></pre></div></li>
 <li>
 <p>更好的办法是在blog表中添加<code>comment_count</code>字段，每次添加comment则+1，每次删除comment则-1</p>
@@ -1269,7 +1269,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <ul>
 <li>
 <p>命令</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#8b008b;font-weight:bold">show</span><span style="color:#bbb"> </span>engines;<span style="color:#bbb">
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#8b008b;font-weight:bold">show</span><span style="color:#bbb"> </span>engines;<span style="color:#bbb">
 </span></code></pre></div></li>
 <li>
 <p>常见</p>
@@ -1285,7 +1285,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <ul>
 <li>
 <p>语法</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#8b008b;font-weight:bold">create</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">unique</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">index</span><span style="color:#bbb"> </span>index1<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">on</span><span style="color:#bbb"> </span>users(name(<span style="color:#b452cd">100</span>));<span style="color:#bbb">
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#8b008b;font-weight:bold">create</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">unique</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">index</span><span style="color:#bbb"> </span>index1<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">on</span><span style="color:#bbb"> </span>users(name(<span style="color:#b452cd">100</span>));<span style="color:#bbb">
 </span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">show</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">index</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">in</span><span style="color:#bbb"> </span>users;<span style="color:#bbb">
 </span></code></pre></div><blockquote>
 <p><a href="https://www.runoob.com/mysql/mysql-index.html">MySQL 索引 | 菜鸟教程 (runoob.com)</a></p>

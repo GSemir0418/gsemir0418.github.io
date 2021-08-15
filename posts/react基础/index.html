@@ -26,8 +26,8 @@
   class MyComponent extends React.Component{ render(){ //render放在MyComponent的原型对象（React.Component）上，供实例使用 	//render中的this指向MyComponent实例对象（组件实例对象） 	console.log(&#39;render方法中的this指向：&#39;,this); return &lt;h1&gt;类式组件，适用于复杂组件的定义&lt;/h1&gt; } } ReactDOM.render(&lt;MyComponent/&gt;,document.getElementById(&#39;test&#39;))  2 组件实例三大属性 2.1 state 2.1.1 state基本使用 state 是组件对象最重要的属性，值是对象(可以包含多个 key-value 的组合)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/react%E5%9F%BA%E7%A1%80/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-04-29T23:11:51&#43;08:00" />
-<meta property="article:modified_time" content="2021-04-29T23:11:51&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-04-29T23:11:51+08:00" />
+<meta property="article:modified_time" content="2021-04-29T23:11:51+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -1629,7 +1629,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </ol>
 </li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">function</span> Demo(){
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">function</span> Demo(){
 	console.log(<span style="color:#8b008b;font-weight:bold">this</span>);<span style="color:#228b22">//undefined
 </span><span style="color:#228b22"></span>	<span style="color:#8b008b;font-weight:bold">return</span> &lt;h1&gt;函数式组件<span style="color:#a61717;background-color:#e3d2d2">，</span>适用于简单组件的定义&lt;<span style="color:#a61717;background-color:#e3d2d2">/h1&gt;</span>
 }
@@ -1649,7 +1649,7 @@ ReactDOM.render(&lt;Demo/&gt;,<span style="color:#658b00">document</span>.getEle
 <p>3.插入到指定的页面元素内部</p>
 </li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> MyComponent <span style="color:#8b008b;font-weight:bold">extends</span> React.Component{
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> MyComponent <span style="color:#8b008b;font-weight:bold">extends</span> React.Component{
 	render(){
 	<span style="color:#228b22">//render放在MyComponent的原型对象（React.Component）上，供实例使用
 </span><span style="color:#228b22"></span>	<span style="color:#228b22">//render中的this指向MyComponent实例对象（组件实例对象）
@@ -1672,7 +1672,7 @@ ReactDOM.render(&lt;MyComponent/&gt;,<span style="color:#658b00">document</span>
 </ul>
 </blockquote>
 <p>代码如下：（无效）</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Weather <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Weather <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
 	constructor(props) {
 		<span style="color:#8b008b;font-weight:bold">super</span>(props)
 		<span style="color:#8b008b;font-weight:bold">this</span>.state = { isHot: <span style="color:#8b008b;font-weight:bold">false</span> }<span style="color:#228b22">//this指向当前类的实例对象
@@ -1710,7 +1710,7 @@ ReactDOM.render(&lt;Weather /&gt;, <span style="color:#658b00">document</span>.g
 <p>状态数据，不能直接修改或更新，需要在方法中使用**this.setState({})**来修改，修改后代码如下：</p>
 </li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Weather <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Weather <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
 
     <span style="color:#228b22">//构造器调用几次？————1次
 </span><span style="color:#228b22"></span>    constructor(props) {
@@ -1741,7 +1741,7 @@ ReactDOM.render(&lt;Weather /&gt;, <span style="color:#658b00">document</span>.g
 }
 ReactDOM.render(&lt;Weather /&gt;, <span style="color:#658b00">document</span>.getElementById(<span style="color:#cd5555">&#39;test&#39;</span>))
 </code></pre></div><h3 id="213-state的简写方式">2.1.3 state的简写方式：</h3>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Weather <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Weather <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
     <span style="color:#228b22">//初始化状态
 </span><span style="color:#228b22"></span>    <span style="color:#228b22">//利用类的特性，可以直接写赋值语句，表示在该类的每一个实例对象中添加state属性
 </span><span style="color:#228b22"></span>    state = { isHot: <span style="color:#8b008b;font-weight:bold">false</span>, wind: <span style="color:#cd5555">&#39;微风&#39;</span> }
@@ -1765,7 +1765,7 @@ ReactDOM.render(&lt;Weather/&gt;, <span style="color:#658b00">document</span>.ge
 <blockquote>
 <p>需求：自定义用来显示一个人员信息的组件</p>
 </blockquote>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#8b008b;font-weight:bold">class</span> Person <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#8b008b;font-weight:bold">class</span> Person <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
     render() {
         <span style="color:#228b22">//console.log(this);//均指向实例对象
 </span><span style="color:#228b22"></span>        <span style="color:#228b22">//this.props.name = &#34;haha&#34;会报错，因为props是只读的
@@ -1798,7 +1798,7 @@ ReactDOM.render(&lt;Person name=<span style="color:#cd5555">&#39;gsq&#39;</span>
 <li>年龄为字符串类型，且为数字类型，默认值为 18</li>
 </ul>
 </blockquote>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#228b22">&lt;!--</span> 引入propstype<span style="color:#a61717;background-color:#e3d2d2">，</span>用来对props进行限制<span style="color:#a61717;background-color:#e3d2d2">（</span>其实就是弹出一些警告<span style="color:#a61717;background-color:#e3d2d2">）</span> --&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#228b22">&lt;!--</span> 引入propstype<span style="color:#a61717;background-color:#e3d2d2">，</span>用来对props进行限制<span style="color:#a61717;background-color:#e3d2d2">（</span>其实就是弹出一些警告<span style="color:#a61717;background-color:#e3d2d2">）</span> --&gt;
 &lt;script src=<span style="color:#cd5555">&#34;../js/prop-types.js&#34;</span>&gt;&lt;<span style="color:#a61717;background-color:#e3d2d2">/script&gt;</span>
 ...
 	<span style="color:#228b22">//对标签属性进行类型、必要性等的限制
@@ -1818,7 +1818,7 @@ ReactDOM.render(&lt;Person name=<span style="color:#cd5555">&#39;gsq&#39;</span>
 <blockquote>
 <p>若要给类的原型对象自身加属性，用static关键字</p>
 </blockquote>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#8b008b;font-weight:bold">class</span> Person <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#8b008b;font-weight:bold">class</span> Person <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
     <span style="color:#228b22">//对标签属性进行类型、必要性等的限制
 </span><span style="color:#228b22"></span>    <span style="color:#8b008b;font-weight:bold">static</span> propTypes = {<span style="color:#228b22">//此处的p小写
 </span><span style="color:#228b22"></span>        name: PropTypes.string.isRequired,<span style="color:#228b22">//别忘逗号和P和T都大写
@@ -1845,7 +1845,7 @@ ReactDOM.render(&lt;Person name=<span style="color:#cd5555">&#39;gsq&#39;</span>
 </code></pre></div><h3 id="224-类式组件中的构造器与props">2.2.4 类式组件中的构造器与props</h3>
 <p>类中的构造器可以省略</p>
 <p>如果写了构造器，同时接受props并传递给super，那么就可以通过this.props访问实例对象的props了（几乎用不到）</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">constructor(props) {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">constructor(props) {
     <span style="color:#228b22">//构造器是否接受props，是否传递给super，取决于：
 </span><span style="color:#228b22"></span>    <span style="color:#228b22">//是否希望在构造器中通过this访问props（即访问每个实例对象的props）
 </span><span style="color:#228b22"></span>    <span style="color:#228b22">//一般能不写就不写
@@ -1854,7 +1854,7 @@ ReactDOM.render(&lt;Person name=<span style="color:#cd5555">&#39;gsq&#39;</span>
 }
 </code></pre></div><h3 id="225-函数组件使用props">2.2.5 函数组件使用props</h3>
 <p>函数组件因为自身能够传参，因此可以使用props属性</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">//函数组件因为自身能够传参，因此可以使用props属性
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">//函数组件因为自身能够传参，因此可以使用props属性
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">function</span> Person(props) {
     <span style="color:#8b008b;font-weight:bold">const</span> {name,gender,age} = props
     <span style="color:#8b008b;font-weight:bold">return</span> (
@@ -1891,7 +1891,7 @@ ReactDOM.render(&lt;Person age={<span style="color:#b452cd">18</span>} gender=<s
 </ol>
 </blockquote>
 <h3 id="231-字符串形式的ref">2.3.1 字符串形式的ref</h3>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Demo <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Demo <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
     render() {
         console.log(<span style="color:#8b008b;font-weight:bold">this</span>);
         <span style="color:#8b008b;font-weight:bold">return</span> (
@@ -1913,7 +1913,7 @@ ReactDOM.render(&lt;Person age={<span style="color:#b452cd">18</span>} gender=<s
 }
 ReactDOM.render(&lt;Demo /&gt;, <span style="color:#658b00">document</span>.getElementById(<span style="color:#cd5555">&#39;test&#39;</span>))
 </code></pre></div><h3 id="232-回调函数形式的ref">2.3.2 回调函数形式的ref</h3>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Demo <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Demo <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
     render() {
         console.log(<span style="color:#8b008b;font-weight:bold">this</span>);
         <span style="color:#8b008b;font-weight:bold">return</span> (
@@ -1937,7 +1937,7 @@ ReactDOM.render(&lt;Demo /&gt;, <span style="color:#658b00">document</span>.getE
 <li>初始化时，ref的回调会执行一次。但是当更新组件时，ref的回调会执行两次，分别返回null和currentNode，因为每次渲染时都会创建一个新的函数实例，所以React清空旧的ref并设置新的。</li>
 <li>可以定义成class的绑定函数的方法来解决，但一般就用内联就可以了，多此一举。</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Demo <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Demo <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
     state = { isHot: <span style="color:#8b008b;font-weight:bold">true</span> }
     <span style="color:#228b22">//不用管它 只是为了更新组件方便些
 </span><span style="color:#228b22"></span>    changeWeather = () =&gt; {
@@ -1985,7 +1985,7 @@ ReactDOM.render(&lt;Demo /&gt;, <span style="color:#658b00">document</span>.getE
 <li>React.createRef()调用后，返回一个容器，该容器可以存储被ref所标识的节点</li>
 <li>一个容器只能存一个节点</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Demo <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Demo <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
     <span style="color:#228b22">/*
 </span><span style="color:#228b22">    React.createRef()调用后，返回一个容器
 </span><span style="color:#228b22">    该容器可以存储被ref所标识的节点
@@ -2022,7 +2022,7 @@ ReactDOM.render(&lt;Demo /&gt;, <span style="color:#658b00">document</span>.getE
 <ul>
 <li>当发生事件的元素正好是我们要操作的元素，就可以省略ref，例如下面的失去焦点事件</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Demo <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Demo <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
     <span style="color:#228b22">//创建ref容器
 </span><span style="color:#228b22"></span>    myRef1 = React.createRef()
     render() {
@@ -2054,7 +2054,7 @@ ReactDOM.render(&lt;Demo /&gt;, <span style="color:#658b00">document</span>.getE
 </blockquote>
 <h2 id="31-非受控组件">3.1 非受控组件</h2>
 <p>输入类型的DOM（表单），对其值现用现取（username.value）的组件，称其为非受控组件</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Login <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Login <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
     handleSubmit = () =&gt; {
         event.preventDefault()<span style="color:#228b22">//阻止表单的默认提交动作
 </span><span style="color:#228b22"></span>        <span style="color:#8b008b;font-weight:bold">const</span>{username,password} = <span style="color:#8b008b;font-weight:bold">this</span>
@@ -2113,7 +2113,7 @@ ReactDOM.render(&lt;Login /&gt;, document.getElementById('test'))
 <h1 id="4-高阶函数以及函数柯里化">4 高阶函数以及函数柯里化</h1>
 <p>上文中的方法过于冗杂，不适于输入项较多的表单</p>
 <p>可以只写一个函数，通过表单项<strong>回调函数的参数</strong>来界定保存的数据</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Login <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Login <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
     <span style="color:#228b22">//初始化状态
 </span><span style="color:#228b22"></span>    state = {
         username: <span style="color:#cd5555">&#34;&#34;</span>,
@@ -2156,7 +2156,7 @@ ReactDOM.render(&lt;Login /&gt;, <span style="color:#658b00">document</span>.get
 <h2 id="42-不使用柯里化的写法">4.2 不使用柯里化的写法</h2>
 <p>直接将返回值中的回调函数写成内联的形式，并传出event对象.</p>
 <p>柯里化的核心点在于，事件的回调必须是一个函数。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Login <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Login <span style="color:#8b008b;font-weight:bold">extends</span> React.Component {
     <span style="color:#228b22">//初始化状态
 </span><span style="color:#228b22"></span>    state = {
         username: <span style="color:#cd5555">&#34;&#34;</span>,
@@ -2196,7 +2196,7 @@ ReactDOM.render(&lt;Login /&gt;, <span style="color:#658b00">document</span>.get
 <li>类中所定义的方法，都是放在类的原型对象上，供实例去使用</li>
 <li>类中允许直接写赋值语句</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">//创建一个Person类
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">//创建一个Person类
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">class</span> Person {
     <span style="color:#228b22">//构造器方法
 </span><span style="color:#228b22"></span>    constructor(name, age) {
@@ -2271,7 +2271,7 @@ console.log(c1);<span style="color:#228b22">//可以利用此特性，简化reac
 <li>onclick（js动态绑定）</li>
 <li>直接在标签上绑定（行内绑定）</li>
 </ol>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">&lt;button id=<span style="color:#cd5555">&#34;btn1&#34;</span>&gt;按钮1&lt;<span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">&lt;button id=<span style="color:#cd5555">&#34;btn1&#34;</span>&gt;按钮1&lt;<span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
 &lt;button id=<span style="color:#cd5555">&#34;btn2&#34;</span>&gt;按钮2&lt;<span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
 &lt;button onclick=<span style="color:#cd5555">&#34;demo()&#34;</span>&gt;按钮3&lt;<span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
 &lt;script&gt;
@@ -2292,7 +2292,7 @@ console.log(c1);<span style="color:#228b22">//可以利用此特性，简化reac
 	<span style="color:#228b22">//react推荐使用方法3
 </span><span style="color:#228b22"></span>&lt;<span style="color:#a61717;background-color:#e3d2d2">/script&gt;</span>
 </code></pre></div><h2 id="3-类中方法的this指向">3 类中方法的this指向</h2>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Student{
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">class</span> Student{
     constructor(name,age){
         <span style="color:#8b008b;font-weight:bold">this</span>.name = name
         <span style="color:#8b008b;font-weight:bold">this</span>.age = age
@@ -2327,7 +2327,7 @@ demo2()
 <li>复制对象（深复制）</li>
 <li>复制一个对象的同时修改器属性</li>
 </ol>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">let</span> arr1 = [<span style="color:#b452cd">1</span>,<span style="color:#b452cd">3</span>,<span style="color:#b452cd">5</span>,<span style="color:#b452cd">7</span>,<span style="color:#b452cd">9</span>]    
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">let</span> arr1 = [<span style="color:#b452cd">1</span>,<span style="color:#b452cd">3</span>,<span style="color:#b452cd">5</span>,<span style="color:#b452cd">7</span>,<span style="color:#b452cd">9</span>]    
 <span style="color:#8b008b;font-weight:bold">let</span> arr2 = [<span style="color:#b452cd">2</span>,<span style="color:#b452cd">4</span>,<span style="color:#b452cd">6</span>,<span style="color:#b452cd">8</span>,<span style="color:#b452cd">10</span>]    
 
 <span style="color:#228b22">//1.展开一个数组
@@ -2359,13 +2359,13 @@ p1.name = <span style="color:#cd5555">&#39;zs&#39;</span><span style="color:#228
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">let</span> p3 = {...p1,name:<span style="color:#cd5555">&#39;gsqzs&#39;</span>}
 console.log(p3);
 </code></pre></div><p>5 对象相关知识</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">let</span> a = <span style="color:#cd5555">&#39;name&#39;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">let</span> a = <span style="color:#cd5555">&#39;name&#39;</span>
 <span style="color:#8b008b;font-weight:bold">const</span> obj = {} <span style="color:#228b22">//需求是将其变成{name:&#39;tom&#39;}
 </span><span style="color:#228b22">// 不可直接obj.a = &#34;tom&#34;
 </span><span style="color:#228b22"></span>obj[a] = <span style="color:#cd5555">&#34;tom&#34;</span>
 console.log(obj)
 </code></pre></div><p>6 显示函数柯里化</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">//正常写法
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">//正常写法
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">function</span> sum(a, b, c) {
 	<span style="color:#8b008b;font-weight:bold">return</span> a + b + c
 }

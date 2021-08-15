@@ -18,14 +18,14 @@
 
 <meta property="og:title" content="NodeHTTP模块" />
 <meta property="og:description" content="0 准备工作 1 ts-node-dev  当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用，但非常适合用来学习  安装
-npm -g i ts-node-dev要用npm安装 ，用yarn安装的话使用时会报错。。无法识别“ts-node-dev”命令，不知道为什么。
+npm -g i ts-node-dev 要用npm安装 ，用yarn安装的话使用时会报错。。无法识别“ts-node-dev”命令，不知道为什么。
 2 VSCode配置 配置自动保存与保存后自动格式化：
 ctrl shift p打开首选项：打开设置(ui)，AutoSave修改为onFocusChange，搜索format，勾选Format On Save开启保存后自动格式化。
-3 curl  GET请求：curl -v url POST请求：curl -v -d “name=gsq&quot; url 设置请求头：-H &#39;Content-Type:application/json&#39; 设置动词：-X PUT JSON请求：curl -d &#39;{&quot;name&quot;:&quot;bob&quot;}&#39; -H &#39;Content-Type:application/json&#39; url 后面会用到curl来构造请求  1 创建项目  初始化项目：  yarn init -y 安装@types/node声明文件  yarn add --dev @types/node 新建index.ts  // 引入http模块 import * as http from &#39;http&#39; // 用http创建server const server = http." />
+3 curl  GET请求：curl -v url POST请求：curl -v -d “name=gsq&quot; url 设置请求头：-H &#39;Content-Type:application/json&#39; 设置动词：-X PUT JSON请求：curl -d &#39;{&quot;name&quot;:&quot;bob&quot;}&#39; -H &#39;Content-Type:application/json&#39; url 后面会用到curl来构造请求  1 创建项目  初始化项目：  yarn init -y  安装@types/node声明文件  yarn add --dev @types/node  新建index.ts  // 引入http模块 import * as http from &#39;http&#39; // 用http创建server const server = http." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/nodehttp%E6%A8%A1%E5%9D%97/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-06-30T09:55:55&#43;08:00" />
-<meta property="article:modified_time" content="2021-06-30T09:55:55&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-06-30T09:55:55+08:00" />
+<meta property="article:modified_time" content="2021-06-30T09:55:55+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -35,10 +35,10 @@ ctrl shift p打开首选项：打开设置(ui)，AutoSave修改为onFocusChange�
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="NodeHTTP模块"/>
 <meta name="twitter:description" content="0 准备工作 1 ts-node-dev  当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用，但非常适合用来学习  安装
-npm -g i ts-node-dev要用npm安装 ，用yarn安装的话使用时会报错。。无法识别“ts-node-dev”命令，不知道为什么。
+npm -g i ts-node-dev 要用npm安装 ，用yarn安装的话使用时会报错。。无法识别“ts-node-dev”命令，不知道为什么。
 2 VSCode配置 配置自动保存与保存后自动格式化：
 ctrl shift p打开首选项：打开设置(ui)，AutoSave修改为onFocusChange，搜索format，勾选Format On Save开启保存后自动格式化。
-3 curl  GET请求：curl -v url POST请求：curl -v -d “name=gsq&quot; url 设置请求头：-H &#39;Content-Type:application/json&#39; 设置动词：-X PUT JSON请求：curl -d &#39;{&quot;name&quot;:&quot;bob&quot;}&#39; -H &#39;Content-Type:application/json&#39; url 后面会用到curl来构造请求  1 创建项目  初始化项目：  yarn init -y 安装@types/node声明文件  yarn add --dev @types/node 新建index.ts  // 引入http模块 import * as http from &#39;http&#39; // 用http创建server const server = http."/>
+3 curl  GET请求：curl -v url POST请求：curl -v -d “name=gsq&quot; url 设置请求头：-H &#39;Content-Type:application/json&#39; 设置动词：-X PUT JSON请求：curl -d &#39;{&quot;name&quot;:&quot;bob&quot;}&#39; -H &#39;Content-Type:application/json&#39; url 后面会用到curl来构造请求  1 创建项目  初始化项目：  yarn init -y  安装@types/node声明文件  yarn add --dev @types/node  新建index.ts  // 引入http模块 import * as http from &#39;http&#39; // 用http创建server const server = http."/>
 
 
 
@@ -1092,7 +1092,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </code></pre><ul>
 <li>新建<code>index.ts</code></li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#228b22">// 引入http模块
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#228b22">// 引入http模块
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">import</span> * <span style="color:#8b008b;font-weight:bold">as</span> http <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;http&#39;</span>
 <span style="color:#228b22">// 用http创建server
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> server = http.createServer()
@@ -1111,7 +1111,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>http.createServer()创建的server是http.Server和net.Server类的实例，可以创建后端环境（静态服务器）。</p>
 <p>首先控制台打出<code>request.contructor</code>，发现request对象的构造函数是<code>IncomingMessage</code>，因此利用ts语法，在传参中直接定义<code>request:IncomingMessage</code>，告诉TypeScript request不是任意对象，而是IncomingMessage对象。</p>
 <p>获取请求信息（请求头、路径、请求消息体等）：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">import</span> * <span style="color:#8b008b;font-weight:bold">as</span> http <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;http&#39;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">import</span> * <span style="color:#8b008b;font-weight:bold">as</span> http <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;http&#39;</span>
 <span style="color:#228b22">// 引入IncomingMessage模块
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">import</span> { IncomingMessage } <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;http&#39;</span>
 
@@ -1166,7 +1166,7 @@ name=gsq
 <li>拥有statusCode属性，默认为200，可读可写</li>
 <li>继承了Stream，也属于Stream类的实例</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">response.setHeader(<span style="color:#cd5555">&#39;NAME&#39;</span>, <span style="color:#cd5555">&#39;gsq&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">response.setHeader(<span style="color:#cd5555">&#39;NAME&#39;</span>, <span style="color:#cd5555">&#39;gsq&#39;</span>)
 response.statusCode = <span style="color:#b452cd">404</span>
 response.write(<span style="color:#cd5555">&#39;1&#39;</span>)
 response.write(<span style="color:#cd5555">&#39;2&#39;</span>)
@@ -1184,7 +1184,7 @@ response.end()
 <blockquote>
 <p>思路：通过request获取到用户请求的url，利用switch进行判断，根据请求不同，应用fs.readFile读取页面数据并返回给请求端。</p>
 </blockquote>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">import</span> * <span style="color:#8b008b;font-weight:bold">as</span> fs <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;fs&#39;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">import</span> * <span style="color:#8b008b;font-weight:bold">as</span> fs <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;fs&#39;</span>
 <span style="color:#8b008b;font-weight:bold">import</span> * <span style="color:#8b008b;font-weight:bold">as</span> http <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;http&#39;</span>
 <span style="color:#8b008b;font-weight:bold">import</span> * <span style="color:#8b008b;font-weight:bold">as</span> p <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;path&#39;</span>
 <span style="color:#8b008b;font-weight:bold">import</span> { IncomingMessage, ServerResponse } <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;http&#39;</span>
@@ -1231,10 +1231,10 @@ server.listen(<span style="color:#b452cd">8888</span>)
 <p>当请求的路径带有参数时（&hellip;/index.html?q=1），会影响到switch对路径的判断，从而找不到对应访问的文件，因此需要<code>url模块</code>来处理查询的参数。</p>
 </blockquote>
 <p>引入url模块时，模块名与request中取到的url同名，所以需要修改url为path：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">const</span> { url:<span style="color:#00688b;font-weight:bold">path</span> } = request
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">const</span> { url:<span style="color:#00688b;font-weight:bold">path</span> } = request
 <span style="color:#228b22">// 在request中取到url字段，重命名为path变量
 </span></code></pre></div><p><code>url.parse(path)</code>返回一个<code>URL对象</code>，包含如下字段：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">Url {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">Url {
   protocol: <span style="color:#00688b;font-weight:bold">null</span>, slashes: <span style="color:#00688b;font-weight:bold">null</span>, auth: <span style="color:#00688b;font-weight:bold">null</span>, host: <span style="color:#00688b;font-weight:bold">null</span>,
   port: <span style="color:#00688b;font-weight:bold">null</span>,  hostname: <span style="color:#00688b;font-weight:bold">null</span>,  hash: <span style="color:#00688b;font-weight:bold">null</span>,  search: <span style="color:#cd5555">&#39;?q=2&#39;</span>,
   query: <span style="color:#cd5555">&#39;q=2&#39;</span>, pathname: <span style="color:#cd5555">&#39;/index.html&#39;</span>, path: <span style="color:#cd5555">&#39;/index.html?q=2&#39;</span>,
@@ -1242,10 +1242,10 @@ server.listen(<span style="color:#b452cd">8888</span>)
 }
 </code></pre></div><p>switch只需读取URL对象中的<code>pathname</code>字段来进行判断即可。</p>
 <p>**注：**但是目前node版本中，url.parse已被<code>弃用</code>，所以我们直接实例化一个URL对象。URL对象接受两个参数，分别为<code>请求路径</code>与<code>根路径</code>。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">const</span> url = <span style="color:#8b008b;font-weight:bold">new</span> URL(path, <span style="color:#cd5555">&#39;http://localhost:8888&#39;</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">const</span> url = <span style="color:#8b008b;font-weight:bold">new</span> URL(path, <span style="color:#cd5555">&#39;http://localhost:8888&#39;</span>);
 <span style="color:#8b008b;font-weight:bold">const</span> { pathname } = <span style="color:#8b008b;font-weight:bold">new</span> URL(path, <span style="color:#cd5555">&#39;http://localhost:8888&#39;</span>) 
 </code></pre></div><p>新的URL对象包含如下字段：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">URL {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">URL {
   href: <span style="color:#cd5555">&#39;http://localhost:8888/index.html?q=1&#39;</span>,
   origin: <span style="color:#cd5555">&#39;http://localhost:8888&#39;</span>,
   protocol: <span style="color:#cd5555">&#39;http:&#39;</span>,
@@ -1266,7 +1266,7 @@ server.listen(<span style="color:#b452cd">8888</span>)
 <p>思路：还是从路径入手，URL对象中的pathname字段的字符串，经过一些字符处理，便可以作为fs读取文件的路径名。例如访问路径为<code>/aa/index.html</code>，则读取路径中需要的字段是<code>aa/index.html</code>，只需将前面的<code>'/'</code>去掉即可。</p>
 </blockquote>
 <p>修改后代码如下：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">import</span> * <span style="color:#8b008b;font-weight:bold">as</span> fs <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;fs&#39;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">import</span> * <span style="color:#8b008b;font-weight:bold">as</span> fs <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;fs&#39;</span>
 <span style="color:#8b008b;font-weight:bold">import</span> * <span style="color:#8b008b;font-weight:bold">as</span> http <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;http&#39;</span>
 <span style="color:#8b008b;font-weight:bold">import</span> * <span style="color:#8b008b;font-weight:bold">as</span> p <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;path&#39;</span>
 <span style="color:#8b008b;font-weight:bold">import</span> { IncomingMessage, ServerResponse } <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#cd5555">&#39;http&#39;</span>
@@ -1297,7 +1297,7 @@ server.listen(<span style="color:#b452cd">8888</span>)
 <p>对访问文件时出现的错误类型进行判断</p>
 </blockquote>
 <h2 id="1-文件不存在的情况">1 文件不存在的情况</h2>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">if</span> (error.errno === -<span style="color:#b452cd">4058</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">if</span> (error.errno === -<span style="color:#b452cd">4058</span>) {
 	response.statusCode = <span style="color:#b452cd">404</span> <span style="color:#228b22">//找不到文件
 </span><span style="color:#228b22"></span>    fs.readFile(p.resolve(publicDir, <span style="color:#cd5555">&#39;404.html&#39;</span>), (error, data) =&gt; {
         response.end(data)
@@ -1305,17 +1305,17 @@ server.listen(<span style="color:#b452cd">8888</span>)
 </span><span style="color:#228b22"></span>	})
 } 
 </code></pre></div><h2 id="2-当访问路径为根路径httplocalhost8888时默认访问indexhtml">2 当访问路径为根路径<code>http://localhost:8888</code>时，默认访问index.html</h2>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">let</span> fileName = pathname.substring(<span style="color:#b452cd">1</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">let</span> fileName = pathname.substring(<span style="color:#b452cd">1</span>)
 <span style="color:#8b008b;font-weight:bold">if</span> (fileName === <span style="color:#cd5555">&#39;&#39;</span>) {
     fileName = <span style="color:#cd5555">&#39;index.html&#39;</span>
 }
 </code></pre></div><h2 id="3当访问路径不是文件而是目录时">3.当访问路径不是文件而是目录时</h2>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">else</span> <span style="color:#8b008b;font-weight:bold">if</span> (error.errno === -<span style="color:#b452cd">4068</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">else</span> <span style="color:#8b008b;font-weight:bold">if</span> (error.errno === -<span style="color:#b452cd">4068</span>) {
 	response.statusCode = <span style="color:#b452cd">403</span> <span style="color:#228b22">//没有权限访问
 </span><span style="color:#228b22"></span>	response.end(<span style="color:#cd5555">&#39;无权查看目录内容&#39;</span>)
 } 
 </code></pre></div><h2 id="4其他错误一律归为服务器内部错误">4.其他错误一律归为服务器内部错误</h2>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">else</span> {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#8b008b;font-weight:bold">else</span> {
 	response.statusCode = <span style="color:#b452cd">500</span> <span style="color:#228b22">//服务器内部错误
 </span><span style="color:#228b22"></span>	response.end(<span style="color:#cd5555">&#39;服务器繁忙，请稍后再试&#39;</span>)
 }
@@ -1330,12 +1330,12 @@ if (method !== 'GET') {
 </code></pre><h1 id="9-添加缓存选项">9 添加缓存选项</h1>
 <p>再次刷新页面时，css、js和图片等静态数据会缓存至内存中，提升网页访问性能。</p>
 <p>成功返回数据前，在响应头添加缓存字段：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">response.setHeader(<span style="color:#cd5555">&#39;Cache-Control&#39;</span>,<span style="color:#cd5555">&#39;public max-age=3600&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">response.setHeader(<span style="color:#cd5555">&#39;Cache-Control&#39;</span>,<span style="color:#cd5555">&#39;public max-age=3600&#39;</span>)
 </code></pre></div><h1 id="10-发布未完成">10 发布(未完成)</h1>
 <p>将ts变成js，需全局安装TypeScript，使用<code>tsc</code>命令进行转换：</p>
 <pre><code>tsc index.ts
 </code></pre><p>把js作为package.json中的<code>main</code>字段</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#cd5555">&#34;main&#34;</span><span style="color:#a61717;background-color:#e3d2d2">:</span> <span style="color:#cd5555">&#34;index.js&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#cd5555">&#34;main&#34;</span><span style="color:#a61717;background-color:#e3d2d2">:</span> <span style="color:#cd5555">&#34;index.js&#34;</span>
 </code></pre></div><p>发布</p>
 <pre><code>yarn login/npm adduser
 yarn publish/npm publish

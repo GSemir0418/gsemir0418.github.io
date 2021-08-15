@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GitHub on GSemir Blog</title>
+    <link>https://gsemir0418.github.io/tags/github/</link>
+    <description>Recent content in GitHub on GSemir Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 15 Aug 2021 22:02:28 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git相关</title>
+      <link>https://gsemir0418.github.io/posts/git/</link>
+      <pubDate>Sun, 15 Aug 2021 22:02:28 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/git/</guid>
+      <description>0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址
+git config --global user.name &amp;quot;gsemir0418&amp;quot; git config --global user.email &amp;quot;845217811@qq.com&amp;quot; // 查看全局配置 git config --list 0.2 配置SSH公匙 0.2.1 本地创建ssh key 打开终端，输入如下指令
+ssh-keygen -t rsa -C &amp;quot;845217811@qq.com&amp;quot; 直接点回车，说明会在默认文件id_rsa上生成ssh key
+然后系统要求输入密码，直接回车表示不设密码；重复密码是也可以直接回车，表示不设密码。
+创建成功后，在终端输入如下指令，便可看到几个文件：
+ls ~/.ssh id_rsa id_rsa.pub known_hosts vscode或vim打开id_rsa.pub，复制全部内容备用。
+0.2.2 git账户设置ssh 进入github主页，进入Account Settings，左边选择SSH Keys，Add SSH Key,
+title建议填写计算机名称，粘贴刚刚复制的key。确定后配置完成了
+0.2.3 验证 输入以下指令验证配置是否成功：
+ssh -T git@github.com 如果配置过密码，输入密码后，看到如下指令，则表示配置成功
+You’ve successfully authenticated, but GitHub does not provide shell access 0.3 修改之前的http仓库为ssh // 查看当前远程仓库路径 git remote -v // 修改为ssh路径 git remote set-url origin [新路径] 1 简单的代码提交流程  git status 查看工作区代码相对于暂存区的差别 git add .</description>
+    </item>
+    
+  </channel>
+</rss>

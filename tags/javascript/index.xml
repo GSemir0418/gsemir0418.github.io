@@ -6,7 +6,16 @@
     <description>Recent content in JavaScript on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Jul 2021 17:30:59 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Aug 2021 20:40:20 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JS专精</title>
+      <link>https://gsemir0418.github.io/posts/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Sat, 07 Aug 2021 20:40:20 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/</guid>
+      <description>1</description>
+    </item>
+    
     <item>
       <title>Object常用方法整理</title>
       <link>https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
@@ -42,7 +51,7 @@ str.chartAt(index) 若没有提供index，则默认使用0
   例子
 const str = &amp;#39;ABCD&amp;#39; str.charAt(1)// &amp;#34;B&amp;#34;   String.prototype.indexOf()   查询字符串对象中第一次出现指定值的索引
   语法：
-str.indexOf(searchValue, fromIndex)fromIndex可选，表示开始查找的位置，默认为0，若指定为负数，则等价于传入0；若大于str.length，则必反回-1
+str.indexOf(searchValue, fromIndex) fromIndex可选，表示开始查找的位置，默认为0，若指定为负数，则等价于传入0；若大于str.length，则必反回-1
 indexOf区分大小写</description>
     </item>
     

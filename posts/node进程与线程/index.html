@@ -26,8 +26,8 @@
   2 线程 2." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-08-06T17:33:55&#43;08:00" />
-<meta property="article:modified_time" content="2021-08-06T17:33:55&#43;08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-08-06T17:33:55+08:00" />
+<meta property="article:modified_time" content="2021-08-06T17:33:55+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -944,7 +944,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </li>
 <li>
 <p>等待子进程运行结束后，主进程再用回调函数读取子进程的运行结果（error,stdout,stderr）</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> child_process = require(<span style="color:#cd5555">&#39;child_process&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> child_process = require(<span style="color:#cd5555">&#39;child_process&#39;</span>)
 <span style="color:#8b008b;font-weight:bold">const</span> {exec} = child_process
 
 exec(<span style="color:#cd5555">&#39;ls&#39;</span>, (error, stdout, stderr)=&gt;{
@@ -973,7 +973,7 @@ exec(<span style="color:#cd5555">&#39;ls&#39;</span>, (error, stdout, stderr)=&g
 <ul>
 <li>
 <p>返回流（不用回调，可以监听stdout流的data事件）</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> child_process = require(<span style="color:#cd5555">&#39;child_process&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> child_process = require(<span style="color:#cd5555">&#39;child_process&#39;</span>)
 <span style="color:#8b008b;font-weight:bold">const</span> {exec} = child_process
 
 <span style="color:#8b008b;font-weight:bold">const</span> child = exec(<span style="color:#cd5555">&#39;ls -l&#39;</span>)
@@ -992,7 +992,7 @@ exec(<span style="color:#cd5555">&#39;ls&#39;</span>, (error, stdout, stderr)=&g
 <ul>
 <li>
 <p>可以使其Promise化（util.promisify）</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> util = require(<span style="color:#cd5555">&#39;util&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> util = require(<span style="color:#cd5555">&#39;util&#39;</span>)
 <span style="color:#8b008b;font-weight:bold">const</span> child_process = require(<span style="color:#cd5555">&#39;child_process&#39;</span>)
 <span style="color:#8b008b;font-weight:bold">const</span> { exec } = child_process
 
@@ -1012,7 +1012,7 @@ exec2(<span style="color:#cd5555">&#39;ls -l&#39;</span>).then(data =&gt; {
 <li>shell：用什么命令行程序执行</li>
 <li>maxBuffer：最大缓存</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">exec(<span style="color:#cd5555">&#39;ls&#39;</span>, {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">exec(<span style="color:#cd5555">&#39;ls&#39;</span>, {
 	cwd : <span style="color:#cd5555">&#39;C:\\&#39;</span>,
 	env : {NODE_ENV : <span style="color:#cd5555">&#39;development&#39;</span>},
 	maxBuffer : <span style="color:#b452cd">1024</span>*<span style="color:#b452cd">2024</span>
@@ -1023,7 +1023,7 @@ exec2(<span style="color:#cd5555">&#39;ls -l&#39;</span>).then(data =&gt; {
 <ul>
 <li>存在cmd被注入的风险</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 当接受用户输入时，以&#39;&amp;&amp;&#39;开头，接着输入一条危险指令
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 当接受用户输入时，以&#39;&amp;&amp;&#39;开头，接着输入一条危险指令
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> userInput = <span style="color:#cd5555">&#39;. &amp;&amp; rm -rf /&#39;</span>
 exec2(<span style="color:#cd5555">`ls </span><span style="color:#cd5555">${</span>userInput<span style="color:#cd5555">}</span><span style="color:#cd5555">`</span>).then(data)...
 <span style="color:#228b22">// 那么命令行就会执行&#39;ls&#39;命令和&#39;rm -rf /&#39;命令
@@ -1039,7 +1039,7 @@ exec2(<span style="color:#cd5555">`ls </span><span style="color:#cd5555">${</spa
 </li>
 <li>
 <p>同步版本：execFileSync</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> { execFile } = child_process
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> { execFile } = child_process
 
 <span style="color:#8b008b;font-weight:bold">const</span> userInput = <span style="color:#cd5555">&#39;. &amp;&amp; pwd&#39;</span>
 execFile(<span style="color:#cd5555">&#39;ls&#39;</span>, [<span style="color:#cd5555">&#39;-la&#39;</span>, userInput], (error, stdout) =&gt; {
@@ -1050,7 +1050,7 @@ execFile(<span style="color:#cd5555">&#39;ls&#39;</span>, [<span style="color:#c
 </span></code></pre></div></li>
 <li>
 <p>支持流</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> child = execFile(<span style="color:#cd5555">&#39;ls&#39;</span>, [userInput])
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> child = execFile(<span style="color:#cd5555">&#39;ls&#39;</span>, [userInput])
 child.stdout.on(<span style="color:#cd5555">&#39;data&#39;</span>, chunk =&gt; {
     console.log(chunk)
 })
@@ -1071,7 +1071,7 @@ child.stdout.on(<span style="color:#cd5555">&#39;data&#39;</span>, chunk =&gt; {
 <li>区别在于没有回调函数，只能通过流事件获取结果</li>
 <li>没有最大200kb的限制（因为是流）</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> child = spawn(<span style="color:#cd5555">&#39;ls&#39;</span>, [<span style="color:#cd5555">&#39;.&#39;</span>], { cwd : <span style="color:#cd5555">&#39;C:\\&#39;</span> })
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> child = spawn(<span style="color:#cd5555">&#39;ls&#39;</span>, [<span style="color:#cd5555">&#39;.&#39;</span>], { cwd : <span style="color:#cd5555">&#39;C:\\&#39;</span> })
 child.stdout.on(<span style="color:#cd5555">&#39;data&#39;</span>, chunk =&gt; {
     console.log(chunk.toString())
 })
@@ -1098,7 +1098,7 @@ child.stdout.on(<span style="color:#cd5555">&#39;data&#39;</span>, chunk =&gt; {
 <li>会多出一个message事件，用于父子通信</li>
 <li>会多出一个send方法</li>
 </ul>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// n.js主进程
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// n.js主进程
 </span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">var</span> n = child_process.fork(<span style="color:#cd5555">&#39;./child.js&#39;</span>)
 n.on(<span style="color:#cd5555">&#39;message&#39;</span>, m =&gt; {
 	console.log(<span style="color:#cd5555">&#39;PARENT got message:&#39;</span>, m)
@@ -1131,8 +1131,8 @@ process.send({ foo: <span style="color:#cd5555">&#39;bar&#39;</span> })<span sty
             <nav class="post-pagination">
 
                 
-                <a class="newer-posts">
-			下回<br>已经到头啦。
+                <a class="newer-posts" href="https://gsemir0418.github.io/posts/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/">
+			下回<br>JS专精
                 </a>
                 
                 
