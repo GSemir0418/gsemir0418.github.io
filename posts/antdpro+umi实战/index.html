@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head>
-<title>antdpro&#43;umi实战</title>
+<title>umi&#43;AntdPro实战总结</title>
 
 
 
@@ -16,17 +16,12 @@
 
 
 
-<meta property="og:title" content="antdpro&#43;umi实战" />
-<meta property="og:description" content="本文通过一个todo list 的小项目演示，实现三个功能：
- 列表功能，列出所有todo项； 添加新项，添加新的todo项； 更新项，更新现有的todo项状态，修改成待办、已完成或者取消  数据结构：
-{ id : 1, // 唯一标识 title : &quot;完成antdpro实战&quot;, // 待办事项标题 status : 0 // 状态：0-待办，1-已完成，2-已取消 } 创建新项目 新建项目目录
-mkdir todo-list cd todo-list 执行
-yarn create umi 选择ant-design-pro、JavaScript、simple，完成项目的创建
-目录结构 ├── config # umi 配置，包含路由，构建等配置 ├── mock # 本地模拟数据 ├── public # 一些公共静态资源 ├── src │ ├── assets # 本地静态资源 │ ├── components # 业务通用组件 │ ├── e2e # 集成测试用例 │ ├── layouts # 通用布局 │ ├── models # 全局 dva model │ ├── pages # 业务页面入口和常用模板 │ ├── services # 后台接口服务 │ ├── utils # 工具库 │ ├── locales # 国际化资源 │ ├── global." />
+<meta property="og:title" content="umi&#43;AntdPro实战总结" />
+<meta property="og:description" content="项目总结" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-06-25T22:51:51+08:00" />
-<meta property="article:modified_time" content="2021-06-25T22:51:51+08:00" /><meta property="og:site_name" content="My Blog" />
+<meta property="article:published_time" content="2021-08-22T22:51:51+08:00" />
+<meta property="article:modified_time" content="2021-08-22T22:51:51+08:00" /><meta property="og:site_name" content="My Blog" />
 
 
 
@@ -34,13 +29,8 @@ yarn create umi 选择ant-design-pro、JavaScript、simple，完成项目的创�
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="antdpro&#43;umi实战"/>
-<meta name="twitter:description" content="本文通过一个todo list 的小项目演示，实现三个功能：
- 列表功能，列出所有todo项； 添加新项，添加新的todo项； 更新项，更新现有的todo项状态，修改成待办、已完成或者取消  数据结构：
-{ id : 1, // 唯一标识 title : &quot;完成antdpro实战&quot;, // 待办事项标题 status : 0 // 状态：0-待办，1-已完成，2-已取消 } 创建新项目 新建项目目录
-mkdir todo-list cd todo-list 执行
-yarn create umi 选择ant-design-pro、JavaScript、simple，完成项目的创建
-目录结构 ├── config # umi 配置，包含路由，构建等配置 ├── mock # 本地模拟数据 ├── public # 一些公共静态资源 ├── src │ ├── assets # 本地静态资源 │ ├── components # 业务通用组件 │ ├── e2e # 集成测试用例 │ ├── layouts # 通用布局 │ ├── models # 全局 dva model │ ├── pages # 业务页面入口和常用模板 │ ├── services # 后台接口服务 │ ├── utils # 工具库 │ ├── locales # 国际化资源 │ ├── global."/>
+<meta name="twitter:title" content="umi&#43;AntdPro实战总结"/>
+<meta name="twitter:description" content="项目总结"/>
 
 
 
@@ -191,141 +181,6 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
     <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
 
 
-	<div class="toc-content">
-	
-		
-		
-		
-		<center>- 目录 -</center>
-		
-		
-		<ul>
-			
-				
-				
-					
-						
-						
-						
-						
-							
-								<ul class="collapse" data-toggle="collapse">
-							
-						
-						
-							<li>
-								<a href="#%e5%88%9b%e5%bb%ba%e6%96%b0%e9%a1%b9%e7%9b%ae" onclick="onNavClick(`#创建新项目-nav`)" id="创建新项目-nav">
-									创建新项目
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84" onclick="onNavClick(`#目录结构-nav`)" id="目录结构-nav">
-									目录结构
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e6%9c%ac%e5%9c%b0%e5%bc%80%e5%8f%91" onclick="onNavClick(`#本地开发-nav`)" id="本地开发-nav">
-									本地开发
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-							
-								<ul class="collapse" data-toggle="collapse">
-							
-						
-						
-							<li>
-								<a href="#%e9%85%8d%e7%bd%ae%e8%b7%af%e7%94%b1" onclick="onNavClick(`#配置路由-nav`)" id="配置路由-nav">
-									配置路由
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e6%b7%bb%e5%8a%a0%e7%a9%ba%e7%99%bd%e9%a1%b5%e9%9d%a2" onclick="onNavClick(`#添加空白页面-nav`)" id="添加空白页面-nav">
-									添加空白页面
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-							
-								</ul>
-							
-								</ul>
-							
-						
-						
-						
-							<li>
-								<a href="#%e6%9c%aa%e5%ae%8c%e5%be%85%e7%bb%ad" onclick="onNavClick(`#未完待续-nav`)" id="未完待续-nav">
-									未完待续。。。
-								</a>
-							</li>
-						
-						
-					
-				
-			
-		</ul>
-	</div>
-
 </div>
     
     <div class="pagination">
@@ -400,141 +255,6 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
             <div class="toc">
 
 
-	<div class="toc-content">
-	
-		
-		
-		
-		<center>- 目录 -</center>
-		
-		
-		<ul>
-			
-				
-				
-					
-						
-						
-						
-						
-							
-								<ul class="collapse" data-toggle="collapse">
-							
-						
-						
-							<li>
-								<a href="#%e5%88%9b%e5%bb%ba%e6%96%b0%e9%a1%b9%e7%9b%ae" onclick="onNavClick(`#创建新项目-nav`)" id="创建新项目-nav">
-									创建新项目
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84" onclick="onNavClick(`#目录结构-nav`)" id="目录结构-nav">
-									目录结构
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e6%9c%ac%e5%9c%b0%e5%bc%80%e5%8f%91" onclick="onNavClick(`#本地开发-nav`)" id="本地开发-nav">
-									本地开发
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-							
-								<ul class="collapse" data-toggle="collapse">
-							
-						
-						
-							<li>
-								<a href="#%e9%85%8d%e7%bd%ae%e8%b7%af%e7%94%b1" onclick="onNavClick(`#配置路由-nav`)" id="配置路由-nav">
-									配置路由
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e6%b7%bb%e5%8a%a0%e7%a9%ba%e7%99%bd%e9%a1%b5%e9%9d%a2" onclick="onNavClick(`#添加空白页面-nav`)" id="添加空白页面-nav">
-									添加空白页面
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-							
-								</ul>
-							
-								</ul>
-							
-						
-						
-						
-							<li>
-								<a href="#%e6%9c%aa%e5%ae%8c%e5%be%85%e7%bb%ad" onclick="onNavClick(`#未完待续-nav`)" id="未完待续-nav">
-									未完待续。。。
-								</a>
-							</li>
-						
-						
-					
-				
-			
-		</ul>
-	</div>
-
 </div>
             
         </div>
@@ -589,18 +309,18 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
             >
                 <div class="post-title">
-                    antdpro&#43;umi实战
+                    umi&#43;AntdPro实战总结
                     
                     <div class="post-meta">
                         
                         <time itemprop="datePublished">
-                            2021-06-25 22:51
+                            2021-08-22 22:51
                         </time>
                         
 
                         
                             <i class="material-icons" style="">folder</i>
-                                <a href="/categories/react%E5%AE%9E%E6%88%98">React实战</a>
+                                <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93">项目实战总结</a>
                                 &nbsp;
                         
 
@@ -629,97 +349,11 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
                 <div class="post-body" v-pre>
                 
-                    <p>本文通过一个todo list 的小项目演示，实现三个功能：</p>
-<ol>
-<li>列表功能，列出所有todo项；</li>
-<li>添加新项，添加新的todo项；</li>
-<li>更新项，更新现有的todo项状态，修改成待办、已完成或者取消</li>
-</ol>
-<p>数据结构：</p>
-<pre><code>{
-	id : 1, // 唯一标识
-	title : &quot;完成antdpro实战&quot;, // 待办事项标题
-	status : 0 // 状态：0-待办，1-已完成，2-已取消
-}
-</code></pre><h2 id="创建新项目">创建新项目</h2>
-<p>新建项目目录</p>
-<pre><code>mkdir todo-list
-cd todo-list
-</code></pre><p>执行</p>
-<pre><code>yarn create umi
-</code></pre><p>选择ant-design-pro、JavaScript、simple，完成项目的创建</p>
-<h2 id="目录结构">目录结构</h2>
-<pre><code>├── config                   # umi 配置，包含路由，构建等配置
-├── mock                     # 本地模拟数据
-├── public                   # 一些公共静态资源
-├── src
-│   ├── assets               # 本地静态资源
-│   ├── components           # 业务通用组件
-│   ├── e2e                  # 集成测试用例
-│   ├── layouts              # 通用布局
-│   ├── models               # 全局 dva model
-│   ├── pages                # 业务页面入口和常用模板
-│   ├── services             # 后台接口服务
-│   ├── utils                # 工具库
-│   ├── locales              # 国际化资源
-│   ├── global.less          # 全局样式
-│   └── global.jsx            # 全局 JS
-├── tests                    # 测试工具
-├── README.md
-└── package.json
-</code></pre><p>其中，mock、models、pages、services将是我们的主要目录。</p>
-<h2 id="本地开发">本地开发</h2>
-<p>安装依赖</p>
-<pre><code>yarn install
-</code></pre><p>运行</p>
-<pre><code>yarn start
-</code></pre><p>浏览器打开http://localhost:8000看到如下界面</p>
-<p>这就是脚手架为我们建好的框架，一个欢迎页面，一个空白的二级页面和一个查询表格，实际开发中我们要删掉这些页面，然后建立自己的业务界面。</p>
-<h3 id="配置路由">配置路由</h3>
-<pre><code>... 
-routes: [
-        {
-          path: '/',
-          component: '../layouts/BasicLayout',
-          authority: ['admin', 'user'],
-          routes: [
-            {
-              path: '/',
-              redirect: '/welcome',
-            },
-            {
-              path: '/todo',// url中path部分
-              name: 'todo', // 名称，国际化菜单配置根据这个名称来配置，如果不配置将直菜单将直接显示这个名称
-              icon: 'unordered-list',// 菜单图标名称
-              component:'./todo'// 组件（页面）,路径相对于src/pages
-            },
-           ...
-  ],
-...
-</code></pre><h3 id="添加空白页面">添加空白页面</h3>
-<p>在src/pages下新建目录todo,在todo目录下新建空白index.jsx文件，代码如下：</p>
-<pre><code>import React from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
-
-
-class TodoPage extends Component {
-
-    componentWillMount() { }
-
-    render() {
-        return (
-            &lt;PageHeaderWrapper&gt;
-                &lt;div&gt;空白面&lt;/div&gt;
-            &lt;/PageHeaderWrapper&gt;);
-    }
-}
-
-export default TodoPage
-</code></pre><h1 id="未完待续">未完待续。。。</h1>
+                    <p>项目总结</p>
 
                     
                     <HR width="100%" id="EOF">
-		    <p style="color:#777;">最后修改于 2021-06-25</p>
+		    <p style="color:#777;">最后修改于 2021-08-22</p>
                     
                 </div>
             </div>
@@ -728,14 +362,14 @@ export default TodoPage
             <nav class="post-pagination">
 
                 
-                <a class="newer-posts" href="https://gsemir0418.github.io/posts/reacthooks/">
-			下回<br>初识Hooks
+                <a class="newer-posts">
+			下回<br>已经到头啦。
                 </a>
                 
                 
                 
-                <a class="older-posts" href="https://gsemir0418.github.io/posts/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/">
-			上回<br>Node文件模块
+                <a class="older-posts" href="https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/">
+			上回<br>Express核心
                 </a>
                 
             </nav>

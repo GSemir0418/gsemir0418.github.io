@@ -27,7 +27,7 @@ ls ~/.ssh id_rsa id_rsa.pub known_hosts vscode或vim打开id_rsa.pub，复制全
 title建议填写计算机名称，粘贴刚刚复制的key。确定后配置完成了
 0.2.3 验证 输入以下指令验证配置是否成功：
 ssh -T git@github.com 如果配置过密码，输入密码后，看到如下指令，则表示配置成功
-You’ve successfully authenticated, but GitHub does not provide shell access 0.3 修改之前的http仓库为ssh // 查看当前远程仓库路径 git remote -v // 修改为ssh路径 git remote set-url origin [新路径] 1 简单的代码提交流程  git status 查看工作区代码相对于暂存区的差别 git add ." />
+You’ve successfully authenticated, but GitHub does not provide shell access 0.3 修改之前的http仓库为ssh // 查看当前远程仓库路径 git remote -v // 修改为ssh路径 git remote set-url origin [新路径] 0." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/git/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-08-15T22:02:28+08:00" />
@@ -50,7 +50,7 @@ ls ~/.ssh id_rsa id_rsa.pub known_hosts vscode或vim打开id_rsa.pub，复制全
 title建议填写计算机名称，粘贴刚刚复制的key。确定后配置完成了
 0.2.3 验证 输入以下指令验证配置是否成功：
 ssh -T git@github.com 如果配置过密码，输入密码后，看到如下指令，则表示配置成功
-You’ve successfully authenticated, but GitHub does not provide shell access 0.3 修改之前的http仓库为ssh // 查看当前远程仓库路径 git remote -v // 修改为ssh路径 git remote set-url origin [新路径] 1 简单的代码提交流程  git status 查看工作区代码相对于暂存区的差别 git add ."/>
+You’ve successfully authenticated, but GitHub does not provide shell access 0.3 修改之前的http仓库为ssh // 查看当前远程仓库路径 git remote -v // 修改为ssh路径 git remote set-url origin [新路径] 0."/>
 
 
 
@@ -342,6 +342,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							<li>
 								<a href="#03-%e4%bf%ae%e6%94%b9%e4%b9%8b%e5%89%8d%e7%9a%84http%e4%bb%93%e5%ba%93%e4%b8%bassh" onclick="onNavClick(`#03-修改之前的http仓库为ssh-nav`)" id="03-修改之前的http仓库为ssh-nav">
 									0.3 修改之前的http仓库为ssh
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#04-%e5%88%9b%e5%bb%ba%e5%a4%9a%e4%b8%aassh-key" onclick="onNavClick(`#04-创建多个ssh-key-nav`)" id="04-创建多个ssh-key-nav">
+									0.4 创建多个ssh key
 								</a>
 							</li>
 						
@@ -728,6 +746,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 						
+						
+						
+							<li>
+								<a href="#04-%e5%88%9b%e5%bb%ba%e5%a4%9a%e4%b8%aassh-key" onclick="onNavClick(`#04-创建多个ssh-key-nav`)" id="04-创建多个ssh-key-nav">
+									0.4 创建多个ssh key
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
 							
 								</ul>
 							
@@ -988,7 +1024,42 @@ id_rsa  id_rsa.pub  known_hosts
 git remote -v
 // 修改为ssh路径
 git remote set-url origin [新路径]
-</code></pre><h1 id="1-简单的代码提交流程">1 简单的代码提交流程</h1>
+</code></pre><h2 id="04-创建多个ssh-key">0.4 创建多个ssh key</h2>
+<p>在使用git的时候，遇到需要创建多个ssh key的需求，一个用来github项目，一个用来gitlab项目；</p>
+<p>之前如果已将创建过一个ssh key，那么在创建第二个的时候，要修改默认名称，然后增加配置文件；</p>
+<p>之前创建ssh key生成了如下两个文件，一个私钥，一个公钥</p>
+<blockquote>
+<p>id_rsa
+id_rsa.pub</p>
+</blockquote>
+<p>我们要生成新的一个ssh key，由于路径跟之前的一直，所以要改个名字</p>
+<blockquote>
+<p>id_rsa_gitlab
+id_rsa_gitlab.pub</p>
+</blockquote>
+<p>具体如下，<code>-f</code>指定路径及文件名：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa -f ~/.ssh/id_rsa_gitlab -C <span style="color:#cd5555">&#34;845217811@qq.com&#34;</span> 
+</code></pre></div><p>注意：因为SSH默认只读取id_rsa,为了让SSH识别新的私钥,需要使用命令将其添加到SSH agent,命令如下：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-add ~/.ssh/id_rsa
+ssh-add ~/.ssh/id_rsa_gitlab
+</code></pre></div><p>若执行ssh-add时提示“Could not open a connection to your authentication agent”,则执行下面的命令：</p>
+<pre><code>ssh-agent bash
+</code></pre><p>然后再运行ssh-add命令(可以通过ssh-add -l查看私钥列表)</p>
+<p>接着修改配置文件：</p>
+<p>在~./ssh目录下新建一个config文件,命令如下：</p>
+<pre><code>touch config
+</code></pre><blockquote>
+<p>配置文件如下：
+#github
+Host github.com
+IdentityFile ~/.ssh/id_rsa
+User <a href="mailto:a@b.com">a@b.com</a></p>
+<p>#gitlab
+Host gitlab.com
+IdentityFile ~/.ssh/id_rsa_gitlab
+User <a href="mailto:a@b.com">a@b.com</a></p>
+</blockquote>
+<h1 id="1-简单的代码提交流程">1 简单的代码提交流程</h1>
 <ol>
 <li><code>git status</code> 查看工作区代码相对于暂存区的差别</li>
 <li><code>git add .</code> 将当前目录下修改的所有代码从工作区添加到暂存区 . 代表当前目录</li>
@@ -1015,8 +1086,8 @@ git remote set-url origin [新路径]
             <nav class="post-pagination">
 
                 
-                <a class="newer-posts">
-			下回<br>已经到头啦。
+                <a class="newer-posts" href="https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/">
+			下回<br>Express核心
                 </a>
                 
                 

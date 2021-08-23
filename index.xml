@@ -5,9 +5,170 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Aug 2021 22:02:28 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 22 Aug 2021 22:51:51 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>umi&#43;AntdPro实战总结</title>
+        <link>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Sun, 22 Aug 2021 22:51:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ -&lt;p&gt;项目总结&lt;/p&gt;
+- https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>Express核心</title>
+        <link>https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/</link>
+        <pubDate>Sun, 22 Aug 2021 21:09:57 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/ -&lt;h1 id=&#34;1-http协议&#34;&gt;1 HTTP协议&lt;/h1&gt;
+&lt;h2 id=&#34;11-curl基本用法&#34;&gt;1.1 curl基本用法&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;curl -s -v 网址&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-s&lt;/code&gt; 是 &lt;code&gt;silent&lt;/code&gt;，用于隐藏进度条&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-v&lt;/code&gt; 是 &lt;code&gt;verbose&lt;/code&gt;，用于打印全部header&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;* &lt;/code&gt;开头的是注释&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;gt;&lt;/code&gt; 开头的是HTTP请求&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;&lt;/code&gt; 开头的是HTTP响应&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;举例&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;curl -s -v http://www.baidu.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;如果得到301和 Location，表示永久重定向，于是重新请求（可以使用 &lt;code&gt;-L&lt;/code&gt;自动重定向）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;curl -s -o nul -v https://www.baidu.com
+
+* TCP_NODELAY &lt;span style=&#34;color:#658b00&#34;&gt;set&lt;/span&gt;
+* Connected to www.baidu.com (180.101.49.12) port &lt;span style=&#34;color:#b452cd&#34;&gt;80&lt;/span&gt; (&lt;span style=&#34;color:#228b22&#34;&gt;#0)&lt;/span&gt;
+&amp;gt; GET / HTTP/1.1
+&amp;gt; Host: www.baidu.com
+&amp;gt; User-Agent: curl/7.64.1
+&amp;gt; Accept: */*
+&amp;gt;
+&amp;lt; HTTP/1.1 &lt;span style=&#34;color:#b452cd&#34;&gt;200&lt;/span&gt; OK
+&amp;lt; Accept-Ranges: bytes
+&amp;lt; Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform
+&amp;lt; Connection: keep-alive
+&amp;lt; Content-Length: &lt;span style=&#34;color:#b452cd&#34;&gt;2381&lt;/span&gt;
+&amp;lt; Content-Type: text/html
+&amp;lt; Date: Sun, &lt;span style=&#34;color:#b452cd&#34;&gt;22&lt;/span&gt; Aug &lt;span style=&#34;color:#b452cd&#34;&gt;2021&lt;/span&gt; 13:22:47 GMT
+&amp;lt; Etag: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;588604c8-94d&amp;#34;&lt;/span&gt;
+&amp;lt; Last-Modified: Mon, &lt;span style=&#34;color:#b452cd&#34;&gt;23&lt;/span&gt; Jan &lt;span style=&#34;color:#b452cd&#34;&gt;2017&lt;/span&gt; 13:27:36 GMT
+&amp;lt; Pragma: no-cache
+&amp;lt; Server: bfe/1.0.8.18
+&amp;lt; Set-Cookie: &lt;span style=&#34;color:#00688b&#34;&gt;BDORZ&lt;/span&gt;=27315; max-age=86400; &lt;span style=&#34;color:#00688b&#34;&gt;domain&lt;/span&gt;=.baidu.com; &lt;span style=&#34;color:#00688b&#34;&gt;path&lt;/span&gt;=/
+&amp;lt;
+{ [&lt;span style=&#34;color:#b452cd&#34;&gt;2381&lt;/span&gt; bytes data]
+* Connection &lt;span style=&#34;color:#228b22&#34;&gt;#0 to host www.baidu.com left intact&lt;/span&gt;
+* Closing connection &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-o nul&lt;/code&gt; 是为了隐藏HTML文本,内容太多不方便演示&lt;/li&gt;
+&lt;li&gt;Linux或Mac要将nul改成/dev/null&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;12-请求和响应&#34;&gt;1.2 请求和响应&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;请求&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;响应&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;请求行&lt;/td&gt;
+&lt;td&gt;POST /xxx HTTP/1.1&lt;/td&gt;
+&lt;td&gt;状态行&lt;/td&gt;
+&lt;td&gt;HTTP/1.1 301 Moved Permanently&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;请求头&lt;/td&gt;
+&lt;td&gt;HOST: baidu.com&lt;!-- raw HTML omitted --&gt;User-Agent: curl/7.61.1&lt;!-- raw HTML omitted --&gt;Accept: &amp;ldquo;/&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;响应头&lt;/td&gt;
+&lt;td&gt;Content-Type: text/html&lt;!-- raw HTML omitted --&gt;Content-Length: 193&lt;!-- raw HTML omitted --&gt;Location: &lt;a href=&#34;https://xxx.com&#34;&gt;https://xxx.com&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;空行&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;回车&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;请求体/消息体&lt;/td&gt;
+&lt;td&gt;{&amp;ldquo;username&amp;rdquo; : &amp;ldquo;gsq&amp;rdquo;}&lt;/td&gt;
+&lt;td&gt;响应体/消息体&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;&lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;&lt;code&gt;&amp;lt;/html&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;如果请求体的内容为JSON，那么请求头就要有&lt;code&gt;Content-Type: application/json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果响应体内容为JSON，那么响应头也要有&lt;code&gt;Content-Type: application/json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;HTTP的复杂性就在于消息头有很多很多功能各不相同的字段&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;13-web框架&#34;&gt;1.3 Web框架&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;功能&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;更方便地处理HTTP请求与响应&lt;/li&gt;
+&lt;li&gt;更方便地链接数据库、Redis&lt;/li&gt;
+&lt;li&gt;更方便的路由&lt;/li&gt;
+&lt;li&gt;其他：HTML模块&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;理念&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Web框架的主流思路都是MVC&lt;/li&gt;
+&lt;li&gt;model层处理数据相关逻辑&lt;/li&gt;
+&lt;li&gt;View层处理视图相关逻辑，前后端分离后，View交给前端&lt;/li&gt;
+&lt;li&gt;Controller负责其他逻辑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;架构示意&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gsemir0418.github.io/Users/gsq/Documents/gitdoc/blogs-backup/content/posts/_img/express1.png&#34; alt=&#34;image-20210822214145696&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;14-处理http请求与响应&#34;&gt;1.4 处理HTTP请求与响应&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;最简单的封装
+&lt;ul&gt;
+&lt;li&gt;将请求封装为&lt;code&gt;[[&#39;get&#39;,&#39;/xxx&#39;],{请求头},&#39;请求体&#39;]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将响应封装为&lt;code&gt;[status,{响应头},&#39;响应体&#39;]&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Node.js封装
+&lt;ul&gt;
+&lt;li&gt;Node.js将其封装到http模块中&lt;/li&gt;
+&lt;li&gt;使用request读取请求&lt;/li&gt;
+&lt;li&gt;使用response设置响应&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Express封装
+&lt;ul&gt;
+&lt;li&gt;只需理解Express的&lt;strong&gt;编程模型&lt;/strong&gt;即可&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+- https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/ - </description>
+        </item>
     
     
     
@@ -47,7 +208,42 @@ id_rsa  id_rsa.pub  known_hosts
 git remote -v
 // 修改为ssh路径
 git remote set-url origin [新路径]
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;1-简单的代码提交流程&#34;&gt;1 简单的代码提交流程&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;04-创建多个ssh-key&#34;&gt;0.4 创建多个ssh key&lt;/h2&gt;
+&lt;p&gt;在使用git的时候，遇到需要创建多个ssh key的需求，一个用来github项目，一个用来gitlab项目；&lt;/p&gt;
+&lt;p&gt;之前如果已将创建过一个ssh key，那么在创建第二个的时候，要修改默认名称，然后增加配置文件；&lt;/p&gt;
+&lt;p&gt;之前创建ssh key生成了如下两个文件，一个私钥，一个公钥&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;id_rsa
+id_rsa.pub&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们要生成新的一个ssh key，由于路径跟之前的一直，所以要改个名字&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;id_rsa_gitlab
+id_rsa_gitlab.pub&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;具体如下，&lt;code&gt;-f&lt;/code&gt;指定路径及文件名：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ssh-keygen -t rsa -f ~/.ssh/id_rsa_gitlab -C &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;845217811@qq.com&amp;#34;&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;注意：因为SSH默认只读取id_rsa,为了让SSH识别新的私钥,需要使用命令将其添加到SSH agent,命令如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ssh-add ~/.ssh/id_rsa
+ssh-add ~/.ssh/id_rsa_gitlab
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;若执行ssh-add时提示“Could not open a connection to your authentication agent”,则执行下面的命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ssh-agent bash
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后再运行ssh-add命令(可以通过ssh-add -l查看私钥列表)&lt;/p&gt;
+&lt;p&gt;接着修改配置文件：&lt;/p&gt;
+&lt;p&gt;在~./ssh目录下新建一个config文件,命令如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;touch config
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;配置文件如下：
+#github
+Host github.com
+IdentityFile ~/.ssh/id_rsa
+User &lt;a href=&#34;mailto:a@b.com&#34;&gt;a@b.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;#gitlab
+Host gitlab.com
+IdentityFile ~/.ssh/id_rsa_gitlab
+User &lt;a href=&#34;mailto:a@b.com&#34;&gt;a@b.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;1-简单的代码提交流程&#34;&gt;1 简单的代码提交流程&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;git status&lt;/code&gt; 查看工作区代码相对于暂存区的差别&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;git add .&lt;/code&gt; 将当前目录下修改的所有代码从工作区添加到暂存区 . 代表当前目录&lt;/li&gt;
@@ -1862,614 +2058,6 @@ console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.values
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 - https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>String常用方法整理</title>
-        <link>https://gsemir0418.github.io/posts/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
-        <pubDate>Mon, 05 Jul 2021 13:29:15 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/ -&lt;h1 id=&#34;stringprototypematch&#34;&gt;String.prototype.match()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;根据传入的正则表达式的检索字符串并返回结果&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;str.match(regexp)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypesearch&#34;&gt;String.prototype.search()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;根据传入的正则表达式寻找符合的字符位置&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;str.search(regexp)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;如果匹配，则返回首次匹配项的索引；反之返回&lt;code&gt;-1&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; str = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hello World&amp;#39;&lt;/span&gt;
-str.search(&lt;span style=&#34;color:#1c7e71&#34;&gt;/[A-Z]/g&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 6
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.search(&lt;span style=&#34;color:#1c7e71&#34;&gt;/[.]/g&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// -1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypechatat&#34;&gt;String.prototype.chatAt()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;从一个字符串中返回指定index的字符&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;str.chartAt(index)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;若没有提供index，则默认使用0&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; str = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ABCD&amp;#39;&lt;/span&gt;
-str.charAt(&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#34;B&amp;#34;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypeindexof&#34;&gt;String.prototype.indexOf()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;查询字符串对象中第一次出现指定值的索引&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;str.indexOf(searchValue, fromIndex)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;fromIndex&lt;/code&gt;可选，表示开始查找的位置，默认为0，若指定为负数，则等价于传入0；若大于&lt;code&gt;str.length&lt;/code&gt;，则必反回&lt;code&gt;-1&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;indexOf&lt;/code&gt;区分大小写&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;若传入的字符串为空，返回值则取决于&lt;code&gt;fromIndex&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Hello World&amp;#34;&lt;/span&gt;.indexOf(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,-&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 0
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Hello World&amp;#34;&lt;/span&gt;.indexOf(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;9&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 9
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Hello World&amp;#34;&lt;/span&gt;.indexOf(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;100&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 11 (str.length)
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 检测是否存在某字符串
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Hello World&amp;#34;&lt;/span&gt;.indexOf(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;World&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 6
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 使用indexOf统计一个字符串中某个字母出现的次数
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; str = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Hello,my name is gsemir.&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; count = &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; pos = str.indexOf(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;e&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;while&lt;/span&gt;(pos !== -&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;){
-	count ++
-	pos = str.indexOf(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;e&amp;#39;&lt;/span&gt;, pos+&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
-}
-console.log(count)&lt;span style=&#34;color:#228b22&#34;&gt;// 3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypelastindexof&#34;&gt;String.prototype.lastIndexOf()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;返回指定值最后一次出现的索引，没找到返回&lt;code&gt;-1&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;str.lastIndexOf(searchStr, fromIndex)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;fromIndex&lt;/code&gt;可选，默认为无穷大，表示从&lt;code&gt;fromIndex&lt;/code&gt;的位置向左回向查找&lt;/p&gt;
-&lt;p&gt;若&lt;code&gt;fromIndex&amp;lt;0&lt;/code&gt;，则等同于&lt;code&gt;fromIndex==0&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;此方法区分大小写&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;cancel&amp;#39;&lt;/span&gt;.lastIndexOf(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 3
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;cancel&amp;#39;&lt;/span&gt;.lastIndexOf(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 0
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;cancel&amp;#39;&lt;/span&gt;.lastIndexOf(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 0
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;cancel&amp;#39;&lt;/span&gt;.lastIndexOf(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;, -&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 0
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;cancel&amp;#39;&lt;/span&gt;.lastIndexOf(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 6 可以用这个获取字符串长度哦
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypeconcat&#34;&gt;String.prototype.concat()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;将字符串连接合并&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;str.concat(str2,str3,...)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;返回一个新字符串&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; str = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;HELLO&amp;#39;&lt;/span&gt;
-str.concat(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;World&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// HELLO WORLD
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototyperepeat&#34;&gt;String.prototype.repeat()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;指定次数复制字符串&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;str.repeat(count)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;.repeat(&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#39;abcabc&amp;#39;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypeendswith&#34;&gt;String.prototype.endsWith()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;判断字符串是否是以指定字符串结尾的&lt;/strong&gt;，&lt;strong&gt;返回&lt;/strong&gt;&lt;code&gt;boolean&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;str.endsWith(searchStr, length)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;length&lt;/code&gt;可选，作为str的长度，默认值为&lt;code&gt;str.length&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;区分大小写&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; str = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hello world&amp;#39;&lt;/span&gt;
-str.endsWith(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// false
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.endsWith(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.endsWith(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;WORLD&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// false
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypestartswith&#34;&gt;String.prototype.startsWith()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;判断字符串是否是以指定字符串开头的&lt;/strong&gt;，&lt;strong&gt;返回&lt;/strong&gt;&lt;code&gt;boolean&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;str.startsWith(searchStr, position)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;position&lt;/code&gt;可选，开始搜索的位置，默认值为&lt;code&gt;0&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;区分大小写&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; str = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hello world&amp;#39;&lt;/span&gt;
-str.startsWith(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.startsWith(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// false
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.startsWith(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;HELLO&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// false
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypeincludes&#34;&gt;String.prototype.includes()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;判断指定字符串是否包含在另一个字符串中&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;str.includes(searchStr, position)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;position&lt;/code&gt;可选，搜寻的起始索引，默认0&lt;/p&gt;
-&lt;p&gt;区分大小写&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; str = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hello, my name is gsemir&amp;#39;&lt;/span&gt;
-str.includes(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// false
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.includes(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;my&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.includes(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;MY&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// false
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypevalueof&#34;&gt;String.prototype.valueOf()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;返回一个String对象的原始值，等同于&lt;code&gt;String.prototype.toString()&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; x = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;String&lt;/span&gt;(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Hello World&amp;#39;&lt;/span&gt;)
-x.valueOf()&lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#34;Hello World&amp;#34;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypetostring&#34;&gt;String.prototype.toString()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;万物皆可变成String，如果对象是字符串对象，则返回结果与&lt;code&gt;.valueOf()&lt;/code&gt;一致&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypesubstring&#34;&gt;String.prototype.subString()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;截取并返回字符串中的一部分&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;str.subString(startIndex, endIndex)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;endIndex&lt;/code&gt;可选，默认为&lt;code&gt;str.length+1&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;结果中不包含&lt;code&gt;endIndex&lt;/code&gt;处的字符&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;若&lt;code&gt;startIndex&lt;/code&gt;大于&lt;code&gt;endIndex&lt;/code&gt;，则相当于两数调换&lt;/li&gt;
-&lt;li&gt;若两数相等，返回空字符串&lt;/li&gt;
-&lt;li&gt;若任一参数小于0，则被当作0&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; str = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;abcdefg&amp;#39;&lt;/span&gt;
-str.subString(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#39;abc&amp;#39;
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.subString(&lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#39;abc&amp;#39;
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.subString(&lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;, -&lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#39;abc&amp;#39;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypeslice&#34;&gt;String.prototype.slice()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;提取字符串某一部分&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;str.slice(beginIndex,endIndex)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;beginIndex&lt;/code&gt;若为&lt;code&gt;-3&lt;/code&gt;，则看作是&lt;code&gt;strLength - 3&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;endIndex&lt;/code&gt;可选，若为空，则是为末尾；若为&lt;code&gt;-3&lt;/code&gt;，则看作是&lt;code&gt;strLength - 3&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;返回一个从原字符串提取出来的新字符串&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; str = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ABCDEFGHIJKLMNOP&amp;#39;&lt;/span&gt;
-str.slice(&lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;, -&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#34;EFGHIJKLMN&amp;#34;
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.slice(&lt;span style=&#34;color:#b452cd&#34;&gt;33&lt;/span&gt;) &lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#39;&amp;#39;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypereplace&#34;&gt;String.prototype.replace()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;内容过多&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypesplit&#34;&gt;String.prototype.split()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;使用指定的分割字符将一个String对象分割成子字符串数组&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; str = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ABCDEFGHIJKLMNOP&amp;#39;&lt;/span&gt;
-str.split(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#34;A&amp;#34;, &amp;#34;B&amp;#34;, &amp;#34;C&amp;#34;, &amp;#34;D&amp;#34;, &amp;#34;E&amp;#34;, &amp;#34;F&amp;#34;, &amp;#34;G&amp;#34;, &amp;#34;H&amp;#34;, &amp;#34;I&amp;#34;, &amp;#34;J&amp;#34;, &amp;#34;K&amp;#34;, &amp;#34;L&amp;#34;, &amp;#34;M&amp;#34;, &amp;#34;N&amp;#34;, &amp;#34;O&amp;#34;, &amp;#34;P&amp;#34;]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.split(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#34;A&amp;#34;,&amp;#34;B&amp;#34;,&amp;#34;C&amp;#34;]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.split(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#34;ABCDEFGHIJKLMNOP&amp;#34;]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;str.split(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;F&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#34;ABCDE&amp;#34;, &amp;#34;GHIJKLMNOP&amp;#34;]
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;stringprototypetrim&#34;&gt;String.prototype.trim()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;删除两端空白字符&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;str.trim()
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;返回一个两端去掉空白的新字符串，不影响原字符串本身&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;例子：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; originStr = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39; foo &amp;#39;&lt;/span&gt;
-originStr.trim()&lt;span style=&#34;color:#228b22&#34;&gt;// &amp;#39;foo&amp;#39;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-- https://gsemir0418.github.io/posts/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>数据库基础</title>
-        <link>https://gsemir0418.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</link>
-        <pubDate>Mon, 05 Jul 2021 08:57:20 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/ -&lt;h1 id=&#34;1-第一二三范式&#34;&gt;1 第一二三范式&lt;/h1&gt;
-&lt;h2 id=&#34;1-第一范式-1nf&#34;&gt;1 第一范式 1NF&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;定义&lt;/strong&gt;：字段不可再分&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;举例&lt;/strong&gt;：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段&lt;/p&gt;
-&lt;p&gt;即user表里应有&lt;code&gt;left_eye&lt;/code&gt;和&lt;code&gt;right_eye&lt;/code&gt;，而不能存为一个字段&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;缺点&lt;/strong&gt;：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./sjk1.png&#34; alt=&#34;image-20210705105007465&#34;&gt;&lt;/p&gt;
-&lt;p&gt;​	这是一个学生选课表，没有违反第一范式，但是存在如下问题：&lt;/p&gt;
-&lt;p&gt;​	数据冗余、创建系时插入异常、删除学生会导致系消失、学生转系时改动多处&lt;/p&gt;
-&lt;p&gt;​	结论：第一范式不够强&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;2-第二范式-2nf&#34;&gt;2 第二范式 2NF&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;定义&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;在1NF的基础上，要有键（键可由多个字段组合）&lt;/li&gt;
-&lt;li&gt;所有字段必须分别&lt;strong&gt;完全依赖&lt;/strong&gt;于键&lt;/li&gt;
-&lt;li&gt;如果键是多个字段组合，则&lt;strong&gt;不允许部分依赖&lt;/strong&gt;于该键&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;依赖关系&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;给出键，就能唯一确定字段的值&lt;/li&gt;
-&lt;li&gt;如给出学号，就能唯一确定姓名，反之则不行&lt;/li&gt;
-&lt;li&gt;则称姓名依赖于学号&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;不满足第二范式的地方&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;上表的键为（学号、课名）&lt;/li&gt;
-&lt;li&gt;但存在部份依赖：姓名依赖与学号&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;改进&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;选课表（&lt;strong&gt;学号&lt;/strong&gt;，&lt;strong&gt;课名&lt;/strong&gt;，分数）&lt;/li&gt;
-&lt;li&gt;学生表（&lt;strong&gt;学号&lt;/strong&gt;，姓名，系名，系主任）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;./sjk2.png&#34; alt=&#34;image-20210705105710705&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;3-第三范式-3nf&#34;&gt;3 第三范式 3NF&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;定义&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;一个表里不能有两层依赖&lt;/li&gt;
-&lt;li&gt;给出学号，就能确定系名——系名依赖于学号&lt;/li&gt;
-&lt;li&gt;给出系名，就能确定系主任——系主任依赖与系名&lt;/li&gt;
-&lt;li&gt;所以，系主任&lt;strong&gt;间接依赖&lt;/strong&gt;于学号&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;解决办法&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;把系名和系主任单独建表&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;./sjk3.png&#34; alt=&#34;image-20210705110014247&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;4-bc范式&#34;&gt;4 BC范式&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;键中的属性也不存在间接依赖&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;2-设计表&#34;&gt;2 设计表&lt;/h1&gt;
-&lt;h2 id=&#34;1-数据库设计经验&#34;&gt;1 数据库设计经验&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;高内聚&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;把相关字段放到一起，不相关的单独建表&lt;/li&gt;
-&lt;li&gt;如果两个字段能够单独建表，那就单独建表&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;低耦合&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果两个表之间有弱关系
-&lt;ul&gt;
-&lt;li&gt;一对一可放在一个表，也可两个表加外键&lt;/li&gt;
-&lt;li&gt;一对多一般用外键&lt;/li&gt;
-&lt;li&gt;多对多一般建中间表&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;2-一对一&#34;&gt;2 一对一&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;假设一个学生只能加入一个班级&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;可以把班级放在学生表中&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;学生id：1001，姓名：小明，班级id：4002&lt;/li&gt;
-&lt;li&gt;班级id：4002，名称：入门1班&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;也可以单独建立关联表&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;学生id：1001，姓名：小明&lt;/li&gt;
-&lt;li&gt;学生班级关联表：id：2003，学生id：1001，班级id：4002&lt;/li&gt;
-&lt;li&gt;班级id：4002，名称：入门1班&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;3-一对多&#34;&gt;3 一对多&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;假设一个作者能写多本书&lt;/li&gt;
-&lt;li&gt;可以把书放到作者表里
-&lt;ul&gt;
-&lt;li&gt;某些DBMS支持数组，可以存两个id到一个字段&lt;/li&gt;
-&lt;li&gt;作者id：1001，姓名：大牛，books：[2001，2002]&lt;/li&gt;
-&lt;li&gt;如果不支持数组，就不能这样做了&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;单独建立关系表（推荐）
-&lt;ul&gt;
-&lt;li&gt;作者id：1001，姓名：大牛&lt;/li&gt;
-&lt;li&gt;出版图书表：：id：2001，作者id：1001，书id：4002，出版社id：xxx&lt;/li&gt;
-&lt;li&gt;出版图书表：：id：2002，作者id：1001，书id：4003，出版社id：xxx&lt;/li&gt;
-&lt;li&gt;书id：4002，名称：js入门&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;4-多对多&#34;&gt;4 多对多&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;假设一个学生可以加入多个班级，每个班级也能有多个学生&lt;/li&gt;
-&lt;li&gt;把班级放到学生表中：DBMS支持数组的话可以，否则不可以&lt;/li&gt;
-&lt;li&gt;单独建立关系表（推荐）：
-&lt;ul&gt;
-&lt;li&gt;学生id：1001，姓名：小明&lt;/li&gt;
-&lt;li&gt;学生班级关系表：id：2001，学生id：1001，班级id：4002，有效期：xxx&lt;/li&gt;
-&lt;li&gt;学生班级关系表：id：2002，学生id：1001，班级id：4003，有效期：xxx&lt;/li&gt;
-&lt;li&gt;班级id：4002，名称：入门班&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;5-什么时候建关联表&#34;&gt;5 什么时候建关联表&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;当关联自身存在属性时
-&lt;ul&gt;
-&lt;li&gt;比如关联的有效期，有效期为一年&lt;/li&gt;
-&lt;li&gt;比如关联的级别，店铺会员分为vip1-6&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;3-join把表连接起来&#34;&gt;3 JOIN把表连接起来&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;连接表
-&lt;ul&gt;
-&lt;li&gt;inner join&lt;/li&gt;
-&lt;li&gt;left join：会保留右边的null，以保证左边都显示&lt;/li&gt;
-&lt;li&gt;right join：会保留左边的null，以保证右边都显示&lt;/li&gt;
-&lt;li&gt;full outer join：保留两边的null，以保证两边都显示&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;看图巧记&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/29234064&#34;&gt;图解 SQL 里的各种 JOIN - 知乎 (zhihu.com)&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;./sjk4.png&#34; alt=&#34;image-20210706153805324&#34;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;语法&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;SELECT&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;A.PK&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;AS&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;A_PK,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;B.PK&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;AS&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;B_PK,&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;	&lt;/span&gt;A.VALUE&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;AS&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;A_VALUE,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;B.VALUE&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;AS&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;B_VALUE&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;FROM&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Table_AA&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;INNER&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;JOIN&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;Table_BB&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;ON&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;A.PK&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;B.PK&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;尝试&lt;/strong&gt;（以inner join为例）：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-mysql&#34; data-lang=&#34;mysql&#34;&gt;//&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;用&lt;/span&gt;docker启动mysql&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;，或者重新&lt;/span&gt;docker&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;run一遍&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;docker&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;container&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;start&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;mysql1&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;//&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;进入&lt;/span&gt;mysql&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;docker&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;exec&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;-it&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;mysql1&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;bash&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;mysql&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;-u&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;root&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;-p&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;123456&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;//&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;创建数据库&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;create&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;database&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;db1&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;character&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;utf8mb4&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;collate&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;utf8mb4_unicode_ci;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;show&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;databases&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;use&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;db1;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;//&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;创建表&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;create&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;table&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#008b45&#34;&gt;users&lt;/span&gt;(id&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;serial,name&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;text&lt;/span&gt;);&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;create&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;table&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#008b45&#34;&gt;staffs&lt;/span&gt;(id&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;serial,name&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;text&lt;/span&gt;);&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;create&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;table&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#008b45&#34;&gt;orders&lt;/span&gt;(id&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;serial,user_id&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;bigint&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;unsigned&lt;/span&gt;,staff_id&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;bigint&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;unsigned&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;amount&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;unsigned&lt;/span&gt;);&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;//&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;创建记录&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;insert&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;into&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#008b45&#34;&gt;users&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(name)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;values&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;XiaoMing&amp;#39;&lt;/span&gt;);&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;+----+----------+&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;id&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;name&lt;span style=&#34;color:#bbb&#34;&gt;     &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;+----+----------+&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;XiaoMing&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;+----+----------+&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;insert&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;into&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#008b45&#34;&gt;staffs&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(name)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;values&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;XiaoHong&amp;#39;&lt;/span&gt;);&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;+----+----------+&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;id&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;name&lt;span style=&#34;color:#bbb&#34;&gt;     &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;+----+----------+&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;XiaoHong&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;+----+----------+&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;insert&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;into&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#008b45&#34;&gt;users&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(user_id,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;staff_id,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;amount)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;values&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#b452cd&#34;&gt;100&lt;/span&gt;);&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;+----+---------+----------+--------+&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;id&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;user_id&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;staff_id&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;amount&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;+----+---------+----------+--------+&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;+----+---------+----------+--------+&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;//&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;使用&lt;/span&gt;inner&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;join&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;select&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;users.name&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;as&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;unname,orders.amount&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;as&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;amount&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;users&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;inner&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;join&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;orders&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;on&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;users.id=orders.&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;user&lt;/span&gt;.id;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;//&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;得到&lt;/span&gt;XiaoMing&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;+----------+--------+&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;uname&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;amount&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;+----------+--------+&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;XiaoMing&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;+----------+--------+&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;4-缓存字段&#34;&gt;4 缓存字段&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;假设一个博客blog包含多个评论comments&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;如何获取博客的评论数&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;select&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;count&lt;/span&gt;(id)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;comments&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;where&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;blog_id=&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;更好的办法是在blog表中添加&lt;code&gt;comment_count&lt;/code&gt;字段，每次添加comment则+1，每次删除comment则-1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;这样就可以快速获取博客的评论数，约定缓存字段均使用&lt;code&gt;_count&lt;/code&gt;结尾&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;5-事务&#34;&gt;5 事务&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;有些操作必须一次完成&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;用户评论之后，&lt;strong&gt;首先&lt;/strong&gt;要在comments表中新增记录，&lt;strong&gt;其次&lt;/strong&gt;在blogs表将对应的comment_count+1&lt;/li&gt;
-&lt;li&gt;如果第一步执行了，第二步没有执行，那么数据就乱了&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;使用事务&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.runoob.com/mysql/mysql-transaction.html&#34;&gt;MySQL 事务 | 菜鸟教程 (runoob.com)&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;6-mysql储存引擎&#34;&gt;6 MySQL储存引擎&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;命令&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;show&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;engines;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;常见&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;innoDB-默认，是事务型数据库的首选，支持事务，遵循ACID、支持行锁和外键；&lt;/li&gt;
-&lt;li&gt;MyISAM-拥有较高的插入查询速度，但不支持事务&lt;/li&gt;
-&lt;li&gt;Memory-内存中，快速访问数据&lt;/li&gt;
-&lt;li&gt;Archive-只支持insert和select&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;7-索引&#34;&gt;7 索引&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;语法&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;create&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;unique&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;index&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;index1&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;on&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;users(name(&lt;span style=&#34;color:#b452cd&#34;&gt;100&lt;/span&gt;));&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;show&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;index&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;users;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.runoob.com/mysql/mysql-index.html&#34;&gt;MySQL 索引 | 菜鸟教程 (runoob.com)&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;用途&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;提高搜索效率&lt;/li&gt;
-&lt;li&gt;where xxx &amp;gt; 100 那么我们可以创建xxx的索引&lt;/li&gt;
-&lt;li&gt;where xxx &amp;gt; 100 and yyy &amp;gt; 200，可以创建xxx，yyy的索引&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-- https://gsemir0418.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/ - </description>
         </item>
     
     

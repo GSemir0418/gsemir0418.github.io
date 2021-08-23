@@ -6,7 +6,16 @@
     <description>Recent content in 前端 on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 Aug 2021 22:15:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 22 Aug 2021 22:51:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>umi&#43;AntdPro实战总结</title>
+      <link>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Sun, 22 Aug 2021 22:51:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
+      <description>项目总结</description>
+    </item>
+    
     <item>
       <title>useState原理</title>
       <link>https://gsemir0418.github.io/posts/usestate%E5%8E%9F%E7%90%86/</link>
@@ -144,20 +153,6 @@ React Hooks让我们更好的拥抱函数式编程，让函数式组件也能使
 函数式组件⽐class组件简洁，开发的体验更好，效率更⾼同时应⽤的性能也更好
    2 useState 2.1 定义 useState：组件状态管理钩⼦，使函数组件能够使⽤state
 2.2 基本使用 const [state,setState]=useState(initState)  state是要设置的状态 setState是更新state的⽅法，只是⼀个⽅法名，可以随意更改 initState是初始的state，可以是随意的数据类型，也可以是回调函数，但是函数必须是有返回值  2.3 实际应用 import React, { useState } from &amp;#39;react&amp;#39; export default function UseS() { const [count, setState] = useState(0) return ( &amp;lt;div&amp;gt; &amp;lt;div&amp;gt;你点击了{count}次&amp;lt;/div&amp;gt; &amp;lt;button onClick={() =&amp;gt; setState(count + 1)}&amp;gt;点 击&amp;lt;/button&amp;gt; &amp;lt;/div&amp;gt; ) }  3 useEffect 3.</description>
-    </item>
-    
-    <item>
-      <title>antdpro&#43;umi实战</title>
-      <link>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</link>
-      <pubDate>Fri, 25 Jun 2021 22:51:51 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
-      <description>本文通过一个todo list 的小项目演示，实现三个功能：
- 列表功能，列出所有todo项； 添加新项，添加新的todo项； 更新项，更新现有的todo项状态，修改成待办、已完成或者取消  数据结构：
-{ id : 1, // 唯一标识 title : &amp;quot;完成antdpro实战&amp;quot;, // 待办事项标题 status : 0 // 状态：0-待办，1-已完成，2-已取消 } 创建新项目 新建项目目录
-mkdir todo-list cd todo-list 执行
-yarn create umi 选择ant-design-pro、JavaScript、simple，完成项目的创建
-目录结构 ├── config # umi 配置，包含路由，构建等配置 ├── mock # 本地模拟数据 ├── public # 一些公共静态资源 ├── src │ ├── assets # 本地静态资源 │ ├── components # 业务通用组件 │ ├── e2e # 集成测试用例 │ ├── layouts # 通用布局 │ ├── models # 全局 dva model │ ├── pages # 业务页面入口和常用模板 │ ├── services # 后台接口服务 │ ├── utils # 工具库 │ ├── locales # 国际化资源 │ ├── global.</description>
     </item>
     
     <item>

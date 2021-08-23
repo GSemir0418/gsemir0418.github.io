@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Express on GSemir Blog</title>
+    <link>https://gsemir0418.github.io/categories/express/</link>
+    <description>Recent content in Express on GSemir Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 22 Aug 2021 21:09:57 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/express/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Express核心</title>
+      <link>https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/</link>
+      <pubDate>Sun, 22 Aug 2021 21:09:57 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/</guid>
+      <description>1 HTTP协议 1.1 curl基本用法   curl -s -v 网址
+ -s 是 silent，用于隐藏进度条 -v 是 verbose，用于打印全部header * 开头的是注释 &amp;gt; 开头的是HTTP请求 &amp;lt; 开头的是HTTP响应    举例
+curl -s -v http://www.baidu.com  如果得到301和 Location，表示永久重定向，于是重新请求（可以使用 -L自动重定向）  curl -s -o nul -v https://www.baidu.com * TCP_NODELAY set * Connected to www.baidu.com (180.101.49.12) port 80 (#0) &amp;gt; GET / HTTP/1.1 &amp;gt; Host: www.baidu.com &amp;gt; User-Agent: curl/7.64.1 &amp;gt; Accept: */* &amp;gt; &amp;lt; HTTP/1.1 200 OK &amp;lt; Accept-Ranges: bytes &amp;lt; Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform &amp;lt; Connection: keep-alive &amp;lt; Content-Length: 2381 &amp;lt; Content-Type: text/html &amp;lt; Date: Sun, 22 Aug 2021 13:22:47 GMT &amp;lt; Etag: &amp;#34;588604c8-94d&amp;#34; &amp;lt; Last-Modified: Mon, 23 Jan 2017 13:27:36 GMT &amp;lt; Pragma: no-cache &amp;lt; Server: bfe/1.</description>
+    </item>
+    
+  </channel>
+</rss>

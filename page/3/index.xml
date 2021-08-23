@@ -5,106 +5,284 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Aug 2021 22:02:28 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 22 Aug 2021 22:51:51 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     
         <item>
-        <title>antdpro&#43;umi实战</title>
-        <link>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</link>
-        <pubDate>Fri, 25 Jun 2021 22:51:51 +0800</pubDate>
+        <title>React入门</title>
+        <link>https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/</link>
+        <pubDate>Fri, 25 Jun 2021 23:11:51 +0800</pubDate>
         
-        <guid>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ -&lt;p&gt;本文通过一个todo list 的小项目演示，实现三个功能：&lt;/p&gt;
+        <guid>https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/ -&lt;h1 id=&#34;1react是什么&#34;&gt;1.React是什么&lt;/h1&gt;
+&lt;p&gt;用于构建&lt;strong&gt;用户界面&lt;/strong&gt;的JS库（操作DOM呈现页面）&lt;/p&gt;
+&lt;p&gt;是一个将数据渲染为HTML视图的开源的JavaScript库&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;官网：https://react.docschina.org/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;2谁开发的&#34;&gt;2.谁开发的&lt;/h1&gt;
+&lt;p&gt;Facebook&lt;/p&gt;
+&lt;h1 id=&#34;3为什么要学&#34;&gt;3.为什么要学&lt;/h1&gt;
 &lt;ol&gt;
-&lt;li&gt;列表功能，列出所有todo项；&lt;/li&gt;
-&lt;li&gt;添加新项，添加新的todo项；&lt;/li&gt;
-&lt;li&gt;更新项，更新现有的todo项状态，修改成待办、已完成或者取消&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;原生JS操作DOM&lt;strong&gt;繁琐、效率低&lt;/strong&gt;（&lt;strong&gt;DOM-API操作UI&lt;/strong&gt;）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用js直接操作DOM，浏览器会进行大量的&lt;strong&gt;重绘重排&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;原生js没有&lt;strong&gt;组件化&lt;/strong&gt;的编码方案，代码复用率低&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;模块化&lt;/strong&gt;是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;数据结构：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-	id : 1, // 唯一标识
-	title : &amp;quot;完成antdpro实战&amp;quot;, // 待办事项标题
-	status : 0 // 状态：0-待办，1-已完成，2-已取消
+&lt;h1 id=&#34;4react的特点&#34;&gt;4.React的特点&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;用&lt;strong&gt;组件化模式&lt;/strong&gt;、&lt;strong&gt;声明式编码&lt;/strong&gt;，提高开发效率及组件复用率&lt;/p&gt;
+&lt;p&gt;之前使用的是&lt;strong&gt;命令式编码&lt;/strong&gt;，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;React Native&lt;/strong&gt;中可以使用React语法进行&lt;strong&gt;移动端&lt;/strong&gt;开发。&lt;/p&gt;
+&lt;p&gt;React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;strong&gt;虚拟DOM&lt;/strong&gt;+优秀的&lt;strong&gt;Diffing算法&lt;/strong&gt;，尽量减少与真实DOM的交互&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程&lt;/p&gt;
+&lt;h1 id=&#34;5-react基本使用&#34;&gt;5. React基本使用&lt;/h1&gt;
+&lt;h2 id=&#34;51-js库引入注意引入顺序&#34;&gt;5.1 js库引入（注意引入顺序）&lt;/h2&gt;
+&lt;p&gt;1.react.development.js：react核心库&lt;/p&gt;
+&lt;p&gt;2.react-dom.development.js：提供操作DOM的react扩展库&lt;/p&gt;
+&lt;p&gt;3.babel.min.js：解析JSX语法代码转为js代码的库&lt;/p&gt;
+&lt;h2 id=&#34;52-虚拟dom的创建&#34;&gt;5.2 虚拟DOM的创建&lt;/h2&gt;
+&lt;h3 id=&#34;521-关于虚拟dom&#34;&gt;5.2.1 关于虚拟DOM&lt;/h3&gt;
+&lt;p&gt;（1）本质上是object类型的&lt;strong&gt;一般对象&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;（2）虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是react内部在用，无需真实DOM上那么多属性&lt;/p&gt;
+&lt;p&gt;（3）虚拟DOM最终会被React转化为真实DOM，呈现在页面上&lt;/p&gt;
+&lt;h3 id=&#34;522-创建的两种方式&#34;&gt;5.2.2 创建的两种方式&lt;/h3&gt;
+&lt;p&gt;（1）纯js方式&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; VDOM = React.createElement(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;标签名&amp;#39;&lt;/span&gt;,{标签属性},&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;标签内容&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; VDOM = React.createElement(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;h1&amp;#39;&lt;/span&gt;,{id:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;},&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;React.createElement(&amp;#39;&lt;/span&gt;span&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;,{},&amp;#39;&lt;/span&gt;HELLO REACT!&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;)&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;​		可以看到，若遇标签嵌套情况，利用纯js来写非常复杂。&lt;/p&gt;
+&lt;p&gt;（2）JSX方式&lt;/p&gt;
+&lt;p&gt;​		是react 定义的一种类似于 XML 的 JS 扩展语法: JS + XML。本质是React.createElement(&amp;lsquo;标签名&amp;rsquo;,{标签属性},&amp;lsquo;标签内容&amp;rsquo;)方法的语法糖，极大地简化了创建虚拟DOM过程。&lt;strong&gt;在利用JSX创建之前，需要将&lt;!-- raw HTML omitted --&gt;标签的type属性由默认的text/javascript改为text/babel&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;1）JSX创建虚拟DOM的写法如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; VDOM = (
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h1&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;id&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;title&amp;#34;&lt;/span&gt;&amp;gt;
+    	&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;span&lt;/span&gt;&amp;gt;hello,react&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;span&lt;/span&gt;&amp;gt;
+    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h1&lt;/span&gt;&amp;gt;
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2）&lt;strong&gt;JSX语法&lt;/strong&gt;如下：&lt;/p&gt;
+&lt;p&gt;1.遇到 &amp;lt;开头的代码，以标签的语法解析：html 同名标签转换为 html 同名元素，其它标签需要特别解析：若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。&lt;/p&gt;
+&lt;p&gt;2.遇到以 { 开头的代码，以 JS 语法解析: &lt;strong&gt;标签中的 js 表达式必须用{ }包含&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;3.&lt;strong&gt;只有一个根标签&lt;/strong&gt;，若想在虚拟DOM中再新增标签，外面需要统一包一个标签&lt;/p&gt;
+&lt;p&gt;4.标签必须&lt;strong&gt;闭合&lt;/strong&gt;（自闭合也行）&lt;/p&gt;
+&lt;p&gt;5.标签内样式的类名指定不要用class，要用&lt;strong&gt;className&lt;/strong&gt;，例如&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;6.标签中内联样式要用**style={{key:value}}**的形式去写，多个单词的要用小驼峰,例如style={{fontSize:&amp;lsquo;29px&amp;rsquo;}}&lt;/p&gt;
+&lt;h2 id=&#34;53-渲染虚拟dom&#34;&gt;5.3 渲染虚拟DOM&lt;/h2&gt;
+&lt;p&gt;基本语法：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;ReactDOM.render(VirtualDOM,containerDOM)
+ReactDOM.render(VDOM,&lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;54-模块与组件的理解&#34;&gt;5.4 模块与组件的理解&lt;/h2&gt;
+&lt;p&gt;模块指的是向外提供特定功能的js程序，一般就是一个js文件，模块化是为了更好地复用js，简化js的编写，提高js运行效率。模块化只针对js；而组件指的是用来实现局部功能效果的代码和资源的集合（html、css、js、image、video等），组件化是为了复用编码，简化项目编码，提高运行效率&lt;/p&gt;
+&lt;p&gt;1.5 jsx练习&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;.%5Cimage-20210321123104572.png&#34; alt=&#34;image-20210321123104572&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;body&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;id&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;test&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;src&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;../js/react.development.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;src&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;../js/react-dom.development.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;src&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;../js/babel.min.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
+
+    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;type&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;text/babel&amp;#34;&lt;/span&gt;&amp;gt;
+    &lt;span style=&#34;color:#228b22&#34;&gt;/*
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;        一定注意区分【js语句（代码）】与【js表达式】
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;            1.表达式：一个表达式会产生一个值，可以放任何一个需要值的地方
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                下面这些都是表达式
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                a
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                a+b
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                demo(1)
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                arr.map()//用来处理数组
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                function test(){}//定义方法
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;            2.语句（代码）：控制代码走向，没有值
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                if(){}
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                for(){}
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;                switch(){case}
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;    */&lt;/span&gt;
+        &lt;span style=&#34;color:#228b22&#34;&gt;//模拟一些数据
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; data = [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Angular&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Vue&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;React&amp;#39;&lt;/span&gt;]
+        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; data2 = [&amp;lt;li&amp;gt;Angular&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/li&amp;gt;, &amp;lt;li&amp;gt;Vue&amp;lt;/li&amp;gt;, &amp;lt;li&amp;gt;React&amp;lt;/li&amp;gt;]//React可以自动遍历数组&lt;/span&gt;
+        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = {name1:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Angular&amp;#39;&lt;/span&gt;,name2:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Vue&amp;#39;&lt;/span&gt;,name3:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;React&amp;#39;&lt;/span&gt;}&lt;span style=&#34;color:#228b22&#34;&gt;//对象不能作为React的节点
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#228b22&#34;&gt;//jsx创建虚拟DOM
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; VDOM = (
+            &amp;lt;div&amp;gt;
+                &amp;lt;h1&amp;gt;前端js框架列表&amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/h1&amp;gt;&lt;/span&gt;
+                &amp;lt;ul&amp;gt;
+                    {
+                        data.map((a,index)=&amp;gt;{
+                            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &amp;lt;li key={index}&amp;gt;{a}&amp;lt;&lt;span style=&#34;color:#1c7e71&#34;&gt;/li&amp;gt;/&lt;/span&gt;/虚拟dom必须有唯一标识key
+                        })
+                    }
+                &amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/ul&amp;gt;&lt;/span&gt;
+            &amp;lt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;/div&amp;gt;&lt;/span&gt;
+        )
+        ReactDOM.render(VDOM, &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;))
+    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;body&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;补充&#34;&gt;补充：&lt;/h2&gt;
+&lt;p&gt;1）早期传输数据的两种格式&lt;/p&gt;
+&lt;p&gt;​		最早使用XML来存储与传输数据的，XML即扩展标记语言 (Extensible Markup Language, XML) ，用于标记电子文件使其具有结构性的标记语言，可以用来标记数据、定义数据类型，是一种允许用户对自己的标记语言进行定义的源语言。典型写法如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;student&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Tom&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/student&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;​		后面改为利用JSON格式。JSON(JavaScript Object Notation)一种轻量级的数据交换格式，具有良好的可读和便于快速编写的特性。可在不同平台之间进行数据交换。主要是得益于JSON的两个重要方法：JSON.parse()和JSON.stringfy()，分别用来快速将JSON中的数据解析为数组和对象，以及快速把JS中的数组和对象转化为JSON字符串&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&amp;#39;name&amp;#39;:&amp;#39;gsq&amp;#39;,&amp;#39;age&amp;#39;:26&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2）XML和JSON的优缺点对比&lt;/p&gt;
+&lt;p&gt;(1)可读性两者基本相同，一边是建议的语法，一边是规范的标签形式，XML可读性较好些；
+(2)可扩展性方面差不多；
+(3)编码难度方面，不借助工具的话，XML较为复杂；
+(4)解码难度方面，XML的解析得考虑子节点父节点，让人头昏眼花，而JSON的解析难度几乎为0。
+(5)流行度方面，XML已经被业界广泛的使用，而JSON才刚刚开始，但是在Ajax这个特定的领域，未来的发展一定是XML让位于JSON。到时Ajax应该变成Ajaj(Asynchronous Javascript and JSON)了；
+(7)数据体积方面，JSON相对于XML来讲，数据的体积小，传递的速度更快些；
+(8)数据交互方面，JSON与JavaScript的交互更加方便，更容易解析处理，更好的数据交互；
+(9)数据描述方面，JSON对数据的描述性比XML较差；
+(10)传输速度方面， JSON的速度要远远快于XML。&lt;/p&gt;
+- https://gsemir0418.github.io/posts/react%E5%85%A5%E9%97%A8/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>初识Hooks</title>
+        <link>https://gsemir0418.github.io/posts/reacthooks/</link>
+        <pubDate>Fri, 25 Jun 2021 23:07:51 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/reacthooks/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/reacthooks/ -&lt;h1 id=&#34;1-hook简介&#34;&gt;1 Hook简介&lt;/h1&gt;
+&lt;h2 id=&#34;11-基本概念&#34;&gt;1.1 基本概念&lt;/h2&gt;
+&lt;p&gt;Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使⽤ state 以及其他的 React 特性。&lt;/p&gt;
+&lt;h2 id=&#34;12-react-hooks优势&#34;&gt;1.2 React Hooks优势&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;函数组件不能使⽤state，⼀般只⽤于⼀些简单⽆交互的组件，⽤作信息展示，即我们上⾯说的傻⽠组件使⽤，如果需要交互更改状态等复杂逻辑时就需要使⽤class组件了&lt;/p&gt;
+&lt;p&gt;React Hooks让我们更好的拥抱函数式编程，让函数式组件也能使⽤state功能，因为函数式组件⽐class组件更简洁好⽤，因为React Hooks的出现，相信未来我们会更多的使⽤函数式组件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;副作⽤问题&lt;/p&gt;
+&lt;p&gt;我们⼀般称数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤由于React Hooks的出现，我们可以使⽤useEffect来处理组件副作⽤问题，所以我们的函数式组件也能进⾏副作⽤逻辑的处理了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;有状态的逻辑重⽤组件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;复杂的状态管理&lt;/p&gt;
+&lt;p&gt;之前我们使⽤redux、dva、mobx第三⽅状态管理器来进⾏复杂的状态管理&lt;/p&gt;
+&lt;p&gt;现在我们可以使⽤useReducer、useContext配合使⽤实现复杂状态管理，不⽤再依赖第三⽅状态管理器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;开发效率和质量问题&lt;/p&gt;
+&lt;p&gt;函数式组件⽐class组件简洁，开发的体验更好，效率更⾼同时应⽤的性能也更好&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;2-usestate&#34;&gt;2 useState&lt;/h1&gt;
+&lt;h2 id=&#34;21-定义&#34;&gt;2.1 定义&lt;/h2&gt;
+&lt;p&gt;useState：组件状态管理钩⼦，使函数组件能够使⽤state&lt;/p&gt;
+&lt;h2 id=&#34;22-基本使用&#34;&gt;2.2 基本使用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [state,setState]=useState(initState)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;state是要设置的状态&lt;/li&gt;
+&lt;li&gt;setState是更新state的⽅法，只是⼀个⽅法名，可以随意更改&lt;/li&gt;
+&lt;li&gt;initState是初始的state，可以是随意的数据类型，也可以是回调函数，但是函数必须是有返回值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;23-实际应用&#34;&gt;2.3 实际应用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React, { useState } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; UseS() {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [count, setState] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;你点击了{count}次&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setState(count + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;点 击&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+    )
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;创建新项目&#34;&gt;创建新项目&lt;/h2&gt;
-&lt;p&gt;新建项目目录&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;mkdir todo-list
-cd todo-list
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;执行&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;yarn create umi
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;选择ant-design-pro、JavaScript、simple，完成项目的创建&lt;/p&gt;
-&lt;h2 id=&#34;目录结构&#34;&gt;目录结构&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;├── config                   # umi 配置，包含路由，构建等配置
-├── mock                     # 本地模拟数据
-├── public                   # 一些公共静态资源
-├── src
-│   ├── assets               # 本地静态资源
-│   ├── components           # 业务通用组件
-│   ├── e2e                  # 集成测试用例
-│   ├── layouts              # 通用布局
-│   ├── models               # 全局 dva model
-│   ├── pages                # 业务页面入口和常用模板
-│   ├── services             # 后台接口服务
-│   ├── utils                # 工具库
-│   ├── locales              # 国际化资源
-│   ├── global.less          # 全局样式
-│   └── global.jsx            # 全局 JS
-├── tests                    # 测试工具
-├── README.md
-└── package.json
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其中，mock、models、pages、services将是我们的主要目录。&lt;/p&gt;
-&lt;h2 id=&#34;本地开发&#34;&gt;本地开发&lt;/h2&gt;
-&lt;p&gt;安装依赖&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;yarn install
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;运行&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;yarn start
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;浏览器打开http://localhost:8000看到如下界面&lt;/p&gt;
-&lt;p&gt;这就是脚手架为我们建好的框架，一个欢迎页面，一个空白的二级页面和一个查询表格，实际开发中我们要删掉这些页面，然后建立自己的业务界面。&lt;/p&gt;
-&lt;h3 id=&#34;配置路由&#34;&gt;配置路由&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;... 
-routes: [
-        {
-          path: &#39;/&#39;,
-          component: &#39;../layouts/BasicLayout&#39;,
-          authority: [&#39;admin&#39;, &#39;user&#39;],
-          routes: [
-            {
-              path: &#39;/&#39;,
-              redirect: &#39;/welcome&#39;,
-            },
-            {
-              path: &#39;/todo&#39;,// url中path部分
-              name: &#39;todo&#39;, // 名称，国际化菜单配置根据这个名称来配置，如果不配置将直菜单将直接显示这个名称
-              icon: &#39;unordered-list&#39;,// 菜单图标名称
-              component:&#39;./todo&#39;// 组件（页面）,路径相对于src/pages
-            },
-           ...
-  ],
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;添加空白页面&#34;&gt;添加空白页面&lt;/h3&gt;
-&lt;p&gt;在src/pages下新建目录todo,在todo目录下新建空白index.jsx文件，代码如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import React from &#39;react&#39;;
-import { PageContainer } from &#39;@ant-design/pro-layout&#39;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h1 id=&#34;3-useeffect&#34;&gt;3 useEffect&lt;/h1&gt;
+&lt;h2 id=&#34;31-定义&#34;&gt;3.1 定义&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;useEffect：副作⽤处理钩⼦&lt;/li&gt;
+&lt;li&gt;数据获取、订阅、定时执⾏任务、⼿动修改ReactDOM这些⾏为都可以称为副作⽤。⽽useEffect就是为了处理这些副作⽤⽽⽣的&lt;/li&gt;
+&lt;li&gt;useEffect也是componentDidMount、componentDidUpdate和componentWillUnmount这⼏个⽣命周期⽅法的统⼀&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;32-基本使用&#34;&gt;3.2 基本使用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;useEffect(callback,array)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;callback：回调函数，作⽤是处理副作⽤逻辑。可以返回⼀个函数，⽤作清理&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;useEffect(() =&amp;gt;{
+	&lt;span style=&#34;color:#228b22&#34;&gt;//副作⽤逻辑
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	xxxxxx
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; ()=&amp;gt;{
+		&lt;span style=&#34;color:#228b22&#34;&gt;//清理副作⽤需要清理的内容
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#228b22&#34;&gt;//类似于componentWillUnmount，组件渲染和组件卸载前执⾏的代码
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	}
+},[array])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;array(可选参数)：数组，⽤于控制useEffect的执⾏。分三种情况&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;空数组，则只会执⾏⼀次（即初次渲染render）,相当于componentDidMount&lt;/li&gt;
+&lt;li&gt;⾮空数组，useEffect会在数组发⽣改变后执⾏，相当于componentDidUpdate&lt;/li&gt;
+&lt;li&gt;不填array这个数组，useEffect每次渲染都会执⾏&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;33-实际应用&#34;&gt;3.3 实际应用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { useState, useEffect } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; UseE = () =&amp;gt; {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [count, setState] = useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
 
-
-class TodoPage extends Component {
-
-    componentWillMount() { }
-
-    render() {
-        return (
-            &amp;lt;PageHeaderWrapper&amp;gt;
-                &amp;lt;div&amp;gt;空白面&amp;lt;/div&amp;gt;
-            &amp;lt;/PageHeaderWrapper&amp;gt;);
-    }
+    useEffect(() =&amp;gt; {
+        &lt;span style=&#34;color:#228b22&#34;&gt;//更新⻚⾯标题
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.title = &lt;span style=&#34;color:#cd5555&#34;&gt;`您点击了&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;count&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;次了哦`&lt;/span&gt;
+    }, [count])
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;你点击了{count}次&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setState(count + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;点 击&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+    )
 }
-
-export default TodoPage
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;未完待续&#34;&gt;未完待续。。。&lt;/h1&gt;
-- https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ - </description>
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; UseE;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h1 id=&#34;4-usecontext&#34;&gt;4 useContext&lt;/h1&gt;
+&lt;h2 id=&#34;41-定义&#34;&gt;4.1 定义&lt;/h2&gt;
+&lt;p&gt;context就是⽤来更⽅便的实现全局数据共享的，但是由于他并不是那么好⽤，所以我们⼀般会使⽤第三⽅状态管理器来实现全局数据共享&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;redux&lt;/li&gt;
+&lt;li&gt;dva&lt;/li&gt;
+&lt;li&gt;mobx&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;是针对context上下⽂提出的⼀个Hooks提出的⼀个API，它接受React.createContext()的返回值作为参数，即context对象，并返回最近的context&lt;/p&gt;
+&lt;p&gt;使⽤useContext是不需要再使⽤Provider和Consumer的&lt;/p&gt;
+&lt;p&gt;当最近的context更新时，那么使⽤该context的hook将会重新渲染&lt;/p&gt;
+&lt;h2 id=&#34;42-基本使用&#34;&gt;4.2 基本使用&lt;/h2&gt;
+&lt;p&gt;store.js中创建数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; Context = React.createContext({ age: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;18&amp;#39;&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;jerry&amp;#39;&lt;/span&gt; })
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; Context
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;组件中使用useContext接收数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React, { useContext } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; Context from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./store&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; UseC = () =&amp;gt; {
+    &lt;span style=&#34;color:#228b22&#34;&gt;//使⽤useContext
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; ctx = useContext(Context)
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;姓名&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;：&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h2&lt;/span&gt;&amp;gt;{ctx.name}&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;h2&lt;/span&gt;&amp;gt;年龄&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;：&lt;/span&gt;{ctx.age}岁&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
+    )
+}
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; UseC
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/reacthooks/ - </description>
         </item>
     
     
@@ -2279,72 +2457,6 @@ let obj1 = &#39;../models/testModel/objTest/objTest.obj&#39;;
 &lt;h2 id=&#34;47-fbx模型导出&#34;&gt;4.7 FBX模型导出&lt;/h2&gt;
 &lt;h1 id=&#34;5绘制施工图纸&#34;&gt;5.绘制施工图纸&lt;/h1&gt;
 - https://gsemir0418.github.io/posts/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>StartBlog</title>
-        <link>https://gsemir0418.github.io/posts/startblog/</link>
-        <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/startblog/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/startblog/ -&lt;h3 id=&#34;step1-安装hugo&#34;&gt;Step1 安装hugo&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;下载链接：https://github.com/gohugoio/hugo/releases&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;选择最新版本进行安装（建议安装&lt;code&gt;hugo_extended&lt;/code&gt;版本）。&lt;/p&gt;
-&lt;p&gt;注意解压后需配置环境变量，可以使用version命令测试是否配置成功：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hugo version
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;step2-新建博客站点&#34;&gt;Step2 新建博客站点&lt;/h3&gt;
-&lt;p&gt;使用命令行，输入如下命令新建博客站点：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hugo new site BLOGNAME
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;step3-下载并配置主题&#34;&gt;Step3 下载并配置主题&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;主题下载链接：https://themes.gohugo.io/&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;官网提供了许多主题供用户选择，按照主题下的安装配置说明进行主题的下载与配置。&lt;/p&gt;
-&lt;p&gt;这里以Diary主题为例，首先在博客的根目录下，使用终端进行git初始化：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git init
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;并执行：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git submodule add https://github.com/AmazingRise/hugo-theme-diary.git themes/diary
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;主题会自动下载至根目录下的&lt;code&gt;themes&lt;/code&gt;文件夹中。下载完成后，启动hugo本地服务并指定该主题：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hugo server -t diary --buildDrafts
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以通过访问&lt;code&gt;localhost:1313&lt;/code&gt;进入本地部署的博客站点。可以看到，hugo已经为我们配置好了下载的主题。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./image-20210103175858811.png&#34; alt=&#34;image-20210103175858811&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;step4-新建博客&#34;&gt;Step4 新建博客&lt;/h3&gt;
-&lt;p&gt;同样，在终端中执行：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hugo new post/文章名称.md
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以使用Typora来编辑文章，就像我现在这样。&lt;/p&gt;
-&lt;h3 id=&#34;step5-部署到github&#34;&gt;Step5 部署到github&lt;/h3&gt;
-&lt;p&gt;首先进入自己的github，新建一个repository，注意名称要使用&lt;strong&gt;小写昵称全名.github.io&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;在终端执行：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hugo --theme=diary --baseUrl=&amp;quot;https://gsemir0418.github.io/&amp;quot; --buildDrafts
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时在根目录下，hugo为我们生成了一个public文件夹，我们只需利用github将此文件夹上传到库中即可。&lt;/p&gt;
-&lt;p&gt;在public文件夹下，进行git初始化。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git init
-
-git add .
-
-git commit -m &amp;quot;v0&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时需要注册GitHub信息&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git config --global user.email &amp;quot;you@example.com&amp;quot;
-git config --global user.name &amp;quot;Your Name&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注册完成后再次提交即可。&lt;/p&gt;
-&lt;p&gt;关联远端git仓库：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git remote add orgin https://github.com/GSemir0418/gsemir0418.github.io.git
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时就可以将文件推上GitHub仓库：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git push -u orgin master
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最终按照提示进行登录验证即可，通过&lt;code&gt;https://gsemir0418.github.io&lt;/code&gt;实现远端访问个人博客。&lt;/p&gt;
-&lt;h3 id=&#34;补充文章插图路径配置问题&#34;&gt;补充：文章插图路径配置问题&lt;/h3&gt;
-&lt;p&gt;在生成发布版本时，插图路径总是需要在文章对应生成的html文档中进行逐条修改，费时费力。所以在最初的插图路径上需要做进一步调整，具体操作如下：&lt;/p&gt;
-&lt;p&gt;文章中的插图路径设定为&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;./图片名.png&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;插图实际保存至&lt;strong&gt;文章同名文件夹&lt;/strong&gt;内即可。&lt;/p&gt;
-&lt;p&gt;**注意：**不过这样会导致文章内的插图是丢失状态，但可以解决发布包的插图正常显示，且方便插图的管理。&lt;/p&gt;
-- https://gsemir0418.github.io/posts/startblog/ - </description>
         </item>
     
     
