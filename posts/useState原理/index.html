@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head>
-<title>useState原理</title>
+<title>UseState原理</title>
 
 
 
@@ -16,7 +16,7 @@
 
 
 
-<meta property="og:title" content="useState原理" />
+<meta property="og:title" content="UseState原理" />
 <meta property="og:description" content="1 useState简单实现 1.1 示例  点击按钮，结果&#43;1  import React from &#34;react&#34;; import ReactDOM from &#34;react-dom&#34;; const rootElement = document.getElementById(&#34;root&#34;); function App() { const [n, setN] = React.useState(0); return ( &lt;div className=&#34;App&#34;&gt; &lt;p&gt;{n}&lt;/p&gt; &lt;p&gt; &lt;button onClick={() =&gt; setN(n &#43; 1)}&gt;&#43;1&lt;/button&gt; &lt;/p&gt; &lt;/div&gt; ); } ReactDOM.render(&lt;App /&gt;, rootElement);  运行过程分析  首次render&lt;App/&gt;，调用App()方法，得到虚拟DOM，React会生成真实DOM 用户单击button，调用setN(n&#43;1)，并再次render&lt;App/&gt;，调用App()方法，得到新的虚拟DOM，经过DOM Diff运算，React会更新真实DOM 每次调用App()，都会运行useState(0)   执行setN的时候会发生什么？n会变吗？App()会重新执行吗？  setN一定会修改某个数据x，而不是直接修改n，并将n&#43;1存入x setN一定会触发&lt;App/&gt;重新渲染   每次重新执行App()时，都会执行useState(o)，那么n每次的值会有不同吗（即不为0）  每次n的值都会不同，说明useState肯定会从x读取n的最新值，而不是简单的初始化n为0   x  每个组件有自己的数据x，即state    1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/usestate%E5%8E%9F%E7%90%86/" /><meta property="article:section" content="posts" />
@@ -29,7 +29,7 @@
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="useState原理"/>
+<meta name="twitter:title" content="UseState原理"/>
 <meta name="twitter:description" content="1 useState简单实现 1.1 示例  点击按钮，结果&#43;1  import React from &#34;react&#34;; import ReactDOM from &#34;react-dom&#34;; const rootElement = document.getElementById(&#34;root&#34;); function App() { const [n, setN] = React.useState(0); return ( &lt;div className=&#34;App&#34;&gt; &lt;p&gt;{n}&lt;/p&gt; &lt;p&gt; &lt;button onClick={() =&gt; setN(n &#43; 1)}&gt;&#43;1&lt;/button&gt; &lt;/p&gt; &lt;/div&gt; ); } ReactDOM.render(&lt;App /&gt;, rootElement);  运行过程分析  首次render&lt;App/&gt;，调用App()方法，得到虚拟DOM，React会生成真实DOM 用户单击button，调用setN(n&#43;1)，并再次render&lt;App/&gt;，调用App()方法，得到新的虚拟DOM，经过DOM Diff运算，React会更新真实DOM 每次调用App()，都会运行useState(0)   执行setN的时候会发生什么？n会变吗？App()会重新执行吗？  setN一定会修改某个数据x，而不是直接修改n，并将n&#43;1存入x setN一定会触发&lt;App/&gt;重新渲染   每次重新执行App()时，都会执行useState(o)，那么n每次的值会有不同吗（即不为0）  每次n的值都会不同，说明useState肯定会从x读取n的最新值，而不是简单的初始化n为0   x  每个组件有自己的数据x，即state    1."/>
 
 
@@ -719,7 +719,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
             >
                 <div class="post-title">
-                    useState原理
+                    UseState原理
                     
                     <div class="post-meta">
                         

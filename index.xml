@@ -22,7 +22,7 @@
 &lt;p&gt;dva 首先是一个基于&lt;code&gt;redux&lt;/code&gt;和&lt;code&gt;redux-saga&lt;/code&gt;的&lt;strong&gt;数据流方案&lt;/strong&gt;，然后为了简化开发体验，dva 还额外内置了&lt;code&gt;react-router&lt;/code&gt;和&lt;code&gt;fetch&lt;/code&gt;，所以也可以理解为一个轻量级的应用框架。&lt;/p&gt;
 &lt;h2 id=&#34;12-dva数据流概念&#34;&gt;1.2 Dva数据流概念&lt;/h2&gt;
 &lt;p&gt;数据的改变发生通常是通过用户交互行为或者浏览器行为（如路由跳转等）触发的，当此类行为会改变数据的时候可以通过 &lt;code&gt;dispatch&lt;/code&gt; 发起一个 action，如果是同步行为会直接通过 &lt;code&gt;Reducers&lt;/code&gt; 改变 &lt;code&gt;State&lt;/code&gt; ，如果是异步行为（副作用）会先触发 &lt;code&gt;Effects&lt;/code&gt; 然后流向 &lt;code&gt;Reducers&lt;/code&gt; 最终改变 &lt;code&gt;State&lt;/code&gt;，所以在 dva 中，数据流向非常清晰简明。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://gsemir0418.github.io/Users/gsq/Documents/gitdoc/blogs-backup/content/posts/_img/Dva.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./Dva.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;13-model层重要api&#34;&gt;1.3 model层重要API&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;namespace&lt;/li&gt;
@@ -1330,7 +1330,7 @@ User &lt;a href=&#34;mailto:a@b.com&#34;&gt;a@b.com&lt;/a&gt;&lt;/p&gt;
     
     
         <item>
-        <title>useState原理</title>
+        <title>UseState原理</title>
         <link>https://gsemir0418.github.io/posts/usestate%E5%8E%9F%E7%90%86/</link>
         <pubDate>Sat, 07 Aug 2021 22:15:51 +0800</pubDate>
         

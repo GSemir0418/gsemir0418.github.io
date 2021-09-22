@@ -738,7 +738,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>dva 首先是一个基于<code>redux</code>和<code>redux-saga</code>的<strong>数据流方案</strong>，然后为了简化开发体验，dva 还额外内置了<code>react-router</code>和<code>fetch</code>，所以也可以理解为一个轻量级的应用框架。</p>
 <h2 id="12-dva数据流概念">1.2 Dva数据流概念</h2>
 <p>数据的改变发生通常是通过用户交互行为或者浏览器行为（如路由跳转等）触发的，当此类行为会改变数据的时候可以通过 <code>dispatch</code> 发起一个 action，如果是同步行为会直接通过 <code>Reducers</code> 改变 <code>State</code> ，如果是异步行为（副作用）会先触发 <code>Effects</code> 然后流向 <code>Reducers</code> 最终改变 <code>State</code>，所以在 dva 中，数据流向非常清晰简明。</p>
-<p><img src="/Users/gsq/Documents/gitdoc/blogs-backup/content/posts/_img/Dva.png" alt="img"></p>
+<p><img src="./Dva.png" alt="img"></p>
 <h2 id="13-model层重要api">1.3 model层重要API</h2>
 <ol>
 <li>namespace</li>

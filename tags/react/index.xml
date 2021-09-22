@@ -42,7 +42,7 @@ EditableProTable的columns配置中的valueEnum是用来转换字符串类型的
     </item>
     
     <item>
-      <title>useState原理</title>
+      <title>UseState原理</title>
       <link>https://gsemir0418.github.io/posts/usestate%E5%8E%9F%E7%90%86/</link>
       <pubDate>Sat, 07 Aug 2021 22:15:51 +0800</pubDate>
       
