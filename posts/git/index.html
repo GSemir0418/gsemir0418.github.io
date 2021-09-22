@@ -1061,8 +1061,8 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 </blockquote>
 <h1 id="1-简单的代码提交流程">1 简单的代码提交流程</h1>
 <ol>
-<li><code>git status</code> 查看工作区代码相对于暂存区的差别</li>
-<li><code>git add .</code> 将当前目录下修改的所有代码从工作区添加到暂存区 . 代表当前目录</li>
+<li><code>git status</code> 查看工作区代码相对于暂存区的差别，可简写为<code>gst</code></li>
+<li><code>git add .</code> 将当前目录下修改的所有代码从工作区添加到暂存区 . 代表当前目录，可简写为<code>ga .</code></li>
 <li><code>git commit -m ‘注释’</code> 将缓存区内容添加到本地仓库</li>
 <li><code>git pull origin master</code>先将远程仓库master中的信息同步到本地仓库master中</li>
 <li><code>git push origin master</code> 将本地版本库推送到远程服务器，origin是远程主机，master表示是远程服务器上的master分支和本地分支重名的简写，分支名是可以修改的</li>
@@ -1073,8 +1073,25 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 <h1 id="5-git-merge">5 git merge</h1>
 <h1 id="6-git-pull">6 git pull</h1>
 <h1 id="7-git-push">7 git push</h1>
+<ul>
+<li>提交代码到指定远程仓库</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git push -u 仓库名 分支名
+</code></pre></div><p>加了参数-u后，以后可以直接用git push 代替</p>
 <h1 id="8-git-remote">8 git remote</h1>
-
+<ul>
+<li>添加远程仓库</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git remote add 仓库名 仓库路径
+</code></pre></div><ul>
+<li>删除远程仓库</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git remote remove 仓库名
+</code></pre></div><ul>
+<li>查看远程仓库</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git remote -v
+</code></pre></div>
                     
                     <HR width="100%" id="EOF">
 		    <p style="color:#777;">最后修改于 2021-08-15</p>

@@ -5,9 +5,555 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Aug 2021 22:51:51 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 15 Sep 2021 16:12:05 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>Dva数据流</title>
+        <link>https://gsemir0418.github.io/posts/dva%E6%95%B0%E6%8D%AE%E6%B5%81/</link>
+        <pubDate>Wed, 15 Sep 2021 16:12:05 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/dva%E6%95%B0%E6%8D%AE%E6%B5%81/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/dva%E6%95%B0%E6%8D%AE%E6%B5%81/ -&lt;h1 id=&#34;1-初识dva&#34;&gt;1 初识Dva&lt;/h1&gt;
+&lt;h2 id=&#34;11-定义&#34;&gt;1.1 定义&lt;/h2&gt;
+&lt;p&gt;dva 首先是一个基于&lt;code&gt;redux&lt;/code&gt;和&lt;code&gt;redux-saga&lt;/code&gt;的&lt;strong&gt;数据流方案&lt;/strong&gt;，然后为了简化开发体验，dva 还额外内置了&lt;code&gt;react-router&lt;/code&gt;和&lt;code&gt;fetch&lt;/code&gt;，所以也可以理解为一个轻量级的应用框架。&lt;/p&gt;
+&lt;h2 id=&#34;12-dva数据流概念&#34;&gt;1.2 Dva数据流概念&lt;/h2&gt;
+&lt;p&gt;数据的改变发生通常是通过用户交互行为或者浏览器行为（如路由跳转等）触发的，当此类行为会改变数据的时候可以通过 &lt;code&gt;dispatch&lt;/code&gt; 发起一个 action，如果是同步行为会直接通过 &lt;code&gt;Reducers&lt;/code&gt; 改变 &lt;code&gt;State&lt;/code&gt; ，如果是异步行为（副作用）会先触发 &lt;code&gt;Effects&lt;/code&gt; 然后流向 &lt;code&gt;Reducers&lt;/code&gt; 最终改变 &lt;code&gt;State&lt;/code&gt;，所以在 dva 中，数据流向非常清晰简明。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gsemir0418.github.io/Users/gsq/Documents/gitdoc/blogs-backup/content/posts/_img/Dva.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;13-model层重要api&#34;&gt;1.3 model层重要API&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;namespace&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;model 的命名空间，同时也是他在全局 state 上的属性，只能用字符串，不支持通过 &lt;code&gt;.&lt;/code&gt; 的方式创建多层命名空间。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;state&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;状态初始值&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;reducers&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以 key/value 格式定义 reducer。用于处理同步操作，唯一可以修改 &lt;code&gt;state&lt;/code&gt; 的地方。由 &lt;code&gt;action&lt;/code&gt; 触发。格式为 &lt;code&gt;(state, action) =&amp;gt; newState&lt;/code&gt; 或 &lt;code&gt;[(state, action) =&amp;gt; newState, enhancer]&lt;/code&gt;。&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;effects&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以 key/value 格式定义 effect。用于处理异步操作和业务逻辑，不直接修改 &lt;code&gt;state&lt;/code&gt;。由 &lt;code&gt;action&lt;/code&gt; 触发，可以触发 &lt;code&gt;action&lt;/code&gt;，可以和服务器交互，可以获取全局 &lt;code&gt;state&lt;/code&gt; 的数据等等。&lt;/p&gt;
+&lt;p&gt;格式为 &lt;code&gt;*(action, effects) =&amp;gt; void&lt;/code&gt; 或 &lt;code&gt;[*(action, effects) =&amp;gt; void, { type }]&lt;/code&gt;。&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;subscriptions&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以 key/value 格式定义 subscription。subscription 是订阅，用于订阅一个数据源，然后根据需要 dispatch 相应的 action。在 &lt;code&gt;app.start()&lt;/code&gt; 时被执行，数据源可以是当前的时间、服务器的 websocket 连接、keyboard 输入、geolocation 变化、history 路由变化等等。&lt;/p&gt;
+&lt;p&gt;格式为 &lt;code&gt;({ dispatch, history }, done) =&amp;gt; unlistenFunction&lt;/code&gt;。&lt;/p&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;Action&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Action 是一个普通 javascript 对象，它是改变 State 的唯一途径。无论是从 UI 事件、网络回调，还是 WebSocket 等数据源所获得的数据，最终都会通过 dispatch 函数调用一个 action，从而改变对应的数据。action 必须带有 &lt;code&gt;type&lt;/code&gt; 属性指明具体的行为，其它字段可以自定义，如果要发起一个 action 需要使用 &lt;code&gt;dispatch&lt;/code&gt; 函数；需要注意的是 &lt;code&gt;dispatch&lt;/code&gt; 是在组件 connect Models以后，通过 props 传入的。&lt;/p&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;dispatch函数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;dispatching function 是一个用于触发 action 的函数，action 是改变 State 的唯一途径，但是它只描述了一个行为，而 dipatch 可以看作是触发这个行为的方式，而 Reducer 则是描述如何改变数据的。&lt;/p&gt;
+&lt;p&gt;在 dva 中，connect Model 的组件通过 props 可以访问到 dispatch，可以调用 Model 中的 Reducer 或者 Effects。&lt;/p&gt;
+&lt;h1 id=&#34;3-示例&#34;&gt;3 示例&lt;/h1&gt;
+&lt;p&gt;通过一个简单的表格数据获取与延时删除demo，熟悉dva数据流的概念、结构及主要API&lt;/p&gt;
+&lt;h2 id=&#34;文件目录&#34;&gt;文件目录&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;src
+&lt;ul&gt;
+&lt;li&gt;model
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;userModel.js&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;service
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;userApi.js&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;page
+&lt;ul&gt;
+&lt;li&gt;UserPage
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;index.jsx&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;userapijs&#34;&gt;userApi.js&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 返回假数据
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; getAllUsers() {
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; {
+    content: [
+      { id: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, age: &lt;span style=&#34;color:#b452cd&#34;&gt;13&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt; },
+      { id: &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, age: &lt;span style=&#34;color:#b452cd&#34;&gt;32&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Sam&amp;#39;&lt;/span&gt; },
+      { id: &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;, age: &lt;span style=&#34;color:#b452cd&#34;&gt;45&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Micheal&amp;#39;&lt;/span&gt; },
+    ],
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;indexjsx&#34;&gt;Index.jsx&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { connect } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dva&amp;#39;&lt;/span&gt;;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { Table } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;antd&amp;#39;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; UserManage = (props) =&amp;gt; {
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 把下面mapStateToProps方法return的数据从props中取出
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#228b22&#34;&gt;// 经过connect后dispatch也会自动传入props
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { users, dispatch } = props;
+
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 获取数据的回调
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; getUsers = () =&amp;gt; {
+    &lt;span style=&#34;color:#228b22&#34;&gt;// 执行dispatch方法，参数为action对象
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    dispatch({
+      &lt;span style=&#34;color:#228b22&#34;&gt;// action对象必须包括type属性，固定写法“命名空间/方法名”,
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      &lt;span style=&#34;color:#228b22&#34;&gt;// 可以理解为触发该命名空间中某个方法，给方法传递参数可以在后面写key:value形式，没有可以不写
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user/getAllUsers&amp;#39;&lt;/span&gt;,
+    });
+  };
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 删除数据的回调
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; deleteUser = (id) =&amp;gt; {
+    dispatch({
+      type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user/deleteUser&amp;#39;&lt;/span&gt;,
+      &lt;span style=&#34;color:#228b22&#34;&gt;// 为model层中的deleteUser方法传入id
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      id,
+    });
+  };
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 延时删除数据的回调
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; delayRemoveUser = (id) =&amp;gt; {
+    dispatch({
+      type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user/delayRemoveUser&amp;#39;&lt;/span&gt;,
+      id,
+    });
+  };
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 表格列配置
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; columns = [
+    { title: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;序号&amp;#39;&lt;/span&gt;, dataIndex: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;id&amp;#39;&lt;/span&gt; },
+    { title: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;名称&amp;#39;&lt;/span&gt;, dataIndex: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; },
+    {
+      title: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;修改&amp;#39;&lt;/span&gt;,
+      render: (_, record) =&amp;gt; [
+        &lt;span style=&#34;color:#228b22&#34;&gt;// 这里的回调要注意使用箭头函数
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; deleteUser(record.id)}&amp;gt;删除&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;,
+        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; delayRemoveUser(record.id)}&amp;gt;&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;s后删除&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;,
+      ],
+    },
+  ];
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
+    &amp;lt;&amp;gt;
+      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;type&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;button&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={getUsers}&amp;gt;
+        获取数据
+      &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
+      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Table&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;rowKey&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;id&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;dataSource&lt;/span&gt;={users} &lt;span style=&#34;color:#658b00&#34;&gt;columns&lt;/span&gt;={columns} /&amp;gt;
+    &amp;lt;/&amp;gt;
+  );
+};
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 将state映射为props
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 参数中的state表示全部model层的state
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; mapStateToProps = (state) =&amp;gt; {
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 这里只用到user中的state，所以state.user把命名空间为user这个model层的state数据取出来
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { users } = state.user;
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 这里return出去的数据，会变成此组件的props，在组件可以通过props.num取到。
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#228b22&#34;&gt;// props变化了，会重新触发render方法，界面也就更新了。
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; {
+    users,
+  };
+};
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 使用connect连接组件和model层数据
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// connect方法用来连接models层的state数据，参数常用的有2个，是第一个mapStateToProps，第二个mapDispatchToProps
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// mapStateToProps按字面意思：把models层state数据变为组件的props
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// mapDispatchToProps：用了此方法，dispatch只会在此方法里。不写该参数，dispatch会作为组件的props。(我平常用几乎不写该方法)
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; connect(mapStateToProps)(UserManage);
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;usermodeljs&#34;&gt;userModel.js&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;/* eslint-disable comma-dangle */&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { message } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;antd&amp;#39;&lt;/span&gt;;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { getAllUsers } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;../services/userApi&amp;#39;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 延时函数，返回promise对象
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; delay(time) {
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Promise&lt;/span&gt;((resolve) =&amp;gt; {
+    setTimeout(() =&amp;gt; {
+      resolve();
+    }, time);
+  });
+}
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; {
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 命名空间标识符
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  namespace: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;,
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 全部state，可以定义一些默认值
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  state: {
+    users: [],
+  },
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 同步处理数据的方法，唯一能够直接改变state的方法，只能用dispatch触发
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#228b22&#34;&gt;// 把新的state retrun出去，用到state数据的界面就会更新，官方推荐处理逻辑都放在effects中
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  reducers: {
+    &lt;span style=&#34;color:#228b22&#34;&gt;// 方法接收2个参数，第一个是旧的state，第二个是action对象,没有可以不写或写_
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    setUsers(state, { users }) {
+      &lt;span style=&#34;color:#228b22&#34;&gt;// 先把旧的state全部解构出来，然后把新的users覆盖原来的,从而实现state的更新
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { ...state, users };
+    },
+    deleteUser(state, { id }) {
+      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; tem = state.users;
+      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; result = tem.filter(i =&amp;gt; id !== i.id);
+      message.success(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;删除成功！&amp;#39;&lt;/span&gt;);
+      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { ...state, users: result };
+    }
+  },
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 异步数据处理的方法
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#228b22&#34;&gt;// 推荐数据逻辑处理也应该在此处理，处理完再给reducer
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  effects: {
+    &lt;span style=&#34;color:#228b22&#34;&gt;// 方法接收两个参数，第一个是传过来的action对象(没有可以写 _ )，第二个基本是用其中call, put, select这3个参数(所有的去官网看)
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;// call: 用来与后台交互
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;// put: 用来触发reducers中的方法，与dispacth功能一样
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;// select: 用来选择models层所有model里state的数据
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;// * yield是es6的Generator函数
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    *getAllUsers(_, { call, put }) {
+      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; resp = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;yield&lt;/span&gt; call(getAllUsers);
+      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;yield&lt;/span&gt; put({
+        type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;setUsers&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#228b22&#34;&gt;// 这里可以省略命名空间
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        users: resp.content
+      });
+      message.success(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;查询成功&amp;#39;&lt;/span&gt;);
+    },
+    *delayRemoveUser({ id }, { call, put }) {
+      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;yield&lt;/span&gt; call(delay, &lt;span style=&#34;color:#b452cd&#34;&gt;1000&lt;/span&gt;);
+      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;yield&lt;/span&gt; put({
+        type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;deleteUser&amp;#39;&lt;/span&gt;,
+        id
+      });
+    }
+  },
+  &lt;span style=&#34;color:#228b22&#34;&gt;// 订阅监听，可以监听路由，键盘输入等，常用作进入某页面发个请求获取数据，展示出来
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  subscriptions: {
+    setup({
+      dispatch, history, query, store,
+    }) {
+      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; history.listen(({ pathname, search }) =&amp;gt; {
+        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (pathname === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/userPage&amp;#39;&lt;/span&gt;) {
+          &lt;span style=&#34;color:#228b22&#34;&gt;// 监听进入testPage页时，做些操作
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;          &lt;span style=&#34;color:#228b22&#34;&gt;// dispatch({ type: &amp;#34;shoppingWZ&amp;#34; })
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        }
+      });
+    },
+  },
+};
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/dva%E6%95%B0%E6%8D%AE%E6%B5%81/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>Lodash常用方法整理</title>
+        <link>https://gsemir0418.github.io/posts/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+        <pubDate>Thu, 02 Sep 2021 16:53:09 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/ -&lt;h1 id=&#34;0-准备&#34;&gt;0 准备&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;下载：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yarn add lodash / npm i lodash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Node.js引入：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;  = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;lodash&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;1-对象&#34;&gt;1 对象&lt;/h1&gt;
+&lt;h2 id=&#34;11-移除对象上的一些属性-omit&#34;&gt;1.1 移除对象上的一些属性-omit&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;把数据提交给接口，很多情况下，都要移除只在前端用，但接口不需要的属性。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.omit(object, [props])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;参数说明：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;object (Object)&lt;/code&gt;: 来源对象。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;[props] (...(string|string[]))&lt;/code&gt;: 要被忽略的属性。（注：单独指定或指定在数组中。）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = { name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;gsq&amp;#39;&lt;/span&gt;, age:&lt;span style=&#34;color:#b452cd&#34;&gt;19&lt;/span&gt;, gender:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;, hobbies:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;play&amp;#39;&lt;/span&gt; }
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.omit(obj,[&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;]) &lt;span style=&#34;color:#228b22&#34;&gt;// { gender:&amp;#39;male&amp;#39;, hobbies:&amp;#39;play&amp;#39; }
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;12-选择对象上的一些属性-pick&#34;&gt;1.2 选择对象上的一些属性-pick&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;选择对象上的一些属性和移除属性操作相反。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.pick(object, [props])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = { name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;gsq&amp;#39;&lt;/span&gt;, age:&lt;span style=&#34;color:#b452cd&#34;&gt;19&lt;/span&gt;, gender:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;, hobbies:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;play&amp;#39;&lt;/span&gt; }
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.pick(obj,[&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;]) &lt;span style=&#34;color:#228b22&#34;&gt;// { name:&amp;#39;gsq&amp;#39;, age:19 }
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;13-对象的深拷贝-clonedeep&#34;&gt;1.3 对象的深拷贝-cloneDeep&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;对象的深度克隆是很困难的。 &lt;code&gt;JSON.parse(JSON.stringify(obj))&lt;/code&gt; 可以实现对象的深度克隆。但有如下缺点:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;值类型是 undefined、function、symbol 的属性会被过滤掉。&lt;/li&gt;
+&lt;li&gt;是类型是 set、map 会被被处理成空对象。&lt;/li&gt;
+&lt;li&gt;对象的属性间出现循环引用时，会报错。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.cloneDeep(obj)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;示例：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj2 = { f: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () { }, u: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;undefined&lt;/span&gt;, a: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, }
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; r1 = JSON.parse(JSON.stringify(obj2))
+console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;r1&amp;#39;&lt;/span&gt;, r1)&lt;span style=&#34;color:#228b22&#34;&gt;// r1 { a: 1 }
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; r2 = &lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.cloneDeep(obj2)
+console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;r2&amp;#39;&lt;/span&gt;, r2)&lt;span style=&#34;color:#228b22&#34;&gt;// r2 { f: [Function: f], u: undefined, a: 1 }
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;2-数组&#34;&gt;2 数组&lt;/h1&gt;
+&lt;h2 id=&#34;21-根据条件去除某个元素-reject&#34;&gt;2.1 根据条件去除某个元素-reject&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;根据条件删除数组中某个元素（与fliter相反）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.reject(collection, identity)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;参数说明&lt;/p&gt;
+&lt;p&gt;identity：判断依据，可以是数组、对象、字符串或回调函数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; users = [
+  { &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;gsq&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#b452cd&#34;&gt;36&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;active&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt; },
+  { &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;zs&amp;#39;&lt;/span&gt;,   &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#b452cd&#34;&gt;40&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;active&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt; }
+];
+ 
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.reject(users, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt;(o) { &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; !o.active; });
+&lt;span style=&#34;color:#228b22&#34;&gt;// [ { user: &amp;#39;zs&amp;#39;, age: 40, active: true } ]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt; 
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.reject(users, { &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#b452cd&#34;&gt;40&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;active&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt; });
+&lt;span style=&#34;color:#228b22&#34;&gt;// [ { user: &amp;#39;gsq&amp;#39;, age: 36, active: false } ]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.reject(users, [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;active&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt;]);
+&lt;span style=&#34;color:#228b22&#34;&gt;// [ { user: &amp;#39;zs&amp;#39;, age: 40, active: true } ]
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt; 
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.reject(users, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;active&amp;#39;&lt;/span&gt;);
+&lt;span style=&#34;color:#228b22&#34;&gt;// [ { user: &amp;#39;gsq&amp;#39;, age: 36, active: false } ]
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;22-数组转换为对象-keyby&#34;&gt;2.2 数组转换为对象-keyBy&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;以某个属性为键，转换数组为对象&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;_.keyBy(collection, key)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;参数说明：&lt;/p&gt;
+&lt;p&gt;collection：Array | Object&lt;/p&gt;
+&lt;p&gt;key：Array | Function | Object | string&lt;/p&gt;
+&lt;p&gt;返回新的对象&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; array = [
+  { &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dir&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;left&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#b452cd&#34;&gt;97&lt;/span&gt; },
+  { &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dir&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;right&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#b452cd&#34;&gt;100&lt;/span&gt; }
+];
+ 
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.keyBy(array, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt;(o) {
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;String&lt;/span&gt;.fromCharCode(o.code);
+});
+&lt;span style=&#34;color:#228b22&#34;&gt;// { &amp;#39;a&amp;#39;: { &amp;#39;dir&amp;#39;: &amp;#39;left&amp;#39;, &amp;#39;code&amp;#39;: 97 }, &amp;#39;d&amp;#39;: { &amp;#39;dir&amp;#39;: &amp;#39;right&amp;#39;, &amp;#39;code&amp;#39;: 100 } }
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt; 
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.keyBy(array, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dir&amp;#39;&lt;/span&gt;);
+&lt;span style=&#34;color:#228b22&#34;&gt;// { &amp;#39;left&amp;#39;: { &amp;#39;dir&amp;#39;: &amp;#39;left&amp;#39;, &amp;#39;code&amp;#39;: 97 }, &amp;#39;right&amp;#39;: { &amp;#39;dir&amp;#39;: &amp;#39;right&amp;#39;, &amp;#39;code&amp;#39;: 100 } }
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;3-语言&#34;&gt;3 语言&lt;/h1&gt;
+&lt;h2 id=&#34;31-判断是否为空-isempty&#34;&gt;3.1 判断是否为空-isEmpty&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;检查 &lt;code&gt;value&lt;/code&gt; 是否为一个空对象，集合，映射或者set。 判断的依据是除非是有枚举属性的对象，length 大于 0 的 arguments object, array, string 或类jquery选择器。&lt;/li&gt;
+&lt;li&gt;API：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;_.isEmpty(value)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;示例：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 以上均返回true
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.isEmpty(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt;)
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.isEmpty(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.isEmpty([])
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.isEmpty({})
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.isEmpty(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
+&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.isEmpty(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;undefined&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;32-防抖&#34;&gt;3.2 防抖&lt;/h2&gt;
+&lt;h2 id=&#34;33-节流&#34;&gt;3.3 节流&lt;/h2&gt;
+&lt;h1 id=&#34;4-数学&#34;&gt;4 数学&lt;/h1&gt;
+&lt;h2 id=&#34;41-随机数-random&#34;&gt;4.1 随机数-random&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;产生一个包括 &lt;code&gt;lower&lt;/code&gt; 与 &lt;code&gt;upper&lt;/code&gt; 之间的数。 如果只提供一个参数返回一个&lt;code&gt;0&lt;/code&gt;到提供数之间的数。 如果 &lt;code&gt;floating&lt;/code&gt; 设为 &lt;code&gt;true&lt;/code&gt;，或者 &lt;code&gt;lower&lt;/code&gt; 或 &lt;code&gt;upper&lt;/code&gt; 是浮点数，结果返回浮点数。&lt;/li&gt;
+&lt;li&gt;API:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;_.random([lower=0], [upper=1], [floating])
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;参数说明&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;[lower=0]&lt;/code&gt; &lt;em&gt;(number)&lt;/em&gt;: 下限。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;[upper=1]&lt;/code&gt; &lt;em&gt;(number)&lt;/em&gt;: 上限。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;[floating]&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt;: 指定是否返回浮点数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.random(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;);
+&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; an integer between 0 and 5
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.random(&lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;);
+&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; also an integer between 0 and 5
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.random(&lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;);
+&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; a floating-point number between 0 and 5
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.random(&lt;span style=&#34;color:#b452cd&#34;&gt;1.2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;5.2&lt;/span&gt;);
+&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; a floating-point number between 1.2 and 5.2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>Web性能优化-基础</title>
+        <link>https://gsemir0418.github.io/posts/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</link>
+        <pubDate>Thu, 02 Sep 2021 14:34:53 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/ -&lt;h1 id=&#34;1-dns与tcp&#34;&gt;1 DNS与TCP&lt;/h1&gt;
+&lt;h2 id=&#34;11-dns与hosts&#34;&gt;1.1 DNS与hosts&lt;/h2&gt;
+&lt;p&gt;DNS（Domain Name System）：域名系统，每个域名对应一个ip&lt;/p&gt;
+&lt;p&gt;hosts相当于手动给操作系统添加ip缓存&lt;/p&gt;
+&lt;h2 id=&#34;12-三次握手&#34;&gt;1.2 三次握手&lt;/h2&gt;
+&lt;p&gt;TCP（Transmission Control Protocol）：传输控制协议&lt;/p&gt;
+&lt;p&gt;建立TCP连接过程的三次握手，x、y一般从0开始&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;A能发&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;B能收，B能发&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A能收（为什么一定需要第三次）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;关闭TCP连接过程的四次挥手，x、y一般不为0&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A：我请求结束了&lt;/li&gt;
+&lt;li&gt;B：我知道你请求结束了&lt;/li&gt;
+&lt;li&gt;B：我响应结束了&lt;/li&gt;
+&lt;li&gt;A：我知道你响应结束了&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为什么B不能一起发送呢：因为第二次和第三次中间，服务端可能夹杂其他响应数据（B可能还没说完）&lt;/p&gt;
+&lt;p&gt;不一定是客户端发起FIN，服务端也可以发起FIN&lt;/p&gt;
+&lt;h1 id=&#34;2-http超文本传输协议&#34;&gt;2 HTTP（超文本传输协议）&lt;/h1&gt;
+&lt;h2 id=&#34;21-http请求&#34;&gt;2.1 HTTP请求&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;请求行&lt;/td&gt;
+&lt;td&gt;动词&lt;code&gt;(GET、POST、PUT、DELETE..)&lt;/code&gt; URL HTTP/1.1&lt;code&gt;(HTTP版本号)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;请求头&lt;/td&gt;
+&lt;td&gt;Accept：text/html &lt;code&gt;期望接受数据的格式&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;Host：baidu.com &lt;code&gt;用户请求的域名或ip&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;Connection：keep-alive&lt;!-- raw HTML omitted --&gt;Content-Type：application/json &lt;code&gt;请求体格式&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;&amp;hellip;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;回车换行&lt;/td&gt;
+&lt;td&gt;\r\n&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;请求体&lt;/td&gt;
+&lt;td&gt;{&amp;ldquo;name&amp;rdquo; : &amp;ldquo;gsq&amp;rdquo;}&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;22-http响应&#34;&gt;2.2 HTTP响应&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;/th&gt;
+&lt;th&gt;示例及解释&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;响应行&lt;/td&gt;
+&lt;td&gt;HTTP/1.1 200&lt;code&gt;(状态码)&lt;/code&gt; OK&lt;code&gt;(状态码的解释)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;响应头&lt;/td&gt;
+&lt;td&gt;Content-Type：text/html&lt;code&gt;(请求体格式或语法)&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;Set-Cookie：session.id = xxx; expires&amp;hellip;&lt;code&gt;(服务器在客户端种下一个cookie)&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;Connection：keep-alive&lt;!-- raw HTML omitted --&gt;Content-Encoding：gzip&lt;!-- raw HTML omitted --&gt;&amp;hellip;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;回车换行&lt;/td&gt;
+&lt;td&gt;\r\n&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;响应体&lt;/td&gt;
+&lt;td&gt;{&amp;ldquo;name&amp;rdquo; : &amp;ldquo;gsq&amp;rdquo;}&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;3-浏览器渲染原理&#34;&gt;3 浏览器渲染原理&lt;/h1&gt;
+&lt;h2 id=&#34;31-html解析过程&#34;&gt;3.1 HTML解析过程&lt;/h2&gt;
+&lt;p&gt;下载与解析html和css的过程可以是同步的，互不影响&lt;/p&gt;
+&lt;p&gt;但js的下载与执行会阻塞html的解析&lt;/p&gt;
+&lt;p&gt;​	当执行js时，可能会修改dom树&lt;/p&gt;
+&lt;p&gt;​	解析html是一行一行的，必须要下载好了执行完毕才能继续，因此下载的过程也会阻塞html的解析（浏览器没有做优化）&lt;/p&gt;
+&lt;h2 id=&#34;32-async和defer的区别&#34;&gt;3.2 async和defer的区别&lt;/h2&gt;
+&lt;p&gt;defer（几乎等价于type=&amp;lsquo;module&amp;rsquo;）&lt;/p&gt;
+&lt;p&gt;defer让js的下载和执行过程与html的解析可以同步进行，不会阻塞html的解析，并保证js的执行是在html解析完成之后到DOM ready事件之前进行&lt;/p&gt;
+&lt;p&gt;如果有多个defer的js，无论下载先后，总会按照标签顺序执行&lt;/p&gt;
+&lt;p&gt;实际工作中经常使用&lt;/p&gt;
+&lt;p&gt;async&lt;/p&gt;
+&lt;p&gt;async也会让js的下载和执行过程与html的解析可以同步进行，但js的执行是会在什么时候下载好什么时候执行的，但执行过程仍可能会影响html解析，可能在DOM ready事件之前，也可能在事件之后。总之，async将js的下载与解析完全分离，如果有多个async，下载与执行的过程也是完全分离的&lt;/p&gt;
+&lt;h2 id=&#34;33-js与css的阻塞关系&#34;&gt;3.3 js与css的阻塞关系&lt;/h2&gt;
+&lt;p&gt;css的下载过程和解析过程会影响js的执行过程&lt;/p&gt;
+&lt;p&gt;因为js需要读取css的解析结果，例如css最后一行写了div1的高度，而js恰好要获取div1的高度，所以要等css下载解析后才能执行&lt;/p&gt;
+&lt;h2 id=&#34;34-页面渲染原理布局绘制合成&#34;&gt;3.4 页面渲染原理：布局、绘制、合成&lt;/h2&gt;
+&lt;p&gt;reflow repaint 合成是始终在进行的&lt;/p&gt;
+- https://gsemir0418.github.io/posts/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/ - </description>
+        </item>
     
     
     
@@ -17,7 +563,113 @@
         <pubDate>Sun, 22 Aug 2021 22:51:51 +0800</pubDate>
         
         <guid>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ -&lt;p&gt;项目总结&lt;/p&gt;
+        <description>GSemir Blog https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ -&lt;p&gt;项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将umi与antdPro框架在使用过程中遇到的问题与解决方案整理如下。&lt;/p&gt;
+&lt;h1 id=&#34;1-ant-design-pro&#34;&gt;1 Ant Design Pro&lt;/h1&gt;
+&lt;h2 id=&#34;11-全局样式&#34;&gt;1.1 全局样式&lt;/h2&gt;
+&lt;p&gt;全局的样式（包括覆盖原生antd的css）可以写到&lt;code&gt;global.less&lt;/code&gt;中，记得属性后加&lt;code&gt;!important&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;打包后样式失效时，可以尝试关闭config.js中的按需加载（&lt;code&gt;dynamicImport&lt;/code&gt;），但可能对平台首页加载速度有一定影响&lt;/p&gt;
+&lt;h2 id=&#34;12-pro表单项onchange事件无效&#34;&gt;1.2 Pro表单项onChange事件无效&lt;/h2&gt;
+&lt;p&gt;使用表单项组件时onChange事件失效&lt;/p&gt;
+&lt;p&gt;在表单项的fieldProps属性中定义onChange事件即可，fieldProps即Pro组件对应的原生antd属性。&lt;/p&gt;
+&lt;h2 id=&#34;13-procomponents&#34;&gt;1.3 ProComponents&lt;/h2&gt;
+&lt;h3 id=&#34;131-protable&#34;&gt;1.3.1 ProTable&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;字段找不到&lt;/p&gt;
+&lt;p&gt;进行列配置时，对应字段可能在对象深层，在配置&lt;code&gt;dataIndex&lt;/code&gt;时可以用数组的形式，例如&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;dataIndex:[&#39;data&#39;, &#39;placeNumber&#39;, &#39;method&#39;]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;那么ProTable就会将行数据的data.placeNumber.method值呈现在表格中了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可编辑表格编辑状态默认值&lt;/p&gt;
+&lt;p&gt;EditableProTable的columns配置中的&lt;code&gt;valueEnum&lt;/code&gt;是用来转换&lt;strong&gt;字符串&lt;/strong&gt;类型的枚举（配合&lt;code&gt;valueType:&#39;select&#39;&lt;/code&gt;替代render），对于非字符串字段（如数值或布尔类型），则会出现编辑状态的默认值为空或为实际value的bug。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以使用renderFormItem配置此字段的Select选择框，利用ref全局变量存储选项值，通过onSave读取ref值，对接保存或新增借口即可。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 修改后的status
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; status = useRef(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
+...
+{
+      title: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;装置状态&amp;#39;&lt;/span&gt;,
+      dataIndex: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;status&amp;#39;&lt;/span&gt;,
+         &lt;span style=&#34;color:#228b22&#34;&gt;// 功能同render
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      valueType: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;select&amp;#39;&lt;/span&gt;,
+      valueEnum: {
+        &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;: {
+          text: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;停工&amp;#39;&lt;/span&gt;,
+          status: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Error&amp;#39;&lt;/span&gt;,
+        },
+        &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;: {
+          text: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;正常&amp;#39;&lt;/span&gt;,
+          status: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Success&amp;#39;&lt;/span&gt;,
+        },
+      },
+      renderFormItem: u =&amp;gt; [
+        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Select&lt;/span&gt;
+          &lt;span style=&#34;color:#658b00&#34;&gt;key&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;statusSelect&amp;#39;&lt;/span&gt;
+          &lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;配置初始值&lt;/span&gt;
+          &lt;span style=&#34;color:#658b00&#34;&gt;defaultValue&lt;/span&gt;={u.entry?u.entry.status:&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;}
+          &lt;span style=&#34;color:#658b00&#34;&gt;onChange&lt;/span&gt;={v =&amp;gt; {
+            status.current = v
+          }}
+          &lt;span style=&#34;color:#658b00&#34;&gt;rules&lt;/span&gt;={[
+            {
+              required: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;,
+              message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;此项为必填项&amp;#39;&lt;/span&gt;,
+            },
+          ]}
+        &amp;gt;
+          &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Option&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;}&amp;gt;停工&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Option&lt;/span&gt;&amp;gt;
+          &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Option&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;}&amp;gt;正常&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Option&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Select&lt;/span&gt;&amp;gt;,
+      ],
+    },
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;2-umijs&#34;&gt;2 umi.js&lt;/h1&gt;
+&lt;h2 id=&#34;21-umi-request&#34;&gt;2.1 umi-request&lt;/h2&gt;
+&lt;p&gt;当打包后请求&lt;code&gt;url&lt;/code&gt;正常，但出现503等错误时，可以尝试在&lt;code&gt;request.js&lt;/code&gt;中去除&lt;code&gt;credentials: &#39;include&#39;&lt;/code&gt;，即默认请求不携带cookie&lt;/p&gt;
+&lt;h2 id=&#34;22-history&#34;&gt;2.2 history&lt;/h2&gt;
+&lt;p&gt;history可以实现路由跳转，也可携带参数跳转&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; {history} from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;umi&amp;#39;&lt;/span&gt;
+
+history.push({
+	pathname:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;xxx/xxx&amp;#39;&lt;/span&gt;,
+	params:{id,name,age}
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;跳转后利用useEffect监听props.location.params中的参数，进行数据请求等操作。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-react&#34; data-lang=&#34;react&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; {id} = props.location.params
+useEffect(()=&amp;gt;{
+	getXXXById(id).then()
+},[id])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;3其他&#34;&gt;3.其他&lt;/h1&gt;
+&lt;h2 id=&#34;31-解决单击双击冲突&#34;&gt;3.1 解决单击双击冲突&lt;/h2&gt;
+&lt;p&gt;可以利用计时器配合单击事件回调，实现单击双击事件的区别触发&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;onClick={() =&amp;gt; {
+  count.current += &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;
+  setTimeout(() =&amp;gt; {
+  	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (count.current === &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;) {
+  		console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;single click: &amp;#39;&lt;/span&gt;, count.current)
+  	} &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (count.current === &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;) {
+  		console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;setTimeout onDoubleClick: &amp;#39;&lt;/span&gt;, count.current)
+  	}
+  	count.current = &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;
+  }, &lt;span style=&#34;color:#b452cd&#34;&gt;300&lt;/span&gt;)
+}}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;32-switch方法在jsx中的使用&#34;&gt;3.2 switch方法在jsx中的使用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;{(() =&amp;gt; {
+	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;switch&lt;/span&gt; (select) {
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;table&amp;#39;&lt;/span&gt;:
+			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; xxx
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;charts&amp;#39;&lt;/span&gt;:
+			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; xxx
+		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt;:
+			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;
+	}
+})()}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;33-useref&#34;&gt;3.3 useRef&lt;/h2&gt;
+&lt;p&gt;既可以作为页面内元素的实例饮用，也可以作为不会导致页面刷新的全局变量使用，&lt;/p&gt;
+&lt;h2 id=&#34;34-表单联动&#34;&gt;3.4 表单联动&lt;/h2&gt;
+&lt;p&gt;将表单项数据保存为state，，利用useMemo监听标单项变化，从而重新计算下一个标单项内容&lt;/p&gt;
 - https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ - </description>
         </item>
     
@@ -143,12 +795,12 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;架构示意&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://gsemir0418.github.io/Users/gsq/Documents/gitdoc/blogs-backup/content/posts/_img/express1.png&#34; alt=&#34;image-20210822214145696&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./express1.png&#34; alt=&#34;image-20210822214145696&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;14-处理http请求与响应&#34;&gt;1.4 处理HTTP请求与响应&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;最简单的封装
+&lt;li&gt;最简单的封装（数组）
 &lt;ul&gt;
 &lt;li&gt;将请求封装为&lt;code&gt;[[&#39;get&#39;,&#39;/xxx&#39;],{请求头},&#39;请求体&#39;]&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;将响应封装为&lt;code&gt;[status,{响应头},&#39;响应体&#39;]&lt;/code&gt;&lt;/li&gt;
@@ -157,15 +809,412 @@
 &lt;li&gt;Node.js封装
 &lt;ul&gt;
 &lt;li&gt;Node.js将其封装到http模块中&lt;/li&gt;
-&lt;li&gt;使用request读取请求&lt;/li&gt;
-&lt;li&gt;使用response设置响应&lt;/li&gt;
+&lt;li&gt;使用request对象读取请求&lt;/li&gt;
+&lt;li&gt;使用response对象设置响应&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;Express封装
 &lt;ul&gt;
 &lt;li&gt;只需理解Express的&lt;strong&gt;编程模型&lt;/strong&gt;即可&lt;/li&gt;
+&lt;li&gt;中文文档：expressjs.com/zh-cn/ 太老了&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;2-hello-express&#34;&gt;2 Hello Express&lt;/h1&gt;
+&lt;h2 id=&#34;21-js版本&#34;&gt;2.1 js版本&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;初始化项目&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;mkdir express-demo-1 &amp;amp;&amp;amp; &lt;span style=&#34;color:#658b00&#34;&gt;cd&lt;/span&gt; express-demo-1
+yarn init -y
+git init
+touch .gitignore
+yarn add express
+git add . &amp;amp;&amp;amp; git commit -m &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;init&amp;#39;&lt;/span&gt;
+git remote add origin git@github.com:GSemir0418/express-demo-1.git
+git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;创建app.js&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; app = express()
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 用于对GET /xxx 请求做出响应
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res) {
+    res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;HelloooWorld!&amp;#39;&lt;/span&gt;)
+})
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 开启端口监听
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () {
+    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Example app listening on port 8080&amp;#39;&lt;/span&gt;)
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;执行node app命令运行服务器后，浏览器访问8080端口，会展示&lt;code&gt;HelloooWorld!&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;22-使用ts&#34;&gt;2.2 使用TS&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;准备工作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yarn global add typescript ts-node ts-node-dev
+yarn add @types/express --dev// 安装express类型支持，一般类型文件都是--dev
+tsc --init // 创建tsconfig.json文件
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;修改tsconfig中的&lt;code&gt;target&lt;/code&gt;为&lt;code&gt;es2015&lt;/code&gt;（即es6），修改&lt;code&gt;noImplicitAny&lt;/code&gt;为&lt;code&gt;true&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建app2.ts&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; express &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; app = express()
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 用于对GET /xxx 请求做出响应
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res) {
+    res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;HelloooTS!&amp;#39;&lt;/span&gt;)
+})
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 开启端口监听
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () {
+    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Example app listening on port 8080&amp;#39;&lt;/span&gt;)
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;项目源码仓库：https://github.com/GSemir0418/express-starter.git&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;23-app的类型&#34;&gt;2.3 app的类型&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;ctrl点击app，找到其类型
+&lt;ul&gt;
+&lt;li&gt;类型为Express接口&lt;/li&gt;
+&lt;li&gt;Express extends Application&lt;/li&gt;
+&lt;li&gt;Application extends EventEmitter, IRouter,&amp;hellip;&lt;/li&gt;
+&lt;li&gt;其中IRouter包含了get/post/put等方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;3-express-脚手架&#34;&gt;3 Express 脚手架&lt;/h1&gt;
+&lt;h2 id=&#34;31-基本使用&#34;&gt;3.1 基本使用&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;安装&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yarn global add express-generator
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;在指定路径下，使用ejs后端模版引擎，搭建项目&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;express --view=ejs 目录名
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;将&lt;code&gt;package.json&lt;/code&gt;中的&lt;code&gt;start&lt;/code&gt;命令改为&lt;code&gt;node-dev ./bin/www&lt;/code&gt;，每次更新后自动刷新。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目录结构&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;bin/www&lt;/strong&gt;：应用主入口，因为真正的入口是app.js，所以www文件先把app.js文件引进来，其余的内容主要就是创建了一个node HTTP server以及监听事件的错误处理。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;app.js&lt;/strong&gt;：应用入口文件，主要做了以下的事&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;引入之前使用&lt;code&gt;npm install&lt;/code&gt;下载的包，并创建express对象；&lt;/li&gt;
+&lt;li&gt;use上面引入的包；&lt;/li&gt;
+&lt;li&gt;引入routes文件夹里面的文件，这些文件主要处理URL路由；&lt;/li&gt;
+&lt;li&gt;关联（use）路由路径与引入的文件；&lt;/li&gt;
+&lt;li&gt;设置（set）模板，views 设置了模板的位置；指定使用的模板引擎；&lt;/li&gt;
+&lt;li&gt;最后进行错误处理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 引入资源及中间件
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; createError = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http-errors&amp;#39;&lt;/span&gt;);
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;);
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; path = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;path&amp;#39;&lt;/span&gt;);
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; cookieParser = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;cookie-parser&amp;#39;&lt;/span&gt;);
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; logger = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;morgan&amp;#39;&lt;/span&gt;);
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 引入index.js和users.js路由配置文件
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; indexRouter = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./routes/index&amp;#39;&lt;/span&gt;);
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; usersRouter = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./routes/users&amp;#39;&lt;/span&gt;);
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 实例化express
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; app = express();
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 视图引擎设置
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 设置视图的目录为当前目录下的views文件夹
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;views&amp;#39;&lt;/span&gt;, path.join(&lt;span style=&#34;color:#b452cd&#34;&gt;__&lt;/span&gt;dirname, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;views&amp;#39;&lt;/span&gt;));
+&lt;span style=&#34;color:#228b22&#34;&gt;// 设置视图引擎为ejs
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;view engine&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ejs&amp;#39;&lt;/span&gt;);
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 使用上面加载的资源
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(logger(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dev&amp;#39;&lt;/span&gt;));
+app.use(express.json());
+app.use(express.urlencoded({ extended: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt; }));
+app.use(cookieParser());&lt;span style=&#34;color:#228b22&#34;&gt;// 使用cookie
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(express.&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;static&lt;/span&gt;(path.join(&lt;span style=&#34;color:#b452cd&#34;&gt;__&lt;/span&gt;dirname, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;public&amp;#39;&lt;/span&gt;)));&lt;span style=&#34;color:#228b22&#34;&gt;// 指定公共资源文件夹
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#228b22&#34;&gt;// 为请求路径分配路由配置
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, indexRouter);
+app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/users&amp;#39;&lt;/span&gt;, usersRouter);
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// catch 404 and forward to error handler
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res, next) {
+    next(createError(&lt;span style=&#34;color:#b452cd&#34;&gt;404&lt;/span&gt;));
+});
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// error handler
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (err, req, res, next) {
+    &lt;span style=&#34;color:#228b22&#34;&gt;// set locals, only providing error in development
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    res.locals.message = err.message;
+    res.locals.error = req.app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;env&amp;#39;&lt;/span&gt;) === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;development&amp;#39;&lt;/span&gt; ? err : {};
+
+    &lt;span style=&#34;color:#228b22&#34;&gt;// render the error page
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    res.status(err.status || &lt;span style=&#34;color:#b452cd&#34;&gt;500&lt;/span&gt;);
+    res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;error&amp;#39;&lt;/span&gt;);
+});
+
+module.exports = app;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;routes&lt;/strong&gt;：以users.js为例，首先加载express，通过express获取到router对象。使用router对象指定路由的方法和路径。由于在app.js已经指定 &lt;code&gt;/users&lt;/code&gt; 到本文件，因此当浏览器请求/user时，会执行下面的回调函数。回调函数有第三个参数next，主要用于中间件中，即将数据传递到下一个方法去处理。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;);
+&lt;span style=&#34;color:#228b22&#34;&gt;// 实例化router对象
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; router = express.Router();
+
+&lt;span style=&#34;color:#228b22&#34;&gt;/* GET users listing. */&lt;/span&gt;
+&lt;span style=&#34;color:#228b22&#34;&gt;// 这是基于users/的根目录
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;router.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res, next) {
+  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;users发送这句话&amp;#39;&lt;/span&gt;);
+});
+router.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/xxx&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res, next) {
+  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;xxx发送这句话&amp;#39;&lt;/span&gt;);
+});
+
+module.exports = router;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;views&lt;/strong&gt;：视图模版文件，默认为pub模板文件，本文指定模板为ejs格式，ejs允许在html中插入js语句，格式为&lt;code&gt;&amp;lt;%= javascript codes %&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-ejs&#34; data-lang=&#34;ejs&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;title&amp;gt;&amp;lt;%= title %&amp;gt;&amp;lt;/title&amp;gt;
+    &amp;lt;link rel=&#39;stylesheet&#39; href=&#39;https://gsemir0418.github.io/stylesheets/style.css&#39; /&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;div&amp;gt;hhahahah&amp;lt;/div&amp;gt;
+    &amp;lt;h1&amp;gt;&amp;lt;%= title %&amp;gt;&amp;lt;/h1&amp;gt;
+    &amp;lt;p&amp;gt;Welcome to &amp;lt;%= title %&amp;gt;&amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;32-改写为ts&#34;&gt;3.2 改写为TS&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;把app.js复制到app2.ts&lt;/li&gt;
+&lt;li&gt;yarn add@types/node-dev这样才能使用require&lt;/li&gt;
+&lt;li&gt;将var替换为const&lt;/li&gt;
+&lt;li&gt;添加RequestHandler和ErrorRequestHandler断言&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-tsx&#34; data-lang=&#34;tsx&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 有两种方式
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 第一种可以给每个参数分别添加类型
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 第二种直接给整个方法添加as断言
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res, next) {
+    next(createError(&lt;span style=&#34;color:#b452cd&#34;&gt;404&lt;/span&gt;));
+} &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;as&lt;/span&gt; RequestHandler);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;将bin/www中的入口改为app2.ts&lt;/li&gt;
+&lt;li&gt;添加start:ts脚本，将&lt;code&gt;node&lt;/code&gt;改为&lt;code&gt;ts-node&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;4-appuse和express编程模型&#34;&gt;4 app.use和Express编程模型&lt;/h1&gt;
+&lt;h2 id=&#34;41-appuse&#34;&gt;4.1 app.use()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;尝试使用request.url和response.send()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; app = express()
+
+app.use((request, response, next) =&amp;gt; {
+    console.log(request.url)
+    response.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
+})
+
+app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;,() =&amp;gt; {
+		console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;正在监听8080端口&amp;#39;&lt;/span&gt;)
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;此时浏览器访问8080端口，控制台会打印出路径&amp;quot;&lt;code&gt;/&lt;/code&gt;&amp;quot;，浏览器出现“hi”&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;说明多次使用app.use()时，后面的不会得到执行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;code&gt;next()&lt;/code&gt;可以使得后面的app.use()执行&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use((request, response, next) =&amp;gt; {
+    console.log(request.url)
+    response.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
+    next()
+})
+app.use((request, response, next) =&amp;gt; {
+    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;第二次响应&amp;#39;&lt;/span&gt;)
+    response.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;但浏览器只显示了一个&amp;quot;hi&amp;quot;，与预期的两个&amp;quot;hi&amp;quot;不符。这是因为同一次请求不允许发送两次数据，即两次&lt;code&gt;responde.send()&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;因此用流来改写response：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use((request, response, next) =&amp;gt; {
+    console.log(request.url)
+    response.write(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
+    next()
+})
+app.use((request, response, next) =&amp;gt; {
+    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;第二次响应&amp;#39;&lt;/span&gt;)
+    response.write(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
+    next()
+})
+&lt;span style=&#34;color:#228b22&#34;&gt;// 可以将关闭响应流的方法单独写在最后的use中
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use((request, response, next) =&amp;gt; {
+    console.log(request.url)
+    &lt;span style=&#34;color:#228b22&#34;&gt;// 用end方法结束响应流
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    response.end()
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;42-express编程模型核心&#34;&gt;4.2 Express编程模型（核心）&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;./express2.png&#34; alt=&#34;image-20210919233846529&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;43-中间件&#34;&gt;4.3 中间件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;上图中的&lt;code&gt;fn&lt;/code&gt;就是中间件，因为它是插入到启动和结束&lt;strong&gt;中间&lt;/strong&gt;的物件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;中间件编程模型的优点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;这种模型使得每个功能都可以通过一个函数来实现&lt;/li&gt;
+&lt;li&gt;然后通过app.use()将这个函数整合起来&lt;/li&gt;
+&lt;li&gt;如果把函数放到文件或npm中，就实现了&lt;strong&gt;模块化&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;实现logger方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建logger.js&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; logger = (prefix) =&amp;gt; {
+    &lt;span style=&#34;color:#228b22&#34;&gt;// 接收一个参数，返回一个函数
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (request, response, next) =&amp;gt; {
+        &lt;span style=&#34;color:#228b22&#34;&gt;// 打印
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;prefix&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;request.url&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;)
+          next()
+    }
+
+}
+module.exports = logger
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;app.js引入logger并use&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; logger = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./logger&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; app = express()
+
+app.use(logger(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dev&amp;#39;&lt;/span&gt;))
+
+app.use((request, response, next) =&amp;gt; {
+    response.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
+    next()
+})
+
+app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;, () =&amp;gt; {
+    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;正在监听8080&amp;#39;&lt;/span&gt;)
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;此时浏览器访问&lt;code&gt;localhost:8080/xxx&lt;/code&gt;，控制台将打印出&lt;code&gt;dev:/xxx&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;44-路由&#34;&gt;4.4 路由&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;利用app.use()实现路由&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;...
+app.use((request, response, next) =&amp;gt; {
+  	&lt;span style=&#34;color:#228b22&#34;&gt;// path不包括请求参数，url包含请求参数(?id=1)
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (request.path === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/xxx&amp;#39;&lt;/span&gt; &amp;amp;&amp;amp; request.method === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;GET&amp;#39;&lt;/span&gt;) { &lt;span style=&#34;color:#228b22&#34;&gt;// 注意请求方法要大写
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        response.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;this is xxx page&amp;#39;&lt;/span&gt;)
+    }
+    next()
+})
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;更方便的写法（语法糖）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;app.use(&#39;/xxx&#39;, fn)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/xxx&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {
+      res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;this is xxx page&amp;#39;&lt;/span&gt;)
+      next()
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;app.get(&#39;/xxx&#39;, fn)&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;app.post(&#39;/xxx&#39;, fn)&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;app.route(&#39;/xxx&#39;).all(f1).get(f2).post(f3)&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;45-错误处理&#34;&gt;4.5 错误处理&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;next(error)&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;会直接进入自定义或默认的&lt;code&gt;errorHandler&lt;/code&gt;，不执行后面的中间件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; logger = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./logger&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; app = express()
+
+app.use(logger(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dev&amp;#39;&lt;/span&gt;))
+app.use((request, response, next) =&amp;gt; {
+    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;执行后会报错的中间件&amp;#39;&lt;/span&gt;)
+    next(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;未登录&amp;#39;&lt;/span&gt;)
+})
+app.use((request, response, next) =&amp;gt; {
+    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;不会执行的中间件&amp;#39;&lt;/span&gt;)
+    next()
+})
+app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;, () =&amp;gt; {
+    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;正在监听8080&amp;#39;&lt;/span&gt;)
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;浏览器访问8080端口，显示“未登录”，且控制台打印出“执行后会报错的中间件”和“未登录”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;自定义&lt;code&gt;errorHandler&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一般在最后定义，可以定义多个：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use((error, request, response, next) =&amp;gt; {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (response.headersSent) {
+        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; next(error)
+    }
+    response.status(&lt;span style=&#34;color:#b452cd&#34;&gt;500&lt;/span&gt;)
+    response.send(error)
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 - https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/ - </description>
         </item>
@@ -245,8 +1294,8 @@ User &lt;a href=&#34;mailto:a@b.com&#34;&gt;a@b.com&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&#34;1-简单的代码提交流程&#34;&gt;1 简单的代码提交流程&lt;/h1&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;code&gt;git status&lt;/code&gt; 查看工作区代码相对于暂存区的差别&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;git add .&lt;/code&gt; 将当前目录下修改的所有代码从工作区添加到暂存区 . 代表当前目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git status&lt;/code&gt; 查看工作区代码相对于暂存区的差别，可简写为&lt;code&gt;gst&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git add .&lt;/code&gt; 将当前目录下修改的所有代码从工作区添加到暂存区 . 代表当前目录，可简写为&lt;code&gt;ga .&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;git commit -m ‘注释’&lt;/code&gt; 将缓存区内容添加到本地仓库&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;git pull origin master&lt;/code&gt;先将远程仓库master中的信息同步到本地仓库master中&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;git push origin master&lt;/code&gt; 将本地版本库推送到远程服务器，origin是远程主机，master表示是远程服务器上的master分支和本地分支重名的简写，分支名是可以修改的&lt;/li&gt;
@@ -257,8 +1306,25 @@ User &lt;a href=&#34;mailto:a@b.com&#34;&gt;a@b.com&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;5-git-merge&#34;&gt;5 git merge&lt;/h1&gt;
 &lt;h1 id=&#34;6-git-pull&#34;&gt;6 git pull&lt;/h1&gt;
 &lt;h1 id=&#34;7-git-push&#34;&gt;7 git push&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;提交代码到指定远程仓库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git push -u 仓库名 分支名
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;加了参数-u后，以后可以直接用git push 代替&lt;/p&gt;
 &lt;h1 id=&#34;8-git-remote&#34;&gt;8 git remote&lt;/h1&gt;
-- https://gsemir0418.github.io/posts/git/ - </description>
+&lt;ul&gt;
+&lt;li&gt;添加远程仓库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git remote add 仓库名 仓库路径
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;删除远程仓库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git remote remove 仓库名
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;查看远程仓库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git remote -v
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/git/ - </description>
         </item>
     
     
@@ -656,7 +1722,7 @@ ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&
     
     
         <item>
-        <title>JS专精</title>
+        <title>JS专精-函数</title>
         <link>https://gsemir0418.github.io/posts/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/</link>
         <pubDate>Sat, 07 Aug 2021 20:40:20 +0800</pubDate>
         
@@ -1147,917 +2213,6 @@ process.send({ foo: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;bar&amp;#
 &lt;h2 id=&#34;27-nodejs-api&#34;&gt;2.7 Node.js API&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;./node4.png&#34; alt=&#34;image-20210730133449418&#34;&gt;&lt;/p&gt;
 - https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>Umi-Request配置</title>
-        <link>https://gsemir0418.github.io/posts/umi-request%E9%85%8D%E7%BD%AE/</link>
-        <pubDate>Fri, 09 Jul 2021 16:47:33 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/umi-request%E9%85%8D%E7%BD%AE/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/umi-request%E9%85%8D%E7%BD%AE/ -&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;utils/request.js&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;/** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request */&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { extend } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;umi-request&amp;#39;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { notification } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;antd&amp;#39;&lt;/span&gt;;
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; codeMessage = {
-  &lt;span style=&#34;color:#b452cd&#34;&gt;200&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;服务器成功返回请求的数据。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;201&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;新建或修改数据成功。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;202&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;一个请求已经进入后台排队（异步任务）。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;204&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;删除数据成功。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;400&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;发出的请求有错误，服务器没有进行新建或修改数据的操作。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;401&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;用户没有权限（令牌、用户名、密码错误）。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;403&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;用户得到授权，但是访问是被禁止的。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;404&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;发出的请求针对的是不存在的记录，服务器没有进行操作。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;406&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;请求的格式不可得。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;410&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;请求的资源被永久删除，且不会再得到的。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;422&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;当创建一个对象时，发生一个验证错误。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;500&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;服务器发生错误，请检查服务器。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;502&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;网关错误。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;503&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;服务不可用，服务器暂时过载或维护。&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#b452cd&#34;&gt;504&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;网关超时。&amp;#39;&lt;/span&gt;,
-};
-&lt;span style=&#34;color:#228b22&#34;&gt;/** 异常处理程序 */&lt;/span&gt;
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; errorHandler = (error) =&amp;gt; {
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { response } = error;
-
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (response &amp;amp;&amp;amp; response.status) {
-    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; errorText = codeMessage[response.status] || response.statusText;
-    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { status, url } = response;
-    notification.error({
-      message: &lt;span style=&#34;color:#cd5555&#34;&gt;`请求错误 &lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;status&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;: &lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;url&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;,
-      description: errorText,
-    });
-  } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (!response) {
-    notification.error({
-      description: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;您的网络发生异常，无法连接服务器&amp;#39;&lt;/span&gt;,
-      message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;网络异常&amp;#39;&lt;/span&gt;,
-    });
-  }
-
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; response;
-};
-&lt;span style=&#34;color:#228b22&#34;&gt;/** 配置request请求时的默认参数 */&lt;/span&gt;
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; request = extend({
-  prefix:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/api&amp;#39;&lt;/span&gt;,
-  errorHandler,
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 默认错误处理
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  credentials: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;include&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#228b22&#34;&gt;// 默认请求是否带上cookie
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;});
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; request;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;config/proxy.js&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; {
-  dev: {
-    &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/api&amp;#39;&lt;/span&gt;: {
-      target: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http://192.168.95.29:18888&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#228b22&#34;&gt;// baseURL
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      changeOrigin: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;,
-      pathRewrite: {
-        &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;^/api&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,
-      },
-    },
-  },
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;简单使用&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;request
-    .get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/equip/get-all/&amp;#39;&lt;/span&gt;)
-    .then(response =&amp;gt; {
-      setDataSource(response.content)
-      console.log(response.content)
-    })
-    .&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;catch&lt;/span&gt;(error =&amp;gt; {
-      console.log(error)
-    })	
-
-request
-    .put(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/equip/change/&amp;#39;&lt;/span&gt;, {
-    data: saveData,
-})
-    .then(response =&amp;gt; {
-    console.log(response)
-})
-    .&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;catch&lt;/span&gt;(error =&amp;gt; {
-    console.log(error)
-})
-
-request
-    .&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;delete&lt;/span&gt;(&lt;span style=&#34;color:#cd5555&#34;&gt;`/equip/delete/&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;key&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;)
-    .then(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (response) {
-    console.log(response)
-})
-    .&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;catch&lt;/span&gt;(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (error) {
-    console.log(error)
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-- https://gsemir0418.github.io/posts/umi-request%E9%85%8D%E7%BD%AE/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>NodeStream模块</title>
-        <link>https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/</link>
-        <pubDate>Thu, 08 Jul 2021 14:07:04 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/ -&lt;h1 id=&#34;1三个示例引入stream&#34;&gt;1.三个示例引入Stream&lt;/h1&gt;
-&lt;h2 id=&#34;11-创建流&#34;&gt;1.1 创建流&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 引入fs模块
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fs = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// 利用fs创建流
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; stream = fs.createWriteStream(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./big_file.txt&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 写数据
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; i = &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span style=&#34;color:#b452cd&#34;&gt;100000&lt;/span&gt;; i++) {
-    stream.write(&lt;span style=&#34;color:#cd5555&#34;&gt;`这是第&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;i&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;行内容，我们需要很多很多内容\n`&lt;/span&gt;)
-}
-&lt;span style=&#34;color:#228b22&#34;&gt;// 关闭流
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;stream.end()
-console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;done&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#228b22&#34;&gt;//命令行执行
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;node &lt;span style=&#34;color:#b452cd&#34;&gt;1.&lt;/span&gt;js
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;分析&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;流程：打开流，多次往里面塞内容，关闭流&lt;/li&gt;
-&lt;li&gt;看起来就是可以多次写，没什么大不了的&lt;/li&gt;
-&lt;li&gt;最终得到一个100M左右的文件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Stream是水流，但默认没有水&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;stream.write可以让水流中有水（数据）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;每次写入的数据片段叫做chunk（块）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;产生数据的一端叫做source&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;接收数据的一端叫做sink&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;./stream1.png&#34; alt=&#34;image-20210803164712797&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;12-浏览器直接读取文件&#34;&gt;1.2 浏览器直接读取文件&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 引入文件模块
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fs = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// 引入http模块
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; http = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 开启服务器
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; server = http.createServer()
-server.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;request&amp;#39;&lt;/span&gt;, (request, response) =&amp;gt; {
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 读取文件
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    fs.readFile(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./big_file.txt&amp;#39;&lt;/span&gt;, (error, data) =&amp;gt; {
-        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (error) &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;throw&lt;/span&gt; error
-        response.end(data)
-        console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;done&amp;#39;&lt;/span&gt;)
-    })
-})
-&lt;span style=&#34;color:#228b22&#34;&gt;// 开启监听端口
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;server.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8888&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;分析
-&lt;ul&gt;
-&lt;li&gt;用任务管理器看Node.js内存占用，相对比较高&lt;/li&gt;
-&lt;li&gt;如果多人同时访问服务器中的此文件，内存占用就爆炸了&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;13-stream读取文件&#34;&gt;1.3 Stream读取文件&lt;/h2&gt;
-&lt;p&gt;用Stream改写第二个例子&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; http = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fs = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; server = http.createServer()
-server.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;request&amp;#39;&lt;/span&gt;, (request, response) =&amp;gt; {
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 利用流读取文件
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; stream = fs.createReadStream(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./big_file.txt&amp;#39;&lt;/span&gt;)
-    stream.pipe(response)
-})
-server.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8888&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;占用内存较低&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;管道&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;两个流可以用一个管道相连&lt;/li&gt;
-&lt;li&gt;stream1的末尾连接上stream2的开端&lt;/li&gt;
-&lt;li&gt;只要stream1有数据，就会流到stream2&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;常用代码&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;stream1.pipe(stream2)
-&lt;span style=&#34;color:#228b22&#34;&gt;// 可读的流.pipe（可写的流）
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;链式操作&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;a.pipe(b).pipe(c)
-&lt;span style=&#34;color:#228b22&#34;&gt;// 等价于
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;a.pipe(b)
-b.pipe(c)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;./stream2.png&#34; alt=&#34;image-20210803164747769&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;管道实际上是事件的封装&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// stream1一有数据就塞给stream2
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;stream1.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;, chunk =&amp;gt; {
-	stream2.write(chunk)
-})
-&lt;span style=&#34;color:#228b22&#34;&gt;// stream1停了，就停掉stream2
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;stream1.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;end&amp;#39;&lt;/span&gt;, () =&amp;gt; {
-	stream2.end()
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果需要自定义的方式去使用流的话，那么事件监听是个不错的选择。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;14-总结&#34;&gt;1.4 总结&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;流（stream）&lt;/code&gt;是一种&lt;strong&gt;在 Node.js 中处理流式数据的抽象接口&lt;/strong&gt;。 stream 模块提供了一些基础的 API，用于构建实现了流接口的对象。&lt;/li&gt;
-&lt;li&gt;Node.js 提供了多种流对象。 例如，发送到 HTTP 服务器的请求和 process.stdout 都是流的实例。&lt;/li&gt;
-&lt;li&gt;优势：
-&lt;ul&gt;
-&lt;li&gt;非阻塞式的数据处理方式可提升效率&lt;/li&gt;
-&lt;li&gt;chunk数据分块可节省内存&lt;/li&gt;
-&lt;li&gt;管道可提升扩展性，方便组合&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;2-stream对象的原型链&#34;&gt;2 Stream对象的原型链&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;console.log(createReafStream(path))&lt;/code&gt;
-&lt;ul&gt;
-&lt;li&gt;自身属性：由&lt;code&gt;fs.ReadStream&lt;/code&gt;构造&lt;/li&gt;
-&lt;li&gt;原型：&lt;code&gt;stream.Readable.prototype&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;二级原型：&lt;code&gt;stream.Stream.prototype&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;三级原型：&lt;code&gt;events.EventEmitter.prototype&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;四级原型：&lt;code&gt;Object.prototype&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Stream对象都继承了&lt;code&gt;EventEmitter&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;3-支持的事件和方法&#34;&gt;3 支持的事件和方法&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&#34;./stream3.png&#34; alt=&#34;image-20210803164814707&#34;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;data&lt;/code&gt;事件&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;stream.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;, chunk =&amp;gt; {
-	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;读取了一次数据&amp;#39;&lt;/span&gt;)
-	console.log(chunk)&lt;span style=&#34;color:#228b22&#34;&gt;// 每次读取的数据片段（Buffer二进制）
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;end&lt;/code&gt;事件&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;stream.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;end&amp;#39;&lt;/span&gt;, () =&amp;gt; {
-	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;数据读完了&amp;#39;&lt;/span&gt;)
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;error事件：文件丢失，文件权限问题&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;**&lt;code&gt;drain&lt;/code&gt;**事件：之前拥堵的水流现在已经干涸了&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;当写的速度远远小于读的速度时，数据在管道中会出现拥堵的现象&lt;/li&gt;
-&lt;li&gt;面试常考&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;cork()&lt;/code&gt;：强制把所有写入的数据都缓冲到内存中，用到再学&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;4-stream分类&#34;&gt;4 Stream分类&lt;/h1&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;名称&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;特点&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Readable&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;可读&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Writable&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;可写&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Duplex&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;可读可写（双向）默认情况下，读和写是两条互相独立的通道&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Transform&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;可读可写（变化）例如babel，写es6，读到es5，流相当于转换器&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;img src=&#34;./stream4.png&#34; alt=&#34;image-20210803171028687&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;5-readable和writable的特点&#34;&gt;5 Readable和Writable的特点&lt;/h1&gt;
-&lt;h2 id=&#34;51-readable-stream&#34;&gt;5.1 Readable Stream&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;静止态paused和流动态flowing&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;默认处于paused态&lt;/li&gt;
-&lt;li&gt;添加data事件监听（或pipe），就变为flowing态&lt;/li&gt;
-&lt;li&gt;删除data事件监听（或pipe），就变为paused态&lt;/li&gt;
-&lt;li&gt;pause()可以将流变为paused&lt;/li&gt;
-&lt;li&gt;resume()可以将它变为flowing&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;stream.pipe(reponse)
-stream.pause()&lt;span style=&#34;color:#228b22&#34;&gt;// 静止态
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;setTimeOut(() =&amp;gt; {
-	stream.resume()&lt;span style=&#34;color:#228b22&#34;&gt;// 3s后恢复为流动态
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;}, &lt;span style=&#34;color:#b452cd&#34;&gt;3000&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;52-writable-stream&#34;&gt;5.2 Writable Stream&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;drain流干了事件&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;表示可以加点水了&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;我们调用stream.write(chunk)的时候，可能会得到false&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;false的意思就是写的太频繁了，数据积压了&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;这个时候我们就不能再write了，要监听drain&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;等drain事件触发了，我们才能继续write&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://nodejs.org/api/stream.html#stream_event_drain&#34;&gt;https://nodejs.org/api/stream.html#stream_event_drain&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fs = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; writeOneMillionTimes(writer, data) {
-    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; i = &lt;span style=&#34;color:#b452cd&#34;&gt;1000000&lt;/span&gt;
-    write()
-
-    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; write() {
-        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; ok = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color:#228b22&#34;&gt;//默认可以写
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;do&lt;/span&gt; {
-            i--
-            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (i === &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;) {
-                &lt;span style=&#34;color:#228b22&#34;&gt;// 最后一次写
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                writer.write(data)
-            } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; {
-                &lt;span style=&#34;color:#228b22&#34;&gt;// 如果i不为0，则说明还继续写
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                &lt;span style=&#34;color:#228b22&#34;&gt;// 向writer中写数据的同时，把值给ok，进入下一次判断
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                ok = writer.write(data)
-                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (ok === &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt;) {
-                    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;不能再写了&amp;#39;&lt;/span&gt;)
-                }
-            }
-        } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;while&lt;/span&gt; (i &amp;gt; &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; &amp;amp;&amp;amp; ok)
-
-        &lt;span style=&#34;color:#228b22&#34;&gt;// 如果ok不为true（写不进去值了）
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (i &amp;gt; &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;) {
-            &lt;span style=&#34;color:#228b22&#34;&gt;// 就监听writer的drain事件
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            writer.once(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;drain&amp;#39;&lt;/span&gt;, () =&amp;gt; {
-                console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;干涸了，可以写了&amp;#39;&lt;/span&gt;)
-                &lt;span style=&#34;color:#228b22&#34;&gt;// 如果drain事件触发了，则继续写
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;                write()
-            })
-        }
-    }
-}
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; writer = fs.createWriteStream(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./big_file.txt&amp;#39;&lt;/span&gt;)
-
-writeOneMillionTimes(writer, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hello world&amp;#39;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;finish事件
-&lt;ul&gt;
-&lt;li&gt;调用stream.end()之后，触发finish事件&lt;/li&gt;
-&lt;li&gt;缓冲区数据都已经传给底层系统之后，触发finish事件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;6-创建流&#34;&gt;6 创建流&lt;/h1&gt;
-&lt;h2 id=&#34;61-创建writable-stream&#34;&gt;6.1 创建Writable Stream&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { Writable } = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; outStream = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; Writable({
-    write(chunk, encoding, callback) {
-        console.log(chunk.toString())
-        callback()
-    }
-})
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// process.stdin是一个用户输入stream
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;process.stdin.pipe(outStream)
-&lt;span style=&#34;color:#228b22&#34;&gt;// 用监听事件改写
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// process.stdin.on(&amp;#39;data&amp;#39;, chunk =&amp;gt; {
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//     outStream.write(chunk)
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// })
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;62-创建readable-stream&#34;&gt;6.2 创建Readable Stream&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { Readable } = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; inStream = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; Readable()
-
-inStream.push(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;ABCDEFGH&amp;#34;&lt;/span&gt;)
-inStream.push(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;IJKLMNOP&amp;#39;&lt;/span&gt;)
-inStream.push(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 等同于inStream.pipe(process.stdout)
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;inStream.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;, chunk =&amp;gt; {
-    process.stdout.write(chunk)
-    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;写了一次数据&amp;#39;&lt;/span&gt;)
-})
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 这个流是先推再读 不管读没读 都推进去了 不推荐 
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { Readable } = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; inStream = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; Readable({
-    read(size) {
-        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;char&lt;/span&gt; = &lt;span style=&#34;color:#658b00&#34;&gt;String&lt;/span&gt;.fromCharCode(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.currentCharCode++)
-        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.push(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;char&lt;/span&gt;)
-        console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;`推了&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;char&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;)
-        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.currentCharCode &amp;gt; &lt;span style=&#34;color:#b452cd&#34;&gt;90&lt;/span&gt;) {&lt;span style=&#34;color:#228b22&#34;&gt;// Z
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.push(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
-        }
-    }
-})
-
-inStream.currentCharCode = &lt;span style=&#34;color:#b452cd&#34;&gt;65&lt;/span&gt; &lt;span style=&#34;color:#228b22&#34;&gt;// A
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-inStream.pipe(process.stdout)&lt;span style=&#34;color:#228b22&#34;&gt;// d
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;63-创建duplex流&#34;&gt;6.3 创建duplex流&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { Duplex } = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;stream&amp;#34;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; inoutStream = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; Duplex({
-	write(chunk, encoding, callback) {
-		console.log(chunk.toString());
-		callback();
-	},
-	read(size) {
-		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.push(&lt;span style=&#34;color:#658b00&#34;&gt;String&lt;/span&gt;.fromCharCode(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.currentCharCode++));
-		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.currentCharCode &amp;gt; &lt;span style=&#34;color:#b452cd&#34;&gt;90&lt;/span&gt;) {
-			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.push(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;);
-		}
-	}
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;64-创建transfrom流&#34;&gt;6.4 创建transfrom流&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { Transform } = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;stream&amp;#34;&lt;/span&gt;);
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; upperCaseTr = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; Transform({
-	transform(chunk, encoding, callback) {
-		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.push(chunk.toString().toUpperCase());
-		callback();
-	}
-});
-&lt;span style=&#34;color:#228b22&#34;&gt;// 将用户输入的字符传到transform流中进行大写处理，再打印输出出来
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;process.stdin.pipe(upperCaseTr).pipe(process.stdout);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;内置的transform流（压缩文件）&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fs = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;fs&amp;#34;&lt;/span&gt;);
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; zlib = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;zlib&amp;#34;&lt;/span&gt;);
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; file = process.argv[&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;];&lt;span style=&#34;color:#228b22&#34;&gt;// 获取用户传的第二个参数（路径）
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-fs.createReadStream(file)
-	&lt;span style=&#34;color:#228b22&#34;&gt;// 每读一点数据，就传给Gzip压缩
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.pipe(zlib.createGzip())
-	&lt;span style=&#34;color:#228b22&#34;&gt;// 没完成一次chunk的传输，就打印输出一个&amp;#39;.&amp;#39;
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;data&amp;#34;&lt;/span&gt;, () =&amp;gt; process.stdout.write(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt;))
-	&lt;span style=&#34;color:#228b22&#34;&gt;// 将数据保存在以.gz结尾的文件中
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.pipe(fs.createWriteStream(file + &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;.gz&amp;#34;&lt;/span&gt;))
-	&lt;span style=&#34;color:#228b22&#34;&gt;// 传输完成，输出&amp;#39;Done&amp;#39;
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;finish&amp;#34;&lt;/span&gt;, () =&amp;gt; console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Done&amp;#34;&lt;/span&gt;));
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// node gzip.js ./big_file.txt
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;单独封装transform流&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fs = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;fs&amp;#34;&lt;/span&gt;);
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; zlib = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;zlib&amp;#34;&lt;/span&gt;);
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; file = process.argv[&lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;];
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { Transform } = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;stream&amp;#34;&lt;/span&gt;);
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; reportProgress = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; Transform({
-	transform(chunk, encoding, callback) {
-      process.stdout.write(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt;);
-        &lt;span style=&#34;color:#228b22&#34;&gt;// this.push(chunk)是一样的
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#228b22&#34;&gt;// 因为callback总是会运行，所以将chunk写到callback第二个参数，继续传输
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      callback(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;, chunk);&lt;span style=&#34;color:#228b22&#34;&gt;// 第一个参数表示当出错的时候传null
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	}
-});
-fs.createReadStream(file)
-	.pipe(zlib.createGzip())
-	&lt;span style=&#34;color:#228b22&#34;&gt;// 说明，我们可以对数据进行无限次的处理，只需用pipe连接一个transform流即可
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.pipe(reportProgress)
-	.pipe(fs.createWriteStream(file + &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;.gz&amp;#34;&lt;/span&gt;))
-	.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;finish&amp;#34;&lt;/span&gt;, () =&amp;gt; console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Done&amp;#34;&lt;/span&gt;));
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// node gzip.js ./big_file.txt
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;加密并压缩&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 引入node自带的crypto加密模块
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; crypto = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;crypto&amp;#34;&lt;/span&gt;);
-&lt;span style=&#34;color:#228b22&#34;&gt;// ..
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;fs.createReadStream(file)
-	&lt;span style=&#34;color:#228b22&#34;&gt;// 使用crypto对文件使用aes192方式加密
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.pipe(crypto.createCipher(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;aes192&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;123456&amp;#34;&lt;/span&gt;))
-	&lt;span style=&#34;color:#228b22&#34;&gt;// 注意应先加密再压缩
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	.pipe(zlib.createGzip())
-	.pipe(reportProgress)
-	.pipe(fs.createWriteStream(file + &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;.gz&amp;#34;&lt;/span&gt;))
-	.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;finish&amp;#34;&lt;/span&gt;, () =&amp;gt; console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;Done&amp;#34;&lt;/span&gt;));
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;7-nodejs中的stream&#34;&gt;7 Node.js中的Stream&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&#34;./stream5.png&#34; alt=&#34;image-20210803215605939&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;8-参考&#34;&gt;8 参考&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Node&amp;rsquo;s Stream&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://jscomplete.com/learn/node-beyond-basics/node-streams&#34;&gt;https://jscomplete.com/learn/node-beyond-basics/node-streams&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Node.js Stream 文档&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;http://nodejs.cn/api/stream.html&#34;&gt;http://nodejs.cn/api/stream.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;面试&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://juejin.im/post/5b421b5ee51d45198651159b&#34;&gt;https://juejin.im/post/5b421b5ee51d45198651159b&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-- https://gsemir0418.github.io/posts/nodejsstream%E6%A8%A1%E5%9D%97/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>Object常用方法整理</title>
-        <link>https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
-        <pubDate>Wed, 07 Jul 2021 17:30:59 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/ -&lt;h1 id=&#34;objectassign&#34;&gt;Object.assign()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.assign(target, ...sources)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;target&lt;/code&gt;目标对象；&lt;code&gt;source&lt;/code&gt;源对象&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;如果目标对象中的属性具有相同的键，则属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的属性。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;只会拷贝源对象自身的并且可枚举的属性到目标对象。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;为了将属性定义（包括其可枚举性）复制到原型，应使用&lt;code&gt;Object.getOwnPropertyDescriptor()&lt;/code&gt;和&lt;code&gt;Object.defineProperty()&lt;/code&gt;。深拷贝？&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 复制一个对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = { a: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt; };
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; copy = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.assign({}, obj);
-console.log(copy); &lt;span style=&#34;color:#228b22&#34;&gt;// { a: 1 }
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 合并对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; o1 = { a: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt; };
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; o2 = { b: &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt; };
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; o3 = { c: &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt; };
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.assign(o1, o2, o3);
-console.log(obj); &lt;span style=&#34;color:#228b22&#34;&gt;// { a: 1, b: 2, c: 3 }
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;console.log(o1);  &lt;span style=&#34;color:#228b22&#34;&gt;// { a: 1, b: 2, c: 3 }, 注意目标对象自身也会改变。
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 合并具有相同属性的对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; o1 = { a: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, b: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, c: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt; };
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; o2 = { b: &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, c: &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt; };
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; o3 = { c: &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt; };
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.assign({}, o1, o2, o3);
-console.log(obj); &lt;span style=&#34;color:#228b22&#34;&gt;// { a: 1, b: 2, c: 3 }
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 继承属性和不可枚举属性是不能拷贝的
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.create({foo: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;}, { &lt;span style=&#34;color:#228b22&#34;&gt;// foo 是个继承属性。
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    bar: {
-        value: &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;  &lt;span style=&#34;color:#228b22&#34;&gt;// bar 是个不可枚举属性。
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    },
-    baz: {
-        value: &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;,
-        enumerable: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;  &lt;span style=&#34;color:#228b22&#34;&gt;// baz 是个自身可枚举属性。
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    }
-});
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; copy = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.assign({}, obj);
-console.log(copy); &lt;span style=&#34;color:#228b22&#34;&gt;// { baz: 3 }
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;深拷贝问题&lt;/p&gt;
-&lt;p&gt;针对深拷贝，需要使用其他办法，因为 &lt;code&gt;Object.assign()&lt;/code&gt;拷贝的是属性值。假如源对象的属性值是一个对象的引用，那么它也只指向那个引用。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; obj = { a: &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; , b: { c: &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;}}; 
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; copy = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.assign({}, obj1); 
-console.log(JSON.stringify(obj2)); &lt;span style=&#34;color:#228b22&#34;&gt;// { a: 0, b: { c: 0}} 
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 改变源对象属性值，拷贝的属性值不变
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;obj.a = &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;; 
-console.log(JSON.stringify(obj)); &lt;span style=&#34;color:#228b22&#34;&gt;// { a: 1, b: { c: 0}} 
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;console.log(JSON.stringify(copy)); &lt;span style=&#34;color:#228b22&#34;&gt;// { a: 0, b: { c: 0}} 
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 改变拷贝的属性值，也不会改变源对象的属性值
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;copy.a = &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;; 
-console.log(JSON.stringify(obj)); &lt;span style=&#34;color:#228b22&#34;&gt;// { a: 1, b: { c: 0}} 
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;console.log(JSON.stringify(copy)); &lt;span style=&#34;color:#228b22&#34;&gt;// { a: 2, b: { c: 0}}
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 改变拷贝对象中的深层属性值，将会彻底改变该属性值
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;copy.b.c = &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;; 
-console.log(JSON.stringify(obj)); &lt;span style=&#34;color:#228b22&#34;&gt;// { a: 1, b: { c: 3}} 
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;console.log(JSON.stringify(copy)); &lt;span style=&#34;color:#228b22&#34;&gt;// { a: 2, b: { c: 3}} 
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// Deep Clone 
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;obj = { a: &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt; , b: { c: &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;}}; 
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; depClone = JSON.parse(JSON.stringify(obj1)); 
-obj.a = &lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;; 
-obj.b.c = &lt;span style=&#34;color:#b452cd&#34;&gt;4&lt;/span&gt;; 
-console.log(JSON.stringify(depClone)); &lt;span style=&#34;color:#228b22&#34;&gt;// { a: 0, b: { c: 0}}
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;objectis&#34;&gt;Object.is()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;判断两个值是否是相同的值，返回布尔值&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is(value1, value2)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;在以下情况下，返回&lt;code&gt;true&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;两个值均为&lt;code&gt;undefined&lt;/code&gt;、&lt;code&gt;null&lt;/code&gt;、&lt;code&gt;true&lt;/code&gt;或&lt;code&gt;false&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;两个值都是由相同个字符按照相同顺序组成的字符串&lt;/li&gt;
-&lt;li&gt;两个值都指向同一个对象&lt;/li&gt;
-&lt;li&gt;两个值都是数字并且
-&lt;ul&gt;
-&lt;li&gt;都是正零&lt;code&gt;+0&lt;/code&gt;或负零&lt;code&gt;-0&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;都是&lt;code&gt;NaN&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;都是除零和&lt;code&gt;NaN&lt;/code&gt;外的其它同一个数字&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;与&lt;code&gt;==&lt;/code&gt;运算符的区别&lt;/p&gt;
-&lt;p&gt;这种相等性判断逻辑和传统的 &lt;code&gt;==&lt;/code&gt;运算不同，&lt;code&gt;==&lt;/code&gt;运算符会对它两边的操作数做隐式类型转换（如果它们类型不同），然后才进行相等性比较，（所以才会有类似 &lt;code&gt;&amp;quot;&amp;quot; == false&lt;/code&gt; 返回 &lt;code&gt;true&lt;/code&gt; 的现象），但 &lt;code&gt;Object.is&lt;/code&gt; 不会做这种类型转换。&lt;code&gt;Object.is()&lt;/code&gt;比较严格。&lt;/p&gt;
-&lt;p&gt;这与&lt;code&gt;===&lt;/code&gt;运算符的判定方式也不一样。&lt;code&gt;===&lt;/code&gt;运算符（和&lt;code&gt;==&lt;/code&gt;运算符）将数字值 &lt;code&gt;-0&lt;/code&gt; 和 &lt;code&gt;+0&lt;/code&gt; 视为相等，并认为 &lt;code&gt;Number.NaN&lt;/code&gt;不等于&lt;code&gt;NaN&lt;/code&gt;。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;);     &lt;span style=&#34;color:#228b22&#34;&gt;// true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is(&lt;span style=&#34;color:#658b00&#34;&gt;window&lt;/span&gt;, &lt;span style=&#34;color:#658b00&#34;&gt;window&lt;/span&gt;);   &lt;span style=&#34;color:#228b22&#34;&gt;// true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;);     &lt;span style=&#34;color:#228b22&#34;&gt;// false
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is([], []);           &lt;span style=&#34;color:#228b22&#34;&gt;// false 与两个对象同理 指向不同
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; foo = { a: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt; };
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; bar = { a: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt; };
-&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is(foo, foo);         &lt;span style=&#34;color:#228b22&#34;&gt;// true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is(foo, bar);         &lt;span style=&#34;color:#228b22&#34;&gt;// false 指向不同
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;);       &lt;span style=&#34;color:#228b22&#34;&gt;// true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 特例
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;, -&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;);            &lt;span style=&#34;color:#228b22&#34;&gt;// false
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;, +&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;);            &lt;span style=&#34;color:#228b22&#34;&gt;// true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is(-&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;, -&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;);           &lt;span style=&#34;color:#228b22&#34;&gt;// true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.is(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;NaN&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;/&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;);         &lt;span style=&#34;color:#228b22&#34;&gt;// true
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;objectprototypehasownproperty&#34;&gt;Object.prototype.hasOwnProperty()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;判断对象自身属性中是否具有指定属性（是否有指定的键）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;obj.hasOwnProperty(prop)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;prop&lt;/code&gt;要检测的属性的&lt;code&gt;String&lt;/code&gt;字符串形式表示的名称，或者&lt;code&gt;Symbol&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;所有继承了&lt;code&gt;Object&lt;/code&gt;的对象都会继承到 &lt;code&gt;hasOwnProperty&lt;/code&gt; 方法。这个方法可以用来检测一个对象是否含有特定的自身属性；和&lt;code&gt;in&lt;/code&gt;运算符不同，该方法会忽略掉那些从原型链上继承到的属性。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;即使属性的值是 &lt;code&gt;null&lt;/code&gt; 或 &lt;code&gt;undefined&lt;/code&gt;，只要属性存在，&lt;code&gt;hasOwnProperty&lt;/code&gt; 依旧会返回 &lt;code&gt;true&lt;/code&gt;。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;o = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;();
-o.hasOwnProperty(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;prop&amp;#39;&lt;/span&gt;); &lt;span style=&#34;color:#228b22&#34;&gt;// 返回 false
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;o.prop = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;exists&amp;#39;&lt;/span&gt;;
-o.hasOwnProperty(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;prop&amp;#39;&lt;/span&gt;); &lt;span style=&#34;color:#228b22&#34;&gt;// 返回 true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 对待自身属性和继承属性的区别：
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;o = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;();
-o.prop = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;exists&amp;#39;&lt;/span&gt;;
-o.hasOwnProperty(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;prop&amp;#39;&lt;/span&gt;);             &lt;span style=&#34;color:#228b22&#34;&gt;// 返回 true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;o.hasOwnProperty(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;toString&amp;#39;&lt;/span&gt;);         &lt;span style=&#34;color:#228b22&#34;&gt;// 返回 false
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;o.hasOwnProperty(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hasOwnProperty&amp;#39;&lt;/span&gt;);   &lt;span style=&#34;color:#228b22&#34;&gt;// 返回 false
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;objectkeys&#34;&gt;Object.keys()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用&lt;code&gt;for...in&lt;/code&gt;循环遍历该对象时返回的顺序一致。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.keys(obj)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;返回一个表示给定对象的所有可枚举属性的字符串数组&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 对于简单的数组
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; arr = [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;];
-console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.keys(arr)); &lt;span style=&#34;color:#228b22&#34;&gt;// console: [&amp;#39;0&amp;#39;, &amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 类数组对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = { &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt; };
-console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.keys(obj)); &lt;span style=&#34;color:#228b22&#34;&gt;// console: [&amp;#39;0&amp;#39;, &amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// key的顺序随机的对象，会排序后返回
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; anObj = { &lt;span style=&#34;color:#b452cd&#34;&gt;100&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;7&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt; };
-console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.keys(anObj)); &lt;span style=&#34;color:#228b22&#34;&gt;// console: [&amp;#39;2&amp;#39;, &amp;#39;7&amp;#39;, &amp;#39;100&amp;#39;]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// getFoo是一个不可枚举的属性
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; myObj = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.create({}, {
-  getFoo: {
-    value: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () { &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.foo; }
-  } 
-});
-myObj.foo = &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;;&lt;span style=&#34;color:#228b22&#34;&gt;// myObj = { foo: 1, getFoo: funtion }
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.keys(myObj)); &lt;span style=&#34;color:#228b22&#34;&gt;// console: [&amp;#39;foo&amp;#39;]
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;objectgetownpropertynames&#34;&gt;Object.getOwnPropertyNames()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;与Object.keys()方法类似，但更强大。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）组成的数组。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyNames(obj)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 对于简单的数组
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; arr = [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;a&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;b&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;c&amp;#34;&lt;/span&gt;];
-console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyNames(arr).sort()); &lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#34;0&amp;#34;, &amp;#34;1&amp;#34;, &amp;#34;2&amp;#34;, &amp;#34;length&amp;#34;] // 居然还有length...
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 类数组对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; obj = { &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;a&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;b&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;c&amp;#34;&lt;/span&gt;};
-console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyNames(obj).sort()); &lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#34;0&amp;#34;, &amp;#34;1&amp;#34;, &amp;#34;2&amp;#34;]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 使用Array.forEach输出属性名和属性值
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyNames(obj).forEach(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt;(val, idx, array) {
-  console.log(val + &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34; -&amp;gt; &amp;#34;&lt;/span&gt; + obj[val]);
-});
-&lt;span style=&#34;color:#228b22&#34;&gt;// 输出
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 0 -&amp;gt; a
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 1 -&amp;gt; b
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 2 -&amp;gt; c
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;//不可枚举属性
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; my_obj = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.create({}, {
-  getFoo: {
-    value: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt;() { &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.foo; },
-    enumerable: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt;
-  }
-});
-my_obj.foo = &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;;
-
-console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyNames(my_obj).sort()); &lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#34;foo&amp;#34;, &amp;#34;getFoo&amp;#34;]
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;objectvalues&#34;&gt;Object.values()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;会返回一个给定对象自身的所有可枚举属性值的数组，值的顺序与使用&lt;code&gt;for...in&lt;/code&gt;循环的顺序相同（区别在于&lt;code&gt;for...in&lt;/code&gt;循环枚举原型链中的属性）。与&lt;code&gt;Object.keys()&lt;/code&gt;十分相似。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.values(obj)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 对于一般对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = { foo: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;, baz: &lt;span style=&#34;color:#b452cd&#34;&gt;42&lt;/span&gt; };
-console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.values(obj)); &lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#39;bar&amp;#39;, 42]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 对于类数组对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = { &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt; };
-console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.values(obj)); &lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 键顺序随机的类数组对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 键的数字顺序决定返回值在数组中的顺序 
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; an_obj = { &lt;span style=&#34;color:#b452cd&#34;&gt;100&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;7&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt; };
-console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.values(an_obj)); &lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;, &amp;#39;a&amp;#39;]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// getFoo是一个不可枚举属性
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; my_obj = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.create({}, { getFoo: { value: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt;() { &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;this&lt;/span&gt;.foo; } } });
-my_obj.foo = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;;
-console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.values(my_obj)); &lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#39;bar&amp;#39;]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 非对象作为参数将被强制转换为对象 
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;console.log(&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.values(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;)); &lt;span style=&#34;color:#228b22&#34;&gt;// [&amp;#39;f&amp;#39;, &amp;#39;o&amp;#39;, &amp;#39;o&amp;#39;]
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;objectgetownpropertydescriptor&#34;&gt;Object.getOwnPropertyDescriptor()&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;方法返回指定对象中的一个自有属性对应的属性描述符。（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;语法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyDescriptor(obj, prop)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;obj&lt;/code&gt;需要查找的目标对象；&lt;code&gt;prop&lt;/code&gt;目标对象内的属性名称&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;如果指定的属性存在于对象上，则返回其属性描述符对象（property descriptor），否则返回&lt;code&gt;undefined&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;在 Javascript 中， &lt;code&gt;属性&lt;/code&gt;由一个字符串类型的“名字”（name）和一个“属性描述符”（property descriptor）对象构成。一个属性描述符是一个记录，由下面属性当中的某些组成的：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;value&lt;/code&gt;：该属性的值&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;writable&lt;/code&gt;：当且仅当属性的值可以被改变时为&lt;code&gt;true&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;get&lt;/code&gt;：获取该属性的访问器函数（getter）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;set&lt;/code&gt;：获取该属性的设置器函数（setter）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;configurable&lt;/code&gt;：当且仅当指定对象的属性描述可以被改变或者属性可被删除时，为&lt;code&gt;true&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;eunmerable&lt;/code&gt;：当且仅当指定对象的属性可以被枚举出时，为&lt;code&gt;true&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; o = { get foo() { &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#b452cd&#34;&gt;17&lt;/span&gt;; } };
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; d = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyDescriptor(o, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;foo&amp;#34;&lt;/span&gt;);
-&lt;span style=&#34;color:#228b22&#34;&gt;// d {
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   configurable: true,
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   enumerable: true,
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   get: /*the getter function*/,
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   set: undefined
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// }
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; o = { bar: &lt;span style=&#34;color:#b452cd&#34;&gt;42&lt;/span&gt; };
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; d = &lt;span style=&#34;color:#658b00&#34;&gt;Object&lt;/span&gt;.getOwnPropertyDescriptor(o, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;bar&amp;#34;&lt;/span&gt;);
-&lt;span style=&#34;color:#228b22&#34;&gt;// d {
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   configurable: true,
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   enumerable: true,
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   value: 42,
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//   writable: true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// }
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-- https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/ - </description>
         </item>
     
     

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>lodash on GSemir Blog</title>
+    <link>https://gsemir0418.github.io/tags/lodash/</link>
+    <description>Recent content in lodash on GSemir Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Sep 2021 16:53:09 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/lodash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lodash常用方法整理</title>
+      <link>https://gsemir0418.github.io/posts/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <pubDate>Thu, 02 Sep 2021 16:53:09 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/posts/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>0 准备  下载：  yarn add lodash / npm i lodash  Node.js引入：  const _ = require(&amp;#39;lodash&amp;#39;) 1 对象 1.1 移除对象上的一些属性-omit   把数据提交给接口，很多情况下，都要移除只在前端用，但接口不需要的属性。
+  API：
+  _.omit(object, [props])   参数说明：
+object (Object): 来源对象。
+[props] (...(string|string[])): 要被忽略的属性。（注：单独指定或指定在数组中。）
+  示例：
+  const obj = { name:&amp;#39;gsq&amp;#39;, age:19, gender:&amp;#39;male&amp;#39;, hobbies:&amp;#39;play&amp;#39; } _.omit(obj,[&amp;#39;name&amp;#39;, &amp;#39;age&amp;#39;]) // { gender:&amp;#39;male&amp;#39;, hobbies:&amp;#39;play&amp;#39; } 1.2 选择对象上的一些属性-pick   选择对象上的一些属性和移除属性操作相反。
+  API：</description>
+    </item>
+    
+  </channel>
+</rss>

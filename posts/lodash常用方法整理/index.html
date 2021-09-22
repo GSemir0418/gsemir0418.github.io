@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html><head>
+<title>Lodash常用方法整理</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<meta property="og:title" content="Lodash常用方法整理" />
+<meta property="og:description" content="0 准备  下载：  yarn add lodash / npm i lodash  Node.js引入：  const _ = require(&#39;lodash&#39;) 1 对象 1.1 移除对象上的一些属性-omit   把数据提交给接口，很多情况下，都要移除只在前端用，但接口不需要的属性。
+  API：
+  _.omit(object, [props])   参数说明：
+object (Object): 来源对象。
+[props] (...(string|string[])): 要被忽略的属性。（注：单独指定或指定在数组中。）
+  示例：
+  const obj = { name:&#39;gsq&#39;, age:19, gender:&#39;male&#39;, hobbies:&#39;play&#39; } _.omit(obj,[&#39;name&#39;, &#39;age&#39;]) // { gender:&#39;male&#39;, hobbies:&#39;play&#39; } 1.2 选择对象上的一些属性-pick   选择对象上的一些属性和移除属性操作相反。
+  API：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/posts/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-09-02T16:53:09+08:00" />
+<meta property="article:modified_time" content="2021-09-02T16:53:09+08:00" /><meta property="og:site_name" content="My Blog" />
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Lodash常用方法整理"/>
+<meta name="twitter:description" content="0 准备  下载：  yarn add lodash / npm i lodash  Node.js引入：  const _ = require(&#39;lodash&#39;) 1 对象 1.1 移除对象上的一些属性-omit   把数据提交给接口，很多情况下，都要移除只在前端用，但接口不需要的属性。
+  API：
+  _.omit(object, [props])   参数说明：
+object (Object): 来源对象。
+[props] (...(string|string[])): 要被忽略的属性。（注：单独指定或指定在数组中。）
+  示例：
+  const obj = { name:&#39;gsq&#39;, age:19, gender:&#39;male&#39;, hobbies:&#39;play&#39; } _.omit(obj,[&#39;name&#39;, &#39;age&#39;]) // { gender:&#39;male&#39;, hobbies:&#39;play&#39; } 1.2 选择对象上的一些属性-pick   选择对象上的一些属性和移除属性操作相反。
+  API："/>
+
+
+
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="https://gsemir0418.github.io/scss/journal.min.5e8f3f653e9f6ce67bf72ff8ee6fee69decf7b5639a3ae7f8344750ad4e065b1.css" integrity="sha256-Xo8/ZT6fbOZ79y/47m/uad7Pe1Y5o65/g0R1CtTgZbE=" media="screen">
+
+
+
+<link rel="stylesheet" href="https://gsemir0418.github.io/scss/dark-mode.min.bdfa63b2e89903517dcbb1032b537d54cff3f425c19d008a78dfe49e6cd07ced.css" integrity="sha256-vfpjsuiZA1F9y7EDK1N9VM/z9CXBnQCKeN/knmzQfO0=" media="screen">
+
+
+<script src="https://gsemir0418.github.io//js/loadCSS.js"></script>
+<script>
+  loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+  
+    <script src="https://gsemir0418.github.io//js/toc-collapse.js"></script>
+  
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'your client id',
+  clientSecret: 'your client secret',
+  repo: 'repo name',
+  owner: 'user',
+  admin: ['user'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
+
+
+
+
+
+
+
+
+</head>
+<body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="https://gsemir0418.github.io/">
+    
+        <div class="nav-title">
+            GSemir Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            个人技术博客
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                Archive
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories">
+                Categories
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags">
+                Tags
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/index.xml">
+                RSS Feed
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 GSemir Blog
+	
+
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#0-%e5%87%86%e5%a4%87" onclick="onNavClick(`#0-准备-nav`)" id="0-准备-nav">
+									0 准备
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#1-%e5%af%b9%e8%b1%a1" onclick="onNavClick(`#1-对象-nav`)" id="1-对象-nav">
+									1 对象
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#11-%e7%a7%bb%e9%99%a4%e5%af%b9%e8%b1%a1%e4%b8%8a%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b1%9e%e6%80%a7-omit" onclick="onNavClick(`#11-移除对象上的一些属性-omit-nav`)" id="11-移除对象上的一些属性-omit-nav">
+									1.1 移除对象上的一些属性-omit
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#12-%e9%80%89%e6%8b%a9%e5%af%b9%e8%b1%a1%e4%b8%8a%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b1%9e%e6%80%a7-pick" onclick="onNavClick(`#12-选择对象上的一些属性-pick-nav`)" id="12-选择对象上的一些属性-pick-nav">
+									1.2 选择对象上的一些属性-pick
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#13-%e5%af%b9%e8%b1%a1%e7%9a%84%e6%b7%b1%e6%8b%b7%e8%b4%9d-clonedeep" onclick="onNavClick(`#13-对象的深拷贝-clonedeep-nav`)" id="13-对象的深拷贝-clonedeep-nav">
+									1.3 对象的深拷贝-cloneDeep
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#2-%e6%95%b0%e7%bb%84" onclick="onNavClick(`#2-数组-nav`)" id="2-数组-nav">
+									2 数组
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#21-%e6%a0%b9%e6%8d%ae%e6%9d%a1%e4%bb%b6%e5%8e%bb%e9%99%a4%e6%9f%90%e4%b8%aa%e5%85%83%e7%b4%a0-reject" onclick="onNavClick(`#21-根据条件去除某个元素-reject-nav`)" id="21-根据条件去除某个元素-reject-nav">
+									2.1 根据条件去除某个元素-reject
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#22-%e6%95%b0%e7%bb%84%e8%bd%ac%e6%8d%a2%e4%b8%ba%e5%af%b9%e8%b1%a1-keyby" onclick="onNavClick(`#22-数组转换为对象-keyby-nav`)" id="22-数组转换为对象-keyby-nav">
+									2.2 数组转换为对象-keyBy
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#3-%e8%af%ad%e8%a8%80" onclick="onNavClick(`#3-语言-nav`)" id="3-语言-nav">
+									3 语言
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#31-%e5%88%a4%e6%96%ad%e6%98%af%e5%90%a6%e4%b8%ba%e7%a9%ba-isempty" onclick="onNavClick(`#31-判断是否为空-isempty-nav`)" id="31-判断是否为空-isempty-nav">
+									3.1 判断是否为空-isEmpty
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#32-%e9%98%b2%e6%8a%96" onclick="onNavClick(`#32-防抖-nav`)" id="32-防抖-nav">
+									3.2 防抖
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#33-%e8%8a%82%e6%b5%81" onclick="onNavClick(`#33-节流-nav`)" id="33-节流-nav">
+									3.3 节流
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#4-%e6%95%b0%e5%ad%a6" onclick="onNavClick(`#4-数学-nav`)" id="4-数学-nav">
+									4 数学
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#41-%e9%9a%8f%e6%9c%ba%e6%95%b0-random" onclick="onNavClick(`#41-随机数-random-nav`)" id="41-随机数-random-nav">
+									4.1 随机数-random
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a class="pagination-action" v-on:click="toggleDarkMode">
+            <i class="material-icons pagination-action-icon" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons pagination-action-icon" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    Archive
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories">
+                    Categories
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags">
+                    Tags
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/index.xml">
+                    RSS Feed
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#0-%e5%87%86%e5%a4%87" onclick="onNavClick(`#0-准备-nav`)" id="0-准备-nav">
+									0 准备
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#1-%e5%af%b9%e8%b1%a1" onclick="onNavClick(`#1-对象-nav`)" id="1-对象-nav">
+									1 对象
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#11-%e7%a7%bb%e9%99%a4%e5%af%b9%e8%b1%a1%e4%b8%8a%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b1%9e%e6%80%a7-omit" onclick="onNavClick(`#11-移除对象上的一些属性-omit-nav`)" id="11-移除对象上的一些属性-omit-nav">
+									1.1 移除对象上的一些属性-omit
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#12-%e9%80%89%e6%8b%a9%e5%af%b9%e8%b1%a1%e4%b8%8a%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b1%9e%e6%80%a7-pick" onclick="onNavClick(`#12-选择对象上的一些属性-pick-nav`)" id="12-选择对象上的一些属性-pick-nav">
+									1.2 选择对象上的一些属性-pick
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#13-%e5%af%b9%e8%b1%a1%e7%9a%84%e6%b7%b1%e6%8b%b7%e8%b4%9d-clonedeep" onclick="onNavClick(`#13-对象的深拷贝-clonedeep-nav`)" id="13-对象的深拷贝-clonedeep-nav">
+									1.3 对象的深拷贝-cloneDeep
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#2-%e6%95%b0%e7%bb%84" onclick="onNavClick(`#2-数组-nav`)" id="2-数组-nav">
+									2 数组
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#21-%e6%a0%b9%e6%8d%ae%e6%9d%a1%e4%bb%b6%e5%8e%bb%e9%99%a4%e6%9f%90%e4%b8%aa%e5%85%83%e7%b4%a0-reject" onclick="onNavClick(`#21-根据条件去除某个元素-reject-nav`)" id="21-根据条件去除某个元素-reject-nav">
+									2.1 根据条件去除某个元素-reject
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#22-%e6%95%b0%e7%bb%84%e8%bd%ac%e6%8d%a2%e4%b8%ba%e5%af%b9%e8%b1%a1-keyby" onclick="onNavClick(`#22-数组转换为对象-keyby-nav`)" id="22-数组转换为对象-keyby-nav">
+									2.2 数组转换为对象-keyBy
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#3-%e8%af%ad%e8%a8%80" onclick="onNavClick(`#3-语言-nav`)" id="3-语言-nav">
+									3 语言
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#31-%e5%88%a4%e6%96%ad%e6%98%af%e5%90%a6%e4%b8%ba%e7%a9%ba-isempty" onclick="onNavClick(`#31-判断是否为空-isempty-nav`)" id="31-判断是否为空-isempty-nav">
+									3.1 判断是否为空-isEmpty
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#32-%e9%98%b2%e6%8a%96" onclick="onNavClick(`#32-防抖-nav`)" id="32-防抖-nav">
+									3.2 防抖
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#33-%e8%8a%82%e6%b5%81" onclick="onNavClick(`#33-节流-nav`)" id="33-节流-nav">
+									3.3 节流
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#4-%e6%95%b0%e5%ad%a6" onclick="onNavClick(`#4-数学-nav`)" id="4-数学-nav">
+									4 数学
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#41-%e9%9a%8f%e6%9c%ba%e6%95%b0-random" onclick="onNavClick(`#41-随机数-random-nav`)" id="41-随机数-random-nav">
+									4.1 随机数-random
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="https://gsemir0418.github.io/">
+            GSemir Blog
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
+            <i class="material-icons" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://gsemir0418.github.io/">
+        <div class="single-column-header-title">GSemir Blog</div>
+        
+        <div class="single-column-header-subtitle">个人技术博客</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    Lodash常用方法整理
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2021-09-02 16:53
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93">项目实战总结</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/javascript">JavaScript</a>
+                                &nbsp;
+                            
+                                <a href="/tags/lodash">lodash</a>
+                                &nbsp;
+                            
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h1 id="0-准备">0 准备</h1>
+<ul>
+<li>下载：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yarn add lodash / npm i lodash
+</code></pre></div><ul>
+<li>Node.js引入：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> <span style="color:#b452cd">_</span>  = require(<span style="color:#cd5555">&#39;lodash&#39;</span>)
+</code></pre></div><h1 id="1-对象">1 对象</h1>
+<h2 id="11-移除对象上的一些属性-omit">1.1 移除对象上的一些属性-omit</h2>
+<ul>
+<li>
+<p>把数据提交给接口，很多情况下，都要移除只在前端用，但接口不需要的属性。</p>
+</li>
+<li>
+<p>API：</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#b452cd">_</span>.omit(object, [props])
+</code></pre></div><ul>
+<li>
+<p>参数说明：</p>
+<p><code>object (Object)</code>: 来源对象。</p>
+<p><code>[props] (...(string|string[]))</code>: 要被忽略的属性。（注：单独指定或指定在数组中。）</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> obj = { name:<span style="color:#cd5555">&#39;gsq&#39;</span>, age:<span style="color:#b452cd">19</span>, gender:<span style="color:#cd5555">&#39;male&#39;</span>, hobbies:<span style="color:#cd5555">&#39;play&#39;</span> }
+<span style="color:#b452cd">_</span>.omit(obj,[<span style="color:#cd5555">&#39;name&#39;</span>, <span style="color:#cd5555">&#39;age&#39;</span>]) <span style="color:#228b22">// { gender:&#39;male&#39;, hobbies:&#39;play&#39; }
+</span></code></pre></div><h2 id="12-选择对象上的一些属性-pick">1.2 选择对象上的一些属性-pick</h2>
+<ul>
+<li>
+<p>选择对象上的一些属性和移除属性操作相反。</p>
+</li>
+<li>
+<p>API：</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#b452cd">_</span>.pick(object, [props])
+</code></pre></div><ul>
+<li>示例</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> obj = { name:<span style="color:#cd5555">&#39;gsq&#39;</span>, age:<span style="color:#b452cd">19</span>, gender:<span style="color:#cd5555">&#39;male&#39;</span>, hobbies:<span style="color:#cd5555">&#39;play&#39;</span> }
+<span style="color:#b452cd">_</span>.pick(obj,[<span style="color:#cd5555">&#39;name&#39;</span>, <span style="color:#cd5555">&#39;age&#39;</span>]) <span style="color:#228b22">// { name:&#39;gsq&#39;, age:19 }
+</span></code></pre></div><h2 id="13-对象的深拷贝-clonedeep">1.3 对象的深拷贝-cloneDeep</h2>
+<ul>
+<li>
+<p>对象的深度克隆是很困难的。 <code>JSON.parse(JSON.stringify(obj))</code> 可以实现对象的深度克隆。但有如下缺点:</p>
+<ul>
+<li>值类型是 undefined、function、symbol 的属性会被过滤掉。</li>
+<li>是类型是 set、map 会被被处理成空对象。</li>
+<li>对象的属性间出现循环引用时，会报错。</li>
+</ul>
+</li>
+<li>
+<p>API：</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#b452cd">_</span>.cloneDeep(obj)
+</code></pre></div><ul>
+<li>示例：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> obj2 = { f: <span style="color:#8b008b;font-weight:bold">function</span> () { }, u: <span style="color:#8b008b;font-weight:bold">undefined</span>, a: <span style="color:#b452cd">1</span>, }
+<span style="color:#8b008b;font-weight:bold">const</span> r1 = JSON.parse(JSON.stringify(obj2))
+console.log(<span style="color:#cd5555">&#39;r1&#39;</span>, r1)<span style="color:#228b22">// r1 { a: 1 }
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> r2 = <span style="color:#b452cd">_</span>.cloneDeep(obj2)
+console.log(<span style="color:#cd5555">&#39;r2&#39;</span>, r2)<span style="color:#228b22">// r2 { f: [Function: f], u: undefined, a: 1 }
+</span></code></pre></div><h1 id="2-数组">2 数组</h1>
+<h2 id="21-根据条件去除某个元素-reject">2.1 根据条件去除某个元素-reject</h2>
+<ul>
+<li>
+<p>根据条件删除数组中某个元素（与fliter相反）</p>
+</li>
+<li>
+<p>API：</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#b452cd">_</span>.reject(collection, identity)
+</code></pre></div><ul>
+<li>
+<p>参数说明</p>
+<p>identity：判断依据，可以是数组、对象、字符串或回调函数</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">var</span> users = [
+  { <span style="color:#cd5555">&#39;user&#39;</span>: <span style="color:#cd5555">&#39;gsq&#39;</span>, <span style="color:#cd5555">&#39;age&#39;</span>: <span style="color:#b452cd">36</span>, <span style="color:#cd5555">&#39;active&#39;</span>: <span style="color:#8b008b;font-weight:bold">false</span> },
+  { <span style="color:#cd5555">&#39;user&#39;</span>: <span style="color:#cd5555">&#39;zs&#39;</span>,   <span style="color:#cd5555">&#39;age&#39;</span>: <span style="color:#b452cd">40</span>, <span style="color:#cd5555">&#39;active&#39;</span>: <span style="color:#8b008b;font-weight:bold">true</span> }
+];
+ 
+<span style="color:#b452cd">_</span>.reject(users, <span style="color:#8b008b;font-weight:bold">function</span>(o) { <span style="color:#8b008b;font-weight:bold">return</span> !o.active; });
+<span style="color:#228b22">// [ { user: &#39;zs&#39;, age: 40, active: true } ]
+</span><span style="color:#228b22"></span> 
+<span style="color:#b452cd">_</span>.reject(users, { <span style="color:#cd5555">&#39;age&#39;</span>: <span style="color:#b452cd">40</span>, <span style="color:#cd5555">&#39;active&#39;</span>: <span style="color:#8b008b;font-weight:bold">true</span> });
+<span style="color:#228b22">// [ { user: &#39;gsq&#39;, age: 36, active: false } ]
+</span><span style="color:#228b22"></span>
+<span style="color:#b452cd">_</span>.reject(users, [<span style="color:#cd5555">&#39;active&#39;</span>, <span style="color:#8b008b;font-weight:bold">false</span>]);
+<span style="color:#228b22">// [ { user: &#39;zs&#39;, age: 40, active: true } ]
+</span><span style="color:#228b22"></span> 
+<span style="color:#b452cd">_</span>.reject(users, <span style="color:#cd5555">&#39;active&#39;</span>);
+<span style="color:#228b22">// [ { user: &#39;gsq&#39;, age: 36, active: false } ]
+</span></code></pre></div><h2 id="22-数组转换为对象-keyby">2.2 数组转换为对象-keyBy</h2>
+<ul>
+<li>
+<p>以某个属性为键，转换数组为对象</p>
+</li>
+<li>
+<p>API：</p>
+</li>
+</ul>
+<pre><code>_.keyBy(collection, key)
+</code></pre><ul>
+<li>
+<p>参数说明：</p>
+<p>collection：Array | Object</p>
+<p>key：Array | Function | Object | string</p>
+<p>返回新的对象</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">const</span> array = [
+  { <span style="color:#cd5555">&#39;dir&#39;</span>: <span style="color:#cd5555">&#39;left&#39;</span>, <span style="color:#cd5555">&#39;code&#39;</span>: <span style="color:#b452cd">97</span> },
+  { <span style="color:#cd5555">&#39;dir&#39;</span>: <span style="color:#cd5555">&#39;right&#39;</span>, <span style="color:#cd5555">&#39;code&#39;</span>: <span style="color:#b452cd">100</span> }
+];
+ 
+<span style="color:#b452cd">_</span>.keyBy(array, <span style="color:#8b008b;font-weight:bold">function</span>(o) {
+  <span style="color:#8b008b;font-weight:bold">return</span> <span style="color:#658b00">String</span>.fromCharCode(o.code);
+});
+<span style="color:#228b22">// { &#39;a&#39;: { &#39;dir&#39;: &#39;left&#39;, &#39;code&#39;: 97 }, &#39;d&#39;: { &#39;dir&#39;: &#39;right&#39;, &#39;code&#39;: 100 } }
+</span><span style="color:#228b22"></span> 
+<span style="color:#b452cd">_</span>.keyBy(array, <span style="color:#cd5555">&#39;dir&#39;</span>);
+<span style="color:#228b22">// { &#39;left&#39;: { &#39;dir&#39;: &#39;left&#39;, &#39;code&#39;: 97 }, &#39;right&#39;: { &#39;dir&#39;: &#39;right&#39;, &#39;code&#39;: 100 } }
+</span></code></pre></div><h1 id="3-语言">3 语言</h1>
+<h2 id="31-判断是否为空-isempty">3.1 判断是否为空-isEmpty</h2>
+<ul>
+<li>检查 <code>value</code> 是否为一个空对象，集合，映射或者set。 判断的依据是除非是有枚举属性的对象，length 大于 0 的 arguments object, array, string 或类jquery选择器。</li>
+<li>API：</li>
+</ul>
+<pre><code>_.isEmpty(value)
+</code></pre><ul>
+<li>示例：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#228b22">// 以上均返回true
+</span><span style="color:#228b22"></span><span style="color:#b452cd">_</span>.isEmpty(<span style="color:#8b008b;font-weight:bold">false</span>)
+<span style="color:#b452cd">_</span>.isEmpty(<span style="color:#b452cd">0</span>)
+<span style="color:#b452cd">_</span>.isEmpty([])
+<span style="color:#b452cd">_</span>.isEmpty({})
+<span style="color:#b452cd">_</span>.isEmpty(<span style="color:#8b008b;font-weight:bold">null</span>)
+<span style="color:#b452cd">_</span>.isEmpty(<span style="color:#8b008b;font-weight:bold">undefined</span>)
+</code></pre></div><h2 id="32-防抖">3.2 防抖</h2>
+<h2 id="33-节流">3.3 节流</h2>
+<h1 id="4-数学">4 数学</h1>
+<h2 id="41-随机数-random">4.1 随机数-random</h2>
+<ul>
+<li>产生一个包括 <code>lower</code> 与 <code>upper</code> 之间的数。 如果只提供一个参数返回一个<code>0</code>到提供数之间的数。 如果 <code>floating</code> 设为 <code>true</code>，或者 <code>lower</code> 或 <code>upper</code> 是浮点数，结果返回浮点数。</li>
+<li>API:</li>
+</ul>
+<pre><code>_.random([lower=0], [upper=1], [floating])
+</code></pre><ul>
+<li>
+<p>参数说明</p>
+<p><code>[lower=0]</code> <em>(number)</em>: 下限。</p>
+<p><code>[upper=1]</code> <em>(number)</em>: 上限。</p>
+<p><code>[floating]</code> <em>(boolean)</em>: 指定是否返回浮点数。</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#b452cd">_</span>.random(<span style="color:#b452cd">0</span>, <span style="color:#b452cd">5</span>);
+<span style="color:#228b22">// =&gt; an integer between 0 and 5
+</span><span style="color:#228b22"></span><span style="color:#b452cd">_</span>.random(<span style="color:#b452cd">5</span>);
+<span style="color:#228b22">// =&gt; also an integer between 0 and 5
+</span><span style="color:#228b22"></span><span style="color:#b452cd">_</span>.random(<span style="color:#b452cd">5</span>, <span style="color:#8b008b;font-weight:bold">true</span>);
+<span style="color:#228b22">// =&gt; a floating-point number between 0 and 5
+</span><span style="color:#228b22"></span><span style="color:#b452cd">_</span>.random(<span style="color:#b452cd">1.2</span>, <span style="color:#b452cd">5.2</span>);
+<span style="color:#228b22">// =&gt; a floating-point number between 1.2 and 5.2
+</span></code></pre></div>
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">最后修改于 2021-09-02</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="https://gsemir0418.github.io/posts/dva%E6%95%B0%E6%8D%AE%E6%B5%81/">
+			下回<br>Dva数据流
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://gsemir0418.github.io/posts/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/">
+			上回<br>Web性能优化-基础
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+<div id="gitalk-container"></div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 GSemir Blog
+	
+</div>
+            </div>
+    <script>
+let app;
+
+app = new Vue({
+    el: '#app',
+    data: {
+        scrollY: 0,
+        navOpacity: 0,
+        isDrawerOpen: false,
+        mounted: false,
+        isDarkMode: false
+    },
+    methods: {
+            sgn(t, x) {
+                let k = 1. / (1. - 2 * t);
+                if (x <= t) return 0;
+                else if (x >= 1 - t) return 1;
+                else {
+                    return k * (x - t);
+                }
+            },
+            handleScroll() {
+                this.scrollY = window.scrollY;
+                this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+
+                if (this.navOpacity >= 1) {
+                    navBackground.style.opacity = 1;
+                    navTitle.style.opacity = 1;
+                } else {
+                    navBackground.style.opacity = 0;
+                    navTitle.style.opacity = 0;
+                }
+            },
+            handleResize() {
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+                extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
+            },
+            navBarHeight() {
+                return this.$refs.navBar.offsetHeight;
+            },
+            pageHeadHeight() {
+                return this.$refs.pageHead.offsetHeight;
+            },
+            toggleDrawer() {
+                this.isDrawerOpen = !this.isDrawerOpen;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            closeDrawer() {
+                this.isDrawerOpen = false;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            toggleDarkMode() {
+                this.isDarkMode = !this.isDarkMode;
+                if (this.isDarkMode==true){
+                    document.cookie = "night=1;path=/";
+                    document.body.classList.add("night");
+                } else {
+                    document.cookie = "night=0;path=/";
+                    document.body.classList.remove("night");
+                }
+            }
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+        window._nonDesktop = function () {
+            let check = false;
+            (function (a) {
+                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+            })(navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        };
+        
+        var night = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if (night==""){
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                
+            }
+        }else{
+            
+            if (night=="1") {
+                this.toggleDarkMode();
+            }
+        }
+    },
+    mounted() {
+        this.handleScroll();
+        this.handleResize();
+        this.mounted = true;
+
+        
+    },
+    destroyed() {
+        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
+    }
+});
+</script>
+
+<script src="https://gsemir0418.github.io//js/journal.js"></script>
+    </body>
+</html>

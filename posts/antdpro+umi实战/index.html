@@ -17,7 +17,18 @@
 
 
 <meta property="og:title" content="umi&#43;AntdPro实战总结" />
-<meta property="og:description" content="项目总结" />
+<meta property="og:description" content="项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将umi与antdPro框架在使用过程中遇到的问题与解决方案整理如下。
+1 Ant Design Pro 1.1 全局样式 全局的样式（包括覆盖原生antd的css）可以写到global.less中，记得属性后加!important
+打包后样式失效时，可以尝试关闭config.js中的按需加载（dynamicImport），但可能对平台首页加载速度有一定影响
+1.2 Pro表单项onChange事件无效 使用表单项组件时onChange事件失效
+在表单项的fieldProps属性中定义onChange事件即可，fieldProps即Pro组件对应的原生antd属性。
+1.3 ProComponents 1.3.1 ProTable   字段找不到
+进行列配置时，对应字段可能在对象深层，在配置dataIndex时可以用数组的形式，例如
+dataIndex:[&#39;data&#39;, &#39;placeNumber&#39;, &#39;method&#39;] 那么ProTable就会将行数据的data.placeNumber.method值呈现在表格中了
+  可编辑表格编辑状态默认值
+EditableProTable的columns配置中的valueEnum是用来转换字符串类型的枚举（配合valueType:&#39;select&#39;替代render），对于非字符串字段（如数值或布尔类型），则会出现编辑状态的默认值为空或为实际value的bug。
+ 可以使用renderFormItem配置此字段的Select选择框，利用ref全局变量存储选项值，通过onSave读取ref值，对接保存或新增借口即可。
+// 修改后的status const status = useRef(null) ... { title: &#39;装置状态&#39;, dataIndex: &#39;status&#39;, // 功能同render  valueType: &#39;select&#39;, valueEnum: { 0: { text: &#39;停工&#39;, status: &#39;Error&#39;, }, 1: { text: &#39;正常&#39;, status: &#39;Success&#39;, }, }, renderFormItem: u =&gt; [ &lt;Select key=&#39;statusSelect&#39; // 配置初始值 defaultValue={u." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-08-22T22:51:51+08:00" />
@@ -30,7 +41,18 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="umi&#43;AntdPro实战总结"/>
-<meta name="twitter:description" content="项目总结"/>
+<meta name="twitter:description" content="项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将umi与antdPro框架在使用过程中遇到的问题与解决方案整理如下。
+1 Ant Design Pro 1.1 全局样式 全局的样式（包括覆盖原生antd的css）可以写到global.less中，记得属性后加!important
+打包后样式失效时，可以尝试关闭config.js中的按需加载（dynamicImport），但可能对平台首页加载速度有一定影响
+1.2 Pro表单项onChange事件无效 使用表单项组件时onChange事件失效
+在表单项的fieldProps属性中定义onChange事件即可，fieldProps即Pro组件对应的原生antd属性。
+1.3 ProComponents 1.3.1 ProTable   字段找不到
+进行列配置时，对应字段可能在对象深层，在配置dataIndex时可以用数组的形式，例如
+dataIndex:[&#39;data&#39;, &#39;placeNumber&#39;, &#39;method&#39;] 那么ProTable就会将行数据的data.placeNumber.method值呈现在表格中了
+  可编辑表格编辑状态默认值
+EditableProTable的columns配置中的valueEnum是用来转换字符串类型的枚举（配合valueType:&#39;select&#39;替代render），对于非字符串字段（如数值或布尔类型），则会出现编辑状态的默认值为空或为实际value的bug。
+ 可以使用renderFormItem配置此字段的Select选择框，利用ref全局变量存储选项值，通过onSave读取ref值，对接保存或新增借口即可。
+// 修改后的status const status = useRef(null) ... { title: &#39;装置状态&#39;, dataIndex: &#39;status&#39;, // 功能同render  valueType: &#39;select&#39;, valueEnum: { 0: { text: &#39;停工&#39;, status: &#39;Error&#39;, }, 1: { text: &#39;正常&#39;, status: &#39;Success&#39;, }, }, renderFormItem: u =&gt; [ &lt;Select key=&#39;statusSelect&#39; // 配置初始值 defaultValue={u."/>
 
 
 
@@ -181,6 +203,279 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
     <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
 
 
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#1-ant-design-pro" onclick="onNavClick(`#1-ant-design-pro-nav`)" id="1-ant-design-pro-nav">
+									1 Ant Design Pro
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#11-%e5%85%a8%e5%b1%80%e6%a0%b7%e5%bc%8f" onclick="onNavClick(`#11-全局样式-nav`)" id="11-全局样式-nav">
+									1.1 全局样式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#12-pro%e8%a1%a8%e5%8d%95%e9%a1%b9onchange%e4%ba%8b%e4%bb%b6%e6%97%a0%e6%95%88" onclick="onNavClick(`#12-pro表单项onchange事件无效-nav`)" id="12-pro表单项onchange事件无效-nav">
+									1.2 Pro表单项onChange事件无效
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#13-procomponents" onclick="onNavClick(`#13-procomponents-nav`)" id="13-procomponents-nav">
+									1.3 ProComponents
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#131-protable" onclick="onNavClick(`#131-protable-nav`)" id="131-protable-nav">
+									1.3.1 ProTable
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#2-umijs" onclick="onNavClick(`#2-umijs-nav`)" id="2-umijs-nav">
+									2 umi.js
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#21-umi-request" onclick="onNavClick(`#21-umi-request-nav`)" id="21-umi-request-nav">
+									2.1 umi-request
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#22-history" onclick="onNavClick(`#22-history-nav`)" id="22-history-nav">
+									2.2 history
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#3%e5%85%b6%e4%bb%96" onclick="onNavClick(`#3其他-nav`)" id="3其他-nav">
+									3.其他
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#31-%e8%a7%a3%e5%86%b3%e5%8d%95%e5%87%bb%e5%8f%8c%e5%87%bb%e5%86%b2%e7%aa%81" onclick="onNavClick(`#31-解决单击双击冲突-nav`)" id="31-解决单击双击冲突-nav">
+									3.1 解决单击双击冲突
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#32-switch%e6%96%b9%e6%b3%95%e5%9c%a8jsx%e4%b8%ad%e7%9a%84%e4%bd%bf%e7%94%a8" onclick="onNavClick(`#32-switch方法在jsx中的使用-nav`)" id="32-switch方法在jsx中的使用-nav">
+									3.2 switch方法在jsx中的使用
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#33-useref" onclick="onNavClick(`#33-useref-nav`)" id="33-useref-nav">
+									3.3 useRef
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#34-%e8%a1%a8%e5%8d%95%e8%81%94%e5%8a%a8" onclick="onNavClick(`#34-表单联动-nav`)" id="34-表单联动-nav">
+									3.4 表单联动
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
 </div>
     
     <div class="pagination">
@@ -254,6 +549,279 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
             
             <div class="toc">
 
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#1-ant-design-pro" onclick="onNavClick(`#1-ant-design-pro-nav`)" id="1-ant-design-pro-nav">
+									1 Ant Design Pro
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#11-%e5%85%a8%e5%b1%80%e6%a0%b7%e5%bc%8f" onclick="onNavClick(`#11-全局样式-nav`)" id="11-全局样式-nav">
+									1.1 全局样式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#12-pro%e8%a1%a8%e5%8d%95%e9%a1%b9onchange%e4%ba%8b%e4%bb%b6%e6%97%a0%e6%95%88" onclick="onNavClick(`#12-pro表单项onchange事件无效-nav`)" id="12-pro表单项onchange事件无效-nav">
+									1.2 Pro表单项onChange事件无效
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#13-procomponents" onclick="onNavClick(`#13-procomponents-nav`)" id="13-procomponents-nav">
+									1.3 ProComponents
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#131-protable" onclick="onNavClick(`#131-protable-nav`)" id="131-protable-nav">
+									1.3.1 ProTable
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#2-umijs" onclick="onNavClick(`#2-umijs-nav`)" id="2-umijs-nav">
+									2 umi.js
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#21-umi-request" onclick="onNavClick(`#21-umi-request-nav`)" id="21-umi-request-nav">
+									2.1 umi-request
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#22-history" onclick="onNavClick(`#22-history-nav`)" id="22-history-nav">
+									2.2 history
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#3%e5%85%b6%e4%bb%96" onclick="onNavClick(`#3其他-nav`)" id="3其他-nav">
+									3.其他
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#31-%e8%a7%a3%e5%86%b3%e5%8d%95%e5%87%bb%e5%8f%8c%e5%87%bb%e5%86%b2%e7%aa%81" onclick="onNavClick(`#31-解决单击双击冲突-nav`)" id="31-解决单击双击冲突-nav">
+									3.1 解决单击双击冲突
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#32-switch%e6%96%b9%e6%b3%95%e5%9c%a8jsx%e4%b8%ad%e7%9a%84%e4%bd%bf%e7%94%a8" onclick="onNavClick(`#32-switch方法在jsx中的使用-nav`)" id="32-switch方法在jsx中的使用-nav">
+									3.2 switch方法在jsx中的使用
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#33-useref" onclick="onNavClick(`#33-useref-nav`)" id="33-useref-nav">
+									3.3 useRef
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#34-%e8%a1%a8%e5%8d%95%e8%81%94%e5%8a%a8" onclick="onNavClick(`#34-表单联动-nav`)" id="34-表单联动-nav">
+									3.4 表单联动
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
 
 </div>
             
@@ -349,7 +917,113 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
                 <div class="post-body" v-pre>
                 
-                    <p>项目总结</p>
+                    <p>项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将umi与antdPro框架在使用过程中遇到的问题与解决方案整理如下。</p>
+<h1 id="1-ant-design-pro">1 Ant Design Pro</h1>
+<h2 id="11-全局样式">1.1 全局样式</h2>
+<p>全局的样式（包括覆盖原生antd的css）可以写到<code>global.less</code>中，记得属性后加<code>!important</code></p>
+<p>打包后样式失效时，可以尝试关闭config.js中的按需加载（<code>dynamicImport</code>），但可能对平台首页加载速度有一定影响</p>
+<h2 id="12-pro表单项onchange事件无效">1.2 Pro表单项onChange事件无效</h2>
+<p>使用表单项组件时onChange事件失效</p>
+<p>在表单项的fieldProps属性中定义onChange事件即可，fieldProps即Pro组件对应的原生antd属性。</p>
+<h2 id="13-procomponents">1.3 ProComponents</h2>
+<h3 id="131-protable">1.3.1 ProTable</h3>
+<ol>
+<li>
+<p>字段找不到</p>
+<p>进行列配置时，对应字段可能在对象深层，在配置<code>dataIndex</code>时可以用数组的形式，例如</p>
+<pre><code>dataIndex:['data', 'placeNumber', 'method']
+</code></pre><p>那么ProTable就会将行数据的data.placeNumber.method值呈现在表格中了</p>
+</li>
+<li>
+<p>可编辑表格编辑状态默认值</p>
+<p>EditableProTable的columns配置中的<code>valueEnum</code>是用来转换<strong>字符串</strong>类型的枚举（配合<code>valueType:'select'</code>替代render），对于非字符串字段（如数值或布尔类型），则会出现编辑状态的默认值为空或为实际value的bug。</p>
+<pre><code>
+</code></pre><p>可以使用renderFormItem配置此字段的Select选择框，利用ref全局变量存储选项值，通过onSave读取ref值，对接保存或新增借口即可。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#228b22">// 修改后的status
+</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">const</span> status = useRef(<span style="color:#8b008b;font-weight:bold">null</span>)
+...
+{
+      title: <span style="color:#cd5555">&#39;装置状态&#39;</span>,
+      dataIndex: <span style="color:#cd5555">&#39;status&#39;</span>,
+         <span style="color:#228b22">// 功能同render
+</span><span style="color:#228b22"></span>      valueType: <span style="color:#cd5555">&#39;select&#39;</span>,
+      valueEnum: {
+        <span style="color:#b452cd">0</span>: {
+          text: <span style="color:#cd5555">&#39;停工&#39;</span>,
+          status: <span style="color:#cd5555">&#39;Error&#39;</span>,
+        },
+        <span style="color:#b452cd">1</span>: {
+          text: <span style="color:#cd5555">&#39;正常&#39;</span>,
+          status: <span style="color:#cd5555">&#39;Success&#39;</span>,
+        },
+      },
+      renderFormItem: u =&gt; [
+        &lt;<span style="color:#8b008b;font-weight:bold">Select</span>
+          <span style="color:#658b00">key</span>=<span style="color:#cd5555">&#39;statusSelect&#39;</span>
+          <span style="color:#a61717;background-color:#e3d2d2">//</span> <span style="color:#658b00">配置初始值</span>
+          <span style="color:#658b00">defaultValue</span>={u.entry?u.entry.status:<span style="color:#8b008b;font-weight:bold">null</span>}
+          <span style="color:#658b00">onChange</span>={v =&gt; {
+            status.current = v
+          }}
+          <span style="color:#658b00">rules</span>={[
+            {
+              required: <span style="color:#8b008b;font-weight:bold">true</span>,
+              message: <span style="color:#cd5555">&#39;此项为必填项&#39;</span>,
+            },
+          ]}
+        &gt;
+          &lt;<span style="color:#8b008b;font-weight:bold">Option</span> <span style="color:#658b00">value</span>={<span style="color:#b452cd">0</span>}&gt;停工&lt;/<span style="color:#8b008b;font-weight:bold">Option</span>&gt;
+          &lt;<span style="color:#8b008b;font-weight:bold">Option</span> <span style="color:#658b00">value</span>={<span style="color:#b452cd">1</span>}&gt;正常&lt;/<span style="color:#8b008b;font-weight:bold">Option</span>&gt;
+        &lt;/<span style="color:#8b008b;font-weight:bold">Select</span>&gt;,
+      ],
+    },
+</code></pre></div></li>
+</ol>
+<h1 id="2-umijs">2 umi.js</h1>
+<h2 id="21-umi-request">2.1 umi-request</h2>
+<p>当打包后请求<code>url</code>正常，但出现503等错误时，可以尝试在<code>request.js</code>中去除<code>credentials: 'include'</code>，即默认请求不携带cookie</p>
+<h2 id="22-history">2.2 history</h2>
+<p>history可以实现路由跳转，也可携带参数跳转</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#8b008b;font-weight:bold">import</span> {history} from <span style="color:#cd5555">&#39;umi&#39;</span>
+
+history.push({
+	pathname:<span style="color:#cd5555">&#39;xxx/xxx&#39;</span>,
+	params:{id,name,age}
+})
+</code></pre></div><p>跳转后利用useEffect监听props.location.params中的参数，进行数据请求等操作。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-react" data-lang="react"><span style="color:#8b008b;font-weight:bold">const</span> {id} = props.location.params
+useEffect(()=&gt;{
+	getXXXById(id).then()
+},[id])
+</code></pre></div><h1 id="3其他">3.其他</h1>
+<h2 id="31-解决单击双击冲突">3.1 解决单击双击冲突</h2>
+<p>可以利用计时器配合单击事件回调，实现单击双击事件的区别触发</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">onClick={() =&gt; {
+  count.current += <span style="color:#b452cd">1</span>
+  setTimeout(() =&gt; {
+  	<span style="color:#8b008b;font-weight:bold">if</span> (count.current === <span style="color:#b452cd">1</span>) {
+  		console.log(<span style="color:#cd5555">&#39;single click: &#39;</span>, count.current)
+  	} <span style="color:#8b008b;font-weight:bold">else</span> <span style="color:#8b008b;font-weight:bold">if</span> (count.current === <span style="color:#b452cd">2</span>) {
+  		console.log(<span style="color:#cd5555">&#39;setTimeout onDoubleClick: &#39;</span>, count.current)
+  	}
+  	count.current = <span style="color:#b452cd">0</span>
+  }, <span style="color:#b452cd">300</span>)
+}}
+</code></pre></div><h2 id="32-switch方法在jsx中的使用">3.2 switch方法在jsx中的使用</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">{(() =&gt; {
+	<span style="color:#8b008b;font-weight:bold">switch</span> (select) {
+		<span style="color:#8b008b;font-weight:bold">case</span> <span style="color:#cd5555">&#39;table&#39;</span>:
+			<span style="color:#8b008b;font-weight:bold">return</span> xxx
+		<span style="color:#8b008b;font-weight:bold">case</span> <span style="color:#cd5555">&#39;charts&#39;</span>:
+			<span style="color:#8b008b;font-weight:bold">return</span> xxx
+		<span style="color:#8b008b;font-weight:bold">default</span>:
+			<span style="color:#8b008b;font-weight:bold">return</span> <span style="color:#8b008b;font-weight:bold">null</span>
+	}
+})()}
+</code></pre></div><h2 id="33-useref">3.3 useRef</h2>
+<p>既可以作为页面内元素的实例饮用，也可以作为不会导致页面刷新的全局变量使用，</p>
+<h2 id="34-表单联动">3.4 表单联动</h2>
+<p>将表单项数据保存为state，，利用useMemo监听标单项变化，从而重新计算下一个标单项内容</p>
 
                     
                     <HR width="100%" id="EOF">
@@ -362,8 +1036,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
             <nav class="post-pagination">
 
                 
-                <a class="newer-posts">
-			下回<br>已经到头啦。
+                <a class="newer-posts" href="https://gsemir0418.github.io/posts/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/">
+			下回<br>Web性能优化-基础
                 </a>
                 
                 
