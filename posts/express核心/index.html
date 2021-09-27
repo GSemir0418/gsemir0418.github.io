@@ -1306,7 +1306,10 @@ tsc --init // 创建tsconfig.json文件
 <p>目录结构</p>
 <ul>
 <li>
-<p><strong>bin/www</strong>：应用主入口，因为真正的入口是app.js，所以www文件先把app.js文件引进来，其余的内容主要就是创建了一个node HTTP server以及监听事件的错误处理。</p>
+<p><strong>bin/www</strong>：bin为可执行文件文件夹。www为应用主入口，因为真正的入口是app.js，所以www文件先把app.js文件引进来，其余的内容主要就是创建了一个node HTTP server以及监听事件的错误处理。</p>
+</li>
+<li>
+<p><strong>public</strong>：放置前端资源，包括js、css及静态图片等</p>
 </li>
 <li>
 <p><strong>app.js</strong>：应用入口文件，主要做了以下的事</p>
@@ -1345,7 +1348,7 @@ app.use(express.urlencoded({ extended: <span style="color:#8b008b;font-weight:bo
 app.use(cookieParser());<span style="color:#228b22">// 使用cookie
 </span><span style="color:#228b22"></span>app.use(express.<span style="color:#8b008b;font-weight:bold">static</span>(path.join(<span style="color:#b452cd">__</span>dirname, <span style="color:#cd5555">&#39;public&#39;</span>)));<span style="color:#228b22">// 指定公共资源文件夹
 </span><span style="color:#228b22"></span>
-<span style="color:#228b22">// 为请求路径分配路由配置
+<span style="color:#228b22">// 挂载路由中间件
 </span><span style="color:#228b22"></span>app.use(<span style="color:#cd5555">&#39;/&#39;</span>, indexRouter);
 app.use(<span style="color:#cd5555">&#39;/users&#39;</span>, usersRouter);
 

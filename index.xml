@@ -5,9 +5,405 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Sep 2021 16:12:05 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 27 Sep 2021 13:47:24 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>Express全解</title>
+        <link>https://gsemir0418.github.io/posts/express%E5%85%A8%E8%A7%A3/</link>
+        <pubDate>Mon, 27 Sep 2021 13:47:24 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/express%E5%85%A8%E8%A7%A3/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/express%E5%85%A8%E8%A7%A3/ -&lt;h1 id=&#34;0-restclient插件&#34;&gt;0 REST.Client插件&lt;/h1&gt;
+&lt;p&gt;用于在vscode中构造请求&lt;/p&gt;
+&lt;p&gt;新建以&lt;code&gt;.http&lt;/code&gt;为后缀的文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@url=http://localhost:8080		--- @用于定义变量，{{}}使用此变量
+###								--- 以###作为请求分割符号
+get {{url}}/users 				--- 注意空格
+###
+post {{url}}
+Content-Type: application/json
+								--- 请求头与消息体直接有空行
+{
+  &amp;quot;username&amp;quot;: &amp;quot;gsq&amp;quot;,
+  &amp;quot;age&amp;quot;: 19
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;1-expressxxx&#34;&gt;1 express.xxx&lt;/h1&gt;
+&lt;p&gt;共7个api，主要是一些内置的中间件，例如用来自动处理不同类型的请求体数据&lt;/p&gt;
+&lt;h2 id=&#34;11-expressjson&#34;&gt;1.1 express.json()&lt;/h2&gt;
+&lt;p&gt;以监听消息体中数据流data事件的方式，拿到全部的json数据并自动解析成对象，放到request.body中&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; app = express()
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 尝试将此中间件注释后，观察控制台打印内容
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(express.json())
+
+app.use((req,res,next)=&amp;gt;{
+  console.log(req.body)
+  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;aaa&amp;#39;&lt;/span&gt;)
+  next()
+})
+
+app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;,()=&amp;gt;{
+  console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;listening 8080...&amp;#39;&lt;/span&gt;)
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;12-expressstatic&#34;&gt;1.2 express.static()&lt;/h2&gt;
+&lt;p&gt;指定静态资源路径，用户请求的静态数据首先从指定路径寻找，优先级高于其他中间件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;...
+&lt;span style=&#34;color:#228b22&#34;&gt;// 指定静态资源目录，如果在xxx目录中找到了就发送给浏览器，如果没有就next()
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(express.&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;static&lt;/span&gt;(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;xxx&amp;#39;&lt;/span&gt;))
+
+app.use((req,res,next)=&amp;gt;{
+  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;aaa&amp;#39;&lt;/span&gt;)
+  next()
+})
+...
+&lt;span style=&#34;color:#228b22&#34;&gt;// 在.http文件中，构造请求静态资源
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;get {{url}}/index.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;13-expressrouter&#34;&gt;1.3 express.Router()&lt;/h2&gt;
+&lt;p&gt;实例化一个&lt;code&gt;mini-app&lt;/code&gt;，拥有app的部分api，方便路由管理与配置，具体用法见第五章节&lt;/p&gt;
+&lt;h1 id=&#34;2-appxxx&#34;&gt;2 app.xxx&lt;/h1&gt;
+&lt;p&gt;共22个api，主要负责应用设置（如模板配置、中间件、挂载路由等）&lt;/p&gt;
+&lt;h2 id=&#34;21-appuse&#34;&gt;2.1 app.use()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;将指定的中间件功能挂载到指定的路径上；当请求路径的基础与路径匹配时，中间件功能将被执行。&lt;/li&gt;
+&lt;li&gt;接收两个参数，第一个是挂载点（可选），第二个是中间件（函数）。中间件根据参数的多少决定是哪种类型：三个参数（req,res,next)为RequestHandler，四个参数（error,req,res,next）为错误处理（ErrorRequestHandler）。&lt;/li&gt;
+&lt;li&gt;app中最基本的api之一，&lt;code&gt;app.get()&lt;/code&gt;、&lt;code&gt;app.post()&lt;/code&gt;、&lt;code&gt;app.delete()&lt;/code&gt;、&lt;code&gt;app.put()&lt;/code&gt;等实际上都是&lt;code&gt;app.use()&lt;/code&gt;的语法糖&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;22-appset&#34;&gt;2.2 app.set()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;能够对应用进行一些特殊配置（此时要放在全部中间件的最上方）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;...
+&lt;span style=&#34;color:#228b22&#34;&gt;// 设置路径大小写敏感度
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;case sensitive routing&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;)
+&lt;span style=&#34;color:#228b22&#34;&gt;// 设置render视图的路径，默认为views
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;views&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;xxx&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#228b22&#34;&gt;// 设置render的引擎
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;view engine&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ejs&amp;#39;&lt;/span&gt;)
+
+app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/testview&amp;#39;&lt;/span&gt;, (rep,res,next)=&amp;gt;{
+  res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;, { title:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;guosenquan&amp;#39;&lt;/span&gt; })
+  next()
+})
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;常用配置：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Property&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;case sensitive routing&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Boolean&lt;/td&gt;
+&lt;td&gt;对请求路径大小写是否敏感，如/STYLE.css和/style.css&lt;/td&gt;
+&lt;td&gt;undefined(false)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;views&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;String or Array&lt;/td&gt;
+&lt;td&gt;指定render视图的路径&lt;/td&gt;
+&lt;td&gt;&amp;lsquo;views&amp;rsquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;view engine&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;指定render视图模板的引擎&lt;/td&gt;
+&lt;td&gt;undefined&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;strict routing&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Boolean&lt;/td&gt;
+&lt;td&gt;请求路径是否开启严格模式，例如&#39;/foo&amp;rsquo;和&#39;/foo/&amp;lsquo;不表示同一路径&lt;/td&gt;
+&lt;td&gt;undefined&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;也可以设置一个变量，这个变量能够被&lt;code&gt;app.get(name)&lt;/code&gt;获取到&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;...
+app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;gsq&amp;#39;&lt;/span&gt;)
+
+app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/testset&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {
+  res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;, { title: app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;) })
+  next()
+})
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;23-applocal&#34;&gt;2.3 app.local&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;app.locals.xxx&lt;/code&gt;定义局部变量，其他中间件可以通过&lt;code&gt;req.app.locals.xxx&lt;/code&gt;来获取&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;...
+&lt;span style=&#34;color:#228b22&#34;&gt;// local一个局部变量
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.locals.title = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;gsq&amp;#39;&lt;/span&gt;
+
+app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/testlocal&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {
+  res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;, { title: req.app.locals.title })
+  next()
+})
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;24-appget&#34;&gt;2.4 app.get()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;app.get()只有一个参数（字符串）时，表示获取set的值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; undefined
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
+app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;My Site&amp;#39;&lt;/span&gt;)
+app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; &amp;#34;My Site&amp;#34;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;app.get(&amp;lsquo;路径&amp;rsquo;,fn)表示处理get请求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/style.css&amp;#39;&lt;/span&gt;, (rep, res, next) =&amp;gt; {
+  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;style.css&amp;#39;&lt;/span&gt;)
+  next()
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;3-reqxxx&#34;&gt;3 req.xxx&lt;/h1&gt;
+&lt;p&gt;共28个api，用来操作请求&lt;/p&gt;
+&lt;h2 id=&#34;31-reqapp&#34;&gt;3.1 req.app&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;获取到全局的app对象&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;32-reqbody&#34;&gt;3.2 req.body&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;返回请求的消息体&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;33-reqmethod&#34;&gt;3.3 req.method&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;返回请求方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;34-reqparams&#34;&gt;3.4 req.params&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;此属性是一个对象，包含映射到指定路由“参数”的属性。例如，如果你有&lt;code&gt;route /user/:name&lt;/code&gt;，那么&amp;quot; name &amp;ldquo;属性是可用的&lt;code&gt;req.params.name&lt;/code&gt;。该对象默认为&lt;code&gt;{}&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/user/:id&amp;#39;&lt;/span&gt;,(req,res,next)=&amp;gt;{
+  res.send(req.params)
+  next()
+})
+&lt;span style=&#34;color:#228b22&#34;&gt;// app.http中构造请求
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;###&lt;/span&gt;
+get {{url}}/user/&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; { &amp;#34;id&amp;#34; : &amp;#34;1&amp;#34; }
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 注意，params只能读取路由中定义的字段，例如
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;get {{url}}/user/&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;?name=gsq
+&lt;span style=&#34;color:#228b22&#34;&gt;// 仍返回{ &amp;#34;id&amp;#34; : &amp;#34;1&amp;#34; }
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 同样在请求body中的内容也是读取不到的
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;35-reqquery&#34;&gt;3.5 req.query&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;获取上文中路由后面的（‘？’后面的）查询参数，可以使用&lt;code&gt;req.query&lt;/code&gt;，express会将查询参数封装为query对象：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/user/:id&amp;#39;&lt;/span&gt;,(req,res,next)=&amp;gt;{
+  res.send(req.query)
+  next()
+})
+&lt;span style=&#34;color:#228b22&#34;&gt;// app.http中构造请求
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;###&lt;/span&gt;
+get {{url}}/user/&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;?name=gsq&amp;amp;age=&lt;span style=&#34;color:#b452cd&#34;&gt;15&lt;/span&gt;
+&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; { &amp;#34;name&amp;#34; : &amp;#34;gsq&amp;#34;, &amp;#34;age&amp;#34; : &amp;#34;15&amp;#34; }
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 同样在请求body中的内容也是读取不到的
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;36-reqget&#34;&gt;3.6 req.get()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;获取请求头字段&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;req.get(&#39;Content-Type&#39;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;37-reqparam&#34;&gt;3.7 req.param()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;获取全部请求参数（仅限于路由中的）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/user/:id&amp;#39;&lt;/span&gt;,(req,res,next)=&amp;gt;{
+  res.send(req.param(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;))
+  next()
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;此方法被遗弃，express推荐使用&lt;code&gt;req.query&lt;/code&gt;结合&lt;code&gt;req.params&lt;/code&gt;来实现查询参数的获取。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;38-reqrange&#34;&gt;3.8 req.range()&lt;/h2&gt;
+&lt;p&gt;分块下载&lt;/p&gt;
+&lt;h1 id=&#34;4-resxxx&#34;&gt;4 res.xxx&lt;/h1&gt;
+&lt;p&gt;共24个api，用来操作响应&lt;/p&gt;
+&lt;h2 id=&#34;41-resset&#34;&gt;4.1 res.set()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;添加响应头参数。如果一次添加多行header，使用&lt;code&gt;object&lt;/code&gt;的形式传参&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;res.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Content-Type&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;)
+
+res.set({
+  &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Content-Type&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;,
+  &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Content-Length&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;123&amp;#39;&lt;/span&gt;,
+  ETag: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;12345&amp;#39;&lt;/span&gt;
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;42-resappend&#34;&gt;4.2 res.append()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;将指定的值&lt;code&gt;附加&lt;/code&gt;到HTTP响应报头字段。如果字段还没有set，它将使用指定的值创建header。value参数可以是字符串或数组。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;res.append(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Link&amp;#39;&lt;/span&gt;, [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;lt;http://localhost/&amp;gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;lt;http://localhost:3000/&amp;gt;&amp;#39;&lt;/span&gt;])
+res.append(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Set-Cookie&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;foo=bar; Path=/; HttpOnly&amp;#39;&lt;/span&gt;)
+res.append(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Warning&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;199 Miscellaneous warning&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;注意:在res.append()之后调用res.set()将重置之前设置的头文件值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;43-resget&#34;&gt;4.3 res.get()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;获取响应头字段值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;44-resformat&#34;&gt;4.4 res.format()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;根据请求对象上的Accept字段存在时进行内容协商。它使用req. accept()根据根据质量值排序的可接受类型选择请求的处理程序。如果未指定Accept字段，则调用第一个回调。当没有找到匹配，服务器响应406 &amp;ldquo;Not Acceptable&amp;rdquo;，或调用默认回调。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在选择回调时设置Content-Type响应头。但是，您可以在回调中使用res.set()或res.type()等方法更改此参数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;下面的例子将在Accept报头字段设置为&lt;code&gt;&amp;quot;application/json&amp;quot;&lt;/code&gt;或&lt;code&gt;&amp;quot;*/json&amp;quot;&lt;/code&gt;时响应&lt;code&gt;{&amp;quot;message&amp;quot;: &amp;quot;hey&amp;quot;}&lt;/code&gt;(但是如果是&lt;code&gt;&amp;quot;*/*&amp;quot;&lt;/code&gt;，则响应将是&amp;quot;hey&amp;rdquo;)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;res.format({
+  &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () {
+    res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hey&amp;#39;&lt;/span&gt;)
+  },
+
+  &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;text/html&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () {
+    res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;lt;p&amp;gt;hey&amp;lt;/p&amp;gt;&amp;#39;&lt;/span&gt;)
+  },
+
+  &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;application/json&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () {
+    res.send({ message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hey&amp;#39;&lt;/span&gt; })
+  },
+
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () {
+    &lt;span style=&#34;color:#228b22&#34;&gt;// log the request and respond with 406
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    res.status(&lt;span style=&#34;color:#b452cd&#34;&gt;406&lt;/span&gt;).send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Not Acceptable&amp;#39;&lt;/span&gt;)
+  }
+})
+&lt;span style=&#34;color:#228b22&#34;&gt;// app,http构造请求
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;###&lt;/span&gt;
+get {{url}}/test
+Accept: text/plain
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;45-reslocation&#34;&gt;4.5 res.location()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;设置响应头的location字段，表示重定向后的路由，一般配合状态码301，302或307等使用会自动跳转。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/oldroute&amp;#39;&lt;/span&gt;,(req, res, next) =&amp;gt; {
+	res.status(&lt;span style=&#34;color:#b452cd&#34;&gt;301&lt;/span&gt;).location(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/newroute&amp;#39;&lt;/span&gt;)
+    res.end()&lt;span style=&#34;color:#228b22&#34;&gt;// 要加上响应关闭的方法
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	next()
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;46-resredirect&#34;&gt;4.6 res.redirect()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;与location功能相同，但会自动重定向并跳转&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/oldroute&amp;#39;&lt;/span&gt;,(req, res, next) =&amp;gt; {
+	res.redirect(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/newroute&amp;#39;&lt;/span&gt;)
+	next()
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;47-resrender&#34;&gt;4.7 res.render()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;渲染视图并将呈现的HTML字符串发送给客户端。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 指定渲染模板的路径和模板引擎
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;views&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;xxx&amp;#39;&lt;/span&gt;)
+app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;view engine&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ejs&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 向客户端发送渲染后的视图
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 如果有回调函数, 模板就只能在回调中用send发送 
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (err, html) {
+  res.send(html)
+})
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 向渲染的页面中传入一个变量
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;, { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Tobi&amp;#39;&lt;/span&gt; }, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (err, html) {
+  &lt;span style=&#34;color:#228b22&#34;&gt;// ...
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;48-ressend&#34;&gt;4.8 res.send()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;发送到客户端的响应体数据，不能与write连用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;49-ressendfile&#34;&gt;4.9 res.sendFile()&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;发送到客户端的响应体数据，可以手动配置响应头等内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/file/:name&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res, next) {
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; options = {
+    root: path.join(&lt;span style=&#34;color:#b452cd&#34;&gt;__&lt;/span&gt;dirname, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;public&amp;#39;&lt;/span&gt;),
+    dotfiles: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;deny&amp;#39;&lt;/span&gt;,
+    headers: {
+      &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;x-timestamp&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#658b00&#34;&gt;Date&lt;/span&gt;.now(),
+      &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;x-sent&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;
+    }
+  }
+
+  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; fileName = req.params.name
+  res.sendFile(fileName, options, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (err) {
+    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (err) {
+      next(err)
+    } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; {
+      console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Sent:&amp;#39;&lt;/span&gt;, fileName)
+    }
+  })
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;5-routerxxx&#34;&gt;5 router.xxx&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;router是express.Router()实例化的对象，可以视为小型的app对象。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;若将路由都使用app.use()写到app.js中，不利于路由的组织与管理：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/users&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {})
+app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/users/:id&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {})
+app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/users/:id/edit&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {})
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;为方便路由的组织管理以及后期维护，可以将路由逻辑拆出来，放至&lt;code&gt;routes&lt;/code&gt;文件夹下。新建&lt;code&gt;user.js&lt;/code&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#228b22&#34;&gt;// 用express实例化router
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; router = express.Router()
+&lt;span style=&#34;color:#228b22&#34;&gt;// 路径可以去掉路由前缀users
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;router.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {
+  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;获取了全部users&amp;#39;&lt;/span&gt;)
+  next()
+})
+router.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/:id&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {
+  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;`获取了id=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;req.params.id&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;用户`&lt;/span&gt;)
+  next()
+})
+router.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/:id/edit&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {
+  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;`对id为&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;req.params.id&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;的用户进行编辑`&lt;/span&gt;)
+  next()
+})
+
+&lt;span style=&#34;color:#228b22&#34;&gt;// 导出users路由对象
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;module.exports = router
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;app.js中引入users路由对象&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; app = express()
+&lt;span style=&#34;color:#228b22&#34;&gt;// 引入users路由对象
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; users = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./routes/users&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#228b22&#34;&gt;// 挂载路由
+&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/users&amp;#39;&lt;/span&gt;, users)
+app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/express%E5%85%A8%E8%A7%A3/ - </description>
+        </item>
     
     
     
@@ -910,7 +1306,10 @@ tsc --init // 创建tsconfig.json文件
 &lt;p&gt;目录结构&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;bin/www&lt;/strong&gt;：应用主入口，因为真正的入口是app.js，所以www文件先把app.js文件引进来，其余的内容主要就是创建了一个node HTTP server以及监听事件的错误处理。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;bin/www&lt;/strong&gt;：bin为可执行文件文件夹。www为应用主入口，因为真正的入口是app.js，所以www文件先把app.js文件引进来，其余的内容主要就是创建了一个node HTTP server以及监听事件的错误处理。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;public&lt;/strong&gt;：放置前端资源，包括js、css及静态图片等&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;app.js&lt;/strong&gt;：应用入口文件，主要做了以下的事&lt;/p&gt;
@@ -949,7 +1348,7 @@ app.use(express.urlencoded({ extended: &lt;span style=&#34;color:#8b008b;font-we
 app.use(cookieParser());&lt;span style=&#34;color:#228b22&#34;&gt;// 使用cookie
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(express.&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;static&lt;/span&gt;(path.join(&lt;span style=&#34;color:#b452cd&#34;&gt;__&lt;/span&gt;dirname, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;public&amp;#39;&lt;/span&gt;)));&lt;span style=&#34;color:#228b22&#34;&gt;// 指定公共资源文件夹
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 为请求路径分配路由配置
+&lt;span style=&#34;color:#228b22&#34;&gt;// 挂载路由中间件
 &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, indexRouter);
 app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/users&amp;#39;&lt;/span&gt;, usersRouter);
 
@@ -2037,182 +2436,6 @@ process.send({ foo: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;bar&amp;#
 &lt;p&gt;&lt;a href=&#34;https://nodejs.org/api/worker_threads.html#worker_threads_worker_threads&#34;&gt;https://nodejs.org/api/worker_threads.html#worker_threads_worker_threads&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 - https://gsemir0418.github.io/posts/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>Node技术架构</title>
-        <link>https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/</link>
-        <pubDate>Thu, 29 Jul 2021 20:54:55 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/ -&lt;h1 id=&#34;1-nodejs概述&#34;&gt;1 Node.js概述&lt;/h1&gt;
-&lt;h2 id=&#34;11-nodejs不是什么&#34;&gt;1.1 Node.js不是什么&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;不是web框架&lt;code&gt;（Flask，Spring）&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;不是编程语言&lt;code&gt;（Python，PHP）&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;12-nodejs是什么&#34;&gt;1.2 Node.js是什么&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;是一个&lt;strong&gt;平台&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;将&lt;strong&gt;多种技术组合&lt;/strong&gt;起来&lt;/li&gt;
-&lt;li&gt;让&lt;strong&gt;JavaScript&lt;/strong&gt;也能调用&lt;strong&gt;系统接口&lt;/strong&gt;，开发后端应用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Node.js搭建技术
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;V8&lt;/code&gt;引擎&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;libuv&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;C/C++&lt;/code&gt;实现的&lt;code&gt;c-ares&lt;/code&gt;（解析dns域名）、&lt;code&gt;http-parser&lt;/code&gt;（解析http）、&lt;code&gt;OpenSSL&lt;/code&gt;（加密解密）、&lt;code&gt;zlib&lt;/code&gt;（数据压缩）等库&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;2-nodejs技术架构&#34;&gt;2 Node.js技术架构&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&#34;./node1.png&#34; alt=&#34;image-20210730103247379&#34;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/yjhjstz/deep-into-node&#34;&gt;https://github.com/yjhjstz/deep-into-node&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;21-nodejs-bindings&#34;&gt;2.1 Node.js bindings&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;背景&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Node.js用&lt;strong&gt;C++&lt;strong&gt;对http_parser进行&lt;/strong&gt;封装&lt;/strong&gt;，使它符合某些要求（统一数据类型等），封装的文件叫做&lt;code&gt;http_parser_bindings.cpp&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;用Node.js提供的编译工具将其&lt;strong&gt;编译&lt;/strong&gt;为.node文件&lt;/li&gt;
-&lt;li&gt;JS代码可以直接require这个.node文件&lt;/li&gt;
-&lt;li&gt;这样JS就能调用C++库，中间的&lt;strong&gt;桥梁&lt;/strong&gt;就是binding&lt;/li&gt;
-&lt;li&gt;由于Node.js提供了很多binding，所以加个s&lt;/li&gt;
-&lt;li&gt;这就是bindings&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;JS与C++交互&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;http://nodejs.cn/api/addons.html#addons_function_arguments&#34;&gt;http://nodejs.cn/api/addons.html#addons_function_arguments&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;C++调用JS回调&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;http://nodejs.cn/api/addons.html#addons_callbacks&#34;&gt;http://nodejs.cn/api/addons.html#addons_callbacks&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;22-libuv&#34;&gt;2.2 libuv&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;背景&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;每个系统上的异步I/O（系统与外界（硬盘文件、打印机、网络请求）交互）都不一样&lt;/li&gt;
-&lt;li&gt;比如FreeBSD系统上有kqueue、Linux上有epoll、Windows上有IOCP&lt;/li&gt;
-&lt;li&gt;Ryan为了一个&lt;strong&gt;跨平台的异步I/O库&lt;/strong&gt;，开始写libuv&lt;/li&gt;
-&lt;li&gt;libuv会根据系统自动选择合适的方案&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;功能&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;可以用于TCP（建立HTTP服务器）/UDP（qq聊天）/DNS（网址对应的ip）/文件（读写）等的异步操作&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;23-v8&#34;&gt;2.3 V8&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;功能
-&lt;ul&gt;
-&lt;li&gt;将JS源代码变成本地代码（机器代码）并执行&lt;/li&gt;
-&lt;li&gt;维护调用栈，确保JS函数的执行顺序&lt;/li&gt;
-&lt;li&gt;内存管理，为所有对象分配内存&lt;/li&gt;
-&lt;li&gt;垃圾回收，重复利用无用的内存&lt;/li&gt;
-&lt;li&gt;实现JS的标准库（数组的方法等）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;注意
-&lt;ul&gt;
-&lt;li&gt;V8不提供DOM API（浏览器提供）&lt;/li&gt;
-&lt;li&gt;V8执行JS是单线程的&lt;/li&gt;
-&lt;li&gt;可以开启两个线程分别执行JS&lt;/li&gt;
-&lt;li&gt;V8本身是包含多个线程的，如垃圾回收为单独线程&lt;/li&gt;
-&lt;li&gt;自带event loop，但Node.js基于libuv自己做了一个&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;24-event-loop&#34;&gt;2.4 Event Loop&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;什么是Event&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;事件分为内部与外部&lt;/li&gt;
-&lt;li&gt;计时器到期了（内部事件）&lt;/li&gt;
-&lt;li&gt;文件可以读取了、读取出错了（外部事件）&lt;/li&gt;
-&lt;li&gt;socket（HTTP消息）有内容了，关闭了（外部事件）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;什么是Loop&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;loop就是循环，由于&lt;strong&gt;事件是分优先级&lt;/strong&gt;的，所以处理起来也是分先后的&lt;/li&gt;
-&lt;li&gt;所以Node.js需要按顺序轮询每种事件&lt;/li&gt;
-&lt;li&gt;这种轮询往往都是循环的，1&amp;ndash;&amp;gt;2&amp;ndash;&amp;gt;3&amp;ndash;&amp;gt;1&amp;ndash;&amp;gt;2&amp;ndash;&amp;gt;3&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Event Loop&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;操作系统可以触发事件，JS可以处理事件&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Event Loop就是对事件处理顺序的管理&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;顺序示意图&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;./node2.png&#34; alt=&#34;image-20210730110930457&#34;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://juejin.cn/post/6844903582538399752&#34;&gt;https://juejin.cn/post/6844903582538399752&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;重点阶段&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;**&lt;code&gt;timers&lt;/code&gt;**检查计时器&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;poll&lt;/code&gt;轮询&lt;/strong&gt;，检查系统事件&lt;/li&gt;
-&lt;li&gt;**&lt;code&gt;check&lt;/code&gt;**检查&lt;code&gt;setImmediate&lt;/code&gt;回调&lt;/li&gt;
-&lt;li&gt;其他阶段用的较少&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;注意&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;大部分时间，Node.js都停在&lt;code&gt;poll&lt;/code&gt;轮询阶段&lt;/li&gt;
-&lt;li&gt;大部分事件都在poll阶段被处理，如文件、网络请求&lt;/li&gt;
-&lt;li&gt;poll阶段是有停留时间限制的，不同系统停留时间不同&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;setTimeout(f1, 0)和setImmediate(f2)哪个先执行？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;由于大部分时间js都停留在poll阶段，之后进入check阶段，从而执行setImmediate；之后进入timers阶段，才会执行setTimeout&lt;/li&gt;
-&lt;li&gt;只有当Node.js最开始运行时，会首先进入timers阶段执行setTimeout&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;25-总结&#34;&gt;2.5 总结&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;用&lt;code&gt;libuv&lt;/code&gt;进行异步I/O操作&lt;/li&gt;
-&lt;li&gt;基于libuv，Node.js用&lt;code&gt;Event Loop&lt;/code&gt;管理事件处理顺序&lt;/li&gt;
-&lt;li&gt;用&lt;code&gt;C/C++库&lt;/code&gt;高效处理DNS/HTTP&lt;/li&gt;
-&lt;li&gt;用&lt;code&gt;bindings&lt;/code&gt;让JS能和C/C++沟通（require）&lt;/li&gt;
-&lt;li&gt;用&lt;code&gt;V8&lt;/code&gt;运行JS&lt;/li&gt;
-&lt;li&gt;用&lt;code&gt;Node.js标准库&lt;/code&gt;简化JS代码&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;26-nodejs工作流程&#34;&gt;2.6 Node.js工作流程&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;./node3.png&#34; alt=&#34;image-20210730131938322&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;27-nodejs-api&#34;&gt;2.7 Node.js API&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;./node4.png&#34; alt=&#34;image-20210730133449418&#34;&gt;&lt;/p&gt;
-- https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/ - </description>
         </item>
     
     

@@ -5,9 +5,185 @@
     <description>Recent content on GSemir Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Sep 2021 16:12:05 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 27 Sep 2021 13:47:24 +0800</lastBuildDate>
     
         <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>Node技术架构</title>
+        <link>https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/</link>
+        <pubDate>Thu, 29 Jul 2021 20:54:55 +0800</pubDate>
+        
+        <guid>https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/</guid>
+        <description>GSemir Blog https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/ -&lt;h1 id=&#34;1-nodejs概述&#34;&gt;1 Node.js概述&lt;/h1&gt;
+&lt;h2 id=&#34;11-nodejs不是什么&#34;&gt;1.1 Node.js不是什么&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;不是web框架&lt;code&gt;（Flask，Spring）&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;不是编程语言&lt;code&gt;（Python，PHP）&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;12-nodejs是什么&#34;&gt;1.2 Node.js是什么&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;是一个&lt;strong&gt;平台&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;将&lt;strong&gt;多种技术组合&lt;/strong&gt;起来&lt;/li&gt;
+&lt;li&gt;让&lt;strong&gt;JavaScript&lt;/strong&gt;也能调用&lt;strong&gt;系统接口&lt;/strong&gt;，开发后端应用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Node.js搭建技术
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;V8&lt;/code&gt;引擎&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;libuv&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C/C++&lt;/code&gt;实现的&lt;code&gt;c-ares&lt;/code&gt;（解析dns域名）、&lt;code&gt;http-parser&lt;/code&gt;（解析http）、&lt;code&gt;OpenSSL&lt;/code&gt;（加密解密）、&lt;code&gt;zlib&lt;/code&gt;（数据压缩）等库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;2-nodejs技术架构&#34;&gt;2 Node.js技术架构&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;./node1.png&#34; alt=&#34;image-20210730103247379&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/yjhjstz/deep-into-node&#34;&gt;https://github.com/yjhjstz/deep-into-node&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;21-nodejs-bindings&#34;&gt;2.1 Node.js bindings&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;背景&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Node.js用&lt;strong&gt;C++&lt;strong&gt;对http_parser进行&lt;/strong&gt;封装&lt;/strong&gt;，使它符合某些要求（统一数据类型等），封装的文件叫做&lt;code&gt;http_parser_bindings.cpp&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;用Node.js提供的编译工具将其&lt;strong&gt;编译&lt;/strong&gt;为.node文件&lt;/li&gt;
+&lt;li&gt;JS代码可以直接require这个.node文件&lt;/li&gt;
+&lt;li&gt;这样JS就能调用C++库，中间的&lt;strong&gt;桥梁&lt;/strong&gt;就是binding&lt;/li&gt;
+&lt;li&gt;由于Node.js提供了很多binding，所以加个s&lt;/li&gt;
+&lt;li&gt;这就是bindings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;JS与C++交互&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://nodejs.cn/api/addons.html#addons_function_arguments&#34;&gt;http://nodejs.cn/api/addons.html#addons_function_arguments&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C++调用JS回调&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://nodejs.cn/api/addons.html#addons_callbacks&#34;&gt;http://nodejs.cn/api/addons.html#addons_callbacks&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;22-libuv&#34;&gt;2.2 libuv&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;背景&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每个系统上的异步I/O（系统与外界（硬盘文件、打印机、网络请求）交互）都不一样&lt;/li&gt;
+&lt;li&gt;比如FreeBSD系统上有kqueue、Linux上有epoll、Windows上有IOCP&lt;/li&gt;
+&lt;li&gt;Ryan为了一个&lt;strong&gt;跨平台的异步I/O库&lt;/strong&gt;，开始写libuv&lt;/li&gt;
+&lt;li&gt;libuv会根据系统自动选择合适的方案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;功能&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以用于TCP（建立HTTP服务器）/UDP（qq聊天）/DNS（网址对应的ip）/文件（读写）等的异步操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;23-v8&#34;&gt;2.3 V8&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;功能
+&lt;ul&gt;
+&lt;li&gt;将JS源代码变成本地代码（机器代码）并执行&lt;/li&gt;
+&lt;li&gt;维护调用栈，确保JS函数的执行顺序&lt;/li&gt;
+&lt;li&gt;内存管理，为所有对象分配内存&lt;/li&gt;
+&lt;li&gt;垃圾回收，重复利用无用的内存&lt;/li&gt;
+&lt;li&gt;实现JS的标准库（数组的方法等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;注意
+&lt;ul&gt;
+&lt;li&gt;V8不提供DOM API（浏览器提供）&lt;/li&gt;
+&lt;li&gt;V8执行JS是单线程的&lt;/li&gt;
+&lt;li&gt;可以开启两个线程分别执行JS&lt;/li&gt;
+&lt;li&gt;V8本身是包含多个线程的，如垃圾回收为单独线程&lt;/li&gt;
+&lt;li&gt;自带event loop，但Node.js基于libuv自己做了一个&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;24-event-loop&#34;&gt;2.4 Event Loop&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;什么是Event&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;事件分为内部与外部&lt;/li&gt;
+&lt;li&gt;计时器到期了（内部事件）&lt;/li&gt;
+&lt;li&gt;文件可以读取了、读取出错了（外部事件）&lt;/li&gt;
+&lt;li&gt;socket（HTTP消息）有内容了，关闭了（外部事件）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;什么是Loop&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;loop就是循环，由于&lt;strong&gt;事件是分优先级&lt;/strong&gt;的，所以处理起来也是分先后的&lt;/li&gt;
+&lt;li&gt;所以Node.js需要按顺序轮询每种事件&lt;/li&gt;
+&lt;li&gt;这种轮询往往都是循环的，1&amp;ndash;&amp;gt;2&amp;ndash;&amp;gt;3&amp;ndash;&amp;gt;1&amp;ndash;&amp;gt;2&amp;ndash;&amp;gt;3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Event Loop&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;操作系统可以触发事件，JS可以处理事件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Event Loop就是对事件处理顺序的管理&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;顺序示意图&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;./node2.png&#34; alt=&#34;image-20210730110930457&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://juejin.cn/post/6844903582538399752&#34;&gt;https://juejin.cn/post/6844903582538399752&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;重点阶段&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;**&lt;code&gt;timers&lt;/code&gt;**检查计时器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;poll&lt;/code&gt;轮询&lt;/strong&gt;，检查系统事件&lt;/li&gt;
+&lt;li&gt;**&lt;code&gt;check&lt;/code&gt;**检查&lt;code&gt;setImmediate&lt;/code&gt;回调&lt;/li&gt;
+&lt;li&gt;其他阶段用的较少&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;注意&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;大部分时间，Node.js都停在&lt;code&gt;poll&lt;/code&gt;轮询阶段&lt;/li&gt;
+&lt;li&gt;大部分事件都在poll阶段被处理，如文件、网络请求&lt;/li&gt;
+&lt;li&gt;poll阶段是有停留时间限制的，不同系统停留时间不同&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;setTimeout(f1, 0)和setImmediate(f2)哪个先执行？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由于大部分时间js都停留在poll阶段，之后进入check阶段，从而执行setImmediate；之后进入timers阶段，才会执行setTimeout&lt;/li&gt;
+&lt;li&gt;只有当Node.js最开始运行时，会首先进入timers阶段执行setTimeout&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;25-总结&#34;&gt;2.5 总结&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;用&lt;code&gt;libuv&lt;/code&gt;进行异步I/O操作&lt;/li&gt;
+&lt;li&gt;基于libuv，Node.js用&lt;code&gt;Event Loop&lt;/code&gt;管理事件处理顺序&lt;/li&gt;
+&lt;li&gt;用&lt;code&gt;C/C++库&lt;/code&gt;高效处理DNS/HTTP&lt;/li&gt;
+&lt;li&gt;用&lt;code&gt;bindings&lt;/code&gt;让JS能和C/C++沟通（require）&lt;/li&gt;
+&lt;li&gt;用&lt;code&gt;V8&lt;/code&gt;运行JS&lt;/li&gt;
+&lt;li&gt;用&lt;code&gt;Node.js标准库&lt;/code&gt;简化JS代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;26-nodejs工作流程&#34;&gt;2.6 Node.js工作流程&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;./node3.png&#34; alt=&#34;image-20210730131938322&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;27-nodejs-api&#34;&gt;2.7 Node.js API&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;./node4.png&#34; alt=&#34;image-20210730133449418&#34;&gt;&lt;/p&gt;
+- https://gsemir0418.github.io/posts/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/ - </description>
+        </item>
     
     
     
@@ -1767,299 +1943,6 @@ connection.end()
 &lt;p&gt;Replace 替换全部字符&lt;/p&gt;
 &lt;p&gt;blog.csdn.net/qq_40138785/article/details/81457849&lt;/p&gt;
 - https://gsemir0418.github.io/posts/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/ - </description>
-        </item>
-    
-    
-    
-        <item>
-        <title>NodeHTTP模块</title>
-        <link>https://gsemir0418.github.io/posts/nodehttp%E6%A8%A1%E5%9D%97/</link>
-        <pubDate>Wed, 30 Jun 2021 09:55:55 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/nodehttp%E6%A8%A1%E5%9D%97/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/nodehttp%E6%A8%A1%E5%9D%97/ -&lt;h1 id=&#34;0-准备工作&#34;&gt;0 准备工作&lt;/h1&gt;
-&lt;h2 id=&#34;1-ts-node-dev&#34;&gt;1 ts-node-dev&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;当文件更新时自动重启node&lt;/li&gt;
-&lt;li&gt;避免每次改完代码都要重新运行的麻烦&lt;/li&gt;
-&lt;li&gt;可以用TS开发Node.js程序，且会自动重启&lt;/li&gt;
-&lt;li&gt;不宜在生产环境使用，但非常适合用来学习&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;安装&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;npm -g i ts-node-dev
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;要用npm安装 ，用yarn安装的话使用时会报错。。无法识别“ts-node-dev”命令，不知道为什么。&lt;/p&gt;
-&lt;h2 id=&#34;2-vscode配置&#34;&gt;2 VSCode配置&lt;/h2&gt;
-&lt;p&gt;配置自动保存与保存后自动格式化：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ctrl shift p&lt;/code&gt;打开&lt;code&gt;首选项：打开设置(ui)&lt;/code&gt;，&lt;code&gt;AutoSave&lt;/code&gt;修改为&lt;code&gt;onFocusChange&lt;/code&gt;，搜索format，勾选&lt;code&gt;Format On Save&lt;/code&gt;开启保存后自动格式化。&lt;/p&gt;
-&lt;h2 id=&#34;3-curl&#34;&gt;3 curl&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;GET请求：&lt;code&gt;curl -v url&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;POST请求：&lt;code&gt;curl -v -d “name=gsq&amp;quot; url&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;设置请求头：&lt;code&gt;-H &#39;Content-Type:application/json&#39;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;设置动词：&lt;code&gt;-X PUT&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;JSON请求：&lt;code&gt;curl -d &#39;{&amp;quot;name&amp;quot;:&amp;quot;bob&amp;quot;}&#39; -H &#39;Content-Type:application/json&#39; url&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;后面会用到&lt;code&gt;curl&lt;/code&gt;来构造请求&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;1-创建项目&#34;&gt;1 创建项目&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;初始化项目：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;yarn init -y
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;安装&lt;code&gt;@types/node&lt;/code&gt;声明文件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;yarn add --dev @types/node
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;新建&lt;code&gt;index.ts&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 引入http模块
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; * &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;as&lt;/span&gt; http &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 用http创建server
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; server = http.createServer()
-&lt;span style=&#34;color:#228b22&#34;&gt;// 监听server的request事件
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;server.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;request&amp;#39;&lt;/span&gt;, (request, response) =&amp;gt; {
-	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;有人请求了&amp;#39;&lt;/span&gt;)
-	response.end(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#228b22&#34;&gt;// 服务器返回data，并终止服务器
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;})
-&lt;span style=&#34;color:#228b22&#34;&gt;// 开始监听8888端口
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;server.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8888&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;控制台&lt;code&gt;ts-node-dev index.ts&lt;/code&gt;启动服务器&lt;/li&gt;
-&lt;li&gt;使用&lt;code&gt;curl -v http://localhost:8888 &lt;/code&gt;发送请求&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;2-request对象&#34;&gt;2 request对象&lt;/h1&gt;
-&lt;p&gt;http.createServer()创建的server是http.Server和net.Server类的实例，可以创建后端环境（静态服务器）。&lt;/p&gt;
-&lt;p&gt;首先控制台打出&lt;code&gt;request.contructor&lt;/code&gt;，发现request对象的构造函数是&lt;code&gt;IncomingMessage&lt;/code&gt;，因此利用ts语法，在传参中直接定义&lt;code&gt;request:IncomingMessage&lt;/code&gt;，告诉TypeScript request不是任意对象，而是IncomingMessage对象。&lt;/p&gt;
-&lt;p&gt;获取请求信息（请求头、路径、请求消息体等）：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; * &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;as&lt;/span&gt; http &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 引入IncomingMessage模块
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { IncomingMessage } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http&amp;#39;&lt;/span&gt;
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; server = http.createServer()
-
-server.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;request&amp;#39;&lt;/span&gt;, (request: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;IncomingMessage&lt;/span&gt;, response) =&amp;gt; {
-    console.log(request.httpVersion)&lt;span style=&#34;color:#228b22&#34;&gt;// 获取http版本号
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    console.log(request.url)&lt;span style=&#34;color:#228b22&#34;&gt;// 获取请求路径
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    console.log(request.headers)&lt;span style=&#34;color:#228b22&#34;&gt;// 获取请求头
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#228b22&#34;&gt;// 获取请求消息体
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; arr = []
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 监听data事件
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;// 用户每上传一个字节或一段内容就会触发data事件，由于每次上传报文的大小是固定的，所以在用户上传过程中会不停地触发data事件。
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;// 因此需要监听每一次的data事件，把每一次上传的数据放到一个数组中
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    request.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;, (chunk) =&amp;gt; {
-        arr.push(chunk)
-    })
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 监听上传结束事件，end事件只有在数据被完全消费掉后再触发
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    request.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;end&amp;#39;&lt;/span&gt;, () =&amp;gt; {
-        &lt;span style=&#34;color:#228b22&#34;&gt;// 将数据中的每一段chunk连接起来
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; body = Buffer.concat(arr).toString()
-        console.log(body)
-        &lt;span style=&#34;color:#228b22&#34;&gt;// 请求处理完成后响应
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        response.end(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
-    })
-})
-
-server.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8888&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;开启服务器后，利用&lt;code&gt;curl&lt;/code&gt;构造请求：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;curl -V -d &amp;quot;name=gsq&amp;quot; http://localhost:8888/api/message
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;控制台将打印如下信息：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1.1
-/api/message
-{
-  host: &#39;localhost:8888&#39;,
-  &#39;user-agent&#39;: &#39;curl/7.55.1&#39;,
-  accept: &#39;*/*&#39;,
-  &#39;content-length&#39;: &#39;8&#39;,
-  &#39;content-type&#39;: &#39;application/x-www-form-urlencoded&#39;
-}
-name=gsq
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;总结：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;拥有headers、method、url等属性&lt;/li&gt;
-&lt;li&gt;从stream.Readable类继承了data、end、error事件&lt;/li&gt;
-&lt;li&gt;不能直接拿到请求的消息体：原因与TCP有关&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;3-response对象&#34;&gt;3 response对象&lt;/h1&gt;
-&lt;p&gt;同样的方式发现response对象是ServerResponse的实例对象&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;拥有getHeader、setHeader、end、write等方法，可以控制响应的每一部分&lt;/li&gt;
-&lt;li&gt;拥有statusCode属性，默认为200，可读可写&lt;/li&gt;
-&lt;li&gt;继承了Stream，也属于Stream类的实例&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;response.setHeader(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;NAME&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;gsq&amp;#39;&lt;/span&gt;)
-response.statusCode = &lt;span style=&#34;color:#b452cd&#34;&gt;404&lt;/span&gt;
-response.write(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;1&amp;#39;&lt;/span&gt;)
-response.write(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;2&amp;#39;&lt;/span&gt;)
-response.end()
-&lt;span style=&#34;color:#228b22&#34;&gt;// 响应的消息体
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&amp;lt; HTTP/&lt;span style=&#34;color:#b452cd&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#b452cd&#34;&gt;404&lt;/span&gt; Not Found
-&amp;lt; NAME: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;gsq&lt;/span&gt;
-&amp;lt; &lt;span style=&#34;color:#658b00&#34;&gt;Date&lt;/span&gt;: Wed, &lt;span style=&#34;color:#b452cd&#34;&gt;30&lt;/span&gt; Jun &lt;span style=&#34;color:#b452cd&#34;&gt;2021&lt;/span&gt; 05:&lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;56&lt;/span&gt;:&lt;span style=&#34;color:#b452cd&#34;&gt;08&lt;/span&gt; GMT
-&amp;lt; Connection: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;keep&lt;/span&gt;-alive
-&amp;lt; Keep-Alive: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;timeout&lt;/span&gt;=&lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;
-&amp;lt; Transfer-Encoding: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;chunked&lt;/span&gt;
-&amp;lt;
-&lt;span style=&#34;color:#b452cd&#34;&gt;12&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;4-根据url返回不同的文件&#34;&gt;4 根据url返回不同的文件&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;思路：通过request获取到用户请求的url，利用switch进行判断，根据请求不同，应用fs.readFile读取页面数据并返回给请求端。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; * &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;as&lt;/span&gt; fs &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; * &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;as&lt;/span&gt; http &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; * &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;as&lt;/span&gt; p &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;path&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { IncomingMessage, ServerResponse } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http&amp;#39;&lt;/span&gt;
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; server = http.createServer()
-&lt;span style=&#34;color:#228b22&#34;&gt;// 获取当前目录下的public路径，利用resolve方法进行拼接并解析为绝对路径
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; publicDir = p.relative(__dirname, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;public&amp;#39;&lt;/span&gt;)
-
-server.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;request&amp;#39;&lt;/span&gt;, (request: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;IncomingMessage&lt;/span&gt;, response: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;ServerResponse&lt;/span&gt;) =&amp;gt; {
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 获取到请求路径
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { url } = request
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 判断请求路径
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;switch&lt;/span&gt; (url) {
-        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/index.html&amp;#39;&lt;/span&gt;:
-            &lt;span style=&#34;color:#228b22&#34;&gt;// 读取index.html文件
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            fs.readFile(p.resolve(publicDir, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index.html&amp;#39;&lt;/span&gt;), (error, data) =&amp;gt; {
-                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (error) &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;throw&lt;/span&gt; error
-                response.end(data.toString())
-            })
-            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;
-        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/main.js&amp;#39;&lt;/span&gt;:
-            &lt;span style=&#34;color:#228b22&#34;&gt;// 在响应的头部声明文件类型
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            response.setHeader(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Content-Type&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;text/javascript; charset=utf-8&amp;#39;&lt;/span&gt;)
-            fs.readFile(p.resolve(publicDir, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;main.js&amp;#39;&lt;/span&gt;), (error, data) =&amp;gt; {
-                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (error) &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;throw&lt;/span&gt; error
-                response.end(data.toString())
-            })
-            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;
-        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/index.css&amp;#39;&lt;/span&gt;:
-            &lt;span style=&#34;color:#228b22&#34;&gt;// 在响应的头部声明文件类型
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;            response.setHeader(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Content-Type&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;text/css; charset=utf-8&amp;#39;&lt;/span&gt;)
-            fs.readFile(p.resolve(publicDir, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index.css&amp;#39;&lt;/span&gt;), (error, data) =&amp;gt; {
-                &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (error) &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;throw&lt;/span&gt; error
-                response.end(data.toString())
-            })
-            &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;
-    }
-})
-
-server.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8888&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在浏览器中访问&lt;code&gt;http://localhost:8888/index.html&lt;/code&gt;&lt;/p&gt;
-&lt;h1 id=&#34;5-处理查询参数&#34;&gt;5 处理查询参数&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;当请求的路径带有参数时（&amp;hellip;/index.html?q=1），会影响到switch对路径的判断，从而找不到对应访问的文件，因此需要&lt;code&gt;url模块&lt;/code&gt;来处理查询的参数。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;引入url模块时，模块名与request中取到的url同名，所以需要修改url为path：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { url:&lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;path&lt;/span&gt; } = request
-&lt;span style=&#34;color:#228b22&#34;&gt;// 在request中取到url字段，重命名为path变量
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;url.parse(path)&lt;/code&gt;返回一个&lt;code&gt;URL对象&lt;/code&gt;，包含如下字段：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;Url {
-  protocol: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;null&lt;/span&gt;, slashes: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;null&lt;/span&gt;, auth: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;null&lt;/span&gt;, host: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;null&lt;/span&gt;,
-  port: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;null&lt;/span&gt;,  hostname: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;null&lt;/span&gt;,  hash: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;null&lt;/span&gt;,  search: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;?q=2&amp;#39;&lt;/span&gt;,
-  query: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;q=2&amp;#39;&lt;/span&gt;, pathname: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/index.html&amp;#39;&lt;/span&gt;, path: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/index.html?q=2&amp;#39;&lt;/span&gt;,
-  href: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/index.html?q=2&amp;#39;&lt;/span&gt;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;switch只需读取URL对象中的&lt;code&gt;pathname&lt;/code&gt;字段来进行判断即可。&lt;/p&gt;
-&lt;p&gt;**注：**但是目前node版本中，url.parse已被&lt;code&gt;弃用&lt;/code&gt;，所以我们直接实例化一个URL对象。URL对象接受两个参数，分别为&lt;code&gt;请求路径&lt;/code&gt;与&lt;code&gt;根路径&lt;/code&gt;。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; url = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; URL(path, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http://localhost:8888&amp;#39;&lt;/span&gt;);
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { pathname } = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; URL(path, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http://localhost:8888&amp;#39;&lt;/span&gt;) 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;新的URL对象包含如下字段：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;URL {
-  href: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http://localhost:8888/index.html?q=1&amp;#39;&lt;/span&gt;,
-  origin: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http://localhost:8888&amp;#39;&lt;/span&gt;,
-  protocol: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http:&amp;#39;&lt;/span&gt;,
-  username: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,
-  password: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,
-  host: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;localhost:8888&amp;#39;&lt;/span&gt;,
-  hostname: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;,
-  port: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;8888&amp;#39;&lt;/span&gt;,
-  pathname: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/index.html&amp;#39;&lt;/span&gt;,
-  search: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;?q=1&amp;#39;&lt;/span&gt;,
-  searchParams: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;URLSearchParams&lt;/span&gt; { &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt; =&amp;gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;1&amp;#39;&lt;/span&gt; },
-  hash: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;同样拥有&lt;code&gt;pathname&lt;/code&gt;字段，之后的switch判断与之前保持一致即可。&lt;/p&gt;
-&lt;h1 id=&#34;6-匹配任意文件&#34;&gt;6 匹配任意文件&lt;/h1&gt;
-&lt;p&gt;目前为止我们只能访问三个路径，其他路径均视为404，如果每多一个页面就多写一个case来判断并响应的话，工作量非常大且代码冗余，重复代码很多，因此需要抽取出关键代码，使其能够自动匹配任意访问的文件。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;思路：还是从路径入手，URL对象中的pathname字段的字符串，经过一些字符处理，便可以作为fs读取文件的路径名。例如访问路径为&lt;code&gt;/aa/index.html&lt;/code&gt;，则读取路径中需要的字段是&lt;code&gt;aa/index.html&lt;/code&gt;，只需将前面的&lt;code&gt;&#39;/&#39;&lt;/code&gt;去掉即可。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;修改后代码如下：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; * &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;as&lt;/span&gt; fs &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;fs&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; * &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;as&lt;/span&gt; http &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; * &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;as&lt;/span&gt; p &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;path&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { IncomingMessage, ServerResponse } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http&amp;#39;&lt;/span&gt;
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; server = http.createServer()
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; publicDir = p.relative(__dirname, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;public&amp;#39;&lt;/span&gt;)
-
-server.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;request&amp;#39;&lt;/span&gt;, (request: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;IncomingMessage&lt;/span&gt;, response: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;ServerResponse&lt;/span&gt;) =&amp;gt; {
-    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { url: &lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;path&lt;/span&gt; } = request
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 在URL对象中获取pathname字段
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { pathname } = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; URL(path, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http://localhost:8888&amp;#39;&lt;/span&gt;)
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 基于访问路径处理文件名
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; fileName = pathname.substring(&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
-    fs.readFile(p.resolve(publicDir, fileName), (error, data) =&amp;gt; {
-        &lt;span style=&#34;color:#228b22&#34;&gt;// 如果读不到文件，则返回404
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (error) {
-            response.statusCode = &lt;span style=&#34;color:#b452cd&#34;&gt;404&lt;/span&gt;
-            response.end()
-        }
-        &lt;span style=&#34;color:#228b22&#34;&gt;// 如果成功读取到文件，则返回读取到的数据
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        response.end(data.toString())
-    })
-})
-
-server.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8888&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;7-处理不存在的文件&#34;&gt;7 处理不存在的文件&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;对访问文件时出现的错误类型进行判断&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;1-文件不存在的情况&#34;&gt;1 文件不存在的情况&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (error.errno === -&lt;span style=&#34;color:#b452cd&#34;&gt;4058&lt;/span&gt;) {
-	response.statusCode = &lt;span style=&#34;color:#b452cd&#34;&gt;404&lt;/span&gt; &lt;span style=&#34;color:#228b22&#34;&gt;//找不到文件
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    fs.readFile(p.resolve(publicDir, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;404.html&amp;#39;&lt;/span&gt;), (error, data) =&amp;gt; {
-        response.end(data)
-        &lt;span style=&#34;color:#228b22&#34;&gt;// data无需toString()，浏览器自动解析data
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	})
-} 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-当访问路径为根路径httplocalhost8888时默认访问indexhtml&#34;&gt;2 当访问路径为根路径&lt;code&gt;http://localhost:8888&lt;/code&gt;时，默认访问index.html&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; fileName = pathname.substring(&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (fileName === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;) {
-    fileName = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index.html&amp;#39;&lt;/span&gt;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3当访问路径不是文件而是目录时&#34;&gt;3.当访问路径不是文件而是目录时&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (error.errno === -&lt;span style=&#34;color:#b452cd&#34;&gt;4068&lt;/span&gt;) {
-	response.statusCode = &lt;span style=&#34;color:#b452cd&#34;&gt;403&lt;/span&gt; &lt;span style=&#34;color:#228b22&#34;&gt;//没有权限访问
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	response.end(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;无权查看目录内容&amp;#39;&lt;/span&gt;)
-} 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4其他错误一律归为服务器内部错误&#34;&gt;4.其他错误一律归为服务器内部错误&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; {
-	response.statusCode = &lt;span style=&#34;color:#b452cd&#34;&gt;500&lt;/span&gt; &lt;span style=&#34;color:#228b22&#34;&gt;//服务器内部错误
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	response.end(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;服务器繁忙，请稍后再试&amp;#39;&lt;/span&gt;)
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;8-处理非get请求&#34;&gt;8 处理非GET请求&lt;/h1&gt;
-&lt;p&gt;静态服务器不会接受非get请求，对Method进行过滤：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;const { method } = request
-if (method !== &#39;GET&#39;) {
-	response.statusCode = 405// Method Not Allowed
-	response.end();
-	return;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;9-添加缓存选项&#34;&gt;9 添加缓存选项&lt;/h1&gt;
-&lt;p&gt;再次刷新页面时，css、js和图片等静态数据会缓存至内存中，提升网页访问性能。&lt;/p&gt;
-&lt;p&gt;成功返回数据前，在响应头添加缓存字段：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;response.setHeader(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Cache-Control&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;public max-age=3600&amp;#39;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;10-发布未完成&#34;&gt;10 发布(未完成)&lt;/h1&gt;
-&lt;p&gt;将ts变成js，需全局安装TypeScript，使用&lt;code&gt;tsc&lt;/code&gt;命令进行转换：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;tsc index.ts
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;把js作为package.json中的&lt;code&gt;main&lt;/code&gt;字段&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;main&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;index.js&amp;#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;发布&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;yarn login/npm adduser
-yarn publish/npm publish
-&lt;/code&gt;&lt;/pre&gt;- https://gsemir0418.github.io/posts/nodehttp%E6%A8%A1%E5%9D%97/ - </description>
         </item>
     
     
