@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Object on GSemir Blog</title>
+    <title>Object on Even - A super concise theme for Hugo</title>
     <link>https://gsemir0418.github.io/tags/object/</link>
-    <description>Recent content in Object on GSemir Blog</description>
+    <description>Recent content in Object on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Wed, 07 Jul 2021 17:30:59 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/object/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Object常用方法整理</title>
-      <link>https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <link>https://gsemir0418.github.io/post/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
       <pubDate>Wed, 07 Jul 2021 17:30:59 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
-      <description>Object.assign()   用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象
-  语法：
-Object.assign(target, ...sources) target目标对象；source源对象
-  如果目标对象中的属性具有相同的键，则属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的属性。
-  只会拷贝源对象自身的并且可枚举的属性到目标对象。
-  为了将属性定义（包括其可枚举性）复制到原型，应使用Object.getOwnPropertyDescriptor()和Object.defineProperty()。深拷贝？
-  示例：
-// 复制一个对象 const obj = { a: 1 }; const copy = Object.assign({}, obj); console.log(copy); // { a: 1 }  // 合并对象 const o1 = { a: 1 }; const o2 = { b: 2 }; const o3 = { c: 3 }; const obj = Object.assign(o1, o2, o3); console.</description>
+      <guid>https://gsemir0418.github.io/post/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>Object.assign() 用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象 语法： 1 Object.assign(target, ...sources) target目标对象</description>
     </item>
     
   </channel>

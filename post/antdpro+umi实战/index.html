@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>umi&#43;AntdPro实战总结 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/antdpro&#43;umi%E5%AE%9E%E6%88%98/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="umi&#43;AntdPro实战总结" />
+<meta property="og:description" content="项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/antdpro&#43;umi%E5%AE%9E%E6%88%98/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-22T22:51:51+08:00" />
+<meta property="article:modified_time" content="2021-10-09T00:00:00+08:00" />
+
+<meta itemprop="name" content="umi&#43;AntdPro实战总结">
+<meta itemprop="description" content="项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将"><meta itemprop="datePublished" content="2021-08-22T22:51:51+08:00" />
+<meta itemprop="dateModified" content="2021-10-09T00:00:00+08:00" />
+<meta itemprop="wordCount" content="2041">
+<meta itemprop="keywords" content="前端,React,umi,antdpro," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="umi&#43;AntdPro实战总结"/>
+<meta name="twitter:description" content="项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">umi&#43;AntdPro实战总结</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-08-22 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93/"> 项目实战总结 </a>
+            </div>
+          <span class="more-meta"> 2041 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-vscode配置">0 vscode配置</a>
+      <ul>
+        <li><a href="#01-windows环境下配置vscode默认终端">0.1 windows环境下配置vscode默认终端</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-ant-design-pro">1 Ant Design Pro</a>
+      <ul>
+        <li><a href="#11-全局样式">1.1 全局样式</a></li>
+        <li><a href="#12-pro表单项onchange事件无效">1.2 Pro表单项onChange事件无效</a></li>
+        <li><a href="#13-procomponents">1.3 ProComponents</a>
+          <ul>
+            <li><a href="#131-protable">1.3.1 ProTable</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#2-umijs">2 umi.js</a>
+      <ul>
+        <li><a href="#21-umi-request">2.1 umi-request</a></li>
+        <li><a href="#22-history">2.2 history</a></li>
+        <li><a href="#23-umi配置sass支持">2.3 umi配置sass支持</a></li>
+      </ul>
+    </li>
+    <li><a href="#3其他">3.其他</a>
+      <ul>
+        <li><a href="#31-解决单击双击冲突">3.1 解决单击双击冲突</a></li>
+        <li><a href="#32-switch方法在jsx中的使用">3.2 switch方法在jsx中的使用</a></li>
+        <li><a href="#33-useref">3.3 useRef</a></li>
+        <li><a href="#34-表单联动">3.4 表单联动</a></li>
+        <li><a href="#35-全局模糊搜索">3.5 全局模糊搜索</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将umi与antdPro框架在使用过程中遇到的问题与解决方案整理如下。</p>
+<h1 id="0-vscode配置">0 vscode配置</h1>
+<h2 id="01-windows环境下配置vscode默认终端">0.1 windows环境下配置vscode默认终端</h2>
+<p>打开setting.json：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;terminal.integrated.profiles.windows&#34;</span><span class="err">:</span> <span class="p">{</span>
+	<span class="nt">&#34;PowerShell&#34;</span><span class="p">:</span> <span class="p">{</span>
+		<span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;PowerShell&#34;</span><span class="p">,</span>
+		<span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-powershell&#34;</span>
+	<span class="p">},</span>
+	<span class="nt">&#34;Command Prompt&#34;</span><span class="p">:</span> <span class="p">{</span>
+		<span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="p">[</span>
+			<span class="s2">&#34;${env:windir}\\Sysnative\\cmd.exe&#34;</span><span class="p">,</span>
+			<span class="s2">&#34;${env:windir}\\System32\\cmd.exe&#34;</span>
+		<span class="p">],</span>
+		<span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[],</span>
+		<span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-cmd&#34;</span>
+	<span class="p">},</span>
+	<span class="nt">&#34;Git-Bash&#34;</span><span class="p">:</span> <span class="p">{</span>
+		<span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;D:\\Git\\bin\\bash.exe&#34;</span><span class="p">,</span>
+		<span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[]</span>
+	<span class="p">}</span>
+<span class="p">}</span><span class="err">,</span>
+<span class="s2">&#34;terminal.integrated.defaultProfile.windows&#34;</span><span class="err">:</span> <span class="s2">&#34;Git-Bash&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="1-ant-design-pro">1 Ant Design Pro</h1>
+<h2 id="11-全局样式">1.1 全局样式</h2>
+<p>全局的样式（包括覆盖原生antd的css）可以写到<code>global.less</code>中，记得属性后加<code>!important</code></p>
+<p>打包后样式失效时，可以尝试关闭config.js中的按需加载（<code>dynamicImport</code>），但可能对平台首页加载速度有一定影响</p>
+<h2 id="12-pro表单项onchange事件无效">1.2 Pro表单项onChange事件无效</h2>
+<p>使用表单项组件时onChange事件失效</p>
+<p>在表单项的fieldProps属性中定义onChange事件即可，fieldProps即Pro组件对应的原生antd属性。</p>
+<h2 id="13-procomponents">1.3 ProComponents</h2>
+<h3 id="131-protable">1.3.1 ProTable</h3>
+<ol>
+<li>
+<p>字段找不到</p>
+<p>进行列配置时，对应字段可能在对象深层，在配置<code>dataIndex</code>时可以用数组的形式，例如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dataIndex:[&#39;data&#39;, &#39;placeNumber&#39;, &#39;method&#39;]
+</code></pre></td></tr></table>
+</div>
+</div><p>那么ProTable就会将行数据的data.placeNumber.method值呈现在表格中了</p>
+</li>
+<li>
+<p>可编辑表格编辑状态默认值</p>
+<p>EditableProTable的columns配置中的<code>valueEnum</code>是用来转换<strong>字符串</strong>类型的枚举（配合<code>valueType:'select'</code>替代render），对于非字符串字段（如数值或布尔类型），则会出现编辑状态的默认值为空或为实际value的bug。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
+</code></pre></td></tr></table>
+</div>
+</div><p>可以使用renderFormItem配置此字段的Select选择框，利用ref全局变量存储选项值，通过onSave读取ref值，对接保存或新增借口即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="c1">// 修改后的status
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>
+<span class="p">...</span>
+<span class="p">{</span>
+      <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;装置状态&#39;</span><span class="p">,</span>
+      <span class="nx">dataIndex</span><span class="o">:</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span>
+         <span class="c1">// 功能同render
+</span><span class="c1"></span>      <span class="nx">valueType</span><span class="o">:</span> <span class="s1">&#39;select&#39;</span><span class="p">,</span>
+      <span class="nx">valueEnum</span><span class="o">:</span> <span class="p">{</span>
+        <span class="mi">0</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;停工&#39;</span><span class="p">,</span>
+          <span class="nx">status</span><span class="o">:</span> <span class="s1">&#39;Error&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="mi">1</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;正常&#39;</span><span class="p">,</span>
+          <span class="nx">status</span><span class="o">:</span> <span class="s1">&#39;Success&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+      <span class="p">},</span>
+      <span class="nx">renderFormItem</span><span class="o">:</span> <span class="nx">u</span> <span class="p">=&gt;</span> <span class="p">[</span>
+        <span class="p">&lt;</span><span class="nt">Select</span>
+          <span class="na">key</span><span class="o">=</span><span class="s">&#39;statusSelect&#39;</span>
+          <span class="err">//</span> <span class="na">配置初始值</span>
+          <span class="na">defaultValue</span><span class="o">=</span><span class="p">{</span><span class="nx">u</span><span class="p">.</span><span class="nx">entry</span><span class="o">?</span><span class="nx">u</span><span class="p">.</span><span class="nx">entry</span><span class="p">.</span><span class="nx">status</span><span class="o">:</span><span class="kc">null</span><span class="p">}</span>
+          <span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">v</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">status</span><span class="p">.</span><span class="nx">current</span> <span class="o">=</span> <span class="nx">v</span>
+          <span class="p">}}</span>
+          <span class="na">rules</span><span class="o">=</span><span class="p">{[</span>
+            <span class="p">{</span>
+              <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+              <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;此项为必填项&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+          <span class="p">]}</span>
+        <span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">Option</span> <span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">}&gt;</span><span class="nx">停工</span><span class="p">&lt;/</span><span class="nt">Option</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">Option</span> <span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}&gt;</span><span class="nx">正常</span><span class="p">&lt;/</span><span class="nt">Option</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">Select</span><span class="p">&gt;,</span>
+      <span class="p">],</span>
+    <span class="p">},</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h1 id="2-umijs">2 umi.js</h1>
+<h2 id="21-umi-request">2.1 umi-request</h2>
+<p>当打包后请求<code>url</code>正常，但出现503等错误时，可以尝试在<code>request.js</code>中去除<code>credentials: 'include'</code>，即默认请求不携带cookie</p>
+<h2 id="22-history">2.2 history</h2>
+<p>history可以实现路由跳转，也可携带参数跳转</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="p">{</span><span class="nx">history</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;umi&#39;</span>
+
+<span class="nx">history</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+	<span class="nx">pathname</span><span class="o">:</span><span class="s1">&#39;xxx/xxx&#39;</span><span class="p">,</span>
+	<span class="nx">params</span><span class="o">:</span><span class="p">{</span><span class="nx">id</span><span class="p">,</span><span class="nx">name</span><span class="p">,</span><span class="nx">age</span><span class="p">}</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>跳转后利用useEffect监听props.location.params中的参数，进行数据请求等操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-react" data-lang="react"><span class="kr">const</span> <span class="p">{</span><span class="nx">id</span><span class="p">}</span> <span class="o">=</span> <span class="nx">props</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">params</span>
+<span class="nx">useEffect</span><span class="p">(()=&gt;{</span>
+	<span class="nx">getXXXById</span><span class="p">(</span><span class="nx">id</span><span class="p">).</span><span class="nx">then</span><span class="p">()</span>
+<span class="p">},[</span><span class="nx">id</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="23-umi配置sass支持">2.3 umi配置sass支持</h2>
+<p>首先安装sass插件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">yarn add @umijs/plugin-sass 或
+npm install @umijs/plugin-sass
+</code></pre></td></tr></table>
+</div>
+</div><p>如果安装完成后出现<code>run &quot;npm audit fix&quot; to fix them</code>的提示，就运行一下</p>
+<p>其次，安装<code>node-sass</code>和<code>sass-loader</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">npm install node-sass sass-loader 或
+yarn add node-sass sass-loader
+</code></pre></td></tr></table>
+</div>
+</div><p>最后，配置<code>.umirc.js</code>（或<code>config.js</code>）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+	<span class="p">...</span>
+	<span class="s2">&#34;sass&#34;</span><span class="o">:</span> <span class="p">{</span> <span class="p">},</span>
+	<span class="p">...</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3其他">3.其他</h1>
+<h2 id="31-解决单击双击冲突">3.1 解决单击双击冲突</h2>
+<p>可以利用计时器配合单击事件回调，实现单击双击事件的区别触发</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">count</span><span class="p">.</span><span class="nx">current</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  	<span class="k">if</span> <span class="p">(</span><span class="nx">count</span><span class="p">.</span><span class="nx">current</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+  		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;single click: &#39;</span><span class="p">,</span> <span class="nx">count</span><span class="p">.</span><span class="nx">current</span><span class="p">)</span>
+  	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">count</span><span class="p">.</span><span class="nx">current</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+  		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;setTimeout onDoubleClick: &#39;</span><span class="p">,</span> <span class="nx">count</span><span class="p">.</span><span class="nx">current</span><span class="p">)</span>
+  	<span class="p">}</span>
+  	<span class="nx">count</span><span class="p">.</span><span class="nx">current</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="p">},</span> <span class="mi">300</span><span class="p">)</span>
+<span class="p">}}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="32-switch方法在jsx中的使用">3.2 switch方法在jsx中的使用</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="p">{(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="k">switch</span> <span class="p">(</span><span class="nx">select</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">case</span> <span class="s1">&#39;table&#39;</span><span class="o">:</span>
+			<span class="k">return</span> <span class="nx">xxx</span>
+		<span class="k">case</span> <span class="s1">&#39;charts&#39;</span><span class="o">:</span>
+			<span class="k">return</span> <span class="nx">xxx</span>
+		<span class="k">default</span><span class="o">:</span>
+			<span class="k">return</span> <span class="kc">null</span>
+	<span class="p">}</span>
+<span class="p">})()}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="33-useref">3.3 useRef</h2>
+<p>既可以作为页面内元素的实例饮用，也可以作为不会导致页面刷新的全局变量使用，</p>
+<h2 id="34-表单联动">3.4 表单联动</h2>
+<p>将表单项数据保存为state，利用useMemo监听标单项变化，从而重新计算下一个标单项内容</p>
+<h2 id="35-全局模糊搜索">3.5 全局模糊搜索</h2>
+<p>思路：将全部数据按行划分，将每一项整合成字符串，判断搜索的字符在数组中的index值，从而筛选并展示相应的搜索结果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">PageContainer</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@ant-design/pro-layout&#39;</span>
+<span class="kr">import</span> <span class="nx">ProTable</span> <span class="nx">from</span> <span class="s1">&#39;@ant-design/pro-table&#39;</span>
+<span class="kr">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">getAllExceptionHandle</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./service&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">omit</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;lodash&#39;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">ExceptionHandle</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// 表格数据
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="p">[</span><span class="nx">dataSource</span><span class="p">,</span> <span class="nx">setDataSource</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">[])</span>
+  <span class="c1">// 检索结果
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="p">[</span><span class="nx">result</span><span class="p">,</span> <span class="nx">setResult</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">[])</span>
+
+  <span class="c1">// 页面挂载完成后请求全部异常数据
+</span><span class="c1"></span>  <span class="nx">useEffect</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">getAllExceptionHandle</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">r</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">content</span>
+      <span class="kr">const</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">i</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">omit</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;createBy&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;placeNumberId&#39;</span><span class="p">])</span>
+      <span class="p">})</span>
+      <span class="nx">setResult</span><span class="p">(</span><span class="nx">arr2</span><span class="p">)</span>
+      <span class="nx">setDataSource</span><span class="p">(</span><span class="nx">arr2</span><span class="p">)</span>
+    <span class="p">})</span>
+  <span class="p">},</span> <span class="p">[])</span>
+
+  <span class="c1">// 全局搜索功能回调
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">handleSearch</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span>
+    <span class="nx">value</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">dataSource</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 输入框内容
+</span><span class="c1"></span>        <span class="kr">const</span> <span class="nx">v</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">v</span> <span class="o">!==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// 1.将data数据的全部属性值复制到数组中，按行划分
+</span><span class="c1"></span>          <span class="c1">// [[1,2,3],[4,5,6],[7,8,9]]
+</span><span class="c1"></span>          <span class="kr">const</span> <span class="nx">valuesArr</span> <span class="o">=</span> <span class="nx">dataSource</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">i</span> <span class="p">=&gt;</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+          <span class="c1">// 2.将数组拼接成一个大字符串
+</span><span class="c1"></span>          <span class="c1">// [&#39;123&#39;,&#39;456&#39;,&#39;789&#39;]
+</span><span class="c1"></span>          <span class="kr">const</span> <span class="nx">valuesArrStr</span> <span class="o">=</span> <span class="nx">valuesArr</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">i</span> <span class="p">=&gt;</span> <span class="nx">i</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+          <span class="c1">// 3.遍历这个数组，如果字符串中包含输入的字符，则返回index值，否则返回-2
+</span><span class="c1"></span>          <span class="c1">// [0,-2,-2]
+</span><span class="c1"></span>          <span class="kr">const</span> <span class="nx">searchIndexArrOrig</span> <span class="o">=</span> <span class="nx">valuesArrStr</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">i</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">=&gt;</span>
+            <span class="nx">i</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">?</span> <span class="nx">index</span> <span class="o">:</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span>
+          <span class="p">)</span>
+          <span class="c1">// 4.筛选出非-2的index值
+</span><span class="c1"></span>          <span class="c1">// [0]
+</span><span class="c1"></span>          <span class="kr">const</span> <span class="nx">searchIndexArr</span> <span class="o">=</span> <span class="nx">searchIndexArrOrig</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">i</span> <span class="p">=&gt;</span> <span class="nx">i</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+          <span class="c1">// 5.根据index值到原数组筛选出来即可
+</span><span class="c1"></span>          <span class="nx">setResult</span><span class="p">(</span><span class="nx">searchIndexArr</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">i</span> <span class="p">=&gt;</span> <span class="nx">dataSource</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">setResult</span><span class="p">(</span><span class="nx">dataSource</span><span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">[</span><span class="nx">dataSource</span><span class="p">],</span>
+  <span class="p">)</span>
+
+  <span class="c1">// 表格列配置
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">columns</span> <span class="o">=</span> <span class="p">[...]</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">PageContainer</span> <span class="na">breadcrumb</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}&gt;</span>
+      <span class="p">&lt;</span><span class="nt">ProTable</span>
+        <span class="na">loading</span><span class="o">=</span><span class="p">{</span><span class="nx">dataSource</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">}</span>
+        <span class="na">columns</span><span class="o">=</span><span class="p">{</span><span class="nx">columns</span><span class="p">}</span>
+        <span class="na">search</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span>
+        <span class="na">dataSource</span><span class="o">=</span><span class="p">{</span><span class="nx">result</span><span class="p">}</span>
+        <span class="na">rowKey</span><span class="o">=</span><span class="s">&#39;id&#39;</span>
+        <span class="na">toolbar</span><span class="o">=</span><span class="p">{{</span>
+          <span class="nx">search</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">onChange</span><span class="o">:</span> <span class="nx">value</span> <span class="p">=&gt;</span> <span class="p">{</span>
+              <span class="nx">handleSearch</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+            <span class="p">},</span>
+          <span class="p">},</span>
+        <span class="p">}}</span>
+        <span class="na">options</span><span class="o">=</span><span class="p">{{</span>
+          <span class="nx">density</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="nx">fullScreen</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="nx">setting</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="nx">reload</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="p">}}</span>
+      <span class="p">&gt;&lt;/</span><span class="nt">ProTable</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">PageContainer</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-10-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="/tags/react/">React</a>
+          <a href="/tags/umi/">umi</a>
+          <a href="/tags/antdpro/">antdpro</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Web性能优化-基础</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/express%E6%A0%B8%E5%BF%83/">
+            <span class="next-text nav-default">Express核心</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

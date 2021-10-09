@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Array常用方法整理 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="Array.prototype.map() 1.关键词：遍历 2.是否修改原数组：false 3.返回值： newArray[]，回调函数的结果组成了新数组的每一个元素。 4.语法： 1 2 3 var" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/array/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Array常用方法整理" />
+<meta property="og:description" content="Array.prototype.map() 1.关键词：遍历 2.是否修改原数组：false 3.返回值： newArray[]，回调函数的结果组成了新数组的每一个元素。 4.语法： 1 2 3 var" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/array/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-28T09:30:55+08:00" />
+<meta property="article:modified_time" content="2021-09-10T00:00:00+08:00" />
+
+<meta itemprop="name" content="Array常用方法整理">
+<meta itemprop="description" content="Array.prototype.map() 1.关键词：遍历 2.是否修改原数组：false 3.返回值： newArray[]，回调函数的结果组成了新数组的每一个元素。 4.语法： 1 2 3 var"><meta itemprop="datePublished" content="2021-06-28T09:30:55+08:00" />
+<meta itemprop="dateModified" content="2021-09-10T00:00:00+08:00" />
+<meta itemprop="wordCount" content="6473">
+<meta itemprop="keywords" content="前端,JavaScript,Array," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Array常用方法整理"/>
+<meta name="twitter:description" content="Array.prototype.map() 1.关键词：遍历 2.是否修改原数组：false 3.返回值： newArray[]，回调函数的结果组成了新数组的每一个元素。 4.语法： 1 2 3 var"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Array常用方法整理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-28 </span>
+        <div class="post-category">
+            <a href="/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"> JS基础知识整理 </a>
+            </div>
+          <span class="more-meta"> 6473 words </span>
+          <span class="more-meta"> 13 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#arrayprototypemap"><code>Array.prototype.map()</code></a></li>
+    <li><a href="#arrayprototypepop"><code>Array.prototype.pop()</code></a></li>
+    <li><a href="#arrayprototypefill"><code>Array.prototype.fill()</code></a></li>
+    <li><a href="#arrayprototypefind"><code>Array.prototype.find()</code></a></li>
+    <li><a href="#arrayprototypejoin"><code>Array.prototype.join()</code></a></li>
+    <li><a href="#arrayprototypepush"><code>Array.prototype.push()</code></a></li>
+    <li><a href="#arrayprototypesome"><code>Array.prototype.some()</code></a></li>
+    <li><a href="#arrayprototypesort"><code>Array.prototype.sort()</code></a></li>
+    <li><a href="#arrayprototypeevery"><code>Array.prototype.every()</code></a></li>
+    <li><a href="#arrayprototypeshift"><code>Array.prototype.shift()</code></a></li>
+    <li><a href="#arrayprototypepop-1"><code>Array.prototype.pop()</code></a></li>
+    <li><a href="#arrayprototypeslice"><code>Array.prototype.slice()</code></a></li>
+    <li><a href="#arrayprototypeconcat"><code>Array.prototype.concat()</code></a></li>
+    <li><a href="#arrayprototypefilter"><code>Array.prototype.filter()</code></a></li>
+    <li><a href="#arrayprototypesplice"><code>Array.prototype.splice()</code></a></li>
+    <li><a href="#arrayprototypeforeach"><code>Array.prototype.forEach()</code></a></li>
+    <li><a href="#arrayprototypeindexof"><code>Array.prototype.indexOf()</code></a></li>
+    <li><a href="#arrayprototypelastindexof"><code>Array.prototype.lastIndexOf()</code></a></li>
+    <li><a href="#arrayprototypereverse"><code>Array.prototype.reverse()</code></a></li>
+    <li><a href="#arrayprototypeunshift"><code>Array.prototype.unshift()</code></a></li>
+    <li><a href="#arrayprototypeincludes"><code>Array.prototype.includes()</code></a></li>
+    <li><a href="#arrayprototypereduce"><code>Array.prototype.reduce()</code></a></li>
+    <li><a href="#arrayprototypereduce-1"><code>Array.prototype.reduce()</code></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="arrayprototypemap"><code>Array.prototype.map()</code></h1>
+<p>1.关键词：遍历</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：</p>
+<p><code>newArray[]</code>，回调函数的结果组成了新数组的每一个元素。</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">new_array</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">currentValue</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="c1">// callback
+</span><span class="c1"></span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>currentValue</code>：callback数组中正在处理的当前元素；</li>
+<li><code>index</code>：可选，callback数组中正在处理的当前元素的索引；</li>
+<li><code>array</code>：可选，map方法调用的数组，几乎不用</li>
+</ul>
+<p>5.描述</p>
+<p><code>map</code> 方法会给原数组中的每个元素都按顺序调用一次  <code>callback</code> 函数。<code>callback</code> 每次执行后的返回值（包括<code>undefined</code>）组合起来形成一个新数组。 <code>callback</code> 函数只会在有值的索引上被调用；那些从来没被赋过值或者使用 <code>delete</code> 删除的索引则不会被调用。</p>
+<p>因为<code>map</code>生成一个新数组，当你不打算使用返回的新数组却使用<code>map</code>是违背设计初衷的，请用<code>forEach</code>或者<code>for-of</code>替代。</p>
+<p><code>callback</code> 函数会被自动传入三个参数：数组元素，元素索引，原数组本身。</p>
+<p>6.示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 求数组中每个元素的平方根
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="kr">const</span> <span class="nx">newArr</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">)</span><span class="c1">// [2, 3, 4]
+</span><span class="c1"></span>
+<span class="c1">// 使用map重新格式化数组中的对象
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">key</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span><span class="mi">10</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="nx">key</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span><span class="mi">20</span> <span class="p">}</span>
+<span class="p">]</span>
+<span class="kr">const</span> <span class="nx">newArr</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">rObj</span><span class="o">=</span><span class="p">{}</span>
+    <span class="nx">rObj</span><span class="p">[</span><span class="nx">item</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">item</span><span class="p">.</span><span class="nx">value</span>
+    <span class="k">return</span> <span class="nx">rObj</span>
+<span class="p">})</span><span class="c1">// [{ 1:10 },{ 2:20 }]
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypepop"><code>Array.prototype.pop()</code></h1>
+<p>1.关键词：删除</p>
+<p>2.是否修改原数组：<code>true</code></p>
+<p>3.返回值：</p>
+<p>从数组中删除的元素(当数组为空时返回<code>undefined</code>)</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p><code>pop</code> 方法从一个数组中删除并返回最后一个元素。</p>
+<p><code>pop</code> 方法有意具有通用性。该方法和<code>call()</code>或<code>apply()</code> 一起使用时，可应用在类似数组的对象上。<code>pop</code>方法根据 <code>length</code>属性来确定最后一个元素的位置。如果不包含<code>length</code>属性或<code>length</code>属性不能被转成一个数值，会将<code>length</code>置为0，并返回<code>undefined</code>。</p>
+<p>如果你在一个空数组上调用 pop()，它返回<code>undefined</code>。</p>
+<p>6.示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="kr">const</span> <span class="nx">poped</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
+<span class="c1">// arr = [1, 2]
+</span><span class="c1">// poped = 3
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypefill"><code>Array.prototype.fill()</code></h1>
+<p>1.关键词：修改、填充</p>
+<p>2.是否修改原数组：<code>true</code></p>
+<p>3.返回值：</p>
+<p>修改后的数组</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">end</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>value</code>：用来填充数组元素的值</li>
+<li><code>start</code> ：可选，起始索引，默认值为0</li>
+<li><code>end</code> ：可选，终止索引，默认值为 <code>this.length</code></li>
+</ul>
+<p>5.描述：</p>
+<p><code>fill</code> 方法接受三个参数 <code>value</code>, <code>start</code> 以及 <code>end</code>。 <code>start</code> 和<code>end</code> 参数是可选的, 其默认值分别为 <code>0</code> 和 <code>this</code> 对象的 <code>length </code>属性值。</p>
+<p>如果 <code>start</code> 是个负数, 则开始索引会被自动计算成为 <code>length+start</code>, 其中 <code>length</code> 是 <code>this</code> 对象的 <code>length </code>属性值。如果 <code>end</code> 是个负数, 则结束索引会被自动计算成为 <code>length+end</code>。</p>
+<p>当一个对象被传递给 <code>fill</code>方法的时候, 填充数组的是这个对象的引用。</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nx">fill</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>               <span class="c1">// [4, 4, 4]
+</span><span class="c1"></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nx">fill</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>            <span class="c1">// [1, 4, 4]
+</span><span class="c1"></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nx">fill</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>         <span class="c1">// [1, 4, 3]
+</span><span class="c1"></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nx">fill</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>         <span class="c1">// [1, 2, 3]
+</span><span class="c1"></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nx">fill</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>         <span class="c1">// [1, 2, 3]
+</span><span class="c1"></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nx">fill</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">);</span>       <span class="c1">// [4, 2, 3]
+</span><span class="c1"></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nx">fill</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="kc">NaN</span><span class="p">,</span> <span class="kc">NaN</span><span class="p">);</span>     <span class="c1">// [1, 2, 3]
+</span><span class="c1"></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nx">fill</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>         <span class="c1">// [1, 2, 3]
+</span><span class="c1"></span><span class="nb">Array</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>                <span class="c1">// [4, 4, 4]
+</span><span class="c1"></span><span class="p">[].</span><span class="nx">fill</span><span class="p">.</span><span class="nx">call</span><span class="p">({</span> <span class="nx">length</span><span class="o">:</span> <span class="mi">3</span> <span class="p">},</span> <span class="mi">4</span><span class="p">);</span>  
+<span class="c1">// {0: 4, 1: 4, 2: 4, length: 3}
+</span><span class="c1"></span>
+<span class="c1">// Objects by reference.
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="nx">fill</span><span class="p">({})</span> <span class="c1">// [{}, {}, {}];
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">hi</span> <span class="o">=</span> <span class="s2">&#34;hi&#34;</span><span class="p">;</span> <span class="c1">// [{ hi: &#34;hi&#34; }, { hi: &#34;hi&#34; }, { hi: &#34;hi&#34; }]
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypefind"><code>Array.prototype.find()</code></h1>
+<p>1.关键词：查找</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：</p>
+<p>数组中第一个满足所提供测试函数的元素的值，否则返回<code>undefined</code></p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">find</span><span class="p">((</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="c1">// callback
+</span><span class="c1"></span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>element</code>：当前遍历到的元素</li>
+<li><code>index</code>：可选，当前遍历到的索引</li>
+<li><code>array</code>：可选，数组本身，基本用不到</li>
+</ul>
+<p>5.描述：</p>
+<p><code>find</code>方法对数组中的每一项元素执行一次 <code>callback</code> 函数，直至有一个 callback 返回 <code>true</code>。当找到了这样一个元素后，该方法会立即返回这个元素的值，否则返回<code>undefined</code>。注意 <code>callback </code>函数会为数组中的每个索引调用即从 <code>0 </code>到 <code>length - 1</code>，而不仅仅是那些被赋值的索引，这意味着对于稀疏数组来说，该方法的效率要低于那些只遍历有值的索引的方法。</p>
+<p><code>find</code>方法不会改变数组。</p>
+<p>6.示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">inventory</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;apples&#39;</span><span class="p">,</span> <span class="nx">quantity</span><span class="o">:</span> <span class="mi">2</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;bananas&#39;</span><span class="p">,</span> <span class="nx">quantity</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;cherries&#39;</span><span class="p">,</span> <span class="nx">quantity</span><span class="o">:</span> <span class="mi">5</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">fruit</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">fruit</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;cherries&#39;</span>
+<span class="p">})</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> 
+<span class="c1">// { name: &#39;cherries&#39;, quantity: 5 }
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypejoin"><code>Array.prototype.join()</code></h1>
+<p>1.关键词：连接</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：</p>
+<p>一个所有数组元素连接的字符串。如果 <code>arr.length</code> 为0，则返回空字符串</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">分隔符</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p>所有的数组元素被转换成字符串，再用一个分隔符将这些字符串连接起来。</p>
+<p>如果一个元素为 <code>undefined</code> 或 <code>null</code>，它会被转换为空字符串。</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Wind&#39;</span><span class="p">,</span> <span class="s1">&#39;Rain&#39;</span><span class="p">,</span> <span class="s1">&#39;Fire&#39;</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">myVar1</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">join</span><span class="p">();</span>      
+<span class="c1">// &#34;Wind,Rain,Fire&#34;
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">myVar2</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">);</span>  
+<span class="c1">// &#34;Wind, Rain, Fire&#34;
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">myVar3</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39; + &#39;</span><span class="p">);</span> 
+<span class="c1">// &#34;Wind + Rain + Fire&#34;
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">myVar4</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>    
+<span class="c1">// &#34;WindRainFire&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypepush"><code>Array.prototype.push()</code></h1>
+<p>1.关键词：添加</p>
+<p>2.是否修改原数组：true</p>
+<p>3.返回值：</p>
+<p>当调用该方法时，新的<code>length</code>属性值将被返回。</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">element1</span><span class="p">,</span> <span class="p">...,</span> <span class="nx">elementN</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p>push方法将值追加到数组中。</p>
+<p>唯一的原生类数组（array-like）对象是<code>Strings</code>，尽管如此，它们并不适用该方法，因为字符串是不可改变的。</p>
+<p>6.示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 添加元素到数组
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">sports</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;soccer&#34;</span><span class="p">,</span> <span class="s2">&#34;baseball&#34;</span><span class="p">];</span>
+<span class="c1">// [&#34;soccer&#34;, &#34;baseball&#34;, &#34;football&#34;, &#34;swimming&#34;]
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">total</span> <span class="o">=</span> <span class="nx">sports</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&#34;football&#34;</span><span class="p">,</span> <span class="s2">&#34;swimming&#34;</span><span class="p">);</span>
+<span class="c1">// 4 
+</span><span class="c1"></span>
+<span class="c1">// 合并两个数组
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">vegetables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;parsnip&#39;</span><span class="p">,</span> <span class="s1">&#39;potato&#39;</span><span class="p">];</span>
+<span class="kr">const</span> <span class="nx">moreVegs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;celery&#39;</span><span class="p">,</span> <span class="s1">&#39;beetroot&#39;</span><span class="p">];</span>
+
+<span class="c1">// 将第二个数组融合进第一个数组
+</span><span class="c1">// 相当于 vegetables.push(&#39;celery&#39;, &#39;beetroot&#39;);
+</span><span class="c1"></span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">push</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">vegetables</span><span class="p">,</span> <span class="nx">moreVegs</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">vegetables</span><span class="p">);</span> 
+<span class="c1">// [&#39;parsnip&#39;, &#39;potato&#39;, &#39;celery&#39;, &#39;beetroot&#39;]
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypesome"><code>Array.prototype.some()</code></h1>
+<p>1.关键词：查找</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：</p>
+<p>数组中有至少一个元素通过回调函数的测试就会返回**<code>true</code>**；所有元素都没有通过回调函数的测试返回值才会为<code>false</code></p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">some</span><span class="p">((</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="c1">// callback
+</span><span class="c1"></span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>element</code>:数组中正在处理的元素。</li>
+<li><code>index</code> :可选，数组中正在处理的元素的索引值。</li>
+<li><code>array</code>：可选，几乎不用</li>
+</ul>
+<p>5.描述：</p>
+<p><code>some()</code> 为数组中的每一个元素执行一次 <code>callback</code> 函数，直到找到一个使得 callback 返回一个“真值”（即可转换为布尔值 true 的值）。如果找到了这样一个值，<code>some()</code> 将会立即返回 <code>true</code>。否则，<code>some()</code> 返回 <code>false</code>。<code>callback</code> 只会在那些”有值“的索引上被调用，不会在那些被删除或从来未被赋值的索引上调用。</p>
+<p><code>callback</code> 被调用时传入三个参数：元素的值，元素的索引，被遍历的数组。</p>
+<p><code>some()</code> 被调用时不会改变数组。</p>
+<p>6.示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 使用箭头函数测试数组元素的值
+</span><span class="c1"></span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">].</span><span class="nx">some</span><span class="p">(</span><span class="nx">x</span> <span class="p">=&gt;</span> <span class="nx">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">);</span>  <span class="c1">// false
+</span><span class="c1"></span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">].</span><span class="nx">some</span><span class="p">(</span><span class="nx">x</span> <span class="p">=&gt;</span> <span class="nx">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">);</span> <span class="c1">// true
+</span><span class="c1"></span>
+<span class="c1">// 判断数组元素中是否存在某个值，可以用include()代替
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;mango&#39;</span><span class="p">,</span> <span class="s1">&#39;guava&#39;</span><span class="p">];</span>
+
+<span class="kd">function</span> <span class="nx">checkAvailability</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span><span class="nx">arrVal</span> <span class="p">=&gt;</span> <span class="nx">val</span> <span class="o">===</span> <span class="nx">arrVal</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">checkAvailability</span><span class="p">(</span><span class="nx">fruits</span><span class="p">,</span> <span class="s1">&#39;kela&#39;</span><span class="p">);</span>   <span class="c1">// false
+</span><span class="c1"></span><span class="nx">checkAvailability</span><span class="p">(</span><span class="nx">fruits</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">);</span> <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypesort"><code>Array.prototype.sort()</code></h1>
+<p>1.关键词：排序</p>
+<p>2.是否修改原数组：<code>true</code></p>
+<p>3.返回值：</p>
+<p>排序后的数组。请注意，数组已原地排序，并且不进行复制。</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">sort</span><span class="p">([</span><span class="nx">compareFunction</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>compareFunction</code> 可选</p>
+<p>用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的各个字符的Unicode位点进行排序。</p>
+<ul>
+<li>
+<p><code>firstEl</code>第一个用于比较的元素。</p>
+</li>
+<li>
+<p><code>	secondEl</code>第二个用于比较的元素。</p>
+</li>
+</ul>
+<p>5.描述：</p>
+<p>如果没有指明 <code>compareFunction</code> ，那么元素会按照转换为的字符串的诸个字符的Unicode位点进行排序。例如 &ldquo;Banana&rdquo; 会被排列到 &ldquo;cherry&rdquo; 之前。当数字按由小到大排序时，9 出现在 80 之前，但因为（没有指明 <code>compareFunction</code>），比较的数字会先被转换为字符串，所以在Unicode顺序上 &ldquo;80&rdquo; 要比 &ldquo;9&rdquo; 要靠前。</p>
+<p>如果指明了 <code>compareFunction</code> ，那么数组会按照调用该函数的返回值排序。即 a 和 b 是两个将要被比较的元素：</p>
+<ul>
+<li>
+<p>如果 <code>compareFunction(a, b)</code> 小于 0 ，那么 a 会被排列到 b 之前；</p>
+</li>
+<li>
+<p>如果 <code>compareFunction(a, b)</code> 等于 0 ， a 和 b 的相对位置不变。备注： ECMAScript 标准并不保证这一行为，而且也不是所有浏览器都会遵守（例如 Mozilla 在 2003 年之前的版本）；</p>
+</li>
+<li>
+<p>如果 <code>compareFunction(a, b)</code> 大于 0 ， b 会被排列到 a 之前。</p>
+</li>
+<li>
+<p><code>compareFunction(a, b)</code> 必须总是对相同的输入返回相同的比较结果，否则排序的结果将是不确定的。</p>
+</li>
+</ul>
+<p>6.示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 数组升序排列
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nx">nums</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span><span class="p">)</span>
+<span class="c1">// [1, 2, 3, 4, 5]
+</span><span class="c1"></span>
+<span class="c1">// 对象按某个属性排序
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">objs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Sam&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span><span class="mi">21</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Gsq&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span><span class="mi">24</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Zs&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span><span class="mi">23</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;The&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span><span class="mi">25</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Art&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span><span class="mi">22</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Bob&#39;</span> <span class="p">},</span>
+<span class="p">]</span>
+<span class="c1">// sort by value
+</span><span class="c1"></span><span class="nx">objs</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">value</span> <span class="o">-</span> <span class="nx">b</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+<span class="c1">// sort by name
+</span><span class="c1"></span><span class="nx">objs</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">nameA</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span>
+    <span class="kr">const</span> <span class="nx">nameB</span> <span class="o">=</span> <span class="nx">b</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">nameA</span> <span class="o">&lt;</span> <span class="nx">nameB</span><span class="p">){</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">nameA</span> <span class="o">&gt;</span> <span class="nx">nameB</span><span class="p">){</span> <span class="k">return</span> <span class="mi">1</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypeevery"><code>Array.prototype.every()</code></h1>
+<p>1.关键词：测试，遍历</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：数组内全部成员都通过了测试，则返回<code>true</code>，否则返回<code>false</code></p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">every</span><span class="p">((</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="c1">// callback
+</span><span class="c1"></span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p><code>every</code> 方法为数组中的每个元素执行一次 <code>callback</code> 函数，直到它找到一个会使 <code>callback</code> 返回<code>falsy</code>的元素。如果发现了一个这样的元素，<code>every</code> 方法将会立即返回 <code>false</code>。否则，<code>callback</code> 为每一个元素返回 <code>true</code>，<code>every</code> 就会返回 <code>true</code>。</p>
+<p>若传入一个空数组，则直接返回<code>true</code></p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 检测所有数组元素是否都大于10
+</span><span class="c1"></span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">].</span><span class="nx">every</span><span class="p">(</span><span class="nx">x</span> <span class="p">=&gt;</span> <span class="nx">x</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">// false
+</span><span class="c1"></span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">10</span><span class="p">].</span><span class="nx">every</span><span class="p">(</span><span class="nx">x</span> <span class="p">=&gt;</span> <span class="nx">x</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypeshift"><code>Array.prototype.shift()</code></h1>
+<p>1.关键词：删除</p>
+<p>2.是否修改原数组：<code>true</code></p>
+<p>3.返回值：返回删除的元素，如果数组为空则返回<code>undefined</code></p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p>删除数组第一个元素，即索引为0的元素，并返回被移除的元素</p>
+<p>6.示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span><span class="c1">// 1
+</span><span class="c1"></span><span class="nx">arr</span><span class="o">:</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypepop-1"><code>Array.prototype.pop()</code></h1>
+<p>1.关键词：删除</p>
+<p>2.是否修改原数组：<code>true</code></p>
+<p>3.返回值：返回删除的元素，如果数组为空则返回<code>undefined</code></p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p>删除并返回数组最后一个元素</p>
+<p>6.示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span><span class="c1">// 3
+</span><span class="c1"></span><span class="nx">arr</span><span class="o">:</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypeslice"><code>Array.prototype.slice()</code></h1>
+<p>1.关键词：截取</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：一个含有被提取元素的新数组</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">begin</span><span class="p">,</span> <span class="nx">end</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>begin</code>可选，默认从0开始，如果是负数，表示从原数组的倒数第几个元素开始提取。如果大于原数组的长度，返回空数组；</p>
+<p><code>end</code>可选，默认到原数组末尾。返回的数组中不包括指定位置的元素，如果是负数，表示在原数组中的倒数几个元素结束抽取，如果大于数组长度，也会一直提取到数组末尾。</p>
+<p>5.描述：</p>
+<p><code>slice</code>不会修改原数组，只会返回一个浅复制（如果改变两个数组任意一个，则另一个不会受影响）了原数组中部分元素的一个新数组。</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Banana&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">,</span> <span class="s1">&#39;Lemon&#39;</span><span class="p">,</span> <span class="s1">&#39;Apple&#39;</span><span class="p">,</span> <span class="s1">&#39;Mango&#39;</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">citrus</span> <span class="o">=</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+
+<span class="c1">// fruits contains [&#39;Banana&#39;, &#39;Orange&#39;, &#39;Lemon&#39;, &#39;Apple&#39;, &#39;Mango&#39;]
+</span><span class="c1">// citrus contains [&#39;Orange&#39;,&#39;Lemon&#39;]
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypeconcat"><code>Array.prototype.concat()</code></h1>
+<p>1.关键词：合并</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：合并后的新数组</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">arr</span><span class="o">/</span><span class="nx">value</span><span class="p">,...)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p>将数组或值连接成新数组。如果省略了参数，则concat会返回一个它所调用的已存在的数组的浅拷贝（只会复制对象引用）。</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 连接两个数组
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">numeric</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="nx">alpha</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">numeric</span><span class="p">);</span><span class="c1">// [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, 1, 2, 3]
+</span><span class="c1"></span>
+<span class="c1">// 连接三个数组
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">num1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="nx">num2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="nx">num3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">nums</span> <span class="o">=</span> <span class="nx">num1</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">num2</span><span class="p">,</span> <span class="nx">num3</span><span class="p">);</span><span class="c1">// [1, 2, 3, 4, 5, 6, 7, 8, 9]
+</span><span class="c1"></span>
+<span class="c1">// 将值连接到数组
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">alphaNumeric</span> <span class="o">=</span> <span class="nx">alpha</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span><span class="c1">// [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, 1, 2, 3]
+</span><span class="c1"></span>
+<span class="c1">// 合并嵌套数组
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">num1</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]];</span>
+<span class="kd">var</span> <span class="nx">num2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">]];</span>
+<span class="kd">var</span> <span class="nx">num3</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,[</span><span class="mi">6</span><span class="p">]];</span>
+
+<span class="kd">var</span> <span class="nx">nums</span> <span class="o">=</span> <span class="nx">num1</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">num2</span><span class="p">);</span><span class="c1">// [[1], 2, [3]]
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">nums2</span><span class="o">=</span><span class="nx">num1</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="nx">num3</span><span class="p">);</span><span class="c1">// [[1], 4, 5,[6]]
+</span><span class="c1"></span>
+<span class="c1">// 在num1数组中的数组添加新的值
+</span><span class="c1"></span><span class="nx">num1</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="c1">// 也会改变合并后的数组
+</span><span class="c1">// 此时nums为 [[1, 4], 2, [3]]
+</span><span class="c1">// 此时nums2为 [[1, 4], 4, 5,[6]]
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypefilter"><code>Array.prototype.filter()</code></h1>
+<p>1.关键词：测试，筛选</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：一个新的，由通过测试的元素组成的新数组，可能为空数组</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="c1">// callback
+</span><span class="c1"></span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p><code>filter</code> 为数组中的每个元素调用一次 <code>callback</code> 函数，并利用所有使得 <code>callback</code> 返回<code>true</code>或<code>等价于 true</code>（即除 <code>false</code>、<code>0</code>、<code>&quot;&quot;</code>、<code>null</code>、<code>undefined</code> 和 <code>NaN</code> 以外皆为真值） 的值的元素创建一个新数组。</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 筛选大于10的元素
+</span><span class="c1"></span><span class="p">[</span><span class="mi">5</span> <span class="p">,</span><span class="mi">11</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">6</span><span class="p">].</span><span class="nx">fillter</span><span class="p">(</span><span class="nx">i</span> <span class="p">=&gt;</span> <span class="nx">i</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span><span class="c1">// [11, 180]
+</span><span class="c1"></span>
+<span class="c1">// 在数组中搜索
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;grapes&#39;</span><span class="p">,</span> <span class="s1">&#39;mango&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">];</span>
+
+<span class="kd">function</span> <span class="nx">filterItems</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">i</span> <span class="p">=&gt;</span>  <span class="nx">el</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">().</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">())</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">filterItems</span><span class="p">(</span><span class="s1">&#39;ap&#39;</span><span class="p">));</span> <span class="c1">// [&#39;apple&#39;, &#39;grapes&#39;]
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">filterItems</span><span class="p">(</span><span class="s1">&#39;an&#39;</span><span class="p">));</span> <span class="c1">// [&#39;banana&#39;, &#39;mango&#39;, &#39;orange&#39;]
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypesplice"><code>Array.prototype.splice()</code></h1>
+<p>1.关键词：删除，替换</p>
+<p>2.是否修改原数组：<code>true</code></p>
+<p>3.返回值：由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span> <span class="nx">deleteCount</span><span class="p">,</span> <span class="nx">item1</span><span class="p">,</span> <span class="p">...)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><code>start</code>表示修改的开始位置<code>（index）</code>，若大于数组长度，则从数组末尾开始添加内容；若为负值，则表示从数组末位开始的第几位<code>（从1开始）</code>；如果负数的绝对值大于数组的长度，则表示开始位置为第0位。</p>
+</li>
+<li>
+<p><code>deleteCount</code>可选，表示要移除的数组元素的个数，如果 <code>deleteCount</code> 大于 <code>start</code> 之后的元素的总数，则从 <code>start</code> 后面的元素都将被删除（含第 <code>start</code> 位）；如果 <code>deleteCount</code> 被省略了，或者它的值大于或者等于<code>start</code>之后的所有元素的数量，那么<code>start</code>之后数组的所有元素都会被删除；如果 <code>deleteCount</code> 是 0 或者负数，则不移除元素。这种情况下，至少应添加一个新元素。</p>
+</li>
+<li>
+<p><code>item1, item2, *...*</code> 可选。要添加进数组的元素,从<code>start</code> 位置开始。如果不指定，则 <code>splice()</code> 将只删除数组元素。</p>
+</li>
+</ul>
+<p>5.描述：</p>
+<p>如果添加进数组的元素个数不等于被删除的元素个数，数组的长度会发生相应的改变。</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">,</span> <span class="s2">&#34;d&#34;</span><span class="p">,</span> <span class="s2">&#34;e&#34;</span><span class="p">]</span>
+
+<span class="c1">// 从第二位开始删除0个元素，插入”f“
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&#34;f&#34;</span><span class="p">)</span> <span class="c1">// []
+</span><span class="c1">// arr = [&#34;a&#34;, &#34;b&#34;, &#34;f&#34;, &#34;c&#34;, &#34;d&#34;, &#34;e&#34;]
+</span><span class="c1"></span>
+<span class="c1">// 从第 2 位开始删除 0 个元素，插入“g” 和 &#34;h&#34;
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&#34;g&#34;</span><span class="p">,</span> <span class="s2">&#34;h&#34;</span><span class="p">)</span> <span class="c1">// []
+</span><span class="c1">// arr = [&#34;a&#34;, &#34;b&#34;, &#34;g&#34;, &#34;h&#34;, &#34;c&#34;, &#34;d&#34;, &#34;e&#34;]
+</span><span class="c1"></span>
+<span class="c1">// 从第3位开始删除1个元素
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// [&#34;d&#34;]
+</span><span class="c1">// arr = [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;, &#34;e&#34;]
+</span><span class="c1"></span>
+<span class="c1">// 从倒数第2位开始删除1个元素
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// [&#34;d&#34;]
+</span><span class="c1">// arr = [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;, &#34;e&#34;]
+</span><span class="c1"></span>
+<span class="c1">// 从第2位开始删除所有元素
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// [&#34;c&#34;, &#34;d&#34;, &#34;e&#34;]
+</span><span class="c1">// arr = [&#34;a&#34;, &#34;b&#34;]
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypeforeach"><code>Array.prototype.forEach()</code></h1>
+<p>1.关键词：遍历</p>
+<p>2.是否修改原数组：<code>depends</code></p>
+<p>3.返回值：<code>undefined</code></p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">currentValue</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">=&gt;{</span>
+    <span class="c1">// callback
+</span><span class="c1"></span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p>针对每一个元素执行提供的函数。forEach适合于你并不打算改变数据，而只是想用数据做一些事情：比如存入数据库或则打印出来。</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 打印元素
+</span><span class="c1"></span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">i</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// 复制一个对象
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">copy</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">copy</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">getPrototypeOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span>
+  <span class="kd">var</span> <span class="nx">propNames</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyNames</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+
+  <span class="nx">propNames</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">desc</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyDescriptor</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">copy</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">desc</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="k">return</span> <span class="nx">copy</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">2</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="nx">copy</span><span class="p">(</span><span class="nx">obj1</span><span class="p">);</span> <span class="c1">// obj2 looks like obj1 now
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypeindexof"><code>Array.prototype.indexOf()</code></h1>
+<p>1.关键词：查找</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：索引位置或<code>-1</code></p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">searchElement</span><span class="p">,</span> <span class="nx">fromIndex</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>searchElement</code>要查找的元素</p>
+<p><code>fromIndex</code>可选，开始查找的位置，若是负值则从末尾开始抵消</p>
+<p>5.描述：</p>
+<p>每个元素实际上都做<code>===</code>（strict equality）来判断</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 找出指定元素出现的所有位置
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">indices</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">var</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">idx</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">idx</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">indices</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">idx</span><span class="p">);</span>
+  <span class="nx">idx</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">indices</span><span class="p">);</span>
+<span class="c1">// [0, 2, 4]
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypelastindexof"><code>Array.prototype.lastIndexOf()</code></h1>
+<p>1.关键词：查找</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：数组中该元素最后一次出现的索引，如未找到返回-1</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="nx">searchElement</span><span class="p">,</span> <span class="nx">fromIndex</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>searchElement</code>被查找的元素。</p>
+<p><code>fromIndex</code> 可选，从此位置开始逆向查找。默认为数组的长度减 1(<code>arr.length - 1</code>)，即整个数组都被查找。如果该值大于或等于数组的长度，则整个数组会被查找。如果为负值，将其视为从数组末尾向前的偏移。即使该值为负，数组仍然会被从后向前查找。如果该值为负时，其绝对值大于数组长度，则方法返回 -1，即数组不会被查找</p>
+<p>5.描述：</p>
+<p>每个元素实际上都做<code>===</code>（strict equality）来判断</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js">
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypereverse"><code>Array.prototype.reverse()</code></h1>
+<p>1.关键词：反转</p>
+<p>2.是否修改原数组：<code>true</code></p>
+<p>3.返回值：颠倒后的数组</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p><code>reverse</code> 方法颠倒数组中元素的位置，改变了数组，并返回该数组的引用</p>
+<p>也可应用于类数组对象</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 反转数组
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// [3, 2, 1]
+</span><span class="c1"></span>
+<span class="c1">// 反转类数组对象
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span> <span class="nx">length</span><span class="o">:</span><span class="mi">3</span><span class="p">}</span>
+<span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">reverse</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="c1">// {0:5, 2:3, 4:1, length:3}
+</span><span class="c1">// 对象中必须包含反应对象属性长度的属性length，否则不会发生任何改变
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypeunshift"><code>Array.prototype.unshift()</code></h1>
+<p>1.关键词：添加</p>
+<p>2.是否修改原数组：<code>true</code></p>
+<p>3.返回值：该数组的新长度</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="nx">element1</span><span class="p">,</span> <span class="p">...,</span> <span class="nx">elementN</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p><strong><code>unshift()</code></strong> 方法将一个或多个元素添加到数组的<strong>开头</strong>，并返回该数组的新长度(该方法修改原有数组)。</p>
+<p><code>unshift</code> 特意被设计成具有<strong>通用性</strong>；这个方法能够通过<code>call</code>或者<code>apply</code>方法作用于类数组对象上。不过对于没有 length 属性（代表从0开始的一系列连续的数字属性的最后一个）的对象，调用该方法可能没有任何意义。</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 在数组前添加元素
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span> <span class="c1">// [1, 2, 3, 4, 5, 6]
+</span><span class="c1"></span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">unshift</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]);</span> <span class="c1">// the new array length is 4
+</span><span class="c1">// arr is [[-4, -3], 4, 5, 6]
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypeincludes"><code>Array.prototype.includes()</code></h1>
+<p>1.关键词：查找</p>
+<p>2.是否修改原数组：<code>false</code></p>
+<p>3.返回值：<code>Boolean</code></p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">fromIndex</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>value</code>要查找的元素值（区分大小写）</p>
+<p><code>fromIndex</code>可选，开始索引，若为负值，则按升序从 <code>array.length + fromIndex</code> 的索引开始搜 （即使从末尾开始往前跳 <code>fromIndex</code> 的绝对值个索引，然后往后搜寻）。<code>formIndex</code>的不同情况见示例，默认为 0</p>
+<p>5.描述：</p>
+<p>用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回false。</p>
+<p>对象数组不能使用，但适用于类对象数组</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>  <span class="c1">// false
+</span><span class="c1"></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// true
+</span><span class="c1"></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">NaN</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="kc">NaN</span><span class="p">);</span> <span class="c1">// true
+</span><span class="c1"></span>
+<span class="c1">// 如果 fromIndex 大于等于数组的长度，则会返回 false，且该数组不会被搜索。
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>   <span class="c1">// false
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span> <span class="c1">// false
+</span><span class="c1"></span>
+<span class="c1">// 计算出的索引小于 0
+</span><span class="c1">// 如果 fromIndex 为负值，计算出的索引将作为开始搜索searchElement的位置。如果计算出的索引小于 0，则整个数组都会被搜索。
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">];</span>
+<span class="c1">// 3 - 100 = -97
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">);</span> <span class="c1">// true
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// false
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypereduce"><code>Array.prototype.reduce()</code></h1>
+<p>1.关键词：</p>
+<p>2.是否修改原数组：``</p>
+<p>3.返回值：</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js">
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js">
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="arrayprototypereduce-1"><code>Array.prototype.reduce()</code></h1>
+<p>1.关键词：</p>
+<p>2.是否修改原数组：``</p>
+<p>3.返回值：</p>
+<p>4.语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js">
+</code></pre></td></tr></table>
+</div>
+</div><p>5.描述：</p>
+<p>6.示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js">
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-09-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="/tags/javascript/">JavaScript</a>
+          <a href="/tags/array/">Array</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B9%8B%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">单元测试之文件模块</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/react%E5%85%A5%E9%97%A8/">
+            <span class="next-text nav-default">React入门</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

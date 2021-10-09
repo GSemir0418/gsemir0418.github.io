@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>UseState原理 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 useState简单实现 1.1 示例 点击按钮，结果&#43;1 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 import React from &amp;#34;react&amp;#34;; import ReactDOM from &amp;#34;react-dom&amp;#34;; const rootElement = document.getElementById(&amp;#34;root&amp;#34;); function App() { const [n, setN] = React.useState(0); return ( &amp;lt;div className=&amp;#34;App&amp;#34;&amp;gt; &amp;lt;p&amp;gt;{n}&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; &amp;lt;button onClick={()" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/usestate%E5%8E%9F%E7%90%86/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="UseState原理" />
+<meta property="og:description" content="1 useState简单实现 1.1 示例 点击按钮，结果&#43;1 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 import React from &#34;react&#34;; import ReactDOM from &#34;react-dom&#34;; const rootElement = document.getElementById(&#34;root&#34;); function App() { const [n, setN] = React.useState(0); return ( &lt;div className=&#34;App&#34;&gt; &lt;p&gt;{n}&lt;/p&gt; &lt;p&gt; &lt;button onClick={()" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/usestate%E5%8E%9F%E7%90%86/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-07T22:15:51+08:00" />
+<meta property="article:modified_time" content="2021-08-07T00:00:00+08:00" />
+
+<meta itemprop="name" content="UseState原理">
+<meta itemprop="description" content="1 useState简单实现 1.1 示例 点击按钮，结果&#43;1 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 import React from &#34;react&#34;; import ReactDOM from &#34;react-dom&#34;; const rootElement = document.getElementById(&#34;root&#34;); function App() { const [n, setN] = React.useState(0); return ( &lt;div className=&#34;App&#34;&gt; &lt;p&gt;{n}&lt;/p&gt; &lt;p&gt; &lt;button onClick={()"><meta itemprop="datePublished" content="2021-08-07T22:15:51+08:00" />
+<meta itemprop="dateModified" content="2021-08-07T00:00:00+08:00" />
+<meta itemprop="wordCount" content="3044">
+<meta itemprop="keywords" content="前端,React基础,React," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="UseState原理"/>
+<meta name="twitter:description" content="1 useState简单实现 1.1 示例 点击按钮，结果&#43;1 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 import React from &#34;react&#34;; import ReactDOM from &#34;react-dom&#34;; const rootElement = document.getElementById(&#34;root&#34;); function App() { const [n, setN] = React.useState(0); return ( &lt;div className=&#34;App&#34;&gt; &lt;p&gt;{n}&lt;/p&gt; &lt;p&gt; &lt;button onClick={()"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">UseState原理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-08-07 </span>
+        <div class="post-category">
+            <a href="/categories/react-hooks/"> React Hooks </a>
+            </div>
+          <span class="more-meta"> 3044 words </span>
+          <span class="more-meta"> 7 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-usestate简单实现">1 useState简单实现</a>
+      <ul>
+        <li><a href="#11-示例">1.1 示例</a></li>
+        <li><a href="#12-简易usestate实现">1.2 简易useState实现</a></li>
+        <li><a href="#13-多个state的情况">1.3 多个state的情况</a></li>
+        <li><a href="#14-总结">1.4 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-n的分身setn会直接改变n吗">2 n的分身(setN会直接改变n吗)</a></li>
+    <li><a href="#3-贯穿始终的状态">3 贯穿始终的状态</a>
+      <ul>
+        <li><a href="#31-useref">3.1 useRef</a></li>
+        <li><a href="#32-usecontext">3.2 useContext</a></li>
+        <li><a href="#33-总结">3.3 总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-usestate简单实现">1 useState简单实现</h1>
+<h2 id="11-示例">1.1 示例</h2>
+<ul>
+<li>点击按钮，结果+1</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s2">&#34;react&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">ReactDOM</span> <span class="nx">from</span> <span class="s2">&#34;react-dom&#34;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">rootElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;root&#34;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">[</span><span class="nx">n</span><span class="p">,</span> <span class="nx">setN</span><span class="p">]</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;App&#34;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{</span><span class="nx">n</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="nx">setN</span><span class="p">(</span><span class="nx">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}&gt;</span><span class="o">+</span><span class="mi">1</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;,</span> <span class="nx">rootElement</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>运行过程分析
+<ol>
+<li>首次render<code>&lt;App/&gt;</code>，调用<code>App()</code>方法，得到虚拟DOM，React会生成真实DOM</li>
+<li>用户单击button，调用<code>setN(n+1)</code>，并再次render<code>&lt;App/&gt;</code>，调用<code>App()</code>方法，得到新的虚拟DOM，经过DOM Diff运算，React会更新真实DOM</li>
+<li>每次调用<code>App()</code>，都会运行<code>useState(0)</code></li>
+</ol>
+</li>
+<li>执行<code>setN</code>的时候会发生什么？n会变吗？<code>App()</code>会重新执行吗？
+<ul>
+<li>setN一定会修改某个数据x，而<strong>不是直接修改n</strong>，并将n+1存入x</li>
+<li>setN<strong>一定会触发<code>&lt;App/&gt;</code>重新渲染</strong></li>
+</ul>
+</li>
+<li>每次重新执行<code>App()</code>时，都会执行<code>useState(o)</code>，那么n每次的值会有不同吗（即不为0）
+<ul>
+<li>每次n的值都会不同，说明useState肯定会<strong>从x读取n的最新值</strong>，而不是简单的初始化n为0</li>
+</ul>
+</li>
+<li>x
+<ul>
+<li>每个组件有自己的数据<code>x</code>，即<code>state</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="12-简易usestate实现">1.2 简易useState实现</h2>
+<p>依据上面的分析，现在可以初步尝试一下手写<code>myUseState</code></p>
+<ol>
+<li>定义<code>myUseState</code>，接受初始值<code>initialValue</code>，返回一个数组</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">myUseState</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialValue</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">setState</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>定义<code>state</code>变量和<code>setState</code>方法，并实现<code>re-render</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">myUseState</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialValue</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 定义state变量
+</span><span class="c1"></span>	<span class="kd">let</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">initialValue</span>
+  <span class="c1">// 定义useState方法
+</span><span class="c1"></span>	<span class="kr">const</span> <span class="nx">useState</span> <span class="o">=</span> <span class="p">(</span><span class="nx">newValue</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// 将新值赋给state
+</span><span class="c1"></span>		<span class="nx">state</span> <span class="o">=</span> <span class="nx">newValue</span>
+		<span class="c1">// re-render
+</span><span class="c1"></span>		<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;,</span> <span class="nx">rootElement</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">setState</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>每次执行都会重新把初始值赋给state，导致n的值不会发生改变。因此需要将state定义在函数外面，避免被myUseState重置。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kd">let</span> <span class="nx">_state</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">myUseState</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialValue</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 对_state值进行判断，重新赋值或者保持上次的值
+</span><span class="c1"></span>	<span class="nx">_state</span> <span class="o">=</span> <span class="nx">_state</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="o">?</span> <span class="nx">initialValue</span> <span class="o">:</span> <span class="nx">_state</span>
+	<span class="kr">const</span> <span class="nx">useState</span> <span class="o">=</span> <span class="p">(</span><span class="nx">newValue</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+		<span class="nx">_state</span> <span class="o">=</span> <span class="nx">newValue</span>
+		<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;,</span> <span class="nx">rootElement</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="p">[</span><span class="nx">_state</span><span class="p">,</span> <span class="nx">setState</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>至此，针对单一组件单一状态值的简易版本useState就完成了，但仍存在一些问题。</p>
+<h2 id="13-多个state的情况">1.3 多个state的情况</h2>
+<ul>
+<li>
+<p><strong>问题</strong>：如果一个组件用了两个useState，怎么办</p>
+</li>
+<li>
+<p><strong>思路</strong>：</p>
+<ul>
+<li>改写_state为对象：_
+<ul>
+<li>_比如_state = { n : 0, m : 0 }</li>
+<li>不行，因为useState(0)并不知道要赋值的变量的key是m还是n</li>
+</ul>
+</li>
+<li>改写_state为数组：_
+<ul>
+<li>比如_state = [ 0, 0 ]</li>
+<li>第一次useState就操作第一个数，第二次就操作第二个数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>改写_state为数组</p>
+<ol>
+<li>定义index变量，标识state的初始化与操作顺序。初步改写如下：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s2">&#34;react&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">ReactDOM</span> <span class="nx">from</span> <span class="s2">&#34;react-dom&#34;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">rootElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;root&#34;</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">_state</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kr">const</span> <span class="nx">myUseState</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialValue</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">_state</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="nx">_state</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">===</span> <span class="kc">undefined</span><span class="o">?</span><span class="nx">initialValue</span><span class="o">:</span><span class="nx">_state</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+  <span class="kr">const</span> <span class="nx">setState</span> <span class="o">=</span> <span class="p">(</span><span class="nx">newValue</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">_state</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="nx">newValue</span>
+    <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;,</span> <span class="nx">rootElement</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">index</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="c1">// 此处返回的实际上总是下一个_state值，因为上面的index已经加一了
+</span><span class="c1"></span>  <span class="c1">// 将其放到return后面的话是不会被执行的
+</span><span class="c1"></span>  <span class="k">return</span> <span class="p">[</span><span class="nx">_state</span><span class="p">[</span><span class="nx">index</span><span class="p">],</span> <span class="nx">setState</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">[</span><span class="nx">n</span><span class="p">,</span> <span class="nx">setN</span><span class="p">]</span> <span class="o">=</span> <span class="nx">myUseState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="p">[</span><span class="nx">m</span><span class="p">,</span> <span class="nx">setM</span><span class="p">]</span> <span class="o">=</span> <span class="nx">myUseState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;App&#34;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{</span><span class="nx">n</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="nx">setN</span><span class="p">(</span><span class="nx">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}&gt;</span><span class="o">+</span><span class="mi">1</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{</span><span class="nx">m</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="nx">setM</span><span class="p">(</span><span class="nx">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}&gt;</span><span class="o">+</span><span class="mi">1</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;,</span> <span class="nx">rootElement</span><span class="p">);</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>由于出现了<code>index += 1</code>的执行顺序问题，页面中的m和n值得不到正确显示。需要定义中间变量<code>currentIndex</code>解决这个问题：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="p">...</span>
+<span class="kr">const</span> <span class="nx">myUseState</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialValue</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="c1">// 将当前index值赋给中间变量
+</span><span class="c1"></span>	<span class="kr">const</span> <span class="nx">currentIndex</span> <span class="o">=</span> <span class="nx">index</span>
+  <span class="nx">_state</span><span class="p">[</span><span class="nx">currentIndex</span><span class="p">]</span> <span class="o">=</span> <span class="nx">_state</span><span class="p">[</span><span class="nx">currentIndex</span><span class="p">]</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="o">?</span> <span class="nx">initialValue</span> <span class="o">:</span> <span class="nx">_state</span><span class="p">[</span><span class="nx">currentIndex</span><span class="p">]</span>
+  <span class="kr">const</span> <span class="nx">setState</span> <span class="o">=</span> <span class="p">(</span><span class="nx">newValue</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">_state</span><span class="p">[</span><span class="nx">currentIndex</span><span class="p">]</span> <span class="o">=</span> <span class="nx">newValue</span>
+    <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;,</span> <span class="nx">rootElement</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">index</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="c1">// 此时index的变化对返回值就不会产生影响了
+</span><span class="c1"></span>  <span class="k">return</span> <span class="p">[</span><span class="nx">_state</span><span class="p">[</span><span class="nx">currentIndex</span><span class="p">],</span> <span class="nx">setState</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>此时单击+1，没有发生任何变化。通过控制台打印出currentIndex的值我们发现，首次渲染<code>&lt;App/&gt;</code>时，currentIndex为0和1；但当单击+1时，currentIndex变为了2和3，导致返回的数组每次useState后都会增加两个值，说明index每次执行useState都继续+1。那么我们应该在每次re-render时重置index为0：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="p">...</span>
+<span class="kr">const</span> <span class="nx">setState</span> <span class="o">=</span> <span class="p">(</span><span class="nx">newValue</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="nx">_state</span><span class="p">[</span><span class="nx">currentIndex</span><span class="p">]</span> <span class="o">=</span> <span class="nx">newValue</span>
+	<span class="c1">// before re-render
+</span><span class="c1"></span>	<span class="nx">index</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;,</span> <span class="nx">rootElement</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>完成多个state的状态处理！</li>
+</ol>
+</li>
+<li>
+<p>数组方案<strong>缺点</strong></p>
+<ul>
+<li>第二次渲染时必须保证useState<strong>调用顺序完全一致</strong>，否则state就乱了</li>
+<li>同样React不允许useState出现在<code>if</code>等条件判断语句中，规定hooks在每次渲染中必须<strong>保持严格一致的执行顺序</strong>。</li>
+</ul>
+</li>
+<li>
+<p>React为每个组件创建自己的<code>_state</code>和<code>index</code>，放在组件对应的虚拟节点对象上。</p>
+</li>
+<li>
+<p>图示：App组件的更新过程（两个子组件也经历同样的过程）</p>
+<p><img src="/usestate/useState1.png" alt="image-20210808092323870"></p>
+</li>
+</ul>
+<h2 id="14-总结">1.4 总结</h2>
+<ol>
+<li>
+<p>每个函数组件对应一个 React节点*</p>
+<ul>
+<li>
+<p>React的节点实际上应该是FiberNode，_state的真实名称为memorizedState，index的实现则是用到了链表</p>
+</li>
+<li>
+<blockquote>
+<p><a href="https://juejin.im/post/5bdfc1c4e51d4539f4178e1f">https://juejin.im/post/5bdfc1c4e51d4539f4178e1f</a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>每个节点保存着<code>state</code>和<code>index</code></p>
+</li>
+<li>
+<p>useState会读取<code>state[index]</code></p>
+</li>
+<li>
+<p><code>index</code>由useState出现的顺序决定</p>
+</li>
+<li>
+<p>setState会修改<code>state</code>,并触发更新</p>
+</li>
+</ol>
+<h1 id="2-n的分身setn会直接改变n吗">2 n的分身(setN会直接改变n吗)</h1>
+<ul>
+<li>背景：两个按钮，一个是单击+1，另一个是在3s后打印出n的值。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s2">&#34;react&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">ReactDOM</span> <span class="nx">from</span> <span class="s2">&#34;react-dom&#34;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">rootElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;root&#34;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">[</span><span class="nx">n</span><span class="p">,</span> <span class="nx">setN</span><span class="p">]</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">log</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`n: </span><span class="si">${</span><span class="nx">n</span><span class="si">}</span><span class="sb">`</span><span class="p">),</span> <span class="mi">3000</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;App&#34;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{</span><span class="nx">n</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="nx">setN</span><span class="p">(</span><span class="nx">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}&gt;</span><span class="o">+</span><span class="mi">1</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">log</span><span class="p">}&gt;</span><span class="nx">log</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;,</span> <span class="nx">rootElement</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>先+1再log时</strong>，控制台3s后打印出：<code>n : 1</code>，在预料之中。</p>
+<p><img src="/usestate/useState2.png" alt="image-20210808124646987"></p>
+</li>
+<li>
+<p><strong>先log再+1时</strong>，控制台3s后打印出：<code>n : 0</code>，而不是有部分人预想的n：1。</p>
+<p><img src="/usestate/useState3.png" alt="image-20210808124726273"></p>
+</li>
+<li>
+<p>为什么log出了<strong>旧数据</strong>？</p>
+<ul>
+<li>在单击log后，无论点击多少次+1，即无论n改变了几次，log始终都会读取点击log那一刻的n值</li>
+<li>说明每次<strong>setN不会直接修改n值</strong>，而是<strong>产生一个新的n</strong>。</li>
+<li>如果想要有一个贯穿始终的状态，办法有很多</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-贯穿始终的状态">3 贯穿始终的状态</h1>
+<p>最直接的方式就是定义全局变量，即<code>window.xxx</code>，除了很low别的没啥毛病</p>
+<h2 id="31-useref">3.1 useRef</h2>
+<ul>
+<li>
+<p>useRef不仅可以用于引用div，还能用于<strong>任意数据</strong></p>
+</li>
+<li>
+<p>示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s2">&#34;react&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">ReactDOM</span> <span class="nx">from</span> <span class="s2">&#34;react-dom&#34;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">rootElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;root&#34;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">nRef</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useRef</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">log</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`n: </span><span class="si">${</span><span class="nx">nRef</span><span class="p">.</span><span class="nx">current</span><span class="si">}</span><span class="sb">`</span><span class="p">),</span> <span class="mi">1000</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;App&#34;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{</span><span class="nx">nRef</span><span class="p">.</span><span class="nx">current</span><span class="p">}</span> <span class="nx">这里并不能实时更新</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">nRef</span><span class="p">.</span><span class="nx">current</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)}&gt;</span><span class="o">+</span><span class="mi">1</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">log</span><span class="p">}&gt;</span><span class="nx">log</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;,</span> <span class="nx">rootElement</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>无论+1与log的顺序如何，log总能打印出最新的n值，因为<strong>nRef是唯一的</strong>。</p>
+<p><img src="/usestate/useState4.png" alt="image-20210808131507759"></p>
+<p>但nRef的改变并不能驱动页面刷新，可以借助useState帮助页面刷新</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="p">...</span>
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// useRef实际上就是个简单的对象
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">nRef</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useRef</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="c1">// { current : 0 }
+</span><span class="c1"></span>  <span class="c1">// 只需借助setState方法
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">update</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+  <span class="kr">const</span> <span class="nx">log</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`n: </span><span class="si">${</span><span class="nx">nRef</span><span class="p">.</span><span class="nx">current</span><span class="si">}</span><span class="sb">`</span><span class="p">),</span> <span class="mi">1000</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;App&#34;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{</span><span class="nx">nRef</span><span class="p">.</span><span class="nx">current</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">nRef</span><span class="p">.</span><span class="nx">current</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="nx">update</span><span class="p">(</span><span class="nx">nRef</span><span class="p">.</span><span class="nx">current</span><span class="p">)</span>
+          <span class="p">}}&gt;</span><span class="o">+</span><span class="mi">1</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">log</span><span class="p">}&gt;</span><span class="nx">log</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在改变nRef的值时，随便改变一下setState的值，页面就会同时刷新</p>
+<p><img src="/usestate/useState5.png" alt="image-20210808132338632"></p>
+</li>
+</ul>
+<h2 id="32-usecontext">3.2 useContext</h2>
+<ul>
+<li>
+<p>useContext不仅能贯穿始终，还能<strong>贯穿不同组件</strong></p>
+</li>
+<li>
+<p>示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s2">&#34;react&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">ReactDOM</span> <span class="nx">from</span> <span class="s2">&#34;react-dom&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="s2">&#34;./styles.css&#34;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">rootElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;root&#34;</span><span class="p">);</span>
+<span class="c1">// 创建上下文（全局）对象
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">themeContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">[</span><span class="nx">theme</span><span class="p">,</span> <span class="nx">setTheme</span><span class="p">]</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useState</span><span class="p">(</span><span class="s2">&#34;red&#34;</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="c1">// 将状态值theme以及改变状态的方法setTheme传入value中
+</span><span class="c1"></span>    <span class="p">&lt;</span><span class="nt">themeContext.Provider</span> <span class="na">value</span><span class="o">=</span><span class="p">{{</span> <span class="nx">theme</span><span class="p">,</span> <span class="nx">setTheme</span> <span class="p">}}&gt;</span>
+      <span class="c1">// 通过theme值改变className，从而改变主题样式
+</span><span class="c1"></span>      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`App </span><span class="si">${</span><span class="nx">theme</span><span class="si">}</span><span class="sb">`</span><span class="p">}&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{</span><span class="nx">theme</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">ChildA</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">ChildB</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">themeContext.Provider</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">ChildA</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// 通过useContext读取到父组件的themeContext对象，取出其中的setTheme方法
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="p">{</span> <span class="nx">setTheme</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useContext</span><span class="p">(</span><span class="nx">themeContext</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="nx">setTheme</span><span class="p">(</span><span class="s2">&#34;red&#34;</span><span class="p">)}&gt;</span><span class="nx">red</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">ChildB</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">setTheme</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useContext</span><span class="p">(</span><span class="nx">themeContext</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="nx">setTheme</span><span class="p">(</span><span class="s2">&#34;blue&#34;</span><span class="p">)}&gt;</span><span class="nx">blue</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;,</span> <span class="nx">rootElement</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/usestate/useState6.png" alt="image-20210808132931213"></p>
+</li>
+</ul>
+<h2 id="33-总结">3.3 总结</h2>
+<ul>
+<li>每次重新渲染，组件函数就会再次执行</li>
+<li>对应的所有state都会出现<code>「分身」</code>，旧的state和新的state可以<strong>同时存在</strong>（例如setTimeout时），之后旧的state会<strong>消失</strong>（垃圾回收）</li>
+<li>如果你不希望出现分身，可以用<code>useRef/useContext</code>等</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-08-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="/tags/react%E5%9F%BA%E7%A1%80/">React基础</a>
+          <a href="/tags/react/">React</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/git/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Git相关</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/">
+            <span class="next-text nav-default">JS专精-函数</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

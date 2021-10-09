@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>String常用方法整理 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="String.prototype.match() 根据传入的正则表达式的检索字符串并返回结果 语法： 1 str.match(regexp) 例子 1 String.prototype.search() 根据传入的正则表达式寻找符合的字符位置 语法 1 str.search(regexp) 如果匹配，则返回首次匹配项的索引" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="String常用方法整理" />
+<meta property="og:description" content="String.prototype.match() 根据传入的正则表达式的检索字符串并返回结果 语法： 1 str.match(regexp) 例子 1 String.prototype.search() 根据传入的正则表达式寻找符合的字符位置 语法 1 str.search(regexp) 如果匹配，则返回首次匹配项的索引" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-05T13:29:15+08:00" />
+<meta property="article:modified_time" content="2021-07-05T00:00:00+08:00" />
+
+<meta itemprop="name" content="String常用方法整理">
+<meta itemprop="description" content="String.prototype.match() 根据传入的正则表达式的检索字符串并返回结果 语法： 1 str.match(regexp) 例子 1 String.prototype.search() 根据传入的正则表达式寻找符合的字符位置 语法 1 str.search(regexp) 如果匹配，则返回首次匹配项的索引"><meta itemprop="datePublished" content="2021-07-05T13:29:15+08:00" />
+<meta itemprop="dateModified" content="2021-07-05T00:00:00+08:00" />
+<meta itemprop="wordCount" content="1292">
+<meta itemprop="keywords" content="前端,JavaScript,String," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="String常用方法整理"/>
+<meta name="twitter:description" content="String.prototype.match() 根据传入的正则表达式的检索字符串并返回结果 语法： 1 str.match(regexp) 例子 1 String.prototype.search() 根据传入的正则表达式寻找符合的字符位置 语法 1 str.search(regexp) 如果匹配，则返回首次匹配项的索引"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">String常用方法整理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-05 </span>
+        <div class="post-category">
+            <a href="/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"> JS基础知识整理 </a>
+            </div>
+          <span class="more-meta"> 1292 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#stringprototypematch">String.prototype.match()</a></li>
+    <li><a href="#stringprototypesearch">String.prototype.search()</a></li>
+    <li><a href="#stringprototypechatat">String.prototype.chatAt()</a></li>
+    <li><a href="#stringprototypeindexof">String.prototype.indexOf()</a></li>
+    <li><a href="#stringprototypelastindexof">String.prototype.lastIndexOf()</a></li>
+    <li><a href="#stringprototypeconcat">String.prototype.concat()</a></li>
+    <li><a href="#stringprototyperepeat">String.prototype.repeat()</a></li>
+    <li><a href="#stringprototypeendswith">String.prototype.endsWith()</a></li>
+    <li><a href="#stringprototypestartswith">String.prototype.startsWith()</a></li>
+    <li><a href="#stringprototypeincludes">String.prototype.includes()</a></li>
+    <li><a href="#stringprototypevalueof">String.prototype.valueOf()</a></li>
+    <li><a href="#stringprototypetostring">String.prototype.toString()</a></li>
+    <li><a href="#stringprototypesubstring">String.prototype.subString()</a></li>
+    <li><a href="#stringprototypeslice">String.prototype.slice()</a></li>
+    <li><a href="#stringprototypereplace">String.prototype.replace()</a></li>
+    <li><a href="#stringprototypesplit">String.prototype.split()</a></li>
+    <li><a href="#stringprototypetrim">String.prototype.trim()</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="stringprototypematch">String.prototype.match()</h1>
+<ul>
+<li>
+<p><strong>根据传入的正则表达式的检索字符串并返回结果</strong></p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">regexp</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypesearch">String.prototype.search()</h1>
+<ul>
+<li>
+<p><strong>根据传入的正则表达式寻找符合的字符位置</strong></p>
+</li>
+<li>
+<p>语法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">regexp</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>如果匹配，则返回首次匹配项的索引；反之返回<code>-1</code></p>
+</li>
+<li>
+<p>例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;hello World&#39;</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="sr">/[A-Z]/g</span><span class="p">)</span><span class="c1">// 6
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="sr">/[.]/g</span><span class="p">)</span><span class="c1">// -1
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypechatat">String.prototype.chatAt()</h1>
+<ul>
+<li>
+<p><strong>从一个字符串中返回指定index的字符</strong></p>
+</li>
+<li>
+<p>语法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">chartAt</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>若没有提供index，则默认使用0</p>
+</li>
+<li>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;ABCD&#39;</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="c1">// &#34;B&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypeindexof">String.prototype.indexOf()</h1>
+<ul>
+<li>
+<p><strong>查询字符串对象中第一次出现指定值的索引</strong></p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">str.indexOf(searchValue, fromIndex)
+</code></pre></td></tr></table>
+</div>
+</div><p><code>fromIndex</code>可选，表示开始查找的位置，默认为0，若指定为负数，则等价于传入0；若大于<code>str.length</code>，则必反回<code>-1</code></p>
+<p><code>indexOf</code>区分大小写</p>
+</li>
+<li>
+<p>若传入的字符串为空，返回值则取决于<code>fromIndex</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;Hello World&#34;</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="c1">// 0
+</span><span class="c1"></span><span class="s2">&#34;Hello World&#34;</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span><span class="c1">// 9
+</span><span class="c1"></span><span class="s2">&#34;Hello World&#34;</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span><span class="c1">// 11 (str.length)
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 检测是否存在某字符串
+</span><span class="c1"></span><span class="s2">&#34;Hello World&#34;</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;World&#39;</span><span class="p">)</span><span class="c1">// 6
+</span><span class="c1"></span>
+<span class="c1">// 使用indexOf统计一个字符串中某个字母出现的次数
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;Hello,my name is gsemir.&#39;</span>
+<span class="kr">const</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kr">const</span> <span class="nx">pos</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">)</span>
+
+<span class="k">while</span><span class="p">(</span><span class="nx">pos</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+	<span class="nx">count</span> <span class="o">++</span>
+	<span class="nx">pos</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="nx">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="p">)</span><span class="c1">// 3
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypelastindexof">String.prototype.lastIndexOf()</h1>
+<ul>
+<li>
+<p>返回指定值最后一次出现的索引，没找到返回<code>-1</code></p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="nx">searchStr</span><span class="p">,</span> <span class="nx">fromIndex</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>fromIndex</code>可选，默认为无穷大，表示从<code>fromIndex</code>的位置向左回向查找</p>
+<p>若<code>fromIndex&lt;0</code>，则等同于<code>fromIndex==0</code></p>
+<p>此方法区分大小写</p>
+</li>
+<li>
+<p>例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;cancel&#39;</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span><span class="c1">// 3
+</span><span class="c1"></span><span class="s1">&#39;cancel&#39;</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="c1">// 0
+</span><span class="c1"></span><span class="s1">&#39;cancel&#39;</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="c1">// 0
+</span><span class="c1"></span><span class="s1">&#39;cancel&#39;</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="c1">// 0
+</span><span class="c1"></span><span class="s1">&#39;cancel&#39;</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="c1">// 6 可以用这个获取字符串长度哦
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypeconcat">String.prototype.concat()</h1>
+<ul>
+<li>
+<p><strong>将字符串连接合并</strong></p>
+</li>
+<li>
+<p>语法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">str2</span><span class="p">,</span><span class="nx">str3</span><span class="p">,...)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>返回一个新字符串</p>
+</li>
+<li>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;HELLO&#39;</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;World&#39;</span><span class="p">)</span><span class="c1">// HELLO WORLD
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototyperepeat">String.prototype.repeat()</h1>
+<ul>
+<li>
+<p><strong>指定次数复制字符串</strong></p>
+</li>
+<li>
+<p>语法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">count</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;abc&#39;</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="c1">// &#39;abcabc&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypeendswith">String.prototype.endsWith()</h1>
+<ul>
+<li>
+<p><strong>判断字符串是否是以指定字符串结尾的</strong>，<strong>返回</strong><code>boolean</code></p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="nx">searchStr</span><span class="p">,</span> <span class="nx">length</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>length</code>可选，作为str的长度，默认值为<code>str.length</code></p>
+<p>区分大小写</p>
+</li>
+<li>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;hello world&#39;</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span><span class="c1">// false
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span><span class="c1">// true
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">&#39;WORLD&#39;</span><span class="p">)</span><span class="c1">// false
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypestartswith">String.prototype.startsWith()</h1>
+<ul>
+<li>
+<p><strong>判断字符串是否是以指定字符串开头的</strong>，<strong>返回</strong><code>boolean</code></p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="nx">searchStr</span><span class="p">,</span> <span class="nx">position</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>position</code>可选，开始搜索的位置，默认值为<code>0</code></p>
+<p>区分大小写</p>
+</li>
+<li>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;hello world&#39;</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span><span class="c1">// true
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span><span class="c1">// false
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">&#39;HELLO&#39;</span><span class="p">)</span><span class="c1">// false
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypeincludes">String.prototype.includes()</h1>
+<ul>
+<li>
+<p><strong>判断指定字符串是否包含在另一个字符串中</strong></p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">searchStr</span><span class="p">,</span> <span class="nx">position</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>position</code>可选，搜寻的起始索引，默认0</p>
+<p>区分大小写</p>
+</li>
+<li>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;hello, my name is gsemir&#39;</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="c1">// false
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;my&#39;</span><span class="p">)</span><span class="c1">// true
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;MY&#39;</span><span class="p">)</span><span class="c1">// false
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypevalueof">String.prototype.valueOf()</h1>
+<ul>
+<li>
+<p><strong>返回一个String对象的原始值，等同于<code>String.prototype.toString()</code></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">)</span>
+<span class="nx">x</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">()</span><span class="c1">// &#34;Hello World&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypetostring">String.prototype.toString()</h1>
+<ul>
+<li>万物皆可变成String，如果对象是字符串对象，则返回结果与<code>.valueOf()</code>一致</li>
+</ul>
+<h1 id="stringprototypesubstring">String.prototype.subString()</h1>
+<ul>
+<li>
+<p>截取并返回字符串中的一部分</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">subString</span><span class="p">(</span><span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>endIndex</code>可选，默认为<code>str.length+1</code></p>
+<p>结果中不包含<code>endIndex</code>处的字符</p>
+<ul>
+<li>若<code>startIndex</code>大于<code>endIndex</code>，则相当于两数调换</li>
+<li>若两数相等，返回空字符串</li>
+<li>若任一参数小于0，则被当作0</li>
+</ul>
+</li>
+<li>
+<p>例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;abcdefg&#39;</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">subString</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="c1">// &#39;abc&#39;
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">subString</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="c1">// &#39;abc&#39;
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">subString</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="c1">// &#39;abc&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypeslice">String.prototype.slice()</h1>
+<ul>
+<li>
+<p><strong>提取字符串某一部分</strong></p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">beginIndex</span><span class="p">,</span><span class="nx">endIndex</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>beginIndex</code>若为<code>-3</code>，则看作是<code>strLength - 3</code></p>
+<p><code>endIndex</code>可选，若为空，则是为末尾；若为<code>-3</code>，则看作是<code>strLength - 3</code></p>
+</li>
+<li>
+<p>返回一个从原字符串提取出来的新字符串</p>
+</li>
+<li>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;ABCDEFGHIJKLMNOP&#39;</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="c1">// &#34;EFGHIJKLMN&#34;
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">33</span><span class="p">)</span> <span class="c1">// &#39;&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypereplace">String.prototype.replace()</h1>
+<ul>
+<li>内容过多</li>
+</ul>
+<h1 id="stringprototypesplit">String.prototype.split()</h1>
+<ul>
+<li>
+<p><strong>使用指定的分割字符将一个String对象分割成子字符串数组</strong></p>
+</li>
+<li>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;ABCDEFGHIJKLMNOP&#39;</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="c1">// [&#34;A&#34;, &#34;B&#34;, &#34;C&#34;, &#34;D&#34;, &#34;E&#34;, &#34;F&#34;, &#34;G&#34;, &#34;H&#34;, &#34;I&#34;, &#34;J&#34;, &#34;K&#34;, &#34;L&#34;, &#34;M&#34;, &#34;N&#34;, &#34;O&#34;, &#34;P&#34;]
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1">// [&#34;A&#34;,&#34;B&#34;,&#34;C&#34;]
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<span class="c1">// [&#34;ABCDEFGHIJKLMNOP&#34;]
+</span><span class="c1"></span><span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+<span class="c1">// [&#34;ABCDE&#34;, &#34;GHIJKLMNOP&#34;]
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="stringprototypetrim">String.prototype.trim()</h1>
+<ul>
+<li>
+<p><strong>删除两端空白字符</strong></p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">str.trim()
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>返回一个两端去掉空白的新字符串，不影响原字符串本身</p>
+</li>
+<li>
+<p>例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">originStr</span> <span class="o">=</span> <span class="s1">&#39; foo &#39;</span>
+<span class="nx">originStr</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span><span class="c1">// &#39;foo&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-05
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="/tags/javascript/">JavaScript</a>
+          <a href="/tags/string/">String</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Object常用方法整理</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/">
+            <span class="next-text nav-default">数据库基础</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

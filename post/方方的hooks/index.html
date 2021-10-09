@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>React Hooks全解 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1.useState 使用状态 1 2 3 const [n, setN] = React.useState(0) const [user, setUser] = React.useState({name:&amp;#39;F&amp;#39;}) 注意事项1：不可局部更新 1 2 3 4 5 const [user, setUser] = useState({name:&amp;#39;Jack&amp;#39;,age:18}) setState({ name:&amp;#39;Sam&amp;#39; }) 结果得到的是{name:&amp;lsquo;Sam&amp;rsqu" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E6%96%B9%E6%96%B9%E7%9A%84hooks/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="React Hooks全解" />
+<meta property="og:description" content="1.useState 使用状态 1 2 3 const [n, setN] = React.useState(0) const [user, setUser] = React.useState({name:&#39;F&#39;}) 注意事项1：不可局部更新 1 2 3 4 5 const [user, setUser] = useState({name:&#39;Jack&#39;,age:18}) setState({ name:&#39;Sam&#39; }) 结果得到的是{name:&lsquo;Sam&rsqu" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E6%96%B9%E6%96%B9%E7%9A%84hooks/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-01T17:02:51+08:00" />
+<meta property="article:modified_time" content="2021-06-01T00:00:00+08:00" />
+
+<meta itemprop="name" content="React Hooks全解">
+<meta itemprop="description" content="1.useState 使用状态 1 2 3 const [n, setN] = React.useState(0) const [user, setUser] = React.useState({name:&#39;F&#39;}) 注意事项1：不可局部更新 1 2 3 4 5 const [user, setUser] = useState({name:&#39;Jack&#39;,age:18}) setState({ name:&#39;Sam&#39; }) 结果得到的是{name:&lsquo;Sam&rsqu"><meta itemprop="datePublished" content="2021-06-01T17:02:51+08:00" />
+<meta itemprop="dateModified" content="2021-06-01T00:00:00+08:00" />
+<meta itemprop="wordCount" content="3075">
+<meta itemprop="keywords" content="前端,React基础,React," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="React Hooks全解"/>
+<meta name="twitter:description" content="1.useState 使用状态 1 2 3 const [n, setN] = React.useState(0) const [user, setUser] = React.useState({name:&#39;F&#39;}) 注意事项1：不可局部更新 1 2 3 4 5 const [user, setUser] = useState({name:&#39;Jack&#39;,age:18}) setState({ name:&#39;Sam&#39; }) 结果得到的是{name:&lsquo;Sam&rsqu"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">React Hooks全解</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-01 </span>
+        <div class="post-category">
+            <a href="/categories/react-hooks/"> React Hooks </a>
+            </div>
+          <span class="more-meta"> 3075 words </span>
+          <span class="more-meta"> 7 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1usestate">1.useState</a>
+      <ul>
+        <li><a href="#使用状态">使用状态</a></li>
+        <li><a href="#注意事项1不可局部更新">注意事项1：不可局部更新</a></li>
+        <li><a href="#注意事项2地址要变">注意事项2：地址要变</a></li>
+        <li><a href="#usestate接受函数">useState接受函数</a></li>
+        <li><a href="#setstate接受函数">setState接受函数</a></li>
+      </ul>
+    </li>
+    <li><a href="#2usereducer">2.useReducer</a>
+      <ul>
+        <li><a href="#用来践行fluxredux的思想">(用来践行Flux/Redux的思想)</a></li>
+        <li><a href="#1创建初始值initialstate">1.创建初始值initialState</a></li>
+        <li><a href="#2创建所有操作reducerstateaction">2.创建所有操作reducer(state,action)</a></li>
+        <li><a href="#3传给usereducer得到读和写api调用写type--操作类型-">3.传给useReducer，得到读和写API，调用写（{type : &lsquo;操作类型&rsquo; }）</a></li>
+        <li><a href="#4总的来说usereducer是usestate的复杂版">4.总的来说，useReducer是useState的复杂版</a></li>
+      </ul>
+    </li>
+    <li><a href="#3usecontext">3.useContext</a>
+      <ul>
+        <li><a href="#1上下文是局部的全局变量">1.上下文是局部的全局变量</a></li>
+        <li><a href="#2使用方法">2.使用方法</a></li>
+        <li><a href="#3注意事项">3.注意事项</a></li>
+      </ul>
+    </li>
+    <li><a href="#4useeffect">4.useEffect</a>
+      <ul>
+        <li><a href="#1副作用">1.副作用</a></li>
+        <li><a href="#2用途">2.用途</a></li>
+        <li><a href="#3特点">3.特点</a></li>
+      </ul>
+    </li>
+    <li><a href="#5uselayouteffect">5.useLayoutEffect</a>
+      <ul>
+        <li><a href="#布局副作用">布局副作用</a></li>
+        <li><a href="#特点">特点</a></li>
+        <li><a href="#经验">经验</a></li>
+      </ul>
+    </li>
+    <li><a href="#6usememo">6.useMemo</a></li>
+    <li><a href="#7usecallback">7.useCallBack</a></li>
+    <li><a href="#8useref">8.useRef</a></li>
+    <li><a href="#9forwardref">9.forwardRef</a></li>
+    <li><a href="#10替代redux">10.替代Redux</a></li>
+    <li><a href="#11自定义hooks">11.自定义hooks</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1usestate">1.useState</h1>
+<h2 id="使用状态">使用状态</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="p">[</span><span class="nx">n</span><span class="p">,</span> <span class="nx">setN</span><span class="p">]</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="p">[</span><span class="nx">user</span><span class="p">,</span> <span class="nx">setUser</span><span class="p">]</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useState</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;F&#39;</span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="注意事项1不可局部更新">注意事项1：不可局部更新</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="p">[</span><span class="nx">user</span><span class="p">,</span> <span class="nx">setUser</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Jack&#39;</span><span class="p">,</span><span class="nx">age</span><span class="o">:</span><span class="mi">18</span><span class="p">})</span>
+
+<span class="nx">setState</span><span class="p">({</span>
+	<span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Sam&#39;</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>结果得到的是{name:&lsquo;Sam&rsquo;}，age属性消失了</p>
+</li>
+<li>
+<p>（可以在之前加上&hellip;user，表示复制user的全部属性到这个新对象中）</p>
+</li>
+<li>
+<p>说明对于state不能部分setState，因为setState<strong>不会帮我们合并属性</strong></p>
+</li>
+<li>
+<p>实际上React中所有hooks都不能自动合并属性，需要我们自己去操作</p>
+</li>
+</ul>
+<h2 id="注意事项2地址要变">注意事项2：地址要变</h2>
+<p>setState(obj)如果obj地址不变，那么React就认为数据没有变化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="p">[</span><span class="nx">user</span><span class="p">,</span> <span class="nx">setUser</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Jack&#39;</span><span class="p">,</span><span class="nx">age</span><span class="o">:</span><span class="mi">18</span><span class="p">})</span>
+
+<span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Sam&#39;</span>
+
+<span class="nx">setState</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>表面上我们先改变了user对象的name属性（实际上也确实改变了），再将user对象setState进去，setState之后的user对象并没有改变。</li>
+<li>对于React来说，对象还是user（地址没变），因此React不认为user改变了，依然加载的是原来的user。</li>
+<li>上一个例子，是在setState中创建了一个新对象，因此React会直接加载新的对象（这也反映了<strong>setState并不会直接修改state，而是生成一个新的state</strong>）</li>
+</ul>
+<h2 id="usestate接受函数">useState接受函数</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">setState</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">initState</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>该函数返回初始state，且只执行一次，节约反复更新渲染组件时js引擎的解析时间（首次渲染时会解析，再次更新组件时js就不会解析这个匿名函数了）</p>
+<h2 id="setstate接受函数">setState接受函数</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="p">[</span><span class="nx">n</span><span class="p">,</span> <span class="nx">setN</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nx">setN</span><span class="p">(</span><span class="nx">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nx">setN</span><span class="p">(</span><span class="nx">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>虽然运行了两次setN，但运行结果为1，并不是预想中的2，原因同样是由于setN并不会改变n的值，n始终为0</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="nx">setN</span><span class="p">(</span><span class="nx">i</span> <span class="p">=&gt;</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>传入函数的方式并<strong>没有直接传入state进行计算</strong>，仅仅是一个<strong>形式化的操作</strong>而已，建议优先选用此种方式进行setState</p>
+<h1 id="2usereducer">2.useReducer</h1>
+<h2 id="用来践行fluxredux的思想">(用来践行Flux/Redux的思想)</h2>
+<h2 id="1创建初始值initialstate">1.创建初始值initialState</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">initial</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2创建所有操作reducerstateaction">2.创建所有操作reducer(state,action)</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">=&gt;{</span><span class="c1">//旧状态，操作的类型
+</span><span class="c1"></span>	<span class="k">if</span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;add&#39;</span><span class="p">){</span>
+		<span class="k">return</span> <span class="p">{</span> <span class="nx">n</span><span class="o">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">n</span><span class="o">+</span><span class="nx">action</span><span class="p">.</span><span class="nx">number</span><span class="p">}</span>
+	<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;mult&#39;</span><span class="p">){</span>
+		<span class="k">return</span> <span class="p">{</span> <span class="nx">n</span><span class="o">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">n</span><span class="o">*</span><span class="mi">2</span> <span class="p">}</span>
+	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;unknown type&#39;</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="3传给usereducer得到读和写api调用写type--操作类型-">3.传给useReducer，得到读和写API，调用写（{type : &lsquo;操作类型&rsquo; }）</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kd">function</span> <span class="nx">App</span><span class="p">(){</span>
+	<span class="kr">const</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span><span class="nx">initial</span><span class="p">)</span>
+	<span class="kr">const</span> <span class="nx">onClick</span> <span class="o">=</span> <span class="p">()=&gt;{</span>
+		<span class="nx">dispatch</span><span class="p">({</span><span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="nx">number</span> <span class="o">:</span> <span class="mi">2</span><span class="p">})</span><span class="c1">//参数为action对象
+</span><span class="c1"></span>	<span class="p">}</span>
+    <span class="k">return</span> <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4总的来说usereducer是usestate的复杂版">4.总的来说，useReducer是useState的复杂版</h2>
+<h1 id="3usecontext">3.useContext</h1>
+<h2 id="1上下文是局部的全局变量">1.上下文是局部的全局变量</h2>
+<h2 id="2使用方法">2.使用方法</h2>
+<p>1.使用C = createContext(initial)创建上下文</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">C</span> <span class="o">=</span> <span class="nx">createContext</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>2.使用&lt;C.Provider/&gt;圈定作用域</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="p">[</span><span class="nx">n</span><span class="p">,</span> <span class="nx">setN</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="p">&lt;</span><span class="nt">C.Provider</span> <span class="na">value</span><span class="o">=</span><span class="p">{{</span><span class="nx">n</span><span class="p">,</span> <span class="nx">setN</span><span class="p">}}&gt;</span><span class="c1">//将state和setState作为对象值传入上下文C中
+</span><span class="c1"></span>	<span class="p">&lt;</span><span class="nt">App</span><span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">C.Provider</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>3.在作用域内使用useContext(C)来使用上下文</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="p">{</span><span class="nx">n</span><span class="p">,</span> <span class="nx">setN</span><span class="p">}</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">C</span><span class="p">)</span>
+
+<span class="nx">onClick</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;{</span><span class="nx">setN</span><span class="p">(</span><span class="nx">n</span> <span class="p">=&gt;</span> <span class="nx">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="3注意事项">3.注意事项</h2>
+<ul>
+<li><strong>不是响应式</strong>的</li>
+<li>在一个模块中将C里面的值改变，另一个模块不会感知到这个变化</li>
+</ul>
+<h1 id="4useeffect">4.useEffect</h1>
+<h2 id="1副作用">1.副作用</h2>
+<p>实际上叫做afterRender更好，每次render后运行</p>
+<p>（对环境的改变即为副作用，如修改document.title</p>
+<p>但我们不一定非要把副作用放在useEffect里</p>
+<h2 id="2用途">2.用途</h2>
+<p>1.替代componentDidMount使用，[ ]作为第二个参数，表示除第一次渲染后执行外，之后不会再执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="nx">useEffect</span><span class="p">(()</span> <span class="p">=&gt;{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;第一次渲染后执行&#39;</span><span class="p">)</span>
+<span class="p">},[])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当第二个参数为空时，表示组件的任何状态变化后都会执行，包括第一次渲染后</p>
+<p>2.替代componentDidUpdate使用，可指定依赖，当n变化是执行，包括第一次渲染后</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="nx">useEffect</span><span class="p">(()</span> <span class="p">=&gt;{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;n变化后执行&#39;</span><span class="p">)</span>
+<span class="p">},[</span><span class="nx">n</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>3.替代componentWillUnmount使用，通过return</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="nx">useEffect</span><span class="p">(()</span> <span class="p">=&gt;{</span>
+    <span class="kr">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="p">=&gt;{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+    <span class="p">},</span><span class="mi">2000</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="p">=&gt;{</span><span class="nb">window</span><span class="p">.</span><span class="nx">clearInterval</span><span class="p">(</span><span class="nx">id</span><span class="p">)}</span>
+  <span class="p">},[])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>以上三种用途可同时存在</p>
+<h2 id="3特点">3.特点</h2>
+<p>如果同时存在多个useEffect，会<strong>按照出现次序执行</strong></p>
+<h1 id="5uselayouteffect">5.useLayoutEffect</h1>
+<h2 id="布局副作用">布局副作用</h2>
+<p>会在浏览器渲染前（屏幕像素改变之前）执行</p>
+<h2 id="特点">特点</h2>
+<ul>
+<li>
+<p>useLayoutEffect<strong>总是比</strong>useEffect要先执行</p>
+</li>
+<li>
+<p>useLayoutEffect中的任务最好确实影响了Layout</p>
+</li>
+</ul>
+<h2 id="经验">经验</h2>
+<p>为了用户体验，优先使用useEffect（先将画面渲染给用户，再进行副作用）</p>
+<h1 id="6usememo">6.useMemo</h1>
+<ul>
+<li>React中默认有多余的render，导致依赖其他状态的无关组件会被再次执行渲染</li>
+</ul>
+<p>可以使用React.memo(Child)将无关组件进行封装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">Child2</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(</span><span class="nx">Child</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Bug：但如果Child的props中有接收到的是函数时，但随着父组件的执行渲染，函数表达虽然没变，但此时地址改变了，故仍被再次执行，导致Child仍再次渲染</li>
+</ul>
+<p>使用useMemo封装此函数解决这个问题：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">onClickChild</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="p">=&gt;{</span>
+	<span class="k">return</span> <span class="p">()</span> <span class="p">=&gt;{</span> <span class="p">...}</span>
+<span class="p">},[</span><span class="nx">m</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>特点</li>
+</ul>
+<p>第一个参数是()=&gt;value</p>
+<p>第二个参数是依赖[m,n]</p>
+<p>只有当依赖变化时，才会计算出新的value；如果依赖不变，那就重用之前的value</p>
+<p><strong>与Vue2中的computed相似</strong></p>
+<p>一般先memo组件，再useMemo函数</p>
+<h1 id="7usecallback">7.useCallBack</h1>
+<p>如果value是个函数，useMemo就要写成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="nx">useMemo</span><span class="p">(</span> <span class="p">()</span> <span class="o">=</span> <span class="o">&gt;</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">}</span> <span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>写起来很复杂，因此使用useCallback解决</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">onClickChild</span> <span class="o">=</span> <span class="nx">useCallback</span> <span class="p">(</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="o">=</span> <span class="o">&gt;</span> <span class="p">{</span> <span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">},</span> <span class="p">[</span><span class="nx">m</span><span class="p">]</span> <span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="8useref">8.useRef</h1>
+<ul>
+<li>
+<p>如果需要一个值，在组件不断render时保持不变，用useRef</p>
+</li>
+<li>
+<p>初始化：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>读取：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="nx">count</span><span class="p">.</span><span class="nx">current</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>也可以将ref作为属性绑定到元素上，使用此ref能够引用到组件对应的DOM对象，类似document.getElementById</li>
+</ul>
+<h1 id="9forwardref">9.forwardRef</h1>
+<p>由于props无法传递ref属性，导致不能直接在子组件上定义ref</p>
+<p>可以使用forwarRef将组件封装成新组件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">Button2</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">forwardRef</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="nx">ref</span><span class="p">)=&gt;{</span>
+	<span class="k">return</span> <span class="p">&lt;</span><span class="nt">button</span> <span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span> <span class="p">{</span><span class="na">...props</span><span class="p">}/&gt;</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>实际上只是允许了子组件接受一个新参数ref</p>
+<h1 id="10替代redux">10.替代Redux</h1>
+<p>1.将数据集中在store对象</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="nx">user</span><span class="o">:</span><span class="kc">null</span><span class="p">,</span>
+	<span class="nx">books</span><span class="o">:</span><span class="kc">null</span><span class="p">,</span>
+	<span class="nx">movies</span><span class="o">:</span><span class="kc">null</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>2.将所有操作集中在reducer</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">case</span> <span class="s2">&#34;setUser&#34;</span><span class="o">:</span>
+			<span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">state</span><span class="p">,</span> <span class="nx">user</span><span class="o">:</span> <span class="nx">action</span><span class="p">.</span><span class="nx">user</span> <span class="p">};</span>
+		<span class="k">case</span> <span class="s2">&#34;setBooks&#34;</span><span class="o">:</span>
+			<span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">state</span><span class="p">,</span> <span class="nx">books</span><span class="o">:</span> <span class="nx">action</span><span class="p">.</span><span class="nx">books</span> <span class="p">};</span>
+		<span class="k">case</span> <span class="s2">&#34;setMovies&#34;</span><span class="o">:</span>
+			<span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">state</span><span class="p">,</span> <span class="nx">movies</span><span class="o">:</span> <span class="nx">action</span><span class="p">.</span><span class="nx">movies</span> <span class="p">};</span>
+		<span class="k">default</span><span class="o">:</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">();</span>
+	<span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>3.创建Context</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">Context</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>4.创建对数据的读写API（只能写在函数组件中）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">reducer</span><span class="p">,</span> <span class="nx">store</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5.将第四步的内容放到第三步的Context（把读写API赋值给Context.Provider）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="p">&lt;</span><span class="nt">Context.Provider</span> <span class="na">value</span><span class="o">=</span><span class="p">{{</span><span class="nx">state</span><span class="p">,</span><span class="nx">dispatch</span><span class="p">}}&gt;</span>
+	<span class="p">...</span>
+<span class="p">&lt;/</span><span class="nt">Context.Provider</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>6.用Context.Provider将Context提供给所有组件（包起来）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="p">&lt;</span><span class="nt">Context.Provider</span> <span class="na">value</span><span class="o">=</span><span class="p">{{</span><span class="nx">state</span><span class="p">,</span><span class="nx">dispatch</span><span class="p">}}&gt;</span>
+	<span class="p">&lt;</span><span class="nt">User</span><span class="p">/&gt;</span>
+	<span class="p">&lt;</span><span class="nt">Books</span><span class="p">/&gt;</span>
+	<span class="p">&lt;</span><span class="nt">Movies</span><span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">Context.Provider</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>7.各个组件用useContext获取读写API</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kd">function</span> <span class="nx">User</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kr">const</span> <span class="p">{</span> <span class="nx">state</span><span class="p">,</span> <span class="nx">dispatch</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">Context</span><span class="p">);</span>
+	<span class="nx">useEffect</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+		<span class="nx">ajax</span><span class="p">(</span><span class="s2">&#34;/user&#34;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">user</span> <span class="p">=&gt;</span> <span class="p">{</span>
+		<span class="nx">dispatch</span><span class="p">({</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;setUser&#34;</span><span class="p">,</span> <span class="nx">user</span><span class="o">:</span> <span class="nx">user</span> <span class="p">});</span>
+		<span class="p">});</span>
+	<span class="p">},</span> <span class="p">[</span> <span class="p">]);</span>
+	<span class="k">return</span> <span class="p">(</span>
+	<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+		<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">个人信息</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+			<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="nx">name</span><span class="o">:</span> <span class="p">{</span><span class="nx">state</span><span class="p">.</span><span class="nx">user</span> <span class="o">?</span> <span class="nx">state</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">:</span> <span class="s2">&#34;&#34;</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+	<span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>8.模块化</p>
+<p>![priceless-jennings-gyls6 - CodeSandbox - Google Chrome 2021_6_2 14_29_21](article_img/priceless-jennings-gyls6 - CodeSandbox - Google Chrome 2021_6_2 14_29_21-1622626575090.png)</p>
+<h1 id="11自定义hooks">11.自定义hooks</h1>
+<p>index.jsx:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s2">&#34;react&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">ReactDOM</span> <span class="nx">from</span> <span class="s2">&#34;react-dom&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">useList</span> <span class="nx">from</span> <span class="s2">&#34;./hooks/useList&#34;</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">list</span><span class="p">,</span> <span class="nx">deleteIndex</span><span class="p">,</span> <span class="nx">addItem</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useList</span><span class="p">();</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;App&#34;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">List</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span>
+        <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+          <span class="nx">addItem</span><span class="p">(</span><span class="s2">&#34;jack&#34;</span><span class="p">);</span>
+        <span class="p">}}</span>
+      <span class="p">&gt;</span>
+        <span class="nx">添加</span>
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">{</span><span class="nx">list</span> <span class="o">?</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">ol</span><span class="p">&gt;</span>
+          <span class="p">{</span><span class="nx">list</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">li</span> <span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">}&gt;</span>
+              <span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span>
+              <span class="p">&lt;</span><span class="nt">button</span>
+                <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                  <span class="nx">deleteIndex</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+                <span class="p">}}</span>
+              <span class="p">&gt;</span>
+                <span class="nx">删除</span>
+              <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+          <span class="p">))}</span>
+        <span class="p">&lt;/</span><span class="nt">ol</span><span class="p">&gt;</span>
+      <span class="p">)</span> <span class="o">:</span> <span class="p">(</span>
+        <span class="s2">&#34;加载中...&#34;</span>
+      <span class="p">)}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">rootElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;root&#34;</span><span class="p">);</span>
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;,</span> <span class="nx">rootElement</span><span class="p">);</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>hooks/useList.js:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&#34;react&#34;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">useList</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">[</span><span class="nx">list</span><span class="p">,</span> <span class="nx">setList</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">ajax</span><span class="p">(</span><span class="s2">&#34;/list&#34;</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">list</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setList</span><span class="p">(</span><span class="nx">list</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">},</span> <span class="p">[]);</span> <span class="c1">// [] 确保只在第一次运行
+</span><span class="c1"></span>  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">list</span><span class="o">:</span> <span class="nx">list</span><span class="p">,</span>
+    <span class="nx">addItem</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setList</span><span class="p">([...</span><span class="nx">list</span><span class="p">,</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span> <span class="p">}]);</span>
+      <span class="c1">//先复制一遍之前的list，再z后面写一个新的对象即可
+</span><span class="c1"></span>    <span class="p">},</span>
+    <span class="nx">deleteIndex</span><span class="o">:</span> <span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setList</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">index</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)));</span>
+      <span class="c1">//截取从开头到被删对象的部分数组（不包括被删对象）
+</span><span class="c1"></span>      <span class="c1">//截取从被删对象下一个开始到最后的部分数组
+</span><span class="c1"></span>      <span class="c1">//通过concat将两个数组合并
+</span><span class="c1"></span>    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">useList</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">ajax</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">resolve</span><span class="p">([</span>
+        <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Frank&#34;</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;2&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Jack&#34;</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;3&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Alice&#34;</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;4&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Bob&#34;</span> <span class="p">}</span>
+      <span class="p">]);</span>
+    <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-06-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="/tags/react%E5%9F%BA%E7%A1%80/">React基础</a>
+          <a href="/tags/react/">React</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">React组件生命周期</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E6%8A%80%E6%9C%AF/">
+            <span class="next-text nav-default">可视化大屏技术</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

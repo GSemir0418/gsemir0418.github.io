@@ -1,73 +1,37 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>研究生技术文档 on GSemir Blog</title>
+    <title>研究生技术文档 on Even - A super concise theme for Hugo</title>
     <link>https://gsemir0418.github.io/categories/%E7%A0%94%E7%A9%B6%E7%94%9F%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
-    <description>Recent content in 研究生技术文档 on GSemir Blog</description>
+    <description>Recent content in 研究生技术文档 on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Fri, 08 Jan 2021 23:15:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/%E7%A0%94%E7%A9%B6%E7%94%9F%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>展示平台说明文档</title>
-      <link>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
+      <link>https://gsemir0418.github.io/post/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
       <pubDate>Fri, 08 Jan 2021 23:15:51 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
-      <description>1. 模型展示页面 ​	模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需修改obj模型路径等简单操作即可实现模型展示demo。obj模型导出及注意事项见3dsMax技术文档。模板已发布到GitHub供读者学习参考：
- https://github.com/GSemir0418/TemplateProjects
- ​	下图为项目目录结构：
-​	其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。
-​	js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。
-1.1 更改网页名称 ​	在index.html文件中，修改&amp;lt;title&amp;gt;标签内的内容即可：
-&amp;lt;title&amp;gt;XXX村寨模型展示&amp;lt;/title&amp;gt; 1.2 修改模型路径 ​	首先将obj模型拷贝至models文件夹下。
-​	在js/index.js文件中，修改15和16行的代码如下：
-//模型路径 let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;; let obj1 = &#39;./models/testobj/lancuiting.obj&#39;; ​	注意路径使用相对路径。
-1.3 控制模型体积 ​	js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：
-model1.scale.set(1.4, 1.4, 1.4); 1.4 其他可配置选项 ​	如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：
-//括号中的2为强度 let dLight = new THREE.DirectionalLight(0xFFFFFF, 2); //光源的位置 dLight.position.set(500, 1000, 4000);  2. Turn.js翻页特效 ​	展示平台的第一个模块是少数民族建筑特征分析。针对大量的图文资料，传统的页面布局得不到很好的展示与交互效果。为提高用户体验，选择类似书本翻页的形式作为展示图文视频资料的方式。Turn.js是一个JavaScript库，利用HTML5的所有优点，可以使内容呈现起来像一本真正的书或杂志。
-​	关于Turn.js的入门教程可以看siki学院的免费课程，也可以通过官网进行学习。
- siki学院：http://www.sikiedu.com/course/517/tasks
-Turn.js官网：http://www.turnjs.com/
- ​	由于少数民族建筑资料篇幅较多，文章内容比较复杂，且Turn.js并没有为用户提供书页模板，全部样式都是用户在CSS中定义的。考虑到书页制作的便捷性与美观性，选择PPT来制作展示书籍的内容，再以加载图片的方式将内容加载到网页端，实现具有翻页效果的少数民族建筑特征分析资料展示模块。</description>
+      <guid>https://gsemir0418.github.io/post/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
+      <description>1. 模型展示页面 ​ 模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需</description>
     </item>
     
     <item>
       <title>3dsMax技术文档</title>
-      <link>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
+      <link>https://gsemir0418.github.io/post/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
       <pubDate>Fri, 08 Jan 2021 16:41:51 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
-      <description>1. 3dsMax概述 ​	3dsMax是由AutoDesk公司开发的三维模型与动画制作渲染软件，它被广泛应用于多个领域，包括游戏设计、广告设计、建筑设计和影视制作等。其优点是具有强大的材质编辑和灯光处理功能，并且相关的学习资源非常丰富。在后期的模型渲染上功能强大，能够得到逼真的模型。同其他建模软件相比，3dsMax创建的模型面片数量较少，占用空间小，模型的处理速度也比较快。本课题正是应用其强大的模型兼容性以及材质编辑功能，作为单体建筑模型后期纹理映射和OBJ模型导出的重要软件。
- 2. 3dsMax软件安装 ​	3dsMax软件发展至今，从最初的3D Studio MAX 1.0开始，其版本迭代更新二十余次，截至文章发布前，Autodesk公司已推出3dsMax 2021。考虑到兼容性、稳定性等问题，推荐安装3dsMax 2016之后的版本。
-​	本章以3dsMax 2020软件安装为例，详细介绍软件安装的过程及注意事项。
-2.1 解压缩安装包 ​	将安装包及注册机文件解压缩至目标文件夹，注意目标文件夹名称及路径应保证全英文。
-​	为防止安装破解过程中出现未知错误，建议安装前关闭所有杀毒软件。
-2.2 安装软件 ​	进入安装包文件夹，右键单击Setup.exe，选择以管理员身份运行；
-​
-在打开的窗口中选择安装（在此计算机安装）。
-许可协议选择我接受，单击下一步。
-设置安装路径后，点击安装即可。注意路径仍要保证全英文。
-安装完成后，选择立即启动。
-2.3 破解软件 ​	第一次进入软件后，选择enter a serial number输入序列号。
-​	选择 I Agree我同意。
-​	进入激活页面，选择Activate激活。
-​	在Serial Number栏中填写序列号666-69696969，单击Next。
-​	第一次会提醒”检测到无效的序列号“，此时选择重新输入，将序列号再次输入即可。
-​	当进入到激活选项窗口，复制Request code请求码。右键单击安装包中的xf-adesk20.exe破解工具，选择以管理员身份运行。
-​	将请求码复制到破解工具中的Request栏后，先单击Patch，再点击Generate，复制Activation栏中自动生成的激活码。
-​	拿到激活码后，回到激活选项页面，选择I have an activation code from Autodesk，把激活码复制到输入框后，点击Next。
-​	激活完成，选择Finish退出激活窗口。
-​	至此，3dsMax 2020安装完成。
-2.4 修改软件语言 ​	3dsMax软件支持简体中文，切换中文版本也很简单，点击开始，找到Autodesk文件夹，选择3dMax 2020 - simplified Chinese即可。</description>
+      <guid>https://gsemir0418.github.io/post/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
+      <description>1. 3dsMax概述 ​ 3dsMax是由AutoDesk公司开发的三维模型与动画制作渲染软件，它被广泛应用于多个领域，包括游戏设计、广告设计、建</description>
     </item>
     
     <item>
       <title>Revit建模技术文档</title>
-      <link>https://gsemir0418.github.io/posts/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
+      <link>https://gsemir0418.github.io/post/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
       <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
-      <description>1. Revit概述 2.安装软件 3.点云数据导入 3.1 直接导入 3.2 Recap 4.构件族与模型搭建 4.1 建模流程概述 4.2 轴网布局 4.3 木框架搭建 4.4 屋顶 4.4.1 歇山式屋顶 4.4.2 悬山式屋顶 4.5 门板 4.6 其他构件 4.7 FBX模型导出 5.绘制施工图纸 </description>
+      <guid>https://gsemir0418.github.io/post/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
+      <description>1. Revit概述 2.安装软件 3.点云数据导入 3.1 直接导入 3.2 Recap 4.构件族与模型搭建 4.1 建模流程概述 4.2 轴网布局 4.3 木框架搭建 4.4 屋顶 4.4.1 歇山式屋顶 4.4.2 悬山式</description>
     </item>
     
   </channel>

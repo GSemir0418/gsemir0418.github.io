@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Docker安装MySQL - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 win10安装Docker https://hub.docker.com/ 注册登录并下载安装Docker Desktop。 启用Hyper-V 右键Windows按钮并选择“应用和功能”，选" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/docker%E5%AE%89%E8%A3%85mysql/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Docker安装MySQL" />
+<meta property="og:description" content="1 win10安装Docker https://hub.docker.com/ 注册登录并下载安装Docker Desktop。 启用Hyper-V 右键Windows按钮并选择“应用和功能”，选" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/docker%E5%AE%89%E8%A3%85mysql/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-02T08:36:55+08:00" />
+<meta property="article:modified_time" content="2021-07-02T00:00:00+08:00" />
+
+<meta itemprop="name" content="Docker安装MySQL">
+<meta itemprop="description" content="1 win10安装Docker https://hub.docker.com/ 注册登录并下载安装Docker Desktop。 启用Hyper-V 右键Windows按钮并选择“应用和功能”，选"><meta itemprop="datePublished" content="2021-07-02T08:36:55+08:00" />
+<meta itemprop="dateModified" content="2021-07-02T00:00:00+08:00" />
+<meta itemprop="wordCount" content="786">
+<meta itemprop="keywords" content="nodejs,Docker,MySQL," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Docker安装MySQL"/>
+<meta name="twitter:description" content="1 win10安装Docker https://hub.docker.com/ 注册登录并下载安装Docker Desktop。 启用Hyper-V 右键Windows按钮并选择“应用和功能”，选"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Docker安装MySQL</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-02 </span>
+        <div class="post-category">
+            <a href="/categories/nodejs%E5%85%A8%E8%A7%A3/"> Nodejs全解 </a>
+            </div>
+          <span class="more-meta"> 786 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-win10安装docker">1 win10安装Docker</a></li>
+    <li><a href="#2-docker安装mysql">2 Docker安装MySQL</a></li>
+    <li><a href="#3-docker常用命令">3 Docker常用命令</a></li>
+    <li><a href="#4-连接mysql">4 连接MySQL</a>
+      <ul>
+        <li><a href="#1-进入容器">1 进入容器</a></li>
+        <li><a href="#2-操作mysql">2 操作MySQL</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-win10安装docker">1 win10安装Docker</h1>
+<blockquote>
+<p><a href="https://hub.docker.com/">https://hub.docker.com/</a></p>
+</blockquote>
+<p>注册登录并下载安装<code>Docker Desktop</code>。</p>
+<ul>
+<li>启用Hyper-V</li>
+</ul>
+<p>右键Windows按钮并选择“应用和功能”，选择相关设置中的“程序和功能”，选择“启用或关闭Windows功能”，选择Hyper-V，单机确定。</p>
+<p><img src="/dockermysql/image-20210702084245852.png" alt="image-20210702084245852"></p>
+<ul>
+<li>启用CPU的虚拟化</li>
+</ul>
+<p>进入<code>BIOS</code>界面，找到<code>Virtualization Technology</code>选项，将disabled改为<code>enabled</code>。</p>
+<ul>
+<li>更新WSL2</li>
+</ul>
+<p>如果出现<code>WSL 2 installation is incomplete</code>的报错，则需要更新WSL 2。</p>
+<blockquote>
+<p><a href="https://aka.ms/wsl2kernel">https://aka.ms/wsl2kernel</a></p>
+</blockquote>
+<p>根据文档下载最新包，安装重启即可。</p>
+<h1 id="2-docker安装mysql">2 Docker安装MySQL</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker run --name mysql1 -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="m">123456</span> -p 3306:3306 -d mysql:8.0.25
+</code></pre></td></tr></table>
+</div>
+</div><p>其中<code>name</code>是容器的名字；<code>-e</code>是环境变量，配置的<code>MYSQL_ROOT_PASSWORD</code>是mysql密码；<code>-p</code>是端口映射，左侧是本机端口号，右侧是虚拟机端口号；<code>-d</code>表示程序持续运行；最后指定mysql的版本号为<code>8.0.25</code>。</p>
+<p>安装完成后，在docker desktop中可以发现mysql1的容器已开启，或者在命令行输入docker ps查看全部在运行的容器。</p>
+<h1 id="3-docker常用命令">3 Docker常用命令</h1>
+<p><code>docker ps</code> 查看容器运行状态</p>
+<p><code>docker start mysql1</code> 启动mysql1容器</p>
+<p><code>docker kill mysql1</code> 关闭容器mysql1</p>
+<p><code>docker container run mysql1</code> 开启刚刚关掉的容器</p>
+<p><code>docker rm mysql1</code> 删除容器，必要时可加-f选项</p>
+<p><code>docker run xxx</code> 启动新容器</p>
+<p><code>ctrl + d</code> 退出</p>
+<p><strong>注</strong>：用docker运行的容器，默认不会持久化，如果容器数据被删掉了，那么数据也没了。类似网吧的电脑机制。</p>
+<h1 id="4-连接mysql">4 连接MySQL</h1>
+<h2 id="1-进入容器">1 进入容器</h2>
+<ul>
+<li>法1 DockerDesktop</li>
+</ul>
+<p>单击容器右侧的<code>cli</code>按钮，弹出命令行窗口，并自动连接到容器。</p>
+<ul>
+<li>法2 命令行</li>
+</ul>
+<p>执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker exec -it mysql1 bash
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2-操作mysql">2 操作MySQL</h2>
+<p>进入容器后，输入<code>mysql -u root -p</code>输入密码，若出现欢迎界面，且命令行前缀变为<code>&gt;mysql</code>，表示连接成功。</p>
+<ul>
+<li>MySQL基本语句：（<strong>必须使用分号结尾</strong>）
+<ul>
+<li><code>show databases;</code> 查看全部数据库</li>
+<li><code>use xxx;</code> 选择要使用的数据库</li>
+<li><code>show tables;</code> 显示数据库中全部数据表</li>
+<li><code>describe xxx;</code> 描述表中全部字段信息</li>
+<li><code>select * from xxx;</code> 显示表中全部内容</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nodejs/">nodejs</a>
+          <a href="/tags/docker/">Docker</a>
+          <a href="/tags/mysql/">MySQL</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Node.js连接数据库</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">
+            <span class="next-text nav-default">杂七杂八</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

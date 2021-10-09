@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Node进程与线程 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 进程 1.1 进程 Process 场景 notepad.exe是一个程序，不是进程 双击notepad.exe时，操作系统会开启一个进程 定义 进程是程序的执行实例 程序" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Node进程与线程" />
+<meta property="og:description" content="1 进程 1.1 进程 Process 场景 notepad.exe是一个程序，不是进程 双击notepad.exe时，操作系统会开启一个进程 定义 进程是程序的执行实例 程序" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-06T17:33:55+08:00" />
+<meta property="article:modified_time" content="2021-08-16T00:00:00+08:00" />
+
+<meta itemprop="name" content="Node进程与线程">
+<meta itemprop="description" content="1 进程 1.1 进程 Process 场景 notepad.exe是一个程序，不是进程 双击notepad.exe时，操作系统会开启一个进程 定义 进程是程序的执行实例 程序"><meta itemprop="datePublished" content="2021-08-06T17:33:55+08:00" />
+<meta itemprop="dateModified" content="2021-08-16T00:00:00+08:00" />
+<meta itemprop="wordCount" content="1903">
+<meta itemprop="keywords" content="nodejs," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Node进程与线程"/>
+<meta name="twitter:description" content="1 进程 1.1 进程 Process 场景 notepad.exe是一个程序，不是进程 双击notepad.exe时，操作系统会开启一个进程 定义 进程是程序的执行实例 程序"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Node进程与线程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-08-06 </span>
+        <div class="post-category">
+            <a href="/categories/nodejs%E5%85%A8%E8%A7%A3/"> Nodejs全解 </a>
+            </div>
+          <span class="more-meta"> 1903 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-进程">1 进程</a>
+      <ul>
+        <li><a href="#11-进程-process">1.1 进程 Process</a></li>
+        <li><a href="#12-了解cpu">1.2 了解CPU</a></li>
+        <li><a href="#13-阻塞">1.3 阻塞</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-线程">2 线程</a>
+      <ul>
+        <li><a href="#21-线程引入">2.1 线程引入</a></li>
+        <li><a href="#22-线程thread">2.2 线程Thread</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-nodejs进程控制">3 Node.js进程控制</a>
+      <ul>
+        <li><a href="#31-child_process模块">3.1 child_process模块</a></li>
+        <li><a href="#32-api">3.2 API</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-nodejs线程">4 Node.js线程</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-进程">1 进程</h1>
+<h2 id="11-进程-process">1.1 进程 Process</h2>
+<ul>
+<li>场景
+<ul>
+<li><code>notepad.exe</code>是一个<strong>程序</strong>，不是进程</li>
+<li>双击notepad.exe时，操作系统会开启一个<strong>进程</strong></li>
+</ul>
+</li>
+<li>定义
+<ul>
+<li>进程是程序的<strong>执行实例</strong></li>
+<li>程序在CPU上<strong>执行时的活动</strong>叫做进程</li>
+</ul>
+</li>
+<li>特点
+<ul>
+<li>一个进程可以创建另一个进程（父进程和子进程）例如Chrome浏览器的网页和插件</li>
+<li>通过任务管理器可以看到进程</li>
+</ul>
+</li>
+</ul>
+<h2 id="12-了解cpu">1.2 了解CPU</h2>
+<ul>
+<li>
+<p>特点：</p>
+<ul>
+<li>一个单核CPU，在一个时刻，只能做一件事情</li>
+<li>如何让用户同时看电影、听音乐、写代码呢</li>
+<li>答案是在不同进程中<strong>快速切换</strong>（CPU频率）</li>
+<li>以渣男交多个女朋友举例</li>
+</ul>
+</li>
+<li>
+<p>多程序并发执行时</p>
+<ul>
+<li>多个程序在<strong>宏观上并行，微观上串行</strong></li>
+<li>每个进程会出现<strong>执行-暂停-执行</strong>的规律</li>
+<li>多个进程之前会出现抢资源（如打印机队列）的现象</li>
+</ul>
+</li>
+<li>
+<p>进程的两个状态：运行态与非运行态</p>
+<p><img src="/nodeprocess/process1.png" alt="image-20210805104328732"></p>
+</li>
+<li>
+<p>进程队列示意</p>
+<p><img src="/nodeprocess/process2.png" alt="image-20210805104451902"></p>
+</li>
+</ul>
+<h2 id="13-阻塞">1.3 阻塞</h2>
+<ul>
+<li>
+<p>等待执行的进程中</p>
+<ul>
+<li>都是非运行态</li>
+<li>一些（A）在等待CPU资源</li>
+<li>另一些（B）在等待I/O完成（如文件读取）</li>
+<li>如果这时把CPU资源分配给B进程，B还是在等I/O（不占用CPU）</li>
+<li>B进程就是阻塞进程</li>
+<li>因此，分派程序只会把CPU分配给非阻塞进程</li>
+<li>比如和女朋友排队买饭，但她中途去厕所了，那么如果排到你们了就会让你去后面重新排队</li>
+</ul>
+</li>
+<li>
+<p>进程的三个状态：<strong>运行</strong>，<strong>就绪</strong>，<strong>阻塞</strong></p>
+<p><img src="/nodeprocess/process3.png" alt="image-20210805105749846"></p>
+</li>
+</ul>
+<h1 id="2-线程">2 线程</h1>
+<h2 id="21-线程引入">2.1 线程引入</h2>
+<ul>
+<li>分阶段
+<ul>
+<li>过去在面向进程设计的系统中，进程是程序的基本执行实体</li>
+<li>在面向线程设计的系统中，进程本身不是基本运行单位，而是<strong>线程的容器</strong></li>
+</ul>
+</li>
+<li>引入原因
+<ul>
+<li>进程是程序的基本执行实体，也是资源（内存等）分配的基本实体</li>
+<li>导致进程的创建、切换、销毁太消耗CPU时间了</li>
+<li>于是引入线程，<strong>线程作为执行的基本实体</strong></li>
+<li>而<strong>进程只作为资源分配的基本实体</strong>（不管执行了）</li>
+<li>例如领导与员工们，<strong>领导负责申请、调配资源，员工们负责执行</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="22-线程thread">2.2 线程Thread</h2>
+<ul>
+<li>概念
+<ul>
+<li>CPU<strong>调度和执行</strong>的<strong>最小单元</strong></li>
+<li>一个进程中<strong>至少</strong>有一个线程</li>
+<li>一个进程中的线程共享该进程的所有资源</li>
+<li>进程的第一个线程叫做初始化线程</li>
+<li>线程的调度可以由操作系统负责，也可以由用户自己负责</li>
+</ul>
+</li>
+<li>举例
+<ul>
+<li>浏览器进程中有渲染引擎、V8引擎、存储模块、网络模块、用户界面模块等</li>
+<li>每个模块都可以放在一个线程里</li>
+</ul>
+</li>
+<li>分析：子进程 VS 线程
+<ul>
+<li>优先使用<strong>线程</strong>，除非需要新的资源分配</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-nodejs进程控制">3 Node.js进程控制</h1>
+<h2 id="31-child_process模块">3.1 child_process模块</h2>
+<ul>
+<li>
+<p>目的</p>
+<ul>
+<li>
+<p>子进程的运行结果存储在系统缓存中（最大200kb）</p>
+</li>
+<li>
+<p>等待子进程运行结束后，主进程再用回调函数读取子进程的运行结果（error,stdout,stderr）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">child_process</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="p">{</span><span class="nx">exec</span><span class="p">}</span> <span class="o">=</span> <span class="nx">child_process</span>
+
+<span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">stdout</span><span class="p">,</span> <span class="nx">stderr</span><span class="p">)=&gt;{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="c1">// null
+</span><span class="c1"></span>	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stdout</span><span class="p">)</span> <span class="c1">// 标准输出
+</span><span class="c1"></span>	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stderr</span><span class="p">)</span> <span class="c1">// 错误内容
+</span><span class="c1"></span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h2 id="32-api">3.2 API</h2>
+<ul>
+<li>
+<p>API-exec</p>
+<ul>
+<li>
+<p>exec(cmd, options, fn)</p>
+<ul>
+<li>execute的缩写，用于执行bash命令</li>
+<li>同步版本：execSync，不用回调，直接const result = execSync</li>
+</ul>
+</li>
+<li>
+<p>流</p>
+<ul>
+<li>
+<p>返回流（不用回调，可以监听stdout流的data事件）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">child_process</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="p">{</span><span class="nx">exec</span><span class="p">}</span> <span class="o">=</span> <span class="nx">child_process</span>
+
+<span class="kr">const</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;ls -l&#39;</span><span class="p">)</span>
+<span class="c1">// 监听stdout的data事件
+</span><span class="c1"></span><span class="nx">child</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;得到了一次数据&#39;</span><span class="p">)</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">chunk</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="c1">// 监听stderr
+</span><span class="c1"></span><span class="nx">child</span><span class="p">.</span><span class="nx">stderr</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>Promise</p>
+<ul>
+<li>
+<p>可以使其Promise化（util.promisify）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">child_process</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">exec</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">child_process</span>
+
+<span class="kr">const</span> <span class="nx">exec2</span> <span class="o">=</span> <span class="nx">util</span><span class="p">.</span><span class="nx">promisify</span><span class="p">(</span><span class="nx">exec</span><span class="p">)</span>
+
+<span class="nx">exec2</span><span class="p">(</span><span class="s1">&#39;ls -l&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">stdout</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>options常用选项（exec第二个参数，execFile第三个参数）</p>
+<ul>
+<li>cwd：执行命令的路径</li>
+<li>env：环境变量</li>
+<li>shell：用什么命令行程序执行</li>
+<li>maxBuffer：最大缓存</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="p">{</span>
+	<span class="nx">cwd</span> <span class="o">:</span> <span class="s1">&#39;C:\\&#39;</span><span class="p">,</span>
+	<span class="nx">env</span> <span class="o">:</span> <span class="p">{</span><span class="nx">NODE_ENV</span> <span class="o">:</span> <span class="s1">&#39;development&#39;</span><span class="p">},</span>
+	<span class="nx">maxBuffer</span> <span class="o">:</span> <span class="mi">1024</span><span class="o">*</span><span class="mi">2024</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>存在的问题</p>
+<ul>
+<li>存在cmd被注入的风险</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 当接受用户输入时，以&#39;&amp;&amp;&#39;开头，接着输入一条危险指令
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">userInput</span> <span class="o">=</span> <span class="s1">&#39;. &amp;&amp; rm -rf /&#39;</span>
+<span class="nx">exec2</span><span class="p">(</span><span class="sb">`ls </span><span class="si">${</span><span class="nx">userInput</span><span class="si">}</span><span class="sb">`</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span><span class="p">)...</span>
+<span class="c1">// 那么命令行就会执行&#39;ls&#39;命令和&#39;rm -rf /&#39;命令
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>推荐使用<code>execFile</code></p>
+<ul>
+<li>
+<p>执行特定的程序</p>
+</li>
+<li>
+<p>命令行的参数要用数组形式传入，无法注入</p>
+</li>
+<li>
+<p>同步版本：execFileSync</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="p">{</span> <span class="nx">execFile</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">child_process</span>
+
+<span class="kr">const</span> <span class="nx">userInput</span> <span class="o">=</span> <span class="s1">&#39;. &amp;&amp; pwd&#39;</span>
+<span class="nx">execFile</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;-la&#39;</span><span class="p">,</span> <span class="nx">userInput</span><span class="p">],</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">stdout</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stdout</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="c1">// 结果会报错，不会将&#39;&amp;&amp;&#39;作为连接号解析
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>支持流</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">execFile</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">userInput</span><span class="p">])</span>
+<span class="nx">child</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">chunk</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">chunk</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>API-spawn</p>
+<ul>
+<li>
+<p><code>spawn</code></p>
+<ul>
+<li>用法与execFile方法类似</li>
+<li>区别在于没有回调函数，只能通过流事件获取结果</li>
+<li>没有最大200kb的限制（因为是流）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;.&#39;</span><span class="p">],</span> <span class="p">{</span> <span class="nx">cwd</span> <span class="o">:</span> <span class="s1">&#39;C:\\&#39;</span> <span class="p">})</span>
+<span class="nx">child</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">chunk</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">chunk</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>能用spawn就不要用execFile</p>
+</li>
+</ul>
+</li>
+<li>
+<p>API-fork</p>
+<ul>
+<li>
+<p>fork</p>
+<ul>
+<li>创建一个子进程，执行Node脚本</li>
+<li>fork('./child.js')相当于执行spawn(&lsquo;node&rsquo;,['./child.js'])</li>
+<li><strong>能用fork，就别用其他的了</strong></li>
+</ul>
+</li>
+<li>
+<p>特点</p>
+<ul>
+<li>会多出一个message事件，用于父子通信</li>
+<li>会多出一个send方法</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// n.js主进程
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">child_process</span><span class="p">.</span><span class="nx">fork</span><span class="p">(</span><span class="s1">&#39;./child.js&#39;</span><span class="p">)</span>
+<span class="nx">n</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="nx">m</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;PARENT got message:&#39;</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nx">n</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="nx">hello</span><span class="o">:</span> <span class="s1">&#39;world&#39;</span> <span class="p">})</span><span class="c1">// 父进程给子进程传值
+</span><span class="c1"></span>
+<span class="c1">// child.js子进程
+</span><span class="c1"></span><span class="nx">process</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="nx">m</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;CHILD got message:&#39;</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nx">process</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="nx">foo</span><span class="o">:</span> <span class="s1">&#39;bar&#39;</span> <span class="p">})</span><span class="c1">// 子进程给父进程传值
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h1 id="4-nodejs线程">4 Node.js线程</h1>
+<p>太新了 官方文档建议用子进程。。</p>
+<blockquote>
+<p><a href="https://nodejs.org/api/worker_threads.html#worker_threads_worker_threads">https://nodejs.org/api/worker_threads.html#worker_threads_worker_threads</a></p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-08-16
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nodejs/">nodejs</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">JS专精-函数</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/">
+            <span class="next-text nav-default">Node技术架构</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

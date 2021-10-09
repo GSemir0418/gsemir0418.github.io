@@ -1,33 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Docker on GSemir Blog</title>
+    <title>Docker on Even - A super concise theme for Hugo</title>
     <link>https://gsemir0418.github.io/tags/docker/</link>
-    <description>Recent content in Docker on GSemir Blog</description>
+    <description>Recent content in Docker on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Fri, 02 Jul 2021 08:36:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker安装MySQL</title>
-      <link>https://gsemir0418.github.io/posts/docker%E5%AE%89%E8%A3%85mysql/</link>
+      <link>https://gsemir0418.github.io/post/docker%E5%AE%89%E8%A3%85mysql/</link>
       <pubDate>Fri, 02 Jul 2021 08:36:55 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/docker%E5%AE%89%E8%A3%85mysql/</guid>
-      <description>1 win10安装Docker  https://hub.docker.com/
- 注册登录并下载安装Docker Desktop。
- 启用Hyper-V  右键Windows按钮并选择“应用和功能”，选择相关设置中的“程序和功能”，选择“启用或关闭Windows功能”，选择Hyper-V，单机确定。
- 启用CPU的虚拟化  进入BIOS界面，找到Virtualization Technology选项，将disabled改为enabled。
- 更新WSL2  如果出现WSL 2 installation is incomplete的报错，则需要更新WSL 2。
- https://aka.ms/wsl2kernel
- 根据文档下载最新包，安装重启即可。
-2 Docker安装MySQL docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:8.0.25 其中name是容器的名字；-e是环境变量，配置的MYSQL_ROOT_PASSWORD是mysql密码；-p是端口映射，左侧是本机端口号，右侧是虚拟机端口号；-d表示程序持续运行；最后指定mysql的版本号为8.0.25。
-安装完成后，在docker desktop中可以发现mysql1的容器已开启，或者在命令行输入docker ps查看全部在运行的容器。
-3 Docker常用命令 docker ps 查看容器运行状态
-docker start mysql1 启动mysql1容器
-docker kill mysql1 关闭容器mysql1
-docker container run mysql1 开启刚刚关掉的容器
-docker rm mysql1 删除容器，必要时可加-f选项
-docker run xxx 启动新容器</description>
+      <guid>https://gsemir0418.github.io/post/docker%E5%AE%89%E8%A3%85mysql/</guid>
+      <description>1 win10安装Docker https://hub.docker.com/ 注册登录并下载安装Docker Desktop。 启用Hyper-V 右键Windows按钮并选择“应用和功能”，选</description>
     </item>
     
   </channel>

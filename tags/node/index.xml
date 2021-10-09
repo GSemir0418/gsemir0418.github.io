@@ -1,35 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>node on GSemir Blog</title>
+    <title>node on Even - A super concise theme for Hugo</title>
     <link>https://gsemir0418.github.io/tags/node/</link>
-    <description>Recent content in node on GSemir Blog</description>
+    <description>Recent content in node on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Mon, 27 Sep 2021 13:47:24 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Express全解</title>
-      <link>https://gsemir0418.github.io/posts/express%E5%85%A8%E8%A7%A3/</link>
+      <link>https://gsemir0418.github.io/post/express%E5%85%A8%E8%A7%A3/</link>
       <pubDate>Mon, 27 Sep 2021 13:47:24 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/express%E5%85%A8%E8%A7%A3/</guid>
-      <description>0 REST.Client插件 用于在vscode中构造请求
-新建以.http为后缀的文件：
-@url=http://localhost:8080	--- @用于定义变量，{{}}使用此变量 ###	--- 以###作为请求分割符号 get {{url}}/users --- 注意空格 ### post {{url}} Content-Type: application/json --- 请求头与消息体直接有空行 { &amp;quot;username&amp;quot;: &amp;quot;gsq&amp;quot;, &amp;quot;age&amp;quot;: 19 } 1 express.xxx 共7个api，主要是一些内置的中间件，例如用来自动处理不同类型的请求体数据
-1.1 express.json() 以监听消息体中数据流data事件的方式，拿到全部的json数据并自动解析成对象，放到request.body中
-const express = require(&amp;#39;express&amp;#39;) const app = express() // 尝试将此中间件注释后，观察控制台打印内容 app.use(express.json()) app.use((req,res,next)=&amp;gt;{ console.log(req.body) res.send(&amp;#39;aaa&amp;#39;) next() }) app.listen(8080,()=&amp;gt;{ console.log(&amp;#39;listening 8080...&amp;#39;) }) 1.2 express.static() 指定静态资源路径，用户请求的静态数据首先从指定路径寻找，优先级高于其他中间件
-... // 指定静态资源目录，如果在xxx目录中找到了就发送给浏览器，如果没有就next() app.use(express.static(&amp;#39;xxx&amp;#39;)) app.use((req,res,next)=&amp;gt;{ res.send(&amp;#39;aaa&amp;#39;) next() }) ... // 在.http文件中，构造请求静态资源 get {{url}}/index.html 1.3 express.</description>
+      <guid>https://gsemir0418.github.io/post/express%E5%85%A8%E8%A7%A3/</guid>
+      <description>0 REST.Client插件 用于在vscode中构造请求 新建以.http为后缀的文件： 1 2 3 4 5 6 7 8 9 10 11 @url=http://localhost:8080 --- @用于定义变量，{{}}使用</description>
     </item>
     
     <item>
       <title>Express核心</title>
-      <link>https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/</link>
+      <link>https://gsemir0418.github.io/post/express%E6%A0%B8%E5%BF%83/</link>
       <pubDate>Sun, 22 Aug 2021 21:09:57 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/</guid>
-      <description>1 HTTP协议 1.1 curl基本用法   curl -s -v 网址
- -s 是 silent，用于隐藏进度条 -v 是 verbose，用于打印全部header * 开头的是注释 &amp;gt; 开头的是HTTP请求 &amp;lt; 开头的是HTTP响应    举例
-curl -s -v http://www.baidu.com  如果得到301和 Location，表示永久重定向，于是重新请求（可以使用 -L自动重定向）  curl -s -o nul -v https://www.baidu.com * TCP_NODELAY set * Connected to www.baidu.com (180.101.49.12) port 80 (#0) &amp;gt; GET / HTTP/1.1 &amp;gt; Host: www.baidu.com &amp;gt; User-Agent: curl/7.64.1 &amp;gt; Accept: */* &amp;gt; &amp;lt; HTTP/1.1 200 OK &amp;lt; Accept-Ranges: bytes &amp;lt; Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform &amp;lt; Connection: keep-alive &amp;lt; Content-Length: 2381 &amp;lt; Content-Type: text/html &amp;lt; Date: Sun, 22 Aug 2021 13:22:47 GMT &amp;lt; Etag: &amp;#34;588604c8-94d&amp;#34; &amp;lt; Last-Modified: Mon, 23 Jan 2017 13:27:36 GMT &amp;lt; Pragma: no-cache &amp;lt; Server: bfe/1.</description>
+      <guid>https://gsemir0418.github.io/post/express%E6%A0%B8%E5%BF%83/</guid>
+      <description>1 HTTP协议 1.1 curl基本用法 curl -s -v 网址 -s 是 silent，用于隐藏进度条 -v 是 verbose，用于打印全部header * 开头的是注释 &amp;gt; 开头的</description>
     </item>
     
   </channel>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>可视化大屏技术 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 背景和意义 数据可视化即把相对复杂、抽象的数据通过可视化的方式以人们更易理解的形式展示出来的一系列手段，旨在更形象地表达数据内在的信息和规律" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E6%8A%80%E6%9C%AF/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="可视化大屏技术" />
+<meta property="og:description" content="1 背景和意义 数据可视化即把相对复杂、抽象的数据通过可视化的方式以人们更易理解的形式展示出来的一系列手段，旨在更形象地表达数据内在的信息和规律" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E6%8A%80%E6%9C%AF/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-28T09:30:55+08:00" />
+<meta property="article:modified_time" content="2021-05-28T00:00:00+08:00" />
+
+<meta itemprop="name" content="可视化大屏技术">
+<meta itemprop="description" content="1 背景和意义 数据可视化即把相对复杂、抽象的数据通过可视化的方式以人们更易理解的形式展示出来的一系列手段，旨在更形象地表达数据内在的信息和规律"><meta itemprop="datePublished" content="2021-05-28T09:30:55+08:00" />
+<meta itemprop="dateModified" content="2021-05-28T00:00:00+08:00" />
+<meta itemprop="wordCount" content="3262">
+<meta itemprop="keywords" content="前端,可视化,echarts,React," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="可视化大屏技术"/>
+<meta name="twitter:description" content="1 背景和意义 数据可视化即把相对复杂、抽象的数据通过可视化的方式以人们更易理解的形式展示出来的一系列手段，旨在更形象地表达数据内在的信息和规律"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">可视化大屏技术</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-05-28 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E7%A7%AF%E7%B4%AF%E6%96%87%E6%A1%A3/"> 技术积累文档 </a>
+            </div>
+          <span class="more-meta"> 3262 words </span>
+          <span class="more-meta"> 7 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-背景和意义">1 背景和意义</a></li>
+    <li><a href="#2-技术原理">2 技术原理</a>
+      <ul>
+        <li><a href="#21-react框架">2.1 React框架</a></li>
+        <li><a href="#22-大屏适配公式">2.2 大屏适配公式</a></li>
+        <li><a href="#23-元素适配公式">2.3 元素适配公式</a></li>
+        <li><a href="#24-echarts可视化图表库">2.4 ECharts可视化图表库</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-技术实现方案">3 技术实现方案</a>
+      <ul>
+        <li><a href="#31-大屏设计流程">3.1 大屏设计流程</a></li>
+        <li><a href="#32-大屏适配">3.2 大屏适配</a></li>
+        <li><a href="#33-css布局">3.3 CSS布局</a></li>
+        <li><a href="#34-特效制作">3.4 特效制作</a>
+          <ul>
+            <li><a href="#1-边框制作">1 边框制作</a></li>
+            <li><a href="#2-霓虹字体">2 霓虹字体</a></li>
+            <li><a href="#3-表格滚动特效">3 表格滚动特效</a></li>
+          </ul>
+        </li>
+        <li><a href="#35-echarts图表的制作">3.5 ECharts图表的制作</a></li>
+        <li><a href="#36-实时更新数据">3.6 实时更新数据</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-背景和意义">1 背景和意义</h1>
+<p>数据可视化即把相对复杂、抽象的数据通过可视化的方式以人们更易理解的形式展示出来的一系列手段，旨在更形象地表达数据内在的信息和规律，促进数据信息的传播和应用。在当前Web前端可视化技术的支持下，数据可视化除了“可视”，还有可交流、可互动的特点。数据可视化的本质是数据空间到图形空间的映射。是抽象数据的具象表达。</p>
+<p>大屏数据可视化是以大屏为主要展示载体的数据可视化设计。基于大屏展示“大面积、炫酷动效、丰富色彩”等主要特征，通过关键信息大屏共享的方式可方便企业团队讨论与决策，因此大屏也常应用与数据分析监测领域。目前大屏数据可视化主要分为信息展示、数据分析及监控预警三大类。</p>
+<p>随着大数据的发展，可视化大屏在各个行业的应用越来越广泛，尤其是在政府、商业、金融、制造等行业的业务场景中。例如，可视化大屏作为传递信息的有效手段，在城市智能运营中心、应急指挥中心、公安监控中心、电力调度中心、金融交易大厅等部门和机构中发挥着重要作用；同时它具有日常监测、分析判断、应急指挥、展示汇报等多种功能，在提高科学管理方面也发挥着重要作用。</p>
+<h1 id="2-技术原理">2 技术原理</h1>
+<p>数据可视化展示大屏主要基于<code>React</code>框架、<code>ECharts</code>可视化图表库、<code>CSS</code>布局与适配以及特效制作等Web前端可视化开发技术。</p>
+<h2 id="21-react框架">2.1 React框架</h2>
+<p><code>React</code>是一个声明式，高效且灵活的用于构建用户界面的JavaScript库。使用React可以将一些简短、独立的代码片段组合成复杂的UI界面，这些代码片段被称作“组件”。数据可视化展示大屏中的每个展示模块均可封装为独立的组件，方便复用与后期维护。</p>
+<h2 id="22-大屏适配公式">2.2 大屏适配公式</h2>
+<p>可视化大屏设计稿的比例通常为16:9，为了保证其在不同分辨率及屏幕比例上的展示效果，在开发时需运用大屏适配算法对大屏尺寸信息进行换算。</p>
+<p><img src="/bigscreen/ksh1.png" alt="img"></p>
+<p><code>公式1.1</code>为大屏尺寸适配公式，其中<code>Wp</code>为页面有效宽度，<code>Hp</code>为页面有效高度。</p>
+<h2 id="23-元素适配公式">2.3 元素适配公式</h2>
+<p>锁定好大屏尺寸后，需要利用到<code>CSS3</code>中新增的rem单位结合适配公式，对大屏内部各元素的尺寸针对不同比例的屏幕进行适配。</p>
+<p><code>Rem</code>（Root em）是<code>CSS3</code>新增的一个相对单位，使用<code>rem</code>为元素设定相对尺寸时，相对的只是HTML根元素。通过它既可以做到只修改根元素就成比例地调整所有字体大小，又可以避免字体大小逐层复合的连锁反应。<code>公式1.2</code>为内部元素尺寸适配公式。</p>
+<p><img src="/bigscreen/ksh2.png" alt="img"></p>
+<h2 id="24-echarts可视化图表库">2.4 ECharts可视化图表库</h2>
+<p><code>ECharts</code>是一个使用JavaScript实现的开源可视化库，涵盖各行业图表，满足各种需求。其主要特点如下：</p>
+<ol>
+<li>丰富的可视化类型：提供了常规的折线图、柱状图、散点图、饼图、K线图，用于统计的盒形图，用于地理数据可视化的地图、热力图、线图，用于关系数据可视化的关系图、treemap、旭日图，多维数据可视化的平行坐标，还有用于BI的漏斗图，仪表盘，并且支持图与图之间的混搭。</li>
+<li>多种数据格式无需转换直接使用：内置的dataset属性（4.0+）支持直接传入包括二维表，key-value等多种格式的数据源，此外还支持输入TypedArray格式的数据。</li>
+<li>千万数据的前端展现：通过增量渲染技术（4.0+），配合各种细致的优化，ECharts能够展现千万级的数据量。</li>
+<li>移动端优化：针对移动端交互做了细致的优化，例如移动端小屏上适于用手指在坐标系中进行缩放、平移。PC端也可以用鼠标在图中进行缩放（用鼠标滚轮）、平移等。</li>
+<li>多渲染方案，跨平台使用：支持以Canvas、SVG（4.0+）、VML的形式渲染图表。</li>
+<li>深度的交互式数据探索：提供了图例、视觉映射、数据区域缩放、tooltip、数据刷选等开箱即用的交互组件，可以对数据进行多维度数据筛取、视图缩放、展示细节等交互操作。</li>
+<li>多维数据的支持以及丰富的视觉编码手段：对于传统的散点图等，传入的数据也可以是多个维度的。</li>
+<li>动态数据：数据的改变驱动图表展现的改变。</li>
+<li>绚丽的特效：针对线数据，点数据等地理数据的可视化提供了吸引眼球的特效。</li>
+<li>通过GL实现更多更强大绚丽的三维可视化：在VR，大屏场景里实现三维的可视化效果。</li>
+</ol>
+<h1 id="3-技术实现方案">3 技术实现方案</h1>
+<h2 id="31-大屏设计流程">3.1 大屏设计流程</h2>
+<ol>
+<li>
+<p>根据业务场景抽取关键指标</p>
+<p>关键指标是一些概括性词语，是对一组或者一系列数据的统称。一般情况下，一个指标在大屏上独占一块区域。以supAPS为例，这里的关键指标有：原料库存、计划实际对比、产品库存与库存成本等。确定关键指标后，根据业务需求拟定各个指标展示的优先级（主、次、辅）。</p>
+</li>
+<li>
+<p>选定可视化图表类型</p>
+<p>同一个指标的数据，从不同维度分析就有不同结果。当确定好各项指标的分析维度后，事实上图表类型也就基本确定了。如库存成本选用柱状图的形式，装置加工选用表格的形式，计划实际对比选择折线图的形式等。</p>
+</li>
+<li>
+<p>页面布局</p>
+<p>图表类型和屏幕尺寸确立后，接下来要对设计稿进行页面布局的划分。核心业务指标安排在中间位置、占较大面积；其余的指标按优先级依次在核心指标周围展开。一般把有关联的指标让其相邻或靠近，把图表类型相近的指标放一起，这样能减少观者认知上的负担并提高信息传递的效率。</p>
+</li>
+<li>
+<p>页面开发</p>
+<p>在定义好分析指标、确定页面布局后，进行前端样式的开发工作，将数据接入到前端并呈现出来。</p>
+</li>
+<li>
+<p>整体细节调优与测试</p>
+</li>
+<li>
+<p>页面开发完成后，将真实页面投放到大屏进行的测试与优化。主要分为两部分：</p>
+<p>1）视觉方面的测试：关键视觉元素、字体字号、页面动效、图形图表等是否按预期显示、有无变形、错位等情况。</p>
+<p>2）性能与数据方面的测试：图形图表动画是否流畅、数据加载、刷新有无异常；页面长时间展示是否存在奔溃、卡死等情况；后台控制系统能否正常切换前端页面显示。</p>
+</li>
+</ol>
+<h2 id="32-大屏适配">3.2 大屏适配</h2>
+<p>基于大屏适配公式，计算页面尺寸。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">clientWidth</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span>
+<span class="kr">const</span> <span class="nx">clientHeight</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientHeight</span>
+	<span class="nb">window</span><span class="p">.</span><span class="nx">pageWidth</span> <span class="o">=</span>
+		<span class="nx">clientWidth</span> <span class="o">/</span> <span class="nx">clientHeight</span> <span class="o">&gt;</span> <span class="mi">16</span> <span class="o">/</span> <span class="mi">9</span>
+		 <span class="o">?</span> <span class="nx">clientHeight</span> <span class="o">*</span> <span class="p">(</span><span class="mi">16</span> <span class="o">/</span> <span class="mi">9</span><span class="p">)</span>
+ <span class="o">:</span> <span class="nx">clientWidth</span>
+<span class="kr">const</span> <span class="nx">pageHeight</span> <span class="o">=</span> <span class="nx">pageWidth</span> <span class="o">/</span> <span class="p">(</span><span class="mi">16</span> <span class="o">/</span> <span class="mi">9</span><span class="p">)</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="sb">`&lt;style&gt;html{font-size:</span><span class="si">${</span><span class="nx">pageWidth</span> <span class="o">/</span> <span class="mi">100</span><span class="si">}</span><span class="sb">px&lt;/style&gt;`</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在通用<code>SCSS</code>文件中定义实际尺寸<code>rem</code>与设计稿<code>px</code>单位之间的换算关系函数，默认选用分辨率为1920*1080。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">@function px($n) {@return $n / 1920 * 100rem;}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="33-css布局">3.3 CSS布局</h2>
+<p>对于内部展示区块，采用<code>CSS3</code>的<code>Grid</code>布局方式。<code>Grid</code> 布局是将容器划分成&quot;行&quot;和&quot;列&quot;，产生单元格，然后指定&quot;项目所在&quot;的单元格，可以看作是二维布局。利用<code>grid-template-areas</code>属性定义区域，通过<code>fr</code>关键字确定区块间的比例关系。</p>
+<p><img src="/bigscreen/ksh3.jpg" alt="img"></p>
+<h2 id="34-特效制作">3.4 特效制作</h2>
+<h3 id="1-边框制作">1 边框制作</h3>
+<p>利用css中<code>box-shadow</code>可以无限叠加的机制，在原来边框的基础上，四角分别叠加两层不同颜色的边框阴影，实现边框效果的制作。</p>
+<p><img src="/bigscreen/ksh4.jpg" alt="img"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="nt">box-shadow</span><span class="o">:</span> 
+<span class="nt">20px</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">-18px</span> <span class="p">#</span><span class="nn">133661</span><span class="o">,</span> <span class="nt">-20px</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">-18px</span> <span class="p">#</span><span class="nn">0e325f</span><span class="o">,</span>
+<span class="nt">0</span> <span class="nt">20px</span> <span class="nt">0</span> <span class="nt">-18px</span> <span class="p">#</span><span class="nn">0e325f</span><span class="o">,</span> <span class="nt">0</span> <span class="nt">-20px</span> <span class="nt">0</span> <span class="nt">-18px</span> <span class="p">#</span><span class="nn">0e325f</span><span class="o">,</span> 
+<span class="nt">10px</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">-8px</span> <span class="p">#</span><span class="nn">164b88</span><span class="o">,</span><span class="nt">-10px</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">-8px</span> <span class="p">#</span><span class="nn">0d4483</span><span class="o">,</span>
+ <span class="nt">0</span> <span class="nt">10px</span> <span class="nt">0</span> <span class="nt">-8px</span> <span class="p">#</span><span class="nn">0d4483</span><span class="o">,</span> <span class="nt">0</span> <span class="nt">-10px</span> <span class="nt">0</span> <span class="nt">-8px</span> <span class="p">#</span><span class="nn">0d4483</span><span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2-霓虹字体">2 霓虹字体</h3>
+<p>通过<code>@keyframes</code>编写文本阴影动画，实现标题文本的霓虹闪烁的特效。</p>
+<p><img src="/bigscreen/ksh5.jpg" alt="img"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="p">@</span><span class="k">keyframes</span> <span class="nt">shining</span> <span class="p">{</span>
+	<span class="nt">from</span> <span class="p">{</span>
+        <span class="k">text-shadow</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">6</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">182</span><span class="p">,</span> <span class="mi">211</span><span class="p">,</span> <span class="mi">207</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span>
+        <span class="mi">0</span> <span class="mi">0</span> <span class="mi">30</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">182</span><span class="p">,</span> <span class="mi">211</span><span class="p">,</span> <span class="mi">207</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">12</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+        <span class="mi">0</span> <span class="mi">0</span> <span class="mi">21</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">34</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span>
+        <span class="mi">0</span> <span class="mi">0</span> <span class="mi">54</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">);</span>
+ 	 <span class="p">}</span>
+ 	 <span class="nt">to</span> <span class="p">{</span>
+         <span class="k">text-shadow</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">16</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">182</span><span class="p">,</span> <span class="mi">211</span><span class="p">,</span> <span class="mi">207</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+         <span class="mi">0</span> <span class="mi">0</span> <span class="mi">30</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">182</span><span class="p">,</span> <span class="mi">211</span><span class="p">,</span> <span class="mi">207</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">),</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">22</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">),</span>
+         <span class="mi">0</span> <span class="mi">0</span> <span class="mi">32</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">48</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span>
+         <span class="mi">0</span> <span class="mi">0</span> <span class="mi">70</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+ 	 <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="3-表格滚动特效">3 表格滚动特效</h3>
+<p>大屏展示中的表格数据显示范围有限，因此需要使表格自动滚动来动态展示表格数据。根据表格滚动条与顶端距离，即判断<code>scrollHeight</code>与<code>scrollTop</code>的大小关系，通过设置定时器的方式不断增加<code>scrollTop</code>的值，从而实现表格数据自动滚动的效果。</p>
+<h2 id="35-echarts图表的制作">3.5 ECharts图表的制作</h2>
+<p>引入<code>ECharts</code>库后，通过<code>echarts.init</code>方法初始化<code>ECharts实例</code>并通过<code>setOption</code>方法生成图表。参考官网的option示例配置，根据需求调整坐标轴与系列图形样式的属性参数即可。</p>
+<p>将图表本身与其所处区块元素视为一个整体的组件进行开发，提高复用性，方便后期维护。组件采用React函数组件形式，结合<code>useRef</code>、<code>useEffect</code>等<code>hooks</code>函数，实现图表的初始化与参数配置。</p>
+<p><img src="/bigscreen/khs6.jpg" alt="img"></p>
+<h2 id="36-实时更新数据">3.6 实时更新数据</h2>
+<p>实时更新数据由于没有实际后端数据，因此使用定时器与随机数的方式模拟实时数据的更新。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">setInterval</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="kr">const</span> <span class="nx">newData</span> <span class="o">=</span> <span class="p">[</span>
+		<span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;甲&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">10</span> <span class="p">},</span>
+		<span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;乙&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">10</span> <span class="p">},</span>
+		<span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;丙&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">10</span> <span class="p">},</span>
+   	<span class="p">]</span>
+    <span class="nx">renderMyChart</span><span class="p">(</span><span class="nx">newData</span><span class="p">)</span>
+<span class="p">},</span> <span class="mi">1000</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/bigscreen/ksh7.jpg" alt="img" style="zoom:150%;" /></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-05-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/">可视化</a>
+          <a href="/tags/echarts/">echarts</a>
+          <a href="/tags/react/">React</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E6%96%B9%E6%96%B9%E7%9A%84hooks/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">React Hooks全解</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/react%E5%9F%BA%E7%A1%80/">
+            <span class="next-text nav-default">React基础</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

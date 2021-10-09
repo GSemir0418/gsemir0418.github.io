@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>React组件生命周期 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 生命周期的理解 1.1 引出生命周期 需求： 让指定的文本做显示* */* 隐藏的渐变动画 从完全可见，到彻底消失，耗时2S 点击“不活了”按钮从界面中卸载组件 源" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="React组件生命周期" />
+<meta property="og:description" content="1 生命周期的理解 1.1 引出生命周期 需求： 让指定的文本做显示* */* 隐藏的渐变动画 从完全可见，到彻底消失，耗时2S 点击“不活了”按钮从界面中卸载组件 源" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-25T11:09:51+08:00" />
+<meta property="article:modified_time" content="2021-06-25T00:00:00+08:00" />
+
+<meta itemprop="name" content="React组件生命周期">
+<meta itemprop="description" content="1 生命周期的理解 1.1 引出生命周期 需求： 让指定的文本做显示* */* 隐藏的渐变动画 从完全可见，到彻底消失，耗时2S 点击“不活了”按钮从界面中卸载组件 源"><meta itemprop="datePublished" content="2021-06-25T11:09:51+08:00" />
+<meta itemprop="dateModified" content="2021-06-25T00:00:00+08:00" />
+<meta itemprop="wordCount" content="2772">
+<meta itemprop="keywords" content="前端,React基础,React," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="React组件生命周期"/>
+<meta name="twitter:description" content="1 生命周期的理解 1.1 引出生命周期 需求： 让指定的文本做显示* */* 隐藏的渐变动画 从完全可见，到彻底消失，耗时2S 点击“不活了”按钮从界面中卸载组件 源"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">React组件生命周期</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-25 </span>
+        <div class="post-category">
+            <a href="/categories/b%E7%AB%99react%E7%AC%94%E8%AE%B0/"> B站React笔记 </a>
+            </div>
+          <span class="more-meta"> 2772 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-生命周期的理解">1 生命周期的理解</a>
+      <ul>
+        <li><a href="#11-引出生命周期">1.1 引出生命周期</a></li>
+        <li><a href="#12-生命周期的理解">1.2 生命周期的理解</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-react生命周期旧">2 React生命周期（旧）</a>
+      <ul>
+        <li><a href="#21-react生命周期图旧">2.1 React生命周期图（旧）</a></li>
+        <li><a href="#22-总结生命周期旧">2.2 总结生命周期（旧）</a></li>
+        <li><a href="#23-react生命周期图新">2.3 React生命周期图（新）</a></li>
+        <li><a href="#24-总结生命周期新">2.4 总结生命周期（新）</a></li>
+        <li><a href="#25-新旧生命周期对比">2.5 新旧生命周期对比</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-生命周期的理解">1 生命周期的理解</h1>
+<h2 id="11-引出生命周期">1.1 引出生命周期</h2>
+<blockquote>
+<p>需求：</p>
+<ol>
+<li>让指定的文本做显示* */* 隐藏的渐变动画</li>
+<li>从完全可见，到彻底消失，耗时2S</li>
+<li>点击“不活了”按钮从界面中卸载组件</li>
+</ol>
+</blockquote>
+<p>源码及笔记如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js">    <span class="kr">class</span> <span class="nx">Life</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+        <span class="c1">//只要页面发生更新，则说明是状态在驱动
+</span><span class="c1"></span>        <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">opacity</span><span class="o">:</span> <span class="mf">0.5</span>
+        <span class="p">}</span>
+
+        <span class="nx">death</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">unmountComponentAtNode</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">))</span>
+        <span class="p">}</span>
+
+        <span class="c1">//和render一样 是由React帮忙调用的 因此不用写成箭头函数的形式
+</span><span class="c1"></span>        <span class="c1">//执行时机：组件挂载到页面后
+</span><span class="c1"></span>        <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">//起个名字 挂到实例自身 方便清除时用
+</span><span class="c1"></span>            <span class="k">this</span><span class="p">.</span><span class="nx">timer</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="c1">//获取状态值
+</span><span class="c1"></span>                <span class="kd">let</span> <span class="nx">opacity</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">opacity</span>
+                <span class="c1">//每次-0.1
+</span><span class="c1"></span>                <span class="nx">opacity</span> <span class="o">-=</span> <span class="mf">0.1</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">opacity</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="nx">opacity</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="c1">//设置新的透明度
+</span><span class="c1"></span>                <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">opacity</span> <span class="p">})</span>
+            <span class="p">},</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="c1">//执行时机：组件将要被卸载
+</span><span class="c1"></span>        <span class="nx">componentWillUnmount</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">clearInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">timer</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="c1">//执行时机：初始化渲染、状态更新后
+</span><span class="c1"></span>        <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">//如果将定时器函数放到render中，那么由于定时器中更新了state值，render函数就会不断被调用
+</span><span class="c1"></span>            <span class="c1">//从而形成无限递归
+</span><span class="c1"></span>            <span class="c1">// setInterval(() =&gt; {
+</span><span class="c1"></span>            <span class="c1">//     //获取状态值
+</span><span class="c1"></span>            <span class="c1">//     let opacity = this.state.opacity
+</span><span class="c1"></span>            <span class="c1">//     //每次-0.1
+</span><span class="c1"></span>            <span class="c1">//     opacity -= 0.1
+</span><span class="c1"></span>            <span class="c1">//     if (opacity &lt;= 0) opacity = 1
+</span><span class="c1"></span>            <span class="c1">//     //设置新的透明度
+</span><span class="c1"></span>            <span class="c1">//     this.setState({ opacity })
+</span><span class="c1"></span>            <span class="c1">// }, 200)
+</span><span class="c1"></span>            <span class="k">return</span> <span class="p">(</span>
+                <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">h2</span> <span class="nx">style</span><span class="o">=</span><span class="p">{{</span> <span class="nx">opacity</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">opacity</span> <span class="p">}}</span><span class="o">&gt;</span><span class="nx">React学不会怎么办</span><span class="o">&lt;</span><span class="err">/h2&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">death</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">不活了</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+                <span class="o">&lt;</span><span class="err">/div&gt;</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Life</span> <span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="12-生命周期的理解">1.2 生命周期的理解</h2>
+<p><strong>合适的时间节点做合适的事</strong></p>
+<ol>
+<li>组件从创建到死亡它会经历一些特定的阶段。</li>
+<li>React 组件中包含一系列勾子函数(生命周期回调函数), 会在特定的时刻调用。</li>
+<li>我们在定义组件时，会在特定的生命周期回调函数中，做特定的工作。</li>
+</ol>
+<hr>
+<h1 id="2-react生命周期旧">2 React生命周期（旧）</h1>
+<h2 id="21-react生命周期图旧">2.1 React生命周期图（旧）</h2>
+<p><img src="/reactlife/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%97%A7).png" alt="react生命周期(旧)"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js">	<span class="kr">class</span> <span class="nx">Count</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+        <span class="c1">//构造器
+</span><span class="c1"></span>        <span class="nx">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kr">super</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---constructor&#39;</span><span class="p">);</span>
+            <span class="c1">//初始化状态
+</span><span class="c1"></span>            <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">count</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="c1">//组件将要挂载的钩子
+</span><span class="c1"></span>        <span class="nx">componentWillMount</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---componentWillMount&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">//组件是否更新的钩子 相当于&#34;阀门&#34;
+</span><span class="c1"></span>        <span class="nx">shouldComponentUpdate</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---shouldComponentUpdate&#39;</span><span class="p">);</span>
+            <span class="k">return</span> <span class="kc">true</span>
+        <span class="p">}</span>
+
+        <span class="c1">//组件将要更新的钩子
+</span><span class="c1"></span>        <span class="nx">componentWillUpdate</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---componentWillUpdate&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// 加一事件的回调
+</span><span class="c1"></span>        <span class="nx">add</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="kr">const</span> <span class="p">{</span> <span class="nx">count</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">count</span><span class="o">:</span> <span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">})</span>
+        <span class="p">}</span>
+
+        <span class="c1">//强制更新组件的回调
+</span><span class="c1"></span>        <span class="nx">force</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">forceUpdate</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="c1">//组件更新完毕的钩子
+</span><span class="c1"></span>        <span class="nx">componentDidUpdate</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---componentDidUpdate&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---render&#39;</span><span class="p">);</span>
+            <span class="kr">const</span> <span class="p">{</span> <span class="nx">count</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">当前求和为</span><span class="err">：</span><span class="p">{</span><span class="nx">count</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/h2&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">add</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">点我</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">death</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">卸载组件</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">force</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">不更新状态</span><span class="err">，</span><span class="nx">只是强制更新一下组件</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+                <span class="o">&lt;</span><span class="err">/div&gt;</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="c1">//组件挂载完毕的钩子
+</span><span class="c1"></span>        <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---componentDidMount&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">//组件将要卸载的钩子
+</span><span class="c1"></span>        <span class="nx">componentWillUnmount</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---conponentWillUnmount&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nx">death</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">unmountComponentAtNode</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">))</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">//父组件A
+</span><span class="c1"></span>    <span class="kr">class</span> <span class="nx">A</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+        <span class="c1">//初始化状态
+</span><span class="c1"></span>        <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">carName</span><span class="o">:</span> <span class="s1">&#39;奔驰&#39;</span>
+        <span class="p">}</span>
+
+        <span class="nx">changeCar</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">carName</span><span class="o">:</span> <span class="s1">&#39;奥迪&#39;</span> <span class="p">})</span>
+        <span class="p">}</span>
+
+        <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">我是A组件</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">changeCar</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">点我切换汽车信息</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">B</span> <span class="nx">carName</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">carName</span><span class="p">}</span> <span class="o">/&gt;</span>
+                <span class="o">&lt;</span><span class="err">/div&gt;</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">//子组件B
+</span><span class="c1"></span>    <span class="kr">class</span> <span class="nx">B</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+
+        <span class="c1">//第一次打开界面 发现其未运行 点击按钮后才会运行此钩子
+</span><span class="c1"></span>        <span class="c1">//改名为componentWillReceiveNewProps更为准确
+</span><span class="c1"></span>        <span class="c1">//组件将要接收新的props的钩子
+</span><span class="c1"></span>        <span class="nx">componentWillReceiveProps</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;B---componentWillReceiveProps&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">//控制组件更新的阀门
+</span><span class="c1"></span>        <span class="nx">shouldComponentUpdate</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;B---shouldComponentUpdate&#39;</span><span class="p">);</span>
+            <span class="c1">//只要写了此钩子 必须return一个布尔值
+</span><span class="c1"></span>            <span class="k">return</span> <span class="kc">true</span>
+        <span class="p">}</span>
+
+        <span class="c1">//组件将要更新的钩子
+</span><span class="c1"></span>        <span class="nx">componentWillUpdate</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;B---componentWillUpdate&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">//组件更新完毕的钩子
+</span><span class="c1"></span>        <span class="nx">componentDidUpdate</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;B---componentDidUpdate&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;B---render&#39;</span><span class="p">);</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">我是B组件</span><span class="err">，</span><span class="nx">接受到的汽车是</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">carName</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Count</span> <span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="22-总结生命周期旧">2.2 总结生命周期（旧）</h2>
+<p>生命周期的三个阶段（旧）:</p>
+<ol>
+<li>初始化阶段: 由 ReactDOM.render()触发&mdash;初次渲染</li>
+</ol>
+<p>​    	1. constructor()</p>
+<pre><code> 2. componentWillMount() 
+   
+ 3. render()
+   
+ 4. **componentDidMount**()
+</code></pre>
+<p>​        		一般在此钩子中做一些初始化的事：开启定时器，发送网络请求、订阅消息</p>
+<ol start="2">
+<li>
+<p>更新阶段: 由组件内部 this.setSate()或父组件重新 render 触发</p>
+<p>​	1. shouldComponentUpdate()</p>
+<p>​    2. componentWillUpdate()</p>
+<pre><code> 3. **render**()
+</code></pre>
+</li>
+</ol>
+<p>​    		4. componentDidUpdate()</p>
+<ol start="3">
+<li>
+<p>卸载组件: 由 ReactDOM.unmountComponentAtNode()触发</p>
+<p>​    1. <strong>componentWillUnmount</strong>()</p>
+<p>​        	一般做一些收尾的事：关闭定时器、取消订阅消息</p>
+</li>
+</ol>
+<h2 id="23-react生命周期图新">2.3 React生命周期图（新）</h2>
+<p><img src="/reactlife/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E6%96%B0).png" alt="react生命周期(新)"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js">	<span class="kr">class</span> <span class="nx">Count</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+        <span class="c1">//构造器
+</span><span class="c1"></span>        <span class="nx">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kr">super</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---constructor&#39;</span><span class="p">);</span>
+            <span class="c1">//初始化状态
+</span><span class="c1"></span>            <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">count</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="c1">//通过props获取派生状态对象
+</span><span class="c1"></span>        <span class="kr">static</span> <span class="nx">getDerivedStateFromProps</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---getDerivedStateFromProps&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="p">,</span> <span class="nx">state</span><span class="p">);</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="c1">//必须有返回值，返回值可以是null也可以是state对象
+</span><span class="c1"></span>            <span class="c1">//return {count:2}//会覆盖初始化的state，且影响更新过程，setState方法失效（因为横跨挂载和更新过程）
+</span><span class="c1"></span>            <span class="c1">//return props //可以接收props作为参数并返回 使得state值在任何时候都取决于props
+</span><span class="c1"></span>        <span class="p">}</span>
+
+        <span class="c1">//在更新之前获取快照
+</span><span class="c1"></span>        <span class="nx">getSnapshotBeforeUpdate</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---getSnapshotBeforeUpdate&#39;</span><span class="p">);</span>
+            <span class="k">return</span> <span class="s1">&#39;atguigu&#39;</span><span class="c1">//返回null或者snapshot值（任何值）
+</span><span class="c1"></span>        <span class="p">}</span>
+
+        <span class="c1">//组件是否更新的钩子 相当于&#34;阀门&#34;
+</span><span class="c1"></span>        <span class="nx">shouldComponentUpdate</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---shouldComponentUpdate&#39;</span><span class="p">);</span>
+            <span class="k">return</span> <span class="kc">true</span>
+        <span class="p">}</span>
+
+        <span class="c1">// 加一事件的回调
+</span><span class="c1"></span>        <span class="nx">add</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="kr">const</span> <span class="p">{</span> <span class="nx">count</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">count</span><span class="o">:</span> <span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">})</span>
+        <span class="p">}</span>
+
+        <span class="c1">//强制更新组件的回调
+</span><span class="c1"></span>        <span class="nx">force</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">forceUpdate</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="c1">//组件更新完毕的钩子
+</span><span class="c1"></span>        <span class="c1">//默认接收两个参数，分别是prevProps，prevState和snapshot值（例如滚轮位置）
+</span><span class="c1"></span>        <span class="nx">componentDidUpdate</span><span class="p">(</span><span class="nx">prevProps</span><span class="p">,</span> <span class="nx">prevState</span><span class="p">,</span> <span class="nx">snapshot</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---componentDidUpdate&#39;</span><span class="p">,</span> <span class="nx">prevProps</span><span class="p">,</span> <span class="nx">prevState</span><span class="p">,</span> <span class="nx">snapshot</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---render&#39;</span><span class="p">);</span>
+            <span class="kr">const</span> <span class="p">{</span> <span class="nx">count</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">当前求和为</span><span class="err">：</span><span class="p">{</span><span class="nx">count</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/h2&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">add</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">点我</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">death</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">卸载组件</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">force</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">不更新状态</span><span class="err">，</span><span class="nx">只是强制更新一下组件</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+                <span class="o">&lt;</span><span class="err">/div&gt;</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="c1">//组件挂载完毕的钩子
+</span><span class="c1"></span>        <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---componentDidMount&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">//组件将要卸载的钩子
+</span><span class="c1"></span>        <span class="nx">componentWillUnmount</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Count---conponentWillUnmount&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nx">death</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">unmountComponentAtNode</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">))</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Count</span> <span class="nx">count</span><span class="o">=</span><span class="p">{</span><span class="mi">199</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="24-总结生命周期新">2.4 总结生命周期（新）</h2>
+<p>生命周期的三个阶段（新）</p>
+<p>1.初始化阶段: 由 ReactDOM.render()触发&mdash;初次渲染</p>
+<pre><code>  1. constructor() 
+  
+ 2. **getDerivedStateFromProps**() 
+  
+ 3. render() 
+</code></pre>
+<p>​		4. <strong>componentDidMount</strong>() 即将出生的那一刻</p>
+<p>2.更新阶段: 由组件内部 this.setSate()或父组件重新 render 触发</p>
+<p>​    	1. getDerivedStateFromProps ()</p>
+<p>​    	2. shouldComponentUpdate()</p>
+<pre><code> 3. **render**() 
+</code></pre>
+<p>​    	4. <strong>getSnapshotBeforeUpdate</strong>()</p>
+<p>​    	5. componentDidUpdate()</p>
+<ol start="3">
+<li>
+<p>卸载组件: 由 ReactDOM.unmountComponentAtNode()触发</p>
+<pre><code>1. **componentWillUnmount**() 即将离去的那一刻
+</code></pre>
+</li>
+</ol>
+<h2 id="25-新旧生命周期对比">2.5 新旧生命周期对比</h2>
+<p>即将在18版本废除三个钩子（willmount，willupdate，willreceiveprops）</p>
+<p>新增了两个钩子（getDerivedStateFromProps，getSnapshotBeforeUpdate）</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-06-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="/tags/react%E5%9F%BA%E7%A1%80/">React基础</a>
+          <a href="/tags/react/">React</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Node文件模块</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E6%96%B9%E6%96%B9%E7%9A%84hooks/">
+            <span class="next-text nav-default">React Hooks全解</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

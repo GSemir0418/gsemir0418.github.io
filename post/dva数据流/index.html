@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Dva数据流 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 初识Dva 1.1 定义 dva 首先是一个基于redux和redux-saga的数据流方案，然后为了简化开发体验，dva 还额外内置了react-rout" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/dva%E6%95%B0%E6%8D%AE%E6%B5%81/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Dva数据流" />
+<meta property="og:description" content="1 初识Dva 1.1 定义 dva 首先是一个基于redux和redux-saga的数据流方案，然后为了简化开发体验，dva 还额外内置了react-rout" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/dva%E6%95%B0%E6%8D%AE%E6%B5%81/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-15T16:12:05+08:00" />
+<meta property="article:modified_time" content="2021-09-15T00:00:00+08:00" />
+
+<meta itemprop="name" content="Dva数据流">
+<meta itemprop="description" content="1 初识Dva 1.1 定义 dva 首先是一个基于redux和redux-saga的数据流方案，然后为了简化开发体验，dva 还额外内置了react-rout"><meta itemprop="datePublished" content="2021-09-15T16:12:05+08:00" />
+<meta itemprop="dateModified" content="2021-09-15T00:00:00+08:00" />
+<meta itemprop="wordCount" content="2807">
+<meta itemprop="keywords" content="前端,React,umi,dva," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Dva数据流"/>
+<meta name="twitter:description" content="1 初识Dva 1.1 定义 dva 首先是一个基于redux和redux-saga的数据流方案，然后为了简化开发体验，dva 还额外内置了react-rout"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Dva数据流</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-09-15 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93/"> 项目实战总结 </a>
+            </div>
+          <span class="more-meta"> 2807 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-初识dva">1 初识Dva</a>
+      <ul>
+        <li><a href="#11-定义">1.1 定义</a></li>
+        <li><a href="#12-dva数据流概念">1.2 Dva数据流概念</a></li>
+        <li><a href="#13-model层重要api">1.3 model层重要API</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-示例">3 示例</a>
+      <ul>
+        <li><a href="#文件目录">文件目录</a></li>
+        <li><a href="#userapijs">userApi.js</a></li>
+        <li><a href="#indexjsx">Index.jsx</a></li>
+        <li><a href="#usermodeljs">userModel.js</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-初识dva">1 初识Dva</h1>
+<h2 id="11-定义">1.1 定义</h2>
+<p>dva 首先是一个基于<code>redux</code>和<code>redux-saga</code>的<strong>数据流方案</strong>，然后为了简化开发体验，dva 还额外内置了<code>react-router</code>和<code>fetch</code>，所以也可以理解为一个轻量级的应用框架。</p>
+<h2 id="12-dva数据流概念">1.2 Dva数据流概念</h2>
+<p>数据的改变发生通常是通过用户交互行为或者浏览器行为（如路由跳转等）触发的，当此类行为会改变数据的时候可以通过 <code>dispatch</code> 发起一个 action，如果是同步行为会直接通过 <code>Reducers</code> 改变 <code>State</code> ，如果是异步行为（副作用）会先触发 <code>Effects</code> 然后流向 <code>Reducers</code> 最终改变 <code>State</code>，所以在 dva 中，数据流向非常清晰简明。</p>
+<p><img src="/dva/Dva.png" alt="img"></p>
+<h2 id="13-model层重要api">1.3 model层重要API</h2>
+<ol>
+<li>namespace</li>
+</ol>
+<p>model 的命名空间，同时也是他在全局 state 上的属性，只能用字符串，不支持通过 <code>.</code> 的方式创建多层命名空间。</p>
+<ol start="2">
+<li>state</li>
+</ol>
+<p>状态初始值</p>
+<ol start="3">
+<li>reducers</li>
+</ol>
+<p>以 key/value 格式定义 reducer。用于处理同步操作，唯一可以修改 <code>state</code> 的地方。由 <code>action</code> 触发。格式为 <code>(state, action) =&gt; newState</code> 或 <code>[(state, action) =&gt; newState, enhancer]</code>。</p>
+<ol start="4">
+<li>effects</li>
+</ol>
+<p>以 key/value 格式定义 effect。用于处理异步操作和业务逻辑，不直接修改 <code>state</code>。由 <code>action</code> 触发，可以触发 <code>action</code>，可以和服务器交互，可以获取全局 <code>state</code> 的数据等等。</p>
+<p>格式为 <code>*(action, effects) =&gt; void</code> 或 <code>[*(action, effects) =&gt; void, { type }]</code>。</p>
+<ol start="5">
+<li>subscriptions</li>
+</ol>
+<p>以 key/value 格式定义 subscription。subscription 是订阅，用于订阅一个数据源，然后根据需要 dispatch 相应的 action。在 <code>app.start()</code> 时被执行，数据源可以是当前的时间、服务器的 websocket 连接、keyboard 输入、geolocation 变化、history 路由变化等等。</p>
+<p>格式为 <code>({ dispatch, history }, done) =&gt; unlistenFunction</code>。</p>
+<ol start="6">
+<li>Action</li>
+</ol>
+<p>Action 是一个普通 javascript 对象，它是改变 State 的唯一途径。无论是从 UI 事件、网络回调，还是 WebSocket 等数据源所获得的数据，最终都会通过 dispatch 函数调用一个 action，从而改变对应的数据。action 必须带有 <code>type</code> 属性指明具体的行为，其它字段可以自定义，如果要发起一个 action 需要使用 <code>dispatch</code> 函数；需要注意的是 <code>dispatch</code> 是在组件 connect Models以后，通过 props 传入的。</p>
+<ol start="7">
+<li>dispatch函数</li>
+</ol>
+<p>dispatching function 是一个用于触发 action 的函数，action 是改变 State 的唯一途径，但是它只描述了一个行为，而 dipatch 可以看作是触发这个行为的方式，而 Reducer 则是描述如何改变数据的。</p>
+<p>在 dva 中，connect Model 的组件通过 props 可以访问到 dispatch，可以调用 Model 中的 Reducer 或者 Effects。</p>
+<h1 id="3-示例">3 示例</h1>
+<p>通过一个简单的表格数据获取与延时删除demo，熟悉dva数据流的概念、结构及主要API</p>
+<h2 id="文件目录">文件目录</h2>
+<blockquote>
+<ul>
+<li>src
+<ul>
+<li>model
+<ul>
+<li><strong>userModel.js</strong></li>
+</ul>
+</li>
+<li>service
+<ul>
+<li><strong>userApi.js</strong></li>
+</ul>
+</li>
+<li>page
+<ul>
+<li>UserPage
+<ul>
+<li><strong>index.jsx</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="userapijs">userApi.js</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 返回假数据
+</span><span class="c1"></span><span class="kr">export</span> <span class="kd">function</span> <span class="nx">getAllUsers</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">content</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">13</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Jack&#39;</span> <span class="p">},</span>
+      <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Sam&#39;</span> <span class="p">},</span>
+      <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">45</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Micheal&#39;</span> <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="indexjsx">Index.jsx</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">connect</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;dva&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Table</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;antd&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">UserManage</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 把下面mapStateToProps方法return的数据从props中取出
+</span><span class="c1"></span>  <span class="c1">// 经过connect后dispatch也会自动传入props
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="p">{</span> <span class="nx">users</span><span class="p">,</span> <span class="nx">dispatch</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">props</span><span class="p">;</span>
+
+  <span class="c1">// 获取数据的回调
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">getUsers</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// 执行dispatch方法，参数为action对象
+</span><span class="c1"></span>    <span class="nx">dispatch</span><span class="p">({</span>
+      <span class="c1">// action对象必须包括type属性，固定写法“命名空间/方法名”,
+</span><span class="c1"></span>      <span class="c1">// 可以理解为触发该命名空间中某个方法，给方法传递参数可以在后面写key:value形式，没有可以不写
+</span><span class="c1"></span>      <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;user/getAllUsers&#39;</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+  <span class="c1">// 删除数据的回调
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">deleteUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">dispatch</span><span class="p">({</span>
+      <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;user/deleteUser&#39;</span><span class="p">,</span>
+      <span class="c1">// 为model层中的deleteUser方法传入id
+</span><span class="c1"></span>      <span class="nx">id</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+  <span class="c1">// 延时删除数据的回调
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">delayRemoveUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">dispatch</span><span class="p">({</span>
+      <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;user/delayRemoveUser&#39;</span><span class="p">,</span>
+      <span class="nx">id</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+  <span class="c1">// 表格列配置
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;序号&#39;</span><span class="p">,</span> <span class="nx">dataIndex</span><span class="o">:</span> <span class="s1">&#39;id&#39;</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;名称&#39;</span><span class="p">,</span> <span class="nx">dataIndex</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span> <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;修改&#39;</span><span class="p">,</span>
+      <span class="nx">render</span><span class="o">:</span> <span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">record</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// 这里的回调要注意使用箭头函数
+</span><span class="c1"></span>        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="nx">deleteUser</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">id</span><span class="p">)}&gt;</span><span class="nx">删除</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;,</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="nx">delayRemoveUser</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">id</span><span class="p">)}&gt;</span><span class="mi">1</span><span class="nx">s后删除</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;,</span>
+      <span class="p">],</span>
+    <span class="p">},</span>
+  <span class="p">];</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;button&#34;</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">getUsers</span><span class="p">}&gt;</span>
+        <span class="nx">获取数据</span>
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Table</span> <span class="na">rowKey</span><span class="o">=</span><span class="s">&#34;id&#34;</span> <span class="na">dataSource</span><span class="o">=</span><span class="p">{</span><span class="nx">users</span><span class="p">}</span> <span class="na">columns</span><span class="o">=</span><span class="p">{</span><span class="nx">columns</span><span class="p">}</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// 将state映射为props
+</span><span class="c1">// 参数中的state表示全部model层的state
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">mapStateToProps</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 这里只用到user中的state，所以state.user把命名空间为user这个model层的state数据取出来
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="p">{</span> <span class="nx">users</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+  <span class="c1">// 这里return出去的数据，会变成此组件的props，在组件可以通过props.num取到。
+</span><span class="c1"></span>  <span class="c1">// props变化了，会重新触发render方法，界面也就更新了。
+</span><span class="c1"></span>  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">users</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// 使用connect连接组件和model层数据
+</span><span class="c1">// connect方法用来连接models层的state数据，参数常用的有2个，是第一个mapStateToProps，第二个mapDispatchToProps
+</span><span class="c1">// mapStateToProps按字面意思：把models层state数据变为组件的props
+</span><span class="c1">// mapDispatchToProps：用了此方法，dispatch只会在此方法里。不写该参数，dispatch会作为组件的props。(我平常用几乎不写该方法)
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="nx">connect</span><span class="p">(</span><span class="nx">mapStateToProps</span><span class="p">)(</span><span class="nx">UserManage</span><span class="p">);</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="usermodeljs">userModel.js</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="cm">/* eslint-disable comma-dangle */</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">message</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;antd&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">getAllUsers</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;../services/userApi&#39;</span><span class="p">;</span>
+
+<span class="c1">// 延时函数，返回promise对象
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">delay</span><span class="p">(</span><span class="nx">time</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">resolve</span><span class="p">();</span>
+    <span class="p">},</span> <span class="nx">time</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="c1">// 命名空间标识符
+</span><span class="c1"></span>  <span class="nx">namespace</span><span class="o">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span>
+  <span class="c1">// 全部state，可以定义一些默认值
+</span><span class="c1"></span>  <span class="nx">state</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">users</span><span class="o">:</span> <span class="p">[],</span>
+  <span class="p">},</span>
+  <span class="c1">// 同步处理数据的方法，唯一能够直接改变state的方法，只能用dispatch触发
+</span><span class="c1"></span>  <span class="c1">// 把新的state retrun出去，用到state数据的界面就会更新，官方推荐处理逻辑都放在effects中
+</span><span class="c1"></span>  <span class="nx">reducers</span><span class="o">:</span> <span class="p">{</span>
+    <span class="c1">// 方法接收2个参数，第一个是旧的state，第二个是action对象,没有可以不写或写_
+</span><span class="c1"></span>    <span class="nx">setUsers</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="p">{</span> <span class="nx">users</span> <span class="p">})</span> <span class="p">{</span>
+      <span class="c1">// 先把旧的state全部解构出来，然后把新的users覆盖原来的,从而实现state的更新
+</span><span class="c1"></span>      <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">state</span><span class="p">,</span> <span class="nx">users</span> <span class="p">};</span>
+    <span class="p">},</span>
+    <span class="nx">deleteUser</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">})</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">tem</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">users</span><span class="p">;</span>
+      <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">tem</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">i</span> <span class="p">=&gt;</span> <span class="nx">id</span> <span class="o">!==</span> <span class="nx">i</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+      <span class="nx">message</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="s1">&#39;删除成功！&#39;</span><span class="p">);</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">state</span><span class="p">,</span> <span class="nx">users</span><span class="o">:</span> <span class="nx">result</span> <span class="p">};</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="c1">// 异步数据处理的方法
+</span><span class="c1"></span>  <span class="c1">// 推荐数据逻辑处理也应该在此处理，处理完再给reducer
+</span><span class="c1"></span>  <span class="nx">effects</span><span class="o">:</span> <span class="p">{</span>
+    <span class="c1">// 方法接收两个参数，第一个是传过来的action对象(没有可以写 _ )，第二个基本是用其中call, put, select这3个参数(所有的去官网看)
+</span><span class="c1"></span>    <span class="c1">// call: 用来与后台交互
+</span><span class="c1"></span>    <span class="c1">// put: 用来触发reducers中的方法，与dispacth功能一样
+</span><span class="c1"></span>    <span class="c1">// select: 用来选择models层所有model里state的数据
+</span><span class="c1"></span>    <span class="c1">// * yield是es6的Generator函数
+</span><span class="c1"></span>    <span class="o">*</span><span class="nx">getAllUsers</span><span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="p">{</span> <span class="nx">call</span><span class="p">,</span> <span class="nx">put</span> <span class="p">})</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">resp</span> <span class="o">=</span> <span class="k">yield</span> <span class="nx">call</span><span class="p">(</span><span class="nx">getAllUsers</span><span class="p">);</span>
+      <span class="k">yield</span> <span class="nx">put</span><span class="p">({</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;setUsers&#39;</span><span class="p">,</span><span class="c1">// 这里可以省略命名空间
+</span><span class="c1"></span>        <span class="nx">users</span><span class="o">:</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">content</span>
+      <span class="p">});</span>
+      <span class="nx">message</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="s1">&#39;查询成功&#39;</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="o">*</span><span class="nx">delayRemoveUser</span><span class="p">({</span> <span class="nx">id</span> <span class="p">},</span> <span class="p">{</span> <span class="nx">call</span><span class="p">,</span> <span class="nx">put</span> <span class="p">})</span> <span class="p">{</span>
+      <span class="k">yield</span> <span class="nx">call</span><span class="p">(</span><span class="nx">delay</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+      <span class="k">yield</span> <span class="nx">put</span><span class="p">({</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;deleteUser&#39;</span><span class="p">,</span>
+        <span class="nx">id</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="c1">// 订阅监听，可以监听路由，键盘输入等，常用作进入某页面发个请求获取数据，展示出来
+</span><span class="c1"></span>  <span class="nx">subscriptions</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">setup</span><span class="p">({</span>
+      <span class="nx">dispatch</span><span class="p">,</span> <span class="nx">history</span><span class="p">,</span> <span class="nx">query</span><span class="p">,</span> <span class="nx">store</span><span class="p">,</span>
+    <span class="p">})</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">history</span><span class="p">.</span><span class="nx">listen</span><span class="p">(({</span> <span class="nx">pathname</span><span class="p">,</span> <span class="nx">search</span> <span class="p">})</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">pathname</span> <span class="o">===</span> <span class="s1">&#39;/userPage&#39;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// 监听进入testPage页时，做些操作
+</span><span class="c1"></span>          <span class="c1">// dispatch({ type: &#34;shoppingWZ&#34; })
+</span><span class="c1"></span>        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-09-15
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="/tags/react/">React</a>
+          <a href="/tags/umi/">umi</a>
+          <a href="/tags/dva/">dva</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/express%E5%85%A8%E8%A7%A3/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Express全解</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">
+            <span class="next-text nav-default">Lodash常用方法整理</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

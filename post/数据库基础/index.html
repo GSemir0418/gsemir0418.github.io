@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>数据库基础 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 第一二三范式 1 第一范式 1NF 定义：字段不可再分 举例：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段 即user表里应有left_eye和" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="数据库基础" />
+<meta property="og:description" content="1 第一二三范式 1 第一范式 1NF 定义：字段不可再分 举例：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段 即user表里应有left_eye和" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-05T08:57:20+08:00" />
+<meta property="article:modified_time" content="2021-07-05T00:00:00+08:00" />
+
+<meta itemprop="name" content="数据库基础">
+<meta itemprop="description" content="1 第一二三范式 1 第一范式 1NF 定义：字段不可再分 举例：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段 即user表里应有left_eye和"><meta itemprop="datePublished" content="2021-07-05T08:57:20+08:00" />
+<meta itemprop="dateModified" content="2021-07-05T00:00:00+08:00" />
+<meta itemprop="wordCount" content="2812">
+<meta itemprop="keywords" content="nodejs,数据库,MySQL," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据库基础"/>
+<meta name="twitter:description" content="1 第一二三范式 1 第一范式 1NF 定义：字段不可再分 举例：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段 即user表里应有left_eye和"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">数据库基础</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-05 </span>
+        <div class="post-category">
+            <a href="/categories/nodejs%E5%85%A8%E8%A7%A3/"> Nodejs全解 </a>
+            </div>
+          <span class="more-meta"> 2812 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-第一二三范式">1 第一二三范式</a>
+      <ul>
+        <li><a href="#1-第一范式-1nf">1 第一范式 1NF</a></li>
+        <li><a href="#2-第二范式-2nf">2 第二范式 2NF</a></li>
+        <li><a href="#3-第三范式-3nf">3 第三范式 3NF</a></li>
+        <li><a href="#4-bc范式">4 BC范式</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-设计表">2 设计表</a>
+      <ul>
+        <li><a href="#1-数据库设计经验">1 数据库设计经验</a></li>
+        <li><a href="#2-一对一">2 一对一</a></li>
+        <li><a href="#3-一对多">3 一对多</a></li>
+        <li><a href="#4-多对多">4 多对多</a></li>
+        <li><a href="#5-什么时候建关联表">5 什么时候建关联表</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-join把表连接起来">3 JOIN把表连接起来</a></li>
+    <li><a href="#4-缓存字段">4 缓存字段</a></li>
+    <li><a href="#5-事务">5 事务</a></li>
+    <li><a href="#6-mysql储存引擎">6 MySQL储存引擎</a></li>
+    <li><a href="#7-索引">7 索引</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-第一二三范式">1 第一二三范式</h1>
+<h2 id="1-第一范式-1nf">1 第一范式 1NF</h2>
+<ul>
+<li>
+<p><strong>定义</strong>：字段不可再分</p>
+</li>
+<li>
+<p><strong>举例</strong>：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段</p>
+<p>即user表里应有<code>left_eye</code>和<code>right_eye</code>，而不能存为一个字段</p>
+</li>
+<li>
+<p><strong>缺点</strong>：</p>
+<p><img src="/database/sjk1.png" alt="image-20210705105007465"></p>
+<p>​	这是一个学生选课表，没有违反第一范式，但是存在如下问题：</p>
+<p>​	数据冗余、创建系时插入异常、删除学生会导致系消失、学生转系时改动多处</p>
+<p>​	结论：第一范式不够强</p>
+</li>
+</ul>
+<h2 id="2-第二范式-2nf">2 第二范式 2NF</h2>
+<ul>
+<li>
+<p><strong>定义</strong>：</p>
+<ul>
+<li>在1NF的基础上，要有键（键可由多个字段组合）</li>
+<li>所有字段必须分别<strong>完全依赖</strong>于键</li>
+<li>如果键是多个字段组合，则<strong>不允许部分依赖</strong>于该键</li>
+</ul>
+</li>
+<li>
+<p><strong>依赖关系</strong>：</p>
+<ul>
+<li>给出键，就能唯一确定字段的值</li>
+<li>如给出学号，就能唯一确定姓名，反之则不行</li>
+<li>则称姓名依赖于学号</li>
+</ul>
+</li>
+<li>
+<p><strong>不满足第二范式的地方</strong>：</p>
+<ul>
+<li>上表的键为（学号、课名）</li>
+<li>但存在部份依赖：姓名依赖与学号</li>
+</ul>
+</li>
+<li>
+<p><strong>改进</strong>：</p>
+<ul>
+<li>选课表（<strong>学号</strong>，<strong>课名</strong>，分数）</li>
+<li>学生表（<strong>学号</strong>，姓名，系名，系主任）</li>
+</ul>
+<p><img src="/database/sjk2.png" alt="image-20210705105710705"></p>
+</li>
+</ul>
+<h2 id="3-第三范式-3nf">3 第三范式 3NF</h2>
+<ul>
+<li>
+<p><strong>定义</strong>：</p>
+<ul>
+<li>一个表里不能有两层依赖</li>
+<li>给出学号，就能确定系名——系名依赖于学号</li>
+<li>给出系名，就能确定系主任——系主任依赖与系名</li>
+<li>所以，系主任<strong>间接依赖</strong>于学号</li>
+</ul>
+</li>
+<li>
+<p><strong>解决办法</strong>：</p>
+<ul>
+<li>把系名和系主任单独建表</li>
+</ul>
+<p><img src="/database/sjk3.png" alt="image-20210705110014247"></p>
+</li>
+</ul>
+<h2 id="4-bc范式">4 BC范式</h2>
+<ul>
+<li>键中的属性也不存在间接依赖</li>
+</ul>
+<h1 id="2-设计表">2 设计表</h1>
+<h2 id="1-数据库设计经验">1 数据库设计经验</h2>
+<ul>
+<li>
+<p><strong>高内聚</strong></p>
+<ul>
+<li>把相关字段放到一起，不相关的单独建表</li>
+<li>如果两个字段能够单独建表，那就单独建表</li>
+</ul>
+</li>
+<li>
+<p><strong>低耦合</strong></p>
+<ul>
+<li>如果两个表之间有弱关系
+<ul>
+<li>一对一可放在一个表，也可两个表加外键</li>
+<li>一对多一般用外键</li>
+<li>多对多一般建中间表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-一对一">2 一对一</h2>
+<ul>
+<li>
+<p>假设一个学生只能加入一个班级</p>
+</li>
+<li>
+<p>可以把班级放在学生表中</p>
+<ul>
+<li>学生id：1001，姓名：小明，班级id：4002</li>
+<li>班级id：4002，名称：入门1班</li>
+</ul>
+</li>
+<li>
+<p>也可以单独建立关联表</p>
+<ul>
+<li>学生id：1001，姓名：小明</li>
+<li>学生班级关联表：id：2003，学生id：1001，班级id：4002</li>
+<li>班级id：4002，名称：入门1班</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-一对多">3 一对多</h2>
+<ul>
+<li>假设一个作者能写多本书</li>
+<li>可以把书放到作者表里
+<ul>
+<li>某些DBMS支持数组，可以存两个id到一个字段</li>
+<li>作者id：1001，姓名：大牛，books：[2001，2002]</li>
+<li>如果不支持数组，就不能这样做了</li>
+</ul>
+</li>
+<li>单独建立关系表（推荐）
+<ul>
+<li>作者id：1001，姓名：大牛</li>
+<li>出版图书表：：id：2001，作者id：1001，书id：4002，出版社id：xxx</li>
+<li>出版图书表：：id：2002，作者id：1001，书id：4003，出版社id：xxx</li>
+<li>书id：4002，名称：js入门</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-多对多">4 多对多</h2>
+<ul>
+<li>假设一个学生可以加入多个班级，每个班级也能有多个学生</li>
+<li>把班级放到学生表中：DBMS支持数组的话可以，否则不可以</li>
+<li>单独建立关系表（推荐）：
+<ul>
+<li>学生id：1001，姓名：小明</li>
+<li>学生班级关系表：id：2001，学生id：1001，班级id：4002，有效期：xxx</li>
+<li>学生班级关系表：id：2002，学生id：1001，班级id：4003，有效期：xxx</li>
+<li>班级id：4002，名称：入门班</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-什么时候建关联表">5 什么时候建关联表</h2>
+<ul>
+<li>当关联自身存在属性时
+<ul>
+<li>比如关联的有效期，有效期为一年</li>
+<li>比如关联的级别，店铺会员分为vip1-6</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-join把表连接起来">3 JOIN把表连接起来</h1>
+<ul>
+<li>连接表
+<ul>
+<li>inner join</li>
+<li>left join：会保留右边的null，以保证左边都显示</li>
+<li>right join：会保留左边的null，以保证右边都显示</li>
+<li>full outer join：保留两边的null，以保证两边都显示</li>
+</ul>
+</li>
+<li>看图巧记</li>
+</ul>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/29234064">图解 SQL 里的各种 JOIN - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<p><img src="/database/sjk4.png" alt="image-20210706153805324"></p>
+<ul>
+<li><strong>语法</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">PK</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">A_PK</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">PK</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">B_PK</span><span class="p">,</span><span class="w">
+</span><span class="w">	</span><span class="n">A</span><span class="p">.</span><span class="n">VALUE</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">A_VALUE</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">VALUE</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">B_VALUE</span><span class="w">
+</span><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">Table_AA</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">Table_BB</span><span class="w">
+</span><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">PK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">PK</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>尝试</strong>（以inner join为例）：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="o">//</span><span class="w"> </span><span class="err">用</span><span class="n">docker启动mysql</span><span class="err">，或者重新</span><span class="n">docker</span><span class="w"> </span><span class="n">run一遍</span><span class="w">
+</span><span class="w"></span><span class="n">docker</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">mysql1</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">进入</span><span class="n">mysql</span><span class="w">
+</span><span class="w"></span><span class="n">docker</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="n">mysql1</span><span class="w"> </span><span class="n">bash</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w">
+</span><span class="w"></span><span class="mi">123456</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">创建数据库</span><span class="w">
+</span><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="n">db1</span><span class="w"> </span><span class="k">character</span><span class="w"> </span><span class="kt">set</span><span class="w"> </span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">collate</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="k">databases</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">db1</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">创建表</span><span class="w">
+</span><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="nf">users</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="n">serial</span><span class="p">,</span><span class="n">name</span><span class="w"> </span><span class="kt">text</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="nf">staffs</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="n">serial</span><span class="p">,</span><span class="n">name</span><span class="w"> </span><span class="kt">text</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="nf">orders</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="n">serial</span><span class="p">,</span><span class="n">user_id</span><span class="w"> </span><span class="kt">bigint</span><span class="w"> </span><span class="k">unsigned</span><span class="p">,</span><span class="n">staff_id</span><span class="w"> </span><span class="kt">bigint</span><span class="w"> </span><span class="k">unsigned</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="k">unsigned</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">创建记录</span><span class="w">
+</span><span class="w"></span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="nf">users</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;XiaoMing&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="o">+----+----------+</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">     </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+----+----------+</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">XiaoMing</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+----+----------+</span><span class="w">
+</span><span class="w"></span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="nf">staffs</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;XiaoHong&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="o">+----+----------+</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">     </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+----+----------+</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">XiaoHong</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+----+----------+</span><span class="w">
+</span><span class="w"></span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="nf">users</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">staff_id</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="o">+----+---------+----------+--------+</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">staff_id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+----+---------+----------+--------+</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w">        </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w">    </span><span class="mi">100</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+----+---------+----------+--------+</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">使用</span><span class="n">inner</span><span class="w"> </span><span class="k">join</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">unname</span><span class="p">,</span><span class="n">orders</span><span class="p">.</span><span class="n">amount</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">amount</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">orders</span><span class="w">
+</span><span class="w"></span><span class="k">on</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">orders</span><span class="p">.</span><span class="k">user</span><span class="p">.</span><span class="n">id</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">得到</span><span class="n">XiaoMing</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="w"></span><span class="o">+----------+--------+</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">uname</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+----------+--------+</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">XiaoMing</span><span class="w"> </span><span class="o">|</span><span class="w">    </span><span class="mi">100</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+----------+--------+</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="4-缓存字段">4 缓存字段</h1>
+<ul>
+<li>
+<p>假设一个博客blog包含多个评论comments</p>
+</li>
+<li>
+<p>如何获取博客的评论数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">comments</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">blog_id</span><span class="o">=</span><span class="mi">1</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>更好的办法是在blog表中添加<code>comment_count</code>字段，每次添加comment则+1，每次删除comment则-1</p>
+</li>
+<li>
+<p>这样就可以快速获取博客的评论数，约定缓存字段均使用<code>_count</code>结尾</p>
+</li>
+</ul>
+<h1 id="5-事务">5 事务</h1>
+<ul>
+<li>
+<p>有些操作必须一次完成</p>
+<ul>
+<li>用户评论之后，<strong>首先</strong>要在comments表中新增记录，<strong>其次</strong>在blogs表将对应的comment_count+1</li>
+<li>如果第一步执行了，第二步没有执行，那么数据就乱了</li>
+</ul>
+</li>
+<li>
+<p>使用事务</p>
+<blockquote>
+<p><a href="https://www.runoob.com/mysql/mysql-transaction.html">MySQL 事务 | 菜鸟教程 (runoob.com)</a></p>
+</blockquote>
+</li>
+</ul>
+<h1 id="6-mysql储存引擎">6 MySQL储存引擎</h1>
+<ul>
+<li>
+<p>命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">show</span><span class="w"> </span><span class="n">engines</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>常见</p>
+<ul>
+<li>innoDB-默认，是事务型数据库的首选，支持事务，遵循ACID、支持行锁和外键；</li>
+<li>MyISAM-拥有较高的插入查询速度，但不支持事务</li>
+<li>Memory-内存中，快速访问数据</li>
+<li>Archive-只支持insert和select</li>
+</ul>
+</li>
+</ul>
+<h1 id="7-索引">7 索引</h1>
+<ul>
+<li>
+<p>语法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">unique</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="n">index1</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">name</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span><span class="w">
+</span><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">users</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><a href="https://www.runoob.com/mysql/mysql-index.html">MySQL 索引 | 菜鸟教程 (runoob.com)</a></p>
+</blockquote>
+</li>
+<li>
+<p>用途</p>
+<ul>
+<li>提高搜索效率</li>
+<li>where xxx &gt; 100 那么我们可以创建xxx的索引</li>
+<li>where xxx &gt; 100 and yyy &gt; 200，可以创建xxx，yyy的索引</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-05
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nodejs/">nodejs</a>
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+          <a href="/tags/mysql/">MySQL</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">String常用方法整理</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/sequelize.js/">
+            <span class="next-text nav-default">Sequelize ORM</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

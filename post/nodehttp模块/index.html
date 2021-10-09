@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>NodeHTTP模块 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="0 准备工作 1 ts-node-dev 当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/nodehttp%E6%A8%A1%E5%9D%97/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="NodeHTTP模块" />
+<meta property="og:description" content="0 准备工作 1 ts-node-dev 当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/nodehttp%E6%A8%A1%E5%9D%97/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-30T09:55:55+08:00" />
+<meta property="article:modified_time" content="2021-06-30T00:00:00+08:00" />
+
+<meta itemprop="name" content="NodeHTTP模块">
+<meta itemprop="description" content="0 准备工作 1 ts-node-dev 当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用"><meta itemprop="datePublished" content="2021-06-30T09:55:55+08:00" />
+<meta itemprop="dateModified" content="2021-06-30T00:00:00+08:00" />
+<meta itemprop="wordCount" content="3167">
+<meta itemprop="keywords" content="nodejs,HTTP," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="NodeHTTP模块"/>
+<meta name="twitter:description" content="0 准备工作 1 ts-node-dev 当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">NodeHTTP模块</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-30 </span>
+        <div class="post-category">
+            <a href="/categories/nodejs%E5%85%A8%E8%A7%A3/"> Nodejs全解 </a>
+            </div>
+          <span class="more-meta"> 3167 words </span>
+          <span class="more-meta"> 7 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-准备工作">0 准备工作</a>
+      <ul>
+        <li><a href="#1-ts-node-dev">1 ts-node-dev</a></li>
+        <li><a href="#2-vscode配置">2 VSCode配置</a></li>
+        <li><a href="#3-curl">3 curl</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-创建项目">1 创建项目</a></li>
+    <li><a href="#2-request对象">2 request对象</a></li>
+    <li><a href="#3-response对象">3 response对象</a></li>
+    <li><a href="#4-根据url返回不同的文件">4 根据url返回不同的文件</a></li>
+    <li><a href="#5-处理查询参数">5 处理查询参数</a></li>
+    <li><a href="#6-匹配任意文件">6 匹配任意文件</a></li>
+    <li><a href="#7-处理不存在的文件">7 处理不存在的文件</a>
+      <ul>
+        <li><a href="#1-文件不存在的情况">1 文件不存在的情况</a></li>
+        <li><a href="#2-当访问路径为根路径httplocalhost8888时默认访问indexhtml">2 当访问路径为根路径<code>http://localhost:8888</code>时，默认访问index.html</a></li>
+        <li><a href="#3当访问路径不是文件而是目录时">3.当访问路径不是文件而是目录时</a></li>
+        <li><a href="#4其他错误一律归为服务器内部错误">4.其他错误一律归为服务器内部错误</a></li>
+      </ul>
+    </li>
+    <li><a href="#8-处理非get请求">8 处理非GET请求</a></li>
+    <li><a href="#9-添加缓存选项">9 添加缓存选项</a></li>
+    <li><a href="#10-发布未完成">10 发布(未完成)</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="0-准备工作">0 准备工作</h1>
+<h2 id="1-ts-node-dev">1 ts-node-dev</h2>
+<ul>
+<li>当文件更新时自动重启node</li>
+<li>避免每次改完代码都要重新运行的麻烦</li>
+<li>可以用TS开发Node.js程序，且会自动重启</li>
+<li>不宜在生产环境使用，但非常适合用来学习</li>
+</ul>
+<p>安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">npm -g i ts-node-dev
+</code></pre></td></tr></table>
+</div>
+</div><p>要用npm安装 ，用yarn安装的话使用时会报错。。无法识别“ts-node-dev”命令，不知道为什么。</p>
+<h2 id="2-vscode配置">2 VSCode配置</h2>
+<p>配置自动保存与保存后自动格式化：</p>
+<p><code>ctrl shift p</code>打开<code>首选项：打开设置(ui)</code>，<code>AutoSave</code>修改为<code>onFocusChange</code>，搜索format，勾选<code>Format On Save</code>开启保存后自动格式化。</p>
+<h2 id="3-curl">3 curl</h2>
+<ul>
+<li>GET请求：<code>curl -v url</code></li>
+<li>POST请求：<code>curl -v -d “name=gsq&quot; url</code></li>
+<li>设置请求头：<code>-H 'Content-Type:application/json'</code></li>
+<li>设置动词：<code>-X PUT</code></li>
+<li>JSON请求：<code>curl -d '{&quot;name&quot;:&quot;bob&quot;}' -H 'Content-Type:application/json' url</code></li>
+<li>后面会用到<code>curl</code>来构造请求</li>
+</ul>
+<h1 id="1-创建项目">1 创建项目</h1>
+<ul>
+<li>初始化项目：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">yarn init -y
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>安装<code>@types/node</code>声明文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">yarn add --dev @types/node
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>新建<code>index.ts</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// 引入http模块
+</span><span class="c1"></span><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">http</span> <span class="kr">from</span> <span class="s1">&#39;http&#39;</span>
+<span class="c1">// 用http创建server
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">()</span>
+<span class="c1">// 监听server的request事件
+</span><span class="c1"></span><span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;有人请求了&#39;</span><span class="p">)</span>
+	<span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span><span class="c1">// 服务器返回data，并终止服务器
+</span><span class="c1"></span><span class="p">})</span>
+<span class="c1">// 开始监听8888端口
+</span><span class="c1"></span><span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>控制台<code>ts-node-dev index.ts</code>启动服务器</li>
+<li>使用<code>curl -v http://localhost:8888 </code>发送请求</li>
+</ul>
+<h1 id="2-request对象">2 request对象</h1>
+<p>http.createServer()创建的server是http.Server和net.Server类的实例，可以创建后端环境（静态服务器）。</p>
+<p>首先控制台打出<code>request.contructor</code>，发现request对象的构造函数是<code>IncomingMessage</code>，因此利用ts语法，在传参中直接定义<code>request:IncomingMessage</code>，告诉TypeScript request不是任意对象，而是IncomingMessage对象。</p>
+<p>获取请求信息（请求头、路径、请求消息体等）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">http</span> <span class="kr">from</span> <span class="s1">&#39;http&#39;</span>
+<span class="c1">// 引入IncomingMessage模块
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">IncomingMessage</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;http&#39;</span>
+
+<span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">()</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span>: <span class="kt">IncomingMessage</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">httpVersion</span><span class="p">)</span><span class="c1">// 获取http版本号
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">)</span><span class="c1">// 获取请求路径
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">)</span><span class="c1">// 获取请求头
+</span><span class="c1"></span>	<span class="c1">// 获取请求消息体
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1">// 监听data事件
+</span><span class="c1"></span>    <span class="c1">// 用户每上传一个字节或一段内容就会触发data事件，由于每次上传报文的大小是固定的，所以在用户上传过程中会不停地触发data事件。
+</span><span class="c1"></span>    <span class="c1">// 因此需要监听每一次的data事件，把每一次上传的数据放到一个数组中
+</span><span class="c1"></span>    <span class="nx">request</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chunk</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="c1">// 监听上传结束事件，end事件只有在数据被完全消费掉后再触发
+</span><span class="c1"></span>    <span class="nx">request</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// 将数据中的每一段chunk连接起来
+</span><span class="c1"></span>        <span class="kr">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">arr</span><span class="p">).</span><span class="nx">toString</span><span class="p">()</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span>
+        <span class="c1">// 请求处理完成后响应
+</span><span class="c1"></span>        <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+    <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>开启服务器后，利用<code>curl</code>构造请求：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">curl -V -d &#34;name=gsq&#34; http://localhost:8888/api/message
+</code></pre></td></tr></table>
+</div>
+</div><p>控制台将打印如下信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">1.1
+/api/message
+{
+  host: &#39;localhost:8888&#39;,
+  &#39;user-agent&#39;: &#39;curl/7.55.1&#39;,
+  accept: &#39;*/*&#39;,
+  &#39;content-length&#39;: &#39;8&#39;,
+  &#39;content-type&#39;: &#39;application/x-www-form-urlencoded&#39;
+}
+name=gsq
+</code></pre></td></tr></table>
+</div>
+</div><p>总结：</p>
+<ul>
+<li>拥有headers、method、url等属性</li>
+<li>从stream.Readable类继承了data、end、error事件</li>
+<li>不能直接拿到请求的消息体：原因与TCP有关</li>
+</ul>
+<h1 id="3-response对象">3 response对象</h1>
+<p>同样的方式发现response对象是ServerResponse的实例对象</p>
+<ul>
+<li>拥有getHeader、setHeader、end、write等方法，可以控制响应的每一部分</li>
+<li>拥有statusCode属性，默认为200，可读可写</li>
+<li>继承了Stream，也属于Stream类的实例</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;gsq&#39;</span><span class="p">)</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">=</span> <span class="mi">404</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">()</span>
+<span class="c1">// 响应的消息体
+</span><span class="c1"></span><span class="o">&lt;</span> <span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">404</span> <span class="nx">Not</span> <span class="nx">Found</span>
+<span class="o">&lt;</span> <span class="nx">NAME</span>: <span class="kt">gsq</span>
+<span class="o">&lt;</span> <span class="nb">Date</span><span class="o">:</span> <span class="nx">Wed</span><span class="p">,</span> <span class="mi">30</span> <span class="nx">Jun</span> <span class="mi">2021</span> <span class="nx">05</span>:<span class="kt">56</span><span class="o">:</span><span class="mi">08</span> <span class="nx">GMT</span>
+<span class="o">&lt;</span> <span class="nx">Connection</span>: <span class="kt">keep</span><span class="o">-</span><span class="nx">alive</span>
+<span class="o">&lt;</span> <span class="nx">Keep</span><span class="o">-</span><span class="nx">Alive</span>: <span class="kt">timeout</span><span class="o">=</span><span class="mi">5</span>
+<span class="o">&lt;</span> <span class="nx">Transfer</span><span class="o">-</span><span class="nx">Encoding</span>: <span class="kt">chunked</span>
+<span class="o">&lt;</span>
+<span class="mi">12</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4-根据url返回不同的文件">4 根据url返回不同的文件</h1>
+<blockquote>
+<p>思路：通过request获取到用户请求的url，利用switch进行判断，根据请求不同，应用fs.readFile读取页面数据并返回给请求端。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">fs</span> <span class="kr">from</span> <span class="s1">&#39;fs&#39;</span>
+<span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">http</span> <span class="kr">from</span> <span class="s1">&#39;http&#39;</span>
+<span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">p</span> <span class="kr">from</span> <span class="s1">&#39;path&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">IncomingMessage</span><span class="p">,</span> <span class="nx">ServerResponse</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;http&#39;</span>
+
+<span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">()</span>
+<span class="c1">// 获取当前目录下的public路径，利用resolve方法进行拼接并解析为绝对路径
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">publicDir</span> <span class="o">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">relative</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;public&#39;</span><span class="p">)</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span>: <span class="kt">IncomingMessage</span><span class="p">,</span> <span class="nx">response</span>: <span class="kt">ServerResponse</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// 获取到请求路径
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="p">{</span> <span class="nx">url</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">request</span>
+    <span class="c1">// 判断请求路径
+</span><span class="c1"></span>    <span class="k">switch</span> <span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s1">&#39;/index.html&#39;</span><span class="o">:</span>
+            <span class="c1">// 读取index.html文件
+</span><span class="c1"></span>            <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">publicDir</span><span class="p">,</span> <span class="s1">&#39;index.html&#39;</span><span class="p">),</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">error</span>
+                <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+            <span class="p">})</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s1">&#39;/main.js&#39;</span><span class="o">:</span>
+            <span class="c1">// 在响应的头部声明文件类型
+</span><span class="c1"></span>            <span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span><span class="s1">&#39;text/javascript; charset=utf-8&#39;</span><span class="p">)</span>
+            <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">publicDir</span><span class="p">,</span> <span class="s1">&#39;main.js&#39;</span><span class="p">),</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">error</span>
+                <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+            <span class="p">})</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s1">&#39;/index.css&#39;</span><span class="o">:</span>
+            <span class="c1">// 在响应的头部声明文件类型
+</span><span class="c1"></span>            <span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span><span class="s1">&#39;text/css; charset=utf-8&#39;</span><span class="p">)</span>
+            <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">publicDir</span><span class="p">,</span> <span class="s1">&#39;index.css&#39;</span><span class="p">),</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">error</span>
+                <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+            <span class="p">})</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在浏览器中访问<code>http://localhost:8888/index.html</code></p>
+<h1 id="5-处理查询参数">5 处理查询参数</h1>
+<blockquote>
+<p>当请求的路径带有参数时（&hellip;/index.html?q=1），会影响到switch对路径的判断，从而找不到对应访问的文件，因此需要<code>url模块</code>来处理查询的参数。</p>
+</blockquote>
+<p>引入url模块时，模块名与request中取到的url同名，所以需要修改url为path：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">const</span> <span class="p">{</span> <span class="nx">url</span>:<span class="kt">path</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">request</span>
+<span class="c1">// 在request中取到url字段，重命名为path变量
+</span></code></pre></td></tr></table>
+</div>
+</div><p><code>url.parse(path)</code>返回一个<code>URL对象</code>，包含如下字段：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="nx">Url</span> <span class="p">{</span>
+  <span class="nx">protocol</span>: <span class="kt">null</span><span class="p">,</span> <span class="nx">slashes</span>: <span class="kt">null</span><span class="p">,</span> <span class="nx">auth</span>: <span class="kt">null</span><span class="p">,</span> <span class="nx">host</span>: <span class="kt">null</span><span class="p">,</span>
+  <span class="nx">port</span>: <span class="kt">null</span><span class="p">,</span>  <span class="nx">hostname</span>: <span class="kt">null</span><span class="p">,</span>  <span class="nx">hash</span>: <span class="kt">null</span><span class="p">,</span>  <span class="nx">search</span><span class="o">:</span> <span class="s1">&#39;?q=2&#39;</span><span class="p">,</span>
+  <span class="nx">query</span><span class="o">:</span> <span class="s1">&#39;q=2&#39;</span><span class="p">,</span> <span class="nx">pathname</span><span class="o">:</span> <span class="s1">&#39;/index.html&#39;</span><span class="p">,</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/index.html?q=2&#39;</span><span class="p">,</span>
+  <span class="nx">href</span><span class="o">:</span> <span class="s1">&#39;/index.html?q=2&#39;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>switch只需读取URL对象中的<code>pathname</code>字段来进行判断即可。</p>
+<p>**注：**但是目前node版本中，url.parse已被<code>弃用</code>，所以我们直接实例化一个URL对象。URL对象接受两个参数，分别为<code>请求路径</code>与<code>根路径</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="s1">&#39;http://localhost:8888&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">pathname</span> <span class="p">}</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="s1">&#39;http://localhost:8888&#39;</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>新的URL对象包含如下字段：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="nx">URL</span> <span class="p">{</span>
+  <span class="nx">href</span><span class="o">:</span> <span class="s1">&#39;http://localhost:8888/index.html?q=1&#39;</span><span class="p">,</span>
+  <span class="nx">origin</span><span class="o">:</span> <span class="s1">&#39;http://localhost:8888&#39;</span><span class="p">,</span>
+  <span class="nx">protocol</span><span class="o">:</span> <span class="s1">&#39;http:&#39;</span><span class="p">,</span>
+  <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+  <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+  <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;localhost:8888&#39;</span><span class="p">,</span>
+  <span class="nx">hostname</span><span class="o">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+  <span class="nx">port</span><span class="o">:</span> <span class="s1">&#39;8888&#39;</span><span class="p">,</span>
+  <span class="nx">pathname</span><span class="o">:</span> <span class="s1">&#39;/index.html&#39;</span><span class="p">,</span>
+  <span class="nx">search</span><span class="o">:</span> <span class="s1">&#39;?q=1&#39;</span><span class="p">,</span>
+  <span class="nx">searchParams</span>: <span class="kt">URLSearchParams</span> <span class="p">{</span> <span class="s1">&#39;q&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span> <span class="p">},</span>
+  <span class="nx">hash</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>同样拥有<code>pathname</code>字段，之后的switch判断与之前保持一致即可。</p>
+<h1 id="6-匹配任意文件">6 匹配任意文件</h1>
+<p>目前为止我们只能访问三个路径，其他路径均视为404，如果每多一个页面就多写一个case来判断并响应的话，工作量非常大且代码冗余，重复代码很多，因此需要抽取出关键代码，使其能够自动匹配任意访问的文件。</p>
+<blockquote>
+<p>思路：还是从路径入手，URL对象中的pathname字段的字符串，经过一些字符处理，便可以作为fs读取文件的路径名。例如访问路径为<code>/aa/index.html</code>，则读取路径中需要的字段是<code>aa/index.html</code>，只需将前面的<code>'/'</code>去掉即可。</p>
+</blockquote>
+<p>修改后代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">fs</span> <span class="kr">from</span> <span class="s1">&#39;fs&#39;</span>
+<span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">http</span> <span class="kr">from</span> <span class="s1">&#39;http&#39;</span>
+<span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">p</span> <span class="kr">from</span> <span class="s1">&#39;path&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">IncomingMessage</span><span class="p">,</span> <span class="nx">ServerResponse</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;http&#39;</span>
+
+<span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">publicDir</span> <span class="o">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">relative</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;public&#39;</span><span class="p">)</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span>: <span class="kt">IncomingMessage</span><span class="p">,</span> <span class="nx">response</span>: <span class="kt">ServerResponse</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">url</span>: <span class="kt">path</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">request</span>
+    <span class="c1">// 在URL对象中获取pathname字段
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="p">{</span> <span class="nx">pathname</span> <span class="p">}</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="s1">&#39;http://localhost:8888&#39;</span><span class="p">)</span>
+    <span class="c1">// 基于访问路径处理文件名
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">fileName</span> <span class="o">=</span> <span class="nx">pathname</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">publicDir</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">),</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// 如果读不到文件，则返回404
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">=</span> <span class="mi">404</span>
+            <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="c1">// 如果成功读取到文件，则返回读取到的数据
+</span><span class="c1"></span>        <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+    <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="7-处理不存在的文件">7 处理不存在的文件</h1>
+<blockquote>
+<p>对访问文件时出现的错误类型进行判断</p>
+</blockquote>
+<h2 id="1-文件不存在的情况">1 文件不存在的情况</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">errno</span> <span class="o">===</span> <span class="o">-</span><span class="mi">4058</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">=</span> <span class="mi">404</span> <span class="c1">//找不到文件
+</span><span class="c1"></span>    <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">publicDir</span><span class="p">,</span> <span class="s1">&#39;404.html&#39;</span><span class="p">),</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+        <span class="c1">// data无需toString()，浏览器自动解析data
+</span><span class="c1"></span>	<span class="p">})</span>
+<span class="p">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2-当访问路径为根路径httplocalhost8888时默认访问indexhtml">2 当访问路径为根路径<code>http://localhost:8888</code>时，默认访问index.html</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kd">let</span> <span class="nx">fileName</span> <span class="o">=</span> <span class="nx">pathname</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">fileName</span> <span class="o">===</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">fileName</span> <span class="o">=</span> <span class="s1">&#39;index.html&#39;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="3当访问路径不是文件而是目录时">3.当访问路径不是文件而是目录时</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">errno</span> <span class="o">===</span> <span class="o">-</span><span class="mi">4068</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">=</span> <span class="mi">403</span> <span class="c1">//没有权限访问
+</span><span class="c1"></span>	<span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;无权查看目录内容&#39;</span><span class="p">)</span>
+<span class="p">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4其他错误一律归为服务器内部错误">4.其他错误一律归为服务器内部错误</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="k">else</span> <span class="p">{</span>
+	<span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1">//服务器内部错误
+</span><span class="c1"></span>	<span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;服务器繁忙，请稍后再试&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="8-处理非get请求">8 处理非GET请求</h1>
+<p>静态服务器不会接受非get请求，对Method进行过滤：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">const { method } = request
+if (method !== &#39;GET&#39;) {
+	response.statusCode = 405// Method Not Allowed
+	response.end();
+	return;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="9-添加缓存选项">9 添加缓存选项</h1>
+<p>再次刷新页面时，css、js和图片等静态数据会缓存至内存中，提升网页访问性能。</p>
+<p>成功返回数据前，在响应头添加缓存字段：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Cache-Control&#39;</span><span class="p">,</span><span class="s1">&#39;public max-age=3600&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="10-发布未完成">10 发布(未完成)</h1>
+<p>将ts变成js，需全局安装TypeScript，使用<code>tsc</code>命令进行转换：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">tsc index.ts
+</code></pre></td></tr></table>
+</div>
+</div><p>把js作为package.json中的<code>main</code>字段</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;main&#34;</span><span class="err">:</span> <span class="s2">&#34;index.js&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>发布</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">yarn login/npm adduser
+yarn publish/npm publish
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-06-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nodejs/">nodejs</a>
+          <a href="/tags/http/">HTTP</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">杂七杂八</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E8%B0%83%E8%AF%95nodejs/">
+            <span class="next-text nav-default">调试Nodejs</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

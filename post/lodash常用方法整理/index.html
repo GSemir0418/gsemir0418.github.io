@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Lodash常用方法整理 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="0 准备 下载： 1 yarn add lodash / npm i lodash Node.js引入： 1 const _ = require(&amp;#39;lodash&amp;#39;) 1 对象 1.1 移除对象上的一些属性-omit 把数据提交给接口，很多情况下，都要移除只在前" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Lodash常用方法整理" />
+<meta property="og:description" content="0 准备 下载： 1 yarn add lodash / npm i lodash Node.js引入： 1 const _ = require(&#39;lodash&#39;) 1 对象 1.1 移除对象上的一些属性-omit 把数据提交给接口，很多情况下，都要移除只在前" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-02T16:53:09+08:00" />
+<meta property="article:modified_time" content="2021-09-02T00:00:00+08:00" />
+
+<meta itemprop="name" content="Lodash常用方法整理">
+<meta itemprop="description" content="0 准备 下载： 1 yarn add lodash / npm i lodash Node.js引入： 1 const _ = require(&#39;lodash&#39;) 1 对象 1.1 移除对象上的一些属性-omit 把数据提交给接口，很多情况下，都要移除只在前"><meta itemprop="datePublished" content="2021-09-02T16:53:09+08:00" />
+<meta itemprop="dateModified" content="2021-09-02T00:00:00+08:00" />
+<meta itemprop="wordCount" content="1023">
+<meta itemprop="keywords" content="JavaScript,lodash," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Lodash常用方法整理"/>
+<meta name="twitter:description" content="0 准备 下载： 1 yarn add lodash / npm i lodash Node.js引入： 1 const _ = require(&#39;lodash&#39;) 1 对象 1.1 移除对象上的一些属性-omit 把数据提交给接口，很多情况下，都要移除只在前"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Lodash常用方法整理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-09-02 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93/"> 项目实战总结 </a>
+            </div>
+          <span class="more-meta"> 1023 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-准备">0 准备</a></li>
+    <li><a href="#1-对象">1 对象</a>
+      <ul>
+        <li><a href="#11-移除对象上的一些属性-omit">1.1 移除对象上的一些属性-omit</a></li>
+        <li><a href="#12-选择对象上的一些属性-pick">1.2 选择对象上的一些属性-pick</a></li>
+        <li><a href="#13-对象的深拷贝-clonedeep">1.3 对象的深拷贝-cloneDeep</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-数组">2 数组</a>
+      <ul>
+        <li><a href="#21-根据条件去除某个元素-reject">2.1 根据条件去除某个元素-reject</a></li>
+        <li><a href="#22-数组转换为对象-keyby">2.2 数组转换为对象-keyBy</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-语言">3 语言</a>
+      <ul>
+        <li><a href="#31-判断是否为空-isempty">3.1 判断是否为空-isEmpty</a></li>
+        <li><a href="#32-防抖">3.2 防抖</a></li>
+        <li><a href="#33-节流">3.3 节流</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-数学">4 数学</a>
+      <ul>
+        <li><a href="#41-随机数-random">4.1 随机数-random</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="0-准备">0 准备</h1>
+<ul>
+<li>下载：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">yarn add lodash / npm i lodash
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Node.js引入：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="mi">_</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;lodash&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="1-对象">1 对象</h1>
+<h2 id="11-移除对象上的一些属性-omit">1.1 移除对象上的一些属性-omit</h2>
+<ul>
+<li>
+<p>把数据提交给接口，很多情况下，都要移除只在前端用，但接口不需要的属性。</p>
+</li>
+<li>
+<p>API：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="mi">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span> <span class="p">[</span><span class="nx">props</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>参数说明：</p>
+<p><code>object (Object)</code>: 来源对象。</p>
+<p><code>[props] (...(string|string[]))</code>: 要被忽略的属性。（注：单独指定或指定在数组中。）</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;gsq&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span><span class="mi">19</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="nx">hobbies</span><span class="o">:</span><span class="s1">&#39;play&#39;</span> <span class="p">}</span>
+<span class="mi">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">obj</span><span class="p">,[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">])</span> <span class="c1">// { gender:&#39;male&#39;, hobbies:&#39;play&#39; }
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="12-选择对象上的一些属性-pick">1.2 选择对象上的一些属性-pick</h2>
+<ul>
+<li>
+<p>选择对象上的一些属性和移除属性操作相反。</p>
+</li>
+<li>
+<p>API：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="mi">_</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span> <span class="p">[</span><span class="nx">props</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>示例</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;gsq&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span><span class="mi">19</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="nx">hobbies</span><span class="o">:</span><span class="s1">&#39;play&#39;</span> <span class="p">}</span>
+<span class="mi">_</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span><span class="nx">obj</span><span class="p">,[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">])</span> <span class="c1">// { name:&#39;gsq&#39;, age:19 }
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="13-对象的深拷贝-clonedeep">1.3 对象的深拷贝-cloneDeep</h2>
+<ul>
+<li>
+<p>对象的深度克隆是很困难的。 <code>JSON.parse(JSON.stringify(obj))</code> 可以实现对象的深度克隆。但有如下缺点:</p>
+<ul>
+<li>值类型是 undefined、function、symbol 的属性会被过滤掉。</li>
+<li>是类型是 set、map 会被被处理成空对象。</li>
+<li>对象的属性间出现循环引用时，会报错。</li>
+</ul>
+</li>
+<li>
+<p>API：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="mi">_</span><span class="p">.</span><span class="nx">cloneDeep</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>示例：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">f</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="p">},</span> <span class="nx">u</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="p">}</span>
+<span class="kr">const</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">obj2</span><span class="p">))</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;r1&#39;</span><span class="p">,</span> <span class="nx">r1</span><span class="p">)</span><span class="c1">// r1 { a: 1 }
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">r2</span> <span class="o">=</span> <span class="mi">_</span><span class="p">.</span><span class="nx">cloneDeep</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;r2&#39;</span><span class="p">,</span> <span class="nx">r2</span><span class="p">)</span><span class="c1">// r2 { f: [Function: f], u: undefined, a: 1 }
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="2-数组">2 数组</h1>
+<h2 id="21-根据条件去除某个元素-reject">2.1 根据条件去除某个元素-reject</h2>
+<ul>
+<li>
+<p>根据条件删除数组中某个元素（与fliter相反）</p>
+</li>
+<li>
+<p>API：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="mi">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">collection</span><span class="p">,</span> <span class="nx">identity</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>参数说明</p>
+<p>identity：判断依据，可以是数组、对象、字符串或回调函数</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="s1">&#39;user&#39;</span><span class="o">:</span> <span class="s1">&#39;gsq&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">36</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="s1">&#39;user&#39;</span><span class="o">:</span> <span class="s1">&#39;zs&#39;</span><span class="p">,</span>   <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span>
+<span class="p">];</span>
+ 
+<span class="mi">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!</span><span class="nx">o</span><span class="p">.</span><span class="nx">active</span><span class="p">;</span> <span class="p">});</span>
+<span class="c1">// [ { user: &#39;zs&#39;, age: 40, active: true } ]
+</span><span class="c1"></span> 
+<span class="mi">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
+<span class="c1">// [ { user: &#39;gsq&#39;, age: 36, active: false } ]
+</span><span class="c1"></span>
+<span class="mi">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="kc">false</span><span class="p">]);</span>
+<span class="c1">// [ { user: &#39;zs&#39;, age: 40, active: true } ]
+</span><span class="c1"></span> 
+<span class="mi">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="p">);</span>
+<span class="c1">// [ { user: &#39;gsq&#39;, age: 36, active: false } ]
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="22-数组转换为对象-keyby">2.2 数组转换为对象-keyBy</h2>
+<ul>
+<li>
+<p>以某个属性为键，转换数组为对象</p>
+</li>
+<li>
+<p>API：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">_.keyBy(collection, key)
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>参数说明：</p>
+<p>collection：Array | Object</p>
+<p>key：Array | Function | Object | string</p>
+<p>返回新的对象</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="s1">&#39;dir&#39;</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="o">:</span> <span class="mi">97</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="s1">&#39;dir&#39;</span><span class="o">:</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="o">:</span> <span class="mi">100</span> <span class="p">}</span>
+<span class="p">];</span>
+ 
+<span class="mi">_</span><span class="p">.</span><span class="nx">keyBy</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// { &#39;a&#39;: { &#39;dir&#39;: &#39;left&#39;, &#39;code&#39;: 97 }, &#39;d&#39;: { &#39;dir&#39;: &#39;right&#39;, &#39;code&#39;: 100 } }
+</span><span class="c1"></span> 
+<span class="mi">_</span><span class="p">.</span><span class="nx">keyBy</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="s1">&#39;dir&#39;</span><span class="p">);</span>
+<span class="c1">// { &#39;left&#39;: { &#39;dir&#39;: &#39;left&#39;, &#39;code&#39;: 97 }, &#39;right&#39;: { &#39;dir&#39;: &#39;right&#39;, &#39;code&#39;: 100 } }
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="3-语言">3 语言</h1>
+<h2 id="31-判断是否为空-isempty">3.1 判断是否为空-isEmpty</h2>
+<ul>
+<li>检查 <code>value</code> 是否为一个空对象，集合，映射或者set。 判断的依据是除非是有枚举属性的对象，length 大于 0 的 arguments object, array, string 或类jquery选择器。</li>
+<li>API：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">_.isEmpty(value)
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>示例：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 以上均返回true
+</span><span class="c1"></span><span class="mi">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<span class="mi">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="mi">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">([])</span>
+<span class="mi">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">({})</span>
+<span class="mi">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>
+<span class="mi">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">(</span><span class="kc">undefined</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="32-防抖">3.2 防抖</h2>
+<h2 id="33-节流">3.3 节流</h2>
+<h1 id="4-数学">4 数学</h1>
+<h2 id="41-随机数-random">4.1 随机数-random</h2>
+<ul>
+<li>产生一个包括 <code>lower</code> 与 <code>upper</code> 之间的数。 如果只提供一个参数返回一个<code>0</code>到提供数之间的数。 如果 <code>floating</code> 设为 <code>true</code>，或者 <code>lower</code> 或 <code>upper</code> 是浮点数，结果返回浮点数。</li>
+<li>API:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">_.random([lower=0], [upper=1], [floating])
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>参数说明</p>
+<p><code>[lower=0]</code> <em>(number)</em>: 下限。</p>
+<p><code>[upper=1]</code> <em>(number)</em>: 上限。</p>
+<p><code>[floating]</code> <em>(boolean)</em>: 指定是否返回浮点数。</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="mi">_</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="c1">// =&gt; an integer between 0 and 5
+</span><span class="c1"></span><span class="mi">_</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="c1">// =&gt; also an integer between 0 and 5
+</span><span class="c1"></span><span class="mi">_</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="c1">// =&gt; a floating-point number between 0 and 5
+</span><span class="c1"></span><span class="mi">_</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">);</span>
+<span class="c1">// =&gt; a floating-point number between 1.2 and 5.2
+</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-09-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/javascript/">JavaScript</a>
+          <a href="/tags/lodash/">lodash</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/dva%E6%95%B0%E6%8D%AE%E6%B5%81/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Dva数据流</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/">
+            <span class="next-text nav-default">Web性能优化-基础</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

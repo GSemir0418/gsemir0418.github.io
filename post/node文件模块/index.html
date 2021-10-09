@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Node文件模块 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 待办事项命令行程序需求 功能： 可以列出所有的todo； 新增、编辑、删除todo； 修改todo状态为已完成/未完成 命令 1 2 3 t t add 任务名 t clear 2" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Node文件模块" />
+<meta property="og:description" content="1 待办事项命令行程序需求 功能： 可以列出所有的todo； 新增、编辑、删除todo； 修改todo状态为已完成/未完成 命令 1 2 3 t t add 任务名 t clear 2" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-25T14:40:55+08:00" />
+<meta property="article:modified_time" content="2021-06-25T00:00:00+08:00" />
+
+<meta itemprop="name" content="Node文件模块">
+<meta itemprop="description" content="1 待办事项命令行程序需求 功能： 可以列出所有的todo； 新增、编辑、删除todo； 修改todo状态为已完成/未完成 命令 1 2 3 t t add 任务名 t clear 2"><meta itemprop="datePublished" content="2021-06-25T14:40:55+08:00" />
+<meta itemprop="dateModified" content="2021-06-25T00:00:00+08:00" />
+<meta itemprop="wordCount" content="2441">
+<meta itemprop="keywords" content="nodejs,fs," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Node文件模块"/>
+<meta name="twitter:description" content="1 待办事项命令行程序需求 功能： 可以列出所有的todo； 新增、编辑、删除todo； 修改todo状态为已完成/未完成 命令 1 2 3 t t add 任务名 t clear 2"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Node文件模块</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-25 </span>
+        <div class="post-category">
+            <a href="/categories/nodejs%E5%85%A8%E8%A7%A3/"> Nodejs全解 </a>
+            </div>
+          <span class="more-meta"> 2441 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-待办事项命令行程序需求">1 待办事项命令行程序需求</a></li>
+    <li><a href="#2-创建命令行项目">2 创建命令行项目</a></li>
+    <li><a href="#3-实现创建任务功能">3 实现创建任务功能</a>
+      <ul>
+        <li><a href="#31-nodejs读取文件api">3.1 <code>nodejs</code>读取文件api：</a></li>
+        <li><a href="#32-获取home路径下的todo文件">3.2 获取home路径下的.todo文件</a></li>
+        <li><a href="#33-nodejs写文件api">3.3 <code>nodejs</code>写文件api</a></li>
+        <li><a href="#34-创建任务功能初步实现">3.4 创建任务功能初步实现</a></li>
+        <li><a href="#35-优化代码">3.5 优化代码</a></li>
+      </ul>
+    </li>
+    <li><a href="#4实现其他功能">4.实现其他功能</a>
+      <ul>
+        <li><a href="#41-清除全部任务">4.1 清除全部任务</a></li>
+        <li><a href="#42-交互列表及交互功能实现">4.2 交互列表及交互功能实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-发布至npm">5 发布至npm</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-待办事项命令行程序需求">1 待办事项命令行程序需求</h1>
+<ul>
+<li>
+<p>功能：</p>
+<ul>
+<li>
+<p>可以列出所有的todo；</p>
+</li>
+<li>
+<p>新增、编辑、删除todo；</p>
+</li>
+<li>
+<p>修改todo状态为已完成/未完成</p>
+</li>
+</ul>
+</li>
+<li>
+<p>命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">t
+t add 任务名
+t clear
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="2-创建命令行项目">2 创建命令行项目</h1>
+<ul>
+<li>空文件夹下，执行：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">yarn init -y
+</code></pre></td></tr></table>
+</div>
+</div><p><code>-y</code>表示跳过交互式对话（确定版本等信息），根据默认值生成<code>package.json</code></p>
+<ul>
+<li>创建<code>index.js</code>，引入<code>commanderjs</code>库，添加<code>add</code>和<code>clear</code>子命令：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">program</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;commander&#39;</span><span class="p">);</span>
+
+<span class="nx">program</span>
+	<span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s1">&#39;-x,--xxx&#39;</span><span class="p">,</span> <span class="s1">&#39;desc of x&#39;</span><span class="p">)</span><span class="c1">// x选项 即在node index命令后输入的选项
+</span><span class="c1"></span><span class="nx">program</span>
+	<span class="p">.</span><span class="nx">command</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">)</span><span class="c1">// 子命令
+</span><span class="c1"></span>	<span class="p">.</span><span class="nx">description</span><span class="p">(</span><span class="s1">&#39;add a task&#39;</span><span class="p">)</span><span class="c1">// 子命令描述
+</span><span class="c1"></span>	<span class="p">.</span><span class="nx">action</span><span class="p">((...</span><span class="nx">args</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="c1">//拿到用户输入的所有字符串参数
+</span><span class="c1"></span>    	<span class="kr">const</span> <span class="nx">words</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="c1">// 由于最后一个参数默认是command对象，因此需要对参数进行预处理
+</span><span class="c1"></span>	<span class="p">})</span>
+<span class="nx">program</span>
+	<span class="p">.</span><span class="nx">command</span><span class="p">(</span><span class="s1">&#39;clear&#39;</span><span class="p">)</span><span class="c1">// 子命令
+</span><span class="c1"></span>	<span class="p">.</span><span class="nx">description</span><span class="p">(</span><span class="s1">&#39;clear all tasks&#39;</span><span class="p">)</span><span class="c1">// 子命令描述
+</span><span class="c1"></span>	<span class="p">.</span><span class="nx">action</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    	<span class="c1">// 执行clear操作
+</span><span class="c1"></span>	<span class="p">})</span>
+
+<span class="nx">program</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-实现创建任务功能">3 实现创建任务功能</h1>
+<p>一般命令行程序的入口文件为<code>cli.js</code>，而<code>index.js</code>中写主要功能实现，因此将index重命名为<code>cli.js</code></p>
+<h2 id="31-nodejs读取文件api">3.1 <code>nodejs</code>读取文件api：</h2>
+<p><img src="/nodefs/image-20210625131432414.png" alt="image-20210625131432414"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>回调会传入两个参数 <code>(err, data)</code>，其中 <code>data</code> 是文件的内容。</p>
+<p>如果没有指定 <code>encoding</code>，则返回原始的 buffer。</p>
+<p><code>options</code> 中的当<code>flag</code> 选项采用字符串时，可用以下标志：</p>
+<ul>
+<li><code>'a'</code> - 打开文件用于追加。如果文件不存在，则创建该文件。</li>
+<li><code>'ax'</code> - 与 <code>'a'</code> 相似，但如果路径已存在则失败。</li>
+<li><code>'a+'</code> - 打开文件用于读取和追加。如果文件不存在，则创建该文件。</li>
+<li><code>'ax+'</code> - 与 <code>'a+'</code> 相似，但如果路径已存在则失败。</li>
+<li><code>'as'</code> - 以同步模式打开文件用于追加。如果文件不存在，则创建该文件。</li>
+<li><code>'as+'</code> - 以同步模式打开文件用于读取和追加。如果文件不存在，则创建该文件。</li>
+<li><code>'r'</code> - 打开文件用于读取。如果文件不存在，则出现异常。</li>
+<li><code>'r+'</code> - 打开文件用于读取和写入。如果文件不存在，则出现异常。</li>
+<li><code>'rs+'</code> - 以同步模式打开文件用于读取和写入。指示操作系统绕过本地的文件系统缓存。</li>
+</ul>
+<h2 id="32-获取home路径下的todo文件">3.2 获取home路径下的.todo文件</h2>
+<ul>
+<li><code>nodejs</code>获取系统home目录路径：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">homedir</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;os&#39;</span><span class="p">).</span><span class="nx">homedir</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>nodejs</code>获取用户home目录路径，如果未获取到，则使用系统home路径</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">home</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">HOME</span> <span class="o">||</span> <span class="nx">homedir</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>处理路径格式问题，以适配任意系统：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">dbPath</span> <span class="o">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">home</span><span class="p">,</span><span class="s1">&#39;.todo&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="33-nodejs写文件api">3.3 <code>nodejs</code>写文件api</h2>
+<p><img src="/nodefs/image-20210625133113444.png" alt="image-20210625133113444"></p>
+<h2 id="34-创建任务功能初步实现">3.4 创建任务功能初步实现</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">)</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="p">(</span><span class="nx">title</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">dbPath</span><span class="p">,</span> <span class="p">{</span><span class="nx">flag</span><span class="o">:</span><span class="s1">&#39;a+&#39;</span><span class="p">},</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">}</span>
+		<span class="k">else</span> <span class="p">{</span>
+			<span class="kd">let</span> <span class="nx">list</span>
+            <span class="c1">// 如果文件是空的，则创建一个数组来存数据
+</span><span class="c1"></span>			<span class="k">try</span> <span class="p">{</span>
+              	<span class="c1">// 尝试让list等于data中的数据
+</span><span class="c1"></span>				<span class="nx">list</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span><span class="c1">// 字符串=&gt;数组对象
+</span><span class="c1"></span>			<span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">error2</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// 如果出错（说明data为空，解析失败），则让list成为空数组
+</span><span class="c1"></span>				<span class="nx">list</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="p">}</span>
+            <span class="c1">// 在list中添加一个任务
+</span><span class="c1"></span>			<span class="kr">const</span> <span class="nx">task</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">done</span><span class="o">:</span><span class="kc">false</span> <span class="p">}</span>
+			<span class="nx">list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">task</span><span class="p">)</span>
+			<span class="kr">const</span> <span class="nx">string</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringfy</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span><span class="c1">// 数组对象=&gt;字符串
+</span><span class="c1"></span>            <span class="c1">// 储存任务到文件
+</span><span class="c1"></span>			<span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="nx">dbPath</span><span class="p">,</span> <span class="nx">string</span><span class="o">+</span><span class="s1">&#39;\n&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">error3</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+				<span class="k">if</span><span class="p">(</span><span class="nx">error3</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">}</span>
+			<span class="p">})</span>
+		<span class="p">}</span>
+	<span class="p">})</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="35-优化代码">3.5 优化代码</h2>
+<ul>
+<li>理清功能需求，从而<strong>面向接口</strong>编程，最终优化结果：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./db.js&#39;</span><span class="p">)</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="p">(</span><span class="nx">title</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 读取之前的任务
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">read</span><span class="p">()</span>
+  <span class="c1">// 添加一个title任务
+</span><span class="c1"></span>  <span class="nx">list</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">done</span><span class="o">:</span> <span class="kc">false</span> <span class="p">})</span>
+  <span class="c1">// 存储任务到文件
+</span><span class="c1"></span>  <span class="nx">db</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span>
+
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>创建<code>db</code>对象，内置读写两个接口，并使用<code>Promise</code>进行封装，db.js:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// 读文件接口
+</span><span class="c1"></span>    <span class="nx">read</span><span class="p">(</span><span class="nx">path</span> <span class="o">=</span> <span class="nx">dbPath</span><span class="p">)</span> <span class="p">{</span><span class="c1">// 指定默认参数
+</span><span class="c1"></span>        <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="c1">// 读取之前的任务
+</span><span class="c1"></span>            <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="p">{</span> <span class="nx">flag</span><span class="o">:</span> <span class="s1">&#39;a+&#39;</span> <span class="p">},</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span> <span class="nx">reject</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
+                <span class="kd">let</span> <span class="nx">list</span>
+                <span class="k">try</span> <span class="p">{</span>
+                    <span class="nx">list</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+
+                <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">list</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="c1">// 这是个异步函数，list不能直接返回，因为这是存在于回调函数中的
+</span><span class="c1"></span>                <span class="p">}</span>
+                <span class="nx">resolve</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span><span class="c1">// 如果成功了，则解析并返回list给外面
+</span><span class="c1"></span>            <span class="p">})</span>
+        <span class="p">})</span>
+    <span class="p">},</span>
+	<span class="c1">// 写文件接口
+</span><span class="c1"></span>    <span class="nx">write</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">dbPath</span><span class="p">)</span> <span class="p">{</span><span class="c1">// 指定默认参数
+</span><span class="c1"></span>        <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="kr">const</span> <span class="nx">string</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span>
+            <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">string</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span>  <span class="k">return</span> <span class="nx">reject</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> 
+                <span class="c1">// return表示如果到这个if里面的话就终止，不用往后面走了
+</span><span class="c1"></span>                <span class="nx">resolve</span><span class="p">()</span>
+            <span class="p">})</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">db</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4实现其他功能">4.实现其他功能</h1>
+<h2 id="41-清除全部任务">4.1 清除全部任务</h2>
+<p>实际上就是写一个空数组将其覆盖即可，同样也是异步的:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">clear</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">write</span><span class="p">([])</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="42-交互列表及交互功能实现">4.2 交互列表及交互功能实现</h2>
+<ul>
+<li>引入制作命令行交互功能的库：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">inquirer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;inquirer&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>用户在执行<code>node cli</code>命令时，进入交互界面，则需要对用户输入的命令条数进行判断
+<ul>
+<li><code>process.argv</code>能够获取到用户输入的参数数组，在<code>cli.js</code>中对其长度进行判断：</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">api</span><span class="p">.</span><span class="nx">showAll</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在<code>index.js</code>中编写主要实现逻辑</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">showAll</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// 读取之前的任务
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">read</span><span class="p">()</span>
+    <span class="c1">// 打印之前的任务，并变为可操作列表
+</span><span class="c1"></span>    <span class="nx">printTasks</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>交互列表首页：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">printTasks</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">inquirer</span><span class="c1">// 制作控制台交互功能的库
+</span><span class="c1"></span>        <span class="p">.</span><span class="nx">prompt</span><span class="p">({</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;list&#39;</span><span class="p">,</span>
+            <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="c1">// 
+</span><span class="c1"></span>            <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;请选择你想操作的任务：&#39;</span><span class="p">,</span>
+            <span class="nx">choices</span><span class="o">:</span> <span class="p">[</span>
+                <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;退出&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;-1&#39;</span> <span class="p">},</span>
+                <span class="p">...</span><span class="nx">list</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">task</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="sb">`</span><span class="si">${</span><span class="nx">task</span><span class="p">.</span><span class="nx">done</span> <span class="o">?</span> <span class="s1">&#39;[x]&#39;</span> <span class="o">:</span> <span class="s1">&#39;[_]&#39;</span><span class="si">}</span><span class="sb">-</span><span class="si">${</span><span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="sb">-</span><span class="si">${</span><span class="nx">task</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="nx">index</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="p">}</span> <span class="p">}),</span>
+                <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;+创建任务&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;-2&#39;</span> <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">answer</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="kr">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">index</span><span class="p">)</span><span class="c1">// 把选中的index转换成数字
+</span><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// 说明选中了一个任务，继续进入操作列表
+</span><span class="c1"></span>                <span class="nx">askForAction</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">===</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// 说明选择的是创建任务
+</span><span class="c1"></span>                <span class="nx">askForCreate</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>选中任务时的操作列表：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">askForAction</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">inquirer</span><span class="p">.</span><span class="nx">prompt</span><span class="p">({</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;list&#39;</span><span class="p">,</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;action&#39;</span><span class="p">,</span><span class="c1">// 用户选中后返回的value的名称
+</span><span class="c1"></span>        <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;请选择操作&#39;</span><span class="p">,</span>
+        <span class="nx">choices</span><span class="o">:</span> <span class="p">[</span>
+            <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;退出&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;quit&#39;</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;已完成&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;markAsDone&#39;</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;未完成&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;markAsUnDone&#39;</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;修改标题&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;updateTitle&#39;</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;删除任务&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;remove&#39;</span> <span class="p">},</span>
+        <span class="p">],</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">answer</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="s1">&#39;markAsDone&#39;</span><span class="o">:</span>
+                <span class="nx">list</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">done</span> <span class="o">=</span> <span class="kc">true</span>
+                <span class="nx">db</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="s1">&#39;markAsUnDone&#39;</span><span class="o">:</span>
+                <span class="nx">list</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">done</span> <span class="o">=</span> <span class="kc">false</span>
+                <span class="nx">db</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="s1">&#39;updateTitle&#39;</span><span class="o">:</span>
+                <span class="c1">// 更新标题需要一个输入框
+</span><span class="c1"></span>                <span class="nx">inquirer</span><span class="p">.</span><span class="nx">prompt</span><span class="p">({</span>
+                    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span>
+                    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span>
+                    <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;设置新标题：&#39;</span><span class="p">,</span>
+                    <span class="k">default</span><span class="o">:</span> <span class="nx">list</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">title</span><span class="c1">// 默认值为原标题
+</span><span class="c1"></span>                <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">answer1</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                    <span class="nx">list</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">title</span> <span class="o">=</span> <span class="nx">answer1</span><span class="p">.</span><span class="nx">title</span>
+                    <span class="nx">db</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span>
+                <span class="p">})</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="s1">&#39;remove&#39;</span><span class="o">:</span>
+                <span class="nx">list</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="nx">db</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;删除成功！&#39;</span><span class="p">)</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>选择创建任务时的操作：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">askForCreate</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">inquirer</span><span class="p">.</span><span class="nx">prompt</span><span class="p">({</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span>
+        <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;输入任务标题：&#39;</span>
+    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">answer</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">list</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span> <span class="nx">title</span><span class="o">:</span> <span class="nx">answer</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span> <span class="nx">done</span><span class="o">:</span> <span class="kc">false</span> <span class="p">})</span>
+        <span class="nx">db</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="5-发布至npm">5 发布至npm</h1>
+<ul>
+<li>修改<code>package.json</code>，添加<code>”bin“</code>，指定命令行程序最终命令是什么；添加”files“，声明哪些文件在发布时是有用的。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;bin&#34;</span><span class="err">:</span><span class="p">{</span>
+	<span class="nt">&#34;t&#34;</span><span class="p">:</span><span class="s2">&#34;cli.js&#34;</span>
+<span class="p">}</span><span class="err">,</span>
+<span class="s2">&#34;files&#34;</span><span class="err">:</span><span class="p">[</span> <span class="s2">&#34;*.js&#34;</span> <span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在<code>cli.js</code>第一行加入<code>shebang</code>，告诉命令行使用什么来运行</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="ch">#!/usr/bin/env node
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>正式发布前，需要使用yrm或nrm将淘宝源修改为原始源</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">nrm ls
+nrm use npm
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>登录</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">npm adduser / yarn login
+yarn publish / npm publish
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>下载</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">yarn global add node-todo-gsq 
+npm i -g node-todo-gsq
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>卸载</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">yarn global remove node-todo-gsq
+npm uninstall -g node-todo-gsq
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>升级</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">yarn upgrade node-todo-gsq
+npm update node-todo-gsq
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>或安装时指定版本</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">npm i -g node-todo-gsq@0.0.3
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-06-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nodejs/">nodejs</a>
+          <a href="/tags/fs/">fs</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/reacthooks/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">初识Hooks</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+            <span class="next-text nav-default">React组件生命周期</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

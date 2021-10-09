@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Web性能优化-基础 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip hosts相当于手动给操作系统添加i" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Web性能优化-基础" />
+<meta property="og:description" content="1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip hosts相当于手动给操作系统添加i" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-02T14:34:53+08:00" />
+<meta property="article:modified_time" content="2021-09-02T00:00:00+08:00" />
+
+<meta itemprop="name" content="Web性能优化-基础">
+<meta itemprop="description" content="1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip hosts相当于手动给操作系统添加i"><meta itemprop="datePublished" content="2021-09-02T14:34:53+08:00" />
+<meta itemprop="dateModified" content="2021-09-02T00:00:00+08:00" />
+<meta itemprop="wordCount" content="1258">
+<meta itemprop="keywords" content="前端,web,HTTP," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Web性能优化-基础"/>
+<meta name="twitter:description" content="1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip hosts相当于手动给操作系统添加i"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Web性能优化-基础</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-09-02 </span>
+        <div class="post-category">
+            <a href="/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"> web性能优化 </a>
+            </div>
+          <span class="more-meta"> 1258 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-dns与tcp">1 DNS与TCP</a>
+      <ul>
+        <li><a href="#11-dns与hosts">1.1 DNS与hosts</a></li>
+        <li><a href="#12-三次握手">1.2 三次握手</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-http超文本传输协议">2 HTTP（超文本传输协议）</a>
+      <ul>
+        <li><a href="#21-http请求">2.1 HTTP请求</a></li>
+        <li><a href="#22-http响应">2.2 HTTP响应</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-浏览器渲染原理">3 浏览器渲染原理</a>
+      <ul>
+        <li><a href="#31-html解析过程">3.1 HTML解析过程</a></li>
+        <li><a href="#32-async和defer的区别">3.2 async和defer的区别</a></li>
+        <li><a href="#33-js与css的阻塞关系">3.3 js与css的阻塞关系</a></li>
+        <li><a href="#34-页面渲染原理布局绘制合成">3.4 页面渲染原理：布局、绘制、合成</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-dns与tcp">1 DNS与TCP</h1>
+<h2 id="11-dns与hosts">1.1 DNS与hosts</h2>
+<p>DNS（Domain Name System）：域名系统，每个域名对应一个ip</p>
+<p>hosts相当于手动给操作系统添加ip缓存</p>
+<h2 id="12-三次握手">1.2 三次握手</h2>
+<p>TCP（Transmission Control Protocol）：传输控制协议</p>
+<p>建立TCP连接过程的三次握手，x、y一般从0开始</p>
+<ol>
+<li>
+<p>A能发</p>
+</li>
+<li>
+<p>B能收，B能发</p>
+</li>
+<li>
+<p>A能收（为什么一定需要第三次）</p>
+</li>
+</ol>
+<p>关闭TCP连接过程的四次挥手，x、y一般不为0</p>
+<ol>
+<li>A：我请求结束了</li>
+<li>B：我知道你请求结束了</li>
+<li>B：我响应结束了</li>
+<li>A：我知道你响应结束了</li>
+</ol>
+<p>为什么B不能一起发送呢：因为第二次和第三次中间，服务端可能夹杂其他响应数据（B可能还没说完）</p>
+<p>不一定是客户端发起FIN，服务端也可以发起FIN</p>
+<h1 id="2-http超文本传输协议">2 HTTP（超文本传输协议）</h1>
+<h2 id="21-http请求">2.1 HTTP请求</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">请求行</td>
+<td>动词<code>(GET、POST、PUT、DELETE..)</code> URL HTTP/1.1<code>(HTTP版本号)</code></td>
+</tr>
+<tr>
+<td style="text-align:center">请求头</td>
+<td>Accept：text/html <code>期望接受数据的格式</code><br/>Host：baidu.com <code>用户请求的域名或ip</code><br/>Connection：keep-alive<br/>Content-Type：application/json <code>请求体格式</code><br/>&hellip;</td>
+</tr>
+<tr>
+<td style="text-align:center">回车换行</td>
+<td>\r\n</td>
+</tr>
+<tr>
+<td style="text-align:center">请求体</td>
+<td>{&ldquo;name&rdquo; : &ldquo;gsq&rdquo;}</td>
+</tr>
+</tbody>
+</table>
+<h2 id="22-http响应">2.2 HTTP响应</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th>示例及解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">响应行</td>
+<td>HTTP/1.1 200<code>(状态码)</code> OK<code>(状态码的解释)</code></td>
+</tr>
+<tr>
+<td style="text-align:center">响应头</td>
+<td>Content-Type：text/html<code>(请求体格式或语法)</code><br/>Set-Cookie：session.id = xxx; expires&hellip;<code>(服务器在客户端种下一个cookie)</code><br/>Connection：keep-alive<br/>Content-Encoding：gzip<br/>&hellip;</td>
+</tr>
+<tr>
+<td style="text-align:center">回车换行</td>
+<td>\r\n</td>
+</tr>
+<tr>
+<td style="text-align:center">响应体</td>
+<td>{&ldquo;name&rdquo; : &ldquo;gsq&rdquo;}</td>
+</tr>
+</tbody>
+</table>
+<h1 id="3-浏览器渲染原理">3 浏览器渲染原理</h1>
+<h2 id="31-html解析过程">3.1 HTML解析过程</h2>
+<p>下载与解析html和css的过程可以是同步的，互不影响</p>
+<p>但js的下载与执行会阻塞html的解析</p>
+<p>​	当执行js时，可能会修改dom树</p>
+<p>​	解析html是一行一行的，必须要下载好了执行完毕才能继续，因此下载的过程也会阻塞html的解析（浏览器没有做优化）</p>
+<h2 id="32-async和defer的区别">3.2 async和defer的区别</h2>
+<p>defer（几乎等价于type=&lsquo;module&rsquo;）</p>
+<p>defer让js的下载和执行过程与html的解析可以同步进行，不会阻塞html的解析，并保证js的执行是在html解析完成之后到DOM ready事件之前进行</p>
+<p>如果有多个defer的js，无论下载先后，总会按照标签顺序执行</p>
+<p>实际工作中经常使用</p>
+<p>async</p>
+<p>async也会让js的下载和执行过程与html的解析可以同步进行，但js的执行是会在什么时候下载好什么时候执行的，但执行过程仍可能会影响html解析，可能在DOM ready事件之前，也可能在事件之后。总之，async将js的下载与解析完全分离，如果有多个async，下载与执行的过程也是完全分离的</p>
+<h2 id="33-js与css的阻塞关系">3.3 js与css的阻塞关系</h2>
+<p>css的下载过程和解析过程会影响js的执行过程</p>
+<p>因为js需要读取css的解析结果，例如css最后一行写了div1的高度，而js恰好要获取div1的高度，所以要等css下载解析后才能执行</p>
+<h2 id="34-页面渲染原理布局绘制合成">3.4 页面渲染原理：布局、绘制、合成</h2>
+<p>reflow repaint 合成是始终在进行的</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-09-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="/tags/web/">web</a>
+          <a href="/tags/http/">HTTP</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Lodash常用方法整理</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/antdpro&#43;umi%E5%AE%9E%E6%88%98/">
+            <span class="next-text nav-default">umi&#43;AntdPro实战总结</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,42 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>HTTP on GSemir Blog</title>
+    <title>HTTP on Even - A super concise theme for Hugo</title>
     <link>https://gsemir0418.github.io/tags/http/</link>
-    <description>Recent content in HTTP on GSemir Blog</description>
+    <description>Recent content in HTTP on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Thu, 02 Sep 2021 14:34:53 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/http/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Web性能优化-基础</title>
-      <link>https://gsemir0418.github.io/posts/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</link>
+      <link>https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Thu, 02 Sep 2021 14:34:53 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</guid>
-      <description>1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip
-hosts相当于手动给操作系统添加ip缓存
-1.2 三次握手 TCP（Transmission Control Protocol）：传输控制协议
-建立TCP连接过程的三次握手，x、y一般从0开始
-  A能发
-  B能收，B能发
-  A能收（为什么一定需要第三次）
-  关闭TCP连接过程的四次挥手，x、y一般不为0
- A：我请求结束了 B：我知道你请求结束了 B：我响应结束了 A：我知道你响应结束了  为什么B不能一起发送呢：因为第二次和第三次中间，服务端可能夹杂其他响应数据（B可能还没说完）
-不一定是客户端发起FIN，服务端也可以发起FIN
-2 HTTP（超文本传输协议） 2.1 HTTP请求          请求行 动词(GET、POST、PUT、DELETE..) URL HTTP/1.1(HTTP版本号)   请求头 Accept：text/html 期望接受数据的格式Host：baidu.com 用户请求的域名或ipConnection：keep-aliveContent-Type：application/json 请求体格式&amp;hellip;   回车换行 \r\n   请求体 {&amp;ldquo;name&amp;rdquo; : &amp;ldquo;gsq&amp;rdquo;}    2.</description>
+      <guid>https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</guid>
+      <description>1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip hosts相当于手动给操作系统添加i</description>
     </item>
     
     <item>
       <title>NodeHTTP模块</title>
-      <link>https://gsemir0418.github.io/posts/nodehttp%E6%A8%A1%E5%9D%97/</link>
+      <link>https://gsemir0418.github.io/post/nodehttp%E6%A8%A1%E5%9D%97/</link>
       <pubDate>Wed, 30 Jun 2021 09:55:55 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/nodehttp%E6%A8%A1%E5%9D%97/</guid>
-      <description>0 准备工作 1 ts-node-dev  当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用，但非常适合用来学习  安装
-npm -g i ts-node-dev 要用npm安装 ，用yarn安装的话使用时会报错。。无法识别“ts-node-dev”命令，不知道为什么。
-2 VSCode配置 配置自动保存与保存后自动格式化：
-ctrl shift p打开首选项：打开设置(ui)，AutoSave修改为onFocusChange，搜索format，勾选Format On Save开启保存后自动格式化。
-3 curl  GET请求：curl -v url POST请求：curl -v -d “name=gsq&amp;quot; url 设置请求头：-H &#39;Content-Type:application/json&#39; 设置动词：-X PUT JSON请求：curl -d &#39;{&amp;quot;name&amp;quot;:&amp;quot;bob&amp;quot;}&#39; -H &#39;Content-Type:application/json&#39; url 后面会用到curl来构造请求  1 创建项目  初始化项目：  yarn init -y  安装@types/node声明文件  yarn add --dev @types/node  新建index.ts  // 引入http模块 import * as http from &amp;#39;http&amp;#39; // 用http创建server const server = http.</description>
+      <guid>https://gsemir0418.github.io/post/nodehttp%E6%A8%A1%E5%9D%97/</guid>
+      <description>0 准备工作 1 ts-node-dev 当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用</description>
     </item>
     
   </channel>

@@ -1,2443 +1,335 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>GSemir Blog</title>
+    <title>Even - A super concise theme for Hugo</title>
     <link>https://gsemir0418.github.io/</link>
-    <description>Recent content on GSemir Blog</description>
+    <description>Recent content on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 27 Sep 2021 13:47:24 +0800</lastBuildDate>
+    <language>en</language>
+    <lastBuildDate>Mon, 27 Sep 2021 13:47:24 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://gsemir0418.github.io/about/</link>
+      <pubDate>Sat, 09 Oct 2021 10:16:52 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/about/</guid>
+      <description>郭森权 浙江杭州 前端开发工程师 大连民族大学 计算机技术 硕士 浙江中控技术股份有限公司</description>
+    </item>
     
-        <atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Express全解</title>
+      <link>https://gsemir0418.github.io/post/express%E5%85%A8%E8%A7%A3/</link>
+      <pubDate>Mon, 27 Sep 2021 13:47:24 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/express%E5%85%A8%E8%A7%A3/</guid>
+      <description>0 REST.Client插件 用于在vscode中构造请求 新建以.http为后缀的文件： 1 2 3 4 5 6 7 8 9 10 11 @url=http://localhost:8080 --- @用于定义变量，{{}}使用</description>
+    </item>
     
+    <item>
+      <title>Dva数据流</title>
+      <link>https://gsemir0418.github.io/post/dva%E6%95%B0%E6%8D%AE%E6%B5%81/</link>
+      <pubDate>Wed, 15 Sep 2021 16:12:05 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/dva%E6%95%B0%E6%8D%AE%E6%B5%81/</guid>
+      <description>1 初识Dva 1.1 定义 dva 首先是一个基于redux和redux-saga的数据流方案，然后为了简化开发体验，dva 还额外内置了react-rout</description>
+    </item>
     
+    <item>
+      <title>Lodash常用方法整理</title>
+      <link>https://gsemir0418.github.io/post/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <pubDate>Thu, 02 Sep 2021 16:53:09 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>0 准备 下载： 1 yarn add lodash / npm i lodash Node.js引入： 1 const _ = require(&amp;#39;lodash&amp;#39;) 1 对象 1.1 移除对象上的一些属性-omit 把数据提交给接口，很多情况下，都要移除只在前</description>
+    </item>
     
-        <item>
-        <title>Express全解</title>
-        <link>https://gsemir0418.github.io/posts/express%E5%85%A8%E8%A7%A3/</link>
-        <pubDate>Mon, 27 Sep 2021 13:47:24 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/express%E5%85%A8%E8%A7%A3/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/express%E5%85%A8%E8%A7%A3/ -&lt;h1 id=&#34;0-restclient插件&#34;&gt;0 REST.Client插件&lt;/h1&gt;
-&lt;p&gt;用于在vscode中构造请求&lt;/p&gt;
-&lt;p&gt;新建以&lt;code&gt;.http&lt;/code&gt;为后缀的文件：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;@url=http://localhost:8080		--- @用于定义变量，{{}}使用此变量
-###								--- 以###作为请求分割符号
-get {{url}}/users 				--- 注意空格
-###
-post {{url}}
-Content-Type: application/json
-								--- 请求头与消息体直接有空行
-{
-  &amp;quot;username&amp;quot;: &amp;quot;gsq&amp;quot;,
-  &amp;quot;age&amp;quot;: 19
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;1-expressxxx&#34;&gt;1 express.xxx&lt;/h1&gt;
-&lt;p&gt;共7个api，主要是一些内置的中间件，例如用来自动处理不同类型的请求体数据&lt;/p&gt;
-&lt;h2 id=&#34;11-expressjson&#34;&gt;1.1 express.json()&lt;/h2&gt;
-&lt;p&gt;以监听消息体中数据流data事件的方式，拿到全部的json数据并自动解析成对象，放到request.body中&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; app = express()
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 尝试将此中间件注释后，观察控制台打印内容
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(express.json())
-
-app.use((req,res,next)=&amp;gt;{
-  console.log(req.body)
-  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;aaa&amp;#39;&lt;/span&gt;)
-  next()
-})
-
-app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;,()=&amp;gt;{
-  console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;listening 8080...&amp;#39;&lt;/span&gt;)
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;12-expressstatic&#34;&gt;1.2 express.static()&lt;/h2&gt;
-&lt;p&gt;指定静态资源路径，用户请求的静态数据首先从指定路径寻找，优先级高于其他中间件&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;...
-&lt;span style=&#34;color:#228b22&#34;&gt;// 指定静态资源目录，如果在xxx目录中找到了就发送给浏览器，如果没有就next()
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(express.&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;static&lt;/span&gt;(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;xxx&amp;#39;&lt;/span&gt;))
-
-app.use((req,res,next)=&amp;gt;{
-  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;aaa&amp;#39;&lt;/span&gt;)
-  next()
-})
-...
-&lt;span style=&#34;color:#228b22&#34;&gt;// 在.http文件中，构造请求静态资源
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;get {{url}}/index.html
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;13-expressrouter&#34;&gt;1.3 express.Router()&lt;/h2&gt;
-&lt;p&gt;实例化一个&lt;code&gt;mini-app&lt;/code&gt;，拥有app的部分api，方便路由管理与配置，具体用法见第五章节&lt;/p&gt;
-&lt;h1 id=&#34;2-appxxx&#34;&gt;2 app.xxx&lt;/h1&gt;
-&lt;p&gt;共22个api，主要负责应用设置（如模板配置、中间件、挂载路由等）&lt;/p&gt;
-&lt;h2 id=&#34;21-appuse&#34;&gt;2.1 app.use()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;将指定的中间件功能挂载到指定的路径上；当请求路径的基础与路径匹配时，中间件功能将被执行。&lt;/li&gt;
-&lt;li&gt;接收两个参数，第一个是挂载点（可选），第二个是中间件（函数）。中间件根据参数的多少决定是哪种类型：三个参数（req,res,next)为RequestHandler，四个参数（error,req,res,next）为错误处理（ErrorRequestHandler）。&lt;/li&gt;
-&lt;li&gt;app中最基本的api之一，&lt;code&gt;app.get()&lt;/code&gt;、&lt;code&gt;app.post()&lt;/code&gt;、&lt;code&gt;app.delete()&lt;/code&gt;、&lt;code&gt;app.put()&lt;/code&gt;等实际上都是&lt;code&gt;app.use()&lt;/code&gt;的语法糖&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;22-appset&#34;&gt;2.2 app.set()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;能够对应用进行一些特殊配置（此时要放在全部中间件的最上方）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;...
-&lt;span style=&#34;color:#228b22&#34;&gt;// 设置路径大小写敏感度
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;case sensitive routing&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// 设置render视图的路径，默认为views
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;views&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;xxx&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// 设置render的引擎
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;view engine&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ejs&amp;#39;&lt;/span&gt;)
-
-app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/testview&amp;#39;&lt;/span&gt;, (rep,res,next)=&amp;gt;{
-  res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;, { title:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;guosenquan&amp;#39;&lt;/span&gt; })
-  next()
-})
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;常用配置：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Property&lt;/th&gt;
-&lt;th&gt;Type&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;case sensitive routing&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Boolean&lt;/td&gt;
-&lt;td&gt;对请求路径大小写是否敏感，如/STYLE.css和/style.css&lt;/td&gt;
-&lt;td&gt;undefined(false)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;views&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;String or Array&lt;/td&gt;
-&lt;td&gt;指定render视图的路径&lt;/td&gt;
-&lt;td&gt;&amp;lsquo;views&amp;rsquo;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;view engine&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;String&lt;/td&gt;
-&lt;td&gt;指定render视图模板的引擎&lt;/td&gt;
-&lt;td&gt;undefined&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;strict routing&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Boolean&lt;/td&gt;
-&lt;td&gt;请求路径是否开启严格模式，例如&#39;/foo&amp;rsquo;和&#39;/foo/&amp;lsquo;不表示同一路径&lt;/td&gt;
-&lt;td&gt;undefined&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;ul&gt;
-&lt;li&gt;也可以设置一个变量，这个变量能够被&lt;code&gt;app.get(name)&lt;/code&gt;获取到&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;...
-app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;gsq&amp;#39;&lt;/span&gt;)
-
-app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/testset&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {
-  res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;, { title: app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;) })
-  next()
-})
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;23-applocal&#34;&gt;2.3 app.local&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;app.locals.xxx&lt;/code&gt;定义局部变量，其他中间件可以通过&lt;code&gt;req.app.locals.xxx&lt;/code&gt;来获取&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;...
-&lt;span style=&#34;color:#228b22&#34;&gt;// local一个局部变量
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.locals.title = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;gsq&amp;#39;&lt;/span&gt;
-
-app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/testlocal&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {
-  res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;, { title: req.app.locals.title })
-  next()
-})
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;24-appget&#34;&gt;2.4 app.get()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;app.get()只有一个参数（字符串）时，表示获取set的值&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; undefined
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;My Site&amp;#39;&lt;/span&gt;)
-app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; &amp;#34;My Site&amp;#34;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;app.get(&amp;lsquo;路径&amp;rsquo;,fn)表示处理get请求&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/style.css&amp;#39;&lt;/span&gt;, (rep, res, next) =&amp;gt; {
-  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;style.css&amp;#39;&lt;/span&gt;)
-  next()
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;3-reqxxx&#34;&gt;3 req.xxx&lt;/h1&gt;
-&lt;p&gt;共28个api，用来操作请求&lt;/p&gt;
-&lt;h2 id=&#34;31-reqapp&#34;&gt;3.1 req.app&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;获取到全局的app对象&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;32-reqbody&#34;&gt;3.2 req.body&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;返回请求的消息体&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;33-reqmethod&#34;&gt;3.3 req.method&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;返回请求方法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;34-reqparams&#34;&gt;3.4 req.params&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;此属性是一个对象，包含映射到指定路由“参数”的属性。例如，如果你有&lt;code&gt;route /user/:name&lt;/code&gt;，那么&amp;quot; name &amp;ldquo;属性是可用的&lt;code&gt;req.params.name&lt;/code&gt;。该对象默认为&lt;code&gt;{}&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/user/:id&amp;#39;&lt;/span&gt;,(req,res,next)=&amp;gt;{
-  res.send(req.params)
-  next()
-})
-&lt;span style=&#34;color:#228b22&#34;&gt;// app.http中构造请求
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;###&lt;/span&gt;
-get {{url}}/user/&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; { &amp;#34;id&amp;#34; : &amp;#34;1&amp;#34; }
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 注意，params只能读取路由中定义的字段，例如
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;get {{url}}/user/&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;?name=gsq
-&lt;span style=&#34;color:#228b22&#34;&gt;// 仍返回{ &amp;#34;id&amp;#34; : &amp;#34;1&amp;#34; }
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 同样在请求body中的内容也是读取不到的
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;35-reqquery&#34;&gt;3.5 req.query&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;获取上文中路由后面的（‘？’后面的）查询参数，可以使用&lt;code&gt;req.query&lt;/code&gt;，express会将查询参数封装为query对象：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/user/:id&amp;#39;&lt;/span&gt;,(req,res,next)=&amp;gt;{
-  res.send(req.query)
-  next()
-})
-&lt;span style=&#34;color:#228b22&#34;&gt;// app.http中构造请求
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;###&lt;/span&gt;
-get {{url}}/user/&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;?name=gsq&amp;amp;age=&lt;span style=&#34;color:#b452cd&#34;&gt;15&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; { &amp;#34;name&amp;#34; : &amp;#34;gsq&amp;#34;, &amp;#34;age&amp;#34; : &amp;#34;15&amp;#34; }
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 同样在请求body中的内容也是读取不到的
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;36-reqget&#34;&gt;3.6 req.get()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;获取请求头字段&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;req.get(&#39;Content-Type&#39;)
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;37-reqparam&#34;&gt;3.7 req.param()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;获取全部请求参数（仅限于路由中的）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/user/:id&amp;#39;&lt;/span&gt;,(req,res,next)=&amp;gt;{
-  res.send(req.param(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;))
-  next()
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;此方法被遗弃，express推荐使用&lt;code&gt;req.query&lt;/code&gt;结合&lt;code&gt;req.params&lt;/code&gt;来实现查询参数的获取。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;38-reqrange&#34;&gt;3.8 req.range()&lt;/h2&gt;
-&lt;p&gt;分块下载&lt;/p&gt;
-&lt;h1 id=&#34;4-resxxx&#34;&gt;4 res.xxx&lt;/h1&gt;
-&lt;p&gt;共24个api，用来操作响应&lt;/p&gt;
-&lt;h2 id=&#34;41-resset&#34;&gt;4.1 res.set()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;添加响应头参数。如果一次添加多行header，使用&lt;code&gt;object&lt;/code&gt;的形式传参&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;res.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Content-Type&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;)
-
-res.set({
-  &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Content-Type&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Content-Length&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;123&amp;#39;&lt;/span&gt;,
-  ETag: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;12345&amp;#39;&lt;/span&gt;
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;42-resappend&#34;&gt;4.2 res.append()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;将指定的值&lt;code&gt;附加&lt;/code&gt;到HTTP响应报头字段。如果字段还没有set，它将使用指定的值创建header。value参数可以是字符串或数组。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;res.append(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Link&amp;#39;&lt;/span&gt;, [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;lt;http://localhost/&amp;gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;lt;http://localhost:3000/&amp;gt;&amp;#39;&lt;/span&gt;])
-res.append(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Set-Cookie&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;foo=bar; Path=/; HttpOnly&amp;#39;&lt;/span&gt;)
-res.append(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Warning&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;199 Miscellaneous warning&amp;#39;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;注意:在res.append()之后调用res.set()将重置之前设置的头文件值。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;43-resget&#34;&gt;4.3 res.get()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;获取响应头字段值&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;44-resformat&#34;&gt;4.4 res.format()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;根据请求对象上的Accept字段存在时进行内容协商。它使用req. accept()根据根据质量值排序的可接受类型选择请求的处理程序。如果未指定Accept字段，则调用第一个回调。当没有找到匹配，服务器响应406 &amp;ldquo;Not Acceptable&amp;rdquo;，或调用默认回调。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;在选择回调时设置Content-Type响应头。但是，您可以在回调中使用res.set()或res.type()等方法更改此参数。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;下面的例子将在Accept报头字段设置为&lt;code&gt;&amp;quot;application/json&amp;quot;&lt;/code&gt;或&lt;code&gt;&amp;quot;*/json&amp;quot;&lt;/code&gt;时响应&lt;code&gt;{&amp;quot;message&amp;quot;: &amp;quot;hey&amp;quot;}&lt;/code&gt;(但是如果是&lt;code&gt;&amp;quot;*/*&amp;quot;&lt;/code&gt;，则响应将是&amp;quot;hey&amp;rdquo;)。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;res.format({
-  &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () {
-    res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hey&amp;#39;&lt;/span&gt;)
-  },
-
-  &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;text/html&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () {
-    res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;&amp;lt;p&amp;gt;hey&amp;lt;/p&amp;gt;&amp;#39;&lt;/span&gt;)
-  },
-
-  &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;application/json&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () {
-    res.send({ message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hey&amp;#39;&lt;/span&gt; })
-  },
-
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () {
-    &lt;span style=&#34;color:#228b22&#34;&gt;// log the request and respond with 406
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    res.status(&lt;span style=&#34;color:#b452cd&#34;&gt;406&lt;/span&gt;).send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Not Acceptable&amp;#39;&lt;/span&gt;)
-  }
-})
-&lt;span style=&#34;color:#228b22&#34;&gt;// app,http构造请求
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;###&lt;/span&gt;
-get {{url}}/test
-Accept: text/plain
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;45-reslocation&#34;&gt;4.5 res.location()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;设置响应头的location字段，表示重定向后的路由，一般配合状态码301，302或307等使用会自动跳转。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/oldroute&amp;#39;&lt;/span&gt;,(req, res, next) =&amp;gt; {
-	res.status(&lt;span style=&#34;color:#b452cd&#34;&gt;301&lt;/span&gt;).location(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/newroute&amp;#39;&lt;/span&gt;)
-    res.end()&lt;span style=&#34;color:#228b22&#34;&gt;// 要加上响应关闭的方法
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	next()
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;46-resredirect&#34;&gt;4.6 res.redirect()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;与location功能相同，但会自动重定向并跳转&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/oldroute&amp;#39;&lt;/span&gt;,(req, res, next) =&amp;gt; {
-	res.redirect(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/newroute&amp;#39;&lt;/span&gt;)
-	next()
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;47-resrender&#34;&gt;4.7 res.render()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;渲染视图并将呈现的HTML字符串发送给客户端。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 指定渲染模板的路径和模板引擎
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;views&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;xxx&amp;#39;&lt;/span&gt;)
-app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;view engine&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ejs&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 向客户端发送渲染后的视图
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 如果有回调函数, 模板就只能在回调中用send发送 
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (err, html) {
-  res.send(html)
-})
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 向渲染的页面中传入一个变量
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;, { name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Tobi&amp;#39;&lt;/span&gt; }, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (err, html) {
-  &lt;span style=&#34;color:#228b22&#34;&gt;// ...
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;48-ressend&#34;&gt;4.8 res.send()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;发送到客户端的响应体数据，不能与write连用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;49-ressendfile&#34;&gt;4.9 res.sendFile()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;发送到客户端的响应体数据，可以手动配置响应头等内容&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/file/:name&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res, next) {
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; options = {
-    root: path.join(&lt;span style=&#34;color:#b452cd&#34;&gt;__&lt;/span&gt;dirname, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;public&amp;#39;&lt;/span&gt;),
-    dotfiles: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;deny&amp;#39;&lt;/span&gt;,
-    headers: {
-      &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;x-timestamp&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#658b00&#34;&gt;Date&lt;/span&gt;.now(),
-      &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;x-sent&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;
-    }
-  }
-
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; fileName = req.params.name
-  res.sendFile(fileName, options, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (err) {
-    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (err) {
-      next(err)
-    } &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; {
-      console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Sent:&amp;#39;&lt;/span&gt;, fileName)
-    }
-  })
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;5-routerxxx&#34;&gt;5 router.xxx&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;router是express.Router()实例化的对象，可以视为小型的app对象。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;若将路由都使用app.use()写到app.js中，不利于路由的组织与管理：&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/users&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {})
-app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/users/:id&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {})
-app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/users/:id/edit&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {})
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;为方便路由的组织管理以及后期维护，可以将路由逻辑拆出来，放至&lt;code&gt;routes&lt;/code&gt;文件夹下。新建&lt;code&gt;user.js&lt;/code&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// 用express实例化router
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; router = express.Router()
-&lt;span style=&#34;color:#228b22&#34;&gt;// 路径可以去掉路由前缀users
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;router.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {
-  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;获取了全部users&amp;#39;&lt;/span&gt;)
-  next()
-})
-router.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/:id&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {
-  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;`获取了id=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;req.params.id&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;用户`&lt;/span&gt;)
-  next()
-})
-router.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/:id/edit&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {
-  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;`对id为&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;req.params.id&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;的用户进行编辑`&lt;/span&gt;)
-  next()
-})
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 导出users路由对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;module.exports = router
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;app.js中引入users路由对象&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; app = express()
-&lt;span style=&#34;color:#228b22&#34;&gt;// 引入users路由对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; users = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./routes/users&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// 挂载路由
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/users&amp;#39;&lt;/span&gt;, users)
-app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/express%E5%85%A8%E8%A7%A3/ - </description>
-        </item>
+    <item>
+      <title>Web性能优化-基础</title>
+      <link>https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Thu, 02 Sep 2021 14:34:53 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</guid>
+      <description>1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip hosts相当于手动给操作系统添加i</description>
+    </item>
     
+    <item>
+      <title>umi&#43;AntdPro实战总结</title>
+      <link>https://gsemir0418.github.io/post/antdpro&#43;umi%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Sun, 22 Aug 2021 22:51:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
+      <description>项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将</description>
+    </item>
     
+    <item>
+      <title>Express核心</title>
+      <link>https://gsemir0418.github.io/post/express%E6%A0%B8%E5%BF%83/</link>
+      <pubDate>Sun, 22 Aug 2021 21:09:57 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/express%E6%A0%B8%E5%BF%83/</guid>
+      <description>1 HTTP协议 1.1 curl基本用法 curl -s -v 网址 -s 是 silent，用于隐藏进度条 -v 是 verbose，用于打印全部header * 开头的是注释 &amp;gt; 开头的</description>
+    </item>
     
-        <item>
-        <title>Dva数据流</title>
-        <link>https://gsemir0418.github.io/posts/dva%E6%95%B0%E6%8D%AE%E6%B5%81/</link>
-        <pubDate>Wed, 15 Sep 2021 16:12:05 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/dva%E6%95%B0%E6%8D%AE%E6%B5%81/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/dva%E6%95%B0%E6%8D%AE%E6%B5%81/ -&lt;h1 id=&#34;1-初识dva&#34;&gt;1 初识Dva&lt;/h1&gt;
-&lt;h2 id=&#34;11-定义&#34;&gt;1.1 定义&lt;/h2&gt;
-&lt;p&gt;dva 首先是一个基于&lt;code&gt;redux&lt;/code&gt;和&lt;code&gt;redux-saga&lt;/code&gt;的&lt;strong&gt;数据流方案&lt;/strong&gt;，然后为了简化开发体验，dva 还额外内置了&lt;code&gt;react-router&lt;/code&gt;和&lt;code&gt;fetch&lt;/code&gt;，所以也可以理解为一个轻量级的应用框架。&lt;/p&gt;
-&lt;h2 id=&#34;12-dva数据流概念&#34;&gt;1.2 Dva数据流概念&lt;/h2&gt;
-&lt;p&gt;数据的改变发生通常是通过用户交互行为或者浏览器行为（如路由跳转等）触发的，当此类行为会改变数据的时候可以通过 &lt;code&gt;dispatch&lt;/code&gt; 发起一个 action，如果是同步行为会直接通过 &lt;code&gt;Reducers&lt;/code&gt; 改变 &lt;code&gt;State&lt;/code&gt; ，如果是异步行为（副作用）会先触发 &lt;code&gt;Effects&lt;/code&gt; 然后流向 &lt;code&gt;Reducers&lt;/code&gt; 最终改变 &lt;code&gt;State&lt;/code&gt;，所以在 dva 中，数据流向非常清晰简明。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./Dva.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;13-model层重要api&#34;&gt;1.3 model层重要API&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;namespace&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;model 的命名空间，同时也是他在全局 state 上的属性，只能用字符串，不支持通过 &lt;code&gt;.&lt;/code&gt; 的方式创建多层命名空间。&lt;/p&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;state&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;状态初始值&lt;/p&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;reducers&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;以 key/value 格式定义 reducer。用于处理同步操作，唯一可以修改 &lt;code&gt;state&lt;/code&gt; 的地方。由 &lt;code&gt;action&lt;/code&gt; 触发。格式为 &lt;code&gt;(state, action) =&amp;gt; newState&lt;/code&gt; 或 &lt;code&gt;[(state, action) =&amp;gt; newState, enhancer]&lt;/code&gt;。&lt;/p&gt;
-&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;effects&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;以 key/value 格式定义 effect。用于处理异步操作和业务逻辑，不直接修改 &lt;code&gt;state&lt;/code&gt;。由 &lt;code&gt;action&lt;/code&gt; 触发，可以触发 &lt;code&gt;action&lt;/code&gt;，可以和服务器交互，可以获取全局 &lt;code&gt;state&lt;/code&gt; 的数据等等。&lt;/p&gt;
-&lt;p&gt;格式为 &lt;code&gt;*(action, effects) =&amp;gt; void&lt;/code&gt; 或 &lt;code&gt;[*(action, effects) =&amp;gt; void, { type }]&lt;/code&gt;。&lt;/p&gt;
-&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;subscriptions&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;以 key/value 格式定义 subscription。subscription 是订阅，用于订阅一个数据源，然后根据需要 dispatch 相应的 action。在 &lt;code&gt;app.start()&lt;/code&gt; 时被执行，数据源可以是当前的时间、服务器的 websocket 连接、keyboard 输入、geolocation 变化、history 路由变化等等。&lt;/p&gt;
-&lt;p&gt;格式为 &lt;code&gt;({ dispatch, history }, done) =&amp;gt; unlistenFunction&lt;/code&gt;。&lt;/p&gt;
-&lt;ol start=&#34;6&#34;&gt;
-&lt;li&gt;Action&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Action 是一个普通 javascript 对象，它是改变 State 的唯一途径。无论是从 UI 事件、网络回调，还是 WebSocket 等数据源所获得的数据，最终都会通过 dispatch 函数调用一个 action，从而改变对应的数据。action 必须带有 &lt;code&gt;type&lt;/code&gt; 属性指明具体的行为，其它字段可以自定义，如果要发起一个 action 需要使用 &lt;code&gt;dispatch&lt;/code&gt; 函数；需要注意的是 &lt;code&gt;dispatch&lt;/code&gt; 是在组件 connect Models以后，通过 props 传入的。&lt;/p&gt;
-&lt;ol start=&#34;7&#34;&gt;
-&lt;li&gt;dispatch函数&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;dispatching function 是一个用于触发 action 的函数，action 是改变 State 的唯一途径，但是它只描述了一个行为，而 dipatch 可以看作是触发这个行为的方式，而 Reducer 则是描述如何改变数据的。&lt;/p&gt;
-&lt;p&gt;在 dva 中，connect Model 的组件通过 props 可以访问到 dispatch，可以调用 Model 中的 Reducer 或者 Effects。&lt;/p&gt;
-&lt;h1 id=&#34;3-示例&#34;&gt;3 示例&lt;/h1&gt;
-&lt;p&gt;通过一个简单的表格数据获取与延时删除demo，熟悉dva数据流的概念、结构及主要API&lt;/p&gt;
-&lt;h2 id=&#34;文件目录&#34;&gt;文件目录&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;src
-&lt;ul&gt;
-&lt;li&gt;model
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;userModel.js&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;service
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;userApi.js&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;page
-&lt;ul&gt;
-&lt;li&gt;UserPage
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;index.jsx&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;userapijs&#34;&gt;userApi.js&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 返回假数据
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; getAllUsers() {
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; {
-    content: [
-      { id: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, age: &lt;span style=&#34;color:#b452cd&#34;&gt;13&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt; },
-      { id: &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;, age: &lt;span style=&#34;color:#b452cd&#34;&gt;32&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Sam&amp;#39;&lt;/span&gt; },
-      { id: &lt;span style=&#34;color:#b452cd&#34;&gt;3&lt;/span&gt;, age: &lt;span style=&#34;color:#b452cd&#34;&gt;45&lt;/span&gt;, name: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Micheal&amp;#39;&lt;/span&gt; },
-    ],
-  };
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;indexjsx&#34;&gt;Index.jsx&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { connect } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dva&amp;#39;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { Table } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;antd&amp;#39;&lt;/span&gt;;
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; UserManage = (props) =&amp;gt; {
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 把下面mapStateToProps方法return的数据从props中取出
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#228b22&#34;&gt;// 经过connect后dispatch也会自动传入props
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { users, dispatch } = props;
-
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 获取数据的回调
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; getUsers = () =&amp;gt; {
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 执行dispatch方法，参数为action对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    dispatch({
-      &lt;span style=&#34;color:#228b22&#34;&gt;// action对象必须包括type属性，固定写法“命名空间/方法名”,
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      &lt;span style=&#34;color:#228b22&#34;&gt;// 可以理解为触发该命名空间中某个方法，给方法传递参数可以在后面写key:value形式，没有可以不写
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user/getAllUsers&amp;#39;&lt;/span&gt;,
-    });
-  };
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 删除数据的回调
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; deleteUser = (id) =&amp;gt; {
-    dispatch({
-      type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user/deleteUser&amp;#39;&lt;/span&gt;,
-      &lt;span style=&#34;color:#228b22&#34;&gt;// 为model层中的deleteUser方法传入id
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      id,
-    });
-  };
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 延时删除数据的回调
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; delayRemoveUser = (id) =&amp;gt; {
-    dispatch({
-      type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user/delayRemoveUser&amp;#39;&lt;/span&gt;,
-      id,
-    });
-  };
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 表格列配置
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; columns = [
-    { title: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;序号&amp;#39;&lt;/span&gt;, dataIndex: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;id&amp;#39;&lt;/span&gt; },
-    { title: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;名称&amp;#39;&lt;/span&gt;, dataIndex: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; },
-    {
-      title: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;修改&amp;#39;&lt;/span&gt;,
-      render: (_, record) =&amp;gt; [
-        &lt;span style=&#34;color:#228b22&#34;&gt;// 这里的回调要注意使用箭头函数
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; deleteUser(record.id)}&amp;gt;删除&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;,
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; delayRemoveUser(record.id)}&amp;gt;&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;s后删除&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;,
-      ],
-    },
-  ];
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
-    &amp;lt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;type&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;button&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={getUsers}&amp;gt;
-        获取数据
-      &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Table&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;rowKey&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;id&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;dataSource&lt;/span&gt;={users} &lt;span style=&#34;color:#658b00&#34;&gt;columns&lt;/span&gt;={columns} /&amp;gt;
-    &amp;lt;/&amp;gt;
-  );
-};
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 将state映射为props
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 参数中的state表示全部model层的state
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; mapStateToProps = (state) =&amp;gt; {
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 这里只用到user中的state，所以state.user把命名空间为user这个model层的state数据取出来
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { users } = state.user;
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 这里return出去的数据，会变成此组件的props，在组件可以通过props.num取到。
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#228b22&#34;&gt;// props变化了，会重新触发render方法，界面也就更新了。
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; {
-    users,
-  };
-};
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 使用connect连接组件和model层数据
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// connect方法用来连接models层的state数据，参数常用的有2个，是第一个mapStateToProps，第二个mapDispatchToProps
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// mapStateToProps按字面意思：把models层state数据变为组件的props
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// mapDispatchToProps：用了此方法，dispatch只会在此方法里。不写该参数，dispatch会作为组件的props。(我平常用几乎不写该方法)
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; connect(mapStateToProps)(UserManage);
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;usermodeljs&#34;&gt;userModel.js&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;/* eslint-disable comma-dangle */&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { message } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;antd&amp;#39;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; { getAllUsers } from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;../services/userApi&amp;#39;&lt;/span&gt;;
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 延时函数，返回promise对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; delay(time) {
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;Promise&lt;/span&gt;((resolve) =&amp;gt; {
-    setTimeout(() =&amp;gt; {
-      resolve();
-    }, time);
-  });
-}
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt; {
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 命名空间标识符
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  namespace: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 全部state，可以定义一些默认值
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  state: {
-    users: [],
-  },
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 同步处理数据的方法，唯一能够直接改变state的方法，只能用dispatch触发
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#228b22&#34;&gt;// 把新的state retrun出去，用到state数据的界面就会更新，官方推荐处理逻辑都放在effects中
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  reducers: {
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 方法接收2个参数，第一个是旧的state，第二个是action对象,没有可以不写或写_
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    setUsers(state, { users }) {
-      &lt;span style=&#34;color:#228b22&#34;&gt;// 先把旧的state全部解构出来，然后把新的users覆盖原来的,从而实现state的更新
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { ...state, users };
-    },
-    deleteUser(state, { id }) {
-      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; tem = state.users;
-      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; result = tem.filter(i =&amp;gt; id !== i.id);
-      message.success(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;删除成功！&amp;#39;&lt;/span&gt;);
-      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; { ...state, users: result };
-    }
-  },
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 异步数据处理的方法
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#228b22&#34;&gt;// 推荐数据逻辑处理也应该在此处理，处理完再给reducer
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  effects: {
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 方法接收两个参数，第一个是传过来的action对象(没有可以写 _ )，第二个基本是用其中call, put, select这3个参数(所有的去官网看)
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;// call: 用来与后台交互
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;// put: 用来触发reducers中的方法，与dispacth功能一样
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;// select: 用来选择models层所有model里state的数据
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#228b22&#34;&gt;// * yield是es6的Generator函数
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    *getAllUsers(_, { call, put }) {
-      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; resp = &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;yield&lt;/span&gt; call(getAllUsers);
-      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;yield&lt;/span&gt; put({
-        type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;setUsers&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#228b22&#34;&gt;// 这里可以省略命名空间
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        users: resp.content
-      });
-      message.success(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;查询成功&amp;#39;&lt;/span&gt;);
-    },
-    *delayRemoveUser({ id }, { call, put }) {
-      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;yield&lt;/span&gt; call(delay, &lt;span style=&#34;color:#b452cd&#34;&gt;1000&lt;/span&gt;);
-      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;yield&lt;/span&gt; put({
-        type: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;deleteUser&amp;#39;&lt;/span&gt;,
-        id
-      });
-    }
-  },
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 订阅监听，可以监听路由，键盘输入等，常用作进入某页面发个请求获取数据，展示出来
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  subscriptions: {
-    setup({
-      dispatch, history, query, store,
-    }) {
-      &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; history.listen(({ pathname, search }) =&amp;gt; {
-        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (pathname === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/userPage&amp;#39;&lt;/span&gt;) {
-          &lt;span style=&#34;color:#228b22&#34;&gt;// 监听进入testPage页时，做些操作
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;          &lt;span style=&#34;color:#228b22&#34;&gt;// dispatch({ type: &amp;#34;shoppingWZ&amp;#34; })
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        }
-      });
-    },
-  },
-};
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/dva%E6%95%B0%E6%8D%AE%E6%B5%81/ - </description>
-        </item>
+    <item>
+      <title>Git相关</title>
+      <link>https://gsemir0418.github.io/post/git/</link>
+      <pubDate>Sun, 15 Aug 2021 22:02:28 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/git/</guid>
+      <description>0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &amp;#34;gsemir0418&amp;#34; git config --global user.email &amp;#34;845217811@qq.com&amp;#34; // 查看全局配置 git config --list 0.2 配置SSH公</description>
+    </item>
     
+    <item>
+      <title>UseState原理</title>
+      <link>https://gsemir0418.github.io/post/usestate%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Sat, 07 Aug 2021 22:15:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/usestate%E5%8E%9F%E7%90%86/</guid>
+      <description>1 useState简单实现 1.1 示例 点击按钮，结果+1 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 import React from &amp;#34;react&amp;#34;; import ReactDOM from &amp;#34;react-dom&amp;#34;; const rootElement = document.getElementById(&amp;#34;root&amp;#34;); function App() { const [n, setN] = React.useState(0); return ( &amp;lt;div className=&amp;#34;App&amp;#34;&amp;gt; &amp;lt;p&amp;gt;{n}&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; &amp;lt;button onClick={()</description>
+    </item>
     
+    <item>
+      <title>JS专精-函数</title>
+      <link>https://gsemir0418.github.io/post/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Sat, 07 Aug 2021 20:40:20 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/</guid>
+      <description>1</description>
+    </item>
     
-        <item>
-        <title>Lodash常用方法整理</title>
-        <link>https://gsemir0418.github.io/posts/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
-        <pubDate>Thu, 02 Sep 2021 16:53:09 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/ -&lt;h1 id=&#34;0-准备&#34;&gt;0 准备&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;下载：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yarn add lodash / npm i lodash
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;Node.js引入：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;  = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;lodash&amp;#39;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;1-对象&#34;&gt;1 对象&lt;/h1&gt;
-&lt;h2 id=&#34;11-移除对象上的一些属性-omit&#34;&gt;1.1 移除对象上的一些属性-omit&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;把数据提交给接口，很多情况下，都要移除只在前端用，但接口不需要的属性。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;API：&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.omit(object, [props])
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;参数说明：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;object (Object)&lt;/code&gt;: 来源对象。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;[props] (...(string|string[]))&lt;/code&gt;: 要被忽略的属性。（注：单独指定或指定在数组中。）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例：&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = { name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;gsq&amp;#39;&lt;/span&gt;, age:&lt;span style=&#34;color:#b452cd&#34;&gt;19&lt;/span&gt;, gender:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;, hobbies:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;play&amp;#39;&lt;/span&gt; }
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.omit(obj,[&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;]) &lt;span style=&#34;color:#228b22&#34;&gt;// { gender:&amp;#39;male&amp;#39;, hobbies:&amp;#39;play&amp;#39; }
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;12-选择对象上的一些属性-pick&#34;&gt;1.2 选择对象上的一些属性-pick&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;选择对象上的一些属性和移除属性操作相反。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;API：&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.pick(object, [props])
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;示例&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj = { name:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;gsq&amp;#39;&lt;/span&gt;, age:&lt;span style=&#34;color:#b452cd&#34;&gt;19&lt;/span&gt;, gender:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;, hobbies:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;play&amp;#39;&lt;/span&gt; }
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.pick(obj,[&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;]) &lt;span style=&#34;color:#228b22&#34;&gt;// { name:&amp;#39;gsq&amp;#39;, age:19 }
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;13-对象的深拷贝-clonedeep&#34;&gt;1.3 对象的深拷贝-cloneDeep&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;对象的深度克隆是很困难的。 &lt;code&gt;JSON.parse(JSON.stringify(obj))&lt;/code&gt; 可以实现对象的深度克隆。但有如下缺点:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;值类型是 undefined、function、symbol 的属性会被过滤掉。&lt;/li&gt;
-&lt;li&gt;是类型是 set、map 会被被处理成空对象。&lt;/li&gt;
-&lt;li&gt;对象的属性间出现循环引用时，会报错。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;API：&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.cloneDeep(obj)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;示例：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; obj2 = { f: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () { }, u: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;undefined&lt;/span&gt;, a: &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;, }
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; r1 = JSON.parse(JSON.stringify(obj2))
-console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;r1&amp;#39;&lt;/span&gt;, r1)&lt;span style=&#34;color:#228b22&#34;&gt;// r1 { a: 1 }
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; r2 = &lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.cloneDeep(obj2)
-console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;r2&amp;#39;&lt;/span&gt;, r2)&lt;span style=&#34;color:#228b22&#34;&gt;// r2 { f: [Function: f], u: undefined, a: 1 }
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;2-数组&#34;&gt;2 数组&lt;/h1&gt;
-&lt;h2 id=&#34;21-根据条件去除某个元素-reject&#34;&gt;2.1 根据条件去除某个元素-reject&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;根据条件删除数组中某个元素（与fliter相反）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;API：&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.reject(collection, identity)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;参数说明&lt;/p&gt;
-&lt;p&gt;identity：判断依据，可以是数组、对象、字符串或回调函数&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例：&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; users = [
-  { &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;gsq&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#b452cd&#34;&gt;36&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;active&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt; },
-  { &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;zs&amp;#39;&lt;/span&gt;,   &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#b452cd&#34;&gt;40&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;active&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt; }
-];
- 
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.reject(users, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt;(o) { &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; !o.active; });
-&lt;span style=&#34;color:#228b22&#34;&gt;// [ { user: &amp;#39;zs&amp;#39;, age: 40, active: true } ]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt; 
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.reject(users, { &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#b452cd&#34;&gt;40&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;active&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt; });
-&lt;span style=&#34;color:#228b22&#34;&gt;// [ { user: &amp;#39;gsq&amp;#39;, age: 36, active: false } ]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.reject(users, [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;active&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt;]);
-&lt;span style=&#34;color:#228b22&#34;&gt;// [ { user: &amp;#39;zs&amp;#39;, age: 40, active: true } ]
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt; 
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.reject(users, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;active&amp;#39;&lt;/span&gt;);
-&lt;span style=&#34;color:#228b22&#34;&gt;// [ { user: &amp;#39;gsq&amp;#39;, age: 36, active: false } ]
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;22-数组转换为对象-keyby&#34;&gt;2.2 数组转换为对象-keyBy&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;以某个属性为键，转换数组为对象&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;API：&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;_.keyBy(collection, key)
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;参数说明：&lt;/p&gt;
-&lt;p&gt;collection：Array | Object&lt;/p&gt;
-&lt;p&gt;key：Array | Function | Object | string&lt;/p&gt;
-&lt;p&gt;返回新的对象&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例：&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; array = [
-  { &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dir&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;left&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#b452cd&#34;&gt;97&lt;/span&gt; },
-  { &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dir&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;right&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#b452cd&#34;&gt;100&lt;/span&gt; }
-];
- 
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.keyBy(array, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt;(o) {
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;String&lt;/span&gt;.fromCharCode(o.code);
-});
-&lt;span style=&#34;color:#228b22&#34;&gt;// { &amp;#39;a&amp;#39;: { &amp;#39;dir&amp;#39;: &amp;#39;left&amp;#39;, &amp;#39;code&amp;#39;: 97 }, &amp;#39;d&amp;#39;: { &amp;#39;dir&amp;#39;: &amp;#39;right&amp;#39;, &amp;#39;code&amp;#39;: 100 } }
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt; 
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.keyBy(array, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dir&amp;#39;&lt;/span&gt;);
-&lt;span style=&#34;color:#228b22&#34;&gt;// { &amp;#39;left&amp;#39;: { &amp;#39;dir&amp;#39;: &amp;#39;left&amp;#39;, &amp;#39;code&amp;#39;: 97 }, &amp;#39;right&amp;#39;: { &amp;#39;dir&amp;#39;: &amp;#39;right&amp;#39;, &amp;#39;code&amp;#39;: 100 } }
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;3-语言&#34;&gt;3 语言&lt;/h1&gt;
-&lt;h2 id=&#34;31-判断是否为空-isempty&#34;&gt;3.1 判断是否为空-isEmpty&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;检查 &lt;code&gt;value&lt;/code&gt; 是否为一个空对象，集合，映射或者set。 判断的依据是除非是有枚举属性的对象，length 大于 0 的 arguments object, array, string 或类jquery选择器。&lt;/li&gt;
-&lt;li&gt;API：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;_.isEmpty(value)
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;示例：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 以上均返回true
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.isEmpty(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt;)
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.isEmpty(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;)
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.isEmpty([])
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.isEmpty({})
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.isEmpty(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
-&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.isEmpty(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;undefined&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;32-防抖&#34;&gt;3.2 防抖&lt;/h2&gt;
-&lt;h2 id=&#34;33-节流&#34;&gt;3.3 节流&lt;/h2&gt;
-&lt;h1 id=&#34;4-数学&#34;&gt;4 数学&lt;/h1&gt;
-&lt;h2 id=&#34;41-随机数-random&#34;&gt;4.1 随机数-random&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;产生一个包括 &lt;code&gt;lower&lt;/code&gt; 与 &lt;code&gt;upper&lt;/code&gt; 之间的数。 如果只提供一个参数返回一个&lt;code&gt;0&lt;/code&gt;到提供数之间的数。 如果 &lt;code&gt;floating&lt;/code&gt; 设为 &lt;code&gt;true&lt;/code&gt;，或者 &lt;code&gt;lower&lt;/code&gt; 或 &lt;code&gt;upper&lt;/code&gt; 是浮点数，结果返回浮点数。&lt;/li&gt;
-&lt;li&gt;API:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;_.random([lower=0], [upper=1], [floating])
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;参数说明&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;[lower=0]&lt;/code&gt; &lt;em&gt;(number)&lt;/em&gt;: 下限。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;[upper=1]&lt;/code&gt; &lt;em&gt;(number)&lt;/em&gt;: 上限。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;[floating]&lt;/code&gt; &lt;em&gt;(boolean)&lt;/em&gt;: 指定是否返回浮点数。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例：&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.random(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;);
-&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; an integer between 0 and 5
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.random(&lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;);
-&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; also an integer between 0 and 5
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.random(&lt;span style=&#34;color:#b452cd&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;);
-&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; a floating-point number between 0 and 5
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b452cd&#34;&gt;_&lt;/span&gt;.random(&lt;span style=&#34;color:#b452cd&#34;&gt;1.2&lt;/span&gt;, &lt;span style=&#34;color:#b452cd&#34;&gt;5.2&lt;/span&gt;);
-&lt;span style=&#34;color:#228b22&#34;&gt;// =&amp;gt; a floating-point number between 1.2 and 5.2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/ - </description>
-        </item>
+    <item>
+      <title>Node进程与线程</title>
+      <link>https://gsemir0418.github.io/post/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Fri, 06 Aug 2021 17:33:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
+      <description>1 进程 1.1 进程 Process 场景 notepad.exe是一个程序，不是进程 双击notepad.exe时，操作系统会开启一个进程 定义 进程是程序的执行实例 程序</description>
+    </item>
     
+    <item>
+      <title>Node技术架构</title>
+      <link>https://gsemir0418.github.io/post/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/</link>
+      <pubDate>Thu, 29 Jul 2021 20:54:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/</guid>
+      <description>1 Node.js概述 1.1 Node.js不是什么 不是web框架（Flask，Spring） 不是编程语言（Python，PHP） 1.2 Node.js是</description>
+    </item>
     
+    <item>
+      <title>Umi-Request配置</title>
+      <link>https://gsemir0418.github.io/post/umi-request%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Fri, 09 Jul 2021 16:47:33 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/umi-request%E9%85%8D%E7%BD%AE/</guid>
+      <description>utils/request.js 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 /** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request</description>
+    </item>
     
-        <item>
-        <title>Web性能优化-基础</title>
-        <link>https://gsemir0418.github.io/posts/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</link>
-        <pubDate>Thu, 02 Sep 2021 14:34:53 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/ -&lt;h1 id=&#34;1-dns与tcp&#34;&gt;1 DNS与TCP&lt;/h1&gt;
-&lt;h2 id=&#34;11-dns与hosts&#34;&gt;1.1 DNS与hosts&lt;/h2&gt;
-&lt;p&gt;DNS（Domain Name System）：域名系统，每个域名对应一个ip&lt;/p&gt;
-&lt;p&gt;hosts相当于手动给操作系统添加ip缓存&lt;/p&gt;
-&lt;h2 id=&#34;12-三次握手&#34;&gt;1.2 三次握手&lt;/h2&gt;
-&lt;p&gt;TCP（Transmission Control Protocol）：传输控制协议&lt;/p&gt;
-&lt;p&gt;建立TCP连接过程的三次握手，x、y一般从0开始&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;A能发&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;B能收，B能发&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;A能收（为什么一定需要第三次）&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;关闭TCP连接过程的四次挥手，x、y一般不为0&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;A：我请求结束了&lt;/li&gt;
-&lt;li&gt;B：我知道你请求结束了&lt;/li&gt;
-&lt;li&gt;B：我响应结束了&lt;/li&gt;
-&lt;li&gt;A：我知道你响应结束了&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;为什么B不能一起发送呢：因为第二次和第三次中间，服务端可能夹杂其他响应数据（B可能还没说完）&lt;/p&gt;
-&lt;p&gt;不一定是客户端发起FIN，服务端也可以发起FIN&lt;/p&gt;
-&lt;h1 id=&#34;2-http超文本传输协议&#34;&gt;2 HTTP（超文本传输协议）&lt;/h1&gt;
-&lt;h2 id=&#34;21-http请求&#34;&gt;2.1 HTTP请求&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;请求行&lt;/td&gt;
-&lt;td&gt;动词&lt;code&gt;(GET、POST、PUT、DELETE..)&lt;/code&gt; URL HTTP/1.1&lt;code&gt;(HTTP版本号)&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;请求头&lt;/td&gt;
-&lt;td&gt;Accept：text/html &lt;code&gt;期望接受数据的格式&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;Host：baidu.com &lt;code&gt;用户请求的域名或ip&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;Connection：keep-alive&lt;!-- raw HTML omitted --&gt;Content-Type：application/json &lt;code&gt;请求体格式&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;&amp;hellip;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;回车换行&lt;/td&gt;
-&lt;td&gt;\r\n&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;请求体&lt;/td&gt;
-&lt;td&gt;{&amp;ldquo;name&amp;rdquo; : &amp;ldquo;gsq&amp;rdquo;}&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id=&#34;22-http响应&#34;&gt;2.2 HTTP响应&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;/th&gt;
-&lt;th&gt;示例及解释&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;响应行&lt;/td&gt;
-&lt;td&gt;HTTP/1.1 200&lt;code&gt;(状态码)&lt;/code&gt; OK&lt;code&gt;(状态码的解释)&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;响应头&lt;/td&gt;
-&lt;td&gt;Content-Type：text/html&lt;code&gt;(请求体格式或语法)&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;Set-Cookie：session.id = xxx; expires&amp;hellip;&lt;code&gt;(服务器在客户端种下一个cookie)&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;Connection：keep-alive&lt;!-- raw HTML omitted --&gt;Content-Encoding：gzip&lt;!-- raw HTML omitted --&gt;&amp;hellip;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;回车换行&lt;/td&gt;
-&lt;td&gt;\r\n&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;响应体&lt;/td&gt;
-&lt;td&gt;{&amp;ldquo;name&amp;rdquo; : &amp;ldquo;gsq&amp;rdquo;}&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h1 id=&#34;3-浏览器渲染原理&#34;&gt;3 浏览器渲染原理&lt;/h1&gt;
-&lt;h2 id=&#34;31-html解析过程&#34;&gt;3.1 HTML解析过程&lt;/h2&gt;
-&lt;p&gt;下载与解析html和css的过程可以是同步的，互不影响&lt;/p&gt;
-&lt;p&gt;但js的下载与执行会阻塞html的解析&lt;/p&gt;
-&lt;p&gt;​	当执行js时，可能会修改dom树&lt;/p&gt;
-&lt;p&gt;​	解析html是一行一行的，必须要下载好了执行完毕才能继续，因此下载的过程也会阻塞html的解析（浏览器没有做优化）&lt;/p&gt;
-&lt;h2 id=&#34;32-async和defer的区别&#34;&gt;3.2 async和defer的区别&lt;/h2&gt;
-&lt;p&gt;defer（几乎等价于type=&amp;lsquo;module&amp;rsquo;）&lt;/p&gt;
-&lt;p&gt;defer让js的下载和执行过程与html的解析可以同步进行，不会阻塞html的解析，并保证js的执行是在html解析完成之后到DOM ready事件之前进行&lt;/p&gt;
-&lt;p&gt;如果有多个defer的js，无论下载先后，总会按照标签顺序执行&lt;/p&gt;
-&lt;p&gt;实际工作中经常使用&lt;/p&gt;
-&lt;p&gt;async&lt;/p&gt;
-&lt;p&gt;async也会让js的下载和执行过程与html的解析可以同步进行，但js的执行是会在什么时候下载好什么时候执行的，但执行过程仍可能会影响html解析，可能在DOM ready事件之前，也可能在事件之后。总之，async将js的下载与解析完全分离，如果有多个async，下载与执行的过程也是完全分离的&lt;/p&gt;
-&lt;h2 id=&#34;33-js与css的阻塞关系&#34;&gt;3.3 js与css的阻塞关系&lt;/h2&gt;
-&lt;p&gt;css的下载过程和解析过程会影响js的执行过程&lt;/p&gt;
-&lt;p&gt;因为js需要读取css的解析结果，例如css最后一行写了div1的高度，而js恰好要获取div1的高度，所以要等css下载解析后才能执行&lt;/p&gt;
-&lt;h2 id=&#34;34-页面渲染原理布局绘制合成&#34;&gt;3.4 页面渲染原理：布局、绘制、合成&lt;/h2&gt;
-&lt;p&gt;reflow repaint 合成是始终在进行的&lt;/p&gt;
-- https://gsemir0418.github.io/posts/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/ - </description>
-        </item>
+    <item>
+      <title>NodeStream模块</title>
+      <link>https://gsemir0418.github.io/post/nodejsstream%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Thu, 08 Jul 2021 14:07:04 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/nodejsstream%E6%A8%A1%E5%9D%97/</guid>
+      <description>1.三个示例引入Stream 1.1 创建流 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 // 引入fs模块 const fs = require(&amp;#39;fs&amp;#39;) // 利用fs创建流 const stream = fs.createWriteStream(&amp;#39;./big_file.txt&amp;#39;) // 写数据 for (let i = 0; i &amp;lt; 100000; i++) {</description>
+    </item>
     
+    <item>
+      <title>Object常用方法整理</title>
+      <link>https://gsemir0418.github.io/post/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <pubDate>Wed, 07 Jul 2021 17:30:59 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>Object.assign() 用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象 语法： 1 Object.assign(target, ...sources) target目标对象</description>
+    </item>
     
+    <item>
+      <title>String常用方法整理</title>
+      <link>https://gsemir0418.github.io/post/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>
+      <pubDate>Mon, 05 Jul 2021 13:29:15 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</guid>
+      <description>String.prototype.match() 根据传入的正则表达式的检索字符串并返回结果 语法： 1 str.match(regexp) 例子 1 String.prototype.search() 根据传入的正则表达式寻找符合的字符位置 语法 1 str.search(regexp) 如果匹配，则返回首次匹配项的索引</description>
+    </item>
     
-        <item>
-        <title>umi&#43;AntdPro实战总结</title>
-        <link>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</link>
-        <pubDate>Sun, 22 Aug 2021 22:51:51 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ -&lt;p&gt;项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将umi与antdPro框架在使用过程中遇到的问题与解决方案整理如下。&lt;/p&gt;
-&lt;h1 id=&#34;1-ant-design-pro&#34;&gt;1 Ant Design Pro&lt;/h1&gt;
-&lt;h2 id=&#34;11-全局样式&#34;&gt;1.1 全局样式&lt;/h2&gt;
-&lt;p&gt;全局的样式（包括覆盖原生antd的css）可以写到&lt;code&gt;global.less&lt;/code&gt;中，记得属性后加&lt;code&gt;!important&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;打包后样式失效时，可以尝试关闭config.js中的按需加载（&lt;code&gt;dynamicImport&lt;/code&gt;），但可能对平台首页加载速度有一定影响&lt;/p&gt;
-&lt;h2 id=&#34;12-pro表单项onchange事件无效&#34;&gt;1.2 Pro表单项onChange事件无效&lt;/h2&gt;
-&lt;p&gt;使用表单项组件时onChange事件失效&lt;/p&gt;
-&lt;p&gt;在表单项的fieldProps属性中定义onChange事件即可，fieldProps即Pro组件对应的原生antd属性。&lt;/p&gt;
-&lt;h2 id=&#34;13-procomponents&#34;&gt;1.3 ProComponents&lt;/h2&gt;
-&lt;h3 id=&#34;131-protable&#34;&gt;1.3.1 ProTable&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;字段找不到&lt;/p&gt;
-&lt;p&gt;进行列配置时，对应字段可能在对象深层，在配置&lt;code&gt;dataIndex&lt;/code&gt;时可以用数组的形式，例如&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;dataIndex:[&#39;data&#39;, &#39;placeNumber&#39;, &#39;method&#39;]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;那么ProTable就会将行数据的data.placeNumber.method值呈现在表格中了&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;可编辑表格编辑状态默认值&lt;/p&gt;
-&lt;p&gt;EditableProTable的columns配置中的&lt;code&gt;valueEnum&lt;/code&gt;是用来转换&lt;strong&gt;字符串&lt;/strong&gt;类型的枚举（配合&lt;code&gt;valueType:&#39;select&#39;&lt;/code&gt;替代render），对于非字符串字段（如数值或布尔类型），则会出现编辑状态的默认值为空或为实际value的bug。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以使用renderFormItem配置此字段的Select选择框，利用ref全局变量存储选项值，通过onSave读取ref值，对接保存或新增借口即可。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 修改后的status
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; status = useRef(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)
-...
-{
-      title: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;装置状态&amp;#39;&lt;/span&gt;,
-      dataIndex: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;status&amp;#39;&lt;/span&gt;,
-         &lt;span style=&#34;color:#228b22&#34;&gt;// 功能同render
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      valueType: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;select&amp;#39;&lt;/span&gt;,
-      valueEnum: {
-        &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;: {
-          text: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;停工&amp;#39;&lt;/span&gt;,
-          status: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Error&amp;#39;&lt;/span&gt;,
-        },
-        &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;: {
-          text: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;正常&amp;#39;&lt;/span&gt;,
-          status: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Success&amp;#39;&lt;/span&gt;,
-        },
-      },
-      renderFormItem: u =&amp;gt; [
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Select&lt;/span&gt;
-          &lt;span style=&#34;color:#658b00&#34;&gt;key&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;statusSelect&amp;#39;&lt;/span&gt;
-          &lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;配置初始值&lt;/span&gt;
-          &lt;span style=&#34;color:#658b00&#34;&gt;defaultValue&lt;/span&gt;={u.entry?u.entry.status:&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;}
-          &lt;span style=&#34;color:#658b00&#34;&gt;onChange&lt;/span&gt;={v =&amp;gt; {
-            status.current = v
-          }}
-          &lt;span style=&#34;color:#658b00&#34;&gt;rules&lt;/span&gt;={[
-            {
-              required: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;,
-              message: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;此项为必填项&amp;#39;&lt;/span&gt;,
-            },
-          ]}
-        &amp;gt;
-          &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Option&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;}&amp;gt;停工&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Option&lt;/span&gt;&amp;gt;
-          &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Option&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;}&amp;gt;正常&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Option&lt;/span&gt;&amp;gt;
-        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;Select&lt;/span&gt;&amp;gt;,
-      ],
-    },
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;2-umijs&#34;&gt;2 umi.js&lt;/h1&gt;
-&lt;h2 id=&#34;21-umi-request&#34;&gt;2.1 umi-request&lt;/h2&gt;
-&lt;p&gt;当打包后请求&lt;code&gt;url&lt;/code&gt;正常，但出现503等错误时，可以尝试在&lt;code&gt;request.js&lt;/code&gt;中去除&lt;code&gt;credentials: &#39;include&#39;&lt;/code&gt;，即默认请求不携带cookie&lt;/p&gt;
-&lt;h2 id=&#34;22-history&#34;&gt;2.2 history&lt;/h2&gt;
-&lt;p&gt;history可以实现路由跳转，也可携带参数跳转&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; {history} from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;umi&amp;#39;&lt;/span&gt;
-
-history.push({
-	pathname:&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;xxx/xxx&amp;#39;&lt;/span&gt;,
-	params:{id,name,age}
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;跳转后利用useEffect监听props.location.params中的参数，进行数据请求等操作。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-react&#34; data-lang=&#34;react&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; {id} = props.location.params
-useEffect(()=&amp;gt;{
-	getXXXById(id).then()
-},[id])
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;3其他&#34;&gt;3.其他&lt;/h1&gt;
-&lt;h2 id=&#34;31-解决单击双击冲突&#34;&gt;3.1 解决单击双击冲突&lt;/h2&gt;
-&lt;p&gt;可以利用计时器配合单击事件回调，实现单击双击事件的区别触发&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;onClick={() =&amp;gt; {
-  count.current += &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;
-  setTimeout(() =&amp;gt; {
-  	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (count.current === &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;) {
-  		console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;single click: &amp;#39;&lt;/span&gt;, count.current)
-  	} &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (count.current === &lt;span style=&#34;color:#b452cd&#34;&gt;2&lt;/span&gt;) {
-  		console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;setTimeout onDoubleClick: &amp;#39;&lt;/span&gt;, count.current)
-  	}
-  	count.current = &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;
-  }, &lt;span style=&#34;color:#b452cd&#34;&gt;300&lt;/span&gt;)
-}}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;32-switch方法在jsx中的使用&#34;&gt;3.2 switch方法在jsx中的使用&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;{(() =&amp;gt; {
-	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;switch&lt;/span&gt; (select) {
-		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;table&amp;#39;&lt;/span&gt;:
-			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; xxx
-		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;charts&amp;#39;&lt;/span&gt;:
-			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; xxx
-		&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;default&lt;/span&gt;:
-			&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;
-	}
-})()}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;33-useref&#34;&gt;3.3 useRef&lt;/h2&gt;
-&lt;p&gt;既可以作为页面内元素的实例饮用，也可以作为不会导致页面刷新的全局变量使用，&lt;/p&gt;
-&lt;h2 id=&#34;34-表单联动&#34;&gt;3.4 表单联动&lt;/h2&gt;
-&lt;p&gt;将表单项数据保存为state，，利用useMemo监听标单项变化，从而重新计算下一个标单项内容&lt;/p&gt;
-- https://gsemir0418.github.io/posts/antdpro&#43;umi%E5%AE%9E%E6%88%98/ - </description>
-        </item>
+    <item>
+      <title>数据库基础</title>
+      <link>https://gsemir0418.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 05 Jul 2021 08:57:20 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</guid>
+      <description>1 第一二三范式 1 第一范式 1NF 定义：字段不可再分 举例：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段 即user表里应有left_eye和</description>
+    </item>
     
+    <item>
+      <title>Sequelize ORM</title>
+      <link>https://gsemir0418.github.io/post/sequelize.js/</link>
+      <pubDate>Fri, 02 Jul 2021 11:01:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/sequelize.js/</guid>
+      <description>1 MySQL数据类型 MySQL支持的数据类型比较少，主要有五种类型： 数字类型 字符串类型 时间和日期类型 JSON类型 其他特殊类型 id 可以指定类型为</description>
+    </item>
     
+    <item>
+      <title>Node.js连接数据库</title>
+      <link>https://gsemir0418.github.io/post/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Fri, 02 Jul 2021 09:24:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>1 安装mysql依赖包 1 yarn add mysql 2 创建mysql连接 创建连接前，确保容器是开启状态。新建test.js文件。 引入mysql模块 1 const mysql = require(&amp;#39;mysql&amp;#39;) 创建连</description>
+    </item>
     
-        <item>
-        <title>Express核心</title>
-        <link>https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/</link>
-        <pubDate>Sun, 22 Aug 2021 21:09:57 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/ -&lt;h1 id=&#34;1-http协议&#34;&gt;1 HTTP协议&lt;/h1&gt;
-&lt;h2 id=&#34;11-curl基本用法&#34;&gt;1.1 curl基本用法&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;curl -s -v 网址&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-s&lt;/code&gt; 是 &lt;code&gt;silent&lt;/code&gt;，用于隐藏进度条&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-v&lt;/code&gt; 是 &lt;code&gt;verbose&lt;/code&gt;，用于打印全部header&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;* &lt;/code&gt;开头的是注释&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;gt;&lt;/code&gt; 开头的是HTTP请求&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;&lt;/code&gt; 开头的是HTTP响应&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;举例&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;curl -s -v http://www.baidu.com
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;如果得到301和 Location，表示永久重定向，于是重新请求（可以使用 &lt;code&gt;-L&lt;/code&gt;自动重定向）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;curl -s -o nul -v https://www.baidu.com
-
-* TCP_NODELAY &lt;span style=&#34;color:#658b00&#34;&gt;set&lt;/span&gt;
-* Connected to www.baidu.com (180.101.49.12) port &lt;span style=&#34;color:#b452cd&#34;&gt;80&lt;/span&gt; (&lt;span style=&#34;color:#228b22&#34;&gt;#0)&lt;/span&gt;
-&amp;gt; GET / HTTP/1.1
-&amp;gt; Host: www.baidu.com
-&amp;gt; User-Agent: curl/7.64.1
-&amp;gt; Accept: */*
-&amp;gt;
-&amp;lt; HTTP/1.1 &lt;span style=&#34;color:#b452cd&#34;&gt;200&lt;/span&gt; OK
-&amp;lt; Accept-Ranges: bytes
-&amp;lt; Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform
-&amp;lt; Connection: keep-alive
-&amp;lt; Content-Length: &lt;span style=&#34;color:#b452cd&#34;&gt;2381&lt;/span&gt;
-&amp;lt; Content-Type: text/html
-&amp;lt; Date: Sun, &lt;span style=&#34;color:#b452cd&#34;&gt;22&lt;/span&gt; Aug &lt;span style=&#34;color:#b452cd&#34;&gt;2021&lt;/span&gt; 13:22:47 GMT
-&amp;lt; Etag: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;588604c8-94d&amp;#34;&lt;/span&gt;
-&amp;lt; Last-Modified: Mon, &lt;span style=&#34;color:#b452cd&#34;&gt;23&lt;/span&gt; Jan &lt;span style=&#34;color:#b452cd&#34;&gt;2017&lt;/span&gt; 13:27:36 GMT
-&amp;lt; Pragma: no-cache
-&amp;lt; Server: bfe/1.0.8.18
-&amp;lt; Set-Cookie: &lt;span style=&#34;color:#00688b&#34;&gt;BDORZ&lt;/span&gt;=27315; max-age=86400; &lt;span style=&#34;color:#00688b&#34;&gt;domain&lt;/span&gt;=.baidu.com; &lt;span style=&#34;color:#00688b&#34;&gt;path&lt;/span&gt;=/
-&amp;lt;
-{ [&lt;span style=&#34;color:#b452cd&#34;&gt;2381&lt;/span&gt; bytes data]
-* Connection &lt;span style=&#34;color:#228b22&#34;&gt;#0 to host www.baidu.com left intact&lt;/span&gt;
-* Closing connection &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-o nul&lt;/code&gt; 是为了隐藏HTML文本,内容太多不方便演示&lt;/li&gt;
-&lt;li&gt;Linux或Mac要将nul改成/dev/null&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;12-请求和响应&#34;&gt;1.2 请求和响应&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;请求&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;响应&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;请求行&lt;/td&gt;
-&lt;td&gt;POST /xxx HTTP/1.1&lt;/td&gt;
-&lt;td&gt;状态行&lt;/td&gt;
-&lt;td&gt;HTTP/1.1 301 Moved Permanently&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;请求头&lt;/td&gt;
-&lt;td&gt;HOST: baidu.com&lt;!-- raw HTML omitted --&gt;User-Agent: curl/7.61.1&lt;!-- raw HTML omitted --&gt;Accept: &amp;ldquo;/&amp;rdquo;&lt;/td&gt;
-&lt;td&gt;响应头&lt;/td&gt;
-&lt;td&gt;Content-Type: text/html&lt;!-- raw HTML omitted --&gt;Content-Length: 193&lt;!-- raw HTML omitted --&gt;Location: &lt;a href=&#34;https://xxx.com&#34;&gt;https://xxx.com&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;空行&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;回车&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;请求体/消息体&lt;/td&gt;
-&lt;td&gt;{&amp;ldquo;username&amp;rdquo; : &amp;ldquo;gsq&amp;rdquo;}&lt;/td&gt;
-&lt;td&gt;响应体/消息体&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;&lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;&lt;code&gt;&amp;lt;/html&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;ul&gt;
-&lt;li&gt;如果请求体的内容为JSON，那么请求头就要有&lt;code&gt;Content-Type: application/json&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;如果响应体内容为JSON，那么响应头也要有&lt;code&gt;Content-Type: application/json&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;HTTP的复杂性就在于消息头有很多很多功能各不相同的字段&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;13-web框架&#34;&gt;1.3 Web框架&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;功能&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;更方便地处理HTTP请求与响应&lt;/li&gt;
-&lt;li&gt;更方便地链接数据库、Redis&lt;/li&gt;
-&lt;li&gt;更方便的路由&lt;/li&gt;
-&lt;li&gt;其他：HTML模块&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;理念&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Web框架的主流思路都是MVC&lt;/li&gt;
-&lt;li&gt;model层处理数据相关逻辑&lt;/li&gt;
-&lt;li&gt;View层处理视图相关逻辑，前后端分离后，View交给前端&lt;/li&gt;
-&lt;li&gt;Controller负责其他逻辑&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;架构示意&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./express1.png&#34; alt=&#34;image-20210822214145696&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;14-处理http请求与响应&#34;&gt;1.4 处理HTTP请求与响应&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;最简单的封装（数组）
-&lt;ul&gt;
-&lt;li&gt;将请求封装为&lt;code&gt;[[&#39;get&#39;,&#39;/xxx&#39;],{请求头},&#39;请求体&#39;]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;将响应封装为&lt;code&gt;[status,{响应头},&#39;响应体&#39;]&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Node.js封装
-&lt;ul&gt;
-&lt;li&gt;Node.js将其封装到http模块中&lt;/li&gt;
-&lt;li&gt;使用request对象读取请求&lt;/li&gt;
-&lt;li&gt;使用response对象设置响应&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Express封装
-&lt;ul&gt;
-&lt;li&gt;只需理解Express的&lt;strong&gt;编程模型&lt;/strong&gt;即可&lt;/li&gt;
-&lt;li&gt;中文文档：expressjs.com/zh-cn/ 太老了&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;2-hello-express&#34;&gt;2 Hello Express&lt;/h1&gt;
-&lt;h2 id=&#34;21-js版本&#34;&gt;2.1 js版本&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;初始化项目&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;mkdir express-demo-1 &amp;amp;&amp;amp; &lt;span style=&#34;color:#658b00&#34;&gt;cd&lt;/span&gt; express-demo-1
-yarn init -y
-git init
-touch .gitignore
-yarn add express
-git add . &amp;amp;&amp;amp; git commit -m &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;init&amp;#39;&lt;/span&gt;
-git remote add origin git@github.com:GSemir0418/express-demo-1.git
-git push -u origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;创建app.js&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; app = express()
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 用于对GET /xxx 请求做出响应
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res) {
-    res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;HelloooWorld!&amp;#39;&lt;/span&gt;)
-})
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 开启端口监听
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () {
-    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Example app listening on port 8080&amp;#39;&lt;/span&gt;)
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;执行node app命令运行服务器后，浏览器访问8080端口，会展示&lt;code&gt;HelloooWorld!&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;22-使用ts&#34;&gt;2.2 使用TS&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;准备工作&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yarn global add typescript ts-node ts-node-dev
-yarn add @types/express --dev// 安装express类型支持，一般类型文件都是--dev
-tsc --init // 创建tsconfig.json文件
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;修改tsconfig中的&lt;code&gt;target&lt;/code&gt;为&lt;code&gt;es2015&lt;/code&gt;（即es6），修改&lt;code&gt;noImplicitAny&lt;/code&gt;为&lt;code&gt;true&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;创建app2.ts&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ts&#34; data-lang=&#34;ts&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; express &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; app = express()
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 用于对GET /xxx 请求做出响应
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res) {
-    res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;HelloooTS!&amp;#39;&lt;/span&gt;)
-})
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 开启端口监听
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; () {
-    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;Example app listening on port 8080&amp;#39;&lt;/span&gt;)
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;项目源码仓库：https://github.com/GSemir0418/express-starter.git&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;23-app的类型&#34;&gt;2.3 app的类型&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;ctrl点击app，找到其类型
-&lt;ul&gt;
-&lt;li&gt;类型为Express接口&lt;/li&gt;
-&lt;li&gt;Express extends Application&lt;/li&gt;
-&lt;li&gt;Application extends EventEmitter, IRouter,&amp;hellip;&lt;/li&gt;
-&lt;li&gt;其中IRouter包含了get/post/put等方法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;3-express-脚手架&#34;&gt;3 Express 脚手架&lt;/h1&gt;
-&lt;h2 id=&#34;31-基本使用&#34;&gt;3.1 基本使用&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;安装&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;yarn global add express-generator
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;在指定路径下，使用ejs后端模版引擎，搭建项目&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;express --view=ejs 目录名
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;将&lt;code&gt;package.json&lt;/code&gt;中的&lt;code&gt;start&lt;/code&gt;命令改为&lt;code&gt;node-dev ./bin/www&lt;/code&gt;，每次更新后自动刷新。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;目录结构&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;bin/www&lt;/strong&gt;：bin为可执行文件文件夹。www为应用主入口，因为真正的入口是app.js，所以www文件先把app.js文件引进来，其余的内容主要就是创建了一个node HTTP server以及监听事件的错误处理。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;public&lt;/strong&gt;：放置前端资源，包括js、css及静态图片等&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;app.js&lt;/strong&gt;：应用入口文件，主要做了以下的事&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;引入之前使用&lt;code&gt;npm install&lt;/code&gt;下载的包，并创建express对象；&lt;/li&gt;
-&lt;li&gt;use上面引入的包；&lt;/li&gt;
-&lt;li&gt;引入routes文件夹里面的文件，这些文件主要处理URL路由；&lt;/li&gt;
-&lt;li&gt;关联（use）路由路径与引入的文件；&lt;/li&gt;
-&lt;li&gt;设置（set）模板，views 设置了模板的位置；指定使用的模板引擎；&lt;/li&gt;
-&lt;li&gt;最后进行错误处理&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 引入资源及中间件
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; createError = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;http-errors&amp;#39;&lt;/span&gt;);
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;);
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; path = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;path&amp;#39;&lt;/span&gt;);
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; cookieParser = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;cookie-parser&amp;#39;&lt;/span&gt;);
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; logger = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;morgan&amp;#39;&lt;/span&gt;);
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 引入index.js和users.js路由配置文件
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; indexRouter = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./routes/index&amp;#39;&lt;/span&gt;);
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; usersRouter = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./routes/users&amp;#39;&lt;/span&gt;);
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 实例化express
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; app = express();
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 视图引擎设置
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 设置视图的目录为当前目录下的views文件夹
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;views&amp;#39;&lt;/span&gt;, path.join(&lt;span style=&#34;color:#b452cd&#34;&gt;__&lt;/span&gt;dirname, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;views&amp;#39;&lt;/span&gt;));
-&lt;span style=&#34;color:#228b22&#34;&gt;// 设置视图引擎为ejs
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.set(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;view engine&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ejs&amp;#39;&lt;/span&gt;);
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// 使用上面加载的资源
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(logger(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dev&amp;#39;&lt;/span&gt;));
-app.use(express.json());
-app.use(express.urlencoded({ extended: &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;false&lt;/span&gt; }));
-app.use(cookieParser());&lt;span style=&#34;color:#228b22&#34;&gt;// 使用cookie
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(express.&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;static&lt;/span&gt;(path.join(&lt;span style=&#34;color:#b452cd&#34;&gt;__&lt;/span&gt;dirname, &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;public&amp;#39;&lt;/span&gt;)));&lt;span style=&#34;color:#228b22&#34;&gt;// 指定公共资源文件夹
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 挂载路由中间件
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, indexRouter);
-app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/users&amp;#39;&lt;/span&gt;, usersRouter);
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// catch 404 and forward to error handler
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res, next) {
-    next(createError(&lt;span style=&#34;color:#b452cd&#34;&gt;404&lt;/span&gt;));
-});
-
-&lt;span style=&#34;color:#228b22&#34;&gt;// error handler
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (err, req, res, next) {
-    &lt;span style=&#34;color:#228b22&#34;&gt;// set locals, only providing error in development
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    res.locals.message = err.message;
-    res.locals.error = req.app.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;env&amp;#39;&lt;/span&gt;) === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;development&amp;#39;&lt;/span&gt; ? err : {};
-
-    &lt;span style=&#34;color:#228b22&#34;&gt;// render the error page
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    res.status(err.status || &lt;span style=&#34;color:#b452cd&#34;&gt;500&lt;/span&gt;);
-    res.render(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;error&amp;#39;&lt;/span&gt;);
-});
-
-module.exports = app;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;routes&lt;/strong&gt;：以users.js为例，首先加载express，通过express获取到router对象。使用router对象指定路由的方法和路径。由于在app.js已经指定 &lt;code&gt;/users&lt;/code&gt; 到本文件，因此当浏览器请求/user时，会执行下面的回调函数。回调函数有第三个参数next，主要用于中间件中，即将数据传递到下一个方法去处理。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;);
-&lt;span style=&#34;color:#228b22&#34;&gt;// 实例化router对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; router = express.Router();
-
-&lt;span style=&#34;color:#228b22&#34;&gt;/* GET users listing. */&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// 这是基于users/的根目录
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;router.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res, next) {
-  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;users发送这句话&amp;#39;&lt;/span&gt;);
-});
-router.get(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/xxx&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res, next) {
-  res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;xxx发送这句话&amp;#39;&lt;/span&gt;);
-});
-
-module.exports = router;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;views&lt;/strong&gt;：视图模版文件，默认为pub模板文件，本文指定模板为ejs格式，ejs允许在html中插入js语句，格式为&lt;code&gt;&amp;lt;%= javascript codes %&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-ejs&#34; data-lang=&#34;ejs&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;
-&amp;lt;html&amp;gt;
-  &amp;lt;head&amp;gt;
-    &amp;lt;title&amp;gt;&amp;lt;%= title %&amp;gt;&amp;lt;/title&amp;gt;
-    &amp;lt;link rel=&#39;stylesheet&#39; href=&#39;https://gsemir0418.github.io/stylesheets/style.css&#39; /&amp;gt;
-  &amp;lt;/head&amp;gt;
-  &amp;lt;body&amp;gt;
-    &amp;lt;div&amp;gt;hhahahah&amp;lt;/div&amp;gt;
-    &amp;lt;h1&amp;gt;&amp;lt;%= title %&amp;gt;&amp;lt;/h1&amp;gt;
-    &amp;lt;p&amp;gt;Welcome to &amp;lt;%= title %&amp;gt;&amp;lt;/p&amp;gt;
-  &amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;32-改写为ts&#34;&gt;3.2 改写为TS&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;把app.js复制到app2.ts&lt;/li&gt;
-&lt;li&gt;yarn add@types/node-dev这样才能使用require&lt;/li&gt;
-&lt;li&gt;将var替换为const&lt;/li&gt;
-&lt;li&gt;添加RequestHandler和ErrorRequestHandler断言&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-tsx&#34; data-lang=&#34;tsx&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 有两种方式
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 第一种可以给每个参数分别添加类型
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 第二种直接给整个方法添加as断言
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; (req, res, next) {
-    next(createError(&lt;span style=&#34;color:#b452cd&#34;&gt;404&lt;/span&gt;));
-} &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;as&lt;/span&gt; RequestHandler);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;将bin/www中的入口改为app2.ts&lt;/li&gt;
-&lt;li&gt;添加start:ts脚本，将&lt;code&gt;node&lt;/code&gt;改为&lt;code&gt;ts-node&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;4-appuse和express编程模型&#34;&gt;4 app.use和Express编程模型&lt;/h1&gt;
-&lt;h2 id=&#34;41-appuse&#34;&gt;4.1 app.use()&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;尝试使用request.url和response.send()&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; app = express()
-
-app.use((request, response, next) =&amp;gt; {
-    console.log(request.url)
-    response.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
-})
-
-app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;,() =&amp;gt; {
-		console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;正在监听8080端口&amp;#39;&lt;/span&gt;)
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;此时浏览器访问8080端口，控制台会打印出路径&amp;quot;&lt;code&gt;/&lt;/code&gt;&amp;quot;，浏览器出现“hi”&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;说明多次使用app.use()时，后面的不会得到执行。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;使用&lt;code&gt;next()&lt;/code&gt;可以使得后面的app.use()执行&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use((request, response, next) =&amp;gt; {
-    console.log(request.url)
-    response.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
-    next()
-})
-app.use((request, response, next) =&amp;gt; {
-    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;第二次响应&amp;#39;&lt;/span&gt;)
-    response.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;但浏览器只显示了一个&amp;quot;hi&amp;quot;，与预期的两个&amp;quot;hi&amp;quot;不符。这是因为同一次请求不允许发送两次数据，即两次&lt;code&gt;responde.send()&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;因此用流来改写response：&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use((request, response, next) =&amp;gt; {
-    console.log(request.url)
-    response.write(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
-    next()
-})
-app.use((request, response, next) =&amp;gt; {
-    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;第二次响应&amp;#39;&lt;/span&gt;)
-    response.write(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
-    next()
-})
-&lt;span style=&#34;color:#228b22&#34;&gt;// 可以将关闭响应流的方法单独写在最后的use中
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;app.use((request, response, next) =&amp;gt; {
-    console.log(request.url)
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 用end方法结束响应流
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    response.end()
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;42-express编程模型核心&#34;&gt;4.2 Express编程模型（核心）&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;./express2.png&#34; alt=&#34;image-20210919233846529&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;43-中间件&#34;&gt;4.3 中间件&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;上图中的&lt;code&gt;fn&lt;/code&gt;就是中间件，因为它是插入到启动和结束&lt;strong&gt;中间&lt;/strong&gt;的物件&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;中间件编程模型的优点&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;这种模型使得每个功能都可以通过一个函数来实现&lt;/li&gt;
-&lt;li&gt;然后通过app.use()将这个函数整合起来&lt;/li&gt;
-&lt;li&gt;如果把函数放到文件或npm中，就实现了&lt;strong&gt;模块化&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;实现logger方法&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;创建logger.js&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; logger = (prefix) =&amp;gt; {
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 接收一个参数，返回一个函数
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (request, response, next) =&amp;gt; {
-        &lt;span style=&#34;color:#228b22&#34;&gt;// 打印
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;prefix&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;request.url&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;)
-          next()
-    }
-
-}
-module.exports = logger
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;app.js引入logger并use&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; logger = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./logger&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; app = express()
-
-app.use(logger(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dev&amp;#39;&lt;/span&gt;))
-
-app.use((request, response, next) =&amp;gt; {
-    response.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;)
-    next()
-})
-
-app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;, () =&amp;gt; {
-    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;正在监听8080&amp;#39;&lt;/span&gt;)
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;此时浏览器访问&lt;code&gt;localhost:8080/xxx&lt;/code&gt;，控制台将打印出&lt;code&gt;dev:/xxx&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;44-路由&#34;&gt;4.4 路由&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;利用app.use()实现路由&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;...
-app.use((request, response, next) =&amp;gt; {
-  	&lt;span style=&#34;color:#228b22&#34;&gt;// path不包括请求参数，url包含请求参数(?id=1)
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (request.path === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/xxx&amp;#39;&lt;/span&gt; &amp;amp;&amp;amp; request.method === &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;GET&amp;#39;&lt;/span&gt;) { &lt;span style=&#34;color:#228b22&#34;&gt;// 注意请求方法要大写
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;        response.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;this is xxx page&amp;#39;&lt;/span&gt;)
-    }
-    next()
-})
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;更方便的写法（语法糖）&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;app.use(&#39;/xxx&#39;, fn)&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;/xxx&amp;#39;&lt;/span&gt;, (req, res, next) =&amp;gt; {
-      res.send(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;this is xxx page&amp;#39;&lt;/span&gt;)
-      next()
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;app.get(&#39;/xxx&#39;, fn)&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;app.post(&#39;/xxx&#39;, fn)&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;app.route(&#39;/xxx&#39;).all(f1).get(f2).post(f3)&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;45-错误处理&#34;&gt;4.5 错误处理&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;next(error)&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;会直接进入自定义或默认的&lt;code&gt;errorHandler&lt;/code&gt;，不执行后面的中间件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; express = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;express&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; logger = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./logger&amp;#39;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; app = express()
-
-app.use(logger(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;dev&amp;#39;&lt;/span&gt;))
-app.use((request, response, next) =&amp;gt; {
-    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;执行后会报错的中间件&amp;#39;&lt;/span&gt;)
-    next(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;未登录&amp;#39;&lt;/span&gt;)
-})
-app.use((request, response, next) =&amp;gt; {
-    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;不会执行的中间件&amp;#39;&lt;/span&gt;)
-    next()
-})
-app.listen(&lt;span style=&#34;color:#b452cd&#34;&gt;8080&lt;/span&gt;, () =&amp;gt; {
-    console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;正在监听8080&amp;#39;&lt;/span&gt;)
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;浏览器访问8080端口，显示“未登录”，且控制台打印出“执行后会报错的中间件”和“未登录”&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;自定义&lt;code&gt;errorHandler&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;一般在最后定义，可以定义多个：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.use((error, request, response, next) =&amp;gt; {
-    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt; (response.headersSent) {
-        &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; next(error)
-    }
-    response.status(&lt;span style=&#34;color:#b452cd&#34;&gt;500&lt;/span&gt;)
-    response.send(error)
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-- https://gsemir0418.github.io/posts/express%E6%A0%B8%E5%BF%83/ - </description>
-        </item>
+    <item>
+      <title>Docker安装MySQL</title>
+      <link>https://gsemir0418.github.io/post/docker%E5%AE%89%E8%A3%85mysql/</link>
+      <pubDate>Fri, 02 Jul 2021 08:36:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/docker%E5%AE%89%E8%A3%85mysql/</guid>
+      <description>1 win10安装Docker https://hub.docker.com/ 注册登录并下载安装Docker Desktop。 启用Hyper-V 右键Windows按钮并选择“应用和功能”，选</description>
+    </item>
     
+    <item>
+      <title>杂七杂八</title>
+      <link>https://gsemir0418.github.io/post/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/</link>
+      <pubDate>Wed, 30 Jun 2021 16:25:00 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/</guid>
+      <description>改变数组中对象的属性名称 blog.csdn.net/weixin_43709908/article/details/105581923 Replace 替换全部字符 blog.csdn.net/qq_40138785/article/details/81457849</description>
+    </item>
     
+    <item>
+      <title>NodeHTTP模块</title>
+      <link>https://gsemir0418.github.io/post/nodehttp%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Wed, 30 Jun 2021 09:55:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/nodehttp%E6%A8%A1%E5%9D%97/</guid>
+      <description>0 准备工作 1 ts-node-dev 当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用</description>
+    </item>
     
-        <item>
-        <title>Git相关</title>
-        <link>https://gsemir0418.github.io/posts/git/</link>
-        <pubDate>Sun, 15 Aug 2021 22:02:28 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/git/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/git/ -&lt;h1 id=&#34;0-初始化配置&#34;&gt;0 初始化配置&lt;/h1&gt;
-&lt;h2 id=&#34;01-全局配置&#34;&gt;0.1 全局配置&lt;/h2&gt;
-&lt;p&gt;安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-git&#34; data-lang=&#34;git&#34;&gt;git config --global user.name &amp;quot;gsemir0418&amp;quot;
-git config --global user.email &amp;quot;845217811@qq.com&amp;quot;
-// 查看全局配置
-git config --list
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;02-配置ssh公匙&#34;&gt;0.2 配置SSH公匙&lt;/h2&gt;
-&lt;h3 id=&#34;021-本地创建ssh-key&#34;&gt;0.2.1 本地创建ssh key&lt;/h3&gt;
-&lt;p&gt;打开终端，输入如下指令&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ssh-keygen -t rsa -C &amp;quot;845217811@qq.com&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;直接点回车，说明会在默认文件id_rsa上生成ssh key&lt;/p&gt;
-&lt;p&gt;然后系统要求输入密码，直接回车表示不设密码；重复密码是也可以直接回车，表示不设密码。&lt;/p&gt;
-&lt;p&gt;创建成功后，在终端输入如下指令，便可看到几个文件：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ls ~/.ssh
-id_rsa  id_rsa.pub  known_hosts
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;vscode或vim打开id_rsa.pub，复制全部内容备用。&lt;/p&gt;
-&lt;h3 id=&#34;022-git账户设置ssh&#34;&gt;0.2.2 git账户设置ssh&lt;/h3&gt;
-&lt;p&gt;进入github主页，进入Account Settings，左边选择SSH Keys，Add SSH Key,&lt;/p&gt;
-&lt;p&gt;title建议填写计算机名称，粘贴刚刚复制的key。确定后配置完成了&lt;/p&gt;
-&lt;h3 id=&#34;023-验证&#34;&gt;0.2.3 验证&lt;/h3&gt;
-&lt;p&gt;输入以下指令验证配置是否成功：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ssh -T git@github.com
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果配置过密码，输入密码后，看到如下指令，则表示配置成功&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;You’ve successfully authenticated, but GitHub does not provide shell access
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;03-修改之前的http仓库为ssh&#34;&gt;0.3 修改之前的http仓库为ssh&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;// 查看当前远程仓库路径
-git remote -v
-// 修改为ssh路径
-git remote set-url origin [新路径]
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;04-创建多个ssh-key&#34;&gt;0.4 创建多个ssh key&lt;/h2&gt;
-&lt;p&gt;在使用git的时候，遇到需要创建多个ssh key的需求，一个用来github项目，一个用来gitlab项目；&lt;/p&gt;
-&lt;p&gt;之前如果已将创建过一个ssh key，那么在创建第二个的时候，要修改默认名称，然后增加配置文件；&lt;/p&gt;
-&lt;p&gt;之前创建ssh key生成了如下两个文件，一个私钥，一个公钥&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;id_rsa
-id_rsa.pub&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;我们要生成新的一个ssh key，由于路径跟之前的一直，所以要改个名字&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;id_rsa_gitlab
-id_rsa_gitlab.pub&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;具体如下，&lt;code&gt;-f&lt;/code&gt;指定路径及文件名：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ssh-keygen -t rsa -f ~/.ssh/id_rsa_gitlab -C &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;845217811@qq.com&amp;#34;&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;注意：因为SSH默认只读取id_rsa,为了让SSH识别新的私钥,需要使用命令将其添加到SSH agent,命令如下：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ssh-add ~/.ssh/id_rsa
-ssh-add ~/.ssh/id_rsa_gitlab
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;若执行ssh-add时提示“Could not open a connection to your authentication agent”,则执行下面的命令：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ssh-agent bash
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后再运行ssh-add命令(可以通过ssh-add -l查看私钥列表)&lt;/p&gt;
-&lt;p&gt;接着修改配置文件：&lt;/p&gt;
-&lt;p&gt;在~./ssh目录下新建一个config文件,命令如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;touch config
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;配置文件如下：
-#github
-Host github.com
-IdentityFile ~/.ssh/id_rsa
-User &lt;a href=&#34;mailto:a@b.com&#34;&gt;a@b.com&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;#gitlab
-Host gitlab.com
-IdentityFile ~/.ssh/id_rsa_gitlab
-User &lt;a href=&#34;mailto:a@b.com&#34;&gt;a@b.com&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;1-简单的代码提交流程&#34;&gt;1 简单的代码提交流程&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;git status&lt;/code&gt; 查看工作区代码相对于暂存区的差别，可简写为&lt;code&gt;gst&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;git add .&lt;/code&gt; 将当前目录下修改的所有代码从工作区添加到暂存区 . 代表当前目录，可简写为&lt;code&gt;ga .&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;git commit -m ‘注释’&lt;/code&gt; 将缓存区内容添加到本地仓库&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;git pull origin master&lt;/code&gt;先将远程仓库master中的信息同步到本地仓库master中&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;git push origin master&lt;/code&gt; 将本地版本库推送到远程服务器，origin是远程主机，master表示是远程服务器上的master分支和本地分支重名的简写，分支名是可以修改的&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;2-git-add&#34;&gt;2 git add&lt;/h1&gt;
-&lt;h1 id=&#34;3-git-commit&#34;&gt;3 git commit&lt;/h1&gt;
-&lt;h1 id=&#34;4-git-fetch&#34;&gt;4 git fetch&lt;/h1&gt;
-&lt;h1 id=&#34;5-git-merge&#34;&gt;5 git merge&lt;/h1&gt;
-&lt;h1 id=&#34;6-git-pull&#34;&gt;6 git pull&lt;/h1&gt;
-&lt;h1 id=&#34;7-git-push&#34;&gt;7 git push&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;提交代码到指定远程仓库&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git push -u 仓库名 分支名
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;加了参数-u后，以后可以直接用git push 代替&lt;/p&gt;
-&lt;h1 id=&#34;8-git-remote&#34;&gt;8 git remote&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;添加远程仓库&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git remote add 仓库名 仓库路径
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;删除远程仓库&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git remote remove 仓库名
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;查看远程仓库&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git remote -v
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://gsemir0418.github.io/posts/git/ - </description>
-        </item>
+    <item>
+      <title>调试Nodejs</title>
+      <link>https://gsemir0418.github.io/post/%E8%B0%83%E8%AF%95nodejs/</link>
+      <pubDate>Wed, 30 Jun 2021 09:40:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%B0%83%E8%AF%95nodejs/</guid>
+      <description>1 VSCode调试Node.js 在launch.json中添加配置 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 { // 使用 IntelliSense 了解相关属性。 // 悬停以查看现</description>
+    </item>
     
+    <item>
+      <title>单元测试之文件模块</title>
+      <link>https://gsemir0418.github.io/post/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B9%8B%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Tue, 29 Jun 2021 08:43:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B9%8B%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</guid>
+      <description>安装jest 1 yarn add -dev jest 在package.json中添加test命令 1 2 3 &amp;#34;scripts&amp;#34;:{ &amp;#34;test&amp;#34;:&amp;#34;jest&amp;#34; } 新建__tests__文件夹，单元测试文件一般命名为xx.un</description>
+    </item>
     
+    <item>
+      <title>Array常用方法整理</title>
+      <link>https://gsemir0418.github.io/post/array/</link>
+      <pubDate>Mon, 28 Jun 2021 09:30:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/array/</guid>
+      <description>Array.prototype.map() 1.关键词：遍历 2.是否修改原数组：false 3.返回值： newArray[]，回调函数的结果组成了新数组的每一个元素。 4.语法： 1 2 3 var</description>
+    </item>
     
-        <item>
-        <title>UseState原理</title>
-        <link>https://gsemir0418.github.io/posts/usestate%E5%8E%9F%E7%90%86/</link>
-        <pubDate>Sat, 07 Aug 2021 22:15:51 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/usestate%E5%8E%9F%E7%90%86/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/usestate%E5%8E%9F%E7%90%86/ -&lt;h1 id=&#34;1-usestate简单实现&#34;&gt;1 useState简单实现&lt;/h1&gt;
-&lt;h2 id=&#34;11-示例&#34;&gt;1.1 示例&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;点击按钮，结果+1&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; ReactDOM from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react-dom&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; rootElement = &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;root&amp;#34;&lt;/span&gt;);
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; App() {
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [n, setN] = React.useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;);
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;className&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;App&amp;#34;&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;{n}&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setN(n + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;+&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-      &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-  );
-}
-
-ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt; /&amp;gt;, rootElement);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;运行过程分析
-&lt;ol&gt;
-&lt;li&gt;首次render&lt;code&gt;&amp;lt;App/&amp;gt;&lt;/code&gt;，调用&lt;code&gt;App()&lt;/code&gt;方法，得到虚拟DOM，React会生成真实DOM&lt;/li&gt;
-&lt;li&gt;用户单击button，调用&lt;code&gt;setN(n+1)&lt;/code&gt;，并再次render&lt;code&gt;&amp;lt;App/&amp;gt;&lt;/code&gt;，调用&lt;code&gt;App()&lt;/code&gt;方法，得到新的虚拟DOM，经过DOM Diff运算，React会更新真实DOM&lt;/li&gt;
-&lt;li&gt;每次调用&lt;code&gt;App()&lt;/code&gt;，都会运行&lt;code&gt;useState(0)&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;执行&lt;code&gt;setN&lt;/code&gt;的时候会发生什么？n会变吗？&lt;code&gt;App()&lt;/code&gt;会重新执行吗？
-&lt;ul&gt;
-&lt;li&gt;setN一定会修改某个数据x，而&lt;strong&gt;不是直接修改n&lt;/strong&gt;，并将n+1存入x&lt;/li&gt;
-&lt;li&gt;setN&lt;strong&gt;一定会触发&lt;code&gt;&amp;lt;App/&amp;gt;&lt;/code&gt;重新渲染&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;每次重新执行&lt;code&gt;App()&lt;/code&gt;时，都会执行&lt;code&gt;useState(o)&lt;/code&gt;，那么n每次的值会有不同吗（即不为0）
-&lt;ul&gt;
-&lt;li&gt;每次n的值都会不同，说明useState肯定会&lt;strong&gt;从x读取n的最新值&lt;/strong&gt;，而不是简单的初始化n为0&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;x
-&lt;ul&gt;
-&lt;li&gt;每个组件有自己的数据&lt;code&gt;x&lt;/code&gt;，即&lt;code&gt;state&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;12-简易usestate实现&#34;&gt;1.2 简易useState实现&lt;/h2&gt;
-&lt;p&gt;依据上面的分析，现在可以初步尝试一下手写&lt;code&gt;myUseState&lt;/code&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;定义&lt;code&gt;myUseState&lt;/code&gt;，接受初始值&lt;code&gt;initialValue&lt;/code&gt;，返回一个数组&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; myUseState = (initialValue) =&amp;gt; {
-	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; [state, setState]
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;定义&lt;code&gt;state&lt;/code&gt;变量和&lt;code&gt;setState&lt;/code&gt;方法，并实现&lt;code&gt;re-render&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; myUseState = (initialValue) =&amp;gt; {
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 定义state变量
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; state = initialValue
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 定义useState方法
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; useState = (newValue) =&amp;gt; {
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 将新值赋给state
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;		state = newValue
-		&lt;span style=&#34;color:#228b22&#34;&gt;// re-render
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;		ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt; /&amp;gt;, rootElement)
-	}
-	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; [state, setState]
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;每次执行都会重新把初始值赋给state，导致n的值不会发生改变。因此需要将state定义在函数外面，避免被myUseState重置。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; _state;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; myUseState = (initialValue) =&amp;gt; {
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 对_state值进行判断，重新赋值或者保持上次的值
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	_state = _state === &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;undefined&lt;/span&gt; ? initialValue : _state
-	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; useState = (newValue) =&amp;gt; {
-		_state = newValue
-		ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt; /&amp;gt;, rootElement)
-	}
-	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; [_state, setState]
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;至此，针对单一组件单一状态值的简易版本useState就完成了，但仍存在一些问题。&lt;/p&gt;
-&lt;h2 id=&#34;13-多个state的情况&#34;&gt;1.3 多个state的情况&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;：如果一个组件用了两个useState，怎么办&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;思路&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;改写_state为对象：_
-&lt;ul&gt;
-&lt;li&gt;_比如_state = { n : 0, m : 0 }&lt;/li&gt;
-&lt;li&gt;不行，因为useState(0)并不知道要赋值的变量的key是m还是n&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;改写_state为数组：_
-&lt;ul&gt;
-&lt;li&gt;比如_state = [ 0, 0 ]&lt;/li&gt;
-&lt;li&gt;第一次useState就操作第一个数，第二次就操作第二个数&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;改写_state为数组&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;定义index变量，标识state的初始化与操作顺序。初步改写如下：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; ReactDOM from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react-dom&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; rootElement = &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;root&amp;#34;&lt;/span&gt;);
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; _state = []
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;let&lt;/span&gt; index = &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; myUseState = (initialValue) =&amp;gt; {
-  _state[index] = _state[index] === &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;undefined&lt;/span&gt;?initialValue:_state[index]
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; setState = (newValue) =&amp;gt; {
-    _state[index] = newValue
-    ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt; /&amp;gt;, rootElement);
-  }
-  index += &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 此处返回的实际上总是下一个_state值，因为上面的index已经加一了
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#228b22&#34;&gt;// 将其放到return后面的话是不会被执行的
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; [_state[index], setState]
-}
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; App() {
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [n, setN] = myUseState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;);
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [m, setM] = myUseState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;);
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;className&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;App&amp;#34;&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;{n}&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setN(n + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;+&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-      &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;{m}&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setM(m + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;+&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-      &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-  );
-}
-ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt; /&amp;gt;, rootElement);
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;由于出现了&lt;code&gt;index += 1&lt;/code&gt;的执行顺序问题，页面中的m和n值得不到正确显示。需要定义中间变量&lt;code&gt;currentIndex&lt;/code&gt;解决这个问题：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;...
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; myUseState = (initialValue) =&amp;gt; {
-	&lt;span style=&#34;color:#228b22&#34;&gt;// 将当前index值赋给中间变量
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; currentIndex = index
-  _state[currentIndex] = _state[currentIndex] === &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;undefined&lt;/span&gt; ? initialValue : _state[currentIndex]
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; setState = (newValue) =&amp;gt; {
-    _state[currentIndex] = newValue
-    ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt; /&amp;gt;, rootElement);
-  }
-  index += &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 此时index的变化对返回值就不会产生影响了
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; [_state[currentIndex], setState]
-}
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;此时单击+1，没有发生任何变化。通过控制台打印出currentIndex的值我们发现，首次渲染&lt;code&gt;&amp;lt;App/&amp;gt;&lt;/code&gt;时，currentIndex为0和1；但当单击+1时，currentIndex变为了2和3，导致返回的数组每次useState后都会增加两个值，说明index每次执行useState都继续+1。那么我们应该在每次re-render时重置index为0：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;...
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; setState = (newValue) =&amp;gt; {
-	_state[currentIndex] = newValue
-	&lt;span style=&#34;color:#228b22&#34;&gt;// before re-render
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	index = &lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;
-	ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt; /&amp;gt;, rootElement);
-}
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;完成多个state的状态处理！&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;数组方案&lt;strong&gt;缺点&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;第二次渲染时必须保证useState&lt;strong&gt;调用顺序完全一致&lt;/strong&gt;，否则state就乱了&lt;/li&gt;
-&lt;li&gt;同样React不允许useState出现在&lt;code&gt;if&lt;/code&gt;等条件判断语句中，规定hooks在每次渲染中必须&lt;strong&gt;保持严格一致的执行顺序&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;React为每个组件创建自己的&lt;code&gt;_state&lt;/code&gt;和&lt;code&gt;index&lt;/code&gt;，放在组件对应的虚拟节点对象上。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;图示：App组件的更新过程（两个子组件也经历同样的过程）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./useState1.png&#34; alt=&#34;image-20210808092323870&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;14-总结&#34;&gt;1.4 总结&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;每个函数组件对应一个 React节点*&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;React的节点实际上应该是FiberNode，_state的真实名称为memorizedState，index的实现则是用到了链表&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://juejin.im/post/5bdfc1c4e51d4539f4178e1f&#34;&gt;https://juejin.im/post/5bdfc1c4e51d4539f4178e1f&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;每个节点保存着&lt;code&gt;state&lt;/code&gt;和&lt;code&gt;index&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;useState会读取&lt;code&gt;state[index]&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;index&lt;/code&gt;由useState出现的顺序决定&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;setState会修改&lt;code&gt;state&lt;/code&gt;,并触发更新&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;2-n的分身setn会直接改变n吗&#34;&gt;2 n的分身(setN会直接改变n吗)&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;背景：两个按钮，一个是单击+1，另一个是在3s后打印出n的值。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; ReactDOM from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react-dom&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; rootElement = &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;root&amp;#34;&lt;/span&gt;);
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; App() {
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [n, setN] = React.useState(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;);
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; log = () =&amp;gt; setTimeout(() =&amp;gt; console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;`n: &lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;n&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;), &lt;span style=&#34;color:#b452cd&#34;&gt;3000&lt;/span&gt;);
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;className&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;App&amp;#34;&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;{n}&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setN(n + &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;+&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={log}&amp;gt;log&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-      &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-  );
-}
-
-ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt; /&amp;gt;, rootElement);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;先+1再log时&lt;/strong&gt;，控制台3s后打印出：&lt;code&gt;n : 1&lt;/code&gt;，在预料之中。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./useState2.png&#34; alt=&#34;image-20210808124646987&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;先log再+1时&lt;/strong&gt;，控制台3s后打印出：&lt;code&gt;n : 0&lt;/code&gt;，而不是有部分人预想的n：1。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./useState3.png&#34; alt=&#34;image-20210808124726273&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;为什么log出了&lt;strong&gt;旧数据&lt;/strong&gt;？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;在单击log后，无论点击多少次+1，即无论n改变了几次，log始终都会读取点击log那一刻的n值&lt;/li&gt;
-&lt;li&gt;说明每次&lt;strong&gt;setN不会直接修改n值&lt;/strong&gt;，而是&lt;strong&gt;产生一个新的n&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;如果想要有一个贯穿始终的状态，办法有很多&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;3-贯穿始终的状态&#34;&gt;3 贯穿始终的状态&lt;/h1&gt;
-&lt;p&gt;最直接的方式就是定义全局变量，即&lt;code&gt;window.xxx&lt;/code&gt;，除了很low别的没啥毛病&lt;/p&gt;
-&lt;h2 id=&#34;31-useref&#34;&gt;3.1 useRef&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;useRef不仅可以用于引用div，还能用于&lt;strong&gt;任意数据&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; ReactDOM from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react-dom&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; rootElement = &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;root&amp;#34;&lt;/span&gt;);
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; App() {
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; nRef = React.useRef(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;);
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; log = () =&amp;gt; setTimeout(() =&amp;gt; console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;`n: &lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;nRef.current&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;), &lt;span style=&#34;color:#b452cd&#34;&gt;1000&lt;/span&gt;);
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;className&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;App&amp;#34;&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;{nRef.current} 这里并不能实时更新&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; (nRef.current += &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;)}&amp;gt;+&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={log}&amp;gt;log&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-      &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-  );
-}
-
-ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt; /&amp;gt;, rootElement);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;无论+1与log的顺序如何，log总能打印出最新的n值，因为&lt;strong&gt;nRef是唯一的&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./useState4.png&#34; alt=&#34;image-20210808131507759&#34;&gt;&lt;/p&gt;
-&lt;p&gt;但nRef的改变并不能驱动页面刷新，可以借助useState帮助页面刷新&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;...
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; App() {
-  &lt;span style=&#34;color:#228b22&#34;&gt;// useRef实际上就是个简单的对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; nRef = React.useRef(&lt;span style=&#34;color:#b452cd&#34;&gt;0&lt;/span&gt;);&lt;span style=&#34;color:#228b22&#34;&gt;// { current : 0 }
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#228b22&#34;&gt;// 只需借助setState方法
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; update = React.useState(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;)[&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;]
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; log = () =&amp;gt; setTimeout(() =&amp;gt; console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;`n: &lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;nRef.current&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;), &lt;span style=&#34;color:#b452cd&#34;&gt;1000&lt;/span&gt;);
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;className&lt;/span&gt;=&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;App&amp;#34;&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;{nRef.current}&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; {
-            nRef.current += &lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;
-            update(nRef.current)
-          }}&amp;gt;+&lt;span style=&#34;color:#b452cd&#34;&gt;1&lt;/span&gt;&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={log}&amp;gt;log&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-      &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-  );
-}
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在改变nRef的值时，随便改变一下setState的值，页面就会同时刷新&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./useState5.png&#34; alt=&#34;image-20210808132338632&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;32-usecontext&#34;&gt;3.2 useContext&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;useContext不仅能贯穿始终，还能&lt;strong&gt;贯穿不同组件&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;示例&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; React from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; ReactDOM from &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;react-dom&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;./styles.css&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; rootElement = &lt;span style=&#34;color:#658b00&#34;&gt;document&lt;/span&gt;.getElementById(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;root&amp;#34;&lt;/span&gt;);
-&lt;span style=&#34;color:#228b22&#34;&gt;// 创建上下文（全局）对象
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; themeContext = React.createContext(&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;null&lt;/span&gt;);
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; App() {
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; [theme, setTheme] = React.useState(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;red&amp;#34;&lt;/span&gt;);
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
-    &lt;span style=&#34;color:#228b22&#34;&gt;// 将状态值theme以及改变状态的方法setTheme传入value中
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;themeContext.Provider&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;value&lt;/span&gt;={{ theme, setTheme }}&amp;gt;
-      &lt;span style=&#34;color:#228b22&#34;&gt;// 通过theme值改变className，从而改变主题样式
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;className&lt;/span&gt;={&lt;span style=&#34;color:#cd5555&#34;&gt;`App &lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;theme&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;}&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;{theme}&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-          &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;ChildA&lt;/span&gt; /&amp;gt;
-        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-          &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;ChildB&lt;/span&gt; /&amp;gt;
-        &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-      &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;themeContext.Provider&lt;/span&gt;&amp;gt;
-  );
-}
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; ChildA() {
-  &lt;span style=&#34;color:#228b22&#34;&gt;// 通过useContext读取到父组件的themeContext对象，取出其中的setTheme方法
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { setTheme } = React.useContext(themeContext);
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setTheme(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;red&amp;#34;&lt;/span&gt;)}&amp;gt;red&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-  );
-}
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;function&lt;/span&gt; ChildB() {
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { setTheme } = React.useContext(themeContext);
-  &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt; (
-    &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-      &amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;onClick&lt;/span&gt;={() =&amp;gt; setTheme(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;blue&amp;#34;&lt;/span&gt;)}&amp;gt;blue&amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;button&lt;/span&gt;&amp;gt;
-    &amp;lt;/&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
-  );
-}
-
-ReactDOM.render(&amp;lt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;App&lt;/span&gt; /&amp;gt;, rootElement);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;./useState6.png&#34; alt=&#34;image-20210808132931213&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;33-总结&#34;&gt;3.3 总结&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;每次重新渲染，组件函数就会再次执行&lt;/li&gt;
-&lt;li&gt;对应的所有state都会出现&lt;code&gt;「分身」&lt;/code&gt;，旧的state和新的state可以&lt;strong&gt;同时存在&lt;/strong&gt;（例如setTimeout时），之后旧的state会&lt;strong&gt;消失&lt;/strong&gt;（垃圾回收）&lt;/li&gt;
-&lt;li&gt;如果你不希望出现分身，可以用&lt;code&gt;useRef/useContext&lt;/code&gt;等&lt;/li&gt;
-&lt;/ul&gt;
-- https://gsemir0418.github.io/posts/usestate%E5%8E%9F%E7%90%86/ - </description>
-        </item>
+    <item>
+      <title>React入门</title>
+      <link>https://gsemir0418.github.io/post/react%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Fri, 25 Jun 2021 23:11:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/react%E5%85%A5%E9%97%A8/</guid>
+      <description>1.React是什么 用于构建用户界面的JS库（操作DOM呈现页面） 是一个将数据渲染为HTML视图的开源的JavaScript库 官网：http</description>
+    </item>
     
+    <item>
+      <title>初识Hooks</title>
+      <link>https://gsemir0418.github.io/post/reacthooks/</link>
+      <pubDate>Fri, 25 Jun 2021 23:07:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/reacthooks/</guid>
+      <description>1 Hook简介 1.1 基本概念 Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使⽤ state 以及其他的 React 特性。 1.2 React Hooks优势 函数组件不能使⽤state</description>
+    </item>
     
+    <item>
+      <title>Node文件模块</title>
+      <link>https://gsemir0418.github.io/post/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Fri, 25 Jun 2021 14:40:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/node%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97/</guid>
+      <description>1 待办事项命令行程序需求 功能： 可以列出所有的todo； 新增、编辑、删除todo； 修改todo状态为已完成/未完成 命令 1 2 3 t t add 任务名 t clear 2</description>
+    </item>
     
-        <item>
-        <title>JS专精-函数</title>
-        <link>https://gsemir0418.github.io/posts/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/</link>
-        <pubDate>Sat, 07 Aug 2021 20:40:20 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/ -&lt;p&gt;1&lt;/p&gt;
-- https://gsemir0418.github.io/posts/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/ - </description>
-        </item>
+    <item>
+      <title>React组件生命周期</title>
+      <link>https://gsemir0418.github.io/post/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</link>
+      <pubDate>Fri, 25 Jun 2021 11:09:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</guid>
+      <description>1 生命周期的理解 1.1 引出生命周期 需求： 让指定的文本做显示* */* 隐藏的渐变动画 从完全可见，到彻底消失，耗时2S 点击“不活了”按钮从界面中卸载组件 源</description>
+    </item>
     
+    <item>
+      <title>React Hooks全解</title>
+      <link>https://gsemir0418.github.io/post/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</link>
+      <pubDate>Tue, 01 Jun 2021 17:02:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%96%B9%E6%96%B9%E7%9A%84hooks/</guid>
+      <description>1.useState 使用状态 1 2 3 const [n, setN] = React.useState(0) const [user, setUser] = React.useState({name:&amp;#39;F&amp;#39;}) 注意事项1：不可局部更新 1 2 3 4 5 const [user, setUser] = useState({name:&amp;#39;Jack&amp;#39;,age:18}) setState({ name:&amp;#39;Sam&amp;#39; }) 结果得到的是{name:&amp;lsquo;Sam&amp;rsqu</description>
+    </item>
     
+    <item>
+      <title>可视化大屏技术</title>
+      <link>https://gsemir0418.github.io/post/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Fri, 28 May 2021 09:30:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E6%8A%80%E6%9C%AF/</guid>
+      <description>1 背景和意义 数据可视化即把相对复杂、抽象的数据通过可视化的方式以人们更易理解的形式展示出来的一系列手段，旨在更形象地表达数据内在的信息和规律</description>
+    </item>
     
-        <item>
-        <title>Node进程与线程</title>
-        <link>https://gsemir0418.github.io/posts/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
-        <pubDate>Fri, 06 Aug 2021 17:33:55 +0800</pubDate>
-        
-        <guid>https://gsemir0418.github.io/posts/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
-        <description>GSemir Blog https://gsemir0418.github.io/posts/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/ -&lt;h1 id=&#34;1-进程&#34;&gt;1 进程&lt;/h1&gt;
-&lt;h2 id=&#34;11-进程-process&#34;&gt;1.1 进程 Process&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;场景
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;notepad.exe&lt;/code&gt;是一个&lt;strong&gt;程序&lt;/strong&gt;，不是进程&lt;/li&gt;
-&lt;li&gt;双击notepad.exe时，操作系统会开启一个&lt;strong&gt;进程&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;定义
-&lt;ul&gt;
-&lt;li&gt;进程是程序的&lt;strong&gt;执行实例&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;程序在CPU上&lt;strong&gt;执行时的活动&lt;/strong&gt;叫做进程&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;特点
-&lt;ul&gt;
-&lt;li&gt;一个进程可以创建另一个进程（父进程和子进程）例如Chrome浏览器的网页和插件&lt;/li&gt;
-&lt;li&gt;通过任务管理器可以看到进程&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;12-了解cpu&#34;&gt;1.2 了解CPU&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;特点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;一个单核CPU，在一个时刻，只能做一件事情&lt;/li&gt;
-&lt;li&gt;如何让用户同时看电影、听音乐、写代码呢&lt;/li&gt;
-&lt;li&gt;答案是在不同进程中&lt;strong&gt;快速切换&lt;/strong&gt;（CPU频率）&lt;/li&gt;
-&lt;li&gt;以渣男交多个女朋友举例&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;多程序并发执行时&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;多个程序在&lt;strong&gt;宏观上并行，微观上串行&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;每个进程会出现&lt;strong&gt;执行-暂停-执行&lt;/strong&gt;的规律&lt;/li&gt;
-&lt;li&gt;多个进程之前会出现抢资源（如打印机队列）的现象&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;进程的两个状态：运行态与非运行态&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./process1.png&#34; alt=&#34;image-20210805104328732&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;进程队列示意&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./process2.png&#34; alt=&#34;image-20210805104451902&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;13-阻塞&#34;&gt;1.3 阻塞&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;等待执行的进程中&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;都是非运行态&lt;/li&gt;
-&lt;li&gt;一些（A）在等待CPU资源&lt;/li&gt;
-&lt;li&gt;另一些（B）在等待I/O完成（如文件读取）&lt;/li&gt;
-&lt;li&gt;如果这时把CPU资源分配给B进程，B还是在等I/O（不占用CPU）&lt;/li&gt;
-&lt;li&gt;B进程就是阻塞进程&lt;/li&gt;
-&lt;li&gt;因此，分派程序只会把CPU分配给非阻塞进程&lt;/li&gt;
-&lt;li&gt;比如和女朋友排队买饭，但她中途去厕所了，那么如果排到你们了就会让你去后面重新排队&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;进程的三个状态：&lt;strong&gt;运行&lt;/strong&gt;，&lt;strong&gt;就绪&lt;/strong&gt;，&lt;strong&gt;阻塞&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./process3.png&#34; alt=&#34;image-20210805105749846&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;2-线程&#34;&gt;2 线程&lt;/h1&gt;
-&lt;h2 id=&#34;21-线程引入&#34;&gt;2.1 线程引入&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;分阶段
-&lt;ul&gt;
-&lt;li&gt;过去在面向进程设计的系统中，进程是程序的基本执行实体&lt;/li&gt;
-&lt;li&gt;在面向线程设计的系统中，进程本身不是基本运行单位，而是&lt;strong&gt;线程的容器&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;引入原因
-&lt;ul&gt;
-&lt;li&gt;进程是程序的基本执行实体，也是资源（内存等）分配的基本实体&lt;/li&gt;
-&lt;li&gt;导致进程的创建、切换、销毁太消耗CPU时间了&lt;/li&gt;
-&lt;li&gt;于是引入线程，&lt;strong&gt;线程作为执行的基本实体&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;而&lt;strong&gt;进程只作为资源分配的基本实体&lt;/strong&gt;（不管执行了）&lt;/li&gt;
-&lt;li&gt;例如领导与员工们，&lt;strong&gt;领导负责申请、调配资源，员工们负责执行&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;22-线程thread&#34;&gt;2.2 线程Thread&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;概念
-&lt;ul&gt;
-&lt;li&gt;CPU&lt;strong&gt;调度和执行&lt;/strong&gt;的&lt;strong&gt;最小单元&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;一个进程中&lt;strong&gt;至少&lt;/strong&gt;有一个线程&lt;/li&gt;
-&lt;li&gt;一个进程中的线程共享该进程的所有资源&lt;/li&gt;
-&lt;li&gt;进程的第一个线程叫做初始化线程&lt;/li&gt;
-&lt;li&gt;线程的调度可以由操作系统负责，也可以由用户自己负责&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;举例
-&lt;ul&gt;
-&lt;li&gt;浏览器进程中有渲染引擎、V8引擎、存储模块、网络模块、用户界面模块等&lt;/li&gt;
-&lt;li&gt;每个模块都可以放在一个线程里&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;分析：子进程 VS 线程
-&lt;ul&gt;
-&lt;li&gt;优先使用&lt;strong&gt;线程&lt;/strong&gt;，除非需要新的资源分配&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;3-nodejs进程控制&#34;&gt;3 Node.js进程控制&lt;/h1&gt;
-&lt;h2 id=&#34;31-child_process模块&#34;&gt;3.1 child_process模块&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;目的&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;子进程的运行结果存储在系统缓存中（最大200kb）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;等待子进程运行结束后，主进程再用回调函数读取子进程的运行结果（error,stdout,stderr）&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; child_process = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;child_process&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; {exec} = child_process
-
-exec(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls&amp;#39;&lt;/span&gt;, (error, stdout, stderr)=&amp;gt;{
-	console.log(error) &lt;span style=&#34;color:#228b22&#34;&gt;// null
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	console.log(stdout) &lt;span style=&#34;color:#228b22&#34;&gt;// 标准输出
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;	console.log(stderr) &lt;span style=&#34;color:#228b22&#34;&gt;// 错误内容
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;32-api&#34;&gt;3.2 API&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;API-exec&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;exec(cmd, options, fn)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;execute的缩写，用于执行bash命令&lt;/li&gt;
-&lt;li&gt;同步版本：execSync，不用回调，直接const result = execSync&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;流&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;返回流（不用回调，可以监听stdout流的data事件）&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; child_process = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;child_process&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; {exec} = child_process
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; child = exec(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls -l&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#228b22&#34;&gt;// 监听stdout的data事件
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;child.stdout.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;, (chunk) =&amp;gt; {
-	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;得到了一次数据&amp;#39;&lt;/span&gt;)
-	console.log(chunk)
-})
-&lt;span style=&#34;color:#228b22&#34;&gt;// 监听stderr
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;child.stderr.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Promise&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;可以使其Promise化（util.promisify）&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; util = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;util&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; child_process = require(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;child_process&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { exec } = child_process
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; exec2 = util.promisify(exec)
-
-exec2(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls -l&amp;#39;&lt;/span&gt;).then(data =&amp;gt; {
-	console.log(data.stdout)
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;options常用选项（exec第二个参数，execFile第三个参数）&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;cwd：执行命令的路径&lt;/li&gt;
-&lt;li&gt;env：环境变量&lt;/li&gt;
-&lt;li&gt;shell：用什么命令行程序执行&lt;/li&gt;
-&lt;li&gt;maxBuffer：最大缓存&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;exec(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls&amp;#39;&lt;/span&gt;, {
-	cwd : &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;C:\\&amp;#39;&lt;/span&gt;,
-	env : {NODE_ENV : &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;development&amp;#39;&lt;/span&gt;},
-	maxBuffer : &lt;span style=&#34;color:#b452cd&#34;&gt;1024&lt;/span&gt;*&lt;span style=&#34;color:#b452cd&#34;&gt;2024&lt;/span&gt;
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;存在的问题&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;存在cmd被注入的风险&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// 当接受用户输入时，以&amp;#39;&amp;amp;&amp;amp;&amp;#39;开头，接着输入一条危险指令
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; userInput = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;. &amp;amp;&amp;amp; rm -rf /&amp;#39;&lt;/span&gt;
-exec2(&lt;span style=&#34;color:#cd5555&#34;&gt;`ls &lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;${&lt;/span&gt;userInput&lt;span style=&#34;color:#cd5555&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;`&lt;/span&gt;).then(data)...
-&lt;span style=&#34;color:#228b22&#34;&gt;// 那么命令行就会执行&amp;#39;ls&amp;#39;命令和&amp;#39;rm -rf /&amp;#39;命令
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;推荐使用&lt;code&gt;execFile&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;执行特定的程序&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;命令行的参数要用数组形式传入，无法注入&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;同步版本：execFileSync&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; { execFile } = child_process
-
-&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; userInput = &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;. &amp;amp;&amp;amp; pwd&amp;#39;&lt;/span&gt;
-execFile(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls&amp;#39;&lt;/span&gt;, [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;-la&amp;#39;&lt;/span&gt;, userInput], (error, stdout) =&amp;gt; {
-    console.log(error)
-    console.log(stdout)
-})
-&lt;span style=&#34;color:#228b22&#34;&gt;// 结果会报错，不会将&amp;#39;&amp;amp;&amp;amp;&amp;#39;作为连接号解析
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;支持流&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; child = execFile(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls&amp;#39;&lt;/span&gt;, [userInput])
-child.stdout.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;, chunk =&amp;gt; {
-    console.log(chunk)
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;API-spawn&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;spawn&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;用法与execFile方法类似&lt;/li&gt;
-&lt;li&gt;区别在于没有回调函数，只能通过流事件获取结果&lt;/li&gt;
-&lt;li&gt;没有最大200kb的限制（因为是流）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;const&lt;/span&gt; child = spawn(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;ls&amp;#39;&lt;/span&gt;, [&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;], { cwd : &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;C:\\&amp;#39;&lt;/span&gt; })
-child.stdout.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;, chunk =&amp;gt; {
-    console.log(chunk.toString())
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;能用spawn就不要用execFile&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;API-fork&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;fork&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;创建一个子进程，执行Node脚本&lt;/li&gt;
-&lt;li&gt;fork(&#39;./child.js&#39;)相当于执行spawn(&amp;lsquo;node&amp;rsquo;,[&#39;./child.js&#39;])&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;能用fork，就别用其他的了&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;特点&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;会多出一个message事件，用于父子通信&lt;/li&gt;
-&lt;li&gt;会多出一个send方法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#228b22&#34;&gt;// n.js主进程
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;var&lt;/span&gt; n = child_process.fork(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;./child.js&amp;#39;&lt;/span&gt;)
-n.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;, m =&amp;gt; {
-	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;PARENT got message:&amp;#39;&lt;/span&gt;, m)
-})
-n.send({ hello: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;world&amp;#39;&lt;/span&gt; })&lt;span style=&#34;color:#228b22&#34;&gt;// 父进程给子进程传值
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#228b22&#34;&gt;// child.js子进程
-&lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;&lt;/span&gt;process.on(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;, m =&amp;gt; {
-	console.log(&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;CHILD got message:&amp;#39;&lt;/span&gt;, m)
-})
-process.send({ foo: &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;bar&amp;#39;&lt;/span&gt; })&lt;span style=&#34;color:#228b22&#34;&gt;// 子进程给父进程传值
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;4-nodejs线程&#34;&gt;4 Node.js线程&lt;/h1&gt;
-&lt;p&gt;太新了 官方文档建议用子进程。。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://nodejs.org/api/worker_threads.html#worker_threads_worker_threads&#34;&gt;https://nodejs.org/api/worker_threads.html#worker_threads_worker_threads&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-- https://gsemir0418.github.io/posts/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/ - </description>
-        </item>
+    <item>
+      <title>React基础</title>
+      <link>https://gsemir0418.github.io/post/react%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Thu, 29 Apr 2021 23:11:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/react%E5%9F%BA%E7%A1%80/</guid>
+      <description>1 React定义组件 1.1 函数式组件 函数式组件适用于简单组件的定义，其首字母需大写，且虚拟DOM元素必须有结束标签 函数组件中的this指向为wi</description>
+    </item>
     
+    <item>
+      <title>展示平台说明文档</title>
+      <link>https://gsemir0418.github.io/post/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
+      <pubDate>Fri, 08 Jan 2021 23:15:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
+      <description>1. 模型展示页面 ​ 模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需</description>
+    </item>
+    
+    <item>
+      <title>3dsMax技术文档</title>
+      <link>https://gsemir0418.github.io/post/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
+      <pubDate>Fri, 08 Jan 2021 16:41:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
+      <description>1. 3dsMax概述 ​ 3dsMax是由AutoDesk公司开发的三维模型与动画制作渲染软件，它被广泛应用于多个领域，包括游戏设计、广告设计、建</description>
+    </item>
+    
+    <item>
+      <title>Revit建模技术文档</title>
+      <link>https://gsemir0418.github.io/post/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</link>
+      <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/</guid>
+      <description>1. Revit概述 2.安装软件 3.点云数据导入 3.1 直接导入 3.2 Recap 4.构件族与模型搭建 4.1 建模流程概述 4.2 轴网布局 4.3 木框架搭建 4.4 屋顶 4.4.1 歇山式屋顶 4.4.2 悬山式</description>
+    </item>
+    
+    <item>
+      <title>StartBlog</title>
+      <link>https://gsemir0418.github.io/post/startblog/</link>
+      <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/startblog/</guid>
+      <description>Step1 安装hugo 下载链接：https://github.com/gohugoio/hugo/releases 选择最新版本进行安装（建议安装hu</description>
+    </item>
     
   </channel>
-</rss> 
+</rss>

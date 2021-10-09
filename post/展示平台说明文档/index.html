@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>展示平台说明文档 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1. 模型展示页面 ​ 模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="展示平台说明文档" />
+<meta property="og:description" content="1. 模型展示页面 ​ 模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-01-08T23:15:51+08:00" />
+<meta property="article:modified_time" content="2021-01-08T00:00:00+08:00" />
+
+<meta itemprop="name" content="展示平台说明文档">
+<meta itemprop="description" content="1. 模型展示页面 ​ 模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需"><meta itemprop="datePublished" content="2021-01-08T23:15:51+08:00" />
+<meta itemprop="dateModified" content="2021-01-08T00:00:00+08:00" />
+<meta itemprop="wordCount" content="2517">
+<meta itemprop="keywords" content="展示平台,翻页特效," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="展示平台说明文档"/>
+<meta name="twitter:description" content="1. 模型展示页面 ​ 模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">展示平台说明文档</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-01-08 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%A0%94%E7%A9%B6%E7%94%9F%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/"> 研究生技术文档 </a>
+            </div>
+          <span class="more-meta"> 2517 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-模型展示页面">1. 模型展示页面</a>
+      <ul>
+        <li><a href="#11-更改网页名称">1.1 更改网页名称</a></li>
+        <li><a href="#12-修改模型路径">1.2 修改模型路径</a></li>
+        <li><a href="#13-控制模型体积">1.3 控制模型体积</a></li>
+        <li><a href="#14-其他可配置选项">1.4 其他可配置选项</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-turnjs翻页特效">2. Turn.js翻页特效</a>
+      <ul>
+        <li><a href="#21-图文内容的准备工作">2.1 图文内容的准备工作</a></li>
+        <li><a href="#22-翻页效果的实现">2.2 翻页效果的实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#3建筑展示平台">3.建筑展示平台</a>
+      <ul>
+        <li><a href="#31-自定义主页样式">3.1 自定义主页样式</a></li>
+        <li><a href="#32-替换obj模型">3.2 替换obj模型</a>
+          <ul>
+            <li><a href="#33-其他可配置选项">3.3 其他可配置选项</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-模型展示页面">1. 模型展示页面</h1>
+<p>​		模型展示页面是基于There.js库、模型和材质加载器以及控制器，实现模型在web端的简单展示。具体实现逻辑已写好，用户只需修改obj模型路径等简单操作即可实现模型展示demo。obj模型导出及注意事项见<code>3dsMax技术文档</code>。模板已发布到GitHub供读者学习参考：</p>
+<blockquote>
+<p><a href="https://github.com/GSemir0418/TemplateProjects">https://github.com/GSemir0418/TemplateProjects</a></p>
+</blockquote>
+<p>​		下图为项目目录结构：</p>
+<p><img src="/modelshow/image-20210108184425370.png" alt="image-20210108184425370"></p>
+<p>​		其中，js文件夹包含全部Javascript脚本文件，models文件夹用来存储obj模型，index.html是项目的主页。</p>
+<p>​		js文件夹中，除index.js外，均是由Three.js为我们提供的模型加载器和控制器脚本文件。而页面的主要逻辑全部封装到了index.js中。</p>
+<h2 id="11-更改网页名称">1.1 更改网页名称</h2>
+<p>​		在index.html文件中，修改<code>&lt;title&gt;</code>标签内的内容即可：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;title&gt;XXX村寨模型展示&lt;/title&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="12-修改模型路径">1.2 修改模型路径</h2>
+<p>​		首先将obj模型拷贝至models文件夹下。</p>
+<p>​		在js/index.js文件中，修改15和16行的代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//模型路径
+let mat1 = &#39;./models/testobj/lancuiting.mtl&#39;;
+let obj1 = &#39;./models/testobj/lancuiting.obj&#39;;
+</code></pre></td></tr></table>
+</div>
+</div><p>​		注意路径使用<strong>相对路径</strong>。</p>
+<h2 id="13-控制模型体积">1.3 控制模型体积</h2>
+<p>​		js/index.js文件中，修改51行代码中的参数即可，注意三个数字应保持一致：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">model1.scale.set(1.4, 1.4, 1.4);
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="14-其他可配置选项">1.4 其他可配置选项</h2>
+<p>​		如需修改灯光位置及强度，可以修改js/index.js文件中46和47行代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//括号中的2为强度
+let dLight = new THREE.DirectionalLight(0xFFFFFF, 2);
+//光源的位置
+dLight.position.set(500, 1000, 4000);
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h1 id="2-turnjs翻页特效">2. Turn.js翻页特效</h1>
+<p>​		展示平台的第一个模块是<strong>少数民族建筑特征分析</strong>。针对大量的图文资料，传统的页面布局得不到很好的展示与交互效果。为提高用户体验，选择类似书本翻页的形式作为展示图文视频资料的方式。Turn.js是一个JavaScript库，利用HTML5的所有优点，可以使内容呈现起来像一本真正的书或杂志。</p>
+<p>​		关于Turn.js的入门教程可以看siki学院的免费课程，也可以通过官网进行学习。</p>
+<blockquote>
+<p>siki学院：http://www.sikiedu.com/course/517/tasks</p>
+<p>Turn.js官网：http://www.turnjs.com/</p>
+</blockquote>
+<p>​		由于少数民族建筑资料篇幅较多，文章内容比较复杂，且Turn.js并没有为用户提供书页模板，全部样式都是用户在CSS中定义的。考虑到书页制作的便捷性与美观性，选择PPT来制作展示书籍的内容，再以加载图片的方式将内容加载到网页端，实现具有翻页效果的少数民族建筑特征分析资料展示模块。</p>
+<p>整个模块的制作流程主要分两部分，<strong>图文内容的准备工作</strong>与<strong>翻页效果的实现</strong>。</p>
+<h2 id="21-图文内容的准备工作">2.1 图文内容的准备工作</h2>
+<p>​		PPT模板及主要实现代码已与平台源代码一同发布至GIthub供大家学习参考：</p>
+<blockquote>
+<p><a href="https://github.com/GSemir0418/TemplateProjects">https://github.com/GSemir0418/TemplateProjects</a></p>
+</blockquote>
+<p>​		模板的样式已经设计制作完成，包括封面的设计、内容的布局和字体的选择。也可以根据自己的审美，重新设计排版布局。注意页面设计中的方向要保证是纵向，具体尺寸取决于Turn.js中定义的宽和高。参考配置如下：</p>
+<p><img src="/modelshow/image-20210109193919127.png" alt="image-20210109193919127"></p>
+<p>​		将撰写好的少数民族建筑特征分析图文资料复制到PPT模板中，进行排版布局后，完成图文内容的准备工作。</p>
+<p><img src="/modelshow/image-20210109194057660.png" alt="image-20210109194057660" style="zoom:80%;" /></p>
+<p>​		点击右上角<code>文件</code>、<code>另存为</code>，设置导出路径后，考虑到网页端的加载效率，文件类型选择较小的<code>.jpg</code>。单击<code>保存</code>，</p>
+<p><img src="/modelshow/image-20210109203821174.png" alt="image-20210109203821174" style="zoom:67%;" /></p>
+<p>​		在弹出的提示框中，选择<code>每张幻灯片</code>。</p>
+<p><img src="/modelshow/image-20210109203901828.png" alt="image-20210109203901828"></p>
+<p>​		导出完成后如下图。</p>
+<p><img src="/modelshow/image-20210109204020537.png" alt="image-20210109204020537" style="zoom:67%;" /></p>
+<p>​		为了加载图片的代码编写的简洁性，需要批量修改每张图片的名字。网上有很多批量修改文件名的方法，这里选择一款解压缩软件<code>好压</code>内置的<code>批量文件改名</code>功能，可以在<code>开始</code>菜单中找到。</p>
+<p><img src="/modelshow/image-20210109204553287.png" alt="image-20210109204553287"></p>
+<p>​		首先根据提示，批量<code>添加</code>所有图片文件；在命名规则中填入<code>#</code>。单击<code>开始重命名</code>即可。</p>
+<p><img src="/modelshow/image-20210109204900765.png" alt="image-20210109204900765" style="zoom:80%;" /></p>
+<p>​		至此，完成翻页效果的素材准备工作。</p>
+<h2 id="22-翻页效果的实现">2.2 翻页效果的实现</h2>
+<p>​		将图片文件夹重命名为英文名称，例如miao_img，将其拷贝到/ADP/turn_img路径下。批量加载的代码已写好，需要调整page/miao_turn_page.html中的几行代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//line 47 修改路径&#34;turn_img/miao_img&#34;
+&#34;&lt;img src=\&#34;../turn_img/miao_img/&#34; + i + &#34;.jpg\&#34; alt=\&#34; \&#34; width=\&#34;525\&#34; height=\&#34;700\&#34;&gt;\n&#34; +
+
+//line 100 修改路径&#34;turn_img/miao_img&#34;
+&lt;img src=&#34;../turn_img/miao_img/1.jpg&#34; alt=&#34; &#34; width=&#34;525&#34; height=&#34;700&#34; /&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>​		加载完成后，根据实际页码，调整目录页数及跳转按钮的页码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//line 89-91 pageTo(修改这里面的数字)
+&lt;a href=&#34;javascript:pageTo(1)&#34; class=&#34;btn btn-secondary&#34; role=&#34;button&#34;&gt;封面&lt;/a&gt;
+&lt;a href=&#34;javascript:pageTo(2)&#34; class=&#34;btn btn-secondary&#34; role=&#34;button&#34;&gt;目录&lt;/a&gt;
+&lt;a href=&#34;javascript:pageTo(72)&#34; class=&#34;btn btn-secondary&#34; role=&#34;button&#34;&gt;封底&lt;/a&gt;
+
+//line 112-119 pageTo(修改这里面的数字) 修改目录文字内容
+&lt;div class=&#34;list-group&#34; style=&#34;left: 50%&#34;&gt;
+    &lt;a href=&#34;javascript:pageTo(4)&#34;
+    class=&#34;list-group-item list-group-item-action&#34;&gt;1.村寨概述-1&lt;/a&gt;
+    &lt;a href=&#34;javascript:pageTo(40)&#34;
+    class=&#34;list-group-item list-group-item-action&#34;&gt;2.村落及居住建筑分析-37&lt;/a&gt;
+    &lt;a href=&#34;javascript:pageTo(56)&#34;
+    class=&#34;list-group-item list-group-item-action&#34;&gt;3.建筑遗传特征-53&lt;/a&gt;
+&lt;/div&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>​		完成翻书效果展示少数民族建筑特征模块的制作。</p>
+<hr>
+<h1 id="3建筑展示平台">3.建筑展示平台</h1>
+<p>​		展示平台的第二部分是<strong>建筑结构体系展示部分</strong>，也是平台的核心部分。包括模型爆炸、构件动态拆分以及模型剖切三大功能模块。由于具体实现逻辑已封装完毕，只需修改模板中的几行代码即可。模板下载链接：</p>
+<blockquote>
+<p><a href="https://github.com/GSemir0418/TemplateProjects">https://github.com/GSemir0418/TemplateProjects</a></p>
+</blockquote>
+<h2 id="31-自定义主页样式">3.1 自定义主页样式</h2>
+<p>​		模板中的主页样式如下图：</p>
+<p><img src="/modelshow/image-20210109213813039.png" alt="image-20210109213813039" style="zoom: 33%;" /></p>
+<p>​		文字部分及插图内容均可自定义，具体替换位置在根目录下的index.html中很明显，这里不再赘述。值得一提的是背景图片的修改路径，需要修改index_assets/css/main.css文件的1627行代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), url(&#34;../../index_images/bg.jpg&#34;);
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="32-替换obj模型">3.2 替换obj模型</h2>
+<p>​		首先将obj模型及DAE模型拷贝至models文件夹下。</p>
+<p>​		在js/miao_model1.js以及js/miao_model2.js文件中，修改变量mat1和obj1的值如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//模型路径
+let mat1 = &#39;../models/testModel/objTest/objTest.mtl&#39;;
+let obj1 = &#39;../models/testModel/objTest/objTest.obj&#39;;
+</code></pre></td></tr></table>
+</div>
+</div><p>​		注意路径使用<strong>相对路径</strong>。</p>
+<p>​		模型剖切模块使用DAE格式的模型文件，在js/miao_simulation.js文件中，修改第28行代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">loader.load( &#39;../models/testModel/DAETest/DAEtest.DAE&#39;, function ( collada ) {
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="33-其他可配置选项">3.3 其他可配置选项</h3>
+<p>​		可参考本文第一章节中的部分内容。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-01-08
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0/">展示平台</a>
+          <a href="/tags/%E7%BF%BB%E9%A1%B5%E7%89%B9%E6%95%88/">翻页特效</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/react%E5%9F%BA%E7%A1%80/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">React基础</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">
+            <span class="next-text nav-default">3dsMax技术文档</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

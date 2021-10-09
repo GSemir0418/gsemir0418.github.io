@@ -1,77 +1,46 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>MySQL on GSemir Blog</title>
+    <title>MySQL on Even - A super concise theme for Hugo</title>
     <link>https://gsemir0418.github.io/tags/mysql/</link>
-    <description>Recent content in MySQL on GSemir Blog</description>
+    <description>Recent content in MySQL on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Mon, 05 Jul 2021 08:57:20 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>数据库基础</title>
-      <link>https://gsemir0418.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</link>
+      <link>https://gsemir0418.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Mon, 05 Jul 2021 08:57:20 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</guid>
-      <description>1 第一二三范式 1 第一范式 1NF   定义：字段不可再分
-  举例：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段
-即user表里应有left_eye和right_eye，而不能存为一个字段
-  缺点：
-​	这是一个学生选课表，没有违反第一范式，但是存在如下问题：
-​	数据冗余、创建系时插入异常、删除学生会导致系消失、学生转系时改动多处
-​	结论：第一范式不够强
-  2 第二范式 2NF   定义：
- 在1NF的基础上，要有键（键可由多个字段组合） 所有字段必须分别完全依赖于键 如果键是多个字段组合，则不允许部分依赖于该键    依赖关系：
- 给出键，就能唯一确定字段的值 如给出学号，就能唯一确定姓名，反之则不行 则称姓名依赖于学号    不满足第二范式的地方：
- 上表的键为（学号、课名） 但存在部份依赖：姓名依赖与学号    改进：
- 选课表（学号，课名，分数） 学生表（学号，姓名，系名，系主任）    3 第三范式 3NF   定义：
- 一个表里不能有两层依赖 给出学号，就能确定系名——系名依赖于学号 给出系名，就能确定系主任——系主任依赖与系名 所以，系主任间接依赖于学号    解决办法：</description>
+      <guid>https://gsemir0418.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</guid>
+      <description>1 第一二三范式 1 第一范式 1NF 定义：字段不可再分 举例：存储体检者的双眼视力，应分为左眼视力和右眼视力两个字段 即user表里应有left_eye和</description>
     </item>
     
     <item>
       <title>Sequelize ORM</title>
-      <link>https://gsemir0418.github.io/posts/sequelize.js/</link>
+      <link>https://gsemir0418.github.io/post/sequelize.js/</link>
       <pubDate>Fri, 02 Jul 2021 11:01:55 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/sequelize.js/</guid>
-      <description>1 MySQL数据类型 MySQL支持的数据类型比较少，主要有五种类型：
- 数字类型 字符串类型 时间和日期类型 JSON类型 其他特殊类型   id 可以指定类型为serial序列，时间格式最好使用ISO 8601格式，即2021-07-02T11:01:55+08:00
- 2 Sequelize使用  官方文档：   sequelize.org/master/manual/getting-started.html
-  安装：  yarn add sequelize yarn add mysql2  使用：  // 引入 const { Sequelize, Model, DataTypes } = require(&amp;#39;sequelize&amp;#39;) // 创建sequelize连接 const sequelize = new Sequelize(&amp;#39;gsq&amp;#39;, &amp;#39;root&amp;#39;, &amp;#39;12345&amp;#39;, { host: &amp;#39;localhost&amp;#39;, dialect: &amp;#39;mysql&amp;#39;, }) // 创建User模型 class User extends Model { } // 初始化User表 User.</description>
+      <guid>https://gsemir0418.github.io/post/sequelize.js/</guid>
+      <description>1 MySQL数据类型 MySQL支持的数据类型比较少，主要有五种类型： 数字类型 字符串类型 时间和日期类型 JSON类型 其他特殊类型 id 可以指定类型为</description>
     </item>
     
     <item>
       <title>Node.js连接数据库</title>
-      <link>https://gsemir0418.github.io/posts/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <link>https://gsemir0418.github.io/post/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
       <pubDate>Fri, 02 Jul 2021 09:24:55 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
-      <description>1 安装mysql依赖包 yarn add mysql 2 创建mysql连接 创建连接前，确保容器是开启状态。新建test.js文件。
- 引入mysql模块  const mysql = require(&amp;#39;mysql&amp;#39;)  创建连接  const connection = mysql.createConnection({ host: &amp;#39;localhost&amp;#39;, // 老版本的docker需要填ip  user: &amp;#39;root&amp;#39;, password: &amp;#39;12345&amp;#39; }) connection.connect();  创建数据库  // 创建数据库 connection.query(&amp;#39;CREATE DATABASE IF NOT EXISTS gsq DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_unicode_520_ci;&amp;#39;, (error, results, fields) =&amp;gt; { if (error) throw error; console.log(results) }) 创建名为gsq的数据库（数据库不存在的情况下），并指定默认字符集为utf8mb4(mysql对于utf-8字符集支持不佳)
- 创建数据表  // 选择数据库 connection.query(&amp;#39;use gsq;&amp;#39;) // 创建表 connection.</description>
+      <guid>https://gsemir0418.github.io/post/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>1 安装mysql依赖包 1 yarn add mysql 2 创建mysql连接 创建连接前，确保容器是开启状态。新建test.js文件。 引入mysql模块 1 const mysql = require(&amp;#39;mysql&amp;#39;) 创建连</description>
     </item>
     
     <item>
       <title>Docker安装MySQL</title>
-      <link>https://gsemir0418.github.io/posts/docker%E5%AE%89%E8%A3%85mysql/</link>
+      <link>https://gsemir0418.github.io/post/docker%E5%AE%89%E8%A3%85mysql/</link>
       <pubDate>Fri, 02 Jul 2021 08:36:55 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/docker%E5%AE%89%E8%A3%85mysql/</guid>
-      <description>1 win10安装Docker  https://hub.docker.com/
- 注册登录并下载安装Docker Desktop。
- 启用Hyper-V  右键Windows按钮并选择“应用和功能”，选择相关设置中的“程序和功能”，选择“启用或关闭Windows功能”，选择Hyper-V，单机确定。
- 启用CPU的虚拟化  进入BIOS界面，找到Virtualization Technology选项，将disabled改为enabled。
- 更新WSL2  如果出现WSL 2 installation is incomplete的报错，则需要更新WSL 2。
- https://aka.ms/wsl2kernel
- 根据文档下载最新包，安装重启即可。
-2 Docker安装MySQL docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:8.0.25 其中name是容器的名字；-e是环境变量，配置的MYSQL_ROOT_PASSWORD是mysql密码；-p是端口映射，左侧是本机端口号，右侧是虚拟机端口号；-d表示程序持续运行；最后指定mysql的版本号为8.0.25。
-安装完成后，在docker desktop中可以发现mysql1的容器已开启，或者在命令行输入docker ps查看全部在运行的容器。
-3 Docker常用命令 docker ps 查看容器运行状态
-docker start mysql1 启动mysql1容器
-docker kill mysql1 关闭容器mysql1
-docker container run mysql1 开启刚刚关掉的容器
-docker rm mysql1 删除容器，必要时可加-f选项
-docker run xxx 启动新容器</description>
+      <guid>https://gsemir0418.github.io/post/docker%E5%AE%89%E8%A3%85mysql/</guid>
+      <description>1 win10安装Docker https://hub.docker.com/ 注册登录并下载安装Docker Desktop。 启用Hyper-V 右键Windows按钮并选择“应用和功能”，选</description>
     </item>
     
   </channel>

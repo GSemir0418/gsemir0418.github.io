@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>request on GSemir Blog</title>
+    <title>request on Even - A super concise theme for Hugo</title>
     <link>https://gsemir0418.github.io/tags/request/</link>
-    <description>Recent content in request on GSemir Blog</description>
+    <description>Recent content in request on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Fri, 09 Jul 2021 16:47:33 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/request/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Umi-Request配置</title>
-      <link>https://gsemir0418.github.io/posts/umi-request%E9%85%8D%E7%BD%AE/</link>
+      <link>https://gsemir0418.github.io/post/umi-request%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Fri, 09 Jul 2021 16:47:33 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/umi-request%E9%85%8D%E7%BD%AE/</guid>
-      <description>utils/request.js
-/** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request */ import { extend } from &amp;#39;umi-request&amp;#39;; import { notification } from &amp;#39;antd&amp;#39;; const codeMessage = { 200: &amp;#39;服务器成功返回请求的数据。&amp;#39;, 201: &amp;#39;新建或修改数据成功。&amp;#39;, 202: &amp;#39;一个请求已经进入后台排队（异步任务）。&amp;#39;, 204: &amp;#39;删除数据成功。&amp;#39;, 400: &amp;#39;发出的请求有错误，服务器没有进行新建或修改数据的操作。&amp;#39;, 401: &amp;#39;用户没有权限（令牌、用户名、密码错误）。&amp;#39;, 403: &amp;#39;用户得到授权，但是访问是被禁止的。&amp;#39;, 404: &amp;#39;发出的请求针对的是不存在的记录，服务器没有进行操作。&amp;#39;, 406: &amp;#39;请求的格式不可得。&amp;#39;, 410: &amp;#39;请求的资源被永久删除，且不会再得到的。&amp;#39;, 422: &amp;#39;当创建一个对象时，发生一个验证错误。&amp;#39;, 500: &amp;#39;服务器发生错误，请检查服务器。&amp;#39;, 502: &amp;#39;网关错误。&amp;#39;, 503: &amp;#39;服务不可用，服务器暂时过载或维护。&amp;#39;, 504: &amp;#39;网关超时。&amp;#39;, }; /** 异常处理程序 */ const errorHandler = (error) =&amp;gt; { const { response } = error; if (response &amp;amp;&amp;amp; response.</description>
+      <guid>https://gsemir0418.github.io/post/umi-request%E9%85%8D%E7%BD%AE/</guid>
+      <description>utils/request.js 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 /** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request</description>
     </item>
     
   </channel>

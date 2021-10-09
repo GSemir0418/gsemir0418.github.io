@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Express全解 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="0 REST.Client插件 用于在vscode中构造请求 新建以.http为后缀的文件： 1 2 3 4 5 6 7 8 9 10 11 @url=http://localhost:8080 --- @用于定义变量，{{}}使用" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/express%E5%85%A8%E8%A7%A3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Express全解" />
+<meta property="og:description" content="0 REST.Client插件 用于在vscode中构造请求 新建以.http为后缀的文件： 1 2 3 4 5 6 7 8 9 10 11 @url=http://localhost:8080 --- @用于定义变量，{{}}使用" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/express%E5%85%A8%E8%A7%A3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-27T13:47:24+08:00" />
+<meta property="article:modified_time" content="2018-09-27T00:00:00+08:00" />
+
+<meta itemprop="name" content="Express全解">
+<meta itemprop="description" content="0 REST.Client插件 用于在vscode中构造请求 新建以.http为后缀的文件： 1 2 3 4 5 6 7 8 9 10 11 @url=http://localhost:8080 --- @用于定义变量，{{}}使用"><meta itemprop="datePublished" content="2021-09-27T13:47:24+08:00" />
+<meta itemprop="dateModified" content="2018-09-27T00:00:00+08:00" />
+<meta itemprop="wordCount" content="3102">
+<meta itemprop="keywords" content="node,Express," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Express全解"/>
+<meta name="twitter:description" content="0 REST.Client插件 用于在vscode中构造请求 新建以.http为后缀的文件： 1 2 3 4 5 6 7 8 9 10 11 @url=http://localhost:8080 --- @用于定义变量，{{}}使用"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Express全解</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-09-27 </span>
+        <div class="post-category">
+            <a href="/categories/express/"> Express </a>
+            </div>
+          <span class="more-meta"> 3102 words </span>
+          <span class="more-meta"> 7 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-restclient插件">0 REST.Client插件</a></li>
+    <li><a href="#1-expressxxx">1 express.xxx</a>
+      <ul>
+        <li><a href="#11-expressjson">1.1 express.json()</a></li>
+        <li><a href="#12-expressstatic">1.2 express.static()</a></li>
+        <li><a href="#13-expressrouter">1.3 express.Router()</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-appxxx">2 app.xxx</a>
+      <ul>
+        <li><a href="#21-appuse">2.1 app.use()</a></li>
+        <li><a href="#22-appset">2.2 app.set()</a></li>
+        <li><a href="#23-applocal">2.3 app.local</a></li>
+        <li><a href="#24-appget">2.4 app.get()</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-reqxxx">3 req.xxx</a>
+      <ul>
+        <li><a href="#31-reqapp">3.1 req.app</a></li>
+        <li><a href="#32-reqbody">3.2 req.body</a></li>
+        <li><a href="#33-reqmethod">3.3 req.method</a></li>
+        <li><a href="#34-reqparams">3.4 req.params</a></li>
+        <li><a href="#35-reqquery">3.5 req.query</a></li>
+        <li><a href="#36-reqget">3.6 req.get()</a></li>
+        <li><a href="#37-reqparam">3.7 req.param()</a></li>
+        <li><a href="#38-reqrange">3.8 req.range()</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-resxxx">4 res.xxx</a>
+      <ul>
+        <li><a href="#41-resset">4.1 res.set()</a></li>
+        <li><a href="#42-resappend">4.2 res.append()</a></li>
+        <li><a href="#43-resget">4.3 res.get()</a></li>
+        <li><a href="#44-resformat">4.4 res.format()</a></li>
+        <li><a href="#45-reslocation">4.5 res.location()</a></li>
+        <li><a href="#46-resredirect">4.6 res.redirect()</a></li>
+        <li><a href="#47-resrender">4.7 res.render()</a></li>
+        <li><a href="#48-ressend">4.8 res.send()</a></li>
+        <li><a href="#49-ressendfile">4.9 res.sendFile()</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-routerxxx">5 router.xxx</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="0-restclient插件">0 REST.Client插件</h1>
+<p>用于在vscode中构造请求</p>
+<p>新建以<code>.http</code>为后缀的文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">@url=http://localhost:8080		--- @用于定义变量，{{}}使用此变量
+###								--- 以###作为请求分割符号
+get {{url}}/users 				--- 注意空格
+###
+post {{url}}
+Content-Type: application/json
+								--- 请求头与消息体直接有空行
+{
+  &#34;username&#34;: &#34;gsq&#34;,
+  &#34;age&#34;: 19
+}
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="1-expressxxx">1 express.xxx</h1>
+<p>共7个api，主要是一些内置的中间件，例如用来自动处理不同类型的请求体数据</p>
+<h2 id="11-expressjson">1.1 express.json()</h2>
+<p>以监听消息体中数据流data事件的方式，拿到全部的json数据并自动解析成对象，放到request.body中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+
+<span class="c1">// 尝试将此中间件注释后，观察控制台打印内容
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">,</span><span class="nx">next</span><span class="p">)=&gt;{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">)</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;aaa&#39;</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">,()=&gt;{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;listening 8080...&#39;</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="12-expressstatic">1.2 express.static()</h2>
+<p>指定静态资源路径，用户请求的静态数据首先从指定路径寻找，优先级高于其他中间件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="p">...</span>
+<span class="c1">// 指定静态资源目录，如果在xxx目录中找到了就发送给浏览器，如果没有就next()
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="s1">&#39;xxx&#39;</span><span class="p">))</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">,</span><span class="nx">next</span><span class="p">)=&gt;{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;aaa&#39;</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="p">...</span>
+<span class="c1">// 在.http文件中，构造请求静态资源
+</span><span class="c1"></span><span class="nx">get</span> <span class="p">{{</span><span class="nx">url</span><span class="p">}}</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="13-expressrouter">1.3 express.Router()</h2>
+<p>实例化一个<code>mini-app</code>，拥有app的部分api，方便路由管理与配置，具体用法见第五章节</p>
+<h1 id="2-appxxx">2 app.xxx</h1>
+<p>共22个api，主要负责应用设置（如模板配置、中间件、挂载路由等）</p>
+<h2 id="21-appuse">2.1 app.use()</h2>
+<ul>
+<li>将指定的中间件功能挂载到指定的路径上；当请求路径的基础与路径匹配时，中间件功能将被执行。</li>
+<li>接收两个参数，第一个是挂载点（可选），第二个是中间件（函数）。中间件根据参数的多少决定是哪种类型：三个参数（req,res,next)为RequestHandler，四个参数（error,req,res,next）为错误处理（ErrorRequestHandler）。</li>
+<li>app中最基本的api之一，<code>app.get()</code>、<code>app.post()</code>、<code>app.delete()</code>、<code>app.put()</code>等实际上都是<code>app.use()</code>的语法糖</li>
+</ul>
+<h2 id="22-appset">2.2 app.set()</h2>
+<ul>
+<li>能够对应用进行一些特殊配置（此时要放在全部中间件的最上方）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="p">...</span>
+<span class="c1">// 设置路径大小写敏感度
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;case sensitive routing&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+<span class="c1">// 设置render视图的路径，默认为views
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="s1">&#39;xxx&#39;</span><span class="p">)</span>
+<span class="c1">// 设置render的引擎
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;view engine&#39;</span><span class="p">,</span> <span class="s1">&#39;ejs&#39;</span><span class="p">)</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/testview&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">rep</span><span class="p">,</span><span class="nx">res</span><span class="p">,</span><span class="nx">next</span><span class="p">)=&gt;{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span><span class="s1">&#39;guosenquan&#39;</span> <span class="p">})</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>常用配置：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>case sensitive routing</code></td>
+<td>Boolean</td>
+<td>对请求路径大小写是否敏感，如/STYLE.css和/style.css</td>
+<td>undefined(false)</td>
+</tr>
+<tr>
+<td><code>views</code></td>
+<td>String or Array</td>
+<td>指定render视图的路径</td>
+<td>&lsquo;views&rsquo;</td>
+</tr>
+<tr>
+<td><code>view engine</code></td>
+<td>String</td>
+<td>指定render视图模板的引擎</td>
+<td>undefined</td>
+</tr>
+<tr>
+<td><code>strict routing</code></td>
+<td>Boolean</td>
+<td>请求路径是否开启严格模式，例如'/foo&rsquo;和'/foo/&lsquo;不表示同一路径</td>
+<td>undefined</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>也可以设置一个变量，这个变量能够被<code>app.get(name)</code>获取到</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="p">...</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;gsq&#39;</span><span class="p">)</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/testset&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span> <span class="p">})</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="23-applocal">2.3 app.local</h2>
+<ul>
+<li><code>app.locals.xxx</code>定义局部变量，其他中间件可以通过<code>req.app.locals.xxx</code>来获取</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="p">...</span>
+<span class="c1">// local一个局部变量
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;gsq&#39;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/testlocal&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">title</span> <span class="p">})</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="24-appget">2.4 app.get()</h2>
+<ul>
+<li>app.get()只有一个参数（字符串）时，表示获取set的值</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span>
+<span class="c1">// =&gt; undefined
+</span><span class="c1"></span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;My Site&#39;</span><span class="p">)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span>
+<span class="c1">// =&gt; &#34;My Site&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>app.get(&lsquo;路径&rsquo;,fn)表示处理get请求</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/style.css&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">rep</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;style.css&#39;</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-reqxxx">3 req.xxx</h1>
+<p>共28个api，用来操作请求</p>
+<h2 id="31-reqapp">3.1 req.app</h2>
+<ul>
+<li>获取到全局的app对象</li>
+</ul>
+<h2 id="32-reqbody">3.2 req.body</h2>
+<ul>
+<li>返回请求的消息体</li>
+</ul>
+<h2 id="33-reqmethod">3.3 req.method</h2>
+<ul>
+<li>返回请求方法</li>
+</ul>
+<h2 id="34-reqparams">3.4 req.params</h2>
+<ul>
+<li>此属性是一个对象，包含映射到指定路由“参数”的属性。例如，如果你有<code>route /user/:name</code>，那么&quot; name &ldquo;属性是可用的<code>req.params.name</code>。该对象默认为<code>{}</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/user/:id&#39;</span><span class="p">,(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">,</span><span class="nx">next</span><span class="p">)=&gt;{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="c1">// app.http中构造请求
+</span><span class="c1"></span><span class="err">###</span>
+<span class="nx">get</span> <span class="p">{{</span><span class="nx">url</span><span class="p">}}</span><span class="o">/</span><span class="nx">user</span><span class="o">/</span><span class="mi">1</span>
+<span class="c1">// =&gt; { &#34;id&#34; : &#34;1&#34; }
+</span><span class="c1">// 注意，params只能读取路由中定义的字段，例如
+</span><span class="c1"></span><span class="nx">get</span> <span class="p">{{</span><span class="nx">url</span><span class="p">}}</span><span class="o">/</span><span class="nx">user</span><span class="o">/</span><span class="mi">1</span><span class="o">?</span><span class="nx">name</span><span class="o">=</span><span class="nx">gsq</span>
+<span class="c1">// 仍返回{ &#34;id&#34; : &#34;1&#34; }
+</span><span class="c1">// 同样在请求body中的内容也是读取不到的
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="35-reqquery">3.5 req.query</h2>
+<ul>
+<li>获取上文中路由后面的（‘？’后面的）查询参数，可以使用<code>req.query</code>，express会将查询参数封装为query对象：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/user/:id&#39;</span><span class="p">,(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">,</span><span class="nx">next</span><span class="p">)=&gt;{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="c1">// app.http中构造请求
+</span><span class="c1"></span><span class="err">###</span>
+<span class="nx">get</span> <span class="p">{{</span><span class="nx">url</span><span class="p">}}</span><span class="o">/</span><span class="nx">user</span><span class="o">/</span><span class="mi">1</span><span class="o">?</span><span class="nx">name</span><span class="o">=</span><span class="nx">gsq</span><span class="o">&amp;</span><span class="nx">age</span><span class="o">=</span><span class="mi">15</span>
+<span class="c1">// =&gt; { &#34;name&#34; : &#34;gsq&#34;, &#34;age&#34; : &#34;15&#34; }
+</span><span class="c1">// 同样在请求body中的内容也是读取不到的
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="36-reqget">3.6 req.get()</h2>
+<ul>
+<li>获取请求头字段</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">req.get(&#39;Content-Type&#39;)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="37-reqparam">3.7 req.param()</h2>
+<ul>
+<li>获取全部请求参数（仅限于路由中的）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/user/:id&#39;</span><span class="p">,(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">,</span><span class="nx">next</span><span class="p">)=&gt;{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">))</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>此方法被遗弃，express推荐使用<code>req.query</code>结合<code>req.params</code>来实现查询参数的获取。</li>
+</ul>
+<h2 id="38-reqrange">3.8 req.range()</h2>
+<p>分块下载</p>
+<h1 id="4-resxxx">4 res.xxx</h1>
+<p>共24个api，用来操作响应</p>
+<h2 id="41-resset">4.1 res.set()</h2>
+<ul>
+<li>添加响应头参数。如果一次添加多行header，使用<code>object</code>的形式传参</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">res</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">)</span>
+
+<span class="nx">res</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+  <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Content-Length&#39;</span><span class="o">:</span> <span class="s1">&#39;123&#39;</span><span class="p">,</span>
+  <span class="nx">ETag</span><span class="o">:</span> <span class="s1">&#39;12345&#39;</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="42-resappend">4.2 res.append()</h2>
+<ul>
+<li>将指定的值<code>附加</code>到HTTP响应报头字段。如果字段还没有set，它将使用指定的值创建header。value参数可以是字符串或数组。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">res</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;Link&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;&lt;http://localhost/&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;http://localhost:3000/&gt;&#39;</span><span class="p">])</span>
+<span class="nx">res</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;Set-Cookie&#39;</span><span class="p">,</span> <span class="s1">&#39;foo=bar; Path=/; HttpOnly&#39;</span><span class="p">)</span>
+<span class="nx">res</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;Warning&#39;</span><span class="p">,</span> <span class="s1">&#39;199 Miscellaneous warning&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>注意:在res.append()之后调用res.set()将重置之前设置的头文件值。</li>
+</ul>
+<h2 id="43-resget">4.3 res.get()</h2>
+<ul>
+<li>获取响应头字段值</li>
+</ul>
+<h2 id="44-resformat">4.4 res.format()</h2>
+<ul>
+<li>
+<p>根据请求对象上的Accept字段存在时进行内容协商。它使用req. accept()根据根据质量值排序的可接受类型选择请求的处理程序。如果未指定Accept字段，则调用第一个回调。当没有找到匹配，服务器响应406 &ldquo;Not Acceptable&rdquo;，或调用默认回调。</p>
+</li>
+<li>
+<p>在选择回调时设置Content-Type响应头。但是，您可以在回调中使用res.set()或res.type()等方法更改此参数。</p>
+</li>
+<li>
+<p>下面的例子将在Accept报头字段设置为<code>&quot;application/json&quot;</code>或<code>&quot;*/json&quot;</code>时响应<code>{&quot;message&quot;: &quot;hey&quot;}</code>(但是如果是<code>&quot;*/*&quot;</code>，则响应将是&quot;hey&rdquo;)。</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">res</span><span class="p">.</span><span class="nx">format</span><span class="p">({</span>
+  <span class="s1">&#39;text/plain&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;hey&#39;</span><span class="p">)</span>
+  <span class="p">},</span>
+
+  <span class="s1">&#39;text/html&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;&lt;p&gt;hey&lt;/p&gt;&#39;</span><span class="p">)</span>
+  <span class="p">},</span>
+
+  <span class="s1">&#39;application/json&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;hey&#39;</span> <span class="p">})</span>
+  <span class="p">},</span>
+
+  <span class="k">default</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// log the request and respond with 406
+</span><span class="c1"></span>    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">406</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Not Acceptable&#39;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+<span class="c1">// app,http构造请求
+</span><span class="c1"></span><span class="err">###</span>
+<span class="nx">get</span> <span class="p">{{</span><span class="nx">url</span><span class="p">}}</span><span class="o">/</span><span class="nx">test</span>
+<span class="nx">Accept</span><span class="o">:</span> <span class="nx">text</span><span class="o">/</span><span class="nx">plain</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="45-reslocation">4.5 res.location()</h2>
+<ul>
+<li>设置响应头的location字段，表示重定向后的路由，一般配合状态码301，302或307等使用会自动跳转。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/oldroute&#39;</span><span class="p">,(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">301</span><span class="p">).</span><span class="nx">location</span><span class="p">(</span><span class="s1">&#39;/newroute&#39;</span><span class="p">)</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">()</span><span class="c1">// 要加上响应关闭的方法
+</span><span class="c1"></span>	<span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="46-resredirect">4.6 res.redirect()</h2>
+<ul>
+<li>与location功能相同，但会自动重定向并跳转</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/oldroute&#39;</span><span class="p">,(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/newroute&#39;</span><span class="p">)</span>
+	<span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="47-resrender">4.7 res.render()</h2>
+<ul>
+<li>渲染视图并将呈现的HTML字符串发送给客户端。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 指定渲染模板的路径和模板引擎
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="s1">&#39;xxx&#39;</span><span class="p">)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;view engine&#39;</span><span class="p">,</span> <span class="s1">&#39;ejs&#39;</span><span class="p">)</span>
+
+<span class="c1">// 向客户端发送渲染后的视图
+</span><span class="c1"></span><span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+
+<span class="c1">// 如果有回调函数, 模板就只能在回调中用send发送 
+</span><span class="c1"></span><span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">html</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">html</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// 向渲染的页面中传入一个变量
+</span><span class="c1"></span><span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Tobi&#39;</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">html</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="c1"></span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="48-ressend">4.8 res.send()</h2>
+<ul>
+<li>发送到客户端的响应体数据，不能与write连用</li>
+</ul>
+<h2 id="49-ressendfile">4.9 res.sendFile()</h2>
+<ul>
+<li>发送到客户端的响应体数据，可以手动配置响应头等内容</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/file/:name&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">root</span><span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="mi">__</span><span class="nx">dirname</span><span class="p">,</span> <span class="s1">&#39;public&#39;</span><span class="p">),</span>
+    <span class="nx">dotfiles</span><span class="o">:</span> <span class="s1">&#39;deny&#39;</span><span class="p">,</span>
+    <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s1">&#39;x-timestamp&#39;</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+      <span class="s1">&#39;x-sent&#39;</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kd">var</span> <span class="nx">fileName</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">name</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">sendFile</span><span class="p">(</span><span class="nx">fileName</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Sent:&#39;</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="5-routerxxx">5 router.xxx</h1>
+<ul>
+<li>
+<p>router是express.Router()实例化的对象，可以视为小型的app对象。</p>
+</li>
+<li>
+<p>若将路由都使用app.use()写到app.js中，不利于路由的组织与管理：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{})</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/users/:id&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{})</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/users/:id/edit&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{})</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>为方便路由的组织管理以及后期维护，可以将路由逻辑拆出来，放至<code>routes</code>文件夹下。新建<code>user.js</code>:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">)</span>
+<span class="c1">// 用express实例化router
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">()</span>
+<span class="c1">// 路径可以去掉路由前缀users
+</span><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;获取了全部users&#39;</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="sb">`获取了id=</span><span class="si">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">用户`</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:id/edit&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="sb">`对id为</span><span class="si">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">的用户进行编辑`</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+
+<span class="c1">// 导出users路由对象
+</span><span class="c1"></span><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">router</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>app.js中引入users路由对象</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+<span class="c1">// 引入users路由对象
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/users&#39;</span><span class="p">)</span>
+<span class="c1">// 挂载路由
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">,</span> <span class="nx">users</span><span class="p">)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-09-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/node/">node</a>
+          <a href="/tags/express/">Express</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/dva%E6%95%B0%E6%8D%AE%E6%B5%81/">
+            <span class="next-text nav-default">Dva数据流</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

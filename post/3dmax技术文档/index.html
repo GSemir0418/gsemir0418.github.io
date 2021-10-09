@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>3dsMax技术文档 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1. 3dsMax概述 ​ 3dsMax是由AutoDesk公司开发的三维模型与动画制作渲染软件，它被广泛应用于多个领域，包括游戏设计、广告设计、建" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="3dsMax技术文档" />
+<meta property="og:description" content="1. 3dsMax概述 ​ 3dsMax是由AutoDesk公司开发的三维模型与动画制作渲染软件，它被广泛应用于多个领域，包括游戏设计、广告设计、建" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/3dmax%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-01-08T16:41:51+08:00" />
+<meta property="article:modified_time" content="2021-01-10T00:00:00+08:00" />
+
+<meta itemprop="name" content="3dsMax技术文档">
+<meta itemprop="description" content="1. 3dsMax概述 ​ 3dsMax是由AutoDesk公司开发的三维模型与动画制作渲染软件，它被广泛应用于多个领域，包括游戏设计、广告设计、建"><meta itemprop="datePublished" content="2021-01-08T16:41:51+08:00" />
+<meta itemprop="dateModified" content="2021-01-10T00:00:00+08:00" />
+<meta itemprop="wordCount" content="3142">
+<meta itemprop="keywords" content="3dmax,贴图,obj," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="3dsMax技术文档"/>
+<meta name="twitter:description" content="1. 3dsMax概述 ​ 3dsMax是由AutoDesk公司开发的三维模型与动画制作渲染软件，它被广泛应用于多个领域，包括游戏设计、广告设计、建"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">3dsMax技术文档</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-01-08 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%A0%94%E7%A9%B6%E7%94%9F%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/"> 研究生技术文档 </a>
+            </div>
+          <span class="more-meta"> 3142 words </span>
+          <span class="more-meta"> 7 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-3dsmax概述">1. 3dsMax概述</a></li>
+    <li><a href="#2-3dsmax软件安装">2. 3dsMax软件安装</a>
+      <ul>
+        <li><a href="#21-解压缩安装包">2.1 解压缩安装包</a></li>
+        <li><a href="#22-安装软件">2.2 安装软件</a></li>
+        <li><a href="#23-破解软件">2.3 破解软件</a></li>
+        <li><a href="#24-修改软件语言">2.4 修改软件语言</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-fbx模型导入">3. FBX模型导入</a>
+      <ul>
+        <li><a href="#31-拖拽导入">3.1 拖拽导入</a></li>
+        <li><a href="#32-选项导入">3.2 选项导入</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-模型预处理">4. 模型预处理</a>
+      <ul>
+        <li><a href="#41-模型优化">4.1 模型优化</a></li>
+        <li><a href="#42-构件分类命名">4.2 构件分类命名</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-贴图">5 贴图</a>
+      <ul>
+        <li><a href="#51-整理贴图">5.1 整理贴图</a></li>
+        <li><a href="#52-贴图步骤">5.2 贴图步骤</a></li>
+      </ul>
+    </li>
+    <li><a href="#6-模型归档和导出">6 模型归档和导出</a>
+      <ul>
+        <li><a href="#61-模型归档">6.1 模型归档</a></li>
+        <li><a href="#62-obj模型导出">6.2 obj模型导出</a></li>
+        <li><a href="#63-dae模型导出">6.3 DAE模型导出</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-3dsmax概述">1. 3dsMax概述</h1>
+<p>​		3dsMax是由<code>AutoDesk</code>公司开发的<strong>三维模型与动画制作渲染软件</strong>，它被广泛应用于多个领域，包括游戏设计、广告设计、建筑设计和影视制作等。其<strong>优点</strong>是具有强大的材质编辑和灯光处理功能，并且相关的学习资源非常丰富。在后期的模型渲染上功能强大，能够得到逼真的模型。同其他建模软件相比，3dsMax创建的模型面片数量较少，占用空间小，模型的处理速度也比较快。本课题正是应用其强大的模型兼容性以及材质编辑功能，作为单体建筑模型<strong>后期纹理映射</strong>和<strong>OBJ模型导出</strong>的重要软件。</p>
+<hr>
+<h1 id="2-3dsmax软件安装">2. 3dsMax软件安装</h1>
+<p>​		3dsMax软件发展至今，从最初的3D Studio MAX 1.0开始，其版本迭代更新二十余次，截至文章发布前，Autodesk公司已推出3dsMax 2021。考虑到兼容性、稳定性等问题，推荐安装<code>3dsMax 2016</code>之后的版本。</p>
+<p>​		本章以<code>3dsMax 2020</code>软件安装为例，详细介绍软件安装的过程及注意事项。</p>
+<h2 id="21-解压缩安装包">2.1 解压缩安装包</h2>
+<p>​		将安装包及注册机文件解压缩至目标文件夹，注意<strong>目标文件夹名称及路径应保证全英文</strong>。</p>
+<p>​		为防止安装破解过程中出现未知错误，建议<strong>安装前关闭所有杀毒软件</strong>。</p>
+<h2 id="22-安装软件">2.2 安装软件</h2>
+<p>​		进入安装包文件夹，右键单击<code>Setup.exe</code>，选择以管理员身份运行；</p>
+<p><img src="/3dmax/image-20210103211416541.png" alt="image-20210103211416541" style="zoom: 50%;" /></p>
+<p>​</p>
+<p>在打开的窗口中选择<code>安装（在此计算机安装）</code>。</p>
+<p><img src="/3dmax/image-20210103211711342.png" alt="image-20210103211711342" style="zoom:50%;" /></p>
+<p>许可协议选择<code>我接受</code>，单击<code>下一步</code>。</p>
+<p>设置安装路径后，点击安装即可。<strong>注意路径仍要保证全英文</strong>。</p>
+<p><img src="/3dmax/image-20210103212033662.png" alt="image-20210103212033662" style="zoom:50%;" /></p>
+<p>安装完成后，选择<code>立即启动</code>。</p>
+<p><img src="/3dmax/image-20210103221207755.png" alt="image-20210103221207755" style="zoom:50%;" /></p>
+<h2 id="23-破解软件">2.3 破解软件</h2>
+<p>​		第一次进入软件后，选择<code>enter a serial number</code>输入序列号。</p>
+<p><img src="/3dmax/image-20210103221859973.png" alt="image-20210103221859973" style="zoom:50%;" /></p>
+<p>​		选择 <code>I Agree</code>我同意。</p>
+<p><img src="/3dmax/image-20210103222017373.png" alt="image-20210103222017373" style="zoom:50%;" /></p>
+<p>​		进入激活页面，选择<code>Activate</code>激活。</p>
+<p><img src="/3dmax/image-20210103222052014.png" alt="image-20210103222052014" style="zoom:50%;" /></p>
+<p>​		在<code>Serial Number</code>栏中填写序列号<code>666-69696969</code>，单击<code>Next</code>。</p>
+<p><img src="/3dmax/image-20210103222132884.png" alt="image-20210103222132884" style="zoom: 80%;" /></p>
+<p>​		第一次会提醒”检测到无效的序列号“，此时选择<code>重新输入</code>，将序列号再次输入即可。</p>
+<p><img src="/3dmax/image-20210103222215471.png" alt="image-20210103222215471" style="zoom:50%;" /></p>
+<p>​		当进入到激活选项窗口，复制<code>Request code</code>请求码。右键单击安装包中的<code>xf-adesk20.exe</code>破解工具，选择以管理员身份运行。</p>
+<p><img src="/3dmax/image-20210103222250253.png" alt="image-20210103222250253"></p>
+<p>​		将请求码复制到破解工具中的<code>Request</code>栏后，先单击<code>Patch</code>，再点击<code>Generate</code>，复制Activation栏中自动生成的激活码。</p>
+<p><img src="/3dmax/image-20210103222411949.png" alt="image-20210103222411949"></p>
+<p>​		拿到激活码后，回到激活选项页面，选择<code>I have an activation code from Autodesk</code>，把激活码复制到输入框后，点击<code>Next</code>。</p>
+<p><img src="/3dmax/image-20210103222438931.png" alt="image-20210103222438931"></p>
+<p>​		激活完成，选择<code>Finish</code>退出激活窗口。</p>
+<p><img src="/3dmax/image-20210103222455009.png" alt="image-20210103222455009" style="zoom:50%;" /></p>
+<p>​		至此，3dsMax 2020安装完成。</p>
+<h2 id="24-修改软件语言">2.4 修改软件语言</h2>
+<p>​		3dsMax软件支持简体中文，切换中文版本也很简单，点击<code>开始</code>，找到<code>Autodesk</code>文件夹，选择<code>3dMax 2020 - simplified Chinese</code>即可。</p>
+<hr>
+<h1 id="3-fbx模型导入">3. FBX模型导入</h1>
+<p>​		导入FBX模型到3dmax有两种方法供大家参考。</p>
+<h2 id="31-拖拽导入">3.1 拖拽导入</h2>
+<p>​		直接将模型文件拖至任意视图窗口后，在弹出的选项中选择“导入文件”；</p>
+<p><img src="/3dmax/image-20210103224446456.png" alt="image-20210103224446456"></p>
+<p><img src="/3dmax/image-20210103224519654.png" alt="image-20210103224519654" style="zoom:150%;" /></p>
+<h2 id="32-选项导入">3.2 选项导入</h2>
+<p>​		单击菜单栏<code>文件</code>选项，选择<code>导入</code>。</p>
+<p><img src="/3dmax/image-20210103224625946.png" alt="image-20210103224625946" style="zoom:150%;" /></p>
+<p>​		在随后弹出来的导入选项中，<strong>注意将“动画”、“摄像机”及“灯光”选项取消勾选。</strong></p>
+<p><img src="/3dmax/image-20210103224722901.png" alt="image-20210103224722901" style="zoom:150%;" /></p>
+<p>​		导入后效果如下图，此时每个构件都没有贴图，修改器属性均为“可编辑网格”。</p>
+<p><img src="/3dmax/image-20210103224800108.png" alt="image-20210103224800108"></p>
+<hr>
+<h1 id="4-模型预处理">4. 模型预处理</h1>
+<p>​		正式贴图前，需要对模型进行初步处理，包括<strong>优化模型体量</strong>以及构件分类命名，以提高后期平台开发过程中的显示性能，为展示功能的实现做准备。</p>
+<h2 id="41-模型优化">4.1 模型优化</h2>
+<p>​		模型优化主要是针对模型数量及面片数量较大的部分，以瓦片屋顶为例。由于瓦片模型数量多，面片数大，不方便后期的贴图及模型处理，因此首先选中一侧屋顶，在命令面板中选择<code>实用工具</code>，依次点击<code>塌陷</code>、<code>塌陷选定模型</code>，使一侧的屋顶塌陷融合成一个整体。另外一侧屋顶可以以复制旋转的方式替代镜像的操作。</p>
+<p><img src="/3dmax/image-20210105191854603.png" alt="image-20210105191854603" style="zoom: 150%;" /></p>
+<h2 id="42-构件分类命名">4.2 构件分类命名</h2>
+<p>​</p>
+<p>​		在revit建模过程中，对于每个族构件模型都进行了命名。由于revit导出的fbx模型，其构件信息包含一些无用字段，因此需要利用3dsMax软件进行构件再次分类命名，为展示平台的构件信息显示功能做准备，从而提升用户体验。</p>
+<p>​		以门板族构件为例，可以根据其相对于建筑的不同方位与材质进行命名，如前部木制门板；</p>
+<p>​		以屋顶为例，可以根据其结构特点结合当地命名习惯进行命名，如椽子、檩条等。</p>
+<hr>
+<h1 id="5-贴图">5 贴图</h1>
+<h2 id="51-整理贴图">5.1 整理贴图</h2>
+<p>​		根据点云数据及现场调研收集到的图像等信息，搜集整理各构件的纹理贴图，注意贴图的<strong>名称不能出现中文</strong>，考虑到在网上下载的贴图有乱码的情况，因此建议将全部贴图<strong>重命名为拼音字母</strong>。贴图的<strong>路径最好也不要出现中文</strong>。正式贴图之前，建议将贴图素材统一整理到模型根目录下的/tietu文件夹中。</p>
+<p><img src="/3dmax/image-20210107104809527.png" alt="image-20210107104809527"></p>
+<h2 id="52-贴图步骤">5.2 贴图步骤</h2>
+<p>​		在3dmax界面下，按<code>M</code>调出材质编辑器，将贴图素材用鼠标拖放至材质球上即可，贴图与材质球一一对应。</p>
+<p><img src="/3dmax/image-20210107105405290.png" alt="image-20210107105405290"></p>
+<p>​		随后将附好材质的材质球直接拖至对应的模型构件上。在模型构件命令面板的修改器列表中，选择<code>UVW贴图</code>（可以提前将此按钮添加到修改器集中，节约查找UVW贴图命令的操作），调整UVW属性中<code>贴图</code>、<code>长宽高</code>和<code>UVW向平铺</code>等相关参数，使效果尽可能接近真实。</p>
+<p><img src="/3dmax/image-20210107105417385.png" alt="image-20210107105417385"></p>
+<p>​		贴图过程中要<strong>及时保存</strong>。</p>
+<p>​		下图为贴图完成后的效果图。</p>
+<p><img src="/3dmax/image-20210107105428481.png" alt="image-20210107105428481"></p>
+<p>​		模型纹理贴图完成后，还需将模型位置调整至中心坐标位置（视窗网格的中心）。可以按<code>G</code>显示或者隐藏视窗网格。</p>
+<p><img src="/3dmax/image-20210107105443894.png" alt="image-20210107105443894"></p>
+<p><img src="/3dmax/image-20210107105450400.png" alt="image-20210107105450400"></p>
+<hr>
+<h1 id="6-模型归档和导出">6 模型归档和导出</h1>
+<h2 id="61-模型归档">6.1 模型归档</h2>
+<p>​		<strong>归档</strong>，就是将当前场景中的模型文件、材质贴图及贴图路径整理出来，另存成为一个压缩包，方便模型的存储和传输。归档操作很简单，菜单栏中选择<code>文件</code>→<code>归档</code>即可；老版本（2017及之前）点击左上角图标→<code>另存为</code>→<code>归档</code>即可。</p>
+<p><img src="/3dmax/image-20210107105534632.png" alt="image-20210107105534632"></p>
+<p>​		归档的模型解压缩并打开后，在3dsMax中浏览虽然是没有问题的，但在导出obj模型前，还需<strong>修改模型的路径</strong>，否则导出的obj模型会出现材质丢失的情况。为避免这种情况产生，建议在完成模型贴图后，直接在本机导出所需的其他格式模型；若要对原模型进行存储或传输，需要归档后在另外的机器导出模型时，就要对模型的贴图路径进行重定向。</p>
+<p>​		在右侧命令面板中，选择<code>实用工具</code>选项（扳手的图标），点击<code>更多...</code>选项。</p>
+<p><img src="/3dmax/image-20210107200949507.png" alt="image-20210107200949507"></p>
+<p>​		在弹出来的窗口中选择<code>位图/光度学路径</code>，点击确定。</p>
+<p><img src="/3dmax/image-20210107201059874.png" alt="image-20210107201059874"></p>
+<p>​		随后在右侧命令面板会出现<code>路径编辑器</code>选项，点击<code>编辑资源</code>。</p>
+<p><img src="/3dmax/image-20210107201231060.png" alt="image-20210107201231060"></p>
+<p>​		此时弹出<code>位图/光度学路径编辑器</code>窗口，在这里将显示全部的贴图路径信息。点击<code>选择丢失的文件</code>，我们会看到全部的文件都变为选中状态，说明全部贴图路径均发生了改变。</p>
+<p><img src="/3dmax/image-20210107201331968.png" alt="image-20210107201331968"></p>
+<p>​		点击下方<code>...</code>按钮，找到解压后模型贴图存放的文件夹，点击<code>使用路径</code>。</p>
+<p><img src="/3dmax/image-20210107201626562.png" alt="image-20210107201626562" style="zoom:80%;" /></p>
+<p>​		之后点击<code>设置路径</code>，将原路径修改为正确的路径。可以再次单击<code>选择丢失的文件</code>，此时已没有文件被选中，说明全部路径已修改完成。</p>
+<p><img src="/3dmax/image-20210107202036510.png" alt="image-20210107202036510"></p>
+<h2 id="62-obj模型导出">6.2 obj模型导出</h2>
+<p>​		依次点击<code>文件</code>、<code>导出</code>，配置好导出路径（纯英文）及文件名后，保存类型选择<code>gw::OBJ-Exporter(*.OBJ)</code>，单击<code>保存</code>。</p>
+<p><img src="/3dmax/image-20210107214504221.png" alt="image-20210107214504221" style="zoom: 80%;" /></p>
+<p>​		在弹出的窗口中，需要继续配置obj模型导出的参数。面需要改为<code>三角形</code>，精度改为<code>5</code>，材质导出选项中，勾选使用材质路径，并修改路径名为<code>./</code>。配置完成后，点击<code>导出</code>。</p>
+<p><img src="/3dmax/image-20210107215114429.png" alt="image-20210107215114429"></p>
+<p>​		至此，obj模型文件、mtl材质文件以及贴图文件已成功导出。</p>
+<p><img src="/3dmax/image-20210107215503304.png" alt="image-20210107215503304" style="zoom:80%;" /></p>
+<p>​		由于3dsMax软件中obj模型导出模块的字符集与网页展示平台中的字符集不匹配，导致构件信息显示错误，出现乱码的情况。之前采用的是使用JavaScript数组对象存储模型构件信息，按构件id来匹配显示构件信息，虽然解决了上述问题，但既费时又费力。所以我们选择从根本上解决此问题——修改obj文件的字符集。方法有很多，这里采用<code>notepad++</code>来处理字符编码的问题。</p>
+<blockquote>
+<p>官网：https://notepad-plus-plus.org/</p>
+</blockquote>
+<p>​		使用<code>notepad++</code>打开obj文件，单击<code>编码</code>，选择<code>转为UTF-8编码</code>后，保存文件即可。</p>
+<p><img src="/3dmax/image-20210107223534056.png" alt="image-20210107223534056" style="zoom:80%;" /></p>
+<h2 id="63-dae模型导出">6.3 DAE模型导出</h2>
+<p>​		DAE模型主要用于模型剖切模块，无需导出材质。导出步骤与上文相同，依次点击<code>文件</code>、<code>导出</code>，配置好导出路径（纯英文）及文件名后，保存类型选择<code>Autodesk Collada(*.DAE)</code>，单击<code>保存</code>。</p>
+<p><img src="/3dmax/image-20210107220206445.png" alt="image-20210107220206445" style="zoom:80%;" /></p>
+<p>​		在弹出的导出选项中，将动画、摄像机和灯光取消勾选。单击<code>确定</code>即可。</p>
+<p><img src="/3dmax/image-20210107221009764.png" alt="image-20210107221009764"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-01-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/3dmax/">3dmax</a>
+          <a href="/tags/%E8%B4%B4%E5%9B%BE/">贴图</a>
+          <a href="/tags/obj/">obj</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">展示平台说明文档</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/revit%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">
+            <span class="next-text nav-default">Revit建模技术文档</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

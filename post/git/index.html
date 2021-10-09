@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Git相关 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &amp;#34;gsemir0418&amp;#34; git config --global user.email &amp;#34;845217811@qq.com&amp;#34; // 查看全局配置 git config --list 0.2 配置SSH公" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/git/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Git相关" />
+<meta property="og:description" content="0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &#34;gsemir0418&#34; git config --global user.email &#34;845217811@qq.com&#34; // 查看全局配置 git config --list 0.2 配置SSH公" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/git/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-15T22:02:28+08:00" />
+<meta property="article:modified_time" content="2021-09-10T00:00:00+08:00" />
+
+<meta itemprop="name" content="Git相关">
+<meta itemprop="description" content="0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &#34;gsemir0418&#34; git config --global user.email &#34;845217811@qq.com&#34; // 查看全局配置 git config --list 0.2 配置SSH公"><meta itemprop="datePublished" content="2021-08-15T22:02:28+08:00" />
+<meta itemprop="dateModified" content="2021-09-10T00:00:00+08:00" />
+<meta itemprop="wordCount" content="1159">
+<meta itemprop="keywords" content="GitHub," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git相关"/>
+<meta name="twitter:description" content="0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &#34;gsemir0418&#34; git config --global user.email &#34;845217811@qq.com&#34; // 查看全局配置 git config --list 0.2 配置SSH公"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Git相关</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-08-15 </span>
+        <div class="post-category">
+            <a href="/categories/github/"> GitHub </a>
+            </div>
+          <span class="more-meta"> 1159 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-初始化配置">0 初始化配置</a>
+      <ul>
+        <li><a href="#01-全局配置">0.1 全局配置</a></li>
+        <li><a href="#02-配置ssh公匙">0.2 配置SSH公匙</a>
+          <ul>
+            <li><a href="#021-本地创建ssh-key">0.2.1 本地创建ssh key</a></li>
+            <li><a href="#022-git账户设置ssh">0.2.2 git账户设置ssh</a></li>
+            <li><a href="#023-验证">0.2.3 验证</a></li>
+          </ul>
+        </li>
+        <li><a href="#03-修改之前的http仓库为ssh">0.3 修改之前的http仓库为ssh</a></li>
+        <li><a href="#04-创建多个ssh-key">0.4 创建多个ssh key</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-简单的代码提交流程">1 简单的代码提交流程</a></li>
+    <li><a href="#2-git-add">2 git add</a></li>
+    <li><a href="#3-git-commit">3 git commit</a></li>
+    <li><a href="#4-git-fetch">4 git fetch</a></li>
+    <li><a href="#5-git-merge">5 git merge</a></li>
+    <li><a href="#6-git-pull">6 git pull</a></li>
+    <li><a href="#7-git-push">7 git push</a></li>
+    <li><a href="#8-git-remote">8 git remote</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="0-初始化配置">0 初始化配置</h1>
+<h2 id="01-全局配置">0.1 全局配置</h2>
+<p>安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git config --global user.name &#34;gsemir0418&#34;
+git config --global user.email &#34;845217811@qq.com&#34;
+// 查看全局配置
+git config --list
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="02-配置ssh公匙">0.2 配置SSH公匙</h2>
+<h3 id="021-本地创建ssh-key">0.2.1 本地创建ssh key</h3>
+<p>打开终端，输入如下指令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ssh-keygen -t rsa -C &#34;845217811@qq.com&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>直接点回车，说明会在默认文件id_rsa上生成ssh key</p>
+<p>然后系统要求输入密码，直接回车表示不设密码；重复密码是也可以直接回车，表示不设密码。</p>
+<p>创建成功后，在终端输入如下指令，便可看到几个文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ls ~/.ssh
+id_rsa  id_rsa.pub  known_hosts
+</code></pre></td></tr></table>
+</div>
+</div><p>vscode或vim打开id_rsa.pub，复制全部内容备用。</p>
+<h3 id="022-git账户设置ssh">0.2.2 git账户设置ssh</h3>
+<p>进入github主页，进入Account Settings，左边选择SSH Keys，Add SSH Key,</p>
+<p>title建议填写计算机名称，粘贴刚刚复制的key。确定后配置完成了</p>
+<h3 id="023-验证">0.2.3 验证</h3>
+<p>输入以下指令验证配置是否成功：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ssh -T git@github.com
+</code></pre></td></tr></table>
+</div>
+</div><p>如果配置过密码，输入密码后，看到如下指令，则表示配置成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">You’ve successfully authenticated, but GitHub does not provide shell access
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="03-修改之前的http仓库为ssh">0.3 修改之前的http仓库为ssh</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// 查看当前远程仓库路径
+git remote -v
+// 修改为ssh路径
+git remote set-url origin [新路径]
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="04-创建多个ssh-key">0.4 创建多个ssh key</h2>
+<p>在使用git的时候，遇到需要创建多个ssh key的需求，一个用来github项目，一个用来gitlab项目；</p>
+<p>之前如果已将创建过一个ssh key，那么在创建第二个的时候，要修改默认名称，然后增加配置文件；</p>
+<p>之前创建ssh key生成了如下两个文件，一个私钥，一个公钥</p>
+<blockquote>
+<p>id_rsa
+id_rsa.pub</p>
+</blockquote>
+<p>我们要生成新的一个ssh key，由于路径跟之前的一直，所以要改个名字</p>
+<blockquote>
+<p>id_rsa_gitlab
+id_rsa_gitlab.pub</p>
+</blockquote>
+<p>具体如下，<code>-f</code>指定路径及文件名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa -f ~/.ssh/id_rsa_gitlab -C <span class="s2">&#34;845217811@qq.com&#34;</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：因为SSH默认只读取id_rsa,为了让SSH识别新的私钥,需要使用命令将其添加到SSH agent,命令如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">ssh-add ~/.ssh/id_rsa
+ssh-add ~/.ssh/id_rsa_gitlab
+</code></pre></td></tr></table>
+</div>
+</div><p>若执行ssh-add时提示“Could not open a connection to your authentication agent”,则执行下面的命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ssh-agent bash
+</code></pre></td></tr></table>
+</div>
+</div><p>然后再运行ssh-add命令(可以通过ssh-add -l查看私钥列表)</p>
+<p>接着修改配置文件：</p>
+<p>在~./ssh目录下新建一个config文件,命令如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">touch config
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>配置文件如下：
+#github
+Host github.com
+IdentityFile ~/.ssh/id_rsa
+User <a href="mailto:a@b.com">a@b.com</a></p>
+<p>#gitlab
+Host gitlab.com
+IdentityFile ~/.ssh/id_rsa_gitlab
+User <a href="mailto:a@b.com">a@b.com</a></p>
+</blockquote>
+<h1 id="1-简单的代码提交流程">1 简单的代码提交流程</h1>
+<ol>
+<li><code>git status</code> 查看工作区代码相对于暂存区的差别，可简写为<code>gst</code></li>
+<li><code>git add .</code> 将当前目录下修改的所有代码从工作区添加到暂存区 . 代表当前目录，可简写为<code>ga .</code></li>
+<li><code>git commit -m ‘注释’</code> 将缓存区内容添加到本地仓库</li>
+<li><code>git pull origin master</code>先将远程仓库master中的信息同步到本地仓库master中</li>
+<li><code>git push origin master</code> 将本地版本库推送到远程服务器，origin是远程主机，master表示是远程服务器上的master分支和本地分支重名的简写，分支名是可以修改的</li>
+</ol>
+<h1 id="2-git-add">2 git add</h1>
+<h1 id="3-git-commit">3 git commit</h1>
+<h1 id="4-git-fetch">4 git fetch</h1>
+<h1 id="5-git-merge">5 git merge</h1>
+<h1 id="6-git-pull">6 git pull</h1>
+<h1 id="7-git-push">7 git push</h1>
+<ul>
+<li>提交代码到指定远程仓库</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git push -u 仓库名 分支名
+</code></pre></td></tr></table>
+</div>
+</div><p>加了参数-u后，以后可以直接用git push 代替</p>
+<h1 id="8-git-remote">8 git remote</h1>
+<ul>
+<li>添加远程仓库</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git remote add 仓库名 仓库路径
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>删除远程仓库</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git remote remove 仓库名
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>查看远程仓库</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git remote -v
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-09-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/github/">GitHub</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/express%E6%A0%B8%E5%BF%83/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Express核心</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/usestate%E5%8E%9F%E7%90%86/">
+            <span class="next-text nav-default">UseState原理</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

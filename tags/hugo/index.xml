@@ -1,36 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>hugo on GSemir Blog</title>
+    <title>hugo on Even - A super concise theme for Hugo</title>
     <link>https://gsemir0418.github.io/tags/hugo/</link>
-    <description>Recent content in hugo on GSemir Blog</description>
+    <description>Recent content in hugo on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Sun, 03 Jan 2021 16:41:51 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>StartBlog</title>
-      <link>https://gsemir0418.github.io/posts/startblog/</link>
+      <link>https://gsemir0418.github.io/post/startblog/</link>
       <pubDate>Sun, 03 Jan 2021 16:41:51 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/posts/startblog/</guid>
-      <description>Step1 安装hugo  下载链接：https://github.com/gohugoio/hugo/releases
- 选择最新版本进行安装（建议安装hugo_extended版本）。
-注意解压后需配置环境变量，可以使用version命令测试是否配置成功：
-hugo version Step2 新建博客站点 使用命令行，输入如下命令新建博客站点：
-hugo new site BLOGNAME Step3 下载并配置主题  主题下载链接：https://themes.gohugo.io/
- 官网提供了许多主题供用户选择，按照主题下的安装配置说明进行主题的下载与配置。
-这里以Diary主题为例，首先在博客的根目录下，使用终端进行git初始化：
-git init 并执行：
-git submodule add https://github.com/AmazingRise/hugo-theme-diary.git themes/diary 主题会自动下载至根目录下的themes文件夹中。下载完成后，启动hugo本地服务并指定该主题：
-hugo server -t diary --buildDrafts 可以通过访问localhost:1313进入本地部署的博客站点。可以看到，hugo已经为我们配置好了下载的主题。
-Step4 新建博客 同样，在终端中执行：
-hugo new post/文章名称.md 可以使用Typora来编辑文章，就像我现在这样。
-Step5 部署到github 首先进入自己的github，新建一个repository，注意名称要使用小写昵称全名.github.io。
-在终端执行：
-hugo --theme=diary --baseUrl=&amp;quot;https://gsemir0418.github.io/&amp;quot; --buildDrafts 此时在根目录下，hugo为我们生成了一个public文件夹，我们只需利用github将此文件夹上传到库中即可。
-在public文件夹下，进行git初始化。
-git init git add . git commit -m &amp;quot;v0&amp;quot; 此时需要注册GitHub信息
-git config --global user.email &amp;quot;you@example.com&amp;quot; git config --global user.</description>
+      <guid>https://gsemir0418.github.io/post/startblog/</guid>
+      <description>Step1 安装hugo 下载链接：https://github.com/gohugoio/hugo/releases 选择最新版本进行安装（建议安装hu</description>
     </item>
     
   </channel>

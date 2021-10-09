@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>React入门 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1.React是什么 用于构建用户界面的JS库（操作DOM呈现页面） 是一个将数据渲染为HTML视图的开源的JavaScript库 官网：http" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/react%E5%85%A5%E9%97%A8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="React入门" />
+<meta property="og:description" content="1.React是什么 用于构建用户界面的JS库（操作DOM呈现页面） 是一个将数据渲染为HTML视图的开源的JavaScript库 官网：http" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/react%E5%85%A5%E9%97%A8/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-25T23:11:51+08:00" />
+<meta property="article:modified_time" content="2021-06-25T00:00:00+08:00" />
+
+<meta itemprop="name" content="React入门">
+<meta itemprop="description" content="1.React是什么 用于构建用户界面的JS库（操作DOM呈现页面） 是一个将数据渲染为HTML视图的开源的JavaScript库 官网：http"><meta itemprop="datePublished" content="2021-06-25T23:11:51+08:00" />
+<meta itemprop="dateModified" content="2021-06-25T00:00:00+08:00" />
+<meta itemprop="wordCount" content="2696">
+<meta itemprop="keywords" content="前端,React基础,React," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="React入门"/>
+<meta name="twitter:description" content="1.React是什么 用于构建用户界面的JS库（操作DOM呈现页面） 是一个将数据渲染为HTML视图的开源的JavaScript库 官网：http"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">React入门</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-25 </span>
+        <div class="post-category">
+            <a href="/categories/b%E7%AB%99react%E7%AC%94%E8%AE%B0/"> B站React笔记 </a>
+            </div>
+          <span class="more-meta"> 2696 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1react是什么">1.React是什么</a></li>
+    <li><a href="#2谁开发的">2.谁开发的</a></li>
+    <li><a href="#3为什么要学">3.为什么要学</a></li>
+    <li><a href="#4react的特点">4.React的特点</a></li>
+    <li><a href="#5-react基本使用">5. React基本使用</a>
+      <ul>
+        <li><a href="#51-js库引入注意引入顺序">5.1 js库引入（注意引入顺序）</a></li>
+        <li><a href="#52-虚拟dom的创建">5.2 虚拟DOM的创建</a>
+          <ul>
+            <li><a href="#521-关于虚拟dom">5.2.1 关于虚拟DOM</a></li>
+            <li><a href="#522-创建的两种方式">5.2.2 创建的两种方式</a></li>
+          </ul>
+        </li>
+        <li><a href="#53-渲染虚拟dom">5.3 渲染虚拟DOM</a></li>
+        <li><a href="#54-模块与组件的理解">5.4 模块与组件的理解</a></li>
+        <li><a href="#补充">补充：</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1react是什么">1.React是什么</h1>
+<p>用于构建<strong>用户界面</strong>的JS库（操作DOM呈现页面）</p>
+<p>是一个将数据渲染为HTML视图的开源的JavaScript库</p>
+<blockquote>
+<p>官网：https://react.docschina.org/</p>
+</blockquote>
+<h1 id="2谁开发的">2.谁开发的</h1>
+<p>Facebook</p>
+<h1 id="3为什么要学">3.为什么要学</h1>
+<ol>
+<li>
+<p>原生JS操作DOM<strong>繁琐、效率低</strong>（<strong>DOM-API操作UI</strong>）</p>
+</li>
+<li>
+<p>使用js直接操作DOM，浏览器会进行大量的<strong>重绘重排</strong></p>
+</li>
+<li>
+<p>原生js没有<strong>组件化</strong>的编码方案，代码复用率低</p>
+<p><strong>模块化</strong>是针对js的，可以把js拆分成独立的功能模块，方便复用。但是html结构和css样式，包括字体图片音频视频等，复用率低。</p>
+</li>
+</ol>
+<h1 id="4react的特点">4.React的特点</h1>
+<ol>
+<li>
+<p>用<strong>组件化模式</strong>、<strong>声明式编码</strong>，提高开发效率及组件复用率</p>
+<p>之前使用的是<strong>命令式编码</strong>，面向过程。比如我想喝一杯水，需要命令别人先站起来，再走到水杯旁，把我帮我拿过来等等的步骤；但是声明式编码只需我说嗓子干了，自动就会帮我把水拿过来。</p>
+</li>
+<li>
+<p>在<strong>React Native</strong>中可以使用React语法进行<strong>移动端</strong>开发。</p>
+<p>React Native可以使得前端开发人员使用最熟悉的js来编写安卓和ios应用。</p>
+</li>
+<li>
+<p>使用<strong>虚拟DOM</strong>+优秀的<strong>Diffing算法</strong>，尽量减少与真实DOM的交互</p>
+</li>
+</ol>
+<p><img src="/reactbasic/image-20210218214729850.png" alt="image-20210218214729850" style="zoom:50%;" /></p>
+<p>​	虚拟DOM发生改变后会对比之前的虚拟DOM，从而减少真实DOM的更新渲染过程</p>
+<h1 id="5-react基本使用">5. React基本使用</h1>
+<h2 id="51-js库引入注意引入顺序">5.1 js库引入（注意引入顺序）</h2>
+<p>1.react.development.js：react核心库</p>
+<p>2.react-dom.development.js：提供操作DOM的react扩展库</p>
+<p>3.babel.min.js：解析JSX语法代码转为js代码的库</p>
+<h2 id="52-虚拟dom的创建">5.2 虚拟DOM的创建</h2>
+<h3 id="521-关于虚拟dom">5.2.1 关于虚拟DOM</h3>
+<p>（1）本质上是object类型的<strong>一般对象</strong></p>
+<p>（2）虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是react内部在用，无需真实DOM上那么多属性</p>
+<p>（3）虚拟DOM最终会被React转化为真实DOM，呈现在页面上</p>
+<h3 id="522-创建的两种方式">5.2.2 创建的两种方式</h3>
+<p>（1）纯js方式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">VDOM</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;标签名&#39;</span><span class="p">,{</span><span class="nx">标签属性</span><span class="p">},</span><span class="s1">&#39;标签内容&#39;</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">VDOM</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,{</span><span class="nx">id</span><span class="o">:</span><span class="s1">&#39;title&#39;</span><span class="p">},</span><span class="s1">&#39;React.createElement(&#39;</span><span class="nx">span</span><span class="s1">&#39;,{},&#39;</span><span class="nx">HELLO</span> <span class="nx">REACT</span><span class="o">!</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​		可以看到，若遇标签嵌套情况，利用纯js来写非常复杂。</p>
+<p>（2）JSX方式</p>
+<p>​		是react 定义的一种类似于 XML 的 JS 扩展语法: JS + XML。本质是React.createElement(&lsquo;标签名&rsquo;,{标签属性},&lsquo;标签内容&rsquo;)方法的语法糖，极大地简化了创建虚拟DOM过程。<strong>在利用JSX创建之前，需要将<script>标签的type属性由默认的text/javascript改为text/babel</strong>。</p>
+<p>1）JSX创建虚拟DOM的写法如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">VDOM</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;title&#34;</span><span class="p">&gt;</span>
+    	<span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span><span class="nx">hello</span><span class="p">,</span><span class="nx">react</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>2）<strong>JSX语法</strong>如下：</p>
+<p>1.遇到 &lt;开头的代码，以标签的语法解析：html 同名标签转换为 html 同名元素，其它标签需要特别解析：若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。</p>
+<p>2.遇到以 { 开头的代码，以 JS 语法解析: <strong>标签中的 js 表达式必须用{ }包含</strong></p>
+<p>3.<strong>只有一个根标签</strong>，若想在虚拟DOM中再新增标签，外面需要统一包一个标签</p>
+<p>4.标签必须<strong>闭合</strong>（自闭合也行）</p>
+<p>5.标签内样式的类名指定不要用class，要用<strong>className</strong>，例如<h1 className ="title"></h1></p>
+<p>6.标签中内联样式要用**style={{key:value}}**的形式去写，多个单词的要用小驼峰,例如style={{fontSize:&lsquo;29px&rsquo;}}</p>
+<h2 id="53-渲染虚拟dom">5.3 渲染虚拟DOM</h2>
+<p>基本语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">VirtualDOM</span><span class="p">,</span><span class="nx">containerDOM</span><span class="p">)</span>
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">VDOM</span><span class="p">,</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="54-模块与组件的理解">5.4 模块与组件的理解</h2>
+<p>模块指的是向外提供特定功能的js程序，一般就是一个js文件，模块化是为了更好地复用js，简化js的编写，提高js运行效率。模块化只针对js；而组件指的是用来实现局部功能效果的代码和资源的集合（html、css、js、image、video等），组件化是为了复用编码，简化项目编码，提高运行效率</p>
+<p>1.5 jsx练习</p>
+<p><img src="/reactbasic/image-20210321123104572.png" alt="image-20210321123104572"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;test&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;../js/react.development.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;../js/react-dom.development.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;../js/babel.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/babel&#34;</span><span class="p">&gt;</span>
+    <span class="cm">/*
+</span><span class="cm">        一定注意区分【js语句（代码）】与【js表达式】
+</span><span class="cm">            1.表达式：一个表达式会产生一个值，可以放任何一个需要值的地方
+</span><span class="cm">                下面这些都是表达式
+</span><span class="cm">                a
+</span><span class="cm">                a+b
+</span><span class="cm">                demo(1)
+</span><span class="cm">                arr.map()//用来处理数组
+</span><span class="cm">                function test(){}//定义方法
+</span><span class="cm">            2.语句（代码）：控制代码走向，没有值
+</span><span class="cm">                if(){}
+</span><span class="cm">                for(){}
+</span><span class="cm">                switch(){case}
+</span><span class="cm">    */</span>
+        <span class="c1">//模拟一些数据
+</span><span class="c1"></span>        <span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Angular&#39;</span><span class="p">,</span> <span class="s1">&#39;Vue&#39;</span><span class="p">,</span> <span class="s1">&#39;React&#39;</span><span class="p">]</span>
+        <span class="kr">const</span> <span class="nx">data2</span> <span class="o">=</span> <span class="p">[</span><span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">Angular</span><span class="o">&lt;</span><span class="err">/li&gt;, &lt;li&gt;Vue&lt;/li&gt;, &lt;li&gt;React&lt;/li&gt;]//React可以自动遍历数组</span>
+        <span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name1</span><span class="o">:</span><span class="s1">&#39;Angular&#39;</span><span class="p">,</span><span class="nx">name2</span><span class="o">:</span><span class="s1">&#39;Vue&#39;</span><span class="p">,</span><span class="nx">name3</span><span class="o">:</span><span class="s1">&#39;React&#39;</span><span class="p">}</span><span class="c1">//对象不能作为React的节点
+</span><span class="c1"></span>        <span class="c1">//jsx创建虚拟DOM
+</span><span class="c1"></span>        <span class="kr">const</span> <span class="nx">VDOM</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">前端js框架列表</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+                <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+                    <span class="p">{</span>
+                        <span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="nx">index</span><span class="p">)=&gt;{</span>
+                            <span class="k">return</span> <span class="o">&lt;</span><span class="nx">li</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">index</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">a</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/li&gt;/</span><span class="o">/</span><span class="nx">虚拟dom必须有唯一标识key</span>
+                        <span class="p">})</span>
+                    <span class="p">}</span>
+                <span class="o">&lt;</span><span class="err">/ul&gt;</span>
+            <span class="o">&lt;</span><span class="err">/div&gt;</span>
+        <span class="p">)</span>
+        <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">VDOM</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">))</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="补充">补充：</h2>
+<p>1）早期传输数据的两种格式</p>
+<p>​		最早使用XML来存储与传输数据的，XML即扩展标记语言 (Extensible Markup Language, XML) ，用于标记电子文件使其具有结构性的标记语言，可以用来标记数据、定义数据类型，是一种允许用户对自己的标记语言进行定义的源语言。典型写法如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;student&gt;</span>
+  <span class="nt">&lt;name&gt;</span>Tom<span class="nt">&lt;/name&gt;</span>
+<span class="nt">&lt;/student&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​		后面改为利用JSON格式。JSON(JavaScript Object Notation)一种轻量级的数据交换格式，具有良好的可读和便于快速编写的特性。可在不同平台之间进行数据交换。主要是得益于JSON的两个重要方法：JSON.parse()和JSON.stringfy()，分别用来快速将JSON中的数据解析为数组和对象，以及快速把JS中的数组和对象转化为JSON字符串</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="err">&#39;name&#39;:&#39;gsq&#39;,&#39;age&#39;:26</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>2）XML和JSON的优缺点对比</p>
+<p>(1)可读性两者基本相同，一边是建议的语法，一边是规范的标签形式，XML可读性较好些；
+(2)可扩展性方面差不多；
+(3)编码难度方面，不借助工具的话，XML较为复杂；
+(4)解码难度方面，XML的解析得考虑子节点父节点，让人头昏眼花，而JSON的解析难度几乎为0。
+(5)流行度方面，XML已经被业界广泛的使用，而JSON才刚刚开始，但是在Ajax这个特定的领域，未来的发展一定是XML让位于JSON。到时Ajax应该变成Ajaj(Asynchronous Javascript and JSON)了；
+(7)数据体积方面，JSON相对于XML来讲，数据的体积小，传递的速度更快些；
+(8)数据交互方面，JSON与JavaScript的交互更加方便，更容易解析处理，更好的数据交互；
+(9)数据描述方面，JSON对数据的描述性比XML较差；
+(10)传输速度方面， JSON的速度要远远快于XML。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-06-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="/tags/react%E5%9F%BA%E7%A1%80/">React基础</a>
+          <a href="/tags/react/">React</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/array/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Array常用方法整理</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/reacthooks/">
+            <span class="next-text nav-default">初识Hooks</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

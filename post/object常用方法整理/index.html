@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Object常用方法整理 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="Object.assign() 用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象 语法： 1 Object.assign(target, ...sources) target目标对象" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Object常用方法整理" />
+<meta property="og:description" content="Object.assign() 用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象 语法： 1 Object.assign(target, ...sources) target目标对象" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-07T17:30:59+08:00" />
+<meta property="article:modified_time" content="2021-07-07T00:00:00+08:00" />
+
+<meta itemprop="name" content="Object常用方法整理">
+<meta itemprop="description" content="Object.assign() 用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象 语法： 1 Object.assign(target, ...sources) target目标对象"><meta itemprop="datePublished" content="2021-07-07T17:30:59+08:00" />
+<meta itemprop="dateModified" content="2021-07-07T00:00:00+08:00" />
+<meta itemprop="wordCount" content="2744">
+<meta itemprop="keywords" content="前端,JavaScript,Object," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Object常用方法整理"/>
+<meta name="twitter:description" content="Object.assign() 用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象 语法： 1 Object.assign(target, ...sources) target目标对象"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Object常用方法整理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-07 </span>
+        <div class="post-category">
+            <a href="/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"> JS基础知识整理 </a>
+            </div>
+          <span class="more-meta"> 2744 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#objectassign">Object.assign()</a></li>
+    <li><a href="#objectis">Object.is()</a></li>
+    <li><a href="#objectprototypehasownproperty">Object.prototype.hasOwnProperty()</a></li>
+    <li><a href="#objectkeys">Object.keys()</a></li>
+    <li><a href="#objectgetownpropertynames">Object.getOwnPropertyNames()</a></li>
+    <li><a href="#objectvalues">Object.values()</a></li>
+    <li><a href="#objectgetownpropertydescriptor">Object.getOwnPropertyDescriptor()</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="objectassign">Object.assign()</h1>
+<ul>
+<li>
+<p>用于将所有可枚举属性（属性能否被for…in查找遍历到）的值从一个或多个源对象复制到目标对象，返回目标对象</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="p">...</span><span class="nx">sources</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>target</code>目标对象；<code>source</code>源对象</p>
+</li>
+<li>
+<p>如果目标对象中的属性具有相同的键，则属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的属性。</p>
+</li>
+<li>
+<p>只会拷贝源对象自身的并且可枚举的属性到目标对象。</p>
+</li>
+<li>
+<p>为了将属性定义（包括其可枚举性）复制到原型，应使用<code>Object.getOwnPropertyDescriptor()</code>和<code>Object.defineProperty()</code>。深拷贝？</p>
+</li>
+<li>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 复制一个对象
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span> <span class="p">};</span>
+<span class="kr">const</span> <span class="nx">copy</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">obj</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">copy</span><span class="p">);</span> <span class="c1">// { a: 1 }
+</span><span class="c1"></span>
+<span class="c1">// 合并对象
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">o1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span> <span class="p">};</span>
+<span class="kr">const</span> <span class="nx">o2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">2</span> <span class="p">};</span>
+<span class="kr">const</span> <span class="nx">o3</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">c</span><span class="o">:</span> <span class="mi">3</span> <span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">o1</span><span class="p">,</span> <span class="nx">o2</span><span class="p">,</span> <span class="nx">o3</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span> <span class="c1">// { a: 1, b: 2, c: 3 }
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o1</span><span class="p">);</span>  <span class="c1">// { a: 1, b: 2, c: 3 }, 注意目标对象自身也会改变。
+</span><span class="c1"></span>
+<span class="c1">// 合并具有相同属性的对象
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">o1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span> <span class="mi">1</span> <span class="p">};</span>
+<span class="kr">const</span> <span class="nx">o2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span> <span class="mi">2</span> <span class="p">};</span>
+<span class="kr">const</span> <span class="nx">o3</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">c</span><span class="o">:</span> <span class="mi">3</span> <span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">o1</span><span class="p">,</span> <span class="nx">o2</span><span class="p">,</span> <span class="nx">o3</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span> <span class="c1">// { a: 1, b: 2, c: 3 }
+</span><span class="c1"></span>
+<span class="c1">// 继承属性和不可枚举属性是不能拷贝的
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span><span class="nx">foo</span><span class="o">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span> <span class="c1">// foo 是个继承属性。
+</span><span class="c1"></span>    <span class="nx">bar</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">value</span><span class="o">:</span> <span class="mi">2</span>  <span class="c1">// bar 是个不可枚举属性。
+</span><span class="c1"></span>    <span class="p">},</span>
+    <span class="nx">baz</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">value</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="nx">enumerable</span><span class="o">:</span> <span class="kc">true</span>  <span class="c1">// baz 是个自身可枚举属性。
+</span><span class="c1"></span>    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="kr">const</span> <span class="nx">copy</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">obj</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">copy</span><span class="p">);</span> <span class="c1">// { baz: 3 }
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>深拷贝问题</p>
+<p>针对深拷贝，需要使用其他办法，因为 <code>Object.assign()</code>拷贝的是属性值。假如源对象的属性值是一个对象的引用，那么它也只指向那个引用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">0</span> <span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="p">{</span> <span class="nx">c</span><span class="o">:</span> <span class="mi">0</span><span class="p">}};</span> 
+<span class="kd">let</span> <span class="nx">copy</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">obj1</span><span class="p">);</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">obj2</span><span class="p">));</span> <span class="c1">// { a: 0, b: { c: 0}} 
+</span><span class="c1"></span>
+<span class="c1">// 改变源对象属性值，拷贝的属性值不变
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span> <span class="c1">// { a: 1, b: { c: 0}} 
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">copy</span><span class="p">));</span> <span class="c1">// { a: 0, b: { c: 0}} 
+</span><span class="c1"></span>
+<span class="c1">// 改变拷贝的属性值，也不会改变源对象的属性值
+</span><span class="c1"></span><span class="nx">copy</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span> <span class="c1">// { a: 1, b: { c: 0}} 
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">copy</span><span class="p">));</span> <span class="c1">// { a: 2, b: { c: 0}}
+</span><span class="c1"></span>
+<span class="c1">// 改变拷贝对象中的深层属性值，将会彻底改变该属性值
+</span><span class="c1"></span><span class="nx">copy</span><span class="p">.</span><span class="nx">b</span><span class="p">.</span><span class="nx">c</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span> <span class="c1">// { a: 1, b: { c: 3}} 
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">copy</span><span class="p">));</span> <span class="c1">// { a: 2, b: { c: 3}} 
+</span><span class="c1"></span>
+<span class="c1">// Deep Clone 
+</span><span class="c1"></span><span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">0</span> <span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="p">{</span> <span class="nx">c</span><span class="o">:</span> <span class="mi">0</span><span class="p">}};</span> 
+<span class="kd">let</span> <span class="nx">depClone</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">obj1</span><span class="p">));</span> 
+<span class="nx">obj</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> 
+<span class="nx">obj</span><span class="p">.</span><span class="nx">b</span><span class="p">.</span><span class="nx">c</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">depClone</span><span class="p">));</span> <span class="c1">// { a: 0, b: { c: 0}}
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="objectis">Object.is()</h1>
+<ul>
+<li>
+<p>判断两个值是否是相同的值，返回布尔值</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>在以下情况下，返回<code>true</code></p>
+<ul>
+<li>两个值均为<code>undefined</code>、<code>null</code>、<code>true</code>或<code>false</code></li>
+<li>两个值都是由相同个字符按照相同顺序组成的字符串</li>
+<li>两个值都指向同一个对象</li>
+<li>两个值都是数字并且
+<ul>
+<li>都是正零<code>+0</code>或负零<code>-0</code></li>
+<li>都是<code>NaN</code></li>
+<li>都是除零和<code>NaN</code>外的其它同一个数字</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>与<code>==</code>运算符的区别</p>
+<p>这种相等性判断逻辑和传统的 <code>==</code>运算不同，<code>==</code>运算符会对它两边的操作数做隐式类型转换（如果它们类型不同），然后才进行相等性比较，（所以才会有类似 <code>&quot;&quot; == false</code> 返回 <code>true</code> 的现象），但 <code>Object.is</code> 不会做这种类型转换。<code>Object.is()</code>比较严格。</p>
+<p>这与<code>===</code>运算符的判定方式也不一样。<code>===</code>运算符（和<code>==</code>运算符）将数字值 <code>-0</code> 和 <code>+0</code> 视为相等，并认为 <code>Number.NaN</code>不等于<code>NaN</code>。</p>
+</li>
+<li>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">);</span>     <span class="c1">// true
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nb">window</span><span class="p">,</span> <span class="nb">window</span><span class="p">);</span>   <span class="c1">// true
+</span><span class="c1"></span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">);</span>     <span class="c1">// false
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">([],</span> <span class="p">[]);</span>           <span class="c1">// false 与两个对象同理 指向不同
+</span><span class="c1"></span>
+<span class="kr">const</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span> <span class="p">};</span>
+<span class="kr">const</span> <span class="nx">bar</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span> <span class="p">};</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="nx">foo</span><span class="p">);</span>         <span class="c1">// true
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="nx">bar</span><span class="p">);</span>         <span class="c1">// false 指向不同
+</span><span class="c1"></span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>       <span class="c1">// true
+</span><span class="c1"></span>
+<span class="c1">// 特例
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">0</span><span class="p">);</span>            <span class="c1">// false
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">+</span><span class="mi">0</span><span class="p">);</span>            <span class="c1">// true
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="o">-</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">0</span><span class="p">);</span>           <span class="c1">// true
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="kc">NaN</span><span class="p">,</span> <span class="mi">0</span><span class="o">/</span><span class="mi">0</span><span class="p">);</span>         <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="objectprototypehasownproperty">Object.prototype.hasOwnProperty()</h1>
+<ul>
+<li>
+<p>判断对象自身属性中是否具有指定属性（是否有指定的键）</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">prop</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>prop</code>要检测的属性的<code>String</code>字符串形式表示的名称，或者<code>Symbol</code></p>
+</li>
+<li>
+<p>所有继承了<code>Object</code>的对象都会继承到 <code>hasOwnProperty</code> 方法。这个方法可以用来检测一个对象是否含有特定的自身属性；和<code>in</code>运算符不同，该方法会忽略掉那些从原型链上继承到的属性。</p>
+</li>
+<li>
+<p>即使属性的值是 <code>null</code> 或 <code>undefined</code>，只要属性存在，<code>hasOwnProperty</code> 依旧会返回 <code>true</code>。</p>
+</li>
+<li>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
+<span class="nx">o</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;prop&#39;</span><span class="p">);</span> <span class="c1">// 返回 false
+</span><span class="c1"></span><span class="nx">o</span><span class="p">.</span><span class="nx">prop</span> <span class="o">=</span> <span class="s1">&#39;exists&#39;</span><span class="p">;</span>
+<span class="nx">o</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;prop&#39;</span><span class="p">);</span> <span class="c1">// 返回 true
+</span><span class="c1"></span>
+<span class="c1">// 对待自身属性和继承属性的区别：
+</span><span class="c1"></span><span class="nx">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
+<span class="nx">o</span><span class="p">.</span><span class="nx">prop</span> <span class="o">=</span> <span class="s1">&#39;exists&#39;</span><span class="p">;</span>
+<span class="nx">o</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;prop&#39;</span><span class="p">);</span>             <span class="c1">// 返回 true
+</span><span class="c1"></span><span class="nx">o</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;toString&#39;</span><span class="p">);</span>         <span class="c1">// 返回 false
+</span><span class="c1"></span><span class="nx">o</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;hasOwnProperty&#39;</span><span class="p">);</span>   <span class="c1">// 返回 false
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="objectkeys">Object.keys()</h1>
+<ul>
+<li>
+<p>会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用<code>for...in</code>循环遍历该对象时返回的顺序一致。</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>返回一个表示给定对象的所有可枚举属性的字符串数组</p>
+</li>
+<li>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 对于简单的数组
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span> <span class="c1">// console: [&#39;0&#39;, &#39;1&#39;, &#39;2&#39;]
+</span><span class="c1"></span>
+<span class="c1">// 类数组对象
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span> <span class="s1">&#39;c&#39;</span> <span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span> <span class="c1">// console: [&#39;0&#39;, &#39;1&#39;, &#39;2&#39;]
+</span><span class="c1"></span>
+<span class="c1">// key的顺序随机的对象，会排序后返回
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">anObj</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">100</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="o">:</span> <span class="s1">&#39;c&#39;</span> <span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">anObj</span><span class="p">));</span> <span class="c1">// console: [&#39;2&#39;, &#39;7&#39;, &#39;100&#39;]
+</span><span class="c1"></span>
+<span class="c1">// getFoo是一个不可枚举的属性
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">myObj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">({},</span> <span class="p">{</span>
+  <span class="nx">getFoo</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">foo</span><span class="p">;</span> <span class="p">}</span>
+  <span class="p">}</span> 
+<span class="p">});</span>
+<span class="nx">myObj</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="c1">// myObj = { foo: 1, getFoo: funtion }
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">myObj</span><span class="p">));</span> <span class="c1">// console: [&#39;foo&#39;]
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="objectgetownpropertynames">Object.getOwnPropertyNames()</h1>
+<ul>
+<li>
+<p>与Object.keys()方法类似，但更强大。</p>
+</li>
+<li>
+<p>返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）组成的数组。</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyNames</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 对于简单的数组
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyNames</span><span class="p">(</span><span class="nx">arr</span><span class="p">).</span><span class="nx">sort</span><span class="p">());</span> <span class="c1">// [&#34;0&#34;, &#34;1&#34;, &#34;2&#34;, &#34;length&#34;] // 居然还有length...
+</span><span class="c1"></span>
+<span class="c1">// 类数组对象
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span> <span class="s2">&#34;c&#34;</span><span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyNames</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">sort</span><span class="p">());</span> <span class="c1">// [&#34;0&#34;, &#34;1&#34;, &#34;2&#34;]
+</span><span class="c1"></span>
+<span class="c1">// 使用Array.forEach输出属性名和属性值
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyNames</span><span class="p">(</span><span class="nx">obj</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">idx</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">val</span> <span class="o">+</span> <span class="s2">&#34; -&gt; &#34;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">val</span><span class="p">]);</span>
+<span class="p">});</span>
+<span class="c1">// 输出
+</span><span class="c1">// 0 -&gt; a
+</span><span class="c1">// 1 -&gt; b
+</span><span class="c1">// 2 -&gt; c
+</span><span class="c1"></span>
+<span class="c1">//不可枚举属性
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">my_obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">({},</span> <span class="p">{</span>
+  <span class="nx">getFoo</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">foo</span><span class="p">;</span> <span class="p">},</span>
+    <span class="nx">enumerable</span><span class="o">:</span> <span class="kc">false</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">my_obj</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyNames</span><span class="p">(</span><span class="nx">my_obj</span><span class="p">).</span><span class="nx">sort</span><span class="p">());</span> <span class="c1">// [&#34;foo&#34;, &#34;getFoo&#34;]
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="objectvalues">Object.values()</h1>
+<ul>
+<li>
+<p>会返回一个给定对象自身的所有可枚举属性值的数组，值的顺序与使用<code>for...in</code>循环的顺序相同（区别在于<code>for...in</code>循环枚举原型链中的属性）。与<code>Object.keys()</code>十分相似。</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 对于一般对象
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">foo</span><span class="o">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="nx">baz</span><span class="o">:</span> <span class="mi">42</span> <span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span> <span class="c1">// [&#39;bar&#39;, 42]
+</span><span class="c1"></span>
+<span class="c1">// 对于类数组对象
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span> <span class="s1">&#39;c&#39;</span> <span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span> <span class="c1">// [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+</span><span class="c1"></span>
+<span class="c1">// 键顺序随机的类数组对象
+</span><span class="c1">// 键的数字顺序决定返回值在数组中的顺序 
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">an_obj</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">100</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="o">:</span> <span class="s1">&#39;c&#39;</span> <span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">an_obj</span><span class="p">));</span> <span class="c1">// [&#39;b&#39;, &#39;c&#39;, &#39;a&#39;]
+</span><span class="c1"></span>
+<span class="c1">// getFoo是一个不可枚举属性
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">my_obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">({},</span> <span class="p">{</span> <span class="nx">getFoo</span><span class="o">:</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">foo</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span> <span class="p">});</span>
+<span class="nx">my_obj</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="s1">&#39;bar&#39;</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">my_obj</span><span class="p">));</span> <span class="c1">// [&#39;bar&#39;]
+</span><span class="c1"></span>
+<span class="c1">// 非对象作为参数将被强制转换为对象 
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">));</span> <span class="c1">// [&#39;f&#39;, &#39;o&#39;, &#39;o&#39;]
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="objectgetownpropertydescriptor">Object.getOwnPropertyDescriptor()</h1>
+<ul>
+<li>
+<p>方法返回指定对象中的一个自有属性对应的属性描述符。（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）</p>
+</li>
+<li>
+<p>语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyDescriptor</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>obj</code>需要查找的目标对象；<code>prop</code>目标对象内的属性名称</p>
+</li>
+<li>
+<p>如果指定的属性存在于对象上，则返回其属性描述符对象（property descriptor），否则返回<code>undefined</code></p>
+</li>
+<li>
+<p>在 Javascript 中， <code>属性</code>由一个字符串类型的“名字”（name）和一个“属性描述符”（property descriptor）对象构成。一个属性描述符是一个记录，由下面属性当中的某些组成的：</p>
+<ul>
+<li><code>value</code>：该属性的值</li>
+<li><code>writable</code>：当且仅当属性的值可以被改变时为<code>true</code></li>
+<li><code>get</code>：获取该属性的访问器函数（getter）</li>
+<li><code>set</code>：获取该属性的设置器函数（setter）</li>
+<li><code>configurable</code>：当且仅当指定对象的属性描述可以被改变或者属性可被删除时，为<code>true</code></li>
+<li><code>eunmerable</code>：当且仅当指定对象的属性可以被枚举出时，为<code>true</code></li>
+</ul>
+</li>
+<li>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">get</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">17</span><span class="p">;</span> <span class="p">}</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyDescriptor</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="s2">&#34;foo&#34;</span><span class="p">);</span>
+<span class="c1">// d {
+</span><span class="c1">//   configurable: true,
+</span><span class="c1">//   enumerable: true,
+</span><span class="c1">//   get: /*the getter function*/,
+</span><span class="c1">//   set: undefined
+</span><span class="c1">// }
+</span><span class="c1"></span>
+<span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">bar</span><span class="o">:</span> <span class="mi">42</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyDescriptor</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="s2">&#34;bar&#34;</span><span class="p">);</span>
+<span class="c1">// d {
+</span><span class="c1">//   configurable: true,
+</span><span class="c1">//   enumerable: true,
+</span><span class="c1">//   value: 42,
+</span><span class="c1">//   writable: true
+</span><span class="c1">// }
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="/tags/javascript/">JavaScript</a>
+          <a href="/tags/object/">Object</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/nodejsstream%E6%A8%A1%E5%9D%97/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">NodeStream模块</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/string%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">
+            <span class="next-text nav-default">String常用方法整理</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
