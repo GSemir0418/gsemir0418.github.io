@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>CSS布局 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 flex布局 Flex布局的目标是提供一种更有效的方式来布局、对齐和分配容器中子元素的空间，即使它们的大小是未知的或动态的。 flex布局背后" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/css%E5%B8%83%E5%B1%80/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="CSS布局" />
+<meta property="og:description" content="1 flex布局 Flex布局的目标是提供一种更有效的方式来布局、对齐和分配容器中子元素的空间，即使它们的大小是未知的或动态的。 flex布局背后" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/css%E5%B8%83%E5%B1%80/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-20T14:36:05+08:00" />
+<meta property="article:modified_time" content="2021-10-20T14:36:05+08:00" />
+
+<meta itemprop="name" content="CSS布局">
+<meta itemprop="description" content="1 flex布局 Flex布局的目标是提供一种更有效的方式来布局、对齐和分配容器中子元素的空间，即使它们的大小是未知的或动态的。 flex布局背后"><meta itemprop="datePublished" content="2021-10-20T14:36:05+08:00" />
+<meta itemprop="dateModified" content="2021-10-20T14:36:05+08:00" />
+<meta itemprop="wordCount" content="2834">
+<meta itemprop="keywords" content="css,grid,flex," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CSS布局"/>
+<meta name="twitter:description" content="1 flex布局 Flex布局的目标是提供一种更有效的方式来布局、对齐和分配容器中子元素的空间，即使它们的大小是未知的或动态的。 flex布局背后"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">CSS布局</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-10-20 </span>
+        <div class="post-category">
+            <a href="/categories/css%E7%9B%B8%E5%85%B3/"> css相关 </a>
+            </div>
+          <span class="more-meta"> 2834 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-flex布局">1 flex布局</a>
+      <ul>
+        <li><a href="#11-container">1.1 container</a></li>
+        <li><a href="#12-items">1.2 items</a></li>
+        <li><a href="#13-align-items与align-content区别">1.3 align-items与align-content区别</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-grid布局">2 grid布局</a>
+      <ul>
+        <li><a href="#21-grid-container">2.1 grid container</a></li>
+        <li><a href="#22-grid-items">2.2 grid items</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-flex布局">1 flex布局</h1>
+<blockquote>
+<p>Flex布局的目标是提供一种<strong>更有效的方式</strong>来布局、对齐和分配容器中子元素的空间，即使它们的大小是<strong>未知的或动态的</strong>。</p>
+<p>flex布局背后的主要想法是让容器能够改变其内部元素的宽度/高度(和顺序)，来更好地填充可用空间(主要是适应各种显示设备和屏幕大小)。即或将物品展开以填满可用的空闲空间，或将物品缩小以防止溢出。</p>
+<p>最重要的是，flexbox布局与常规布局不同，是方向无关的(区块是基于垂直的，内联是基于水平的)。</p>
+<p>注意：Flex布局最适合<strong>组件和小规模</strong>布局，而Grid布局则适合更大规模的布局。</p>
+</blockquote>
+<p>flex属性按作用范围分为container和items两类</p>
+<h2 id="11-container">1.1 container</h2>
+<ul>
+<li><code>display:flex</code>：定义容器为flex布局</li>
+<li><code>flex-direction</code>：规定flex容器<strong>主轴</strong>方向，默认为row
+<ul>
+<li>row|row-reverse|column|column-reverse</li>
+</ul>
+</li>
+<li><code>flex-wrap</code>：允许<strong>换行</strong>，默认为nowrap（因为默认情况下，子项总是挤在同一行，即子项宽度定义无效）
+<ul>
+<li>nowrap|wrap|wrap-reverse</li>
+</ul>
+</li>
+<li><code>flex-flow</code>：前两者的简写形式
+<ul>
+<li>flex-flow:column wrap</li>
+</ul>
+</li>
+<li><code>justify-content</code>：规定<strong>主轴</strong>方向的排列形式</li>
+</ul>
+<p><img src="/csslayout/justifycontent.png" alt="image-20211009142422206"></p>
+<ul>
+<li><code>align-items</code>：规定元素<strong>垂直轴方向</strong>的排列形式</li>
+</ul>
+<p><img src="/csslayout/alignitems.png" alt="image-20211009142607363"></p>
+<ul>
+<li><code>align-content</code>：当垂直轴上有额外的空间且元素大于一行时，规定<strong>全体元素</strong>在垂直轴上的排列方式，类似于justify-content在主轴上对齐单个元素。</li>
+</ul>
+<p><img src="/csslayout/aligncontent.png" alt="image-20211009142722383"></p>
+<ul>
+<li><code>gap</code>,<code>row-gap</code>,<code>column-gap</code>：指定元素间<strong>最小间距</strong>，当space过大时，定义gap是不起作用的</li>
+</ul>
+<h2 id="12-items">1.2 items</h2>
+<ul>
+<li><code>order</code>：默认情况下，items按源顺序排列。order属性可以控制它们在容器中的顺序，默认为0</li>
+<li><code>flex-grow</code>：定义元素在空间足够时自动放大的比例（可以用来自动填满剩余空间），默认为0</li>
+<li><code>flex-shrink</code>：定义元素在空间不足时自动收缩的比例，默认为1</li>
+<li><code>flex</code>：<code>flex-grow</code>，<code>flex-shrink</code>和<code>flex-basis</code>的简写，默认值为<code>0 1 auto</code>，后两个参数是可选的</li>
+<li><code>align-self</code>：单独定义元素在垂直轴方向的排列形式，同<code>align-items</code></li>
+</ul>
+<h2 id="13-align-items与align-content区别">1.3 align-items与align-content区别</h2>
+<table>
+	<tr style="text-align:center">
+    	<td colspan='2'>条件</td>
+    	<td colspan='2'>属性（是否有效果）</td>
+    </tr>
+	<tr>
+		<td>items</td>
+        <td>container</td>
+        <td>align-items</td>
+        <td>align-content</td>
+	</tr>
+	<tr>
+		<td rowspan='2'>单行</td>
+        <td>不指定高度</td>
+        <td>是</td>
+        <td>否</td>
+	</tr>
+	<tr>
+        <td>固定高度</td>
+        <td>是</td>
+        <td>否（当设置flex-warp:warp时，有效果）</td>
+	</tr>
+	<tr>
+		<td rowspan='2'>多行</td>
+        <td>不指定高度</td>
+        <td>是</td>
+        <td>否</td>
+	</tr>
+	<tr>
+        <td>固定高度</td>
+        <td>是</td>
+        <td>是</td>
+	</tr>
+</table>
+<ol>
+<li><code>align-items</code>属性是针对单独的每一个flex子项起作用，它的基本作用单位是<strong>每一个子项</strong>，在所有情况下都有效果</li>
+<li><code>align-content</code>属性是将flex子项作为一个整体起作用，它的基本作用单位是<strong>子项构成的行</strong>，只在两种情况下有效果：
+<ol>
+<li>子项多行且指定flex容器高度</li>
+<li>子项单行，指定flex容器高度且设置了<code>flex-wrap:warp</code></li>
+</ol>
+</li>
+</ol>
+<h1 id="2-grid布局">2 grid布局</h1>
+<p>CSS Grid Layout是一种基于二维网格的布局系统，是第一个专为解决布局问题而发明的CSS模块</p>
+<p>grid属性按作用范围分为grid container和grid items两类</p>
+<h2 id="21-grid-container">2.1 grid container</h2>
+<ul>
+<li>
+<p><code>display: grid | inline-grid</code>：定义容器为grid或inline-grid布局</p>
+</li>
+<li>
+<p><code>grid-template-columns | grid-template-rows</code>：定义网格的行与列，可以是长度，也可以是百分数或者<code>fr</code></p>
+<ul>
+<li>定义重复的部分，可以使用repeat关键字，例如<code>repeat(3,20px)</code>，等同于<code>20px 20px 20px</code></li>
+<li><code>fr</code>表示将区间按比例设置为容器空闲空间（去掉指定px的部分）的一部分。例如，这将把每个项目设置为网格容器宽度的三分之一:<code>1fr 1fr 1fr</code></li>
+</ul>
+</li>
+<li>
+<p><code>grid-template-areas</code>：通过引用由grid-area属性指定的网格区域的名称来定义网格模板。重复网格区域的名称会导致内容跨越这些单元格。<code>.</code>表示空单元格，<code>none</code>表示不定义此区域。语法本身提供了网格结构的可视化。</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">item-a</span> <span class="p">{</span>
+  <span class="k">grid-area</span><span class="p">:</span> <span class="n">header</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">item-b</span> <span class="p">{</span>
+  <span class="k">grid-area</span><span class="p">:</span> <span class="n">main</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">item-c</span> <span class="p">{</span>
+  <span class="k">grid-area</span><span class="p">:</span> <span class="n">sidebar</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">item-d</span> <span class="p">{</span>
+  <span class="k">grid-area</span><span class="p">:</span> <span class="n">footer</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+  <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span> <span class="mi">50</span><span class="kt">px</span> <span class="mi">50</span><span class="kt">px</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">grid-template-rows</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+  <span class="k">grid-template-areas</span><span class="p">:</span> 
+    <span class="s2">&#34;header header header header&#34;</span>
+    <span class="s2">&#34;main main . sidebar&#34;</span>
+    <span class="s2">&#34;footer footer footer footer&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/csslayout/gridarea.png" alt="image-20211020104943021"></p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>grid-template</code>：在单个声明中设置rows、columns和areas的简写。例如</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
+  <span class="k">grid-template</span><span class="p">:</span>
+    <span class="s2">&#34;header header header&#34;</span> <span class="mi">25</span><span class="kt">px</span> 
+    <span class="s2">&#34;footer footer footer&#34;</span> <span class="mi">25</span><span class="kt">px</span> 
+    <span class="o">/</span> <span class="kc">auto</span> <span class="mi">50</span><span class="kt">px</span> <span class="kc">auto</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>等价于</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
+  <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">25</span><span class="kt">px</span> <span class="mi">25</span><span class="kt">px</span>
+  <span class="k">grid-template-columns</span><span class="o">:</span> <span class="kc">auto</span> <span class="mi">50</span><span class="kt">px</span> <span class="kc">auto</span><span class="p">;</span>
+  <span class="k">grid-template-areas</span><span class="p">:</span> 
+    <span class="s2">&#34;header header header&#34;</span> 
+    <span class="s2">&#34;footer footer footer&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><code>column-gap | row-gap | grid-column-gap | grid-row-gap</code>：指定内部间隙宽度，例如：</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.container {
+  grid-template-columns: 100px 50px 100px;
+  grid-template-rows: 80px auto 80px; 
+  column-gap: 10px;
+  row-gap: 15px;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/csslayout/gridgap.png" alt="image-20211020105712423"></p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>gap | grid-gap</code>：定义间隙的简写，写法为<code>&lt;row-gap&gt; &lt;column-gap&gt;</code></p>
+</li>
+<li>
+<p><code>justify-items</code>：对每个区域内的网格项沿主轴方向进行排列，选项有<code>start|end|center|stretch</code>，单独调整某个网格项可使用<code>justify-self</code>属性</p>
+<ul>
+<li><code>start</code>:</li>
+</ul>
+<p><img src="/csslayout/gridjustify1.png" alt="image-20211020132049623"></p>
+<ul>
+<li><code>end</code>:</li>
+</ul>
+<p><img src="/csslayout/gridjustify2.png" alt="image-20211020132139117"></p>
+<ul>
+<li><code>center</code>:</li>
+</ul>
+<p><img src="/csslayout/gridjustufy3.png" alt="image-20211020132202229"></p>
+<ul>
+<li><code>stretch</code>:</li>
+</ul>
+<p><img src="/csslayout/gridjustify4.png" alt="image-20211020132230181"></p>
+</li>
+<li>
+<p><code>align-items</code>：对每个区域内的网格项沿垂直轴方向进行排列，选项有<code>start|end|stretch|center</code>，单独调整某个网格项可使用<code>align-self</code>属性</p>
+<ul>
+<li>示例效果同上，自行脑补</li>
+</ul>
+</li>
+<li>
+<p><code>place-items</code>：<code>justify-items</code>与<code>align-items</code>的简写，例如<code>place-items: center | end</code></p>
+</li>
+<li>
+<p><code>justify-content</code>：当网格的总尺寸小于容器的尺寸时（例如全部用px定义网格尺寸），可以使用此属性定义网格整体沿容器主轴方向的排列方式。选项有<code>start|end|stretch|center|space-around|space-between|space-evenly</code></p>
+<ul>
+<li><code>start</code>:</li>
+</ul>
+<p><img src="/csslayout/gridjustcontent1.png" alt="image-20211020133418836"></p>
+<ul>
+<li><code>end</code>:</li>
+</ul>
+<p><img src="/csslayout/gridjustcontent2.png" alt="image-20211020133457894"></p>
+<ul>
+<li><code>center</code>:</li>
+</ul>
+<p><img src="/csslayout/gridjustcontent3.png" alt="image-20211020133536716"></p>
+<ul>
+<li><code>stretch</code>:</li>
+</ul>
+<p><img src="/csslayout/gridjustcontent4.png" alt="image-20211020133717096"></p>
+<ul>
+<li><code>space-around</code>:</li>
+</ul>
+<p><img src="/csslayout/gridjustcontent5.png" alt="image-20211020133817641"></p>
+<ul>
+<li><code>space-between</code>:</li>
+</ul>
+<p><img src="/csslayout/gridjustcontent6.png" alt="image-20211020133908188"></p>
+<ul>
+<li><code>space-evenly</code>(间隔宽度相等):</li>
+</ul>
+<p><img src="/csslayout/gridjustcontent7.png" alt="image-20211020134016331"></p>
+</li>
+<li>
+<p><code>align-content</code>：当网格的总尺寸小于容器的尺寸时（例如全部用px定义网格尺寸），可以使用此属性定义网格整体沿容器垂直轴方向的排列方式。选项有<code>start|end|stretch|center|space-around|space-between|space-evenly</code></p>
+<ul>
+<li>效果同上，自行脑补</li>
+</ul>
+</li>
+<li>
+<p><code>grid-auto-flow</code>：划分网格以后，容器的子元素会按照顺序，自动放置在每一个网格。默认的放置顺序是&quot;先行后列&quot;，即先填满第一行，再开始放入第二行。这个属性由<code>grid-auto-flow</code>确定，默认为<code>row</code>。</p>
+<ul>
+<li><code>column</code>：表示从第一列开始，按从上到下的顺序依次填充。</li>
+<li><code>row-dense</code>：表示“先行后列”，并且尽可能紧密填满，尽量不出现空格</li>
+<li><code>column-dense</code>：表示“先列后行”，并且尽可能紧密填满，尽量不出现空格</li>
+</ul>
+</li>
+</ul>
+<h2 id="22-grid-items">2.2 grid items</h2>
+<ul>
+<li>
+<p><code>grid-column-start | grid-column-end | grid-row-start | grid-row-end</code>：指定网格项的占位标识，允许数字、线名、span等值，例如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">item-b</span> <span class="p">{</span>
+  <span class="k">grid-column-start</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">grid-column-end</span><span class="p">:</span> <span class="n">span</span> <span class="n">col4-start</span><span class="p">;</span>
+  <span class="k">grid-row-start</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">grid-row-end</span><span class="p">:</span> <span class="n">span</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/csslayout/griditems1.png" alt="image-20211020142323770"></p>
+</li>
+<li>
+<p><code>grid-column | grid-row</code>：以上属性的简写。示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">item-c</span> <span class="p">{</span>
+  <span class="k">grid-column</span><span class="p">:</span> <span class="mi">3</span> <span class="o">/</span> <span class="n">span</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">grid-row</span><span class="p">:</span> <span class="n">third-line</span> <span class="o">/</span> <span class="mi">4</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/csslayout/griditems2.png" alt="image-20211020142457783"></p>
+</li>
+<li>
+<p><code>grid-area</code>：以上所有的简写，示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">item-d</span> <span class="p">{</span>
+  <span class="k">grid-area</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">col4-start</span> <span class="o">/</span> <span class="kc">last</span><span class="o">-</span><span class="n">line</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/csslayout/griditems3.png" alt="image-20211020142730561"></p>
+</li>
+<li>
+<p><code>justify-self</code>：定义当前网格项内容在网格内部的沿主轴的排列方式，选项有<code>start|end|center|stretch</code></p>
+</li>
+<li>
+<p><code>align-self</code>：定义当前网格项内容在网格内部的沿垂直轴的排列方式，选项有<code>start|end|center|stretch</code></p>
+</li>
+<li>
+<p><code>place-self</code>：以上两项属性的简写，例如<code>place-self: center end</code></p>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-10-20
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/css/">css</a>
+          <a href="/tags/grid/">grid</a>
+          <a href="/tags/flex/">flex</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/vim/">
+            <span class="next-text nav-default">Vim</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

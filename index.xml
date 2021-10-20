@@ -6,7 +6,7 @@
     <description>Recent content on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 27 Sep 2021 13:47:24 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Oct 2021 14:36:05 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>https://gsemir0418.github.io/about/</link>
@@ -14,6 +14,24 @@
       
       <guid>https://gsemir0418.github.io/about/</guid>
       <description>郭森权 浙江杭州 前端开发工程师 大连民族大学 计算机技术 硕士 浙江中控技术股份有限公司</description>
+    </item>
+    
+    <item>
+      <title>CSS布局</title>
+      <link>https://gsemir0418.github.io/post/css%E5%B8%83%E5%B1%80/</link>
+      <pubDate>Wed, 20 Oct 2021 14:36:05 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/css%E5%B8%83%E5%B1%80/</guid>
+      <description>1 flex布局 Flex布局的目标是提供一种更有效的方式来布局、对齐和分配容器中子元素的空间，即使它们的大小是未知的或动态的。 flex布局背后</description>
+    </item>
+    
+    <item>
+      <title>Vim</title>
+      <link>https://gsemir0418.github.io/post/vim/</link>
+      <pubDate>Tue, 12 Oct 2021 10:31:38 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/vim/</guid>
+      <description>0 初识vim 0.1 简介 在这个蔚蓝色的星球上，流传着两大神器的传说：Emacs是神的编辑器，而Vim是编辑器之神。 VIM , 全称 Vi Improved , Vi的增强版 。 Vi 在</description>
     </item>
     
     <item>

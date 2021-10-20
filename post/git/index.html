@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Git相关">
 <meta itemprop="description" content="0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &#34;gsemir0418&#34; git config --global user.email &#34;845217811@qq.com&#34; // 查看全局配置 git config --list 0.2 配置SSH公"><meta itemprop="datePublished" content="2021-08-15T22:02:28+08:00" />
 <meta itemprop="dateModified" content="2021-09-10T00:00:00+08:00" />
-<meta itemprop="wordCount" content="1159">
+<meta itemprop="wordCount" content="1464">
 <meta itemprop="keywords" content="GitHub," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Git相关"/>
 <meta name="twitter:description" content="0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &#34;gsemir0418&#34; git config --global user.email &#34;845217811@qq.com&#34; // 查看全局配置 git config --list 0.2 配置SSH公"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/github/"> GitHub </a>
             </div>
-          <span class="more-meta"> 1159 words </span>
+          <span class="more-meta"> 1464 words </span>
           <span class="more-meta"> 3 mins read </span>
         
       </div>
@@ -169,6 +169,7 @@
     <li><a href="#6-git-pull">6 git pull</a></li>
     <li><a href="#7-git-push">7 git push</a></li>
     <li><a href="#8-git-remote">8 git remote</a></li>
+    <li><a href="#9-git-checkoutbranch">9 git checkout/branch</a></li>
   </ul>
 </nav>
   </div>
@@ -215,7 +216,8 @@ git config --list
 id_rsa  id_rsa.pub  known_hosts
 </code></pre></td></tr></table>
 </div>
-</div><p>vscode或vim打开id_rsa.pub，复制全部内容备用。</p>
+</div><p>如没有known_hosts，可以后续尝试clone项目，git会为我们自动添加known_hosts文件</p>
+<p>vscode或vim打开<code>id_rsa.pub</code>，复制全部内容备用。</p>
 <h3 id="022-git账户设置ssh">0.2.2 git账户设置ssh</h3>
 <p>进入github主页，进入Account Settings，左边选择SSH Keys，Add SSH Key,</p>
 <p>title建议填写计算机名称，粘贴刚刚复制的key。确定后配置完成了</p>
@@ -321,15 +323,60 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 <ol>
 <li><code>git status</code> 查看工作区代码相对于暂存区的差别，可简写为<code>gst</code></li>
 <li><code>git add .</code> 将当前目录下修改的所有代码从工作区添加到暂存区 . 代表当前目录，可简写为<code>ga .</code></li>
-<li><code>git commit -m ‘注释’</code> 将缓存区内容添加到本地仓库</li>
+<li><code>git commit -m &quot;注释&quot;</code> 将缓存区内容添加到本地仓库，尽量使用双引号</li>
 <li><code>git pull origin master</code>先将远程仓库master中的信息同步到本地仓库master中</li>
 <li><code>git push origin master</code> 将本地版本库推送到远程服务器，origin是远程主机，master表示是远程服务器上的master分支和本地分支重名的简写，分支名是可以修改的</li>
 </ol>
 <h1 id="2-git-add">2 git add</h1>
-<h1 id="3-git-commit">3 git commit</h1>
+<ul>
+<li>提交所有变化</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git add -A
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>提交被修改和被删除的文件，不包括新文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git add -u
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>提交新文件和被修改的文件，不包括被删除的文件</li>
+<li>2.x版本的<code>git add .</code>相当于<code>-A</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git add .
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-git-commit">3 git commit</h1>
 <h1 id="4-git-fetch">4 git fetch</h1>
 <h1 id="5-git-merge">5 git merge</h1>
-<h1 id="6-git-pull">6 git pull</h1>
+<ul>
+<li>将所在分支与指定分支合并</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git merge &lt;分支名&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="6-git-pull">6 git pull</h1>
 <h1 id="7-git-push">7 git push</h1>
 <ul>
 <li>提交代码到指定远程仓库</li>
@@ -367,6 +414,17 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
+<li>修改远程仓库路径</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git remote set-url 路径
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>查看远程仓库</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -375,6 +433,73 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git remote -v
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="9-git-checkoutbranch">9 git checkout/branch</h1>
+<ul>
+<li>查看本地有哪些分支</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git branch
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>新建分支</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git branch &lt;分支名&gt;
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>切换至分支</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git checkout &lt;分支名&gt;
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>新建并切换至新分支</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git checkout -b &lt;分支名&gt;
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>删除本地分支</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git branch -d &lt;分支名&gt;
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>删除远端分支</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git push origin --delete &lt;分支名&gt;
 </code></pre></td></tr></table>
 </div>
 </div>

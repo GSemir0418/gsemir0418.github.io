@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vim on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/categories/vim/</link>
+    <description>Recent content in vim on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 12 Oct 2021 10:31:38 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/vim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vim</title>
+      <link>https://gsemir0418.github.io/post/vim/</link>
+      <pubDate>Tue, 12 Oct 2021 10:31:38 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/vim/</guid>
+      <description>0 初识vim 0.1 简介 在这个蔚蓝色的星球上，流传着两大神器的传说：Emacs是神的编辑器，而Vim是编辑器之神。 VIM , 全称 Vi Improved , Vi的增强版 。 Vi 在</description>
+    </item>
+    
+  </channel>
+</rss>

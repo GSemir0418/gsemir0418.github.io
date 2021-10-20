@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Vim - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="0 初识vim 0.1 简介 在这个蔚蓝色的星球上，流传着两大神器的传说：Emacs是神的编辑器，而Vim是编辑器之神。 VIM , 全称 Vi Improved , Vi的增强版 。 Vi 在" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/vim/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Vim" />
+<meta property="og:description" content="0 初识vim 0.1 简介 在这个蔚蓝色的星球上，流传着两大神器的传说：Emacs是神的编辑器，而Vim是编辑器之神。 VIM , 全称 Vi Improved , Vi的增强版 。 Vi 在" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/vim/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-12T10:31:38+08:00" />
+<meta property="article:modified_time" content="2021-10-12T10:31:38+08:00" />
+
+<meta itemprop="name" content="Vim">
+<meta itemprop="description" content="0 初识vim 0.1 简介 在这个蔚蓝色的星球上，流传着两大神器的传说：Emacs是神的编辑器，而Vim是编辑器之神。 VIM , 全称 Vi Improved , Vi的增强版 。 Vi 在"><meta itemprop="datePublished" content="2021-10-12T10:31:38+08:00" />
+<meta itemprop="dateModified" content="2021-10-12T10:31:38+08:00" />
+<meta itemprop="wordCount" content="1857">
+<meta itemprop="keywords" content="vim," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vim"/>
+<meta name="twitter:description" content="0 初识vim 0.1 简介 在这个蔚蓝色的星球上，流传着两大神器的传说：Emacs是神的编辑器，而Vim是编辑器之神。 VIM , 全称 Vi Improved , Vi的增强版 。 Vi 在"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Vim</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-10-12 </span>
+        <div class="post-category">
+            <a href="/categories/vim/"> vim </a>
+            </div>
+          <span class="more-meta"> 1857 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-初识vim">0 初识vim</a>
+      <ul>
+        <li><a href="#01-简介">0.1 简介</a></li>
+        <li><a href="#02-模式">0.2 模式</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-vim-install">1 vim install</a>
+      <ul>
+        <li><a href="#11-windows">1.1 windows</a></li>
+        <li><a href="#12-macos">1.2 macOS</a></li>
+        <li><a href="#13-vscode-vim插件配置">1.3 VSCode-Vim插件配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-vim-基本操作">2 vim 基本操作</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="0-初识vim">0 初识vim</h1>
+<h2 id="01-简介">0.1 简介</h2>
+<p>在这个蔚蓝色的星球上，流传着两大神器的传说：Emacs是神的编辑器，而Vim是编辑器之神。</p>
+<p>VIM , 全称 Vi Improved , Vi的增强版 。</p>
+<p>Vi 在 1976 年发布，奉行 Unix 传统的“Do one thing and do it well”哲学，每个程序只做一件事但做到最好，通过程序之间的配合得到强大的功能。</p>
+<p>Emacs则奉行“Everything at reach”设计哲学，通过强大的扩展性，达到在一个软件里做所有的事。Emacs可以用来编辑文档、时间管理、浏览图片、阅读pdf、听音乐、写程序、运行程序、调试程序、接受发送邮件、看新闻组、玩游戏、管理系统、Telnet/FTP、版本控制、写LaTex…被称为“伪装成编辑器的操作系统”。</p>
+<p>江湖中有一句话: “ 世界上的程序员分三种，一种使用Emacs，一种使用Vim，剩余的是其它” 。</p>
+<h2 id="02-模式">0.2 模式</h2>
+<p>vim有5中基本模式，分别是</p>
+<ul>
+<li>Normal Mode 也就是最一般的普通模式，默认进入vim之后，处于这种模式。</li>
+<li>Visual Mode 一般译作可视模式，在这种模式下选定一些字符、行、多列。 在普通模式下，可以按v进入。</li>
+<li>Insert Mode 插入模式，其实就是指处在编辑输入的状态。普通模式下，可以按i进入。</li>
+<li>Select Mode 在gvim下常用的模式，可以叫作选择模式吧。用鼠标拖选区域的时候，就进入了选择模式。 和可视模式不同的是，在这个模式下，选择完了高亮区域后，敲任何按键就直接输入并替换选择的文本了。 和windows下的编辑器选定编辑的效果一致。普通模式下，可以按gh进入。 ps:这种模式好无用啊</li>
+<li>Command-Line/Ex Mode 就叫命令行模式和Ex模式吧。两者略有不同，普通模式下按冒号(:)进入Command-Line模式，可以输入各种命令， 使用vim的各种强大功能。普通模式下按Q进入Ex模式，其实就是多行的Command-Line模式。 ps:经常使用EX模式的都是神阶vimer</li>
+</ul>
+<p><em>注：本文中所说的快捷键若无特殊说明则是Normal Mode下的模式</em></p>
+<h1 id="1-vim-install">1 vim install</h1>
+<h2 id="11-windows">1.1 windows</h2>
+<p>在github中下载window环境的.zip安装包</p>
+<blockquote>
+<p><a href="https://github.com/vim/vim-win32-installer/releases">https://github.com/vim/vim-win32-installer/releases</a></p>
+</blockquote>
+<p>解压后添加环境变量，右键<code>vim.exe</code>，打开属性，复制<code>位置</code>中的路径至path变量</p>
+<h2 id="12-macos">1.2 macOS</h2>
+<p>利用homebrew安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">自己查吧 我也忘了
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="13-vscode-vim插件配置">1.3 VSCode-Vim插件配置</h2>
+<p>在setting.json中新增：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> // INSERT模式下键位绑定
+&#34;vim.insertModeKeyBindings&#34;: [
+	{
+		&#34;before&#34;:[&#34;j&#34;,&#34;j&#34;],
+		&#34;after&#34;:[&#34;&lt;Esc&gt;&#34;]
+	},{
+		&#34;before&#34;:[&#34;x&#34;,&#34;x&#34;],
+		&#34;after&#34;:[&#34;&lt;Esc&gt;&#34;,&#34;$&#34;,&#34;a&#34;,&#34;;&#34;]
+	}
+],
+// NORMAL模式下键位绑定
+&#34;vim.normalModeKeyBindingsNonRecursive&#34;:[
+	{
+        &#34;before&#34;: [&#34;l&#34;,&#34;e&#34;],
+        &#34;after&#34;: [&#34;$&#34;]
+	},
+	{
+        &#34;before&#34;: [&#34;l&#34;,&#34;b&#34;],
+        &#34;after&#34;: [&#34;0&#34;]
+	}
+],
+// 可视模式下键位绑定
+&#34;vim.visualModeKeyBindingsNonRecursive&#34;:[
+	{
+        &#34;before&#34;:[&#34;l&#34;,&#34;e&#34;],
+        &#34;after&#34;:[&#34;$&#34;]
+	},
+	{
+        &#34;before&#34;:[&#34;l&#34;,&#34;b&#34;],
+        &#34;after&#34;:[&#34;0&#34;]
+	}
+],
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="2-vim-基本操作">2 vim 基本操作</h1>
+<table>
+<thead>
+<tr>
+<th>操作描述</th>
+<th>键位</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>移动光标</td>
+<td><code>h</code>、<code>j</code>、<code>k</code>、<code>l</code></td>
+<td></td>
+</tr>
+<tr>
+<td>删除字符</td>
+<td><code>x</code></td>
+<td></td>
+</tr>
+<tr>
+<td>插入字符</td>
+<td><code>i</code>（光标前)、<code>a</code>（光标后）、<code>A</code>（行末）</td>
+<td>进入INSERT模式</td>
+</tr>
+<tr>
+<td>从光标处删除到单词末尾</td>
+<td><code>dw</code>（下一个单词起始）、<code>de</code>（仅末尾）</td>
+<td>可指定删除次数，如<code>d2w</code></td>
+</tr>
+<tr>
+<td>从光标处删除到行末</td>
+<td><code>d$</code></td>
+<td></td>
+</tr>
+<tr>
+<td>至行首或行尾</td>
+<td><code>0</code>（行首）、<code>$</code>（行尾）、<code>^</code>（行内容开头）</td>
+<td></td>
+</tr>
+<tr>
+<td>删除（剪切）整行</td>
+<td><code>dd</code></td>
+<td>可指定行数，如<code>d2d</code>或<code>2dd</code><br><code>ddp</code>本行与下一行替换位置</td>
+</tr>
+<tr>
+<td>撤销</td>
+<td><code>u</code>（撤销上次指令）、<code>U</code>（恢复整行状态）</td>
+<td></td>
+</tr>
+<tr>
+<td>重做</td>
+<td><code>ctrl+r</code></td>
+<td></td>
+</tr>
+<tr>
+<td>粘贴</td>
+<td><code>p</code></td>
+<td></td>
+</tr>
+<tr>
+<td>替换字符</td>
+<td><code>r</code>（替换单个字符）、<code>R</code>（连续替换多个）</td>
+<td></td>
+</tr>
+<tr>
+<td>更改</td>
+<td><code>c4e</code>、<code>c2w</code>、<code>c0</code>、<code>c$</code></td>
+<td>同<code>d</code>，支持添加数字重复次数</td>
+</tr>
+<tr>
+<td>显示当前光标位置及文件状态信息</td>
+<td><code>ctrl+g</code></td>
+<td></td>
+</tr>
+<tr>
+<td>至文件开头或末尾</td>
+<td><code>gg</code>（开头）、<code>G</code>（末尾）</td>
+<td></td>
+</tr>
+<tr>
+<td>查找字符串</td>
+<td><code>/</code>（向后查询）、<code>?</code>（向前查询）</td>
+<td><code>n</code>移至下一处，<code>N</code>移至上一处</td>
+</tr>
+<tr>
+<td>查找配对括号</td>
+<td><code>%</code></td>
+<td></td>
+</tr>
+<tr>
+<td>替换命令</td>
+<td><code>:s/old/new</code>（替换光标所在行的第一个匹配）</td>
+<td><code>:s/old/new/g</code>全行替换<br><code>:%s/old/new/g</code>全局替换<br><code>:%s/old/new/gc</code>全局自定义替换</td>
+</tr>
+<tr>
+<td>另存为</td>
+<td><code>:w FILENAME</code></td>
+<td></td>
+</tr>
+<tr>
+<td>行插入</td>
+<td><code>o</code>（下行插入）、<code>O</code>（上行插入）</td>
+<td></td>
+</tr>
+<tr>
+<td>复制</td>
+<td><code>y</code>复制选中部分</td>
+<td><code>y$</code>复制光标到行末的部分<br><code>yw</code>复制光标到单词结尾的部分<br><code>yy</code>复制当前整行</td>
+</tr>
+<tr>
+<td>设置查询选项</td>
+<td><code>:set xxx</code></td>
+<td><code>:set ic</code>查找时忽略大小写<br><code>:set is</code>查找短语时显示部分匹配<br><code>:set hls</code>高亮显示全部匹配短语<br>在选项前加<code>no</code>可关闭选项</td>
+</tr>
+<tr>
+<td>自动补全命令</td>
+<td><code>Tab</code></td>
+<td></td>
+</tr>
+<tr>
+<td>替换字符（并进入输入模式）</td>
+<td><code>s</code>（删除单个字符并进入输入模式）、<code>S</code>（删除整行并进入输入模式）</td>
+<td></td>
+</tr>
+<tr>
+<td>选中</td>
+<td><code>v</code>（进入可视模式选中光标经过的部分）、<code>V</code>（进入可视模式并选中光标经过的全部行）</td>
+<td></td>
+</tr>
+<tr>
+<td>跳转至第n行</td>
+<td><code>:n</code></td>
+<td></td>
+</tr>
+<tr>
+<td>查找最近的字符</td>
+<td><code>f</code>（向后找）、<code>F</code>（向前找）</td>
+<td></td>
+</tr>
+<tr>
+<td>移动光标至页面不同位置</td>
+<td><code>H</code>（页面顶部）、<code>M</code>（页面中部）、<code>L</code>（页面底部）</td>
+<td></td>
+</tr>
+<tr>
+<td>合并两行</td>
+<td><code>J</code></td>
+<td>即删除两行间换行符</td>
+</tr>
+<tr>
+<td>调整缩进</td>
+<td><code>&lt;</code>（反缩进）、<code>&gt;</code>（正缩进）</td>
+<td>NORMAL模式下</td>
+</tr>
+<tr>
+<td>翻页</td>
+<td><code>ctrl+b</code>（下一整页）、<code>ctrl+f</code>（上一整页）</td>
+<td><code>ctrl+d</code>（翻下半页）、<code>ctrl+u</code>（翻上半页）</td>
+</tr>
+<tr>
+<td>光标位置</td>
+<td><code>zz</code>（移动光标所在行至屏幕中央）</td>
+<td><code>zt</code>（屏幕最上）、<code>zb</code>（屏幕最下）</td>
+</tr>
+<tr>
+<td>滚轮回滚</td>
+<td><code>ctrl+e</code>（向下回滚一行）、<code>ctrl+y</code>（向上回滚一行）</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-10-12
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/vim/">vim</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/css%E5%B8%83%E5%B1%80/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">CSS布局</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/express%E5%85%A8%E8%A7%A3/">
+            <span class="next-text nav-default">Express全解</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
