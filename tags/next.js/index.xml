@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Next.js on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/next.js/</link>
+    <description>Recent content in Next.js on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 23 Oct 2021 20:38:48 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/next.js/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nextjs全解</title>
+      <link>https://gsemir0418.github.io/post/nextjs%E5%85%A8%E8%A7%A3/</link>
+      <pubDate>Sat, 23 Oct 2021 20:38:48 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/nextjs%E5%85%A8%E8%A7%A3/</guid>
+      <description>0 准备 0.1 创建项目 利用yarn或npm创建 1 2 3 yarn create next-app // 或 npx create-next-app@latest 使用typescript： 1 yarn create next-app --typescript 根据提示输入文件名后，输入yarn dev启动</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,7 +6,16 @@
     <description>Recent content in React on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 15 Sep 2021 16:12:05 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Oct 2021 20:38:48 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nextjs全解</title>
+      <link>https://gsemir0418.github.io/post/nextjs%E5%85%A8%E8%A7%A3/</link>
+      <pubDate>Sat, 23 Oct 2021 20:38:48 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/nextjs%E5%85%A8%E8%A7%A3/</guid>
+      <description>0 准备 0.1 创建项目 利用yarn或npm创建 1 2 3 yarn create next-app // 或 npx create-next-app@latest 使用typescript： 1 yarn create next-app --typescript 根据提示输入文件名后，输入yarn dev启动</description>
+    </item>
+    
     <item>
       <title>Dva数据流</title>
       <link>https://gsemir0418.github.io/post/dva%E6%95%B0%E6%8D%AE%E6%B5%81/</link>

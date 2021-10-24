@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Nextjs全解 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="0 准备 0.1 创建项目 利用yarn或npm创建 1 2 3 yarn create next-app // 或 npx create-next-app@latest 使用typescript： 1 yarn create next-app --typescript 根据提示输入文件名后，输入yarn dev启动" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/nextjs%E5%85%A8%E8%A7%A3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Nextjs全解" />
+<meta property="og:description" content="0 准备 0.1 创建项目 利用yarn或npm创建 1 2 3 yarn create next-app // 或 npx create-next-app@latest 使用typescript： 1 yarn create next-app --typescript 根据提示输入文件名后，输入yarn dev启动" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/nextjs%E5%85%A8%E8%A7%A3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-23T20:38:48+08:00" />
+<meta property="article:modified_time" content="2021-10-23T20:38:48+08:00" />
+
+<meta itemprop="name" content="Nextjs全解">
+<meta itemprop="description" content="0 准备 0.1 创建项目 利用yarn或npm创建 1 2 3 yarn create next-app // 或 npx create-next-app@latest 使用typescript： 1 yarn create next-app --typescript 根据提示输入文件名后，输入yarn dev启动"><meta itemprop="datePublished" content="2021-10-23T20:38:48+08:00" />
+<meta itemprop="dateModified" content="2021-10-23T20:38:48+08:00" />
+<meta itemprop="wordCount" content="5504">
+<meta itemprop="keywords" content="node,Next.js,React," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Nextjs全解"/>
+<meta name="twitter:description" content="0 准备 0.1 创建项目 利用yarn或npm创建 1 2 3 yarn create next-app // 或 npx create-next-app@latest 使用typescript： 1 yarn create next-app --typescript 根据提示输入文件名后，输入yarn dev启动"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Nextjs全解</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-10-23 </span>
+        <div class="post-category">
+            <a href="/categories/nextjs%E5%85%A8%E8%A7%A3/"> Nextjs全解 </a>
+            </div>
+          <span class="more-meta"> 5504 words </span>
+          <span class="more-meta"> 11 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-准备">0 准备</a>
+      <ul>
+        <li><a href="#01-创建项目">0.1 创建项目</a></li>
+        <li><a href="#02-link快速导航">0.2 Link快速导航</a></li>
+        <li><a href="#03-同构代码">0.3 同构代码</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-全局配置">1 全局配置</a>
+      <ul>
+        <li><a href="#11-自定义head">1.1 自定义<code>&lt;head&gt;</code></a></li>
+        <li><a href="#12-_appjs">1.2 <code>_app.js</code></a></li>
+        <li><a href="#13-局部css">1.3 局部css</a></li>
+        <li><a href="#14-静态资源">1.4 静态资源</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-nextjs-api示例">2 Next.js API示例</a></li>
+    <li><a href="#3-nextjs页面渲染方式">3 Next.js页面渲染方式</a>
+      <ul>
+        <li><a href="#31-客户端渲染">3.1 客户端渲染</a></li>
+        <li><a href="#32-静态页面生成">3.2 静态页面生成</a></li>
+        <li><a href="#33-服务端渲染">3.3 服务端渲染</a></li>
+        <li><a href="#34-nextjs渲染页面方案总结">3.4 Next.js渲染页面方案总结</a></li>
+        <li><a href="#35-三种渲染方式的选择">3.5 三种渲染方式的选择</a></li>
+      </ul>
+    </li>
+    <li><a href="#附-博客主页跳转">附 博客主页跳转</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="0-准备">0 准备</h1>
+<h2 id="01-创建项目">0.1 创建项目</h2>
+<ul>
+<li>利用yarn或npm创建</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">yarn create next-app
+// 或
+npx create-next-app@latest
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用typescript：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">yarn create next-app --typescript
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>根据提示输入文件名后，输入<code>yarn dev</code>启动项目。</li>
+</ul>
+<h2 id="02-link快速导航">0.2 Link快速导航</h2>
+<ul>
+<li>用法：用Link标签包裹a标签</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">Link</span> <span class="nx">from</span> <span class="s1">&#39;next/link&#39;</span>
+<span class="p">&lt;</span><span class="nt">Link</span> <span class="na">ref</span><span class="o">=</span><span class="s">&#39;/&#39;</span><span class="p">&gt;&lt;</span><span class="nt">a</span><span class="p">&gt;</span><span class="nx">回到首页</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">Link</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>优点：</li>
+</ul>
+<ol>
+<li>​	页面不会刷新，而是利用AJAX请求新页面内容</li>
+<li>​	不会请求重复的HTML、CSS、JS（可以打开控制台/network）</li>
+<li>​	自动在页面插入新内容、删除旧内容</li>
+<li>​	因为省了很多请求和解析过程，所以速度极快</li>
+<li>​	借鉴了Rails Turbolinks、pjax等技术</li>
+</ol>
+<h2 id="03-同构代码">0.3 同构代码</h2>
+<ul>
+<li>同一份代码运行在Node控制台和Chrome两端</li>
+<li>不是所有的代码都会运行，有些需要用户触发，有些API（window）不能两端共用</li>
+</ul>
+<h1 id="1-全局配置">1 全局配置</h1>
+<h2 id="11-自定义head">1.1 自定义<code>&lt;head&gt;</code></h2>
+<ul>
+<li>
+<p>Head标签可以改变各页面的<code>title</code>及<code>meta:viewport</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">Head</span> <span class="nx">from</span> <span class="s1">&#39;next/head&#39;</span>
+<span class="p">...</span>
+<span class="p">&lt;</span><span class="nt">Head</span><span class="p">&gt;</span>
+	<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span><span class="nx">我的next页面</span><span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;description&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;Generated by create next app&#34;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">Head</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="12-_appjs">1.2 <code>_app.js</code></h2>
+<ul>
+<li>
+<p>在<code>page/_app.js</code>中统一编写各页面的全局配置，包括全局<code>css</code>以及全局<code>&lt;head&gt;</code>等。</p>
+</li>
+<li>
+<p>页面切换时app组件不会销毁，只是其中的组件会销毁，所以可以在这里保存一些全局状态</p>
+</li>
+<li>
+<p>全局css只能在这里引入，其他组件只能编写局部css</p>
+</li>
+<li>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="c1">// 全局css
+</span><span class="c1"></span><span class="kr">import</span> <span class="s1">&#39;../styles/globals.css&#39;</span>
+<span class="kr">import</span> <span class="nx">Head</span> <span class="nx">from</span> <span class="s1">&#39;next/head&#39;</span>
+
+<span class="kd">function</span> <span class="nx">MyApp</span><span class="p">({</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">pageProps</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>
+          <span class="nx">我的博客</span>
+        <span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;description&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;Generated by create next app&#34;</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">Head</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Component</span> <span class="p">{</span><span class="na">...pageProps</span><span class="p">}</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">MyApp</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>引入css的路径是基于本文件的相对路径，因此写起来有些麻烦。可以通过配置<code>jsconfig.json | tsconfig.json</code>来重新规定项目引用根目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">{
+  &#34;compilerOptions&#34;: {
+    &#34;baseUrl&#34;: &#34;.&#34;
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>引用时，可以简写为<code>import 'styles/global.css'</code></p>
+</li>
+</ul>
+<h2 id="13-局部css">1.3 局部css</h2>
+<ul>
+<li>
+<p><code>styled-jsx</code></p>
+<ul>
+<li>
+<p>写法为：</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#39;example&#39;</span><span class="p">&gt;</span>
+	<span class="nx">First</span> <span class="nx">Post</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">style</span> <span class="na">jsx</span><span class="p">&gt;{</span><span class="sb">`
+</span><span class="sb">	.example {
+</span><span class="sb">        color: blue
+</span><span class="sb">	}
+</span><span class="sb">`</span><span class="p">}&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><code>CSS Modules</code></p>
+<ul>
+<li>
+<p>在styles文件夹下新建<code>Example.module.css</code>，在文件中引入及使用方式为：</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">style</span> <span class="nx">from</span> <span class="s1">&#39;styles/Example.module.css&#39;</span>
+<span class="p">...</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="p">{</span> <span class="nx">style</span><span class="p">.</span><span class="nx">example</span> <span class="p">}&gt;</span><span class="nx">First</span> <span class="nx">Post</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>配置<code>scss</code></p>
+<ul>
+<li>
+<p>直接安装依赖即可</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">yarn add sass
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h2 id="14-静态资源">1.4 静态资源</h2>
+<ul>
+<li>
+<p>配置<code>webpack</code></p>
+<ul>
+<li>
+<p>需要在<code>next.config.js</code>中配置<code>file-loader</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="nx">reactStrictMode</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+	<span class="nx">webpack</span><span class="o">:</span> <span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">config</span><span class="p">.</span><span class="nx">module</span><span class="p">.</span><span class="nx">rules</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+            <span class="nx">test</span><span class="o">:</span> <span class="sr">/\.(png|jpg|jpeg|gif|svg)$/</span><span class="p">,</span>
+            <span class="nx">use</span><span class="o">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nx">loader</span><span class="o">:</span> <span class="s1">&#39;file/loader&#39;</span><span class="p">,</span>
+                    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="c1">// 指定输出名称：‘文件名.哈希值.后缀’
+</span><span class="c1"></span>                        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;[name].[contenthash].[ext]&#39;</span><span class="p">,</span>
+                        <span class="c1">// 硬盘中的输出路径
+</span><span class="c1"></span>                        <span class="nx">outputPath</span><span class="o">:</span> <span class="s1">&#39;static&#39;</span><span class="p">,</span>
+                        <span class="c1">// 网站中的加载路径
+</span><span class="c1"></span>                        <span class="nx">publicPath</span><span class="o">:</span> <span class="s1">&#39;/_next/static&#39;</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+            <span class="p">],</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="nx">config</span>
+	<span class="p">},</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>在根目录下新建<code>assets/image</code>，用于存放图片类型的静态资源</p>
+</li>
+<li>
+<p><code>yarn add --dev file-loader</code>安装依赖，重启项目后，即可引用图片格式的静态资源了</p>
+</li>
+</ul>
+</li>
+<li>
+<p>新版next中无需配置<code>webpack</code>，如需加载静态图片资源，使用<code>&lt;Image&gt;</code>插件即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">png</span> <span class="nx">from</span> <span class="s1">&#39;assets/image/1.png&#39;</span>
+<span class="kr">import</span> <span class="nx">Image</span> <span class="nx">from</span> <span class="s1">&#39;next/image&#39;</span>
+<span class="p">...</span>
+<span class="p">&lt;</span><span class="nt">Image</span> <span class="na">alt</span><span class="o">=</span><span class="s">&#39;&#39;</span> <span class="na">src</span><span class="o">=</span><span class="p">{</span> <span class="nx">png</span> <span class="p">}</span> <span class="p">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="2-nextjs-api示例">2 Next.js API示例</h1>
+<ul>
+<li>
+<p>Next.js的api位于<code>pages/api</code>中，下面以路径<code>/api/v1/post</code>、响应体json为例，开发<code>获取全部博客列表</code>的接口</p>
+<ol>
+<li>
+<p>在api下新建v1文件夹（表示第一版接口），创建<code>posts.tsx</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NextApiHandler</span><span class="p">,</span> <span class="nx">NextApiRequest</span><span class="p">,</span> <span class="nx">NextApiResponse</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;next&#34;</span><span class="p">;</span>
+<span class="c1">// 将getPosts方法放在lib目录下，表示自己封装的工具函数
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">getPosts</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;lib/posts&#39;</span>
+
+<span class="c1">// 在指定类型时也可以给整个方法指定为NextApiHandler类型
+</span><span class="c1">// const Posts:NextApiHandler = (req, res) =&gt; {
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">Posts</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span>: <span class="kt">NextApiRequest</span><span class="p">,</span> <span class="nx">res</span>: <span class="kt">NextApiResponse</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">postsList</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getPosts</span><span class="p">()</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">=</span> <span class="mi">200</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">)</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">postsList</span><span class="p">))</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Posts</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>lib/posts.tsx</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="nx">fs</span><span class="p">,</span> <span class="p">{</span> <span class="nx">promises</span> <span class="kr">as</span> <span class="nx">fsPromise</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;fs&#39;</span>
+<span class="kr">import</span> <span class="nx">path</span> <span class="kr">from</span> <span class="s1">&#39;path&#39;</span>
+<span class="kr">import</span> <span class="nx">matter</span> <span class="kr">from</span> <span class="s1">&#39;gray-matter&#39;</span>
+
+<span class="c1">// 获取博客列表
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">getPosts</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 获取当前工作目录(current working dir)，即项目的绝对路径
+</span><span class="c1"></span>  <span class="c1">// 不同操作系统，路径的连接方式不同，所以使用path.join自动拼接路径
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">markdownDir</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="s1">&#39;markdown&#39;</span><span class="p">)</span>
+  <span class="kr">const</span> <span class="nx">fileNameList</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fsPromise</span><span class="p">.</span><span class="nx">readdir</span><span class="p">(</span><span class="nx">markdownDir</span><span class="p">)</span>
+  <span class="c1">// 分别读取每个文件
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">posts</span> <span class="o">=</span> <span class="nx">fileNameList</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">fileName</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">fullPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">markdownDir</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">)</span>
+    <span class="c1">// 处理文件名的后缀
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">fileName</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;.md&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="c1">// 每个文件的文本数据
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">fullPath</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="c1">// 交给matter的库去处理，matter用来解析md格式的头部文件
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="p">{</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">title</span> <span class="p">},</span> <span class="nx">content</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">matter</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">id</span><span class="p">,</span> <span class="nx">title</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="k">return</span> <span class="nx">posts</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="p">{</span> <span class="nx">getPosts</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/nextjs/next1.png" alt="image-20211021144858713"></p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="3-nextjs页面渲染方式">3 Next.js页面渲染方式</h1>
+<ul>
+<li>Next.js渲染页面主要有三种方式：客户端渲染<code>(BSR)</code>、静态页面生成<code>(SSG)</code>和服务端渲染<code>(SSR)</code></li>
+<li>分别对应：
+<ul>
+<li>客户端渲染——用JS、Vue、 React创建HTML</li>
+<li>SSG——页面静态化，把PHP提前渲染成HTML</li>
+<li>SSR——PHP、 Python、 Ruby、 Java后台的基本功能</li>
+</ul>
+</li>
+<li>区别：不过Next.js的预渲染可以与前端React无缝对接（SSG）</li>
+</ul>
+<h2 id="31-客户端渲染">3.1 客户端渲染</h2>
+<ul>
+<li>
+<p>只在浏览器上执行的渲染，一般前端开发都是以这种形式，即由浏览器将前端请求到的数据渲染到页面中。</p>
+</li>
+<li>
+<p>以上文posts接口为例，在页面中加载请求的posts数据。新建<code>pages/posts/index.tsx</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// 安装axios并引入：yarn add axios @types/axios
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">axios</span> <span class="kr">from</span> <span class="s2">&#34;axios&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">NextPage</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;next&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;react&#34;</span><span class="p">;</span>
+<span class="c1">// 声明Post数据类型
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">Post</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">id</span>: <span class="kt">string</span>
+  <span class="nx">title</span>: <span class="kt">string</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">PostsIndex</span>: <span class="kt">NextPage</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// post数据
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="p">[</span><span class="nx">posts</span><span class="p">,</span> <span class="nx">setPosts</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">&lt;</span><span class="nt">Post</span><span class="err">[]</span><span class="p">&gt;([])</span>
+  <span class="c1">// 是否加载中
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="p">[</span><span class="nx">isLoading</span><span class="p">,</span> <span class="nx">setIsLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+  <span class="c1">// 数据是否为空
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="p">[</span><span class="nx">isEmpty</span><span class="p">,</span> <span class="nx">setIsEmpty</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// 请求数据
+</span><span class="c1"></span>    <span class="nx">axios</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;/api/v1/post&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+      <span class="nx">setPosts</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">setIsEmpty</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+    <span class="p">})</span>
+  <span class="p">},</span> <span class="p">[])</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="err">文章列表</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">{</span><span class="nx">isLoading</span> <span class="o">?</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="err">正在加载。。。</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="o">:</span>
+        <span class="nx">isEmpty</span> <span class="o">?</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="err">无数据</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="o">:</span>
+          <span class="nx">posts</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">post</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span>
+              <span class="p">&lt;</span><span class="nt">div</span> <span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="p">}&gt;</span>
+                <span class="p">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span>
+              <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;)</span>
+          <span class="p">})}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">PostsIndex</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>访问<code>localhost:3000/posts</code>:</p>
+<p><img src="/nextjs/next2.png" alt="image-20211021160911001"></p>
+</li>
+<li>
+<p>封装hooks技巧</p>
+<ol>
+<li>在<code>lib</code>目录下新建hooks文件夹，创建<code>usePosts.tsx</code></li>
+<li>复制全部hooks有关的代码及类型声明到新文件</li>
+<li>将usePosts中的hooks全部return出来</li>
+<li>源文件就可以通过usePosts函数获取到全部需要的参数</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// usePosts.tsx
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">axios</span> <span class="kr">from</span> <span class="s2">&#34;axios&#34;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;react&#34;</span>
+<span class="kr">type</span> <span class="nx">Post</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">id</span>: <span class="kt">string</span>
+  <span class="nx">title</span>: <span class="kt">string</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">usePosts</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">[</span><span class="nx">posts</span><span class="p">,</span> <span class="nx">setPosts</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">&lt;</span><span class="nt">Post</span><span class="err">[]</span><span class="p">&gt;([])</span>
+  <span class="kr">const</span> <span class="p">[</span><span class="nx">isLoading</span><span class="p">,</span> <span class="nx">setIsLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+  <span class="kr">const</span> <span class="p">[</span><span class="nx">isEmpty</span><span class="p">,</span> <span class="nx">setIsEmpty</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">axios</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;/api/v1/post&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+      <span class="nx">setPosts</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">setIsEmpty</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+    <span class="p">})</span>
+  <span class="p">},</span> <span class="p">[])</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">posts</span><span class="p">,</span> <span class="nx">setPosts</span><span class="p">,</span> <span class="nx">isLoading</span><span class="p">,</span> <span class="nx">setIsLoading</span><span class="p">,</span> <span class="nx">isEmpty</span><span class="p">,</span> <span class="nx">setIsEmpty</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// pages/posts/index.tsx
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">NextPage</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;next&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">usePosts</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;lib/hooks/usePosts&#39;</span>
+<span class="kr">type</span> <span class="nx">post</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">id</span>: <span class="kt">string</span>
+  <span class="nx">title</span>: <span class="kt">string</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">PostsIndex</span>: <span class="kt">NextPage</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">isLoading</span><span class="p">,</span> <span class="nx">isEmpty</span><span class="p">,</span> <span class="nx">posts</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">usePosts</span><span class="p">()</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="err">文章列表</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">{</span><span class="nx">isLoading</span> <span class="o">?</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="err">正在加载。。。</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="o">:</span>
+        <span class="nx">isEmpty</span> <span class="o">?</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="err">无数据</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="o">:</span>
+          <span class="nx">posts</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">post</span>: <span class="kt">post</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span>
+              <span class="p">&lt;</span><span class="nt">div</span> <span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="p">}&gt;</span>
+                <span class="p">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span>
+              <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;)</span>
+          <span class="p">})}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">PostsIndex</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>文章列表完全是由前端渲染的，我们称之为<strong>客户端渲染</strong></p>
+</li>
+<li>
+<p>客户端渲染缺点：</p>
+<ol>
+<li>白屏：在AJAX得到响应之前，页面中只有白屏或Loading；</li>
+<li>对<code>SEO(SearchEngineOptimization)</code>不友好：搜索引擎访问页面，看不到posts数据，因为搜索引擎默认不会执行JS，只能看到HTML。对于本页面来说，只能看到“文章列表”四个字。</li>
+</ol>
+</li>
+<li>
+<p>静态内容和动态内容（选看）</p>
+<ul>
+<li>一般来说，静态内容（<code>&lt;div&gt;文章列表&lt;/div&gt;</code>）是写在代码中的，动态内容（<code>posts</code>）是来自数据库的</li>
+<li>静态内容是由<strong>服务端与客户端分别渲染</strong>一次</li>
+<li><code>Next.js</code>分别调用了react的<code>renderToString()</code>方法，由后端将前端代码转为字符串再发送给前端；之后调用hydrate()方法在前端将后端传过来的代码与前端React实例进行整合，会保留HTML且只进行事件绑定，从而让用户有一个非常高性能的首次加载体验。</li>
+<li>也就是说后端渲染HTML，前端添加事件绑定</li>
+<li>前端也会渲染一次，但不是放在页面上，而是用来确保前后端渲染结果一致</li>
+</ul>
+</li>
+</ul>
+<h2 id="32-静态页面生成">3.2 静态页面生成</h2>
+<ul>
+<li>
+<p>背景：</p>
+<ul>
+<li>当某个页面（例如首页）与用户数据无关时，即每位用户看到的页面是一样的，这种情况下仍需要每位用户的浏览器来渲染</li>
+<li>所以可以在后端渲染好，然后发给每个用户</li>
+<li>这样之前的N次渲染就变成了1次渲染，即N次客户端渲染变成了1次静态页面生成</li>
+<li>这个过程叫做<strong>动态内容静态化</strong></li>
+</ul>
+</li>
+<li>
+<p>Next.js中后端获取数据的方式——<code>getStaticProps</code></p>
+<ul>
+<li>
+<p>将getStaticProps声明在每个page导出的函数旁边即可</p>
+</li>
+<li>
+<p>写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">getStaticProps</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="kr">const</span> <span class="nx">posts</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getPosts</span><span class="p">()</span>
+	<span class="k">return</span> <span class="p">{</span><span class="nx">props</span><span class="o">:</span> <span class="p">{</span><span class="nx">posts</span>: <span class="kt">posts</span><span class="p">}}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>示例：修改posts页面为SSG渲染</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">GetStaticProps</span><span class="p">,</span> <span class="nx">NextPage</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;next&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">getPosts</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;lib/posts&#34;</span><span class="p">;</span>
+
+<span class="kr">type</span> <span class="nx">Props</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">posts</span>: <span class="kt">Posts</span><span class="p">[]</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">PostsIndex</span>: <span class="kt">NextPage</span><span class="p">&lt;</span><span class="nt">Props</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">posts</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">props</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="err">文章列表</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">{</span><span class="nx">posts</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">post</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(&lt;</span><span class="nt">div</span> <span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="p">}&gt;{</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;)</span>
+      <span class="p">})}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">PostsIndex</span>
+
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">getStaticProps</span>: <span class="kt">GetStaticProps</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">posts</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getPosts</span><span class="p">()</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span> <span class="nx">posts</span>: <span class="kt">posts</span> <span class="p">}</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>打开页面源码，可以发现后端拿到数据后，将数据直接放入了<code>&lt;script type=&quot;application/json&quot;&gt;</code>标签内部</p>
+<p><img src="/nextjs/next3.png" alt="image-20211022095946388"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>通过同构，前端也可以不用AJAX就能拿到数据了，这就是同构的好处：后端数据可以直接传给前端，然后前端<code>JSON.parse</code>一下就能得到了数据（next框架已经帮我们做了parse）。</p>
+</li>
+<li>
+<p>PHP/java/Python 能不能做?</p>
+<ul>
+<li>思路是一样的，他们也能做，但是他们不支持jsx，不好与React无缝对接，而且这些语言的对象不能直接提供给JS用，需要类型转换。</li>
+</ul>
+</li>
+<li>
+<p>SSG静态化的时机：</p>
+<ul>
+<li>开发环境：在开发环境每次请求都会运行一次<code>getStaticProps</code>，这是为了方便修改代码时重新运行。</li>
+<li>生产环境：<code>getStaticProps</code>只在build时运行一次，这样可以提供一份HTML给所有用户下载。</li>
+</ul>
+</li>
+<li>
+<p>总结</p>
+<ul>
+<li>动态内容静态化
+<ul>
+<li>如果动态内容与用户无关，那么可以提前静态化</li>
+<li>通过<code>getStaticProps</code>可以获取数据</li>
+<li>静态内容+数据（本地获取）就得到了完整页面，代替了之前的静态内容+动态内容（AJAX获取）</li>
+</ul>
+</li>
+<li>时机
+<ul>
+<li>静态化是在<code>yarn build</code>的时候实现的</li>
+</ul>
+</li>
+<li>优点
+<ul>
+<li>生产环境中直接给出完整页面</li>
+<li>首屏不会白屏</li>
+<li>搜索引擎能看到页面内容，方便SEO（注意SEO只识别有意义的标签，例如<code>h1</code>，<code>a</code>等，不要使用<code>div</code>）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="33-服务端渲染">3.3 服务端渲染</h2>
+<ul>
+<li>
+<p>背景</p>
+<ul>
+<li>在页面内容与用户相关时，较难提前静态化。因为我们需要在用户请求时才可以获取到用户信息，然后通过用户信息再去数据库拿数据</li>
+<li>比如微博首页的信息流</li>
+<li>因此，由<strong>服务端拿到用户信息后渲染页面发送给前端</strong>，这种方案，解决了传统的客户端渲染白屏的问题，而且访问速度也大大提升</li>
+</ul>
+</li>
+<li>
+<p>而<code>getStaticProps()</code>只是在项目build阶段执行的，无法获取用户的请求数据</p>
+</li>
+<li>
+<p>Next.js服务端获取数据的方式——<code>getServerSideProps</code></p>
+</li>
+<li>
+<p>用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">getServerSideProps</span>: <span class="kt">GetServerSideProps</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="p">...</span><span class="c1">// context对象包含用户请求与响应等一切信息，类型为NextPageContext
+</span><span class="c1"></span>	<span class="k">return</span> <span class="p">{</span><span class="nx">props</span><span class="o">:</span> <span class="p">{</span><span class="nx">result</span>: <span class="kt">result</span><span class="p">}}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>运行时机：<strong>每次请求到来</strong>之后运行</p>
+</li>
+<li>
+<p>示例：获取用户浏览器数据并展示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">GetServerSideProps</span><span class="p">,</span> <span class="nx">NextPage</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;next&#39;</span>
+<span class="c1">// 解析浏览器与系统信息的js库
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">UAParser</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;ua-parser-js&#39;</span>
+
+<span class="kr">type</span> <span class="nx">Props</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">browser</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">name</span>: <span class="kt">string</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">Home</span>: <span class="kt">NextPage</span><span class="p">&lt;</span><span class="nt">Props</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">browser</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">props</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="err">你的浏览器是</span><span class="o">:</span><span class="p">{</span><span class="nx">browser</span><span class="p">.</span><span class="nx">name</span><span class="p">}&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Home</span>
+
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">getServerSideProps</span>: <span class="kt">GetServerSideProps</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">ua</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">req</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="s1">&#39;user-agent&#39;</span><span class="p">]</span>
+  <span class="c1">// 利用ua-parser-js库解析出客户端浏览器信息
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UAParser</span><span class="p">(</span><span class="nx">ua</span><span class="p">).</span><span class="nx">getBrowser</span><span class="p">()</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">browser</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>运行结果：</p>
+<p><img src="/nextjs/next4.png" alt="image-20211022154410121"></p>
+</li>
+</ul>
+<h2 id="34-nextjs渲染页面方案总结">3.4 Next.js渲染页面方案总结</h2>
+<ul>
+<li>静态内容
+<ul>
+<li>直接输出HTML</li>
+</ul>
+</li>
+<li>动态内容（Brower Side Render）
+<ul>
+<li>通过AJAX请求，渲染成HTML</li>
+</ul>
+</li>
+<li>动态内容静态化（Static Site Generation）
+<ul>
+<li>通过<code>getStaticProps</code>获取用户无关内容</li>
+</ul>
+</li>
+<li>用户相关动态内容静态化（Server Side Render）
+<ul>
+<li>通过<code>getServerSideProps</code>获取请求数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="35-三种渲染方式的选择">3.5 三种渲染方式的选择</h2>
+<p><img src="/nextjs/next5.png" alt="image-20211022160139139"></p>
+<h1 id="附-博客主页跳转">附 博客主页跳转</h1>
+<p>实现点击文章名称，跳转至文章页面的功能。</p>
+<ul>
+<li>添加Link实现跳转</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="p">&lt;</span><span class="nt">Link</span> <span class="na">href</span><span class="o">=</span><span class="p">{</span><span class="sb">`/post/</span><span class="si">${</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">}&gt;</span>
+	<span class="p">&lt;</span><span class="nt">a</span><span class="p">&gt;{</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="p">}&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">Link</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>基于约定式路由命名规范，在<code>pages/page/posts</code>目录下创建<code>[id].tsx</code>文件</p>
+<ul>
+<li>既声明了路由<code>/post/:id</code>，又是<code>post/:id</code>的页面实现程序</li>
+</ul>
+</li>
+<li>
+<p>在<code>[id].tsx</code>中：</p>
+<ul>
+<li>
+<p>实现<code>PostShow</code>，从<code>props</code>接收<code>post</code>数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">type</span> <span class="nx">Props</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">post</span>: <span class="kt">Posts</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">postShow</span>: <span class="kt">NextPage</span><span class="p">&lt;</span><span class="nt">Props</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">post</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">props</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;{</span><span class="nx">post</span><span class="p">.</span><span class="nx">title</span><span class="p">}&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">post</span><span class="p">.</span><span class="nx">content</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">postShow</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>实现<code>getStaticPaths</code>，返回静态id列表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">getStaticPaths</span>: <span class="kt">GetStaticPaths</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">idList</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getPostIdList</span><span class="p">()</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">paths</span>: <span class="kt">idList.map</span><span class="p">(</span><span class="nx">i</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span> <span class="nx">params</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span>: <span class="kt">i</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}),</span>
+    <span class="nx">fallback</span>: <span class="kt">false</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>实现<code>getStaticProps</code>，从第一个参数接收<code>params.id</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">getStaticProps</span>: <span class="kt">GetStaticProps</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">staticContext</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">staticContext</span><span class="p">.</span><span class="nx">params</span><span class="o">?</span><span class="p">.</span><span class="nx">id</span>
+  <span class="kr">const</span> <span class="nx">post</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getPost</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">post</span>: <span class="kt">post</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>源码如下</p>
+<ul>
+<li><code>pages/posts/index.tsx</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">GetStaticProps</span><span class="p">,</span> <span class="nx">NextPage</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;next&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">getPosts</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;lib/posts&#34;</span>
+<span class="kr">import</span> <span class="nx">Link</span> <span class="kr">from</span> <span class="s2">&#34;next/link&#34;</span><span class="p">;</span>
+
+<span class="kr">type</span> <span class="nx">Props</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">posts</span>: <span class="kt">Posts</span><span class="p">[]</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">PostsIndex</span>: <span class="kt">NextPage</span><span class="p">&lt;</span><span class="nt">Props</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">posts</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">props</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="err">文章列表</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">{</span><span class="nx">posts</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">post</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+          <span class="p">&lt;&gt;</span>
+          <span class="p">&lt;</span><span class="nt">Link</span> <span class="na">href</span><span class="o">=</span><span class="p">{</span><span class="sb">`/posts/</span><span class="si">${</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span> <span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="p">}&gt;</span>
+            <span class="p">&lt;</span><span class="nt">a</span><span class="p">&gt;{</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="p">}&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">Link</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">hr</span> <span class="p">/&gt;</span>
+          <span class="p">&lt;/&gt;)</span>
+      <span class="p">})}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">PostsIndex</span>
+
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">getStaticProps</span>: <span class="kt">GetStaticProps</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">posts</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getPosts</span><span class="p">()</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span> <span class="nx">posts</span>: <span class="kt">posts</span> <span class="p">}</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>pages/posts/[id].tsx</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">getPost</span><span class="p">,</span> <span class="nx">getPostIdList</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;lib/posts&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">GetStaticPaths</span><span class="p">,</span> <span class="nx">GetStaticProps</span><span class="p">,</span> <span class="nx">NextPage</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;next&#39;</span><span class="p">;</span>
+
+<span class="kr">type</span> <span class="nx">Props</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">post</span>: <span class="kt">Posts</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">postShow</span>: <span class="kt">NextPage</span><span class="p">&lt;</span><span class="nt">Props</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">post</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">props</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;{</span><span class="nx">post</span><span class="p">.</span><span class="nx">title</span><span class="p">}&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">post</span><span class="p">.</span><span class="nx">content</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">postShow</span>
+
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">getStaticPaths</span>: <span class="kt">GetStaticPaths</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">idList</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getPostIdList</span><span class="p">()</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">paths</span>: <span class="kt">idList.map</span><span class="p">(</span><span class="nx">i</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span> <span class="nx">params</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span>: <span class="kt">i</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}),</span>
+    <span class="nx">fallback</span>: <span class="kt">false</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">getStaticProps</span>: <span class="kt">GetStaticProps</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">staticContext</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">staticContext</span><span class="p">.</span><span class="nx">params</span><span class="o">?</span><span class="p">.</span><span class="nx">id</span>
+  <span class="kr">const</span> <span class="nx">post</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getPost</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">post</span>: <span class="kt">post</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>lib/posts.tsx</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="nx">fs</span><span class="p">,</span> <span class="p">{</span> <span class="nx">promises</span> <span class="kr">as</span> <span class="nx">fsPromise</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;fs&#39;</span>
+<span class="kr">import</span> <span class="nx">path</span> <span class="kr">from</span> <span class="s1">&#39;path&#39;</span>
+<span class="kr">import</span> <span class="nx">matter</span> <span class="kr">from</span> <span class="s1">&#39;gray-matter&#39;</span>
+
+<span class="kr">const</span> <span class="nx">markdownDir</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="s1">&#39;markdown&#39;</span><span class="p">)</span>
+<span class="c1">// 获取博客列表
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">getPosts</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">fileNameList</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fsPromise</span><span class="p">.</span><span class="nx">readdir</span><span class="p">(</span><span class="nx">markdownDir</span><span class="p">)</span>
+  <span class="c1">// 分别读取每个文件
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">posts</span> <span class="o">=</span> <span class="nx">fileNameList</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">fileName</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">fullPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">markdownDir</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">)</span>
+    <span class="c1">// 处理文件名的后缀
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">fileName</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;.md&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="c1">// 每个文件的文本数据
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">fullPath</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="c1">// 交给matter的库去处理
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="p">{</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">title</span> <span class="p">},</span> <span class="nx">content</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">matter</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">id</span><span class="p">,</span> <span class="nx">title</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="k">return</span> <span class="nx">posts</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="p">{</span> <span class="nx">getPosts</span> <span class="p">}</span>
+
+<span class="c1">// 获取博客数据
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">getPost</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">id</span>: <span class="kt">string</span><span class="p">[]</span> <span class="o">|</span> <span class="kt">string</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">fullPath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">markdownDir</span><span class="p">,</span> <span class="nx">id</span> <span class="o">+</span> <span class="s1">&#39;.md&#39;</span><span class="p">)</span>
+  <span class="kr">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">fullPath</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">title</span> <span class="p">},</span> <span class="nx">content</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">matter</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">id</span><span class="p">,</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">content</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="p">{</span> <span class="nx">getPost</span> <span class="p">}</span>
+
+<span class="c1">// 获取博客id数组
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">getPostIdList</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">fileNameList</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fsPromise</span><span class="p">.</span><span class="nx">readdir</span><span class="p">(</span><span class="nx">markdownDir</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nx">fileNameList</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">i</span> <span class="o">=&gt;</span> <span class="nx">i</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;.md&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="p">{</span> <span class="nx">getPostIdList</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-10-23
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/node/">node</a>
+          <a href="/tags/next.js/">Next.js</a>
+          <a href="/tags/react/">React</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/css%E5%B8%83%E5%B1%80/">
+            <span class="next-text nav-default">CSS布局</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
