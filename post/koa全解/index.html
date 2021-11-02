@@ -481,7 +481,7 @@
 </div><h1 id="3-koa的中间件">3 Koa的中间件</h1>
 <h2 id="31-洋葱圈模型">3.1 洋葱圈模型</h2>
 <p>Koa的中间件运行完逻辑代码，需调用await next()才能将请求交给下一个中间件处理。下图为Koa中间件的执行流程</p>
-<p><img src="/Users/gsq/Documents/gitdoc/blogs-backup-2/static/koa/koa1.png" alt="image-20211101152331085"></p>
+<p><img src="/koa/koa1.png" alt="image-20211101152331085"></p>
 <ul>
 <li>Koa的中间件模型为“洋葱圈模型”，请求从左边进入，有序地经过中间件处理，最终从右边输出响应。</li>
 <li><strong>最先use</strong>的中间件在<strong>最外层</strong>，<strong>最后use</strong>的中间件在<strong>最内层</strong>。</li>
