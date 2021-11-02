@@ -25,5 +25,14 @@
       <description>1 HTTP协议 1.1 curl基本用法 curl -s -v 网址 -s 是 silent，用于隐藏进度条 -v 是 verbose，用于打印全部header * 开头的是注释 &amp;gt; 开头的</description>
     </item>
     
+    <item>
+      <title>Express留言板</title>
+      <link>https://gsemir0418.github.io/post/express%E7%95%99%E8%A8%80%E6%9D%BF/</link>
+      <pubDate>Sun, 22 Aug 2021 21:09:57 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/express%E7%95%99%E8%A8%80%E6%9D%BF/</guid>
+      <description>项目源码地址：https://github.com/GSemir0418/express-board 1 ejs模板引擎 1.1 安装 1 yarn add ejs 1.2 设置应用</description>
+    </item>
+    
   </channel>
 </rss>

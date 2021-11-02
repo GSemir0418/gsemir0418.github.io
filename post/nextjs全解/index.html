@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/post/nextjs%E5%85%A8%E8%A7%A3/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-10-23T20:38:48+08:00" />
-<meta property="article:modified_time" content="2021-10-23T20:38:48+08:00" />
+<meta property="article:modified_time" content="2021-10-25T10:55:48+08:00" />
 
 <meta itemprop="name" content="Nextjs全解">
 <meta itemprop="description" content="0 准备 0.1 创建项目 利用yarn或npm创建 1 2 3 yarn create next-app // 或 npx create-next-app@latest 使用typescript： 1 yarn create next-app --typescript 根据提示输入文件名后，输入yarn dev启动"><meta itemprop="datePublished" content="2021-10-23T20:38:48+08:00" />
-<meta itemprop="dateModified" content="2021-10-23T20:38:48+08:00" />
-<meta itemprop="wordCount" content="5504">
+<meta itemprop="dateModified" content="2021-10-25T10:55:48+08:00" />
+<meta itemprop="wordCount" content="5699">
 <meta itemprop="keywords" content="node,Next.js,React," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Nextjs全解"/>
 <meta name="twitter:description" content="0 准备 0.1 创建项目 利用yarn或npm创建 1 2 3 yarn create next-app // 或 npx create-next-app@latest 使用typescript： 1 yarn create next-app --typescript 根据提示输入文件名后，输入yarn dev启动"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/nextjs%E5%85%A8%E8%A7%A3/"> Nextjs全解 </a>
             </div>
-          <span class="more-meta"> 5504 words </span>
-          <span class="more-meta"> 11 mins read </span>
+          <span class="more-meta"> 5699 words </span>
+          <span class="more-meta"> 12 mins read </span>
         
       </div>
     </header>
@@ -1207,9 +1207,10 @@ npx create-next-app@latest
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div></li>
+</div><p><code>fallback:false</code>表示是否兜底，如果是false，表示如果请求的id不在getStaticPaths的结果中，则直接返回404页面；如果是true，表示id找不到的情况下，仍然尝试渲染页面（例如SSR的形式）。注意，id找不到不代表该id不存在，因为大型项目无法将全部页面静态化，只静态化了一部分id对应的页面。</p>
+</li>
 <li>
-<p>实现<code>getStaticProps</code>，从第一个参数接收<code>params.id</code></p>
+<p>实现<code>getStaticProps</code>，从第一个参数接收<code>params.id</code>，返回静态post数据，并在build阶段生成各自的html文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1344,6 +1345,7 @@ npx create-next-app@latest
 </span><span class="lnt">31
 </span><span class="lnt">32
 </span><span class="lnt">33
+</span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">getPost</span><span class="p">,</span> <span class="nx">getPostIdList</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;lib/posts&#39;</span><span class="p">;</span>
@@ -1367,7 +1369,8 @@ npx create-next-app@latest
   <span class="kr">const</span> <span class="nx">idList</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getPostIdList</span><span class="p">()</span>
   <span class="k">return</span> <span class="p">{</span>
     <span class="nx">paths</span>: <span class="kt">idList.map</span><span class="p">(</span><span class="nx">i</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span> <span class="nx">params</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span>: <span class="kt">i</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}),</span>
-    <span class="nx">fallback</span>: <span class="kt">false</span>
+    <span class="c1">// 
+</span><span class="c1"></span>    <span class="nx">fallback</span>: <span class="kt">false</span>
   <span class="p">}</span>
 <span class="p">}</span>
 <span class="kr">export</span> <span class="kr">const</span> <span class="nx">getStaticProps</span>: <span class="kt">GetStaticProps</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">staticContext</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -1489,7 +1492,7 @@ npx create-next-app@latest
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2021-10-23
+        2021-10-25
         
     </span>
   </p>
@@ -1503,7 +1506,11 @@ npx create-next-app@latest
           <a href="/tags/react/">React</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/koa%E5%85%A8%E8%A7%A3/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Koa全解</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/css%E5%B8%83%E5%B1%80/">
             <span class="next-text nav-default">CSS布局</span>
             <span class="next-text nav-mobile">Next</span>

@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Node技术架构">
 <meta itemprop="description" content="1 Node.js概述 1.1 Node.js不是什么 不是web框架（Flask，Spring） 不是编程语言（Python，PHP） 1.2 Node.js是"><meta itemprop="datePublished" content="2021-07-29T20:54:55+08:00" />
 <meta itemprop="dateModified" content="2021-07-29T00:00:00+08:00" />
-<meta itemprop="wordCount" content="1486">
+<meta itemprop="wordCount" content="2346">
 <meta itemprop="keywords" content="nodejs," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Node技术架构"/>
 <meta name="twitter:description" content="1 Node.js概述 1.1 Node.js不是什么 不是web框架（Flask，Spring） 不是编程语言（Python，PHP） 1.2 Node.js是"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/nodejs%E5%85%A8%E8%A7%A3/"> Nodejs全解 </a>
             </div>
-          <span class="more-meta"> 1486 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 2346 words </span>
+          <span class="more-meta"> 5 mins read </span>
         
       </div>
     </header>
@@ -164,6 +164,13 @@
         <li><a href="#27-nodejs-api">2.7 Node.js API</a></li>
       </ul>
     </li>
+    <li><a href="#3-nodejs优缺点">3 Node.js优缺点</a>
+      <ul>
+        <li><a href="#31-优点">3.1 优点</a></li>
+        <li><a href="#32-缺点">3.2 缺点</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-nodejs适用场景">4 Node.js适用场景</a></li>
   </ul>
 </nav>
   </div>
@@ -210,6 +217,13 @@
 </ul>
 </li>
 <li>
+<p>概念</p>
+<ul>
+<li>Bindings层主要是一些<strong>胶水代码</strong></li>
+<li>在Node.js中，Bindings层所做的就是<strong>把底层的C/C++接口暴露给JavaScript环境</strong>，从而打通JavaScript与C/C++之间的<strong>相互调用</strong></li>
+</ul>
+</li>
+<li>
 <p>JS与C++交互</p>
 <blockquote>
 <p><a href="http://nodejs.cn/api/addons.html#addons_function_arguments">http://nodejs.cn/api/addons.html#addons_function_arguments</a></p>
@@ -230,13 +244,14 @@
 <li>每个系统上的异步I/O（系统与外界（硬盘文件、打印机、网络请求）交互）都不一样</li>
 <li>比如FreeBSD系统上有kqueue、Linux上有epoll、Windows上有IOCP</li>
 <li>Ryan为了一个<strong>跨平台的异步I/O库</strong>，开始写libuv</li>
-<li>libuv会根据系统自动选择合适的方案</li>
+<li>libuv会根据系统自动选择合适的异步方案</li>
 </ul>
 </li>
 <li>
 <p>功能</p>
 <ul>
 <li>可以用于TCP（建立HTTP服务器）/UDP（qq聊天）/DNS（网址对应的ip）/文件（读写）等的异步操作</li>
+<li>在运行时负责一个事件循环（Event Loop）、一个线程池、文件系统I/O、DNS相关的I/Oy以及网络I/O等。</li>
 </ul>
 </li>
 </ul>
@@ -244,7 +259,7 @@
 <ul>
 <li>功能
 <ul>
-<li>将JS源代码变成本地代码（机器代码）并执行</li>
+<li>将JS源代码变成**本地代码（机器代码）**并执行</li>
 <li>维护调用栈，确保JS函数的执行顺序</li>
 <li>内存管理，为所有对象分配内存</li>
 <li>垃圾回收，重复利用无用的内存</li>
@@ -254,7 +269,7 @@
 <li>注意
 <ul>
 <li>V8不提供DOM API（浏览器提供）</li>
-<li>V8执行JS是单线程的</li>
+<li>V8执行JS是<strong>单线程</strong>的</li>
 <li>可以开启两个线程分别执行JS</li>
 <li>V8本身是包含多个线程的，如垃圾回收为单独线程</li>
 <li>自带event loop，但Node.js基于libuv自己做了一个</li>
@@ -296,8 +311,7 @@
 <p><a href="https://juejin.cn/post/6844903582538399752">https://juejin.cn/post/6844903582538399752</a></p>
 </blockquote>
 <ul>
-<li>
-<p>重点阶段</p>
+<li>重点阶段
 <ul>
 <li>**<code>timers</code>**检查计时器</li>
 <li><strong><code>poll</code>轮询</strong>，检查系统事件</li>
@@ -305,19 +319,23 @@
 <li>其他阶段用的较少</li>
 </ul>
 </li>
-<li>
-<p>注意</p>
+<li>注意
 <ul>
 <li>大部分时间，Node.js都停在<code>poll</code>轮询阶段</li>
 <li>大部分事件都在poll阶段被处理，如文件、网络请求</li>
 <li>poll阶段是有停留时间限制的，不同系统停留时间不同</li>
 </ul>
 </li>
-<li>
-<p>setTimeout(f1, 0)和setImmediate(f2)哪个先执行？</p>
+<li>setTimeout(f1, 0)和setImmediate(f2)哪个先执行？
 <ul>
 <li>由于大部分时间js都停留在poll阶段，之后进入check阶段，从而执行setImmediate；之后进入timers阶段，才会执行setTimeout</li>
 <li>只有当Node.js最开始运行时，会首先进入timers阶段执行setTimeout</li>
+</ul>
+</li>
+<li>小结
+<ul>
+<li>Node.js的js线程是单线程运行的，通过一个事件循环来循环取出消息队列中的消息进行处理，处理过程基本上就是去调用该消息的回调函数。</li>
+<li>事件驱动程序设计（Event-Driven Programming）模型是Node.js的重要特性之一。这种模型的程序运行流程是由用户的操作（如鼠标的按键、键盘的按键操作）或者是由其他程序的消息来驱动的。</li>
 </ul>
 </li>
 </ul>
@@ -332,8 +350,46 @@
 </ul>
 <h2 id="26-nodejs工作流程">2.6 Node.js工作流程</h2>
 <p><img src="/node/node3.png" alt="image-20210730131938322"></p>
+<ul>
+<li>
+<p>Node.js应用启动时，会开启JS线程（主线程）、由libuv提供的线程池和一个事件循环。JS线程负责执行应用代码，当发现有I/O操作时，直接提交给libuv的线程池并<strong>注册回调函数</strong>，<strong>不会等待</strong>I/O结束后再继续运行，而是拿到一个状态后继续执行，这就是“<strong>单线程非阻塞I/O</strong>”</p>
+</li>
+<li>
+<p>I/O操作结束之后会有一个事件，该事件会放在事件队列中，事件循环每次都会检查是否有事件需要处理，如果有就处理，否则进行下一轮轮询；如果没有任何事件要处理则退出进程。这就是“<strong>事件驱动</strong>”</p>
+</li>
+<li>
+<p>在I/O密集型应用中，<strong>主线程只负责提交任务，轮询结果，耗时的任务执行部分会提交给底层执行</strong>，这就是Node.js为什么会有如此高性能的原因。</p>
+</li>
+</ul>
 <h2 id="27-nodejs-api">2.7 Node.js API</h2>
 <p><img src="/node/node4.png" alt="image-20210730133449418"></p>
+<ul>
+<li>Node standard library
+<ul>
+<li>比较薄的API封装层</li>
+<li>提供网络、文件、事件等操作，但实际是由底层来完成的</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-nodejs优缺点">3 Node.js优缺点</h1>
+<h2 id="31-优点">3.1 优点</h2>
+<ul>
+<li>事件驱动、异步编程，在I/O密集场景下有着极高的性能</li>
+<li>轻量高效，资源占用率低</li>
+<li>使用JS作为应用层语言，语言门槛低</li>
+</ul>
+<h2 id="32-缺点">3.2 缺点</h2>
+<ul>
+<li>单进程，一旦JS线程出现未处理的错误，进程会退出，服务会终止</li>
+<li>单线程（特指JS线程），一旦JS线程上出现耗时的CPU计算（加解密之类的操作），JS线程将出现阻塞，会拖慢事件轮询。</li>
+</ul>
+<h1 id="4-nodejs适用场景">4 Node.js适用场景</h1>
+<ol>
+<li>Restful API</li>
+<li>实时WebSocket应用</li>
+<li>前端工具链</li>
+<li>桌面开发</li>
+</ol>
 
     </div>
 

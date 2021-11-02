@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/post/express%E6%A0%B8%E5%BF%83/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-08-22T21:09:57+08:00" />
-<meta property="article:modified_time" content="2018-08-22T00:00:00+08:00" />
+<meta property="article:modified_time" content="2021-08-22T00:00:00+08:00" />
 
 <meta itemprop="name" content="Express核心">
 <meta itemprop="description" content="1 HTTP协议 1.1 curl基本用法 curl -s -v 网址 -s 是 silent，用于隐藏进度条 -v 是 verbose，用于打印全部header * 开头的是注释 &gt; 开头的"><meta itemprop="datePublished" content="2021-08-22T21:09:57+08:00" />
-<meta itemprop="dateModified" content="2018-08-22T00:00:00+08:00" />
-<meta itemprop="wordCount" content="3778">
+<meta itemprop="dateModified" content="2021-08-22T00:00:00+08:00" />
+<meta itemprop="wordCount" content="3789">
 <meta itemprop="keywords" content="node,Express," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Express核心"/>
 <meta name="twitter:description" content="1 HTTP协议 1.1 curl基本用法 curl -s -v 网址 -s 是 silent，用于隐藏进度条 -v 是 verbose，用于打印全部header * 开头的是注释 &gt; 开头的"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/express/"> Express </a>
             </div>
-          <span class="more-meta"> 3778 words </span>
+          <span class="more-meta"> 3789 words </span>
           <span class="more-meta"> 8 mins read </span>
         
       </div>
@@ -999,22 +999,21 @@ tsc --init // 创建tsconfig.json文件
 </code></pre></td></tr></table>
 </div>
 </div><ul>
-<li>
-<p><code>app.get('/xxx', fn)</code></p>
+<li><code>app.get('/xxx', fn)</code></li>
+</ul>
 </li>
 <li>
 <p><code>app.post('/xxx', fn)</code></p>
-</li>
-<li>
-<p><code>app.route('/xxx').all(f1).get(f2).post(f3)</code></p>
-</li>
+<ul>
+<li><code>app.route('/xxx').all(f1).get(f2).post(f3)</code></li>
+<li>route提取公共路由</li>
 </ul>
 </li>
 </ul>
 <h2 id="45-错误处理">4.5 错误处理</h2>
 <ul>
 <li>
-<p><code>next(error)</code></p>
+<p><code>next(string|number|Error)</code></p>
 <ul>
 <li>会直接进入自定义或默认的<code>errorHandler</code>，不执行后面的中间件</li>
 </ul>
@@ -1100,7 +1099,7 @@ tsc --init // 创建tsconfig.json文件
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2018-08-22
+        2021-08-22
         
     </span>
   </p>
@@ -1118,8 +1117,8 @@ tsc --init // 创建tsconfig.json文件
             <span class="prev-text nav-default">umi&#43;AntdPro实战总结</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/git/">
-            <span class="next-text nav-default">Git相关</span>
+        <a class="next" href="/post/express%E7%95%99%E8%A8%80%E6%9D%BF/">
+            <span class="next-text nav-default">Express留言板</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
