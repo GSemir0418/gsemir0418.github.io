@@ -17,15 +17,6 @@
     </item>
     
     <item>
-      <title>Sequelize ORM</title>
-      <link>https://gsemir0418.github.io/post/sequelize.js/</link>
-      <pubDate>Fri, 02 Jul 2021 11:01:55 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/post/sequelize.js/</guid>
-      <description>1 MySQL数据类型 MySQL支持的数据类型比较少，主要有五种类型： 数字类型 字符串类型 时间和日期类型 JSON类型 其他特殊类型 id 可以指定类型为</description>
-    </item>
-    
-    <item>
       <title>Node.js连接数据库</title>
       <link>https://gsemir0418.github.io/post/node.js%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
       <pubDate>Fri, 02 Jul 2021 09:24:55 +0800</pubDate>

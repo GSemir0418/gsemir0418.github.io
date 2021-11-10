@@ -49,8 +49,8 @@
 <meta itemprop="name" content="Koa全解">
 <meta itemprop="description" content="1 Koa的基础使用 1.1 Koa简介 Koa是由Express开发团队打造的一种全新的Web框架。通过基于Promise、async/await的异"><meta itemprop="datePublished" content="2021-11-01T13:34:39+08:00" />
 <meta itemprop="dateModified" content="2021-11-01T13:34:39+08:00" />
-<meta itemprop="wordCount" content="2960">
-<meta itemprop="keywords" content="node,Koa,ejs," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="3027">
+<meta itemprop="keywords" content="nodejs,Koa,ejs," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Koa全解"/>
 <meta name="twitter:description" content="1 Koa的基础使用 1.1 Koa简介 Koa是由Express开发团队打造的一种全新的Web框架。通过基于Promise、async/await的异"/>
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/koa/"> Koa </a>
             </div>
-          <span class="more-meta"> 2960 words </span>
-          <span class="more-meta"> 6 mins read </span>
+          <span class="more-meta"> 3027 words </span>
+          <span class="more-meta"> 7 mins read </span>
         
       </div>
     </header>
@@ -179,6 +179,7 @@
             <li><a href="#363-模块化路由">3.6.3 模块化路由</a></li>
           </ul>
         </li>
+        <li><a href="#37-中间件的引入顺序">3.7 中间件的引入顺序</a></li>
       </ul>
     </li>
     <li><a href="#4-koa的页面渲染与数据输出">4 Koa的页面渲染与数据输出</a>
@@ -736,7 +737,14 @@ middleware2 end
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">router</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="4-koa的页面渲染与数据输出">4 Koa的页面渲染与数据输出</h1>
+</div><h2 id="37-中间件的引入顺序">3.7 中间件的引入顺序</h2>
+<ol>
+<li>错误处理器。最先注册的中间件在最外层。以确保可以捕获全部错误</li>
+<li>第三方中间件，也就是npm安装的</li>
+<li>自定义全局中间件</li>
+<li>路由文件</li>
+</ol>
+<h1 id="4-koa的页面渲染与数据输出">4 Koa的页面渲染与数据输出</h1>
 <h2 id="41-使用ejs">4.1 使用ejs</h2>
 <ul>
 <li>安装</li>
@@ -999,7 +1007,7 @@ yarn add koa koa-ejs koa-bodyparser koa-router bluebird
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/node/">node</a>
+          <a href="/tags/nodejs/">nodejs</a>
           <a href="/tags/koa/">Koa</a>
           <a href="/tags/ejs/">ejs</a>
           </div>

@@ -206,12 +206,12 @@
     </item>
     
     <item>
-      <title>Sequelize ORM</title>
+      <title>Sequelize ORM（未完成）</title>
       <link>https://gsemir0418.github.io/post/sequelize.js/</link>
       <pubDate>Fri, 02 Jul 2021 11:01:55 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/sequelize.js/</guid>
-      <description>1 MySQL数据类型 MySQL支持的数据类型比较少，主要有五种类型： 数字类型 字符串类型 时间和日期类型 JSON类型 其他特殊类型 id 可以指定类型为</description>
+      <description>1 ORM Object Relational Mapping，对象关系映射，通过实体对象的语法，完成对关系数据库的操作（几乎不编写SQL语句） ORM将数据库中的术语映射为面向对象</description>
     </item>
     
     <item>

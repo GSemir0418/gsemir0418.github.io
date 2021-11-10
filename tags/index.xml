@@ -26,11 +26,11 @@
     </item>
     
     <item>
-      <title>node</title>
-      <link>https://gsemir0418.github.io/tags/node/</link>
+      <title>nodejs</title>
+      <link>https://gsemir0418.github.io/tags/nodejs/</link>
       <pubDate>Mon, 01 Nov 2021 13:34:39 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/tags/node/</guid>
+      <guid>https://gsemir0418.github.io/tags/nodejs/</guid>
       <description></description>
     </item>
     
@@ -197,15 +197,6 @@
     </item>
     
     <item>
-      <title>nodejs</title>
-      <link>https://gsemir0418.github.io/tags/nodejs/</link>
-      <pubDate>Fri, 06 Aug 2021 17:33:55 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/tags/nodejs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>request</title>
       <link>https://gsemir0418.github.io/tags/request/</link>
       <pubDate>Fri, 09 Jul 2021 16:47:33 +0800</pubDate>
@@ -256,6 +247,15 @@
       <pubDate>Mon, 05 Jul 2021 08:57:20 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sequelize</title>
+      <link>https://gsemir0418.github.io/tags/sequelize/</link>
+      <pubDate>Fri, 02 Jul 2021 11:01:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/sequelize/</guid>
       <description></description>
     </item>
     

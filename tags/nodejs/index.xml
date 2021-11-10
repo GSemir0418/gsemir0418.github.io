@@ -6,7 +6,52 @@
     <description>Recent content in nodejs on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 06 Aug 2021 17:33:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Nov 2021 13:34:39 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Koa全解</title>
+      <link>https://gsemir0418.github.io/post/koa%E5%85%A8%E8%A7%A3/</link>
+      <pubDate>Mon, 01 Nov 2021 13:34:39 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/koa%E5%85%A8%E8%A7%A3/</guid>
+      <description>1 Koa的基础使用 1.1 Koa简介 Koa是由Express开发团队打造的一种全新的Web框架。通过基于Promise、async/await的异</description>
+    </item>
+    
+    <item>
+      <title>Nextjs全解</title>
+      <link>https://gsemir0418.github.io/post/nextjs%E5%85%A8%E8%A7%A3/</link>
+      <pubDate>Sat, 23 Oct 2021 20:38:48 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/nextjs%E5%85%A8%E8%A7%A3/</guid>
+      <description>0 准备 0.1 创建项目 利用yarn或npm创建 1 2 3 yarn create next-app // 或 npx create-next-app@latest 使用typescript： 1 yarn create next-app --typescript 根据提示输入文件名后，输入yarn dev启动</description>
+    </item>
+    
+    <item>
+      <title>Express全解</title>
+      <link>https://gsemir0418.github.io/post/express%E5%85%A8%E8%A7%A3/</link>
+      <pubDate>Mon, 27 Sep 2021 13:47:24 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/express%E5%85%A8%E8%A7%A3/</guid>
+      <description>0 REST.Client插件 用于在vscode中构造请求 新建以.http为后缀的文件： 1 2 3 4 5 6 7 8 9 10 11 @url=http://localhost:8080 --- @用于定义变量，{{}}使用</description>
+    </item>
+    
+    <item>
+      <title>Express核心</title>
+      <link>https://gsemir0418.github.io/post/express%E6%A0%B8%E5%BF%83/</link>
+      <pubDate>Sun, 22 Aug 2021 21:09:57 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/express%E6%A0%B8%E5%BF%83/</guid>
+      <description>1 HTTP协议 1.1 curl基本用法 curl -s -v 网址 -s 是 silent，用于隐藏进度条 -v 是 verbose，用于打印全部header * 开头的是注释 &amp;gt; 开头的</description>
+    </item>
+    
+    <item>
+      <title>Express留言板</title>
+      <link>https://gsemir0418.github.io/post/express%E7%95%99%E8%A8%80%E6%9D%BF/</link>
+      <pubDate>Sun, 22 Aug 2021 21:09:57 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/express%E7%95%99%E8%A8%80%E6%9D%BF/</guid>
+      <description>项目源码地址：https://github.com/GSemir0418/express-board 1 ejs模板引擎 1.1 安装 1 yarn add ejs 1.2 设置应用</description>
+    </item>
+    
     <item>
       <title>Node进程与线程</title>
       <link>https://gsemir0418.github.io/post/node%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
@@ -44,12 +89,12 @@
     </item>
     
     <item>
-      <title>Sequelize ORM</title>
+      <title>Sequelize ORM（未完成）</title>
       <link>https://gsemir0418.github.io/post/sequelize.js/</link>
       <pubDate>Fri, 02 Jul 2021 11:01:55 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/sequelize.js/</guid>
-      <description>1 MySQL数据类型 MySQL支持的数据类型比较少，主要有五种类型： 数字类型 字符串类型 时间和日期类型 JSON类型 其他特殊类型 id 可以指定类型为</description>
+      <description>1 ORM Object Relational Mapping，对象关系映射，通过实体对象的语法，完成对关系数据库的操作（几乎不编写SQL语句） ORM将数据库中的术语映射为面向对象</description>
     </item>
     
     <item>
