@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>浏览器渲染原理 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 HTML、CSS和JS的加载过程 整体过程包括解析HTML（生成DOM树）、下载CSS、解析CSS（生成CSS树）、下载JS与执行JS五部分" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="浏览器渲染原理" />
+<meta property="og:description" content="1 HTML、CSS和JS的加载过程 整体过程包括解析HTML（生成DOM树）、下载CSS、解析CSS（生成CSS树）、下载JS与执行JS五部分" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-11T09:07:24+08:00" />
+<meta property="article:modified_time" content="2021-11-11T09:07:24+08:00" />
+
+<meta itemprop="name" content="浏览器渲染原理">
+<meta itemprop="description" content="1 HTML、CSS和JS的加载过程 整体过程包括解析HTML（生成DOM树）、下载CSS、解析CSS（生成CSS树）、下载JS与执行JS五部分"><meta itemprop="datePublished" content="2021-11-11T09:07:24+08:00" />
+<meta itemprop="dateModified" content="2021-11-11T09:07:24+08:00" />
+<meta itemprop="wordCount" content="862">
+<meta itemprop="keywords" content="面试,reflow," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="浏览器渲染原理"/>
+<meta name="twitter:description" content="1 HTML、CSS和JS的加载过程 整体过程包括解析HTML（生成DOM树）、下载CSS、解析CSS（生成CSS树）、下载JS与执行JS五部分"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">浏览器渲染原理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-11 </span>
+        <div class="post-category">
+            <a href="/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"> Web性能优化 </a>
+            </div>
+          <span class="more-meta"> 862 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-htmlcss和js的加载过程">1 HTML、CSS和JS的加载过程</a></li>
+    <li><a href="#2-html的解析被js阻塞">2 HTML的解析被JS阻塞</a></li>
+    <li><a href="#3-async和defer的区别">3 async和defer的区别</a>
+      <ul>
+        <li><a href="#31-defer">3.1 defer</a></li>
+        <li><a href="#32-async">3.2 async</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-js的执行被css阻塞">4 JS的执行被CSS阻塞</a></li>
+    <li><a href="#5-页面渲染原理">5 页面渲染原理</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-htmlcss和js的加载过程">1 HTML、CSS和JS的加载过程</h1>
+<ul>
+<li>整体过程包括<code>解析HTML</code>（生成DOM树）、<code>下载CSS</code>、<code>解析CSS</code>（生成CSS树）、<code>下载JS</code>与<code>执行JS</code>五部分。</li>
+</ul>
+<p><img src="%5Cbrowserrender%5Crender2.png" alt="image-20211111103307626"></p>
+<h1 id="2-html的解析被js阻塞">2 HTML的解析被JS阻塞</h1>
+<ul>
+<li><strong>JS的下载与执行会阻塞HTML的解析</strong></li>
+<li>执行JS会阻塞HTML原因：JS的执行存在<strong>修改DOM树</strong>结构的情况</li>
+<li>下载JS会阻塞HTML的原因：浏览器一般情况下是解析到script标签才会去下载（并没有做特殊优化），一旦下载，就必须等待其执行完毕</li>
+</ul>
+<h1 id="3-async和defer的区别">3 async和defer的区别</h1>
+<h2 id="31-defer">3.1 defer</h2>
+<ul>
+<li>defer可以使得JS的下载与HTML的解析同时进行，能够保证JS的执行是在<strong>HTML解析之后、DOM ready事件之前</strong>的</li>
+<li>若有多个defer，则执行顺序以<strong>标签的前后顺序</strong>为准</li>
+</ul>
+<h2 id="32-async">3.2 async</h2>
+<ul>
+<li>async也可以使JS的下载与HTML的解析同时进行，但在解析HTML<strong>结束后就触发DOM ready事件</strong>，也就是说将JS的下载与执行过程完全与HTML的解析分离。所以async常用于与页面DOM结构毫无关系的（比如一些纯计算的函数）JS解析过程。</li>
+<li>若有多个async，则执行顺序以<strong>下载完成的先后顺序</strong>为准</li>
+<li>JS的下载与执行过程与HTML的解析过程的关系图：</li>
+</ul>
+<p><img src="%5Cbrowserrender%5Crender1.png" alt="image-20211111093205174"></p>
+<ul>
+<li>实际工作中defer&gt;async</li>
+</ul>
+<h1 id="4-js的执行被css阻塞">4 JS的执行被CSS阻塞</h1>
+<ul>
+<li>HTML的解析与CSS的下载和解析过程不会互相影响</li>
+<li>CSS的下载与解析完成后，才能去执行JS。也就是说，<strong>CSS的下载与解析过程阻塞了JS的执行过程</strong>。</li>
+<li>原因：JS可能会需要<strong>读取</strong>CSS的结果（比如元素宽高）</li>
+</ul>
+<h1 id="5-页面渲染原理">5 页面渲染原理</h1>
+<ul>
+<li>HTML解析完成后生成DOM树（DOM），CSS解析完成后生成CSS树（CSSOM）。两颗树的示意图如下：</li>
+</ul>
+<p><img src="%5Cbrowserrender%5Cdom.png" alt="image-20211111095024919"></p>
+<p><img src="%5Cbrowserrender%5Ccssom.png" alt="image-20211111095305581"></p>
+<ul>
+<li>两个对象模型会将HTML结构与CSS样式合成一个”渲染树“</li>
+</ul>
+<p><img src="%5Cbrowserrender%5Crendertree.png" alt="image-20211111095452178"></p>
+<ul>
+<li>
+<p>渲染树生成后，还要经历<code>布局（Layout）</code>、<code>绘制（Paint）</code>和<code>合成（Composite）</code>三个步骤</p>
+</li>
+<li>
+<p>当页面更新时（例如修改div的宽高），会触发浏览器的<code>重排（reflow）</code>和<code>重绘（repaint）</code>（全部改变都会涉及到重新合成）</p>
+</li>
+</ul>
+<blockquote>
+<p>具体哪些属性的修改会导致reflow或者repaint详见https://csstriggers.com/</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-11-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/reflow/">reflow</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">缓存与内容协商</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-css/">
+            <span class="next-text nav-default">每日一题 CSS</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

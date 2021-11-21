@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.87.0 with theme even" />
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
 
 
 <link rel="canonical" href="https://gsemir0418.github.io/post/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/" />
@@ -198,7 +198,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="mi">_</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;lodash&#39;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">_</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;lodash&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="1-对象">1 对象</h1>
@@ -216,7 +216,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="mi">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span> <span class="p">[</span><span class="nx">props</span><span class="p">])</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span> <span class="p">[</span><span class="nx">props</span><span class="p">])</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -236,7 +236,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;gsq&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span><span class="mi">19</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="nx">hobbies</span><span class="o">:</span><span class="s1">&#39;play&#39;</span> <span class="p">}</span>
-<span class="mi">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">obj</span><span class="p">,[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">])</span> <span class="c1">// { gender:&#39;male&#39;, hobbies:&#39;play&#39; }
+<span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">obj</span><span class="p">,[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">])</span> <span class="c1">// { gender:&#39;male&#39;, hobbies:&#39;play&#39; }
 </span></code></pre></td></tr></table>
 </div>
 </div><h2 id="12-选择对象上的一些属性-pick">1.2 选择对象上的一些属性-pick</h2>
@@ -253,7 +253,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="mi">_</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span> <span class="p">[</span><span class="nx">props</span><span class="p">])</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">_</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span> <span class="p">[</span><span class="nx">props</span><span class="p">])</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -266,7 +266,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;gsq&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span><span class="mi">19</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="nx">hobbies</span><span class="o">:</span><span class="s1">&#39;play&#39;</span> <span class="p">}</span>
-<span class="mi">_</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span><span class="nx">obj</span><span class="p">,[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">])</span> <span class="c1">// { name:&#39;gsq&#39;, age:19 }
+<span class="nx">_</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span><span class="nx">obj</span><span class="p">,[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">])</span> <span class="c1">// { name:&#39;gsq&#39;, age:19 }
 </span></code></pre></td></tr></table>
 </div>
 </div><h2 id="13-对象的深拷贝-clonedeep">1.3 对象的深拷贝-cloneDeep</h2>
@@ -288,7 +288,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="mi">_</span><span class="p">.</span><span class="nx">cloneDeep</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">_</span><span class="p">.</span><span class="nx">cloneDeep</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -306,7 +306,7 @@
 <pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">f</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="p">},</span> <span class="nx">u</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="p">}</span>
 <span class="kr">const</span> <span class="nx">r1</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">obj2</span><span class="p">))</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;r1&#39;</span><span class="p">,</span> <span class="nx">r1</span><span class="p">)</span><span class="c1">// r1 { a: 1 }
-</span><span class="c1"></span><span class="kr">const</span> <span class="nx">r2</span> <span class="o">=</span> <span class="mi">_</span><span class="p">.</span><span class="nx">cloneDeep</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span>
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">r2</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">cloneDeep</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;r2&#39;</span><span class="p">,</span> <span class="nx">r2</span><span class="p">)</span><span class="c1">// r2 { f: [Function: f], u: undefined, a: 1 }
 </span></code></pre></td></tr></table>
 </div>
@@ -325,7 +325,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="mi">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">collection</span><span class="p">,</span> <span class="nx">identity</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">collection</span><span class="p">,</span> <span class="nx">identity</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -362,16 +362,16 @@
   <span class="p">{</span> <span class="s1">&#39;user&#39;</span><span class="o">:</span> <span class="s1">&#39;zs&#39;</span><span class="p">,</span>   <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span>
 <span class="p">];</span>
  
-<span class="mi">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!</span><span class="nx">o</span><span class="p">.</span><span class="nx">active</span><span class="p">;</span> <span class="p">});</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!</span><span class="nx">o</span><span class="p">.</span><span class="nx">active</span><span class="p">;</span> <span class="p">});</span>
 <span class="c1">// [ { user: &#39;zs&#39;, age: 40, active: true } ]
 </span><span class="c1"></span> 
-<span class="mi">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
 <span class="c1">// [ { user: &#39;gsq&#39;, age: 36, active: false } ]
 </span><span class="c1"></span>
-<span class="mi">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="kc">false</span><span class="p">]);</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="kc">false</span><span class="p">]);</span>
 <span class="c1">// [ { user: &#39;zs&#39;, age: 40, active: true } ]
 </span><span class="c1"></span> 
-<span class="mi">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="p">);</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">users</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="p">);</span>
 <span class="c1">// [ { user: &#39;gsq&#39;, age: 36, active: false } ]
 </span></code></pre></td></tr></table>
 </div>
@@ -424,12 +424,12 @@
   <span class="p">{</span> <span class="s1">&#39;dir&#39;</span><span class="o">:</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="o">:</span> <span class="mi">100</span> <span class="p">}</span>
 <span class="p">];</span>
  
-<span class="mi">_</span><span class="p">.</span><span class="nx">keyBy</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">keyBy</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// { &#39;a&#39;: { &#39;dir&#39;: &#39;left&#39;, &#39;code&#39;: 97 }, &#39;d&#39;: { &#39;dir&#39;: &#39;right&#39;, &#39;code&#39;: 100 } }
 </span><span class="c1"></span> 
-<span class="mi">_</span><span class="p">.</span><span class="nx">keyBy</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="s1">&#39;dir&#39;</span><span class="p">);</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">keyBy</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="s1">&#39;dir&#39;</span><span class="p">);</span>
 <span class="c1">// { &#39;left&#39;: { &#39;dir&#39;: &#39;left&#39;, &#39;code&#39;: 97 }, &#39;right&#39;: { &#39;dir&#39;: &#39;right&#39;, &#39;code&#39;: 100 } }
 </span></code></pre></td></tr></table>
 </div>
@@ -462,12 +462,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 以上均返回true
-</span><span class="c1"></span><span class="mi">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
-<span class="mi">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="mi">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">([])</span>
-<span class="mi">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">({})</span>
-<span class="mi">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>
-<span class="mi">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">(</span><span class="kc">undefined</span><span class="p">)</span>
+</span><span class="c1"></span><span class="nx">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">([])</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">({})</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">(</span><span class="kc">undefined</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="32-防抖">3.2 防抖</h2>
@@ -509,13 +509,13 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="mi">_</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">_</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
 <span class="c1">// =&gt; an integer between 0 and 5
-</span><span class="c1"></span><span class="mi">_</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span><span class="c1"></span><span class="nx">_</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
 <span class="c1">// =&gt; also an integer between 0 and 5
-</span><span class="c1"></span><span class="mi">_</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span><span class="c1"></span><span class="nx">_</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 <span class="c1">// =&gt; a floating-point number between 0 and 5
-</span><span class="c1"></span><span class="mi">_</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">);</span>
+</span><span class="c1"></span><span class="nx">_</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">);</span>
 <span class="c1">// =&gt; a floating-point number between 1.2 and 5.2
 </span></code></pre></td></tr></table>
 </div>

@@ -6,7 +6,43 @@
     <description>Recent content in Posts on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 01 Nov 2021 13:34:39 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Nov 2021 16:23:10 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>代码写法优化</title>
+      <link>https://gsemir0418.github.io/post/%E4%BB%A3%E7%A0%81%E5%86%99%E6%B3%95%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Thu, 11 Nov 2021 16:23:10 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E4%BB%A3%E7%A0%81%E5%86%99%E6%B3%95%E4%BC%98%E5%8C%96/</guid>
+      <description>1 CSS和JS的位置 考虑到HTML、CSS、JS三者存在互相堵塞的情况（详见“浏览器渲染原理”）： CSS建议放在head标签中： 由于CSS的</description>
+    </item>
+    
+    <item>
+      <title>缓存与内容协商</title>
+      <link>https://gsemir0418.github.io/post/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/</link>
+      <pubDate>Thu, 11 Nov 2021 13:09:45 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/</guid>
+      <description>缓存和内容协商又称强缓存（有效期内的缓存）和弱缓存（服务器和浏览器商量是否能缓存的方案） 1 HTTP缓存 例如我们访问百度，百度会发送html文</description>
+    </item>
+    
+    <item>
+      <title>浏览器渲染原理</title>
+      <link>https://gsemir0418.github.io/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Thu, 11 Nov 2021 09:07:24 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/</guid>
+      <description>1 HTML、CSS和JS的加载过程 整体过程包括解析HTML（生成DOM树）、下载CSS、解析CSS（生成CSS树）、下载JS与执行JS五部分</description>
+    </item>
+    
+    <item>
+      <title>每日一题 CSS</title>
+      <link>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-css/</link>
+      <pubDate>Wed, 10 Nov 2021 19:45:19 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-css/</guid>
+      <description>1 BFC 1.1 BFC是什么 常见定位方案 普通流：元素按照其在HTML中的先后位置至上而下布局，行内元素由左至右排列，占满一行后换行，块级元素占满整行。</description>
+    </item>
+    
     <item>
       <title>Koa全解</title>
       <link>https://gsemir0418.github.io/post/koa%E5%85%A8%E8%A7%A3/</link>
@@ -31,7 +67,7 @@
       <pubDate>Wed, 20 Oct 2021 14:36:05 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/css%E5%B8%83%E5%B1%80/</guid>
-      <description>1 flex布局 Flex布局的目标是提供一种更有效的方式来布局、对齐和分配容器中子元素的空间，即使它们的大小是未知的或动态的。 flex布局背后</description>
+      <description>1 flex弹性布局 Flex布局的目标是提供一种更有效的方式来布局、对齐和分配容器中子元素的空间，即使它们的大小是未知的或动态的。 flex布局</description>
     </item>
     
     <item>
@@ -301,7 +337,7 @@
       <pubDate>Fri, 25 Jun 2021 11:09:51 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</guid>
-      <description>1 生命周期的理解 1.1 引出生命周期 需求： 让指定的文本做显示* */* 隐藏的渐变动画 从完全可见，到彻底消失，耗时2S 点击“不活了”按钮从界面中卸载组件 源</description>
+      <description>1 生命周期的理解 1.1 引出生命周期 需求： 让指定的文本做显示* / 隐藏的渐变动画 从完全可见，到彻底消失，耗时2S 点击“不活了”按钮从界面中卸载组件 源</description>
     </item>
     
     <item>

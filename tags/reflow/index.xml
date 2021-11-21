@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>reflow on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/reflow/</link>
+    <description>Recent content in reflow on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 11 Nov 2021 09:07:24 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/reflow/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>浏览器渲染原理</title>
+      <link>https://gsemir0418.github.io/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Thu, 11 Nov 2021 09:07:24 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/</guid>
+      <description>1 HTML、CSS和JS的加载过程 整体过程包括解析HTML（生成DOM树）、下载CSS、解析CSS（生成CSS树）、下载JS与执行JS五部分</description>
+    </item>
+    
+  </channel>
+</rss>

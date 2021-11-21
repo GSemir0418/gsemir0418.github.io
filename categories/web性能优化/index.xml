@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>web性能优化 on Even - A super concise theme for Hugo</title>
+    <title>Web性能优化 on Even - A super concise theme for Hugo</title>
     <link>https://gsemir0418.github.io/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
-    <description>Recent content in web性能优化 on Even - A super concise theme for Hugo</description>
+    <description>Recent content in Web性能优化 on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 02 Sep 2021 14:34:53 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Nov 2021 16:23:10 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>代码写法优化</title>
+      <link>https://gsemir0418.github.io/post/%E4%BB%A3%E7%A0%81%E5%86%99%E6%B3%95%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Thu, 11 Nov 2021 16:23:10 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E4%BB%A3%E7%A0%81%E5%86%99%E6%B3%95%E4%BC%98%E5%8C%96/</guid>
+      <description>1 CSS和JS的位置 考虑到HTML、CSS、JS三者存在互相堵塞的情况（详见“浏览器渲染原理”）： CSS建议放在head标签中： 由于CSS的</description>
+    </item>
+    
+    <item>
+      <title>缓存与内容协商</title>
+      <link>https://gsemir0418.github.io/post/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/</link>
+      <pubDate>Thu, 11 Nov 2021 13:09:45 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/</guid>
+      <description>缓存和内容协商又称强缓存（有效期内的缓存）和弱缓存（服务器和浏览器商量是否能缓存的方案） 1 HTTP缓存 例如我们访问百度，百度会发送html文</description>
+    </item>
+    
+    <item>
+      <title>浏览器渲染原理</title>
+      <link>https://gsemir0418.github.io/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Thu, 11 Nov 2021 09:07:24 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/</guid>
+      <description>1 HTML、CSS和JS的加载过程 整体过程包括解析HTML（生成DOM树）、下载CSS、解析CSS（生成CSS树）、下载JS与执行JS五部分</description>
+    </item>
+    
     <item>
       <title>Web性能优化-基础</title>
       <link>https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</link>

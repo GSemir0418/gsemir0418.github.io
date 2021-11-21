@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>缓存与内容协商 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="缓存和内容协商又称强缓存（有效期内的缓存）和弱缓存（服务器和浏览器商量是否能缓存的方案） 1 HTTP缓存 例如我们访问百度，百度会发送html文" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="缓存与内容协商" />
+<meta property="og:description" content="缓存和内容协商又称强缓存（有效期内的缓存）和弱缓存（服务器和浏览器商量是否能缓存的方案） 1 HTTP缓存 例如我们访问百度，百度会发送html文" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-11T13:09:45+08:00" />
+<meta property="article:modified_time" content="2021-11-11T13:09:45+08:00" />
+
+<meta itemprop="name" content="缓存与内容协商">
+<meta itemprop="description" content="缓存和内容协商又称强缓存（有效期内的缓存）和弱缓存（服务器和浏览器商量是否能缓存的方案） 1 HTTP缓存 例如我们访问百度，百度会发送html文"><meta itemprop="datePublished" content="2021-11-11T13:09:45+08:00" />
+<meta itemprop="dateModified" content="2021-11-11T13:09:45+08:00" />
+<meta itemprop="wordCount" content="1805">
+<meta itemprop="keywords" content="面试,HTTP,缓存与内容协商," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="缓存与内容协商"/>
+<meta name="twitter:description" content="缓存和内容协商又称强缓存（有效期内的缓存）和弱缓存（服务器和浏览器商量是否能缓存的方案） 1 HTTP缓存 例如我们访问百度，百度会发送html文"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">缓存与内容协商</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-11 </span>
+        <div class="post-category">
+            <a href="/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"> Web性能优化 </a>
+            </div>
+          <span class="more-meta"> 1805 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-http缓存">1 HTTP缓存</a></li>
+    <li><a href="#2-cache-control释义">2 Cache-Control释义</a></li>
+    <li><a href="#3-http内容协商">3 HTTP内容协商</a></li>
+    <li><a href="#4-缓存方案">4 缓存方案</a></li>
+    <li><a href="#5-禁用缓存">5 禁用缓存</a></li>
+    <li><a href="#6-实际应用">6 实际应用</a></li>
+    <li><a href="#7-缓存api">7 缓存API</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>缓存和内容协商又称<code>强缓存</code>（有效期内的缓存）和<code>弱缓存</code>（服务器和浏览器商量是否能缓存的方案）</p>
+<h1 id="1-http缓存">1 HTTP缓存</h1>
+<ul>
+<li>例如我们访问百度，百度会发送html文件到客户端，而其他的js、css或图片等文件是由<code>CDN</code>发送给客户端的，并且在响应头添加<code>Cache-Control: public, max-age=3600, must-revalidate</code>，允许客户端缓存该文件。</li>
+</ul>
+<h1 id="2-cache-control释义">2 Cache-Control释义</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">Cache</span><span class="o">-</span><span class="nx">Control</span><span class="o">:</span> 
+<span class="kr">public</span>			<span class="c1">// 公开内容，允许中间代理（小区、市级）进行缓存
+</span><span class="c1"></span>				<span class="c1">// 如果是private，则表示只允许用户的浏览器缓存
+</span><span class="c1"></span><span class="nx">max</span><span class="o">-</span><span class="nx">age</span><span class="o">=</span><span class="mi">3600</span>	<span class="c1">// 缓存时间
+</span><span class="c1"></span><span class="nx">must</span><span class="o">-</span><span class="nx">revalidate</span>	<span class="c1">// 对于过期的缓存，应重新校验
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="3-http内容协商">3 HTTP内容协商</h1>
+<ul>
+<li>协商的是<strong>缓存过期后能不能重用</strong>的问题</li>
+<li>过程：
+<ul>
+<li>客户端第一次向CDN服务器请求js文件时，CDN服务器会在响应头上添加<strong>Cache-Control字段</strong>以及<strong>ETag字段</strong>。</li>
+<li><strong>Etag字段值为该js文件编码（md5）后的哈希值字符串</strong></li>
+<li>浏览器会将该js文件缓存，当缓存过期时，会向服务器发送<strong>协商请求</strong>，该请求头需要添加<code>If-None-Match</code>，其值为<strong>之前ETag</strong>的值。</li>
+<li>这样以来，服务器会<strong>对比</strong>自己的和协商请求头中的ETag值，进而得出缓存文件的处理方式：
+<ul>
+<li>如果两次值不同，说明服务器端更新了该js文件，所以将以200状态码向客户端响应新的文件，告知浏览器将原来的缓存文件删除或覆盖；</li>
+<li>如果两次ETag值相同，说明不需要更新js文件，所以将以304状态码向客户端响应，告知客户端沿用缓存文件即可。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-缓存方案">4 缓存方案</h1>
+<table>
+<thead>
+<tr>
+<th>http协议版本</th>
+<th>缓存（强缓存）</th>
+<th>内容协商（弱缓存）</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP/1.1</td>
+<td>服务器响应时在响应头添加：<br><code>Cache-Control: max-age:3600,must-revalidate</code><br><code>ETag: ...</code></td>
+<td>请求头：<code>If-None-Match: ...ETag</code><br>响应：304+空内容/200+新内容</td>
+<td>主流</td>
+</tr>
+<tr>
+<td>HTTP/1.0</td>
+<td>服务器响应时在响应头添加：<br><code>Expire: 时间点A</code><br><code>Last-Modified: 时间点B</code></td>
+<td>请求头：<code>If-Modified-Since: 时间点B</code><br/>响应：304+空内容/200+新内容</td>
+<td>依赖于收发双方的时间统一，如果用户PC时间不准确，将会影响缓存文件的时效性。</td>
+</tr>
+</tbody>
+</table>
+<p>实际工作中，程序员可能会同时使用这两套方案，以兼容一些旧的网络设备和浏览器。</p>
+<h1 id="5-禁用缓存">5 禁用缓存</h1>
+<ul>
+<li>服务端要求禁用缓存：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">Cache</span><span class="o">-</span><span class="nx">Control</span><span class="o">:</span> <span class="nx">max</span><span class="o">-</span><span class="nx">age</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">must</span><span class="o">-</span><span class="nx">revalidate</span>	<span class="c1">// 不允许缓存，允许协商
+</span><span class="c1"></span><span class="nx">Cache</span><span class="o">-</span><span class="nx">Control</span><span class="o">:</span> <span class="nx">no</span><span class="o">-</span><span class="nx">cache</span>						<span class="c1">// 不允许缓存，允许协商
+</span><span class="c1"></span><span class="nx">Cache</span><span class="o">-</span><span class="nx">Control</span><span class="o">:</span> <span class="nx">no</span><span class="o">-</span><span class="nx">store</span>						<span class="c1">// 不允许缓存，也不允许协商
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>浏览器端禁用缓存：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="mi">1</span><span class="err">、</span><span class="nx">在请求头添加</span>
+<span class="nx">Cache</span><span class="o">-</span><span class="nx">Control</span><span class="o">:</span> <span class="nx">no</span><span class="o">-</span><span class="nx">cache</span><span class="p">,</span> <span class="nx">no</span><span class="o">-</span><span class="nx">store</span><span class="p">,</span> <span class="nx">max</span><span class="o">-</span><span class="nx">age</span><span class="o">=</span><span class="mi">0</span>
+<span class="mi">2</span><span class="err">、</span><span class="nx">在请求的url后添加</span> <span class="o">?</span><span class="nx">_</span><span class="o">=</span><span class="nx">随机数</span> <span class="nx">即可</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="6-实际应用">6 实际应用</h1>
+<ul>
+<li>index.html<strong>不能缓存</strong>，响应头里加<code>Cache-Control: max-age=0</code>防止缓存，加<code>Etag</code>用于内容协商，加<code>Expire: 过去的时间</code>用于兼容旧浏览器</li>
+<li>CSS、JS和图片文件一律在<strong>文件名后面加版本字符串</strong>，如<code>index-855fcfd82e.js</code>，响应头里加<code>Cache-Control: max-age=2592000</code><strong>缓存一个月</strong>以上，Etag可以不加（因为内容不会变，过时的缓存可以用）。CDN服务商一般都会帮你做这些事。</li>
+<li>当CSS、JS和图片文件内容有变化时，直接<strong>修改文件名中的版本字符串</strong>（Webpack 会帮我们做），替换index.html里的旧文件名即可。旧文件的缓存会一直躺在用户的电脑里直到过期后被浏览器自动清理。</li>
+<li>API响应头里加<code>Cache-Control: no-store, max-age=0</code>防止缓存和内容协商。</li>
+</ul>
+<h1 id="7-缓存api">7 缓存API</h1>
+<ul>
+<li>前端程序员一直在尝试自己用 JS 控制缓存，而不是用 HTTP 缓存。 比如曾经有人通过 AJAX 获取 CSS、JS，然后插入页面中，并存储在 LocalStorage 里作为缓 存。其优点是在移动端网速特别慢时（比如 2G/3G 网络），读取 LocalStorage 比内容协商要快很多。 再加上有一段时间浏览器厂商宣传「Web 可以比原生应用相媲美」，于是浏览器专门给JS提供了 一套用于缓存的API：<code>Cache API</code>。样例代码如下：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// service-worker.js 中默认会有全局对象 self
+</span><span class="c1"></span><span class="nx">self</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// self 可以监听页面请求
+</span><span class="c1"></span>	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;发现浏览器在请求文件：&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
+	
+ 	<span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span> <span class="c1">// 我来进行响应
+</span><span class="c1"></span> 		<span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&#34;font-cache-v1&#34;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">cache</span> <span class="p">=&gt;</span> <span class="c1">// 打开缓存
+</span><span class="c1"></span> 			<span class="nx">cache</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span> <span class="c1">// 查找对应的请求
+</span><span class="c1"></span> 				<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+ 					<span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 如果有对应的响应
+</span><span class="c1"></span> 						<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39; 发现已有缓存：&#39;</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span>
+ 						<span class="k">return</span> <span class="nx">response</span>
+ 					<span class="p">}</span><span class="k">else</span><span class="p">{</span> <span class="c1">// 如果没有对应的响应
+</span><span class="c1"></span> 						<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39; 没有找到对应缓存&#39;</span><span class="p">)</span>
+ 					<span class="p">}</span>
+ 				<span class="p">})</span> 
+ 				<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+ 					<span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39; 未知错误&#39;</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+ 					<span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+ 				<span class="p">});</span>
+ 		<span class="p">)</span>
+ 	<span class="p">);</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>实际工作中，经常将<code>Cache API</code>与<code>service worker</code>结合使用，因为<code>service worker</code>可以<strong>劫持</strong>浏览器的请求，并进行响应；而<code>Cache API</code>可以对该请求的缓存进行增删改查。 注意，第一次请求是无法被劫持的，因为那时JS还没有被下载到浏览器中。但是随后的所有请求都可以被service worker劫持。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-11-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/http/">HTTP</a>
+          <a href="/tags/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/">缓存与内容协商</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E4%BB%A3%E7%A0%81%E5%86%99%E6%B3%95%E4%BC%98%E5%8C%96/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">代码写法优化</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/">
+            <span class="next-text nav-default">浏览器渲染原理</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

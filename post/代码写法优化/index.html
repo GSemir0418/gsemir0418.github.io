@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>代码写法优化 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 CSS和JS的位置 考虑到HTML、CSS、JS三者存在互相堵塞的情况（详见“浏览器渲染原理”）： CSS建议放在head标签中： 由于CSS的" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E4%BB%A3%E7%A0%81%E5%86%99%E6%B3%95%E4%BC%98%E5%8C%96/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="代码写法优化" />
+<meta property="og:description" content="1 CSS和JS的位置 考虑到HTML、CSS、JS三者存在互相堵塞的情况（详见“浏览器渲染原理”）： CSS建议放在head标签中： 由于CSS的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E4%BB%A3%E7%A0%81%E5%86%99%E6%B3%95%E4%BC%98%E5%8C%96/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-11T16:23:10+08:00" />
+<meta property="article:modified_time" content="2021-11-17T09:31:10+08:00" />
+
+<meta itemprop="name" content="代码写法优化">
+<meta itemprop="description" content="1 CSS和JS的位置 考虑到HTML、CSS、JS三者存在互相堵塞的情况（详见“浏览器渲染原理”）： CSS建议放在head标签中： 由于CSS的"><meta itemprop="datePublished" content="2021-11-11T16:23:10+08:00" />
+<meta itemprop="dateModified" content="2021-11-17T09:31:10+08:00" />
+<meta itemprop="wordCount" content="3141">
+<meta itemprop="keywords" content="面试,代码规范," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="代码写法优化"/>
+<meta name="twitter:description" content="1 CSS和JS的位置 考虑到HTML、CSS、JS三者存在互相堵塞的情况（详见“浏览器渲染原理”）： CSS建议放在head标签中： 由于CSS的"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">代码写法优化</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-11 </span>
+        <div class="post-category">
+            <a href="/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"> Web性能优化 </a>
+            </div>
+          <span class="more-meta"> 3141 words </span>
+          <span class="more-meta"> 7 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-css和js的位置">1 CSS和JS的位置</a></li>
+    <li><a href="#2-白屏与闪烁问题">2 白屏与闪烁问题</a></li>
+    <li><a href="#3-代码拆分技巧">3 代码拆分技巧</a></li>
+    <li><a href="#4-js动态导入">4 JS动态导入</a></li>
+    <li><a href="#5-懒加载">5 懒加载</a></li>
+    <li><a href="#6-预加载">6 预加载</a></li>
+    <li><a href="#7-css代码优化技巧">7 CSS代码优化技巧</a></li>
+    <li><a href="#8-js代码优化">8 JS代码优化</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-css和js的位置">1 CSS和JS的位置</h1>
+<ul>
+<li>
+<p>考虑到HTML、CSS、JS三者存在互相堵塞的情况（详见“浏览器渲染原理”）：</p>
+</li>
+<li>
+<p><strong>CSS建议放在head标签中</strong>：</p>
+<ul>
+<li>由于CSS的下载与解析并不阻塞HTML的解析，所以尽早下载即可</li>
+<li>防止被JS阻塞（CSS优先，毕竟用户是先看到页面的）</li>
+<li>对于内联的JS，可以放在head标签中CSS之前</li>
+</ul>
+</li>
+<li>
+<p><strong>JS建议放在body标签的最后</strong>：</p>
+<ul>
+<li>可以直接访问DOM，无需监听DOM Ready事件</li>
+<li>避免阻塞html的解析</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-白屏与闪烁问题">2 白屏与闪烁问题</h1>
+<ul>
+<li>如果CSS下载过慢，将导致页面<strong>白屏</strong>（页面空白）或<strong>闪烁</strong>（样式从无到有），根据浏览器不同以及link标签的位置不同，出现的结果也不相同。
+<ul>
+<li>在Chrome浏览器中，无论link标签在head标签中还是在body标签的首部，都会出现<strong>白屏</strong>现象</li>
+<li>在FireFox浏览器中，如果link标签在head标签内，则出现<strong>白屏</strong>；如果link标签在body标签的上部，则出现<strong>闪烁</strong></li>
+</ul>
+</li>
+<li>实际上CSS并没有阻塞HTML的解析，但确实是阻塞的JS的下载与执行过程。</li>
+</ul>
+<h1 id="3-代码拆分技巧">3 代码拆分技巧</h1>
+<ul>
+<li>
+<p>如果打包后仅生成一个js文件的话，当服务端做一个很小的改动，那么客户端就需要更新整个js文件，造成资源的浪费。</p>
+</li>
+<li>
+<p>因此建议将js代码根据js文件改动频率进行拆分：</p>
+<ul>
+<li>
+<p>runtime.js，该文件是webpack自己生成的代码，跟我们的代码隔离开比较好。假设我们不修改代码，只是将webpack升级，那么就只有runtime.js会改变</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">optimization</span><span class="o">:</span> <span class="p">{</span>
+	<span class="nx">runtimeChunk</span><span class="o">:</span> <span class="s1">&#39;single&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>vendors.js，该文件包含全局使用的第三方基础库，比如React全家桶和Vue全家桶，一般来说我们不会去修改这部分代码，只会升级它们</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">optimization</span><span class="o">:</span> <span class="p">{</span>
+	<span class="nx">splitChunks</span><span class="o">:</span> <span class="p">{</span>
+		<span class="nx">cacheGroups</span><span class="o">:</span> <span class="p">{</span>
+			<span class="nx">vendor</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">priority</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+				<span class="nx">minSize</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// 如果不写0，由于React文件尺寸太小，会直接跳过
+</span><span class="c1"></span>				<span class="nx">test</span><span class="o">:</span> <span class="sr">/[\\/]node_modules[\\/]/</span><span class="p">,</span> <span class="c1">// 为了匹配/node_modules/或\node_modules\
+</span><span class="c1"></span>        <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;vendors&#34;</span><span class="p">,</span>
+        <span class="nx">chunks</span><span class="o">:</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="c1">// async表示异步加载，initial表示同步加载，all表示以上两者
+</span><span class="c1"></span>        <span class="c1">// 这三行的整体意思就是把两种加载方式的来自node_modules目录的文件打包为vendor.xxx.js
+</span><span class="c1"></span>        <span class="c1">// 其中vendor是第三方的意思
+</span><span class="c1"></span>			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>common.js，该文件包含公司内部的基础库，比如公司内部的UI组件库，大概几个月会被更新或升级一次</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">optimization</span><span class="o">:</span> <span class="p">{</span>
+	<span class="nx">splitChunks</span><span class="o">:</span> <span class="p">{</span>
+		<span class="nx">cacheGroups</span><span class="o">:</span> <span class="p">{</span>
+			<span class="nx">common</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">priority</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+				<span class="nx">minSize</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+				<span class="nx">minChunks</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span><span class="c1">// 如果一个模块被其他两个模块引用了，说明该模块是公共库
+</span><span class="c1"></span>				<span class="nx">chunks</span><span class="o">:</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span>
+				<span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;common&#39;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>page-index.js，该文件只包含当前页面的逻辑，每周都会变动。不同的页面有不同的index.js</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 多页面可以通过配置多入口来做
+</span><span class="c1">// 若文件过多，也可以单独遍历全部入口配置，再传入entry中
+</span><span class="c1"></span><span class="nx">entry</span><span class="o">:</span> <span class="p">{</span>
+	<span class="nx">main</span><span class="o">:</span> <span class="s1">&#39;./src/index.js&#39;</span><span class="p">,</span>
+	<span class="nx">admin</span><span class="o">:</span> <span class="s1">&#39;./src/admin.js&#39;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>CSS代码拆分也是一样的思路</p>
+</li>
+</ul>
+<h1 id="4-js动态导入">4 JS动态导入</h1>
+<ul>
+<li>原生js动态导入</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span><span class="p">(</span><span class="s1">&#39;库名&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">库实例</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="c1">// 回调函数
+</span><span class="c1"></span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Vue动态导入</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">Router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VueRouter</span><span class="p">({</span>
+	<span class="nx">routes</span><span class="o">:</span> <span class="p">[</span>
+		<span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/home&#39;</span><span class="p">,</span> <span class="nx">component</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="kr">import</span><span class="p">(</span><span class="s1">&#39;./Home.vue&#39;</span><span class="p">)</span> <span class="p">},</span>
+		<span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/about&#39;</span><span class="p">,</span> <span class="nx">component</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">({</span> <span class="c1">// 支持传入参数
+</span><span class="c1"></span>			<span class="nx">component</span><span class="o">:</span> <span class="kr">import</span><span class="p">(</span><span class="s1">&#39;./About.vue&#39;</span><span class="p">),</span>
+			<span class="nx">loading</span><span class="o">:</span> <span class="nx">LoadingComponent</span><span class="p">,</span>
+			<span class="nx">error</span><span class="o">:</span> <span class="nx">ErrorComponent</span>
+		<span class="p">})</span>
+	<span class="p">]</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>React动态导入</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="c1">// 引入Suspense和lazy
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Suspense</span><span class="p">,</span> <span class="nx">lazy</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">BrowserRouter</span> <span class="nx">as</span> <span class="nx">Router</span><span class="p">,</span> <span class="nx">Route</span><span class="p">,</span> <span class="nx">Switch</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react-router-dom&#39;</span>
+
+<span class="c1">// 使用lazy去处理组件的引入
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">Home</span> <span class="o">=</span> <span class="nx">lazy</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="kr">import</span><span class="p">(</span><span class="s1">&#39;./routes/Home&#39;</span><span class="p">))</span>
+<span class="kr">const</span> <span class="nx">About</span> <span class="o">=</span> <span class="nx">lazy</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="kr">import</span><span class="p">(</span><span class="s1">&#39;./routes/About&#39;</span><span class="p">))</span>
+
+<span class="kr">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">(</span>
+	<span class="p">&lt;</span><span class="nt">Router</span><span class="p">&gt;</span>
+    <span class="c">&lt;!--</span> <span class="nx">要在Switch组件的外面包上Suspense</span> <span class="o">--&gt;</span>
+ 		<span class="p">&lt;</span><span class="nt">Suspense</span> <span class="na">fallback</span><span class="o">=</span><span class="p">{</span><span class="nx">LoadingComponent</span><span class="p">}&gt;</span>
+ 			<span class="p">&lt;</span><span class="nt">Switch</span><span class="p">&gt;</span>
+ 				<span class="p">&lt;</span><span class="nt">Route</span> <span class="na">exact</span> <span class="na">path</span><span class="o">=</span><span class="s">&#34;/&#34;</span> <span class="na">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Home</span><span class="p">}/&gt;</span>
+				<span class="p">&lt;</span><span class="nt">Route</span> <span class="na">path</span><span class="o">=</span><span class="s">&#34;/about&#34;</span> <span class="na">component</span><span class="o">=</span><span class="p">{</span><span class="nx">About</span><span class="p">}/&gt;</span>
+  		<span class="p">&lt;/</span><span class="nt">Switch</span><span class="p">&gt;</span>
+ 		<span class="p">&lt;/</span><span class="nt">Suspense</span><span class="p">&gt;</span>
+ 	<span class="p">&lt;/</span><span class="nt">Router</span><span class="p">&gt;</span>
+<span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="5-懒加载">5 懒加载</h1>
+<ul>
+<li>
+<p>懒加载就是一开始不加载，但需要用到的时候再加载。这听起来跟动态导入很像，不过懒加载一般指的是非JS资源，比如图片和样式等。</p>
+</li>
+<li>
+<p>常见的懒加载思路举例：</p>
+<ol>
+<li>页面中有大量商品图片需要展示。假设代码为<code>&lt;img src='product.png'&gt;</code>。</li>
+<li>可以用一个1k大小的占位图片代替所有商品图片。代码改为<code>&lt;img src='placeholder.png' data-src='product.png'&gt;</code>。也就是说，创建一个自定义属性<code>data-src</code>存放<strong>真正需要显示的图片路径</strong>，而img自带的src放一张大小为<strong>1 * 1px的图片路径</strong>。</li>
+<li>在某个时刻（如页面加载的一秒钟后、用户滚动页面且快要看到下一页的产品时)使用JS去加载商品图片，替换掉占位图片。即当页面滚动直至此图片出现在可视区域时，用js取到该图片的data-src的<strong>值赋</strong>给src。</li>
+</ol>
+</li>
+</ul>
+<p><img src="/codeOptimize/wheeldistance.png" alt="iShot2021-11-17 15.20.09"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">start</span><span class="p">()</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;scroll&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+ <span class="nx">start</span><span class="p">()</span>
+<span class="p">})</span>
+
+<span class="kd">function</span> <span class="nx">start</span><span class="p">(){</span>
+  <span class="c1">//.not(&#39;[data-isLoaded]&#39;)选中已加载的图片不需要重新加载
+</span><span class="c1"></span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.container img&#39;</span><span class="p">).</span><span class="nx">not</span><span class="p">(</span><span class="s1">&#39;[data-isLoaded]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+   <span class="kd">var</span> <span class="nx">$node</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+   <span class="k">if</span><span class="p">(</span> <span class="nx">isShow</span><span class="p">(</span><span class="nx">$node</span><span class="p">)</span> <span class="p">){</span>
+     <span class="nx">loadImg</span><span class="p">(</span><span class="nx">$node</span><span class="p">)</span>
+   <span class="p">}</span>
+ <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">//判断一个元素是不是出现在窗口(视野)
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">isShow</span><span class="p">(</span><span class="nx">$node</span><span class="p">){</span>
+	<span class="k">return</span> <span class="nx">$node</span><span class="p">.</span><span class="nx">offset</span><span class="p">().</span><span class="nx">top</span> <span class="o">&lt;=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">height</span><span class="p">()</span> <span class="o">+</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="c1">//加载图片
+</span><span class="c1"></span> <span class="kd">function</span> <span class="nx">loadImg</span><span class="p">(</span><span class="nx">$img</span><span class="p">){</span>
+  <span class="c1">//.attr(值)
+</span><span class="c1"></span>  <span class="c1">//.attr(属性名称,值)
+</span><span class="c1"></span>  <span class="nx">$img</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="nx">$img</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-src&#39;</span><span class="p">))</span> <span class="c1">//把data-src的值 赋值给src
+</span><span class="c1"></span>  <span class="nx">$img</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-isLoaded&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="c1">//已加载的图片做标记
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>淘宝、天猫这类电商网站大量采用了这种方案，提速效果明显，而且可以为公司节省很多带宽成本。</li>
+</ul>
+<h1 id="6-预加载">6 预加载</h1>
+<ul>
+<li>
+<p>懒加载导致一些资源的加载被推迟，影响了用户体验。那么我们能不能把被推迟的资源提前下载下来呢？听起来很矛盾对不对，想象一下用户的操作：</p>
+<ol>
+<li>打开淘宝，查看首屏</li>
+<li>移动鼠标并点击，或者滚动鼠标滚轮</li>
+<li>点看商品链接，或者查看第二屏</li>
+</ol>
+</li>
+<li>
+<p>第二步大概有一秒钟的时间，那么我们能不能在这个时候，预测用户的动作，并提前加载第三步的资源呢？答案是可以。</p>
+</li>
+<li>
+<p>比如，当用户的鼠标离某个链接还有200px时，我们提前用JS去get链接内容，那么就可以让用户提前看到内容了。（浏览器自带一个优化：不会在同一时间对同一个资源发两个请求，而是复用同一个请求。所以你不用担心有多余的请求。）代码如下：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">$container</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">e</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 其他代码略
+</span><span class="c1"></span>  <span class="k">if</span><span class="p">(</span><span class="nx">距离链接小于200px</span><span class="p">){</span>
+  	<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;链接&#39;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>比如，当用户屏幕滚动到距离图片还有200px时，我们提前用JS去get图片内容，那么等用户滚到第二屏时，说不定图片已经加载好了。代码如下</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">$container</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wheel&#39;</span><span class="p">,</span> <span class="nx">e</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 其他代码略
+</span><span class="c1"></span>  <span class="k">if</span><span class="p">(</span><span class="nx">举例图片小于200px</span><span class="p">){</span>
+  	<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;图片链接&#39;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>除了预加载这些动态内容，程序员也可以预加载一些静态资源，写法如下：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;preload&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;page-2.css&#34;</span> <span class="na">as</span><span class="o">=</span><span class="s">&#34;style&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;preload&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;page-2.js&#34;</span> <span class="na">as</span><span class="o">=</span><span class="s">&#34;script&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;preload&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;video.mp4&#34;</span> <span class="na">as</span><span class="o">=</span><span class="s">&#34;video&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;video/mp4&#34;</span><span class="p">&gt;</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="7-css代码优化技巧">7 CSS代码优化技巧</h1>
+<ol>
+<li>使用<code>uncss</code><strong>删掉无用的CSS</strong>，但这个方法无法保证不误删，所以实践中要谨慎使用，面试的时候可以提一下。</li>
+<li>使用<strong>更高效的选择器</strong></li>
+<li><strong>减少重排</strong>（<code>reflow</code>）。在比较多种样式修改方案时，尽量选择不会引起重排的方案。比如在做动画时，修改<code>transform</code>永远比修改<code>left、top、bottom、right</code>更好，因为transform不会引起重排。</li>
+<li><strong>不要使用</strong><code>@import url.css;</code>因为被加载的CSS不能与当前文件并行下载。实践中本来就没人用它，面试的时候提一下就行。</li>
+<li>启用<strong>GPU硬件加速</strong>：在动画的元素上添加<code>transform: translate3d(0, 0, 0);</code>启用GPU加速渲染（默认是CPU计算并渲染的）</li>
+</ol>
+<p>总的来说，CSS 能优化的空间并不大，而且节点数少于 2000 的页面也没有必要过早优化 CSS。</p>
+<h1 id="8-js代码优化">8 JS代码优化</h1>
+<p>JS代码的优化技巧主要指是不要使用那些「<strong>容易引起性能问题</strong>」的特性，比如</p>
+<ul>
+<li>
+<p>尽量不用全局变量，因为全局变量太多会使变量查找变慢。</p>
+</li>
+<li>
+<p>尽量少操作DOM，可以使用Fragment一次性插入多个DOM节点。</p>
+</li>
+<li>
+<p>不要往页面中插入大量的HTML，一定会卡</p>
+</li>
+<li>
+<p>尽量少触发重排，可以使用节流和防抖来降低重排频率。</p>
+</li>
+<li>
+<p>尽量少用闭包，减少内存占用，避免内存泄漏（只有IE有内存泄露问题）。</p>
+</li>
+<li>
+<p>如果渲染10w条列表数据：用虚拟滚动列表（第三方库）</p>
+<ul>
+<li>
+<blockquote>
+<p><a href="https://juejin.cn/post/6844904183582162957">https://juejin.cn/post/6844904183582162957</a></p>
+</blockquote>
+</li>
+<li>
+<p>监听滚轮事件/触摸事件，记录列表的总偏移量。</p>
+</li>
+<li>
+<p>根据总偏移量计算列表的可视元素起始索引。</p>
+</li>
+<li>
+<p>从起始索引渲染元素至视口底部。</p>
+</li>
+<li>
+<p>当总偏移量更新时，重新渲染可视元素列表。</p>
+</li>
+<li>
+<p>为可视元素列表前后加入缓冲元素。</p>
+</li>
+<li>
+<p>在滚动量比较小时，直接修改可视元素列表的偏移量。</p>
+</li>
+<li>
+<p>在滚动量比较大时（比如拖动滚动条），会重新渲染整个列表。</p>
+</li>
+<li>
+<p>事件节流。</p>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-11-17
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">代码规范</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/">
+            <span class="next-text nav-default">缓存与内容协商</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

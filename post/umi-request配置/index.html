@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.87.0 with theme even" />
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
 
 
 <link rel="canonical" href="https://gsemir0418.github.io/post/umi-request%E9%85%8D%E7%BD%AE/" />
@@ -328,11 +328,11 @@
 <pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">request</span>
     <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/equip/get-all/&#39;</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
-      <span class="nx">setDataSource</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">content</span><span class="p">)</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">content</span><span class="p">)</span>
+    	<span class="nx">setDataSource</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">content</span><span class="p">)</span>
+    	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">content</span><span class="p">)</span>
     <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="p">=&gt;</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
+    	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
     <span class="p">})</span>	
 
 <span class="nx">request</span>

@@ -31,7 +31,7 @@
       <pubDate>Fri, 25 Jun 2021 11:09:51 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</guid>
-      <description>1 生命周期的理解 1.1 引出生命周期 需求： 让指定的文本做显示* */* 隐藏的渐变动画 从完全可见，到彻底消失，耗时2S 点击“不活了”按钮从界面中卸载组件 源</description>
+      <description>1 生命周期的理解 1.1 引出生命周期 需求： 让指定的文本做显示* / 隐藏的渐变动画 从完全可见，到彻底消失，耗时2S 点击“不活了”按钮从界面中卸载组件 源</description>
     </item>
     
     <item>

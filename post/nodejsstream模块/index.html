@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.87.0 with theme even" />
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
 
 
 <link rel="canonical" href="https://gsemir0418.github.io/post/nodejsstream%E6%A8%A1%E5%9D%97/" />
@@ -889,10 +889,10 @@
 
 <span class="kr">const</span> <span class="nx">reportProgress</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Transform</span><span class="p">({</span>
 	<span class="nx">transform</span><span class="p">(</span><span class="nx">chunk</span><span class="p">,</span> <span class="nx">encoding</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">);</span>
+		<span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">);</span>
         <span class="c1">// this.push(chunk)是一样的
 </span><span class="c1"></span>        <span class="c1">// 因为callback总是会运行，所以将chunk写到callback第二个参数，继续传输
-</span><span class="c1"></span>      <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">chunk</span><span class="p">);</span><span class="c1">// 第一个参数表示当出错的时候传null
+</span><span class="c1"></span>		<span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">chunk</span><span class="p">);</span><span class="c1">// 第一个参数表示当出错的时候传null
 </span><span class="c1"></span>	<span class="p">}</span>
 <span class="p">});</span>
 <span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span>

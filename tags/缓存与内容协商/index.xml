@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>缓存与内容协商 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/</link>
+    <description>Recent content in 缓存与内容协商 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 11 Nov 2021 13:09:45 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>缓存与内容协商</title>
+      <link>https://gsemir0418.github.io/post/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/</link>
+      <pubDate>Thu, 11 Nov 2021 13:09:45 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86/</guid>
+      <description>缓存和内容协商又称强缓存（有效期内的缓存）和弱缓存（服务器和浏览器商量是否能缓存的方案） 1 HTTP缓存 例如我们访问百度，百度会发送html文</description>
+    </item>
+    
+  </channel>
+</rss>
