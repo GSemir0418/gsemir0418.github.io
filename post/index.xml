@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 11 Nov 2021 16:23:10 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Nov 2021 17:30:49 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Webpack全解</title>
+      <link>https://gsemir0418.github.io/post/webpack%E5%85%A8%E8%A7%A3/</link>
+      <pubDate>Sun, 21 Nov 2021 17:30:49 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/webpack%E5%85%A8%E8%A7%A3/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>代码写法优化</title>
       <link>https://gsemir0418.github.io/post/%E4%BB%A3%E7%A0%81%E5%86%99%E6%B3%95%E4%BC%98%E5%8C%96/</link>

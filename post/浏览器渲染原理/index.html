@@ -166,7 +166,7 @@
 <ul>
 <li>整体过程包括<code>解析HTML</code>（生成DOM树）、<code>下载CSS</code>、<code>解析CSS</code>（生成CSS树）、<code>下载JS</code>与<code>执行JS</code>五部分。</li>
 </ul>
-<p><img src="%5Cbrowserrender%5Crender2.png" alt="image-20211111103307626"></p>
+<p><img src="/browserrender/render2.png" alt="image-20211111103307626"></p>
 <h1 id="2-html的解析被js阻塞">2 HTML的解析被JS阻塞</h1>
 <ul>
 <li><strong>JS的下载与执行会阻塞HTML的解析</strong></li>
@@ -185,7 +185,7 @@
 <li>若有多个async，则执行顺序以<strong>下载完成的先后顺序</strong>为准</li>
 <li>JS的下载与执行过程与HTML的解析过程的关系图：</li>
 </ul>
-<p><img src="%5Cbrowserrender%5Crender1.png" alt="image-20211111093205174"></p>
+<p><img src="/browserrender/render1.png" alt="image-20211111093205174"></p>
 <ul>
 <li>实际工作中defer&gt;async</li>
 </ul>
@@ -199,12 +199,12 @@
 <ul>
 <li>HTML解析完成后生成DOM树（DOM），CSS解析完成后生成CSS树（CSSOM）。两颗树的示意图如下：</li>
 </ul>
-<p><img src="%5Cbrowserrender%5Cdom.png" alt="image-20211111095024919"></p>
-<p><img src="%5Cbrowserrender%5Ccssom.png" alt="image-20211111095305581"></p>
+<p><img src="/browserrender/dom.png" alt="image-20211111095024919"></p>
+<p><img src="/browserrender/cssom.png" alt="image-20211111095305581"></p>
 <ul>
 <li>两个对象模型会将HTML结构与CSS样式合成一个”渲染树“</li>
 </ul>
-<p><img src="%5Cbrowserrender%5Crendertree.png" alt="image-20211111095452178"></p>
+<p><img src="/browserrender/rendertree.png" alt="image-20211111095452178"></p>
 <ul>
 <li>
 <p>渲染树生成后，还要经历<code>布局（Layout）</code>、<code>绘制（Paint）</code>和<code>合成（Composite）</code>三个步骤</p>
