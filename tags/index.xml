@@ -6,7 +6,34 @@
     <description>Recent content in Tags on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 11 Nov 2021 16:23:10 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Nov 2021 10:38:31 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>for..in</title>
+      <link>https://gsemir0418.github.io/tags/for..in/</link>
+      <pubDate>Tue, 23 Nov 2021 10:38:31 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/for..in/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>for..of</title>
+      <link>https://gsemir0418.github.io/tags/for..of/</link>
+      <pubDate>Tue, 23 Nov 2021 10:38:31 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/for..of/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JavaScript</title>
+      <link>https://gsemir0418.github.io/tags/javascript/</link>
+      <pubDate>Tue, 23 Nov 2021 10:38:31 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>代码规范</title>
       <link>https://gsemir0418.github.io/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</link>
@@ -166,15 +193,6 @@
       <pubDate>Wed, 15 Sep 2021 16:12:05 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/tags/%E5%89%8D%E7%AB%AF/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>JavaScript</title>
-      <link>https://gsemir0418.github.io/tags/javascript/</link>
-      <pubDate>Thu, 02 Sep 2021 16:53:09 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/tags/javascript/</guid>
       <description></description>
     </item>
     

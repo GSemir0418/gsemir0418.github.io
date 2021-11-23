@@ -9,15 +9,64 @@
   </url>
   
   <url>
+    <loc>https://gsemir0418.github.io/categories/</loc>
+    <lastmod>2021-11-23T10:38:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://gsemir0418.github.io/</loc>
-    <lastmod>2021-11-21T17:30:49+08:00</lastmod>
+    <lastmod>2021-11-23T10:38:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gsemir0418.github.io/tags/for..in/</loc>
+    <lastmod>2021-11-23T10:38:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gsemir0418.github.io/post/for..in%E5%92%8Cfor..of/</loc>
+    <lastmod>2021-11-23T10:38:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gsemir0418.github.io/tags/for..of/</loc>
+    <lastmod>2021-11-23T10:38:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gsemir0418.github.io/tags/javascript/</loc>
+    <lastmod>2021-11-23T10:38:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gsemir0418.github.io/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</loc>
+    <lastmod>2021-11-23T10:38:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://gsemir0418.github.io/post/</loc>
-    <lastmod>2021-11-21T17:30:49+08:00</lastmod>
+    <lastmod>2021-11-23T10:38:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gsemir0418.github.io/tags/</loc>
+    <lastmod>2021-11-23T10:38:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -25,20 +74,6 @@
   <url>
     <loc>https://gsemir0418.github.io/post/webpack%E5%85%A8%E8%A7%A3/</loc>
     <lastmod>2021-11-21T17:30:49+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://gsemir0418.github.io/categories/</loc>
-    <lastmod>2021-11-18T13:12:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://gsemir0418.github.io/tags/</loc>
-    <lastmod>2021-11-18T13:12:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -289,13 +324,6 @@
   </url>
   
   <url>
-    <loc>https://gsemir0418.github.io/tags/javascript/</loc>
-    <lastmod>2021-09-10T00:00:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://gsemir0418.github.io/tags/lodash/</loc>
     <lastmod>2021-09-02T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -459,13 +487,6 @@
   <url>
     <loc>https://gsemir0418.github.io/tags/stream/</loc>
     <lastmod>2021-07-08T00:00:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://gsemir0418.github.io/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</loc>
-    <lastmod>2021-09-10T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

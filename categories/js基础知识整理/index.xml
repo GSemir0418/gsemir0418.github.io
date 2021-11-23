@@ -6,7 +6,16 @@
     <description>Recent content in JS基础知识整理 on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 07 Jul 2021 17:30:59 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Nov 2021 10:38:31 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>For..in和for..of</title>
+      <link>https://gsemir0418.github.io/post/for..in%E5%92%8Cfor..of/</link>
+      <pubDate>Tue, 23 Nov 2021 10:38:31 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/for..in%E5%92%8Cfor..of/</guid>
+      <description>1 for&amp;hellip;in 1.1 概念 for...in语句以任意顺序遍历一个对象的除Symbol以外的可枚举属性。 1.2 语法 1 2 for (variable in object) statement variable 在每次迭代时，variable会</description>
+    </item>
+    
     <item>
       <title>Object常用方法整理</title>
       <link>https://gsemir0418.github.io/post/object%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/</link>

@@ -6,7 +6,16 @@
     <description>Recent content in Categories on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 11 Nov 2021 16:23:10 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Nov 2021 10:38:31 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JS基础知识整理</title>
+      <link>https://gsemir0418.github.io/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</link>
+      <pubDate>Tue, 23 Nov 2021 10:38:31 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Web性能优化</title>
       <link>https://gsemir0418.github.io/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
@@ -103,15 +112,6 @@
       <pubDate>Fri, 06 Aug 2021 17:33:55 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/categories/nodejs%E5%85%A8%E8%A7%A3/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>JS基础知识整理</title>
-      <link>https://gsemir0418.github.io/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</link>
-      <pubDate>Wed, 07 Jul 2021 17:30:59 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</guid>
       <description></description>
     </item>
     

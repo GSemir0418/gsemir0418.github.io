@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>For..in和for..of - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 for&amp;hellip;in 1.1 概念 for...in语句以任意顺序遍历一个对象的除Symbol以外的可枚举属性。 1.2 语法 1 2 for (variable in object) statement variable 在每次迭代时，variable会" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/for..in%E5%92%8Cfor..of/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="For..in和for..of" />
+<meta property="og:description" content="1 for&hellip;in 1.1 概念 for...in语句以任意顺序遍历一个对象的除Symbol以外的可枚举属性。 1.2 语法 1 2 for (variable in object) statement variable 在每次迭代时，variable会" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/for..in%E5%92%8Cfor..of/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-23T10:38:31+08:00" />
+<meta property="article:modified_time" content="2021-11-23T10:38:31+08:00" />
+
+<meta itemprop="name" content="For..in和for..of">
+<meta itemprop="description" content="1 for&hellip;in 1.1 概念 for...in语句以任意顺序遍历一个对象的除Symbol以外的可枚举属性。 1.2 语法 1 2 for (variable in object) statement variable 在每次迭代时，variable会"><meta itemprop="datePublished" content="2021-11-23T10:38:31+08:00" />
+<meta itemprop="dateModified" content="2021-11-23T10:38:31+08:00" />
+<meta itemprop="wordCount" content="2136">
+<meta itemprop="keywords" content="JavaScript,for..in,for..of," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="For..in和for..of"/>
+<meta name="twitter:description" content="1 for&hellip;in 1.1 概念 for...in语句以任意顺序遍历一个对象的除Symbol以外的可枚举属性。 1.2 语法 1 2 for (variable in object) statement variable 在每次迭代时，variable会"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">For..in和for..of</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-23 </span>
+        <div class="post-category">
+            <a href="/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"> JS基础知识整理 </a>
+            </div>
+          <span class="more-meta"> 2136 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-forin">1 for&hellip;in</a>
+      <ul>
+        <li><a href="#11-概念">1.1 概念</a></li>
+        <li><a href="#12-语法">1.2 语法</a></li>
+        <li><a href="#13-描述">1.3 描述</a></li>
+        <li><a href="#14-示例">1.4 示例</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-forof">2 *for&hellip;of</a>
+      <ul>
+        <li><a href="#21-概念">2.1 概念</a></li>
+        <li><a href="#22-语法">2.2 语法</a></li>
+        <li><a href="#23-描述">2.3 描述</a></li>
+        <li><a href="#24-示例">2.4 示例</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-区别">3 区别</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-forin">1 for&hellip;in</h1>
+<h2 id="11-概念">1.1 概念</h2>
+<p><strong><code>for...in</code>语句</strong>以<strong>任意顺序</strong>遍历一个对象的除Symbol以外的<strong>可枚举属性</strong>。</p>
+<h2 id="12-语法">1.2 语法</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">for</span> <span class="p">(</span><span class="nx">variable</span> <span class="k">in</span> <span class="nx">object</span><span class="p">)</span>
+  <span class="nx">statement</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><code>variable</code></p>
+<p>在每次迭代时，variable会被赋值为不同的属性名。</p>
+</li>
+<li>
+<p><code>object</code></p>
+<p>非Symbol类型的可枚举属性被迭代的对象。</p>
+</li>
+</ul>
+<h2 id="13-描述">1.3 描述</h2>
+<p><code>for...in</code> 循环只遍历可枚举属性。循环将遍历对象本身的所有可枚举属性，以及对象从其构造函数原型中继承的属性（更接近原型链中对象的属性覆盖原型属性）。</p>
+<p><strong>提示：</strong><code>for...in</code><strong>不应该用于迭代一个 Array</strong>。</p>
+<ul>
+<li>数组索引只是具有整数名称的枚举属性，并且与通用对象属性相同。不能保证<code>for ... in</code>将以<strong>任何特定的顺序</strong>返回索引。</li>
+<li><code>for ... in</code>循环语句<strong>将返回所有可枚举</strong>属性，不仅是数组索引，还包括非整数类型的名称和继承的那些。</li>
+</ul>
+<p>因为迭代的顺序是依赖于执行环境的，所以数组遍历<strong>不一定按次序</strong>访问元素。因此当迭代访问顺序很重要的数组时，最好用整数索引去进行<code>for</code>循环（或者使用<code>Array.prototype.forEach()</code>或<code>for...of</code>循环）。</p>
+<p>如果你只要考虑对象本身的属性，而不是它的原型，那么使用 <code>getOwnPropertyNames()</code>或执行<code>hasOwnProperty()</code>来确定某属性是否是对象本身的属性（也能使用<code>propertyIsEnumerable</code>。</p>
+<p><code>for-in</code>循环的每次迭代都会产生更多开销，因此要比其他循环类型慢，一般速度为其他类型循环的 1/7。因此，除非明确需要迭代一个<strong>属性数量未知</strong>的对象，否则应避免使用for-in循环。如果需要遍历一个数量有限的已知属性列表，使用其他循环会更快，</p>
+<h2 id="14-示例">1.4 示例</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 基本使用
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span><span class="mi">3</span><span class="p">};</span>    
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">prop</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;obj.&#34;</span> <span class="o">+</span> <span class="nx">prop</span> <span class="o">+</span> <span class="s2">&#34; = &#34;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">prop</span><span class="p">]);</span>
+<span class="p">}</span>
+<span class="c1">// Output:
+</span><span class="c1">// &#34;obj.a = 1&#34;
+</span><span class="c1">// &#34;obj.b = 2&#34;
+</span><span class="c1">// &#34;obj.c = 3&#34;
+</span><span class="c1"></span>
+<span class="c1">// 仅遍历自身属性
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">triangle</span> <span class="o">=</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span> <span class="mi">3</span><span class="p">};</span>
+<span class="kd">function</span> <span class="nx">ColoredTriangle</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// triangle成为了ColorTriangle原型链上的属性
+</span><span class="c1"></span><span class="nx">ColoredTriangle</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ColoredTriangle</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">prop</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 利用hasOwnProperty筛选出自身属性
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">prop</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`obj.</span><span class="si">${</span><span class="nx">prop</span><span class="si">}</span><span class="sb"> = </span><span class="si">${</span><span class="nx">obj</span><span class="p">[</span><span class="nx">prop</span><span class="p">]</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+  <span class="p">}</span> 
+<span class="p">}</span>
+<span class="c1">// Output:
+</span><span class="c1">// &#34;obj.color = red&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="2-forof">2 *for&hellip;of</h1>
+<h2 id="21-概念">2.1 概念</h2>
+<p><strong><code>for...of</code>语句</strong>在可迭代对象（包括 Array，Map，Set，String，TypedArray，arguments对象等等）上创建一个迭代循环，调用自定义迭代钩子，并为每个不同属性的值执行语句</p>
+<h2 id="22-语法">2.2 语法</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">for</span> <span class="p">(</span><span class="nx">variable</span> <span class="k">of</span> <span class="nx">iterable</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//statements
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><code>variable</code></p>
+<p>在每次迭代中，将不同属性的<strong>值</strong>分配给变量。</p>
+</li>
+<li>
+<p><code>iterable</code></p>
+<p>被迭代枚举其属性的对象。</p>
+</li>
+</ul>
+<h2 id="23-描述">2.3 描述</h2>
+<ul>
+<li>
+<p>特点</p>
+<ul>
+<li>
+<p>跟<code>forEach</code>相比，可以正确响应break, continue, return。</p>
+</li>
+<li>
+<p>for-of 循环不仅<strong>支持数组</strong>，还支持大多数<strong>类数组对象</strong>，例如 DOM nodelist 对象。</p>
+</li>
+<li>
+<p>for-of 循环也支持<strong>字符串遍历</strong>，它将字符串视为一系列 Unicode 字符来进行遍历。</p>
+</li>
+<li>
+<p>for-of 也支持 <strong>Map</strong> 和 <strong>Set</strong> （两者均为 ES6 中新增的类型）对象遍历。</p>
+</li>
+<li>
+<p>这是最简洁、最直接的遍历数组元素的语法。</p>
+</li>
+<li>
+<p>这个方法避开了for-in循环的所有缺陷。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>但需要注意的是，for-of循环<strong>不支持普通对象</strong>，但如果你想迭代一个对象的属性，你可以用<code>for-in</code>循环（这也是它的本职工作）。</p>
+</li>
+</ul>
+<h2 id="24-示例">2.4 示例</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// 迭代Array
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">iterable</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">value</span> <span class="k">of</span> <span class="nx">iterable</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">value</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// 11
+</span><span class="c1">// 21
+</span><span class="c1">// 31
+</span><span class="c1"></span>
+<span class="c1">// 迭代string
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">iterable</span> <span class="o">=</span> <span class="s2">&#34;boo&#34;</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">value</span> <span class="k">of</span> <span class="nx">iterable</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// &#34;b&#34;
+</span><span class="c1">// &#34;o&#34;
+</span><span class="c1">// &#34;o&#34;
+</span><span class="c1"></span>
+<span class="c1">// 迭代Map
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">iterable</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([[</span><span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s2">&#34;c&#34;</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]);</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">entry</span> <span class="k">of</span> <span class="nx">iterable</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">entry</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// [&#34;a&#34;, 1]
+</span><span class="c1">// [&#34;b&#34;, 2]
+</span><span class="c1">// [&#34;c&#34;, 3]
+</span><span class="c1"></span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="p">[</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">]</span> <span class="k">of</span> <span class="nx">iterable</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// 1
+</span><span class="c1">// 2
+</span><span class="c1">// 3
+</span><span class="c1"></span>
+<span class="c1">// 迭代Set
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">iterable</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">value</span> <span class="k">of</span> <span class="nx">iterable</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// 1
+</span><span class="c1">// 2
+</span><span class="c1">// 3
+</span><span class="c1"></span>
+<span class="c1">// 迭代arguments对象
+</span><span class="c1"></span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">argument</span> <span class="k">of</span> <span class="nx">arguments</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">argument</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">})(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+
+<span class="c1">// 1
+</span><span class="c1">// 2
+</span><span class="c1">// 3
+</span><span class="c1"></span>
+<span class="c1">// 迭代DOM集合
+</span><span class="c1">// 迭代 DOM 元素集合，比如一个NodeList对象：下面的例子演示给每一个 article 标签内的 p 标签添加一个 &#34;read&#34; 类。
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">articleParagraphs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&#34;article &gt; p&#34;</span><span class="p">);</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">paragraph</span> <span class="k">of</span> <span class="nx">articleParagraphs</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">paragraph</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&#34;read&#34;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-区别">3 区别</h1>
+<p>无论是<code>for...in</code>还是<code>for...of</code>语句都是迭代一些东西。它们之间的主要区别在于它们的迭代方式。</p>
+<ul>
+<li><code>for...in</code>语句以<strong>任意顺序</strong>迭代对象的<strong>可枚举属性</strong>。（适合<strong>对象属性</strong>遍历）</li>
+<li><code>for...of</code> 语句<strong>遍历可迭代对象</strong>定义要迭代的<strong>数据</strong>。（适合<strong>数组</strong>遍历）</li>
+</ul>
+<p>以下示例显示了与<strong>Array</strong>一起使用时，<code>for...of</code>循环和<code>for...in</code>循环之间的区别。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">objCustom</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span> 
+<span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">arrCustom</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
+<span class="cm">/* 每个对象将继承objCustom属性，并且作为Array的每个对象将继承arrCustom属性，由于继承和原型链，对象iterable继承属性objCustom和arrCustom。*/</span>
+
+<span class="kd">let</span> <span class="nx">iterable</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">];</span>
+<span class="nx">iterable</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">iterable</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span> <span class="c1">// 0, 1, 2, &#34;foo&#34;, &#34;arrCustom&#34;, &#34;objCustom&#34;
+</span><span class="c1"></span><span class="p">}</span>
+<span class="cm">/*此循环仅以原始插入顺序记录iterable对象的可枚举属性。它不记录数组元素3, 5, 7 或hello，因为这些不是枚举属性。但是它记录了数组索引以及arrCustom和objCustom。*/</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">iterable</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">iterable</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span> <span class="c1">// 0, 1, 2, &#34;foo&#34;
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+<span class="cm">/*这个循环类似于第一个，但是它使用hasOwnProperty()来检查，如果找到的枚举属性是对象自己的（不是继承的）。如果是，该属性被记录。记录的属性是0, 1, 2和foo，因为它们是自身的属性（不是继承的）。属性arrCustom和objCustom不会被记录，因为它们是继承的。*/</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">of</span> <span class="nx">iterable</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span> <span class="c1">// 3, 5, 7
+</span><span class="c1"></span><span class="p">}</span>
+<span class="cm">/*该循环迭代并记录iterable作为可迭代对象定义的迭代值，这些是数组元素3, 5, 7，而不是任何对象的属性。*/</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-11-23
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/javascript/">JavaScript</a>
+          <a href="/tags/for..in/">for..in</a>
+          <a href="/tags/for..of/">for..of</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/webpack%E5%85%A8%E8%A7%A3/">
+            <span class="next-text nav-default">Webpack全解</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
