@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>JS运算符 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 逻辑运算符 1.1 基本用法 ||（或） 1 if(a || b){} a 或者 b 有一个为真，返回true。 &amp;amp;&amp;amp;（与） 1 if (a &amp;amp;&amp;amp; b) {} a 和 b 都为真，才会返回tru" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="JS运算符" />
+<meta property="og:description" content="1 逻辑运算符 1.1 基本用法 ||（或） 1 if(a || b){} a 或者 b 有一个为真，返回true。 &amp;&amp;（与） 1 if (a &amp;&amp; b) {} a 和 b 都为真，才会返回tru" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-02T14:17:20+08:00" />
+<meta property="article:modified_time" content="2021-12-02T14:17:20+08:00" />
+
+<meta itemprop="name" content="JS运算符">
+<meta itemprop="description" content="1 逻辑运算符 1.1 基本用法 ||（或） 1 if(a || b){} a 或者 b 有一个为真，返回true。 &amp;&amp;（与） 1 if (a &amp;&amp; b) {} a 和 b 都为真，才会返回tru"><meta itemprop="datePublished" content="2021-12-02T14:17:20+08:00" />
+<meta itemprop="dateModified" content="2021-12-02T14:17:20+08:00" />
+<meta itemprop="wordCount" content="1800">
+<meta itemprop="keywords" content="JavaScript,运算符," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JS运算符"/>
+<meta name="twitter:description" content="1 逻辑运算符 1.1 基本用法 ||（或） 1 if(a || b){} a 或者 b 有一个为真，返回true。 &amp;&amp;（与） 1 if (a &amp;&amp; b) {} a 和 b 都为真，才会返回tru"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">JS运算符</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-02 </span>
+        <div class="post-category">
+            <a href="/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"> JS基础知识整理 </a>
+            </div>
+          <span class="more-meta"> 1800 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-逻辑运算符">1 逻辑运算符</a>
+      <ul>
+        <li><a href="#11-基本用法">1.1 基本用法</a></li>
+        <li><a href="#12-短路用法">1.2 短路用法</a></li>
+        <li><a href="#13-赋值用法">1.3 赋值用法</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-零合并操作符">2 零合并操作符</a></li>
+    <li><a href="#3-可选链操作符">3 可选链操作符</a></li>
+    <li><a href="#4-按位取反操作符">4 按位取反操作符</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-逻辑运算符">1 逻辑运算符</h1>
+<h2 id="11-基本用法">1.1 基本用法</h2>
+<ul>
+<li><code>||</code>（或）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">a</span> <span class="o">||</span> <span class="nx">b</span><span class="p">){}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>a 或者 b 有一个为真，返回<code>true</code>。</p>
+<ul>
+<li><code>&amp;&amp;</code>（与）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span> <span class="p">(</span><span class="nx">a</span> <span class="o">&amp;&amp;</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>a 和 b 都为真，才会返回<code>true</code>。</p>
+<ul>
+<li><code>!</code>（非）</li>
+</ul>
+<p>对 a 的值取反。</p>
+<ul>
+<li><code>!!</code>（强制类型转换）</li>
+</ul>
+<p>转换类型为<code>boolean</code>，这样做的目的就是保证值只能在true/false中取。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">num</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">typeof</span> <span class="o">!!</span> <span class="p">(</span><span class="nx">num</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// boolean
+</span><span class="c1">// tips: 判断是否为奇数，与!!(num % 2)同理
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="12-短路用法">1.2 短路用法</h2>
+<p>在<code>&amp;&amp;</code>的运算中，代码从左往右执行，<strong>找假值</strong>，如果是真就继续执行下一个，找不到就执行最后一个</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 遇到假值，返回这个假值，后续不再执行
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="mi">1</span> <span class="p">);</span> <span class="c1">// null
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="mi">2</span> <span class="p">);;</span><span class="c1">// 0
+</span><span class="c1">// 都为真，返回最后一个值
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="mi">123</span> <span class="o">&amp;&amp;</span> <span class="s1">&#39;中国&#39;</span><span class="p">);</span> <span class="c1">// &#39;中国&#39; 
+</span><span class="c1">// 计算表达式a的运算结果，如果为true，则执行表达式b，并返回b的结果
+</span><span class="c1"></span><span class="nx">表达式a</span> <span class="o">&amp;&amp;</span> <span class="nx">表达式b</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在<code>||</code>的运算中，代码从左往右执行，<strong>找真值</strong>，如果是假就继续执行下一个，找不到就执行最后一个</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 遇到真值，返回这个真值，后续不会执行
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="mi">123</span> <span class="o">||</span> <span class="s1">&#39;中国&#39;</span><span class="p">);</span> <span class="c1">// 123
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">0</span> <span class="o">||</span> <span class="mi">1</span> <span class="o">||</span> <span class="mi">2</span><span class="p">);</span><span class="c1">//1
+</span><span class="c1">// 都为假，返回最后一个值
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="kc">undefined</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// 0 
+</span><span class="c1">// 计算表达式a的运算结果，如果为false，则执行表达式b，并返回b的结果
+</span><span class="c1"></span><span class="nx">表达式a</span> <span class="o">||</span> <span class="nx">表达式b</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们可以利用短路运算符的特性对逻辑判断（switch\if..else）进行简写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">a</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">){</span>
+  <span class="nx">b</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">a</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">){</span>
+  <span class="nx">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+  <span class="nx">b</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="p">}</span>
+<span class="c1">//可以写成：
+</span><span class="c1"></span><span class="nx">b</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="nx">a</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="mi">2</span><span class="p">)</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="13-赋值用法">1.3 赋值用法</h2>
+<ul>
+<li>或等于(<code>||=</code>)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">a</span> <span class="o">||=</span> <span class="nx">b</span> <span class="nx">等同于</span> <span class="nx">a</span> <span class="o">||</span> <span class="p">(</span><span class="nx">a</span> <span class="o">=</span> <span class="nx">b</span><span class="p">);</span> 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>且等于(<code>&amp;&amp;=</code>)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">a</span> <span class="o">&amp;&amp;=</span> <span class="nx">b</span> <span class="nx">等同于</span> <span class="nx">a</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">a</span> <span class="o">=</span> <span class="nx">b</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="2-零合并操作符">2 零合并操作符</h1>
+<ul>
+<li>零合并操作符 <code>??</code> 是一个逻辑操作符，只会在左侧的操作数为 <code>null</code> 或者 <code>undefined</code> 时，返回右侧操作数，否则返回左侧操作数。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">expr1</span> <span class="o">??</span> <span class="nx">expr2</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>空值合并操作符一般用来<strong>为常量提供默认值</strong>，保证常量不为 <code>null</code> 或者 <code>undefined</code>，以前一般使用 <code>||</code> 来做这件事 <code>variable = variable || 'bar'</code>。</p>
+</li>
+<li>
+<p>然而，由于 <code>||</code> 是一个布尔逻辑运算符，左侧的操作数会被强制转换成布尔值用于求值。任何假值（<code>0</code>， <code>''</code>， <code>NaN</code>， <code>null</code>， <code>undefined</code>）都不会被返回。这导致如果你使用 <code>0</code>、<code>''</code>、<code>NaN</code> 、false作为有效值，就会出现不可预料的后果。</p>
+</li>
+<li>
+<p><strong><code>??</code> 可以理解为是 <code>||</code> 的升级版。</strong></p>
+</li>
+</ul>
+<p>可以在浏览器中执行下面的代码感受一下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kc">undefined</span> <span class="o">||</span> <span class="s1">&#39;default&#39;</span> <span class="c1">// &#39;default&#39;
+</span><span class="c1"></span><span class="kc">null</span> <span class="o">||</span> <span class="s1">&#39;default&#39;</span>      <span class="c1">// &#39;default&#39;
+</span><span class="c1"></span><span class="kc">false</span> <span class="o">||</span> <span class="s1">&#39;default&#39;</span>     <span class="c1">// &#39;default&#39;
+</span><span class="c1"></span><span class="mi">0</span> <span class="o">||</span> <span class="s1">&#39;default&#39;</span>         <span class="c1">// &#39;default&#39;
+</span><span class="c1"></span>
+<span class="kc">undefined</span> <span class="o">??</span> <span class="s1">&#39;default&#39;</span> <span class="c1">// &#39;default&#39;
+</span><span class="c1"></span><span class="kc">null</span> <span class="o">??</span> <span class="s1">&#39;default&#39;</span>      <span class="c1">// &#39;default&#39;
+</span><span class="c1"></span><span class="kc">false</span> <span class="o">??</span> <span class="s1">&#39;default&#39;</span>     <span class="c1">// &#39;false&#39;
+</span><span class="c1"></span><span class="mi">0</span> <span class="o">??</span> <span class="s1">&#39;default&#39;</span>         <span class="c1">// 0
+</span></code></pre></td></tr></table>
+</div>
+</div><p>另外在赋值的时候，可以运用<strong>逻辑空分配符</strong> <code>??=</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">b</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span> <span class="mi">10</span> <span class="p">}</span>
+<span class="c1">// obj.b ? null : obj.b = 20
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">b</span> <span class="o">??=</span> <span class="mi">20</span> <span class="c1">// 等效于 obj.b ?? (obj.b = 20)
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">c</span> <span class="o">??=</span> <span class="mi">20</span> <span class="c1">// 等效于 obj.c ?? (obj.c = 20)
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="c1">// { b: 20, c: 10 }
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="3-可选链操作符">3 可选链操作符</h1>
+<ul>
+<li>
+<p>可选链操作符 <code>?.</code> 允许读取位于连接对象链深处的属性的值，而不必验证链中的每个引用是否有效。</p>
+</li>
+<li>
+<p><code>?.</code> 操作符的功能类似于 <code>.</code> 链式操作符，不同之处在于，在引用为 <code>null</code> 或者 <code>undefined</code> 的情况下不会引起错误，该表达式短路返回值是 <code>undefined</code>。</p>
+</li>
+<li>
+<p>当尝试<strong>访问可能不存在的对象属性</strong>时，可选链操作符将会使表达式更短、更简明。</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">a</span><span class="o">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span>
+  <span class="nx">b</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">c</span><span class="o">:</span> <span class="s1">&#39;bar&#39;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">b</span><span class="o">?</span><span class="p">.</span><span class="nx">c</span><span class="p">)</span> <span class="c1">// 输出 bar
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">d</span><span class="o">?</span><span class="p">.</span><span class="nx">c</span><span class="p">)</span> <span class="c1">// 输出 undefined
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">func</span><span class="p">())</span> <span class="c1">// Uncaught TypeError: obj.func is not a function
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">func</span><span class="o">?</span><span class="p">.())</span> <span class="c1">// 不报错，输出 undefined
+</span><span class="c1"></span><span class="nx">复制代码</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>以前可能会通过 <code>obj &amp;&amp; obj.a &amp;&amp; obj.a.b</code> 来获取一个深度嵌套的子属性，现在可以直接<strong>简写</strong>为 <code>obj?.a?.b</code> 即可。</p>
+</li>
+<li>
+<p>可选链除了可以用在获取对象的属性，还可以用在<strong>数组的索引</strong> <code>arr?.[index]</code>，也可以用在函数的判断 <code>func?.(args)</code>，当尝试调用一个可能不存在的方法时也可以使用可选链,在函数不存在时返回 <code>undefined</code> 而不是直接抛异常。</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">someInterface</span><span class="p">.</span><span class="nx">customFunc</span><span class="o">?</span><span class="p">.()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4-按位取反操作符">4 按位取反操作符</h1>
+<ul>
+<li>按位非操作符由一个波浪线<code>~</code>表示，执行按位非的结果就是返回数值的反码</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">num5</span> <span class="o">=</span> <span class="mi">25</span><span class="p">;</span><span class="c1">//25 等于 00000000000000000000000000011001
+</span><span class="c1"></span>
+<span class="kd">let</span> <span class="nx">num6</span> <span class="o">=</span> <span class="o">~</span><span class="nx">num5</span><span class="p">;</span><span class="c1">//转换为 11111111111111111111111111100110
+</span><span class="c1"></span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">num6</span><span class="p">);</span><span class="c1">//输出 &#34;-26&#34;
+</span><span class="c1"></span>
+<span class="c1">// 相当于 -1减去当前值 或 相当于是对数值求负后减1
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>立即执行函数：本质上就是将函数声明变成一个表达式，因此可以解析完直接调用。</li>
+<li>函数前加上<code>~</code>，其作用是把函数声明转换为表达式，这样就可以直接运行。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="o">~</span><span class="kd">function</span> <span class="nx">sayHello</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">);</span>
+<span class="p">}()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这种简写只能用于无返回值的函数，否则会对函数的返回值进行运算，这样可能会导致最终的结果与期望值不一致。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="o">!</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="mi">1</span><span class="p">}()</span><span class="c1">//false
+</span><span class="c1"></span><span class="o">~</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="mi">1</span><span class="p">}()</span><span class="c1">//-2
+</span><span class="c1"></span><span class="o">-</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="kc">false</span><span class="p">}()</span><span class="c1">//0
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>将<code>-1</code>转换为假值（应用于字符串的indexOf方法）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">str</span><span class="o">=</span><span class="s1">&#39;haha&#39;</span>
+<span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="nx">str</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)){</span>  <span class="c1">// 这样更加简洁
+</span><span class="c1"></span>	<span class="p">...</span>
+<span class="p">}</span>
+<span class="c1">// 数组的indexOf可能会返回0，因此不建议使用~符号
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>将Boolean转成1和0</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="o">~~</span><span class="kc">true</span><span class="o">===</span><span class="mi">1</span> 
+ <span class="o">~~</span><span class="kc">false</span><span class="o">===</span><span class="mi">0</span>
+ <span class="c1">// 其实还有更精简的写法 +false 和 +true
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>去小数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="o">~~</span> <span class="mf">1.5</span> <span class="o">===</span> <span class="mi">1</span>
+<span class="o">~~</span> <span class="o">-</span><span class="mf">1.5</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span> <span class="c1">// 注意这里和floor（）就不同了如果用floor 得到的是-2
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-12-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/javascript/">JavaScript</a>
+          <a href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/">运算符</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/golang/">
+            <span class="next-text nav-default">Golang</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

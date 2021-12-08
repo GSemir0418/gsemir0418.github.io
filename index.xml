@@ -6,7 +6,7 @@
     <description>Recent content on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 23 Nov 2021 10:38:31 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Dec 2021 14:17:20 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>https://gsemir0418.github.io/about/</link>
@@ -17,7 +17,43 @@
     </item>
     
     <item>
-      <title>For..in和for..of</title>
+      <title>JS运算符</title>
+      <link>https://gsemir0418.github.io/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+      <pubDate>Thu, 02 Dec 2021 14:17:20 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
+      <description>1 逻辑运算符 1.1 基本用法 ||（或） 1 if(a || b){} a 或者 b 有一个为真，返回true。 &amp;amp;&amp;amp;（与） 1 if (a &amp;amp;&amp;amp; b) {} a 和 b 都为真，才会返回tru</description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>https://gsemir0418.github.io/post/golang/</link>
+      <pubDate>Mon, 29 Nov 2021 09:45:56 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/golang/</guid>
+      <description>1 安装 https://golang.google.cn/dl/ 2 Golang语言特性 2.1 优势 极简单的部署方式 可直接变成成机器码 不依赖其他库 直接运行即可部署 静态类型语言 编译过程就可以检查出来隐藏的大</description>
+    </item>
+    
+    <item>
+      <title>手写深拷贝</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D/</link>
+      <pubDate>Tue, 23 Nov 2021 16:15:44 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D/</guid>
+      <description>1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 最简单的方法 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函</description>
+    </item>
+    
+    <item>
+      <title>fetch与axios</title>
+      <link>https://gsemir0418.github.io/post/fetch%E4%B8%8Eaxios/</link>
+      <pubDate>Tue, 23 Nov 2021 15:53:56 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/fetch%E4%B8%8Eaxios/</guid>
+      <description>一句话总结：Ajax是异步请求的统称。axios和fetch都是利用promise封装实现的ajax。只不过fetch是浏览器亲生的，axi</description>
+    </item>
+    
+    <item>
+      <title>for..in和for..of</title>
       <link>https://gsemir0418.github.io/post/for..in%E5%92%8Cfor..of/</link>
       <pubDate>Tue, 23 Nov 2021 10:38:31 +0800</pubDate>
       

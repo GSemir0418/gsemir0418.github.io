@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Golang on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/categories/golang/</link>
+    <description>Recent content in Golang on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 29 Nov 2021 09:45:56 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang</title>
+      <link>https://gsemir0418.github.io/post/golang/</link>
+      <pubDate>Mon, 29 Nov 2021 09:45:56 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/golang/</guid>
+      <description>1 安装 https://golang.google.cn/dl/ 2 Golang语言特性 2.1 优势 极简单的部署方式 可直接变成成机器码 不依赖其他库 直接运行即可部署 静态类型语言 编译过程就可以检查出来隐藏的大</description>
+    </item>
+    
+  </channel>
+</rss>

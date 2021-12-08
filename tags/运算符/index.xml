@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>运算符 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+    <description>Recent content in 运算符 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 02 Dec 2021 14:17:20 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JS运算符</title>
+      <link>https://gsemir0418.github.io/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+      <pubDate>Thu, 02 Dec 2021 14:17:20 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
+      <description>1 逻辑运算符 1.1 基本用法 ||（或） 1 if(a || b){} a 或者 b 有一个为真，返回true。 &amp;amp;&amp;amp;（与） 1 if (a &amp;amp;&amp;amp; b) {} a 和 b 都为真，才会返回tru</description>
+    </item>
+    
+  </channel>
+</rss>

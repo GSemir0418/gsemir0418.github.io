@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>面试题 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+    <description>Recent content in 面试题 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 23 Nov 2021 16:15:44 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手写深拷贝</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D/</link>
+      <pubDate>Tue, 23 Nov 2021 16:15:44 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D/</guid>
+      <description>1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 最简单的方法 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函</description>
+    </item>
+    
+    <item>
+      <title>每日一题 CSS</title>
+      <link>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-css/</link>
+      <pubDate>Wed, 10 Nov 2021 19:45:19 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-css/</guid>
+      <description>1 BFC 1.1 BFC是什么 常见定位方案 普通流：元素按照其在HTML中的先后位置至上而下布局，行内元素由左至右排列，占满一行后换行，块级元素占满整行。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,9 +6,18 @@
     <description>Recent content in JavaScript on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 23 Nov 2021 10:38:31 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Dec 2021 14:17:20 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>For..in和for..of</title>
+      <title>JS运算符</title>
+      <link>https://gsemir0418.github.io/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+      <pubDate>Thu, 02 Dec 2021 14:17:20 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
+      <description>1 逻辑运算符 1.1 基本用法 ||（或） 1 if(a || b){} a 或者 b 有一个为真，返回true。 &amp;amp;&amp;amp;（与） 1 if (a &amp;amp;&amp;amp; b) {} a 和 b 都为真，才会返回tru</description>
+    </item>
+    
+    <item>
+      <title>for..in和for..of</title>
       <link>https://gsemir0418.github.io/post/for..in%E5%92%8Cfor..of/</link>
       <pubDate>Tue, 23 Nov 2021 10:38:31 +0800</pubDate>
       
