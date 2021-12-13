@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 02 Dec 2021 14:17:20 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Dec 2021 09:57:36 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>每日一题-JavaScript</title>
+      <link>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98javascript/</link>
+      <pubDate>Wed, 08 Dec 2021 09:57:36 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98javascript/</guid>
+      <description>1 JS继承的方式及优缺点 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对</description>
+    </item>
+    
     <item>
       <title>JS运算符</title>
       <link>https://gsemir0418.github.io/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/</link>

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>每日一题-JavaScript - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 JS继承的方式及优缺点 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98javascript/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="每日一题-JavaScript" />
+<meta property="og:description" content="1 JS继承的方式及优缺点 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98javascript/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-08T09:57:36+08:00" />
+<meta property="article:modified_time" content="2021-12-08T09:57:36+08:00" />
+
+<meta itemprop="name" content="每日一题-JavaScript">
+<meta itemprop="description" content="1 JS继承的方式及优缺点 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对"><meta itemprop="datePublished" content="2021-12-08T09:57:36+08:00" />
+<meta itemprop="dateModified" content="2021-12-08T09:57:36+08:00" />
+<meta itemprop="wordCount" content="1503">
+<meta itemprop="keywords" content="面试,JavaScript," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="每日一题-JavaScript"/>
+<meta name="twitter:description" content="1 JS继承的方式及优缺点 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">每日一题-JavaScript</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-08 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
+            </div>
+          <span class="more-meta"> 1503 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>1 JS继承的方式及优缺点</p>
+<ul>
+<li>
+<p>原型与原型链</p>
+<ul>
+<li>
+<p><strong>函数本身</strong>作为<strong>原型对象</strong>的<strong>构造函数</strong></p>
+</li>
+<li>
+<p>所有对象的祖先原型都是<code>Object.prototype</code></p>
+</li>
+<li>
+<p>实例对象会改变原型对象的<strong>引用类型属性</strong>（而构造函数中的属性不会受到影响）</p>
+</li>
+<li>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 构造函数
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">Parent</span><span class="p">(){</span>
+  <span class="c1">// 构造函数的属性，实例化时会复制到实例对象上
+</span><span class="c1"></span>  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="p">}</span>
+<span class="c1">// 原型对象的属性，实例化时不会直接复制到实例对象上
+</span><span class="c1">// 实例对象会改变原型对象中的引用类型属性
+</span><span class="c1"></span><span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;gsq&#39;</span>
+<span class="c1">// 实例化Parent为对象p
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parent</span><span class="p">()</span>
+<span class="c1">// 也可以直接通过原型对象上的构造函数进行实例化
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span>
+<span class="c1">// p可以访问原型对象上的name属性
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="c1">// &#39;gsq&#39;
+</span><span class="c1">// 实例对象上的同名属性会覆盖原型对象的属性
+</span><span class="c1"></span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;zs&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>访问原型对象的方式</p>
+<ul>
+<li>
+<p><code>构造函数.prototype</code></p>
+</li>
+<li>
+<p><code>实例对象.__proto__</code>（不推荐）</p>
+</li>
+<li>
+<p><code>Object.getPrototypeOf(实例对象)</code>（推荐）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>继承</p>
+<ul>
+<li>
+<p><strong>原型链继承</strong>：</p>
+<ul>
+<li>
+<p><strong>子类的原型对象指向父类的实例对象</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 构造函数Parent
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">Parent</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// 构造函数中的实例属性
+</span><span class="c1"></span>  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;gsq&#39;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="c1">// 原型属性
+</span><span class="c1"></span><span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">array2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="c1">// 原型方法
+</span><span class="c1"></span><span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">say</span><span class="p">(){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;say something&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 构造函数Child
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">Child</span> <span class="p">()</span> <span class="p">{}</span>
+
+<span class="c1">// 原型链继承核心
+</span><span class="c1"></span><span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parent</span><span class="p">()</span>
+<span class="c1">// 可有可无的细节：
+</span><span class="c1">// 重新建立子类实例与子类构造函数的联系
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="s2">&#34;constructor&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">value</span><span class="o">:</span> <span class="nx">Child</span><span class="p">,</span>
+  <span class="nx">enumerable</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">writable</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">})</span>
+
+<span class="c1">// 实例化Child
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">c1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Child</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">c2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Child</span><span class="p">()</span>
+<span class="c1">// 实例对象c能够访问到Parent构造函数的实例属性以及Parent原型对象的属性
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c1</span><span class="p">.</span><span class="nx">array</span><span class="p">)</span> <span class="c1">// [1, 2, 3]
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c2</span><span class="p">.</span><span class="nx">array2</span><span class="p">)</span> <span class="c1">// [4, 5 ,6]
+</span><span class="c1"></span><span class="nx">c1</span><span class="p">.</span><span class="nx">say</span><span class="p">()</span>
+<span class="nx">c2</span><span class="p">.</span><span class="nx">say</span><span class="p">()</span>
+
+<span class="cm">/* 重点来啦 */</span>
+<span class="c1">// 尝试改变对象继承的属性
+</span><span class="c1"></span><span class="nx">c1</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;zs&#39;</span>
+<span class="nx">c1</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nx">c1</span><span class="p">.</span><span class="nx">array2</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="c1">// 会发现实例对象c2继承的引用属性发生了改变
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c2</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="c1">// 仍然是gsq
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c2</span><span class="p">.</span><span class="nx">array</span><span class="p">)</span> <span class="c1">// [1, 2, 3, 4]
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c2</span><span class="p">.</span><span class="nx">array2</span><span class="p">)</span> <span class="c1">// [4, 5 ,6 ,7]
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>优点：实现了原型对象属性与方法的继承</p>
+</li>
+<li>
+<p>缺点：存在引用值共享的问题，无法实现多继承</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>构造函数继承</strong></p>
+<ul>
+<li>
+<p>子类构造函数借用父类构造函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 父类构造函数
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">Parent</span><span class="p">(){</span>
+  <span class="c1">// 实例属性（引用类型）
+</span><span class="c1"></span>  <span class="k">this</span><span class="p">.</span><span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="c1">// 原型属性
+</span><span class="c1"></span><span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;gsq&#39;</span>
+<span class="c1">// 子类构造函数
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">Son</span><span class="p">(){</span>
+  <span class="c1">// 借用父类的构造函数
+</span><span class="c1"></span>  <span class="c1">// 变更Parent执行时内部的this指向为实例对象
+</span><span class="c1"></span>  <span class="nx">Parent</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 实例化
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">s1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Son</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">s2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Son</span><span class="p">()</span>
+<span class="c1">// 解决了引用值不会共享的问题
+</span><span class="c1"></span><span class="nx">s1</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s2</span><span class="p">.</span><span class="nx">array</span><span class="p">)</span> <span class="c1">// [1,2,3]
+</span><span class="c1">// 但访问不了父类原型对象的属性与方法
+</span><span class="c1"></span><span class="nx">s2</span><span class="p">.</span><span class="nx">title</span> <span class="c1">// undefined
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>优点：解决了原型链继承引用值共享的问题，可以实现多继承</p>
+</li>
+<li>
+<p>缺点：只能继承父类的实例属性和方法，不能继承原型对象的属性和方法</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>组合继承</strong>（伪经典继承）</p>
+<ul>
+<li>
+<p>原型链继承结合构造函数继承</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Parent</span><span class="p">(){</span>
+  <span class="c1">// 实例属性（引用类型）
+</span><span class="c1"></span>  <span class="k">this</span><span class="p">.</span><span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="c1">// 原型方法
+</span><span class="c1"></span><span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">say</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;say sth&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 构造函数继承
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">Son</span><span class="p">(){</span>
+  <span class="nx">Parent</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 原型链继承
+</span><span class="c1"></span><span class="nx">Son</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parent</span><span class="p">()</span>
+
+<span class="kr">const</span> <span class="nx">s1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Son</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">s2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Son</span><span class="p">()</span>
+<span class="c1">// 不会出现引用类型属性共享的问题
+</span><span class="c1"></span><span class="nx">s1</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s2</span><span class="p">.</span><span class="nx">array</span><span class="p">)</span> <span class="c1">// [1,2,3]
+</span><span class="c1">// 同时也可以访问父类原型上的方法
+</span><span class="c1"></span><span class="nx">s2</span><span class="p">.</span><span class="nx">say</span><span class="p">()</span> <span class="c1">// &#34;say sth&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>优点：解决原型链继承和构造函数继承的问题</p>
+</li>
+<li>
+<p>缺点：父类的构造函数复用的问题（执行两次）</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>寄生组合继承</strong>（经典继承）</p>
+<ul>
+<li>
+<p>利用<code>Object.create()</code>方法，指定子类原型对象的父类原型对象（不再通过父类实例）</p>
+</li>
+<li>
+<p><code>var B = Object.create(A)</code>：以<code>A</code>对象为原型，生成了<code>B</code>对象。<code>B</code>继承了<code>A</code>的所有属性和方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Parent</span><span class="p">(){}</span>
+<span class="kd">function</span> <span class="nx">Son</span><span class="p">(){</span>
+  <span class="nx">Parent</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// Son的原型直接继承Parent的原型
+</span><span class="c1"></span><span class="nx">Son</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>
+<span class="c1">// Object.create等同于
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">proto</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">function</span> <span class="nx">F</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">proto</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">F</span><span class="p">();</span>
+  <span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>优点：优化了组合继承中父类构造函数的复用的问题</p>
+</li>
+<li>
+<p>缺点：重写了子类的原型，会导致子类的属性与方法无法访问</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>变态面试题</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 构造函数
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">Foo</span><span class="p">(){</span>
+  <span class="c1">// 全局函数
+</span><span class="c1"></span>	<span class="nx">getName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+		<span class="nx">cosole</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="k">this</span>
+<span class="p">}</span>
+<span class="c1">// 静态方法
+</span><span class="c1"></span><span class="nx">Foo</span><span class="p">.</span><span class="nx">getName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 原型方法
+</span><span class="c1"></span><span class="nx">Foo</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 函数表达式
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">getName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 函数声明
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">getName</span><span class="p">(){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="cm">/*-------------------------*/</span>
+<span class="c1">// 第一题
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Foo</span><span class="p">())</span><span class="c1">// 独立调用执行，返回值this指向window对象 // window
+</span><span class="c1"></span><span class="nx">Foo</span><span class="p">.</span><span class="nx">getName</span><span class="p">()</span> 
+
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-12-08
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/javascript/">JavaScript</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/">
+            <span class="next-text nav-default">JS运算符</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
