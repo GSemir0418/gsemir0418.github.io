@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Nextjs配置TypeORM - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 创建Next.js项目 1 yarn create next-app --typescript 按照提示填写项目名称后， 项目就搭建完成了，以下是项目文件结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 . ├── README.md" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/nextjs%E9%85%8D%E7%BD%AEtypeorm/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Nextjs配置TypeORM" />
+<meta property="og:description" content="1 创建Next.js项目 1 yarn create next-app --typescript 按照提示填写项目名称后， 项目就搭建完成了，以下是项目文件结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 . ├── README.md" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/nextjs%E9%85%8D%E7%BD%AEtypeorm/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-11T16:25:49+08:00" />
+<meta property="article:modified_time" content="2022-01-11T16:25:49+08:00" />
+
+<meta itemprop="name" content="Nextjs配置TypeORM">
+<meta itemprop="description" content="1 创建Next.js项目 1 yarn create next-app --typescript 按照提示填写项目名称后， 项目就搭建完成了，以下是项目文件结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 . ├── README.md"><meta itemprop="datePublished" content="2022-01-11T16:25:49+08:00" />
+<meta itemprop="dateModified" content="2022-01-11T16:25:49+08:00" />
+<meta itemprop="wordCount" content="2848">
+<meta itemprop="keywords" content="nodejs,Next.js,TypeORM," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Nextjs配置TypeORM"/>
+<meta name="twitter:description" content="1 创建Next.js项目 1 yarn create next-app --typescript 按照提示填写项目名称后， 项目就搭建完成了，以下是项目文件结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 . ├── README.md"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Nextjs配置TypeORM</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-11 </span>
+        <div class="post-category">
+            <a href="/categories/nextjs%E5%85%A8%E8%A7%A3/"> Nextjs全解 </a>
+            </div>
+          <span class="more-meta"> 2848 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-创建nextjs项目">1 创建Next.js项目</a></li>
+        <li><a href="#2-docker启动postgresql">2 docker启动postgresql</a></li>
+        <li><a href="#3-nextjs安装typeorm">3 Next.js安装TypeORM</a></li>
+        <li><a href="#4-统一typescript编译">4 统一TypeScript编译</a></li>
+        <li><a href="#5-使用migration创建表">5 使用migration创建表</a></li>
+        <li><a href="#6-数据映射到实体">6 数据映射到实体</a></li>
+        <li><a href="#7-操作实体">7 操作实体</a></li>
+        <li><a href="#8-数据填充">8 数据填充</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="1-创建nextjs项目">1 创建Next.js项目</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">yarn create next-app --typescript
+</code></pre></td></tr></table>
+</div>
+</div><p>按照提示填写项目名称后， 项目就搭建完成了，以下是项目文件结构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.
+├── README.md
+├── next-env.d.ts
+├── next.config.js
+├── package.json
+├── pages
+│   ├── _app.tsx
+│   ├── api
+│   │   └── hello.ts
+│   └── index.tsx
+├── public
+│   ├── favicon.ico
+│   └── vercel.svg
+├── styles
+│   ├── Home.module.css
+│   └── globals.css
+├── tsconfig.json
+└── yarn.lock
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2-docker启动postgresql">2 docker启动postgresql</h2>
+<ol>
+<li>创建数据库目录/blog-data并添加至<code>.gitignore</code></li>
+<li>Docker启动PostgreSQL</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">docker run -v <span class="s2">&#34;</span><span class="nv">$PWD</span><span class="s2">/blog-data&#34;</span>:/var/lib/postgresql/data -p 5432:5432 -e <span class="nv">POSTGRES_USER</span><span class="o">=</span>blog -e <span class="nv">POSTGRES_HOST_AUTH_METHOD</span><span class="o">=</span>trust -d postgres:12.2
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>windows系统需要将<code>$PWD</code>去掉</li>
+<li>如果下载慢，先搜阿里云镜像（需要登录阿里云），再搜Docker加速</li>
+<li>容器搭建结束后会返回容器的id</li>
+<li><code>docker ps -a</code>查看全部容器运行状态</li>
+<li><code>docker logs id</code>查看容器启动日志</li>
+</ul>
+<ol start="3">
+<li>验证是否成功启动</li>
+</ol>
+<ul>
+<li><code>docker exec -it 容器id bash</code>使用bash命令行进入容器</li>
+<li><code>psql -U blog -W</code>进入postgres数据库（没有设置密码）</li>
+<li>执行pg命令
+<ul>
+<li><code>\l</code>： list databases</li>
+<li><code>\c</code>：connect to a database</li>
+<li><code>\dt</code>：display tables</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>创建数据库</li>
+</ol>
+<p>由于TypeORM没有提供单纯创建数据库的API，只能使用SQL语句来创建数据库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">xxx</span><span class="w"> </span><span class="k">ENCODING</span><span class="w"> </span><span class="s1">&#39;UTF8&#39;</span><span class="w"> </span><span class="n">LC_COLLATE</span><span class="w"> </span><span class="s1">&#39;en_US.utf8&#39;</span><span class="w"> </span><span class="n">LC_CTYPE</span><span class="w"> </span><span class="s1">&#39;en_US.utf8&#39;</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>分别创建<code>blog_dev</code>、<code>blog_product</code>、<code>blog_test</code>三个数据库</p>
+<h2 id="3-nextjs安装typeorm">3 Next.js安装TypeORM</h2>
+<p>安装相关依赖</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">yarn add typeorm reflect-metadata pg  
+</code></pre></td></tr></table>
+</div>
+</div><p>修改<code>tsconfig.json</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;emitDecoratorMetadata&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>
+<span class="s2">&#34;experimentalDecorators&#34;</span><span class="err">:</span> <span class="kc">true</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在初始化TypeORM前，应提交一次代码，用来恢复被初始化后的文件</p>
+<p>使用npx执行TypeORM初始化命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">npx typeorm init --database postgres
+</code></pre></td></tr></table>
+</div>
+</div><p>利用checkout命令将<code>.gitignore</code>、<code>package.json</code>和<code>tsconfig.json</code>恢复至上次最新提交的状态</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git checkout HEAD -- .gitignore
+</code></pre></td></tr></table>
+</div>
+</div><p>最终初始化的结果为新增了src文件夹与<code>ormconfig.json</code>，修改ormconfig</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">{
+  &#34;type&#34;: &#34;postgres&#34;,
+  &#34;host&#34;: &#34;localhost&#34;,
+  &#34;port&#34;: 5432,
+  &#34;username&#34;: &#34;blog&#34;,
+  &#34;password&#34;: &#34;&#34;,
+  &#34;database&#34;: &#34;blog_dev&#34;,
+  &#34;synchronize&#34;: false,
+  &#34;logging&#34;: false,
+  &#34;entities&#34;: [&#34;src/entity/**/*.ts&#34;],
+  &#34;migrations&#34;: [&#34;src/migration/**/*.ts&#34;],
+  &#34;subscribers&#34;: [&#34;src/subscriber/**/*.ts&#34;],
+  &#34;cli&#34;: {
+    &#34;entitiesDir&#34;: &#34;src/entity&#34;,
+    &#34;migrationsDir&#34;: &#34;src/migration&#34;,
+    &#34;subscribersDir&#34;: &#34;src/subscriber&#34;
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>初始化完成</p>
+<h2 id="4-统一typescript编译">4 统一TypeScript编译</h2>
+<p>TypeORM建议使用ts-node运行ts，而Next.js默认使用内置的babel转义ts为js后再用node来运行。因此我们统一用babel和node来编译和运行ts。</p>
+<p>安装@babel/cli</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">yarn add @babel/cli @babel/core
+</code></pre></td></tr></table>
+</div>
+</div><p>利用npx执行babel命令，将src文件编译为js文件，存入dist文件夹下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">npx babel ./src --out-dir dist --extensions <span class="s2">&#34;.ts,.tsx&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>创建.babelrc，在next内置babel的基础上添加装饰器插件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;presets&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;next/babel&#34;</span><span class="p">],</span>
+  <span class="nt">&#34;plugins&#34;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>修改ormconfig.json中的entities、migrations和subscribers，否则迁移数据库等操作会报错</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="err">...</span>
+<span class="s2">&#34;entities&#34;</span><span class="err">:</span> <span class="p">[</span><span class="s2">&#34;dist/entity/**/*.js&#34;</span><span class="p">]</span><span class="err">,</span>
+<span class="s2">&#34;migrations&#34;</span><span class="err">:</span> <span class="p">[</span><span class="s2">&#34;dist/migration/**/*.js&#34;</span><span class="p">]</span><span class="err">,</span>
+<span class="s2">&#34;subscribers&#34;</span><span class="err">:</span> <span class="p">[</span><span class="s2">&#34;dist/subscriber/**/*.js&#34;</span><span class="p">]</span><span class="err">,</span>
+<span class="err">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>修改tsconfig.json，将module改成commonjs</p>
+<p>运行node ./dist/index.js后，控制台打印connection的信息，说明已成功连接数据库服务</p>
+<h2 id="5-使用migration创建表">5 使用migration创建表</h2>
+<p>利用npx执行typeorm migration创建</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">npx typeorm migration:create -n CreatePost
+</code></pre></td></tr></table>
+</div>
+</div><p>得到<code>src/migrations/{TIMESTAMP}-CreatePost.ts</code>，编写up和down函数（分别用于升级与降级数据库）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">MigrationInterface</span><span class="p">,</span> <span class="nx">QueryRunner</span><span class="p">,</span> <span class="nx">Table</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;typeorm&#34;</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">CreatePost1641976068405</span> <span class="kr">implements</span> <span class="nx">MigrationInterface</span> <span class="p">{</span>
+  <span class="kr">public</span> <span class="kr">async</span> <span class="nx">up</span><span class="p">(</span><span class="nx">queryRunner</span>: <span class="kt">QueryRunner</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="c1">// 升级数据库
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">await</span> <span class="nx">queryRunner</span><span class="p">.</span><span class="nx">createTable</span><span class="p">(</span>
+      <span class="k">new</span> <span class="nx">Table</span><span class="p">({</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;posts&#34;</span><span class="p">,</span>
+        <span class="nx">columns</span><span class="o">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;id&#34;</span><span class="p">,</span>
+            <span class="kr">type</span><span class="o">:</span> <span class="s2">&#34;int&#34;</span><span class="p">,</span>
+            <span class="nx">isPrimary</span>: <span class="kt">true</span><span class="p">,</span>
+            <span class="nx">isGenerated</span>: <span class="kt">true</span><span class="p">,</span>
+            <span class="nx">generationStrategy</span><span class="o">:</span> <span class="s2">&#34;increment&#34;</span><span class="p">,</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;title&#34;</span><span class="p">,</span>
+            <span class="kr">type</span><span class="o">:</span> <span class="s2">&#34;varchar&#34;</span><span class="p">,</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;content&#34;</span><span class="p">,</span>
+            <span class="kr">type</span><span class="o">:</span> <span class="s2">&#34;text&#34;</span><span class="p">,</span>
+          <span class="p">},</span>
+        <span class="p">],</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kr">public</span> <span class="kr">async</span> <span class="nx">down</span><span class="p">(</span><span class="nx">queryRunner</span>: <span class="kt">QueryRunner</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="c1">// 降级数据库
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">await</span> <span class="nx">queryRunner</span><span class="p">.</span><span class="nx">dropTable</span><span class="p">(</span><span class="s2">&#34;posts&#34;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>将编译指令与执行数据库迁移指令封装到package.json的scripts属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="err">“migration:run</span><span class="s2">&#34;: &#34;</span><span class="err">typeorm</span> <span class="err">migration:run</span><span class="s2">&#34;,
+</span><span class="s2">&#34;</span><span class="err">migration:revert</span><span class="s2">&#34;: &#34;</span><span class="err">typeorm</span> <span class="err">migration:revert&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>执行同步数据库命令后，进入docker检查对应数据库是否同步成功</p>
+<ul>
+<li>优化<code>package.json</code>的<code>scripts</code>，启动next项目的同时自动开启babel编译，并监听代码变动</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;dev&#34;</span><span class="err">:</span> <span class="s2">&#34;next dev &amp; babel -w /src --out-dir dist --extensions .ts,.tsx&#34;</span>
+<span class="c1">// windows系统下 yarn add -D concurrently
+</span><span class="c1"></span><span class="s2">&#34;dev&#34;</span><span class="err">:</span> <span class="s2">&#34;concurrently \&#34;next dev\&#34; \&#34;babel -w /src --out-dir dist --extensions .ts,.tsx\&#34;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="6-数据映射到实体">6 数据映射到实体</h2>
+<p>将新建entity的命令添加至scripts</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;entity:create&#34;</span><span class="err">:</span> <span class="s2">&#34;typeorm entity:create&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>执行创建命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">yarn entity:create -n Post
+</code></pre></td></tr></table>
+</div>
+</div><p>执行后，src文件夹下新增了<code>entity</code>文件夹，以及其中的<code>Post.ts</code>，新建代码如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Column</span><span class="p">,</span> <span class="nx">Entity</span><span class="p">,</span> <span class="nx">PrimaryGeneratedColumn</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;typeorm&#34;</span><span class="p">;</span>
+
+<span class="c1">// posts表的实体
+</span><span class="c1"></span><span class="kd">@Entity</span><span class="p">(</span><span class="s2">&#34;posts&#34;</span><span class="p">)</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">Post</span> <span class="p">{</span>
+  <span class="c1">// 自增 主键
+</span><span class="c1"></span>  <span class="kd">@PrimaryGeneratedColumn</span><span class="p">(</span><span class="s2">&#34;increment&#34;</span><span class="p">)</span>
+  <span class="nx">id</span>: <span class="kt">string</span><span class="p">;</span>
+  <span class="c1">// 类型为varchar的列
+</span><span class="c1"></span>  <span class="kd">@Column</span><span class="p">(</span><span class="s2">&#34;varchar&#34;</span><span class="p">)</span>
+  <span class="nx">title</span>: <span class="kt">string</span><span class="p">;</span>
+  <span class="c1">// 类型为text的列
+</span><span class="c1"></span>  <span class="kd">@Column</span><span class="p">(</span><span class="s2">&#34;text&#34;</span><span class="p">)</span>
+  <span class="nx">content</span>: <span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="7-操作实体">7 操作实体</h2>
+<ul>
+<li>
+<p>TypeORM为我们提供了两套操作实体的API，分别是<code>Manager</code>和<code>Repository</code>，这里选择ManagerAPI</p>
+</li>
+<li>
+<p>Manager API的封装思路就是将数据的具体操作交给manager，把User实体类，user1对象和其它参数传给manager即可，Manager常用API如下：</p>
+<ul>
+<li><code>await manager.find(User, { name: 'frank' })</code></li>
+<li><code>await manager.create(User, { name: '...' })</code></li>
+<li><code>await manager.save(user1)</code></li>
+<li><code>await manager.save([user1, user2, user3])</code></li>
+<li><code>await manager.remove(user1)</code>（涉及到事务操作）</li>
+<li><code>await manager.update(User, 1, { name: 'frank' })</code></li>
+<li><code>await manager.delete(User, 1)</code></li>
+<li><code>await manager.findOne(User, 1)</code></li>
+</ul>
+</li>
+<li>
+<p>Repository API的封装思路为先通过User构造一个repo对象，这个repo对象就只操作User表了，具体示例如下：</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">const</span> <span class="nx">userRepository</span> <span class="o">=</span> <span class="nx">getRepository</span><span class="p">(</span><span class="nx">User</span><span class="p">)</span>
+<span class="k">await</span> <span class="nx">userRepository</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">await</span> <span class="nx">userRepository</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>测试manager API，回到index.ts:</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="s2">&#34;reflect-metadata&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">createConnection</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;typeorm&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Post</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;./entity/Post&#34;</span><span class="p">;</span>
+
+<span class="nx">createConnection</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">connection</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// 在connection中取出manager
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="p">{</span> <span class="nx">manager</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">connection</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">posts</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">manager</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">Post</span><span class="p">);</span>
+    <span class="c1">// 第一次查找全部Post数据应该为空
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">posts</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Post</span><span class="p">();</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">&#34;Post 1&#34;</span><span class="p">;</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">content</span> <span class="o">=</span> <span class="s2">&#34;我的第一篇博客&#34;</span><span class="p">;</span>
+    <span class="c1">// 保存p对象
+</span><span class="c1"></span>    <span class="k">await</span> <span class="nx">manager</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">posts2</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">manager</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">Post</span><span class="p">);</span>
+    <span class="c1">// 应该有新增的一条数据
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">posts2</span><span class="p">);</span>
+    <span class="c1">// 最后要关闭连接
+</span><span class="c1"></span>    <span class="nx">connection</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>可能会出现不支持装饰器语法的bug，添加babel插件即可</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">yarn add --dev @babel/plugin-proposal-decorators
+// .babelrc
+{
+  &#34;presets&#34;: [&#34;next/babel&#34;],
+  &#34;plugins&#34;: [
+      [
+          &#34;@babel/plugin-proposal-decorators&#34;,
+          {
+              &#34;legacy&#34;: true
+          }
+      ]
+  ]
+}
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>测试结果：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ node ./dist/index
+<span class="o">[]</span>
+<span class="o">[</span> Post <span class="o">{</span> id: 1, title: <span class="s1">&#39;Post 1&#39;</span>, content: <span class="s1">&#39;我的第一篇博客&#39;</span> <span class="o">}</span> <span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="8-数据填充">8 数据填充</h2>
+<ul>
+<li>
+<p>目前数据库与数据表都完成了，但是没有数据，可以通过<code>seed脚本</code>来构造数据</p>
+</li>
+<li>
+<p>将src下的<code>index.ts</code>改为<code>seed.ts</code></p>
+</li>
+<li>
+<p>方便新增数据，改写entity下的Post.ts，添加构造器函数</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Column</span><span class="p">,</span> <span class="nx">Entity</span><span class="p">,</span> <span class="nx">PrimaryGeneratedColumn</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;typeorm&#34;</span><span class="p">;</span>
+
+<span class="c1">// posts表的实体
+</span><span class="c1"></span><span class="kd">@Entity</span><span class="p">(</span><span class="s2">&#34;posts&#34;</span><span class="p">)</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">Post</span> <span class="p">{</span>
+  <span class="c1">// 自增 主键
+</span><span class="c1"></span>  <span class="kd">@PrimaryGeneratedColumn</span><span class="p">(</span><span class="s2">&#34;increment&#34;</span><span class="p">)</span>
+  <span class="nx">id</span>: <span class="kt">string</span><span class="p">;</span>
+  <span class="c1">// 类型为varchar的列
+</span><span class="c1"></span>  <span class="kd">@Column</span><span class="p">(</span><span class="s2">&#34;varchar&#34;</span><span class="p">)</span>
+  <span class="nx">title</span>: <span class="kt">string</span><span class="p">;</span>
+  <span class="c1">// 类型为text的列
+</span><span class="c1"></span>  <span class="kd">@Column</span><span class="p">(</span><span class="s2">&#34;text&#34;</span><span class="p">)</span>
+  <span class="nx">content</span>: <span class="kt">string</span><span class="p">;</span>
+  <span class="c1">// Partial的作用在于 不需要将Post的全部属性都传递过来
+</span><span class="c1"></span>  <span class="kr">constructor</span><span class="p">(</span><span class="nx">attributes</span>: <span class="kt">Partial</span><span class="p">&lt;</span><span class="nt">Post</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="c1">// 将attributes的全部属性放到this上即可
+</span><span class="c1"></span>    <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">attributes</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Seed.ts</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="s2">&#34;reflect-metadata&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">createConnection</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;typeorm&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Post</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;./entity/Post&#34;</span><span class="p">;</span>
+
+<span class="nx">createConnection</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">connection</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">manager</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">connection</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">posts</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">manager</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">Post</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">posts</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">await</span> <span class="nx">manager</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">].</span><span class="nx">map</span><span class="p">((</span><span class="nx">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="nx">Post</span><span class="p">({</span>
+            <span class="nx">title</span><span class="o">:</span> <span class="sb">`Post </span><span class="si">${</span><span class="nx">v</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+            <span class="nx">content</span><span class="o">:</span> <span class="sb">`这是我的第</span><span class="si">${</span><span class="nx">v</span><span class="si">}</span><span class="sb">篇博客`</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">})</span>
+      <span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`posts数据填充完成!`</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">connection</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>执行结果</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ node ./dist/seed   
+posts数据填充完成!
+
+<span class="nv">blog_dev</span><span class="o">=</span><span class="c1"># select * from posts;</span>
+ id <span class="p">|</span>  title  <span class="p">|</span>      content       
+----+---------+--------------------
+  <span class="m">1</span> <span class="p">|</span> Post <span class="m">1</span>  <span class="p">|</span> 这是我的第1篇博客
+  <span class="m">2</span> <span class="p">|</span> Post <span class="m">2</span>  <span class="p">|</span> 这是我的第2篇博客
+  <span class="m">3</span> <span class="p">|</span> Post <span class="m">3</span>  <span class="p">|</span> 这是我的第3篇博客
+  <span class="m">4</span> <span class="p">|</span> Post <span class="m">4</span>  <span class="p">|</span> 这是我的第4篇博客
+  <span class="m">5</span> <span class="p">|</span> Post <span class="m">5</span>  <span class="p">|</span> 这是我的第5篇博客
+  <span class="m">6</span> <span class="p">|</span> Post <span class="m">6</span>  <span class="p">|</span> 这是我的第6篇博客
+  <span class="m">7</span> <span class="p">|</span> Post <span class="m">7</span>  <span class="p">|</span> 这是我的第7篇博客
+  <span class="m">8</span> <span class="p">|</span> Post <span class="m">8</span>  <span class="p">|</span> 这是我的第8篇博客
+  <span class="m">9</span> <span class="p">|</span> Post <span class="m">9</span>  <span class="p">|</span> 这是我的第9篇博客
+ <span class="m">10</span> <span class="p">|</span> Post <span class="m">10</span> <span class="p">|</span> 这是我的第10篇博客
+<span class="o">(</span><span class="m">10</span> rows<span class="o">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-01-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nodejs/">nodejs</a>
+          <a href="/tags/next.js/">Next.js</a>
+          <a href="/tags/typeorm/">TypeORM</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/node%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
+            <span class="next-text nav-default">Node包管理工具</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

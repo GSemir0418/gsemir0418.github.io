@@ -49,7 +49,7 @@
 <meta itemprop="name" content="umi&#43;AntdPro实战总结">
 <meta itemprop="description" content="项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将"><meta itemprop="datePublished" content="2021-08-22T22:51:51+08:00" />
 <meta itemprop="dateModified" content="2021-10-09T00:00:00+08:00" />
-<meta itemprop="wordCount" content="2041">
+<meta itemprop="wordCount" content="3216">
 <meta itemprop="keywords" content="前端,React,umi,antdpro," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="umi&#43;AntdPro实战总结"/>
 <meta name="twitter:description" content="项目主体开发临近尾声，顺利进入了测试阶段。为期三个月的开发期间，使我对react，特别是hooks的理解以及umi框架的理解大大提升。在此将"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93/"> 项目实战总结 </a>
             </div>
-          <span class="more-meta"> 2041 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 3216 words </span>
+          <span class="more-meta"> 7 mins read </span>
         
       </div>
     </header>
@@ -161,13 +161,15 @@
             <li><a href="#131-protable">1.3.1 ProTable</a></li>
           </ul>
         </li>
+        <li><a href="#14-样式切换方案">1.4 样式切换方案</a></li>
       </ul>
     </li>
     <li><a href="#2-umijs">2 umi.js</a>
       <ul>
         <li><a href="#21-umi-request">2.1 umi-request</a></li>
-        <li><a href="#22-history">2.2 history</a></li>
+        <li><a href="#22-history路由跳转">2.2 history路由跳转</a></li>
         <li><a href="#23-umi配置sass支持">2.3 umi配置sass支持</a></li>
+        <li><a href="#24-useecharts封装">2.4 useEcharts封装</a></li>
       </ul>
     </li>
     <li><a href="#3其他">3.其他</a>
@@ -177,6 +179,7 @@
         <li><a href="#33-useref">3.3 useRef</a></li>
         <li><a href="#34-表单联动">3.4 表单联动</a></li>
         <li><a href="#35-全局模糊搜索">3.5 全局模糊搜索</a></li>
+        <li><a href="#36-request拦截器封装">3.6 request拦截器封装</a></li>
       </ul>
     </li>
   </ul>
@@ -260,10 +263,38 @@
 <p>EditableProTable的columns配置中的<code>valueEnum</code>是用来转换<strong>字符串</strong>类型的枚举（配合<code>valueType:'select'</code>替代render），对于非字符串字段（如数值或布尔类型），则会出现编辑状态的默认值为空或为实际value的bug。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">{
+	title: &#39;状态&#39;，
+	dataIndex: &#39;status&#39;,
+	valueType: &#39;select&#39;,
+	valueEnum: {
+		0: {
+			text: &#39;停工&#39;,
+			status: &#39;Error&#39;
+		},
+		1: {
+			text: &#39;正常&#39;,
+			status: &#39;Success&#39;
+		}
+	}
+}
 </code></pre></td></tr></table>
 </div>
 </div><p>可以使用renderFormItem配置此字段的Select选择框，利用ref全局变量存储选项值，通过onSave读取ref值，对接保存或新增借口即可。</p>
@@ -307,6 +338,7 @@
 </span><span class="lnt">36
 </span><span class="lnt">37
 </span><span class="lnt">38
+</span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="c1">// 修改后的status
@@ -327,11 +359,11 @@
           <span class="nx">status</span><span class="o">:</span> <span class="s1">&#39;Success&#39;</span><span class="p">,</span>
         <span class="p">},</span>
       <span class="p">},</span>
-      <span class="nx">renderFormItem</span><span class="o">:</span> <span class="nx">u</span> <span class="p">=&gt;</span> <span class="p">[</span>
+      <span class="nx">renderFormItem</span><span class="o">:</span> <span class="nx">item</span> <span class="p">=&gt;</span> <span class="p">[</span>
         <span class="p">&lt;</span><span class="nt">Select</span>
           <span class="na">key</span><span class="o">=</span><span class="s">&#39;statusSelect&#39;</span>
           <span class="err">//</span> <span class="na">配置初始值</span>
-          <span class="na">defaultValue</span><span class="o">=</span><span class="p">{</span><span class="nx">u</span><span class="p">.</span><span class="nx">entry</span><span class="o">?</span><span class="nx">u</span><span class="p">.</span><span class="nx">entry</span><span class="p">.</span><span class="nx">status</span><span class="o">:</span><span class="kc">null</span><span class="p">}</span>
+          <span class="na">defaultValue</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">entry</span><span class="o">?</span><span class="p">.</span><span class="nx">status</span><span class="o">:</span><span class="kc">null</span><span class="p">}</span>
           <span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">v</span> <span class="p">=&gt;</span> <span class="p">{</span>
             <span class="nx">status</span><span class="p">.</span><span class="nx">current</span> <span class="o">=</span> <span class="nx">v</span>
           <span class="p">}}</span>
@@ -342,6 +374,7 @@
             <span class="p">},</span>
           <span class="p">]}</span>
         <span class="p">&gt;</span>
+          <span class="p">{</span><span class="cm">/* 如果Option需要被遍历出来时，源数据应为数组而非对象 */</span><span class="p">}</span>
           <span class="p">&lt;</span><span class="nt">Option</span> <span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">}&gt;</span><span class="nx">停工</span><span class="p">&lt;/</span><span class="nt">Option</span><span class="p">&gt;</span>
           <span class="p">&lt;</span><span class="nt">Option</span> <span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}&gt;</span><span class="nx">正常</span><span class="p">&lt;/</span><span class="nt">Option</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nt">Select</span><span class="p">&gt;,</span>
@@ -351,11 +384,16 @@
 </div>
 </div></li>
 </ol>
+<h2 id="14-样式切换方案">1.4 样式切换方案</h2>
+<ul>
+<li>局部切换样式不同于整体换肤，只需动态修改元素className即可</li>
+<li>将className绑定为<code>className={theme+'-table'}</code>，theme是表示主题的state</li>
+</ul>
 <h1 id="2-umijs">2 umi.js</h1>
 <h2 id="21-umi-request">2.1 umi-request</h2>
 <p>当打包后请求<code>url</code>正常，但出现503等错误时，可以尝试在<code>request.js</code>中去除<code>credentials: 'include'</code>，即默认请求不携带cookie</p>
-<h2 id="22-history">2.2 history</h2>
-<p>history可以实现路由跳转，也可携带参数跳转</p>
+<h2 id="22-history路由跳转">2.2 history路由跳转</h2>
+<p>在页面内可以使用history可以实现路由跳转，也可携带参数跳转</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -428,6 +466,61 @@ yarn add node-sass sass-loader
 	<span class="s2">&#34;sass&#34;</span><span class="o">:</span> <span class="p">{</span> <span class="p">},</span>
 	<span class="p">...</span>
 <span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="24-useecharts封装">2.4 useEcharts封装</h2>
+<ul>
+<li>接收图表绑定的元素ref和图表的配置option，将echarts的引入与setOption方法封装成hooks</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">echarts</span> <span class="nx">from</span> <span class="s1">&#39;echarts&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">useEcharts</span> <span class="o">=</span> <span class="p">(</span><span class="nx">ref</span><span class="p">,</span> <span class="nx">option</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">echarts</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">ref</span><span class="o">?</span><span class="p">.</span><span class="nx">current</span><span class="p">).</span><span class="nx">setOption</span><span class="p">(</span><span class="nx">option</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">option</span><span class="p">,</span> <span class="nx">ref</span><span class="p">]);</span>
+<span class="p">};</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">useEcharts</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">divRef</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">option</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1">// 图表配置
+</span><span class="c1"></span><span class="p">};</span>
+<span class="nx">useEcharts</span><span class="p">(</span><span class="nx">divRef</span><span class="p">,</span> <span class="nx">option</span><span class="p">);</span>
+<span class="k">return</span> <span class="p">(</span>
+	<span class="p">&lt;</span><span class="nt">PageContainer</span><span class="p">&gt;</span>
+		<span class="p">&lt;</span><span class="nt">div</span> <span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">divRef</span><span class="p">}</span> <span class="na">style</span><span class="o">=</span><span class="p">{{</span> <span class="nx">height</span><span class="o">:</span> <span class="s1">&#39;500px&#39;</span><span class="p">,</span> <span class="nx">width</span><span class="o">:</span> <span class="s1">&#39;800px&#39;</span> <span class="p">}}</span> <span class="p">/&gt;</span>
+	<span class="p">&lt;/</span><span class="nt">PageContainer</span><span class="p">&gt;</span>
+<span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="3其他">3.其他</h1>
@@ -666,6 +759,139 @@ yarn add node-sass sass-loader
 
 </code></pre></td></tr></table>
 </div>
+</div><h2 id="36-request拦截器封装">3.6 request拦截器封装</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="cm">/** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request */</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">extend</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;umi-request&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Notification</span> <span class="nx">from</span> <span class="s1">&#39;./Notification&#39;</span><span class="p">;</span>
+
+<span class="c1">// 引入环境变量，用于区分代码运行环境
+</span><span class="c1"></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">NODE_ENV</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">codeMessage</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="mi">200</span><span class="o">:</span> <span class="s1">&#39;服务器成功返回请求的数据。&#39;</span><span class="p">,</span>
+  <span class="mi">201</span><span class="o">:</span> <span class="s1">&#39;新建或修改数据成功。&#39;</span><span class="p">,</span>
+  <span class="mi">202</span><span class="o">:</span> <span class="s1">&#39;一个请求已经进入后台排队（异步任务）。&#39;</span><span class="p">,</span>
+  <span class="mi">204</span><span class="o">:</span> <span class="s1">&#39;删除数据成功。&#39;</span><span class="p">,</span>
+  <span class="mi">400</span><span class="o">:</span> <span class="s1">&#39;发出的请求有错误，服务器没有进行新建或修改数据的操作。&#39;</span><span class="p">,</span>
+  <span class="mi">401</span><span class="o">:</span> <span class="s1">&#39;用户没有权限（令牌、用户名、密码错误）。&#39;</span><span class="p">,</span>
+  <span class="mi">403</span><span class="o">:</span> <span class="s1">&#39;用户得到授权，但是访问是被禁止的。&#39;</span><span class="p">,</span>
+  <span class="mi">404</span><span class="o">:</span> <span class="s1">&#39;发出的请求针对的是不存在的记录，服务器没有进行操作。&#39;</span><span class="p">,</span>
+  <span class="mi">406</span><span class="o">:</span> <span class="s1">&#39;请求的格式不可得。&#39;</span><span class="p">,</span>
+  <span class="mi">410</span><span class="o">:</span> <span class="s1">&#39;请求的资源被永久删除，且不会再得到的。&#39;</span><span class="p">,</span>
+  <span class="mi">422</span><span class="o">:</span> <span class="s1">&#39;当创建一个对象时，发生一个验证错误。&#39;</span><span class="p">,</span>
+  <span class="mi">500</span><span class="o">:</span> <span class="s1">&#39;服务器发生错误，请检查服务器。&#39;</span><span class="p">,</span>
+  <span class="mi">502</span><span class="o">:</span> <span class="s1">&#39;网关错误。&#39;</span><span class="p">,</span>
+  <span class="mi">503</span><span class="o">:</span> <span class="s1">&#39;服务不可用，服务器暂时过载或维护。&#39;</span><span class="p">,</span>
+  <span class="mi">504</span><span class="o">:</span> <span class="s1">&#39;网关超时。&#39;</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="cm">/** 异常处理程序 */</span>
+
+<span class="kr">const</span> <span class="nx">errorHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">response</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">error</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">response</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">errorText</span> <span class="o">=</span> <span class="nx">codeMessage</span><span class="p">[</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">]</span> <span class="o">||</span> <span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">url</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">response</span><span class="p">;</span>
+    <span class="nx">Notification</span><span class="p">(</span><span class="sb">`请求错误 </span><span class="si">${</span><span class="nx">status</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">url</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">errorText</span><span class="p">,</span> <span class="s1">&#39;small&#39;</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Notification</span><span class="p">(</span><span class="s1">&#39;网络错误&#39;</span><span class="p">,</span> <span class="s1">&#39;您的网络发生异常，无法连接服务器&#39;</span><span class="p">,</span> <span class="s1">&#39;small&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="cm">/** 配置request请求时的默认参数 */</span>
+
+<span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">extend</span><span class="p">({</span>
+  <span class="c1">// 区分代码运行环境
+</span><span class="c1"></span>  <span class="nx">prefix</span><span class="o">:</span> <span class="nx">NODE_ENV</span> <span class="o">===</span> <span class="s1">&#39;development&#39;</span> <span class="o">?</span> <span class="s1">&#39;/api&#39;</span> <span class="o">:</span> <span class="s1">&#39;http://10.30.20.203:8080&#39;</span><span class="p">,</span>
+  <span class="c1">// prefix: &#39;http://10.30.20.203:8080&#39;,
+</span><span class="c1"></span>  <span class="nx">errorHandler</span><span class="p">,</span>
+  <span class="c1">// 默认错误处理
+</span><span class="c1"></span>  <span class="c1">// credentials: &#39;include&#39;, // 默认请求是否带上cookie
+</span><span class="c1"></span>  <span class="c1">// headers: { &#39;Access-Control-Allow-Credentials&#39;: true, &#39;Access-Control-Allow-Origin&#39;: &#39;*&#39;, &#39;Access-Control-Allow-Headers&#39;: &#39;x-requested-with&#39; },
+</span><span class="c1"></span><span class="p">});</span>
+
+<span class="cm">/** request拦截器 **/</span>
+<span class="nx">request</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">c_token</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;ticket&#39;</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">c_token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">Authorization</span><span class="o">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">c_token</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="o">:</span> <span class="p">{</span> <span class="p">...</span><span class="nx">options</span><span class="p">,</span> <span class="nx">headers</span><span class="o">:</span> <span class="nx">headers</span> <span class="p">}</span> <span class="p">};</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="o">:</span> <span class="p">{</span> <span class="p">...</span><span class="nx">options</span> <span class="p">}</span> <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">request</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
 </div>
     </div>
 
@@ -736,7 +962,8 @@ yarn add node-sass sass-loader
 
   <span class="copyright-year">
     &copy; 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
   </span>
 </div>
 

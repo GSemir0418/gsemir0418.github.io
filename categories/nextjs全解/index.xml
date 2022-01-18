@@ -6,7 +6,16 @@
     <description>Recent content in Nextjs全解 on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 23 Oct 2021 20:38:48 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/nextjs%E5%85%A8%E8%A7%A3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 Jan 2022 16:25:49 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/nextjs%E5%85%A8%E8%A7%A3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nextjs配置TypeORM</title>
+      <link>https://gsemir0418.github.io/post/nextjs%E9%85%8D%E7%BD%AEtypeorm/</link>
+      <pubDate>Tue, 11 Jan 2022 16:25:49 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/nextjs%E9%85%8D%E7%BD%AEtypeorm/</guid>
+      <description>1 创建Next.js项目 1 yarn create next-app --typescript 按照提示填写项目名称后， 项目就搭建完成了，以下是项目文件结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 . ├── README.md</description>
+    </item>
+    
     <item>
       <title>Nextjs全解</title>
       <link>https://gsemir0418.github.io/post/nextjs%E5%85%A8%E8%A7%A3/</link>

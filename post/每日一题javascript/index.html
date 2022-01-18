@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="gsemir" /><meta name="description" content="1 JS继承的方式及优缺点 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="gsemir" /><meta name="description" content="1 JS继承 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对象的引用类型属" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="每日一题-JavaScript" />
-<meta property="og:description" content="1 JS继承的方式及优缺点 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对" />
+<meta property="og:description" content="1 JS继承 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对象的引用类型属" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98javascript/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-08T09:57:36+08:00" />
 <meta property="article:modified_time" content="2021-12-08T09:57:36+08:00" />
 
 <meta itemprop="name" content="每日一题-JavaScript">
-<meta itemprop="description" content="1 JS继承的方式及优缺点 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对"><meta itemprop="datePublished" content="2021-12-08T09:57:36+08:00" />
+<meta itemprop="description" content="1 JS继承 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对象的引用类型属"><meta itemprop="datePublished" content="2021-12-08T09:57:36+08:00" />
 <meta itemprop="dateModified" content="2021-12-08T09:57:36+08:00" />
-<meta itemprop="wordCount" content="1503">
+<meta itemprop="wordCount" content="1876">
 <meta itemprop="keywords" content="面试,JavaScript," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="每日一题-JavaScript"/>
-<meta name="twitter:description" content="1 JS继承的方式及优缺点 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对"/>
+<meta name="twitter:description" content="1 JS继承 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对象的引用类型属"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
             </div>
-          <span class="more-meta"> 1503 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 1876 words </span>
+          <span class="more-meta"> 4 mins read </span>
         
       </div>
     </header>
@@ -145,11 +145,16 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-js继承">1 JS继承</a></li>
+    <li><a href="#2-callbind和apply三者关系">2 call、bind和apply三者关系</a></li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      <p>1 JS继承的方式及优缺点</p>
+      <h1 id="1-js继承">1 JS继承</h1>
 <ul>
 <li>
 <p>原型与原型链</p>
@@ -502,6 +507,71 @@
 </li>
 </ul>
 </li>
+<li>
+<p><strong>ES6 继承</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Father</span> <span class="p">{</span>
+  <span class="nx">age</span> <span class="o">=</span> <span class="mi">60</span><span class="p">;</span>
+  <span class="nx">gender</span> <span class="o">=</span> <span class="s2">&#34;male&#34;</span><span class="p">;</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">getAge</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kr">static</span> <span class="nx">getName</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">&#34;father&#34;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">class</span> <span class="nx">Son</span> <span class="kr">extends</span> <span class="nx">Father</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/*
+</span><span class="cm">    子类必须在constructor方法中调用super方法，否则新建实例时会报错。
+</span><span class="cm">    这是因为子类自己的this对象，必须先通过父类的构造函数完成塑造，得到与父类同样的实例属性和方法，
+</span><span class="cm">    然后再对其进行加工，加上子类自己的实例属性和方法。
+</span><span class="cm">    如果不调用super方法，子类就得不到this对象。
+</span><span class="cm">    */</span>
+    <span class="kr">super</span><span class="p">(</span><span class="nx">age</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">son</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Son</span><span class="p">(</span><span class="s2">&#34;gsq&#34;</span><span class="p">,</span> <span class="mi">90</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">son</span><span class="p">);</span>
+<span class="nx">Son</span> <span class="p">{</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">90</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;gsq&#39;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 </li>
 <li>
@@ -572,7 +642,28 @@
 </div>
 </div></li>
 </ul>
-
+<h1 id="2-callbind和apply三者关系">2 call、bind和apply三者关系</h1>
+<ul>
+<li>他们都是用来改变函数this指向的</li>
+<li>call和apply是直接进行函数调用的，而bind不会执行相关函数，而是返回一个新函数，此新函数已经自动绑定了新的this指向</li>
+<li>call和apply的区别主要在于参数设定上</li>
+<li>以下三行代码是等价的</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="s1">&#39;arg1&#39;</span><span class="p">,</span> <span class="s1">&#39;arg2&#39;</span><span class="p">)</span>
+<span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;arg1&#39;</span><span class="p">,</span> <span class="s1">&#39;arg2&#39;</span><span class="p">])</span>
+<span class="nx">fn</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="s1">&#39;arg1&#39;</span><span class="p">,</span> <span class="s1">&#39;arg2&#39;</span><span class="p">)()</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
@@ -596,7 +687,11 @@
           <a href="/tags/javascript/">JavaScript</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/%E6%89%8B%E5%86%99promise/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">手写Promise</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/">
             <span class="next-text nav-default">JS运算符</span>
             <span class="next-text nav-mobile">Next</span>
@@ -636,7 +731,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
   </span>
 </div>
 

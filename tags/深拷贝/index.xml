@@ -13,7 +13,7 @@
       <pubDate>Tue, 23 Nov 2021 16:15:44 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D/</guid>
-      <description>1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 最简单的方法 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函</description>
+      <description>1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函数属性 不支持</description>
     </item>
     
   </channel>

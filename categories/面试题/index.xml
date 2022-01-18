@@ -6,14 +6,23 @@
     <description>Recent content in 面试题 on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 08 Dec 2021 09:57:36 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Dec 2021 09:59:48 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手写Promise</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99promise/</link>
+      <pubDate>Tue, 14 Dec 2021 09:59:48 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99promise/</guid>
+      <description>0 手写前 该技术解决什么问题-why 回调地狱，比如node读写文件 该技术是怎么解决它的-how Promise的构造函数接收一个参数：函数，并且</description>
+    </item>
+    
     <item>
       <title>每日一题-JavaScript</title>
       <link>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98javascript/</link>
       <pubDate>Wed, 08 Dec 2021 09:57:36 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98javascript/</guid>
-      <description>1 JS继承的方式及优缺点 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对</description>
+      <description>1 JS继承 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对象的引用类型属</description>
     </item>
     
     <item>
@@ -22,7 +31,7 @@
       <pubDate>Tue, 23 Nov 2021 16:15:44 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D/</guid>
-      <description>1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 最简单的方法 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函</description>
+      <description>1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函数属性 不支持</description>
     </item>
     
     <item>

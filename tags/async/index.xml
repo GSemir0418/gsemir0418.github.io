@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>async on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/async/</link>
+    <description>Recent content in async on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 15 Dec 2021 14:31:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/async/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>async/await全解</title>
+      <link>https://gsemir0418.github.io/post/asyncawait/</link>
+      <pubDate>Wed, 15 Dec 2021 14:31:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/asyncawait/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

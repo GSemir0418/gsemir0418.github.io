@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>手写Promise - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="0 手写前 该技术解决什么问题-why 回调地狱，比如node读写文件 该技术是怎么解决它的-how Promise的构造函数接收一个参数：函数，并且" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99promise/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="手写Promise" />
+<meta property="og:description" content="0 手写前 该技术解决什么问题-why 回调地狱，比如node读写文件 该技术是怎么解决它的-how Promise的构造函数接收一个参数：函数，并且" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99promise/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-14T09:59:48+08:00" />
+<meta property="article:modified_time" content="2021-12-14T09:59:48+08:00" />
+
+<meta itemprop="name" content="手写Promise">
+<meta itemprop="description" content="0 手写前 该技术解决什么问题-why 回调地狱，比如node读写文件 该技术是怎么解决它的-how Promise的构造函数接收一个参数：函数，并且"><meta itemprop="datePublished" content="2021-12-14T09:59:48+08:00" />
+<meta itemprop="dateModified" content="2021-12-14T09:59:48+08:00" />
+<meta itemprop="wordCount" content="3861">
+<meta itemprop="keywords" content="JS手写,Promise," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="手写Promise"/>
+<meta name="twitter:description" content="0 手写前 该技术解决什么问题-why 回调地狱，比如node读写文件 该技术是怎么解决它的-how Promise的构造函数接收一个参数：函数，并且"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">手写Promise</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-14 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
+            </div>
+          <span class="more-meta"> 3861 words </span>
+          <span class="more-meta"> 8 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#0-手写前">0 手写前</a></li>
+        <li><a href="#1-初始化测试环境">1 初始化测试环境</a>
+          <ul>
+            <li><a href="#11-安装">1.1 安装</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-单元测试驱动编程">2 单元测试驱动编程</a>
+          <ul>
+            <li><a href="#21-promise是一个类">2.1 Promise是一个类</a></li>
+            <li><a href="#22-promise实例化时接受一个函数">2.2 Promise实例化时接受一个函数</a></li>
+            <li><a href="#23-promise实例化对象具有then方法">2.3 Promise实例化对象具有then方法</a></li>
+            <li><a href="#24-promise实例化传递的函数参数立即执行">2.4 Promise实例化传递的函数参数立即执行</a></li>
+            <li><a href="#25-promise实例对象在执行时接收resolve和reject两个函数">2.5 Promise实例对象在执行时，接收resolve和reject两个函数</a></li>
+            <li><a href="#26-promise实例对象then方法中的success回调会在resolve被调用后执行">2.6 Promise实例对象then方法中的success回调会在resolve被调用后执行</a></li>
+            <li><a href="#27-如果then的参数不是函数则忽略a规范221">2.7 如果then的参数不是函数，则忽略——<code>A+规范2.2.1</code></a></li>
+            <li><a href="#28-success函数必须在promise-完成fulfilled后被调用并把promise-的值作为它的第一个参数完成fulfilled之前绝对不能被调用绝对不能被调用超过一次a规范222">2.8 success函数必须在<code>promise</code> 完成(fulfilled)后被调用,并把<code>promise</code> 的值作为它的第一个参数；完成(fulfilled)之前绝对不能被调用；绝对不能被调用超过一次——A+规范2.2.2</a></li>
+            <li><a href="#29-在我们的代码执行结束后再执行success回调a规范224">2.9 在我们的代码执行结束后，再执行success回调——A+规范2.2.4</a></li>
+            <li><a href="#210-then的两个函数只能以函数形式调用即内部this指向undefineda规范225">2.10 then的两个函数只能以函数形式调用，即内部this指向undefined——A+规范2.2.5</a></li>
+            <li><a href="#211-then可以在同一个promise中多次调用且依据then的顺序调用a规范226">2.11 then可以在同一个promise中多次调用，且依据then的顺序调用——A+规范2.2.6</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-总结">3 总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="0-手写前">0 手写前</h2>
+<ul>
+<li>该技术解决什么问题-why
+<ul>
+<li>回调地狱，比如node读写文件</li>
+</ul>
+</li>
+<li>该技术是怎么解决它的-how
+<ul>
+<li>Promise的构造函数接收一个参数：函数，并且这个函数需要传入两个参数：
+<ul>
+<li>resolve ：异步操作执行成功后的回调函数</li>
+<li>reject：异步操作执行失败后的回调函数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>该技术的优点
+<ul>
+<li>通过链式调用，减少缩进</li>
+<li>消灭if(error)，错误处理单独放到一个函数里，如果不处理就抛到最后</li>
+</ul>
+</li>
+<li>该技术缺点
+<ul>
+<li>then的链式调用可读性不佳，有时写起来比较麻烦</li>
+</ul>
+</li>
+<li>如何克服这些缺点
+<ul>
+<li>async/await</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-初始化测试环境">1 初始化测试环境</h2>
+<h3 id="11-安装">1.1 安装</h3>
+<p>yarn init -y</p>
+<p>yarn global add mocha ts-node</p>
+<p>yarn add &ndash;dev typescript chai mocha @types/chai @types/mocha</p>
+<p>创建tsconfig.json、test/index.ts文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">chai</span> <span class="kr">from</span> <span class="s2">&#34;chai&#34;</span><span class="p">;</span>
+
+<span class="c1">// chai提供了断言方法
+</span><span class="c1"></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">assert</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">chai</span><span class="p">;</span>
+
+<span class="c1">// mocha提供了describe和it方法，以及控制台输出
+</span><span class="c1"></span><span class="nx">describe</span><span class="p">(</span><span class="s2">&#34;chai的使用&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">&#34;能判等&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// @ts-ignore
+</span><span class="c1"></span>    <span class="nx">assert</span><span class="p">(</span><span class="mi">1</span> <span class="o">===</span> <span class="mi">4</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>在package.json中添加测试命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;scripts&#34;</span><span class="err">:</span> <span class="p">{</span>
+  <span class="c1">// mocha需要借助ts-node中register才能测试ts代码；
+</span><span class="c1"></span>  <span class="c1">// 匹配test文件夹下全部ts结尾的文件
+</span><span class="c1"></span>	<span class="nt">&#34;test&#34;</span><span class="p">:</span> <span class="s2">&#34;mocha -r ts-node/register test/**/*.ts&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>运行测试</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">yarn <span class="nb">test</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2-单元测试驱动编程">2 单元测试驱动编程</h2>
+<h3 id="21-promise是一个类">2.1 Promise是一个类</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="c1">// test/index.ts
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">MyPromise</span> <span class="kr">from</span> <span class="s2">&#34;../src/promise&#34;</span>
+<span class="nx">describe</span><span class="p">(</span><span class="s2">&#34;MyPromise&#34;</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+	<span class="nx">it</span><span class="p">(</span><span class="s2">&#34;是一个类&#34;</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+		<span class="nx">assert</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span><span class="nx">MyPromise</span><span class="p">)</span>
+		<span class="nx">assert</span><span class="p">.</span><span class="nx">isObject</span><span class="p">(</span><span class="nx">MyPromise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>
+	<span class="p">})</span>
+<span class="p">})</span>
+
+<span class="c1">// src/promise.ts
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="22-promise实例化时接受一个函数">2.2 Promise实例化时接受一个函数</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="c1">// test/index.ts
+</span><span class="c1"></span><span class="nx">it</span><span class="p">(</span><span class="s2">&#34;new Promise(fn)接收一个函数&#34;</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+	<span class="c1">// 断言，不传参或传非函数的参数会报错
+</span><span class="c1"></span>	<span class="nx">assert</span><span class="p">.</span><span class="k">throw</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+		<span class="k">new</span> <span class="nx">MyPromise</span><span class="p">()</span>
+	<span class="p">})</span>
+	<span class="nx">assert</span><span class="p">.</span><span class="k">throw</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+		<span class="k">new</span> <span class="nx">MyPromise</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+	<span class="p">})</span>
+<span class="p">})</span>
+
+<span class="c1">// src/promise.ts
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
+	<span class="kr">constructor</span><span class="p">(</span><span class="nx">fn</span><span class="p">){</span>
+    <span class="c1">// 如果参数不是函数会报错
+</span><span class="c1"></span>		<span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">fn</span> <span class="o">!==</span> <span class="s2">&#34;function&#34;</span><span class="p">){</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;我只接受函数啊&#39;</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="23-promise实例化对象具有then方法">2.3 Promise实例化对象具有then方法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="c1">// test/index.ts
+</span><span class="c1"></span><span class="nx">it</span><span class="p">(</span><span class="s2">&#34;new Promise(fn)有then方法&#34;</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+	<span class="kr">const</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPromise</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{})</span>
+	<span class="nx">assert</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">then</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// src/promise.ts
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
+	<span class="kr">constructor</span><span class="p">(</span><span class="nx">fn</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">fn</span> <span class="o">!==</span> <span class="s2">&#34;function&#34;</span><span class="p">){</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;我只接受函数啊&#39;</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="c1">// 添加实例方法then
+</span><span class="c1"></span>	<span class="nx">then</span><span class="p">(){}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="24-promise实例化传递的函数参数立即执行">2.4 Promise实例化传递的函数参数立即执行</h3>
+<ul>
+<li>
+<p>安装测试方法的库sinon</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">yarn add -D sinon sinon-chai @types/sinon @types/sinon-chai
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="c1">// test/index.ts
+</span><span class="c1"></span><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">sinon</span> <span class="kr">from</span> <span class="s2">&#34;sinon&#34;</span>
+<span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">sinonChai</span> <span class="kr">from</span> <span class="s2">&#34;sinon-chai&#34;</span>
+<span class="nx">chai</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">sinonChai</span><span class="p">)</span>
+
+<span class="nx">it</span><span class="p">(</span><span class="s2">&#34;new Promise(fn)的fn立即执行&#34;</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+	<span class="kr">const</span> <span class="nx">fn</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">fake</span><span class="p">()</span>
+	<span class="k">new</span> <span class="nx">MyPromise</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span>
+	<span class="c1">// 断言fn被调用了
+</span><span class="c1"></span>	<span class="nx">assert</span><span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">called</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// src/promise.ts
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
+	<span class="kr">constructor</span><span class="p">(</span><span class="nx">fn</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">fn</span> <span class="o">!==</span> <span class="s2">&#34;function&#34;</span><span class="p">){</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;我只接受函数啊&#39;</span><span class="p">)</span>
+		<span class="p">}</span>
+		<span class="nx">fn</span><span class="p">()</span>
+	<span class="p">}</span>
+  <span class="nx">then</span><span class="p">(){}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="25-promise实例对象在执行时接收resolve和reject两个函数">2.5 Promise实例对象在执行时，接收resolve和reject两个函数</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="c1">// test/index.ts
+</span><span class="c1"></span><span class="nx">it</span><span class="p">(</span><span class="s2">&#34;new Promise(fn)的fn执行时接受resolve和reject两个函数&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span> <span class="c1">// 传递done参数
+</span><span class="c1"></span>	<span class="k">new</span> <span class="nx">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">reject</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">assert</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span><span class="nx">resolve</span><span class="p">)</span>
+    <span class="nx">assert</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span><span class="nx">reject</span><span class="p">)</span>
+    <span class="c1">// 只有上面两个断言都执行了，才算测试完成
+</span><span class="c1"></span>    <span class="nx">done</span><span class="p">()</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="c1">// src/promise.ts
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
+	<span class="kr">constructor</span><span class="p">(</span><span class="nx">fn</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">fn</span> <span class="o">!==</span> <span class="s2">&#34;function&#34;</span><span class="p">){</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;我只接受函数啊&#39;</span><span class="p">)</span>
+		<span class="p">}</span>
+    <span class="c1">// 先随便传递两个函数即可
+</span><span class="c1"></span>		<span class="nx">fn</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{},()</span><span class="o">=&gt;</span><span class="p">{})</span>
+	<span class="p">}</span>
+  <span class="nx">then</span><span class="p">(){}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="26-promise实例对象then方法中的success回调会在resolve被调用后执行">2.6 Promise实例对象then方法中的success回调会在resolve被调用后执行</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="c1">// test/index.ts
+</span><span class="c1"></span><span class="nx">it</span><span class="p">(</span><span class="s2">&#34;p.then(success)的success回调会在resolve被调用后执行&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+	<span class="kr">const</span> <span class="nx">success</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">fake</span><span class="p">()</span>
+	<span class="kr">const</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPromise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	 	<span class="c1">// 断言，在resolve执行前，success不会执行
+</span><span class="c1"></span>		<span class="nx">assert</span><span class="p">.</span><span class="nx">isFalse</span><span class="p">(</span><span class="nx">success</span><span class="p">.</span><span class="nx">called</span><span class="p">)</span>
+		<span class="nx">resolve</span><span class="p">()</span>
+		<span class="c1">// 之所以设置定时器，是因为resolve的过程是异步的，等待then执行后将success绑定到实例对象，再执行success
+</span><span class="c1"></span>		<span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+			<span class="c1">// 断言，在resolve后，success才会执行
+</span><span class="c1"></span>			<span class="nx">assert</span><span class="p">(</span><span class="nx">success</span><span class="p">.</span><span class="nx">called</span><span class="p">)</span>
+			<span class="c1">// 保证代码执行完毕才算测试结束
+</span><span class="c1"></span>			<span class="nx">done</span><span class="p">()</span>
+		<span class="p">})</span>
+	<span class="p">})</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// src/promise.ts
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
+	<span class="nx">success</span> <span class="o">=</span> <span class="kc">null</span>
+	<span class="nx">fail</span> <span class="o">=</span> <span class="kc">null</span>
+  <span class="c1">// 调用resolve（第一个参数）时，调用success方法
+</span><span class="c1"></span>  <span class="nx">resolve</span><span class="p">(){</span>
+    <span class="c1">// 由于fn是立即执行的，所以还没等到then方法绑定success回调至实例，就执行了success
+</span><span class="c1"></span>    <span class="c1">// 因此设置延时，让then先执行，再执行resolve，从而执行success
+</span><span class="c1"></span>    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">success</span><span class="p">()</span>  
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="c1">// 调用reject（第二个参数）时，调用failed方法
+</span><span class="c1"></span>  <span class="nx">reject</span><span class="p">(){</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">fail</span><span class="p">()</span>  
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span>
+	<span class="kr">constructor</span><span class="p">(</span><span class="nx">fn</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">fn</span> <span class="o">!==</span> <span class="s2">&#34;function&#34;</span><span class="p">){</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;我只接受函数啊&#39;</span><span class="p">)</span>
+		<span class="p">}</span>
+    <span class="c1">// 绑定this，防止success的this丢失
+</span><span class="c1"></span>		<span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">reject</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">))</span>	
+	<span class="p">}</span>
+	<span class="c1">// then 接受两个参数（回调函数）（可选），保存为实例属性
+</span><span class="c1"></span>  <span class="nx">then</span><span class="p">(</span><span class="nx">success</span><span class="o">?</span><span class="p">,</span> <span class="nx">fail</span><span class="o">?</span><span class="p">){</span>
+  	<span class="k">this</span><span class="p">.</span><span class="nx">success</span> <span class="o">=</span> <span class="nx">success</span>
+  	<span class="k">this</span><span class="p">.</span><span class="nx">fail</span> <span class="o">=</span> <span class="nx">fail</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="27-如果then的参数不是函数则忽略a规范221">2.7 如果then的参数不是函数，则忽略——<code>A+规范2.2.1</code></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="c1">// test/index.ts
+</span><span class="c1"></span><span class="nx">it</span><span class="p">(</span><span class="s2">&#34;then方法的第一个参数不是函数，则忽略&#34;</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+  <span class="c1">// 正常执行，不报错即可
+</span><span class="c1"></span>	<span class="kr">const</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPromise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">resolve</span><span class="p">()</span>
+    <span class="nx">reject</span><span class="p">()</span>
+  <span class="p">})</span>
+  <span class="nx">p</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="kc">null</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// src/promise.ts
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
+	<span class="nx">success</span> <span class="o">=</span> <span class="kc">null</span>
+	<span class="nx">fail</span> <span class="o">=</span> <span class="kc">null</span>
+  <span class="nx">resolve</span><span class="p">(){</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// 如果success是函数，再调用success
+</span><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">success</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">){</span>
+      	<span class="k">this</span><span class="p">.</span><span class="nx">success</span><span class="p">()</span>  
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">reject</span><span class="p">(){</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">fail</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">){</span>
+      	<span class="k">this</span><span class="p">.</span><span class="nx">fail</span><span class="p">()</span>  
+      <span class="p">}</span>  
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span>
+	<span class="kr">constructor</span><span class="p">(</span><span class="nx">fn</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">fn</span> <span class="o">!==</span> <span class="s2">&#34;function&#34;</span><span class="p">){</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;我只接受函数啊&#39;</span><span class="p">)</span>
+		<span class="p">}</span>
+		<span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">reject</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">))</span>	
+	<span class="p">}</span>
+  <span class="nx">then</span><span class="p">(</span><span class="nx">success</span><span class="o">?</span><span class="p">,</span> <span class="nx">fail</span><span class="o">?</span><span class="p">){</span>
+    <span class="c1">// 添加判断
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">success</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">){</span>
+      	<span class="k">this</span><span class="p">.</span><span class="nx">success</span> <span class="o">=</span> <span class="nx">success</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">fail</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">){</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">fail</span> <span class="o">=</span> <span class="nx">fail</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="28-success函数必须在promise-完成fulfilled后被调用并把promise-的值作为它的第一个参数完成fulfilled之前绝对不能被调用绝对不能被调用超过一次a规范222">2.8 success函数必须在<code>promise</code> 完成(fulfilled)后被调用,并把<code>promise</code> 的值作为它的第一个参数；完成(fulfilled)之前绝对不能被调用；绝对不能被调用超过一次——A+规范2.2.2</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="c1">// test/index.ts
+</span><span class="c1"></span><span class="nx">it</span><span class="p">(</span><span class="s2">&#34;success函数必须在promise完成(fulfilled)后被调用,并把promise的值作为它的第一个参数；完成(fulfilled)之前绝对不能被调用；绝对不能被调用超过一次&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+	<span class="kr">const</span> <span class="nx">success</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">fake</span><span class="p">()</span>
+  <span class="kr">const</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPromise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="c1">// 断言在resolve之前不会调用success
+</span><span class="c1"></span>    <span class="nx">assert</span><span class="p">.</span><span class="nx">isFalse</span><span class="p">(</span><span class="nx">success</span><span class="p">.</span><span class="nx">called</span><span class="p">)</span>
+    <span class="nx">resolve</span><span class="p">(</span><span class="mi">233</span><span class="p">)</span>
+    <span class="nx">resolve</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+      <span class="c1">// 断言状态变为了fulfilled
+</span><span class="c1"></span>      <span class="nx">assert</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">state</span> <span class="o">===</span> <span class="s1">&#39;fulfilled&#39;</span><span class="p">)</span>
+      <span class="c1">// 断言状态变更后调用success回调，且只调用一次
+</span><span class="c1"></span>      <span class="nx">assert</span><span class="p">(</span><span class="nx">success</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">)</span>
+      <span class="c1">// 断言success调用时的参数为resolve的值
+</span><span class="c1"></span>      <span class="nx">assert</span><span class="p">(</span><span class="nx">success</span><span class="p">.</span><span class="nx">calledWith</span><span class="p">(</span><span class="mi">233</span><span class="p">))</span>
+      <span class="c1">// 异步测试结束
+</span><span class="c1"></span>      <span class="nx">done</span><span class="p">()</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">})</span>
+  <span class="nx">p</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// src/promise.ts
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
+	<span class="nx">success</span> <span class="o">=</span> <span class="kc">null</span>
+	<span class="nx">fail</span> <span class="o">=</span> <span class="kc">null</span>
+	<span class="c1">// 状态，默认pending
+</span><span class="c1"></span>	<span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;pending&#39;</span>
+  <span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">){</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// 防止多次调用
+</span><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">!==</span> <span class="s1">&#39;pending&#39;</span><span class="p">)</span> <span class="k">return</span>
+      <span class="c1">// 在执行success前，变更状态为fulfilled
+</span><span class="c1"></span>      <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;fulfilled&#39;</span>
+      <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">success</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">){</span>
+        <span class="c1">// 接收resolve1的值作为参数
+</span><span class="c1"></span>      	<span class="k">this</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>  
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">reject</span><span class="p">(</span><span class="nx">reason</span><span class="p">){</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">!==</span> <span class="s1">&#39;pending&#39;</span><span class="p">)</span> <span class="k">return</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;rejected&#39;</span>
+      <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">fail</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">){</span>
+      	<span class="k">this</span><span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="nx">reason</span><span class="p">)</span>  
+      <span class="p">}</span>  
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span>
+	<span class="kr">constructor</span><span class="p">(</span><span class="nx">fn</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">fn</span> <span class="o">!==</span> <span class="s2">&#34;function&#34;</span><span class="p">){</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;我只接受函数啊&#39;</span><span class="p">)</span>
+		<span class="p">}</span>
+		<span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">reject</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">))</span>	
+	<span class="p">}</span>
+  <span class="nx">then</span><span class="p">(</span><span class="nx">success</span><span class="o">?</span><span class="p">,</span> <span class="nx">fail</span><span class="o">?</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">success</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">){</span>
+      	<span class="k">this</span><span class="p">.</span><span class="nx">success</span> <span class="o">=</span> <span class="nx">success</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">fail</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">){</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">fail</span> <span class="o">=</span> <span class="nx">fail</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="29-在我们的代码执行结束后再执行success回调a规范224">2.9 在我们的代码执行结束后，再执行success回调——A+规范2.2.4</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="c1">// test/index.ts
+</span><span class="c1"></span><span class="nx">it</span><span class="p">(</span><span class="s2">&#34;在我们的代码执行结束之前，不得调用then中的两个函数&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+	<span class="kr">const</span> <span class="nx">success</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">fake</span><span class="p">()</span>
+  <span class="kr">const</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPromise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+		<span class="nx">resolve</span><span class="p">()</span>
+  <span class="p">})</span>
+  <span class="nx">p</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span>
+  <span class="c1">// 断言success不会被执行
+</span><span class="c1"></span>  <span class="nx">assert</span><span class="p">.</span><span class="nx">isFalse</span><span class="p">(</span><span class="nx">success</span><span class="p">.</span><span class="nx">called</span><span class="p">)</span>
+  <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="c1">// 待同步代码执行完毕后，断言success执行
+</span><span class="c1"></span>    <span class="nx">assert</span><span class="p">(</span><span class="nx">success</span><span class="p">.</span><span class="nx">called</span><span class="p">)</span>
+		<span class="nx">done</span><span class="p">()</span>
+  <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// src/promise.ts
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
+	<span class="c1">// 在resolve中，由于success的执行本来就是异步的（setTimeout）
+</span><span class="c1"></span>  <span class="c1">// 所以自然满足测试用例
+</span><span class="c1"></span>  <span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">){</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">!==</span> <span class="s1">&#39;pending&#39;</span><span class="p">)</span> <span class="k">return</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;fulfilled&#39;</span>
+      <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">success</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">){</span>
+      	<span class="k">this</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>  
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="210-then的两个函数只能以函数形式调用即内部this指向undefineda规范225">2.10 then的两个函数只能以函数形式调用，即内部this指向undefined——A+规范2.2.5</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="c1">// test/index.ts
+</span><span class="c1"></span><span class="nx">it</span><span class="p">(</span><span class="s2">&#34;then的两个函数只能以函数形式调用，即内部this指向undefined&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPromise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+		<span class="nx">resolve</span><span class="p">()</span>
+  <span class="p">})</span>
+  <span class="nx">p</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  	<span class="s2">&#34;use strict&#34;</span>
+  	<span class="nx">assert</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span>
+    <span class="nx">done</span><span class="p">()</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="c1">// src/promise.ts
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
+	<span class="c1">// 原来调用success回调时采用的方式是this.success()
+</span><span class="c1"></span>	<span class="c1">// 会自动将this实例传入success
+</span><span class="c1"></span>  <span class="c1">// 所以利用call改变this指向即可
+</span><span class="c1"></span>  <span class="nx">success</span> <span class="o">=</span> <span class="kc">null</span>
+  <span class="nx">fail</span> <span class="o">=</span> <span class="kc">null</span>
+  <span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">){</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">!==</span> <span class="s1">&#39;pending&#39;</span><span class="p">)</span> <span class="k">return</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;fulfilled&#39;</span>
+      <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">success</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">){</span>
+      	<span class="k">this</span><span class="p">.</span><span class="nx">success</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span>  
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">reject</span><span class="p">(</span><span class="nx">reason</span><span class="p">){</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">!==</span> <span class="s1">&#39;pending&#39;</span><span class="p">)</span> <span class="k">return</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">&#39;rejected&#39;</span>
+      <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">fail</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">){</span>
+      	<span class="k">this</span><span class="p">.</span><span class="nx">fail</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">reason</span><span class="p">)</span>  
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="211-then可以在同一个promise中多次调用且依据then的顺序调用a规范226">2.11 then可以在同一个promise中多次调用，且依据then的顺序调用——A+规范2.2.6</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="c1">// test/index.ts
+</span><span class="c1"></span><span class="nx">it</span><span class="p">(</span><span class="s2">&#34;then可以在同一个promise中多次调用，且依据then的顺序调用&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPromise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+		<span class="nx">resolve</span><span class="p">()</span>
+  <span class="p">})</span>
+  <span class="kr">const</span> <span class="nx">callback</span> <span class="o">=</span> <span class="p">[</span><span class="nx">sinon</span><span class="p">.</span><span class="nx">fake</span><span class="p">(),</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">fake</span><span class="p">(),</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">fake</span><span class="p">()]</span>
+  <span class="nx">p</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">callback</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="nx">p</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">callback</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+  <span class="nx">p</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">callback</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+  <span class="c1">// 断言三个都被调用了
+</span><span class="c1"></span>  <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">callback</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">called</span><span class="p">)</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">callback</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">called</span><span class="p">)</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">callback</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nx">called</span><span class="p">)</span>
+    <span class="c1">// 断言调用顺序
+</span><span class="c1"></span>    <span class="nx">assert</span><span class="p">(</span><span class="nx">callback</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">calledAfter</span><span class="p">(</span><span class="nx">callback</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="nx">assert</span><span class="p">(</span><span class="nx">callback</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nx">calledAfter</span><span class="p">(</span><span class="nx">callback</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="nx">done</span><span class="p">()</span>
+  <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// src/promise.ts
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
+	<span class="c1">// 目前的then只会保留一个success和一个fail，只能实现单次调用
+</span><span class="c1"></span>  <span class="c1">// 若要实现多次调用，需要将多次的success和fail保存起来
+</span><span class="c1"></span>  <span class="c1">// 因此利用数组改写
+</span><span class="c1"></span>  <span class="c1">// success = null
+</span><span class="c1"></span>  <span class="c1">// fail = null
+</span><span class="c1"></span>  <span class="nx">callbacks</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="nx">state</span> <span class="o">=</span> <span class="s2">&#34;pending&#34;</span><span class="p">;</span>
+  <span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">!==</span> <span class="s2">&#34;pending&#34;</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s2">&#34;fulfilled&#34;</span><span class="p">;</span>
+      <span class="c1">// forEach按顺序遍历并执行全部handler的第一个函数（success）
+</span><span class="c1"></span>      <span class="k">this</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">handler</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">handler</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&#34;function&#34;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">handler</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">call</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">reject</span><span class="p">(</span><span class="nx">reason</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">!==</span> <span class="s2">&#34;pending&#34;</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s2">&#34;rejected&#34;</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">handler</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">handler</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&#34;function&#34;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">handler</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">call</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">reason</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="kr">constructor</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">fn</span> <span class="o">!==</span> <span class="s2">&#34;function&#34;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;我只接受函数啊&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">reject</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="nx">then</span><span class="p">(</span><span class="nx">success</span><span class="o">?</span><span class="p">,</span> <span class="nx">fail</span><span class="o">?</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 将then的全部参数作为一个handler数组保存
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">handler</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">success</span> <span class="o">===</span> <span class="s2">&#34;function&#34;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 数组的第一个值为成功的回调
+</span><span class="c1"></span>      <span class="nx">handler</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">success</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">fail</span> <span class="o">===</span> <span class="s2">&#34;function&#34;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 数组的第二个值为失败的回调
+</span><span class="c1"></span>      <span class="nx">handler</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">fail</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 将回调函数推进数组
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">handler</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="3-总结">3 总结</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
+  <span class="nx">state</span> <span class="o">=</span> <span class="s2">&#34;pending&#34;</span><span class="p">;</span>
+  <span class="nx">callbacks</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">!==</span> <span class="s2">&#34;pending&#34;</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s2">&#34;fulfilled&#34;</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">handler</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">handler</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&#34;function&#34;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">handler</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">call</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">reject</span><span class="p">(</span><span class="nx">reason</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">!==</span> <span class="s2">&#34;pending&#34;</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s2">&#34;rejected&#34;</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">handler</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">handler</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&#34;function&#34;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">handler</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">call</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">reason</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="kr">constructor</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">fn</span> <span class="o">!==</span> <span class="s2">&#34;function&#34;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;我只接受函数&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">reject</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="nx">then</span><span class="p">(</span><span class="nx">success</span><span class="o">?</span><span class="p">,</span> <span class="nx">fail</span><span class="o">?</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">handler</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">success</span> <span class="o">===</span> <span class="s2">&#34;function&#34;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">handler</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">success</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">fail</span> <span class="o">===</span> <span class="s2">&#34;function&#34;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">handler</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">fail</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">handler</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-12-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/js%E6%89%8B%E5%86%99/">JS手写</a>
+          <a href="/tags/promise/">Promise</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/asyncawait/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">async/await全解</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98javascript/">
+            <span class="next-text nav-default">每日一题-JavaScript</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

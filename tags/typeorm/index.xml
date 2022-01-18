@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TypeORM on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/typeorm/</link>
+    <description>Recent content in TypeORM on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 11 Jan 2022 16:25:49 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/typeorm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nextjs配置TypeORM</title>
+      <link>https://gsemir0418.github.io/post/nextjs%E9%85%8D%E7%BD%AEtypeorm/</link>
+      <pubDate>Tue, 11 Jan 2022 16:25:49 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/nextjs%E9%85%8D%E7%BD%AEtypeorm/</guid>
+      <description>1 创建Next.js项目 1 yarn create next-app --typescript 按照提示填写项目名称后， 项目就搭建完成了，以下是项目文件结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 . ├── README.md</description>
+    </item>
+    
+  </channel>
+</rss>

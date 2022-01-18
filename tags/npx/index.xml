@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>npx on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/npx/</link>
+    <description>Recent content in npx on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 28 Dec 2021 22:11:43 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/npx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Node包管理工具</title>
+      <link>https://gsemir0418.github.io/post/node%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Tue, 28 Dec 2021 22:11:43 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/node%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/</guid>
+      <description>1 npm 5.4.2+版本的npm，在执行npm i命令后，会检查package.json与lock文件的异同，如果不同，会以package.jso</description>
+    </item>
+    
+  </channel>
+</rss>

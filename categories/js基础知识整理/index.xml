@@ -6,7 +6,34 @@
     <description>Recent content in JS基础知识整理 on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 02 Dec 2021 14:17:20 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Dec 2021 16:10:22 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>This</title>
+      <link>https://gsemir0418.github.io/post/this/</link>
+      <pubDate>Fri, 17 Dec 2021 16:10:22 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/this/</guid>
+      <description>1 隐式this的确定规则 函数的简单调用，this表示window/global对象（严格模式为undefined） fn(1, 2) &amp;lt;=&amp;gt; fn.call(undefined, 1, 2) 通过对象调用方</description>
+    </item>
+    
+    <item>
+      <title>JavaScript函数</title>
+      <link>https://gsemir0418.github.io/post/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Wed, 15 Dec 2021 20:40:20 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/</guid>
+      <description>1 函数和闭包 javascript中全部函数均有返回值 对象中的函数叫做方法 1.1 函数的环境 函数返回值的影响因素 函数调用时输入的参数 params 函数定义时的环</description>
+    </item>
+    
+    <item>
+      <title>async/await全解</title>
+      <link>https://gsemir0418.github.io/post/asyncawait/</link>
+      <pubDate>Wed, 15 Dec 2021 14:31:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/asyncawait/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>JS运算符</title>
       <link>https://gsemir0418.github.io/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/</link>

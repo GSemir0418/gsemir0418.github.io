@@ -6,14 +6,23 @@
     <description>Recent content in JS手写 on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 23 Nov 2021 16:15:44 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/js%E6%89%8B%E5%86%99/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Dec 2021 09:59:48 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/js%E6%89%8B%E5%86%99/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手写Promise</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99promise/</link>
+      <pubDate>Tue, 14 Dec 2021 09:59:48 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99promise/</guid>
+      <description>0 手写前 该技术解决什么问题-why 回调地狱，比如node读写文件 该技术是怎么解决它的-how Promise的构造函数接收一个参数：函数，并且</description>
+    </item>
+    
     <item>
       <title>手写深拷贝</title>
       <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D/</link>
       <pubDate>Tue, 23 Nov 2021 16:15:44 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D/</guid>
-      <description>1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 最简单的方法 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函</description>
+      <description>1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函数属性 不支持</description>
     </item>
     
   </channel>

@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Dva数据流">
 <meta itemprop="description" content="1 初识Dva 1.1 定义 dva 首先是一个基于redux和redux-saga的数据流方案，然后为了简化开发体验，dva 还额外内置了react-rout"><meta itemprop="datePublished" content="2021-09-15T16:12:05+08:00" />
 <meta itemprop="dateModified" content="2021-12-08T00:00:00+08:00" />
-<meta itemprop="wordCount" content="2882">
+<meta itemprop="wordCount" content="2967">
 <meta itemprop="keywords" content="前端,React,umi,dva," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Dva数据流"/>
 <meta name="twitter:description" content="1 初识Dva 1.1 定义 dva 首先是一个基于redux和redux-saga的数据流方案，然后为了简化开发体验，dva 还额外内置了react-rout"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93/"> 项目实战总结 </a>
             </div>
-          <span class="more-meta"> 2882 words </span>
+          <span class="more-meta"> 2967 words </span>
           <span class="more-meta"> 6 mins read </span>
         
       </div>
@@ -152,6 +152,11 @@
         <li><a href="#11-定义">1.1 定义</a></li>
         <li><a href="#12-dva数据流概念">1.2 Dva数据流概念</a></li>
         <li><a href="#13-model层重要api">1.3 model层重要API</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-使用">2 使用</a>
+      <ul>
+        <li><a href="#21-路由跳转">2.1 路由跳转</a></li>
       </ul>
     </li>
     <li><a href="#3-示例">3 示例</a>
@@ -205,7 +210,48 @@
 </ol>
 <p>dispatching function 是一个用于触发 action 的函数，action 是改变 State 的唯一途径，但是它只描述了一个行为，而 dipatch 可以看作是触发这个行为的方式，而 Reducer 则是描述如何改变数据的。</p>
 <p>在 dva 中，connect Model 的组件通过 props 可以访问到 dispatch，可以调用 Model 中的 Reducer 或者 Effects。</p>
-<h1 id="3-示例">3 示例</h1>
+<h1 id="2-使用">2 使用</h1>
+<h2 id="21-路由跳转">2.1 路由跳转</h2>
+<ul>
+<li>基于action进行页面跳转</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="p">{</span> <span class="nx">routerRedux</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;dva/router&#39;</span><span class="p">;</span>
+
+<span class="c1">// 在effects中使用
+</span><span class="c1"></span><span class="k">yield</span> <span class="nx">put</span><span class="p">(</span><span class="nx">routerRedux</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;/logout&#39;</span><span class="p">));</span>
+
+<span class="c1">// 在effects外使用
+</span><span class="c1"></span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">routerRedux</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;/logout&#39;</span><span class="p">));</span>
+
+<span class="c1">// 带参数跳转
+</span><span class="c1"></span><span class="nx">routerRedux</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+  <span class="nx">pathname</span><span class="o">:</span> <span class="s1">&#39;/logout&#39;</span><span class="p">,</span>
+  <span class="nx">query</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">page</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-示例">3 示例</h1>
 <p>通过一个简单的表格数据获取与延时删除demo，熟悉dva数据流的概念、结构及主要API</p>
 <h2 id="文件目录">文件目录</h2>
 <blockquote>
@@ -648,7 +694,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
   </span>
 </div>
 

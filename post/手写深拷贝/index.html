@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="gsemir" /><meta name="description" content="1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 最简单的方法 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="gsemir" /><meta name="description" content="1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函数属性 不支持" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="手写深拷贝" />
-<meta property="og:description" content="1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 最简单的方法 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函" />
+<meta property="og:description" content="1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函数属性 不支持" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-23T16:15:44+08:00" />
 <meta property="article:modified_time" content="2021-11-23T16:15:44+08:00" />
 
 <meta itemprop="name" content="手写深拷贝">
-<meta itemprop="description" content="1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 最简单的方法 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函"><meta itemprop="datePublished" content="2021-11-23T16:15:44+08:00" />
+<meta itemprop="description" content="1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函数属性 不支持"><meta itemprop="datePublished" content="2021-11-23T16:15:44+08:00" />
 <meta itemprop="dateModified" content="2021-11-23T16:15:44+08:00" />
-<meta itemprop="wordCount" content="368">
+<meta itemprop="wordCount" content="354">
 <meta itemprop="keywords" content="深拷贝,JS手写," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="手写深拷贝"/>
-<meta name="twitter:description" content="1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 最简单的方法 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函"/>
+<meta name="twitter:description" content="1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函数属性 不支持"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
             </div>
-          <span class="more-meta"> 368 words </span>
+          <span class="more-meta"> 354 words </span>
           <span class="more-meta"> 1 min read </span>
         
       </div>
@@ -145,14 +145,19 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-什么是深拷贝">1 什么是深拷贝</a></li>
+    <li><a href="#2-json序列化与反序列化">2 JSON序列化与反序列化</a></li>
+    <li><a href="#3-递归">3 递归</a></li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      <p>1 什么是深拷贝</p>
+      <h1 id="1-什么是深拷贝">1 什么是深拷贝</h1>
 <p>b是a的一份拷贝，b中没有对a中对象的引用</p>
-<p>2 最简单的方法</p>
-<p><strong>JSON序列化与反序列化</strong></p>
+<h1 id="2-json序列化与反序列化">2 JSON序列化与反序列化</h1>
 <p>最简单，但存在如下缺点</p>
 <p>不支持函数，会直接忽略函数属性</p>
 <p>不支持undefined，也会直接忽略</p>
@@ -160,7 +165,7 @@
 <p>不支持Date类型，会转换成<code>ISO8601</code>字符串（“2021-11-23T08:37:34.035Z”）</p>
 <p>不支持正则表达式，会变成空对象</p>
 <p>&hellip;只要是JSON不支持的类型，都可以作为此方法的缺点。</p>
-<p>3 利用<strong>递归</strong>的方式深克隆</p>
+<h1 id="3-递归">3 递归</h1>
 <p>思路</p>
 <p>看节点的类型</p>
 <p>如果是基本类型就直接拷贝</p>
@@ -234,7 +239,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
   </span>
 </div>
 

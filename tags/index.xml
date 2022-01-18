@@ -6,22 +6,148 @@
     <description>Recent content in Tags on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 08 Dec 2021 09:57:36 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 Jan 2022 16:25:49 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Next.js</title>
+      <link>https://gsemir0418.github.io/tags/next.js/</link>
+      <pubDate>Tue, 11 Jan 2022 16:25:49 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/next.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nodejs</title>
+      <link>https://gsemir0418.github.io/tags/nodejs/</link>
+      <pubDate>Tue, 11 Jan 2022 16:25:49 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/nodejs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TypeORM</title>
+      <link>https://gsemir0418.github.io/tags/typeorm/</link>
+      <pubDate>Tue, 11 Jan 2022 16:25:49 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/typeorm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cnpm</title>
+      <link>https://gsemir0418.github.io/tags/cnpm/</link>
+      <pubDate>Tue, 28 Dec 2021 22:11:43 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/cnpm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>npm</title>
+      <link>https://gsemir0418.github.io/tags/npm/</link>
+      <pubDate>Tue, 28 Dec 2021 22:11:43 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/npm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>npx</title>
+      <link>https://gsemir0418.github.io/tags/npx/</link>
+      <pubDate>Tue, 28 Dec 2021 22:11:43 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/npx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pnpm</title>
+      <link>https://gsemir0418.github.io/tags/pnpm/</link>
+      <pubDate>Tue, 28 Dec 2021 22:11:43 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/pnpm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>yarn</title>
+      <link>https://gsemir0418.github.io/tags/yarn/</link>
+      <pubDate>Tue, 28 Dec 2021 22:11:43 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/yarn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TypeScript</title>
+      <link>https://gsemir0418.github.io/tags/typescript/</link>
+      <pubDate>Fri, 24 Dec 2021 15:15:48 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/typescript/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>JavaScript</title>
       <link>https://gsemir0418.github.io/tags/javascript/</link>
-      <pubDate>Wed, 08 Dec 2021 09:57:36 +0800</pubDate>
+      <pubDate>Fri, 17 Dec 2021 16:10:22 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/tags/javascript/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>this</title>
+      <link>https://gsemir0418.github.io/tags/this/</link>
+      <pubDate>Fri, 17 Dec 2021 16:10:22 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/this/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>面试</title>
       <link>https://gsemir0418.github.io/tags/%E9%9D%A2%E8%AF%95/</link>
-      <pubDate>Wed, 08 Dec 2021 09:57:36 +0800</pubDate>
+      <pubDate>Fri, 17 Dec 2021 16:10:22 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/tags/%E9%9D%A2%E8%AF%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>async</title>
+      <link>https://gsemir0418.github.io/tags/async/</link>
+      <pubDate>Wed, 15 Dec 2021 14:31:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/async/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>await</title>
+      <link>https://gsemir0418.github.io/tags/await/</link>
+      <pubDate>Wed, 15 Dec 2021 14:31:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/await/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JS手写</title>
+      <link>https://gsemir0418.github.io/tags/js%E6%89%8B%E5%86%99/</link>
+      <pubDate>Tue, 14 Dec 2021 09:59:48 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/js%E6%89%8B%E5%86%99/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Promise</title>
+      <link>https://gsemir0418.github.io/tags/promise/</link>
+      <pubDate>Tue, 14 Dec 2021 09:59:48 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/tags/promise/</guid>
       <description></description>
     </item>
     
@@ -40,15 +166,6 @@
       <pubDate>Mon, 29 Nov 2021 09:45:56 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/tags/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>JS手写</title>
-      <link>https://gsemir0418.github.io/tags/js%E6%89%8B%E5%86%99/</link>
-      <pubDate>Tue, 23 Nov 2021 16:15:44 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/tags/js%E6%89%8B%E5%86%99/</guid>
       <description></description>
     </item>
     
@@ -170,24 +287,6 @@
     </item>
     
     <item>
-      <title>nodejs</title>
-      <link>https://gsemir0418.github.io/tags/nodejs/</link>
-      <pubDate>Mon, 01 Nov 2021 13:34:39 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/tags/nodejs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Next.js</title>
-      <link>https://gsemir0418.github.io/tags/next.js/</link>
-      <pubDate>Sat, 23 Oct 2021 20:38:48 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/tags/next.js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>React</title>
       <link>https://gsemir0418.github.io/tags/react/</link>
       <pubDate>Sat, 23 Oct 2021 20:38:48 +0800</pubDate>
@@ -301,15 +400,6 @@
       <pubDate>Sat, 07 Aug 2021 22:15:51 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/tags/react%E5%9F%BA%E7%A1%80/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>函数</title>
-      <link>https://gsemir0418.github.io/tags/%E5%87%BD%E6%95%B0/</link>
-      <pubDate>Sat, 07 Aug 2021 20:40:20 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/tags/%E5%87%BD%E6%95%B0/</guid>
       <description></description>
     </item>
     
