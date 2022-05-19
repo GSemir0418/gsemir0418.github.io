@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Node包管理工具">
 <meta itemprop="description" content="1 npm 5.4.2&#43;版本的npm，在执行npm i命令后，会检查package.json与lock文件的异同，如果不同，会以package.jso"><meta itemprop="datePublished" content="2021-12-28T22:11:43+08:00" />
 <meta itemprop="dateModified" content="2021-12-28T22:11:43+08:00" />
-<meta itemprop="wordCount" content="508">
+<meta itemprop="wordCount" content="827">
 <meta itemprop="keywords" content="npm,yarn,cnpm,npx,pnpm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Node包管理工具"/>
 <meta name="twitter:description" content="1 npm 5.4.2&#43;版本的npm，在执行npm i命令后，会检查package.json与lock文件的异同，如果不同，会以package.jso"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/"> 前端工程化 </a>
             </div>
-          <span class="more-meta"> 508 words </span>
+          <span class="more-meta"> 827 words </span>
           <span class="more-meta"> 2 mins read </span>
         
       </div>
@@ -145,11 +145,19 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-npm">1 npm</a></li>
+    <li><a href="#2-npx">2 npx</a></li>
+    <li><a href="#3-yarn">3 yarn</a></li>
+    <li><a href="#4-cnpm">4 cnpm</a></li>
+    <li><a href="#5-pnpm">5 pnpm</a></li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      <p>1 npm</p>
+      <h1 id="1-npm">1 npm</h1>
 <p>5.4.2+版本的npm，在执行<code>npm i</code>命令后，会检查<code>package.json</code>与lock文件的异同，如果不同，会以<code>package.json</code>为准，并同步修改lock文件</p>
 <p>npm下载安装依赖包的过程是串行的，因此下载速度会受到一定限制</p>
 <p><code>semver</code>标准</p>
@@ -169,10 +177,10 @@
 npm config <span class="nb">set</span> registry http://registry.npm.taobao.org
 </code></pre></td></tr></table>
 </div>
-</div><p>2 npx</p>
+</div><h1 id="2-npx">2 npx</h1>
 <p>下载并执行依赖包命令，而npm只负责依赖包的管理</p>
 <p><code>npx</code> 首先会寻找项目中已经安装的包，再寻找全局安装的包，如果都没有找到的话，<code>npx</code> 会先安装这个包，然后再执行命令。</p>
-<p>3 yarn</p>
+<h1 id="3-yarn">3 yarn</h1>
 <p>早期的npm没有<code>package-lock.json</code>文件，而yarn有，不过现在都有了</p>
 <p><code>yarn</code> 下载安装依赖包的速度要比 <code>npm</code> 快很多，这是因为 <code>yarn</code> 采用并行安装依赖的方式，而 <code>npm</code> 是串行。</p>
 <p>yarn配置淘宝源</p>
@@ -186,10 +194,32 @@ npm config <span class="nb">set</span> registry http://registry.npm.taobao.org
 yarn config <span class="nb">set</span> registry https://registry.npm.taobao.org
 </code></pre></td></tr></table>
 </div>
-</div><p>4 cnpm</p>
+</div><h1 id="4-cnpm">4 cnpm</h1>
 <p>因为<code>cnpm</code>的镜像仓库在国内，比 <code>npm</code>下载速度要快一些</p>
 <p>但不会生成lock文件，安装依赖时也会直接忽略掉lock文件</p>
-<p>5 pnpm</p>
+<h1 id="5-pnpm">5 pnpm</h1>
+<ol>
+<li>
+<p>速度快</p>
+</li>
+<li>
+<p>高效利用磁盘空间</p>
+<ul>
+<li>
+<p>pnpm 内部使用<code>基于内容寻址</code>的文件系统来存储磁盘上所有的文件，这个文件系统出色的地方在于:</p>
+</li>
+<li>
+<p>不会重复安装同一个包。用 npm/yarn 的时候，如果 100 个项目都依赖 lodash，那么 lodash 很可能就被安装了 100 次，磁盘中就有 100 个地方写入了这部分代码。但在使用 pnpm 只会安装一次，磁盘中只有一个地方写入，后面再次使用都会直接使用 <code>hardlink</code>(硬链接，不清楚的同学详见<a href="https://link.juejin.cn?target=https%3A%2F%2Fwww.cnblogs.com%2Fitech%2Farchive%2F2009%2F04%2F10%2F1433052.html">这篇文章</a>)。</p>
+</li>
+<li>
+<p>即使一个包的不同版本，pnpm 也会极大程度地复用之前版本的代码。举个例子，比如 lodash 有 100 个文件，更新版本之后多了一个文件，那么磁盘当中并不会重新写入 101 个文件，而是保留原来的 100 个文件的 <code>hardlink</code>，仅仅写入那<code>一个新增的文件</code>。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>避免蹭依赖，使得node_modules结构也更加稳定</p>
+</li>
+</ol>
 
     </div>
 

@@ -16,5 +16,14 @@
       <description>1 npm 5.4.2+版本的npm，在执行npm i命令后，会检查package.json与lock文件的异同，如果不同，会以package.jso</description>
     </item>
     
+    <item>
+      <title>Vite Pnpm React搭建</title>
+      <link>https://gsemir0418.github.io/post/vite-pnpm-react%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Thu, 15 Apr 2021 13:33:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/vite-pnpm-react%E6%90%AD%E5%BB%BA/</guid>
+      <description>1 pnpm 1.1 安装与配置 安装 1 2 3 4 5 6 7 8 9 10 // HomeBrew $ brew install pnpm // powershell $env:PNPM_VERSION=&amp;#39;7.0.0-beta.2&amp;#39; ; iwr https://get.pnpm.io/install.ps1 -useb | iex // npm $ npm install -g pnpm@next-7 // curl $ curl -fsSL https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - //wget $ wget -qO- https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - 配置淘宝源 1 $ pnpm config</description>
+    </item>
+    
   </channel>
 </rss>

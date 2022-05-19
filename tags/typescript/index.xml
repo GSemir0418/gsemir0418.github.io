@@ -6,7 +6,16 @@
     <description>Recent content in TypeScript on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 24 Dec 2021 15:15:48 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Apr 2022 14:39:41 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>前端面试TS</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95ts/</link>
+      <pubDate>Fri, 22 Apr 2022 14:39:41 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95ts/</guid>
+      <description>1 TS和JS的区别是什么 语法层面 TypeScript = JavaScript + Type （TS是JS的超集） 执行环境层面 浏览器、Node.js可以直接执行JS，但不能执行TS 编译层面 TS</description>
+    </item>
+    
     <item>
       <title>TypeScript学习</title>
       <link>https://gsemir0418.github.io/post/typescript%E5%AD%A6%E4%B9%A0/</link>

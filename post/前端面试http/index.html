@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>前端面试HTTP - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 GET和POST的区别有哪些 1.1 幂等性 首先最根本的不同是语义上的不同，GET是读，POST是写，造成两者幂等性的不同 由于GET是读，POST" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95http/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="前端面试HTTP" />
+<meta property="og:description" content="1 GET和POST的区别有哪些 1.1 幂等性 首先最根本的不同是语义上的不同，GET是读，POST是写，造成两者幂等性的不同 由于GET是读，POST" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95http/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-08T09:57:38+08:00" />
+<meta property="article:modified_time" content="2022-03-08T09:57:38+08:00" />
+
+<meta itemprop="name" content="前端面试HTTP">
+<meta itemprop="description" content="1 GET和POST的区别有哪些 1.1 幂等性 首先最根本的不同是语义上的不同，GET是读，POST是写，造成两者幂等性的不同 由于GET是读，POST"><meta itemprop="datePublished" content="2022-03-08T09:57:38+08:00" />
+<meta itemprop="dateModified" content="2022-03-08T09:57:38+08:00" />
+<meta itemprop="wordCount" content="2574">
+<meta itemprop="keywords" content="面试,HTTP," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="前端面试HTTP"/>
+<meta name="twitter:description" content="1 GET和POST的区别有哪些 1.1 幂等性 首先最根本的不同是语义上的不同，GET是读，POST是写，造成两者幂等性的不同 由于GET是读，POST"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">前端面试HTTP</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-08 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
+            </div>
+          <span class="more-meta"> 2574 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-get和post的区别有哪些">1 GET和POST的区别有哪些</a>
+      <ul>
+        <li><a href="#11-幂等性">1.1 幂等性</a></li>
+        <li><a href="#12-请求参数不同">1.2 请求参数不同</a></li>
+        <li><a href="#13-tcp-packet">1.3 TCP packet</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-http缓存有哪些方案">2 HTTP缓存有哪些方案</a></li>
+    <li><a href="#3-http和https的区别">3 HTTP和HTTPS的区别</a></li>
+    <li><a href="#4-tcp三次握手四次挥手">4 TCP三次握手四次挥手</a></li>
+    <li><a href="#5-说说同源策略与跨域">5 说说同源策略与跨域</a></li>
+    <li><a href="#6-cookiesessionlsss的区别">6 Cookie、Session、LS、SS的区别</a>
+      <ul>
+        <li><a href="#61-cookie-vs-ls">6.1 Cookie vs LS</a></li>
+        <li><a href="#62-ls-vs-ss">6.2 LS vs SS</a></li>
+        <li><a href="#63-cookie-vs-session">6.3 Cookie vs Session</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-http2-vs-http11">7 HTTP/2 vs HTTP/1.1</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-get和post的区别有哪些">1 GET和POST的区别有哪些</h1>
+<h2 id="11-幂等性">1.1 幂等性</h2>
+<ul>
+<li>首先最根本的不同是语义上的不同，<strong>GET是读，POST是写</strong>，造成两者幂等性的不同
+<ul>
+<li>由于GET是读，POST是写
+<ul>
+<li>所以GET是幂等的，POST不是幂等的</li>
+<li>所以用浏览器<strong>打开网页</strong>会发送GET请求（若想用POST打开网页要用form标签）</li>
+<li>所以GET打开的页面<strong>刷新</strong>是无害的，POST打开的页面刷新需要确认</li>
+<li>所以GET结果会被<strong>缓存</strong>，POST结果不会被缓存</li>
+<li>所以GET打开的页面可被<strong>书签</strong>收藏，POST打开的不行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="12-请求参数不同">1.2 请求参数不同</h2>
+<ul>
+<li><strong>通常</strong>，GET请求参数放在url中，POST请求数据放在body（消息体）中
+<ul>
+<li>其实是可以互换的，即GET可以携带body，不过浏览器或服务器一般不会接受</li>
+</ul>
+</li>
+<li>GET比POST更<strong>不安全</strong>，因为参数直接以明文形式暴露在url中，所以不能用来传递敏感信息
+<ul>
+<li>但是POST请求体实际上也是明文的</li>
+</ul>
+</li>
+<li>GET请求参数放在url中是有<strong>长度限制</strong>的，而POST放在body里没有长度限制
+<ul>
+<li>都是可配置的，比如nginx就可以限制POST请求体的最大长度（code:414）</li>
+</ul>
+</li>
+</ul>
+<h2 id="13-tcp-packet">1.3 TCP packet</h2>
+<ul>
+<li>GET产生一个TCP数据包，POST产生两个或以上TCP数据包
+<ul>
+<li>因为一般浏览器或服务器不会接受GET的请求体，默认GET没有请求体</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-http缓存有哪些方案">2 HTTP缓存有哪些方案</h1>
+<p>详见《缓存与内容协商》</p>
+<table>
+<thead>
+<tr>
+<th>http协议版本</th>
+<th>缓存（强缓存）</th>
+<th>内容协商（弱缓存）</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP/1.1</td>
+<td>服务器响应时在响应头添加：<br><code>Cache-Control: max-age:3600,must-revalidate</code><br><code>ETag: ...</code></td>
+<td>请求头：<code>If-None-Match: ...ETag</code><br>响应：304+空内容/200+新内容</td>
+<td>主流</td>
+</tr>
+<tr>
+<td>HTTP/1.0</td>
+<td>服务器响应时在响应头添加：<br><code>Expire: 时间点A</code><br><code>Last-Modified: 时间点B</code></td>
+<td>请求头：<code>If-Modified-Since: 时间点B</code><br/>响应：304+空内容/200+新内容</td>
+<td>依赖于收发双方的时间统一，如果用户PC时间不准确，将会影响缓存文件的时效性。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="3-http和https的区别">3 HTTP和HTTPS的区别</h1>
+<ul>
+<li><code>HTTPS = HTTP + SSL/TLS(安全层)</code></li>
+<li>区别：
+<ol>
+<li>HTTP是<strong>明文传输</strong>的，不安全（Chrome直接会显示不安全）；HTTPS是<strong>加密传输</strong>的，非常安全</li>
+<li>HTTP默认使用<strong>80</strong>端口；HTTPS默认使用<strong>443</strong>端口</li>
+<li>HTTP较<strong>快</strong>，HTTPS较<strong>慢</strong>（因为要加密）</li>
+<li>HTTPS的证书一般需要<strong>购买</strong>，HTTP<strong>不需要</strong>证书</li>
+</ol>
+</li>
+</ul>
+<h1 id="4-tcp三次握手四次挥手">4 TCP三次握手四次挥手</h1>
+<p><strong>TCP（Transmission Control Protocol）：传输控制协议</strong></p>
+<ul>
+<li>建立TCP连接过程的三次握手，<code>SYN</code>表示同步信息，<code>ACK</code>表示获悉，x、y一般从0开始</li>
+</ul>
+<ol>
+<li>A-&gt;B，<code>SYN(x)</code></li>
+<li>B-&gt;A，<code>ACK(x+1)SYN(y)</code>——确保A能向B发送信息，B能收到A的信息，</li>
+<li>A-&gt;B，<code>ACK(y+1)</code>——确保A能收（为什么一定需要第三次）</li>
+<li>A正式开始发送HTTP请求</li>
+</ol>
+<ul>
+<li>关闭TCP连接过程的四次挥手，<code>FIN</code>表示finish，x、y一般不为0</li>
+</ul>
+<ol>
+<li>
+<p>A-&gt;B，<code>FIN(x)</code>——A请求结束通讯</p>
+</li>
+<li>
+<p>B-&gt;A，<code>ACK(x+1)</code>——确保B知道A要请求结束了</p>
+</li>
+<li>
+<p>B-&gt;A，<code>FIN(y)</code>——B结束响应，并关闭TCP连接</p>
+</li>
+<li>
+<p>A-&gt;B，<code>ACK(y+1)</code>——确保A知道B要结束响应了</p>
+<ul>
+<li>
+<p>为什么2、3两步骤B不能一起发送？因为第二次和第三次中间，服务端<strong>可能夹杂其他响应数据</strong>（B可能还没说完）</p>
+</li>
+<li>
+<p>不一定是客户端发起FIN，服务端也可以发起FIN</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="5-说说同源策略与跨域">5 说说同源策略与跨域</h1>
+<ol>
+<li>
+<p>什么是同源策略</p>
+<ul>
+<li>如果两个URL的<strong>协议</strong>、<strong>端口</strong>和<strong>域名</strong>都完全一致的话，则这两个URL是同源的</li>
+</ul>
+</li>
+<li>
+<p>同源策略怎么做</p>
+<ul>
+<li>只要是在<strong>浏览器</strong>中打开页面，就默认遵守同源策略</li>
+<li>postman可以随便发请求</li>
+</ul>
+</li>
+<li>
+<p>优点：</p>
+<ul>
+<li>保证用户的隐私安全与数据安全</li>
+</ul>
+</li>
+<li>
+<p>缺点：</p>
+<ul>
+<li>很多情况下，前端需要访问另一个域名的后端接口，会被浏览器阻止其获取响应，即出现<strong>跨域</strong>问题</li>
+</ul>
+</li>
+<li>
+<p>如何解决缺点：</p>
+<ol>
+<li>
+<p>JSONP</p>
+<ul>
+<li>
+<p>请求阶段：浏览器先准备一个接受数据的全局函数（<code>jsonpCallback</code>），再创建一个<code>script</code>标签，并给其<code>src</code>赋值（<code>http://example.com/api/?callback-jsonpCallback</code>）</p>
+</li>
+<li>
+<p>发送请求：当浏览器解析到script标签有src属性时，就会自动发起get请求</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+	<span class="nb">window</span><span class="p">.</span><span class="nx">jsonpCallback</span> <span class="o">=</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#39;http://example.com/api/?callback-jsonpCallback&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>数据响应：<strong>服务端</strong>将要返回的数据<strong>作为参数</strong>和<strong>函数名称拼接</strong>在一起（<code>jsonpCallback({name:'abc'})</code>）<strong>返回</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">jsonpCallback({name: &#39;abc&#39;})
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>浏览器接收到了响应数据，由于发起请求的是script标签，所以相当于直接调用<code>jsonpCallback</code>方法，并且传入了一个参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+	<span class="nb">window</span><span class="p">.</span><span class="nx">jsonpCallback</span> <span class="o">=</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+	<span class="nx">jsonpCallback</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;abc&#39;</span><span class="p">})</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>优点是兼容性好，缺点是只支持GET方法</p>
+</li>
+</ul>
+</li>
+<li>
+<p>CORS（跨域资源共享）</p>
+<ul>
+<li>
+<p>对于<strong>简单请求</strong>，乙站点Server端在响应头里添加<code>Accept-Control-Allow-Origin: http://甲站点</code>即可</p>
+</li>
+<li>
+<p>对于<strong>复杂请求</strong>，如PATCH，乙站点Server端需要：</p>
+<ul>
+<li>
+<p>响应OPTIONS请求，在响应添加如下的响应头</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Access-Control-Allow-Origin: https://甲站点
+Access-Control-Allow-Methods: POST, GET, OPTIONS
+Access-Control-Allow-Headers: Content-Type
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>响应POST请求，在响应中添加<code>Access-Control-Allow-Origin</code>头</p>
+</li>
+</ul>
+</li>
+<li>
+<p>如果需要附带身份信息，需要前端在AJAX中设置<code>xhr-withCredentials = true</code></p>
+</li>
+<li>
+<p><strong>存在一定风险</strong>，因为添加响应头，说明<strong>完全信任</strong>甲站点，小公司可以，但是大公司建议用nginx代理，即中间层</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>nginx如何解决跨域？</p>
+</li>
+</ol>
+<ul>
+<li>配置nginx</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+	<span class="kn">listen</span>	<span class="mi">80</span><span class="p">;</span>
+	<span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+	<span class="c1"># 我们访问的路径是localhost:80，但内容是localhost:8888的
+</span><span class="c1"></span>  <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+  	<span class="kn">root</span>	<span class="s">html</span><span class="p">;</span>
+  	<span class="kn">index</span>	<span class="s">index.html</span> <span class="s">index.htm</span><span class="p">;</span>
+  	<span class="kn">proxy_pass</span>	<span class="s">http://localhost:8888</span><span class="p">;</span> 
+  <span class="p">}</span>
+  <span class="c1"># 访问的路径是localhost:80/api/*，但内容是api.real.com/*中的
+</span><span class="c1"></span>  <span class="kn">location</span> <span class="s">/api/</span> <span class="p">{</span>
+  	<span class="kn">proxy_pass</span>	<span class="s">http://api.real.com/</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="6-cookiesessionlsss的区别">6 Cookie、Session、LS、SS的区别</h1>
+<h2 id="61-cookie-vs-ls">6.1 Cookie vs LS</h2>
+<ul>
+<li>主要区别是cookie会被发送到服务器，而LS不会</li>
+<li>cookie一般最大4k，LS可以用5M甚至10M（各浏览器不同）</li>
+</ul>
+<h2 id="62-ls-vs-ss">6.2 LS vs SS</h2>
+<ul>
+<li>LS存储的数据没有过期时间设置，而存储在SS中的数据会在页面会话结束时被浏览器清除
+<ul>
+<li>理论上关闭浏览器或tab页，SS的数据就会被清除</li>
+<li>而恢复页面或刷新不会影响SS</li>
+</ul>
+</li>
+</ul>
+<h2 id="63-cookie-vs-session">6.3 Cookie vs Session</h2>
+<ul>
+<li>Cookie存在浏览器的文件中，Session存在服务器的文件里</li>
+<li>Session是基于Cookie实现的，具体做法就是把SessionID存在Cookie中，ID对应的数据放在服务器中</li>
+</ul>
+<h1 id="7-http2-vs-http11">7 HTTP/2 vs HTTP/1.1</h1>
+<ul>
+<li>HTTP/2使用了二进制传输，而且将head和body分成帧来传输；HTTP/1.1是字符串传输</li>
+<li>HTTP/2支持多路复用，即一个TCP连接从单车道变成了几百个双向通行的车道</li>
+<li>HTTP/2可以压缩head</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-03-08
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/http/">HTTP</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E4%BC%AA%E7%B1%BB%E5%92%8C%E4%BC%AA%E5%85%83%E7%B4%A0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">伪类和伪元素</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95css/">
+            <span class="next-text nav-default">前端面试CSS</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Git相关">
 <meta itemprop="description" content="0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &#34;gsemir0418&#34; git config --global user.email &#34;845217811@qq.com&#34; // 查看全局配置 git config --list 0.2 配置SSH公"><meta itemprop="datePublished" content="2021-08-15T22:02:28+08:00" />
 <meta itemprop="dateModified" content="2021-11-12T15:45:00+08:00" />
-<meta itemprop="wordCount" content="1711">
+<meta itemprop="wordCount" content="1982">
 <meta itemprop="keywords" content="GitHub," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Git相关"/>
 <meta name="twitter:description" content="0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &#34;gsemir0418&#34; git config --global user.email &#34;845217811@qq.com&#34; // 查看全局配置 git config --list 0.2 配置SSH公"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/github/"> GitHub </a>
             </div>
-          <span class="more-meta"> 1711 words </span>
+          <span class="more-meta"> 1982 words </span>
           <span class="more-meta"> 4 mins read </span>
         
       </div>
@@ -384,6 +384,18 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="3-git-commit">3 git commit</h1>
+<ul>
+<li>取消上次commit
+<ul>
+<li><code>git reset --soft HEAD^</code> ——仅撤回commit操作，不改变代码</li>
+<li>HEAD表示回退版本，如果你进行了2次commit，都想撤回，可以使用HEAD^2</li>
+<li><code>--mixed</code>——不删除工作空间改动代码，撤销commit，并且撤销git add . 操作这个为默认参数,git reset &ndash;mixed HEAD^ 和 git reset HEAD^ 效果是一样的。</li>
+<li><code>--soft</code>——不删除工作空间改动代码，撤销commit，不撤销git add .</li>
+<li><code>--hard</code>——删除工作空间改动代码，撤销commit，撤销git add . 注意完成这个操作后，就恢复到了上一次的commit状态。</li>
+</ul>
+</li>
+<li>如果commit注释写错了，只是想改一下注释，只需要<code>git commit --amend</code></li>
+</ul>
 <h1 id="4-git-fetch">4 git fetch</h1>
 <h1 id="5-git-merge">5 git merge</h1>
 <ul>

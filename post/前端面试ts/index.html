@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>前端面试TS - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 TS和JS的区别是什么 语法层面 TypeScript = JavaScript &#43; Type （TS是JS的超集） 执行环境层面 浏览器、Node.js可以直接执行JS，但不能执行TS 编译层面 TS" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95ts/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="前端面试TS" />
+<meta property="og:description" content="1 TS和JS的区别是什么 语法层面 TypeScript = JavaScript &#43; Type （TS是JS的超集） 执行环境层面 浏览器、Node.js可以直接执行JS，但不能执行TS 编译层面 TS" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95ts/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-22T14:39:41+08:00" />
+<meta property="article:modified_time" content="2022-05-19T12:21:41+08:00" />
+
+<meta itemprop="name" content="前端面试TS">
+<meta itemprop="description" content="1 TS和JS的区别是什么 语法层面 TypeScript = JavaScript &#43; Type （TS是JS的超集） 执行环境层面 浏览器、Node.js可以直接执行JS，但不能执行TS 编译层面 TS"><meta itemprop="datePublished" content="2022-04-22T14:39:41+08:00" />
+<meta itemprop="dateModified" content="2022-05-19T12:21:41+08:00" />
+<meta itemprop="wordCount" content="1774">
+<meta itemprop="keywords" content="面试,TypeScript," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="前端面试TS"/>
+<meta name="twitter:description" content="1 TS和JS的区别是什么 语法层面 TypeScript = JavaScript &#43; Type （TS是JS的超集） 执行环境层面 浏览器、Node.js可以直接执行JS，但不能执行TS 编译层面 TS"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">前端面试TS</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-04-22 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
+            </div>
+          <span class="more-meta"> 1774 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-ts和js的区别是什么">1 TS和JS的区别是什么</a></li>
+        <li><a href="#2-anyunknownnever的区别是什么">2 any、unknown、never的区别是什么</a></li>
+        <li><a href="#3-type和interface的区别是什么">3 type和interface的区别是什么</a></li>
+        <li><a href="#4-ts工具类的作用和实现">4 TS工具类的作用和实现</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="1-ts和js的区别是什么">1 TS和JS的区别是什么</h2>
+<ol>
+<li>语法层面
+<ul>
+<li>TypeScript = JavaScript + Type （TS是JS的<strong>超集</strong>）</li>
+</ul>
+</li>
+<li>执行环境层面
+<ul>
+<li>浏览器、Node.js可以<strong>直接执行</strong>JS，但不能执行TS</li>
+</ul>
+</li>
+<li>编译层面
+<ul>
+<li>TS有<strong>编译</strong>阶段，JS没有编译阶段，只有<strong>转义</strong>（打包ES6+ =&gt; ES5）和<strong>lint阶段</strong>（与TS很像，都会提示代码的错误，不过仅仅是针对行文语法和风格）</li>
+</ul>
+</li>
+<li>编写层面
+<ul>
+<li>TS更难写，但<strong>类型更安全</strong>，能减少低级错误和bug率</li>
+</ul>
+</li>
+<li>文档层面
+<ul>
+<li>TS的代码写出来就是文档，IDE可以完美提示，JS的提示其实主要是TS贡献的</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-anyunknownnever的区别是什么">2 any、unknown、never的区别是什么</h2>
+<ul>
+<li>
+<p><code>any</code> vs <code>unknown</code></p>
+<ul>
+<li>
+<p>二者都是<strong>顶级类型</strong>，任何类型的值都可以赋值给顶级类型的变量</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">foo</span>: <span class="kt">any</span> <span class="o">=</span> <span class="mi">123</span> <span class="c1">// 不报错
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">bar</span>: <span class="kt">unknown</span> <span class="o">=</span> <span class="mi">123</span> <span class="c1">// 不报错
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>但unknown比any的类型检查更严格，any什么检查都不做，unknown要求先收窄类型</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">const</span> <span class="nx">value</span>: <span class="kt">unknown</span> <span class="o">=</span> <span class="s1">&#39;Hello&#39;</span>
+<span class="kr">const</span> <span class="nx">someStr</span>: <span class="kt">string</span> <span class="o">=</span> <span class="nx">value</span>
+<span class="c1">// 不可以把unknown赋值给string
+</span><span class="c1">// 报错: Type &#39;unknown&#39; is not assignable to type &#34;string&#34;.
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">const</span> <span class="nx">value</span>: <span class="kt">unknown</span> <span class="o">=</span> <span class="s1">&#39;Hello&#39;</span>
+<span class="kr">const</span> <span class="nx">someStr</span>: <span class="kt">string</span> <span class="o">=</span> <span class="nx">value</span> <span class="kr">as</span> <span class="kt">string</span> <span class="c1">// 利用断言收窄类型
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><code>never</code></p>
+<ul>
+<li>
+<p>never是<strong>底类型</strong>，表示不应该出现的类型，不能接受任何类型的值</p>
+</li>
+<li>
+<p>如果出现了never，说明代码写错了</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">interface</span> <span class="nx">A</span> <span class="p">{</span>
+	<span class="kr">type</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span>
+<span class="p">}</span>
+<span class="kr">interface</span> <span class="nx">B</span> <span class="p">{</span>
+	<span class="kr">type</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span>
+<span class="p">}</span>
+<span class="kr">type</span> <span class="nx">All</span> <span class="o">=</span> <span class="nx">A</span> <span class="o">|</span> <span class="nx">B</span>
+
+<span class="kd">function</span> <span class="nx">handleValue</span><span class="p">(</span><span class="nx">val</span>: <span class="kt">All</span><span class="p">){</span>
+	<span class="k">switch</span><span class="p">(</span><span class="nx">val</span><span class="p">.</span><span class="kr">type</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">case</span> <span class="s1">&#39;a&#39;</span><span class="o">:</span>
+			<span class="nx">val</span>
+            <span class="c1">// 这里val被收窄为A
+</span><span class="c1"></span>			<span class="k">break</span>
+		<span class="k">case</span> <span class="s1">&#39;b&#39;</span><span class="o">:</span>
+			<span class="nx">val</span>
+            <span class="c1">// 这里val被收窄为B
+</span><span class="c1"></span>			<span class="k">break</span>
+		<span class="k">default</span><span class="o">:</span>
+			<span class="nx">val</span>
+            <span class="c1">// 除AB外，没有其他类型了，说明此default是没有任何意义的
+</span><span class="c1"></span>            <span class="c1">// 因此val在这里是never
+</span><span class="c1"></span>			<span class="kr">const</span> <span class="nx">check</span>: <span class="kt">never</span> <span class="o">=</span> <span class="nx">val</span>
+			<span class="k">break</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h2 id="3-type和interface的区别是什么">3 type和interface的区别是什么</h2>
+<p>一般情况下，与对象有关的类型定义使用interface，其余情况用type</p>
+<ol>
+<li>组合方式：<code>interface</code>使用<code>extends</code>来实现<strong>继承</strong>，<code>type</code>使用<code>&amp;</code>来实现<strong>联合类型</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">interface</span> <span class="nx">A</span> <span class="p">{</span> <span class="nx">a</span>: <span class="kt">string</span> <span class="p">}</span>
+<span class="kr">interface</span> <span class="nx">B</span> <span class="kr">extends</span> <span class="nx">A</span> <span class="p">{</span> <span class="nx">b</span>: <span class="kt">string</span> <span class="p">}</span>
+<span class="kr">const</span> <span class="nx">b</span>: <span class="kt">B</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span> <span class="p">}</span>
+
+<span class="kr">type</span> <span class="nx">C</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">c</span>: <span class="kt">string</span> <span class="p">}</span>
+<span class="kr">type</span> <span class="nx">D</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">d</span>: <span class="kt">string</span> <span class="p">}</span> <span class="o">&amp;</span> <span class="nx">C</span>
+<span class="kr">const</span> <span class="nx">d</span>: <span class="kt">D</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">c</span><span class="o">:</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="nx">d</span><span class="o">:</span> <span class="s1">&#39;d&#39;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>扩展方式：<code>interface</code>可以重复声明用来扩展，<code>type</code>一个类型只能声明一次</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">interface</span> <span class="nx">A</span> <span class="p">{</span> <span class="nx">a</span>: <span class="kt">string</span> <span class="p">}</span>
+<span class="c1">// 2.js
+</span><span class="c1"></span><span class="kr">interface</span> <span class="nx">A</span> <span class="p">{</span> <span class="nx">b</span>: <span class="kt">string</span> <span class="p">}</span>
+<span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span> <span class="p">}</span>
+
+<span class="kr">type</span> <span class="nx">C</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">c</span>: <span class="kt">string</span> <span class="p">}</span>
+<span class="kr">type</span> <span class="nx">C</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">d</span>: <span class="kt">string</span> <span class="p">}</span> <span class="c1">// 报错，类似const定义变量
+</span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>范围不同：<code>type</code>适用于基本类型，<code>interface</code>一般不行</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">type</span> <span class="nx">UserName</span> <span class="o">=</span> <span class="kt">string</span> <span class="c1">// 可以
+</span><span class="c1"></span><span class="kr">interface</span> <span class="nx">UserName</span> <span class="o">=</span> <span class="kt">string</span> <span class="c1">// 错误
+</span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>命名方式：<code>interface</code>会创建新的类型名，<code>type</code>只是创建类型别名，并没有创建新类型</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">type</span> <span class="nx">X</span> <span class="o">=</span> <span class="kt">number</span> <span class="o">|</span> <span class="kt">string</span>
+<span class="kr">const</span> <span class="nx">x</span>: <span class="kt">X</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kr">type</span> <span class="nx">Y</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">x</span> <span class="c1">// 此时类型Y并不是X，而是number
+</span><span class="c1"></span>
+<span class="kr">interface</span> <span class="nx">A</span> <span class="p">{</span> <span class="nx">a</span>: <span class="kt">string</span> <span class="p">}</span>
+<span class="kr">const</span> <span class="nx">a</span>: <span class="kt">A</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span> <span class="p">}</span>
+<span class="kr">type</span> <span class="nx">B</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">a</span> <span class="c1">// 此时类型B就是A
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-ts工具类的作用和实现">4 TS工具类的作用和实现</h2>
+<ul>
+<li>Partial 部分类型 <code>type Partial&lt;T&gt; = { [P in keyof T]?: T[P] | undefined }</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+	<span class="nx">id</span>: <span class="kt">string</span>
+	<span class="nx">name</span>: <span class="kt">string</span>
+<span class="p">}</span>
+<span class="c1">// 此时还没上传到服务器，因此没有id字段，导致编译不通过
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">user</span>: <span class="kt">User</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;gsq&#39;</span> <span class="p">}</span>
+<span class="c1">// 利用Partial函数，表示此对象的类型是User，但又不全是User，编译通过
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">user</span>: <span class="kt">Partial</span><span class="p">&lt;</span><span class="nt">User</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;gsq&#39;</span><span class="p">}</span>
+<span class="c1">// 相当于给每个key添加?，每个值添加 | undefined
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Required 必填类型 <code>type Required&lt;T&gt; = { [P in keyof T]-?: T[P] }</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+	<span class="nx">id?</span>: <span class="kt">string</span> <span class="c1">// 此时id为可选属性
+</span><span class="c1"></span>	<span class="nx">name</span>: <span class="kt">string</span>
+<span class="p">}</span>
+<span class="c1">// Required会把全部属性变为必选属性
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">user</span>: <span class="kt">Required</span><span class="p">&lt;</span><span class="nt">User</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span><span class="s1">&#39;123&#39;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;gsq&#39;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>ReadOnly 类型只读 <code>type ReadOnly&lt;T&gt; = { readonly [P in keyof T]: T[P] }</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="nx">insterface</span> <span class="nx">User</span> <span class="p">{</span>
+ 	<span class="nx">id?</span>: <span class="kt">string</span>
+ 	<span class="nx">name</span>: <span class="kt">string</span>
+<span class="p">}</span>
+<span class="c1">// 给每个类型声明前添加readonly关键字
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">user</span>: <span class="kt">ReadOnly</span><span class="p">&lt;</span><span class="nt">User</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;111&#39;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;gsq&#39;</span> <span class="p">}</span>
+<span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;123&#39;</span><span class="c1">// 错误
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>Pick/Omit</code> 挑选/排除key类型（针对对象类型）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+	<span class="nx">id</span>: <span class="kt">string</span>
+	<span class="nx">name</span>: <span class="kt">string</span>
+	<span class="nx">age</span>: <span class="kt">number</span>
+<span class="p">}</span>
+<span class="c1">// 若想声明一个没有年龄的User类型
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">God</span> <span class="o">=</span> <span class="nx">Pick</span><span class="p">&lt;</span><span class="nt">User</span><span class="err">,</span> <span class="err">&#39;</span><span class="na">id</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="na">name</span><span class="err">&#39;</span><span class="p">&gt;</span>
+<span class="c1">// 相当于
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">God</span> <span class="o">=</span> <span class="nx">Omit</span><span class="p">&lt;</span><span class="nt">User</span><span class="err">,</span> <span class="err">&#39;</span><span class="na">age</span><span class="err">&#39;</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>Exclude/Extract</code> 排除/提取类型（针对基本类型）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">type</span> <span class="nx">Dir</span> <span class="o">=</span> <span class="s1">&#39;东&#39;</span> <span class="o">|</span> <span class="s1">&#39;南&#39;</span> <span class="o">|</span> <span class="s1">&#39;西&#39;</span> <span class="o">|</span> <span class="s1">&#39;北&#39;</span>
+<span class="kr">type</span> <span class="nx">Dir1</span> <span class="o">=</span> <span class="nx">Exclude</span><span class="p">&lt;</span><span class="nt">Dir</span><span class="err">,</span> <span class="err">&#39;</span><span class="na">东</span><span class="err">&#39;|</span> <span class="err">&#39;</span><span class="na">西</span><span class="err">&#39;</span><span class="p">&gt;</span> <span class="c1">// &#39;南&#39; | &#39;北&#39;
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">Dir2</span> <span class="o">=</span> <span class="nx">Extract</span><span class="p">&lt;</span><span class="nt">Dir</span><span class="err">,</span> <span class="err">&#39;</span><span class="na">南</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="na">北</span><span class="err">&#39;</span><span class="p">&gt;</span> <span class="c1">// &#39;南&#39; | &#39;北&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>ReturnType</code> 获取函数返回值类型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">a</span>:<span class="kt">number</span><span class="p">,</span> <span class="nx">b</span>:<span class="kt">number</span><span class="p">){</span>
+	<span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+<span class="p">}</span>
+<span class="kr">type</span> <span class="nx">R</span> <span class="o">=</span> <span class="nx">ReturnType</span><span class="p">&lt;</span><span class="nt">typeof</span> <span class="na">f</span><span class="p">&gt;</span> <span class="c1">// number
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>Record</code> 定义一个对象的key或value的类型，规范对象的声明</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// 第一个参数为key的类型，第二个为value的类型
+</span><span class="c1">// 第一个参数只能是string/number/symbol
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">A</span> <span class="o">=</span> <span class="nx">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">number</span><span class="p">&gt;</span>
+<span class="c1">// 相当于
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">A</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="p">[</span><span class="nx">x</span>: <span class="kt">string</span><span class="p">]</span><span class="o">:</span> <span class="kt">number</span>
+<span class="p">}</span>
+
+<span class="c1">// 页面导航栏配置
+</span><span class="c1"></span><span class="kr">interface</span> <span class="nx">PageInfo</span> <span class="p">{</span>
+  <span class="nx">title</span>: <span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">type</span> <span class="nx">Page</span> <span class="o">=</span> <span class="s2">&#34;home&#34;</span> <span class="o">|</span> <span class="s2">&#34;about&#34;</span> <span class="o">|</span> <span class="s2">&#34;contact&#34;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">nav</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">Page</span><span class="err">,</span> <span class="na">PageInfo</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">about</span><span class="o">:</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s2">&#34;about&#34;</span> <span class="p">},</span>
+  <span class="nx">contact</span><span class="o">:</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s2">&#34;contact&#34;</span> <span class="p">},</span>
+  <span class="nx">home</span><span class="o">:</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s2">&#34;home&#34;</span> <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>Map</code>跟<code>Record</code>一样，区别在于Key的类型为任意类型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">type</span> <span class="nx">A</span> <span class="o">=</span> <span class="nx">Map</span><span class="o">&lt;</span><span class="p">()</span><span class="o">=&gt;</span><span class="kt">number</span><span class="p">,</span> <span class="kt">string</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-05-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/typescript/">TypeScript</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%8C%96/">
+            <span class="next-text nav-default">前端面试工程化</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

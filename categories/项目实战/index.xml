@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>项目实战 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/</link>
+    <description>Recent content in 项目实战 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 14 May 2021 13:33:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Umi多环境配置</title>
+      <link>https://gsemir0418.github.io/post/umi%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Fri, 14 May 2021 13:33:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/umi%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+      <description>0 各环境接口 生产环境 203服务器——10.30.20.203:9725 supplant——10.30.20.203:8080 supos——1</description>
+    </item>
+    
+    <item>
+      <title>Vite Pnpm React搭建</title>
+      <link>https://gsemir0418.github.io/post/vite-pnpm-react%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Thu, 15 Apr 2021 13:33:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/vite-pnpm-react%E6%90%AD%E5%BB%BA/</guid>
+      <description>1 pnpm 1.1 安装与配置 安装 1 2 3 4 5 6 7 8 9 10 // HomeBrew $ brew install pnpm // powershell $env:PNPM_VERSION=&amp;#39;7.0.0-beta.2&amp;#39; ; iwr https://get.pnpm.io/install.ps1 -useb | iex // npm $ npm install -g pnpm@next-7 // curl $ curl -fsSL https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - //wget $ wget -qO- https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - 配置淘宝源 1 $ pnpm config</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Nextjs项目部署到阿里云 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 Node应用Docker化 创建Dockerfile脚本文件 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 下载一个含有node12的操作系统FROMnode" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/nextjs%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Nextjs项目部署到阿里云" />
+<meta property="og:description" content="1 Node应用Docker化 创建Dockerfile脚本文件 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 下载一个含有node12的操作系统FROMnode" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/nextjs%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-03T09:05:41+08:00" />
+<meta property="article:modified_time" content="2022-03-03T09:05:41+08:00" />
+
+<meta itemprop="name" content="Nextjs项目部署到阿里云">
+<meta itemprop="description" content="1 Node应用Docker化 创建Dockerfile脚本文件 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 下载一个含有node12的操作系统FROMnode"><meta itemprop="datePublished" content="2022-03-03T09:05:41+08:00" />
+<meta itemprop="dateModified" content="2022-03-03T09:05:41+08:00" />
+<meta itemprop="wordCount" content="2209">
+<meta itemprop="keywords" content="nodejs,Next.js,阿里云,Docker,nginx," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Nextjs项目部署到阿里云"/>
+<meta name="twitter:description" content="1 Node应用Docker化 创建Dockerfile脚本文件 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 下载一个含有node12的操作系统FROMnode"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Nextjs项目部署到阿里云</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-03 </span>
+        <div class="post-category">
+            <a href="/categories/nextjs%E5%85%A8%E8%A7%A3/"> Nextjs全解 </a>
+            </div>
+          <span class="more-meta"> 2209 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-node应用docker化">1 Node应用Docker化</a></li>
+    <li><a href="#2-购买阿里云服务器">2 购买阿里云服务器</a></li>
+    <li><a href="#3-配置应用环境">3 配置应用环境</a>
+      <ul>
+        <li><a href="#31-为应用创建单独的user">3.1 为应用创建单独的user</a></li>
+        <li><a href="#32-用root用户安装docker">3.2 用root用户安装docker</a></li>
+        <li><a href="#33-安装nodejs与yarn">3.3 安装nodejs与yarn</a></li>
+        <li><a href="#34-配置bash的环境变量">3.4 配置bash的环境变量</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-构建镜像与容器">4 构建镜像与容器</a>
+      <ul>
+        <li><a href="#41-调整源码">4.1 调整源码</a></li>
+        <li><a href="#42-构建并运行镜像">4.2 构建并运行镜像</a></li>
+        <li><a href="#43-创建并运行数据库容器">4.3 创建并运行数据库容器</a></li>
+        <li><a href="#44---networkhost命令">4.4 <code>--network=host</code>命令</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-创建数据库">5 创建数据库</a></li>
+    <li><a href="#6-创建数据表">6 创建数据表</a></li>
+    <li><a href="#7-阿里云安全策略">7 阿里云安全策略</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-node应用docker化">1 Node应用Docker化</h1>
+<ul>
+<li>
+<p>创建Dockerfile脚本文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="c"># 下载一个含有node12的操作系统</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> node:12</span><span class="err">
+</span><span class="err"></span><span class="c"># 创建工作路径</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /usr/src/app</span><span class="err">
+</span><span class="err"></span><span class="c"># 将本地的package.json复制到工作目录</span><span class="err">
+</span><span class="err"></span><span class="k">COPY</span> package.json ./<span class="err">
+</span><span class="err"></span><span class="k">COPY</span> yarn.lock ./<span class="err">
+</span><span class="err"></span><span class="k">RUN</span> yarn install<span class="err">
+</span><span class="err"></span><span class="c"># 将本地根目录下的全部文件都拷贝至工作目录</span><span class="err">
+</span><span class="err"></span><span class="k">COPY</span> . .<span class="err">
+</span><span class="err"></span><span class="c"># 暴露3000端口</span><span class="err">
+</span><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 3000</span><span class="err">
+</span><span class="err"></span><span class="c"># 运行命令</span><span class="err">
+</span><span class="err"></span><span class="k">CMD</span> <span class="p">[</span> <span class="s2">&#34;yarn&#34;</span><span class="p">,</span> <span class="s2">&#34;start&#34;</span><span class="p">]</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>.dockerignore</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">node_modules
+*.log
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>构建用于部署的操作系统镜像</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">// 构建之前应将项目打包为next服务
+$ yarn build
+$ docker build -t gsq/next-web-app .
+// 利用当前目录（.）下的Dockerfile构建名为“gsq/next-web-app”的镜像
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>运行镜像构建容器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ docker run -p 3000:3000 -d gsq/next-web-app
+// 以gsq/next-web-app为镜像创建一个新容器并运行，端口映射3000:3000，同时返回容器id
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>访问网址后，出现访问数据库失败的bug：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Error: connect ECONNREFUSED 127.0.0.1:5432 at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1144:16)
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>解决1：<code>ormconfig.json</code>中的host更改为宿主机的ip地址</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="s2">&#34;host&#34;</span><span class="err">:</span> <span class="s2">&#34;10.30.36.113&#34;</span><span class="err">,</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>解决2：给<code>docker run</code>添加<code>--network=host</code>选项，使容器共享宿主机网络栈，并且容器不会分配自己的 IP 地址。(<strong>在本机无效</strong>)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-购买阿里云服务器">2 购买阿里云服务器</h1>
+<blockquote>
+<p><a href="https://www.aliyun.com/product/ecs?spm=5176.19720258.J_8058803260.30.464d2c4ayJrEir">云服务器ECS_云主机_服务器托管_弹性计算-阿里云 (aliyun.com)</a></p>
+</blockquote>
+<ul>
+<li>安装ubuntu18.04系统即可，完成创建实例后，如未设置实例密码需在管理页面进入“重置实例密码”</li>
+</ul>
+<p><img src="/Users/gsemir/Documents/blogs/blogs-backup-2/static/aliyun/aliyun1.png" alt="image-20220303103856263"></p>
+<ul>
+<li>记录公网ip，打开终端，使用ssh连接远程机器</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ssh root@47.99.70.28
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>输入密码后则登录成功，为了防止每次登录都要输入密码，可以将本机的publickey上传至远程机器中</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ssh-copy-id root@47.99.70.28
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>可以将远程机器的ip地址放到本机hosts中，方便登录</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">// hosts
+47.99.70.28 dev
+// 登录时可简写
+$ ssh root@dev
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果要新增成员，可以进入<code>~/.ssh</code>中，<code>vi authorized_keys</code>编辑授权的key文件，在下方将新成员的publickey复制过来即可</li>
+</ul>
+<h1 id="3-配置应用环境">3 配置应用环境</h1>
+<h2 id="31-为应用创建单独的user">3.1 为应用创建单独的user</h2>
+<ul>
+<li>创建一个blog用户，后续一直回车即可。会在<code>home</code>下创建一个blog文件夹（<code>pwd</code>查看当前路径）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ adduser blog
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>切换登录用户</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ su - blog
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>将publickey也上传到blog用户下</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ssh-copy-id blog@dev
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="32-用root用户安装docker">3.2 用root用户安装docker</h2>
+<blockquote>
+<p><a href="https://docs.docker.com/engine/install/ubuntu/">Install Docker Engine on Ubuntu | Docker Documentation</a></p>
+</blockquote>
+<ul>
+<li>按照步骤安装即可</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ sudo apt-get update
+$ sudo apt-get install <span class="se">\
+</span><span class="se"></span>    ca-certificates <span class="se">\
+</span><span class="se"></span>    curl <span class="se">\
+</span><span class="se"></span>    gnupg <span class="se">\
+</span><span class="se"></span>    lsb-release
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg <span class="p">|</span> sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+$ <span class="nb">echo</span> <span class="se">\
+</span><span class="se"></span>  <span class="s2">&#34;deb [arch=</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+</span><span class="s2">  </span><span class="k">$(</span>lsb_release -cs<span class="k">)</span><span class="s2"> stable&#34;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+$ sudo apt-get update
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+$ sudo docker run hello-world 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>将blog用户添加至docker分组中</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ usermod -a -G docker blog
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="33-安装nodejs与yarn">3.3 安装nodejs与yarn</h2>
+<ul>
+<li>
+<p>安装nodejs v12.x</p>
+</li>
+<li>
+<blockquote>
+<p><a href="https://github.com/nodesource/distributions/blob/master/README.md">distributions/README.md at master · nodesource/distributions (github.com)</a></p>
+</blockquote>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Using Ubuntu</span>
+$ curl -fsSL https://deb.nodesource.com/setup_12.x <span class="p">|</span> sudo -E bash -
+$ sudo apt-get install -y nodejs
+$ sudo apt-get install gcc g++ make
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>安装yarn</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg <span class="p">|</span> gpg --dearmor <span class="p">|</span> sudo tee /usr/share/keyrings/yarnkey.gpg &gt;/dev/null
+$ <span class="nb">echo</span> <span class="s2">&#34;deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main&#34;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/yarn.list
+$ sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install yarn
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>su - blog</code>切换到blog用户，<code>which nodejs</code>、<code>which yarn</code>来验证是否安装成功并可以使用</li>
+</ul>
+<h2 id="34-配置bash的环境变量">3.4 配置bash的环境变量</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ vi ~/.bashrc
+// 在第一行加入NODE环境变量
+<span class="nb">export</span> <span class="nv">NODE_EMV</span><span class="o">=</span>production
+// 配置完成后退出重连服务器
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4-构建镜像与容器">4 构建镜像与容器</h1>
+<h2 id="41-调整源码">4.1 调整源码</h2>
+<ul>
+<li>处理生产环境下的数据库连接配置<code>lib/getDatabaseConnection.tsx</code>，重写<code>host</code>属性与<code>database</code>属性</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">const</span> <span class="nx">create</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// @ts-ignore
+</span><span class="c1"></span>  <span class="k">return</span> <span class="nx">createConnection</span><span class="p">({</span>
+    <span class="p">...</span><span class="nx">config</span><span class="p">,</span>
+    <span class="nx">host</span>: <span class="kt">process.env.NODE_ENV</span> <span class="o">===</span> <span class="s2">&#34;production&#34;</span> <span class="o">?</span> <span class="s2">&#34;localhost&#34;</span> <span class="o">:</span> <span class="nx">config</span><span class="p">.</span><span class="nx">host</span><span class="p">,</span>
+    <span class="nx">database</span>: <span class="kt">process.env.NODE_ENV</span> <span class="o">===</span> <span class="s2">&#34;production&#34;</span> <span class="o">?</span> <span class="s2">&#34;blog_production&#34;</span> <span class="o">:</span> <span class="s2">&#34;blog_development&#34;</span><span class="p">,</span>
+    <span class="nx">entities</span><span class="o">:</span> <span class="p">[</span><span class="nx">Post</span><span class="p">,</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">Comment</span><span class="p">],</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="42-构建并运行镜像">4.2 构建并运行镜像</h2>
+<ul>
+<li>调整源码后，就可以使用git来拉取博客项目了</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ mkdir app
+$ <span class="nb">cd</span> app
+$ git clone https://github.com/GSemir0418/nextjs-blog.git
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>由于我们为了数据安全并没有把<code>.env.local</code>文件上传至git，此时执行打包命令会报错</li>
+<li>所以用两种方式在服务器项目创建<code>.env.local</code>文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">// 法一
+$ touch .env.local
+$ vi .env.local
+// 法二
+$ <span class="nb">echo</span> <span class="s1">&#39;SECRET_COOKIE_PASSWORD=56da34b1-fa9c-4c82-868f-0d8b349f797d&#39;</span> &gt; .env.local
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>构建镜像并运行（run 后一定要加 &ndash;network=host），开启前后端项目</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nb">cd</span> app/nextjs-blog
+// 不知为什么 需要root用户才能成功安装所有依赖
+$ yarn
+$ yarn build
+$ docker build -t gsq/next-app .
+$ docker run --network<span class="o">=</span>host -p 3000:3000 -d gsq/next-app
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="43-创建并运行数据库容器">4.3 创建并运行数据库容器</h2>
+<ul>
+<li>在根目录创建<code>blog-data</code>文件夹</li>
+<li>直接使用<code>docker run</code>命令创建数据库容器</li>
+<li>将路径映射改为绝对路径，并添加<code>--network=host</code>选项</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ docker run --network<span class="o">=</span>host -v /home/blog/blog-data/:/var/lib/postgresql/data -p 5432:5432 -e <span class="nv">POSTGRES_USER</span><span class="o">=</span>blog -e <span class="nv">POSTGRES_HOST_AUTH_METHOD</span><span class="o">=</span>trust -d postgres:12.2
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="44---networkhost命令">4.4 <code>--network=host</code>命令</h2>
+<ul>
+<li>该属性意味着<strong>容器共享宿主机网络栈</strong>，双方在网络名称空间并没有隔离（只在Linux操作系统主机上可用，不支持Mac、Windows。）</li>
+</ul>
+<h1 id="5-创建数据库">5 创建数据库</h1>
+<ul>
+<li>当两个容器启动后，使用<code>curl -L http://localhost:3000</code>验证是否连接成功，此时docker会报找不到数据库的错误</li>
+<li>进入容器创建数据库</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ docker exec -it 586 bash
+$ psql -U blog
+$ create database blog_production encoding &#39;UTF8&#39; lc_collate &#39;en_US.utf8&#39; lc_ctype &#39;en_US.utf8&#39;;
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="6-创建数据表">6 创建数据表</h1>
+<ul>
+<li>进入项目目录，执行<code>yarn dev</code>，利用babel将数据库相关代码编译为js</li>
+<li>执行同步数据库命令<code>yarn m:run</code>即可</li>
+<li>此时由于typeorm在migration时读取的是<code>omrconfig.json</code>文件，所以还需要用vim编辑配置文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="err">...</span>
+  <span class="nt">&#34;host&#34;</span><span class="p">:</span> <span class="s2">&#34;localhost&#34;</span><span class="p">,</span>
+ 	<span class="err">...</span>
+  <span class="nt">&#34;database&#34;</span><span class="p">:</span> <span class="s2">&#34;blog_production&#34;</span><span class="p">,</span>
+  <span class="err">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>期间会报错，因为getDatabaseConnection模块未找到，需要用vim编辑User.ts文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// 注释这两部分
+</span><span class="c1"></span><span class="p">...</span>
+<span class="c1">// import { getDatabaseConnection } from &#34;lib/getDatabaseConnection&#34;;
+</span><span class="c1"></span><span class="p">...</span>
+    <span class="c1">// const hasUser = await (
+</span><span class="c1"></span>    <span class="c1">//   await getDatabaseConnection()
+</span><span class="c1"></span>    <span class="c1">// ).manager.find(User, { username: this.username });
+</span><span class="c1"></span>    <span class="c1">// if (hasUser.length &gt; 0) {
+</span><span class="c1"></span>    <span class="c1">//   this.errors.username.push(&#34;用户名已存在&#34;);
+</span><span class="c1"></span>    <span class="c1">// }
+</span><span class="c1"></span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>同步数据表</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ yarn m:run
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="7-阿里云安全策略">7 阿里云安全策略</h1>
+<ul>
+<li>
+<p>目前我们服务器的本地端口3000是可以访问的，但3000端口未对公网开放，还需要进行安全策略配置</p>
+</li>
+<li>
+<p>配置安全组规则-配置规则-手动添加</p>
+</li>
+</ul>
+<p><img src="/Users/gsemir/Documents/blogs/blogs-backup-2/static/aliyun/aliyun2.png" alt="image-20220306221916216"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-03-03
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nodejs/">nodejs</a>
+          <a href="/tags/next.js/">Next.js</a>
+          <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/">阿里云</a>
+          <a href="/tags/docker/">Docker</a>
+          <a href="/tags/nginx/">nginx</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95html/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">前端面试HTML</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/nextjs%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/">
+            <span class="next-text nav-default">Nextjs博客系统</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

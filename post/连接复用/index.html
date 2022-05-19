@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>连接复用 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 DNS预解析 假设index.html的部分代码为： 1 2 &amp;lt;script src=&amp;#34;http://a.com/1.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&amp;#34;http://b.com/2.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; 那么客户端会对a.com进行DNS的解析，拿到ip后请求1.js，然后再对b" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="连接复用" />
+<meta property="og:description" content="1 DNS预解析 假设index.html的部分代码为： 1 2 &lt;script src=&#34;http://a.com/1.js&#34;&gt;&lt;/script&gt; &lt;script src=&#34;http://b.com/2.js&#34;&gt;&lt;/script&gt; 那么客户端会对a.com进行DNS的解析，拿到ip后请求1.js，然后再对b" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-20T14:46:29+08:00" />
+<meta property="article:modified_time" content="2022-01-20T14:46:29+08:00" />
+
+<meta itemprop="name" content="连接复用">
+<meta itemprop="description" content="1 DNS预解析 假设index.html的部分代码为： 1 2 &lt;script src=&#34;http://a.com/1.js&#34;&gt;&lt;/script&gt; &lt;script src=&#34;http://b.com/2.js&#34;&gt;&lt;/script&gt; 那么客户端会对a.com进行DNS的解析，拿到ip后请求1.js，然后再对b"><meta itemprop="datePublished" content="2022-01-20T14:46:29+08:00" />
+<meta itemprop="dateModified" content="2022-01-20T14:46:29+08:00" />
+<meta itemprop="wordCount" content="813">
+<meta itemprop="keywords" content="面试,DNS,连接复用,并行化连接," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="连接复用"/>
+<meta name="twitter:description" content="1 DNS预解析 假设index.html的部分代码为： 1 2 &lt;script src=&#34;http://a.com/1.js&#34;&gt;&lt;/script&gt; &lt;script src=&#34;http://b.com/2.js&#34;&gt;&lt;/script&gt; 那么客户端会对a.com进行DNS的解析，拿到ip后请求1.js，然后再对b"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">连接复用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-20 </span>
+        <div class="post-category">
+            <a href="/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"> Web性能优化 </a>
+            </div>
+          <span class="more-meta"> 813 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-dns预解析">1 DNS预解析</a></li>
+    <li><a href="#2-tcp连接优化">2 TCP连接优化</a>
+      <ul>
+        <li><a href="#21-连接复用">2.1 连接复用</a></li>
+        <li><a href="#22-并行化连接">2.2 并行化连接</a></li>
+        <li><a href="#23-应用">2.3 应用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-dns预解析">1 DNS预解析</h1>
+<ul>
+<li>
+<p>假设index.html的部分代码为：</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;http://a.com/1.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;http://b.com/2.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>那么客户端会对<code>a.com</code>进行DNS的解析，拿到ip后请求<code>1.js</code>，然后再对<code>b.com</code>进行DNS解析，再请求<code>2.js</code></p>
+</li>
+<li>
+<p>这其中存在2次DNS的解析，且第二次DNS解析过程要等第一次请求回来的js下载并执行完毕后再开始</p>
+</li>
+<li>
+<p>解决方案：在一开始先统一解析全部DNS</p>
+</li>
+</ul>
+</li>
+<li>
+<p>再index.html的<code>&lt;head&gt;</code>中：</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;dns-prefetch&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;https://a.com/&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;dns-prefetch&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;https://b.com/&#34;</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h1 id="2-tcp连接优化">2 TCP连接优化</h1>
+<h2 id="21-连接复用">2.1 连接复用</h2>
+<ul>
+<li>在<strong>HTTP请求头与响应头</strong>添加<code>Connection: keep-alive</code>即可实现<strong>TCP连接复用</strong>，即在一定时间间隔内，TCP连接不会关闭。</li>
+<li>设置<strong>间隔时间</strong>：<code>KeepAlive: timeout=5,max=100</code>，客户端和服务端均可自定义timeout和max，以<strong>服务端</strong>为准</li>
+<li>如果浏览器支持的<strong>HTTP版本在1.1及以上</strong>，<code>Connection: keep-alive</code>是自动添加的。实际上绝大部分浏览器已经升级到了HTTP/1.1及以上，因此客户端无需优化；服务端方面例如Apache、nginx都有相关配置，如果是nodejs也可以手动添加至响应头。</li>
+</ul>
+<h2 id="22-并行化连接">2.2 并行化连接</h2>
+<ul>
+<li>
+<p>在需要请求很多css文件的情况下，使用<strong>并行连接</strong>同时请求这些文件，会大大提升页面加载效率。而TCP连接复用属于<strong>串行</strong>的请求</p>
+</li>
+<li>
+<p>既然并发连接效率远高于TCP连接复用，那么为什么不都使用并行连接的形式呢？</p>
+</li>
+<li>
+<p>这是由于<strong>浏览器处理并行连接的数量</strong>是有限的（一般是4-12个），当达到最大并行请求数量后，后面的请求会自动复用前面的连接。</p>
+</li>
+<li>
+<p>浏览器并行连接处理的请求响应数量，主要受限于<strong>域名</strong>的限制，因此可以通过<strong>添加cdn域名的方式，突破并行连接上限</strong>。同一个网站，可以分成多个cdn，从而同时进行多次并行连接。</p>
+</li>
+<li>
+<p>浏览器虽然<strong>不会</strong>对域名数量做限制，但会有一个最大TCP连接数量的限制。</p>
+</li>
+</ul>
+<p><img src="/Users/gsemir/Documents/blogs/blogs-backup-2/static/tcp/tcp1.png" alt="image-20220123094224555"></p>
+<h2 id="23-应用">2.3 应用</h2>
+<p>实际应用中，对于ajax可以利用<code>Promise.all</code>同时多次请求；对于css可以分成多个css文件及对应<code>link标签</code>等。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-01-20
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/dns/">DNS</a>
+          <a href="/tags/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/">连接复用</a>
+          <a href="/tags/%E5%B9%B6%E8%A1%8C%E5%8C%96%E8%BF%9E%E6%8E%A5/">并行化连接</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">多路复用</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/nextjs%E9%85%8D%E7%BD%AEtypeorm/">
+            <span class="next-text nav-default">Nextjs配置TypeORM</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -6,7 +6,16 @@
     <description>Recent content in React on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 23 Oct 2021 20:38:48 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Mar 2022 09:54:46 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>前端面试React</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95react/</link>
+      <pubDate>Thu, 31 Mar 2022 09:54:46 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95react/</guid>
+      <description>1 虚拟DOM的原理是什么 1.1 是什么 虚拟DOM就是虚拟节点。React用JS对象来模拟DOM节点，然后将其渲染成真实的DOM节点 1.2 怎么做 模拟（J</description>
+    </item>
+    
     <item>
       <title>Nextjs全解</title>
       <link>https://gsemir0418.github.io/post/nextjs%E5%85%A8%E8%A7%A3/</link>

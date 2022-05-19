@@ -6,7 +6,16 @@
     <description>Recent content in TypeORM on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 11 Jan 2022 16:25:49 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/typeorm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Feb 2022 23:55:48 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/typeorm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nextjs博客系统</title>
+      <link>https://gsemir0418.github.io/post/nextjs%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Sat, 12 Feb 2022 23:55:48 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/nextjs%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</guid>
+      <description>1 数据库设计与搭建 1.1 需求分析 主要的表有users、posts、comments users(id/username/passwordDigest) posts(id/userId/title/content) comments(id/userId/postId/content) 1.2 创建表 创建并启动容器，清除之前的开发环境，创建数据库 1</description>
+    </item>
+    
     <item>
       <title>Nextjs配置TypeORM</title>
       <link>https://gsemir0418.github.io/post/nextjs%E9%85%8D%E7%BD%AEtypeorm/</link>

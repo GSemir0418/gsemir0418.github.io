@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>去重 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/%E5%8E%BB%E9%87%8D/</link>
+    <description>Recent content in 去重 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 28 Mar 2022 17:46:37 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E5%8E%BB%E9%87%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手写数组去重</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/</link>
+      <pubDate>Mon, 28 Mar 2022 17:46:37 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/</guid>
+      <description>1 Set 1 2 3 const uniq = (arr) =&amp;gt; Array.from(new Set(arr)) // or const uniq = (arr) =&amp;gt; [...new Set(arr)] 2 计数排序 1 2 3 4 5 6 7 8 9 10 11 const uniq = (arr) =&amp;gt; { if(!arr.length) return [] const map = {} for(let i = 0; i &amp;lt;= arr.length; i++) { if(!arr[i] || map[arr[i]]) continue // 利用对象中k</description>
+    </item>
+    
+  </channel>
+</rss>

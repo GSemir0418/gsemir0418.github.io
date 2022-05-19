@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>前端面试DOM - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 请简述DOM事件模型（DOM Event） 每个事件都先经历从上到下（根元素=&amp;gt;最底层子节点）的捕获阶段，再经历从下到上（最底层子节点=" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95dom/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="前端面试DOM" />
+<meta property="og:description" content="1 请简述DOM事件模型（DOM Event） 每个事件都先经历从上到下（根元素=&gt;最底层子节点）的捕获阶段，再经历从下到上（最底层子节点=" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95dom/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-16T14:39:41+08:00" />
+<meta property="article:modified_time" content="2022-03-16T14:39:41+08:00" />
+
+<meta itemprop="name" content="前端面试DOM">
+<meta itemprop="description" content="1 请简述DOM事件模型（DOM Event） 每个事件都先经历从上到下（根元素=&gt;最底层子节点）的捕获阶段，再经历从下到上（最底层子节点="><meta itemprop="datePublished" content="2022-03-16T14:39:41+08:00" />
+<meta itemprop="dateModified" content="2022-03-16T14:39:41+08:00" />
+<meta itemprop="wordCount" content="1473">
+<meta itemprop="keywords" content="面试,DOM," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="前端面试DOM"/>
+<meta name="twitter:description" content="1 请简述DOM事件模型（DOM Event） 每个事件都先经历从上到下（根元素=&gt;最底层子节点）的捕获阶段，再经历从下到上（最底层子节点="/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">前端面试DOM</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-16 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
+            </div>
+          <span class="more-meta"> 1473 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-请简述dom事件模型dom-event">1 请简述DOM事件模型（DOM Event）</a></li>
+    <li><a href="#2-手写事件委托">2 手写事件委托</a></li>
+    <li><a href="#3-手写可拖拽div">3 手写可拖拽div</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-请简述dom事件模型dom-event">1 请简述DOM事件模型（DOM Event）</h1>
+<ul>
+<li>每个事件都先经历从上到下（根元素=&gt;最底层子节点）的<strong>捕获阶段</strong>，再经历从下到上（最底层子节点=&gt;根元素）的<strong>冒泡阶段</strong>，这决定着<strong>元素接收事件的顺序</strong>，从而决定<strong>函数执行的顺序</strong></li>
+<li>事件模型的核心API是<code>addEventListener(type, fn, true/false)</code>，第三个参数可以选择执行阶段（是否在捕获阶段执行）
+<ul>
+<li>当给同一个元素绑定listener时，仅仅是队列模型，即按照函数定义顺序来执行</li>
+<li>绑定在不同元素时，当第三个参数为true时，就会在捕获阶段来执行函数（爷爷-爸爸-儿子），</li>
+</ul>
+</li>
+<li>可以使用<code>event.stopPropagation()</code>来阻止<strong>传播</strong>（捕获或冒泡）</li>
+</ul>
+<h1 id="2-手写事件委托">2 手写事件委托</h1>
+<ol>
+<li>是什么：
+<ul>
+<li>事件委托，通俗地来讲，就是<strong>把一个元素响应事件（click、keydown&hellip;&hellip;）的函数委托到另一个元素</strong>；</li>
+<li>一般来讲，会把<strong>一个或者一组</strong>元素的事件委托到<strong>它的父层或者更外层</strong>元素上，真正绑定事件的是外层元素，当事件响应到需要绑定的元素上时，会通过<strong>事件冒泡</strong>机制从而触发它的外层元素的绑定事件上，然后在外层元素上去执行函数。</li>
+<li>举个例子，比如一个宿舍的同学同时快递到了，一种方法就是他们都傻傻地 一个个去领取，还有一种方法就是把这件事情委托给宿舍长，让一个人出去拿好所有快递，然后再根据收件人一一分发给每个宿舍同学；在这里，取快递就是一个事件，每个同学指的是需要响应事件的 DOM 元素，而出去统一领取快递的宿舍长就是代理的元素，所以真正绑定事件的是这个元素，按照收件人分发快递的过程就是在事件执行中，需要判断当前响应的事件应该匹配到被代理元素中的哪一个或者哪几个。</li>
+<li>React和Vue框架会自动帮我们实现事件委托（把事件绑定在根元素上）</li>
+</ul>
+</li>
+<li>有什么优点：
+<ol>
+<li>节省内存，节省监听器（不用每个子元素都加事件监听器）</li>
+<li>实现动态监听（里面子元素随意换）</li>
+</ol>
+</li>
+<li>有什么缺点：
+<ol>
+<li>调试复杂，不容易知道当前元素的监听器</li>
+</ol>
+</li>
+<li>缺点如何解决：
+<ol>
+<li>chrome和edge浏览器中调试窗口有一个选项 EventListener</li>
+</ol>
+</li>
+<li>简单用法：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">ul</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+  <span class="c1">// e.target是用户点击的元素，不固定
+</span><span class="c1"></span>  <span class="c1">// e.currentTarget是监听器绑定的元素(ul)
+</span><span class="c1"></span>	<span class="k">if</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">tagName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">===</span> <span class="s1">&#39;li&#39;</span><span class="p">){</span>
+		<span class="nx">fn</span><span class="p">()</span> <span class="c1">// 执行某个函数
+</span><span class="c1"></span>	<span class="p">}</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果用户点击的是li里面的span，则无法触发此事件监听器
+<ul>
+<li>解决思路：点击子元素（li）内部的子元素（span）时，对其父元素进行递归遍历，直到找到监听器绑定的元素（ul）为止，如果没找到，说明点击的不是绑定元素的子元素（ul外面的span）</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-手写可拖拽div">3 手写可拖拽div</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;X-UA-Compatible&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;IE=edge&#34;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+      <span class="p">#</span><span class="nn">root</span> <span class="p">{</span>
+        <span class="err">//</span> <span class="err">一定要是absolute，否则无法移动</span>
+        <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+        <span class="k">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">width</span><span class="p">:</span> <span class="mi">200</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">height</span><span class="p">:</span> <span class="mi">200</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;root&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="c1">// 标识是否进行拖拽
+</span><span class="c1"></span>    <span class="kd">let</span> <span class="nx">dragging</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="c1">// 元素的位置
+</span><span class="c1"></span>    <span class="kd">let</span> <span class="nx">position</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="c1">// 给root元素添加mousedown的事件监听器
+</span><span class="c1"></span>    <span class="nx">root</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;mousedown&#34;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">dragging</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="c1">// 记录鼠标的初始位置，也可以用pageX/pageY，只要统一就行
+</span><span class="c1"></span>      <span class="nx">position</span> <span class="o">=</span> <span class="p">[</span><span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">];</span>
+    <span class="p">});</span>
+    <span class="c1">// 给document添加mousemove的事件监听器
+</span><span class="c1"></span>    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;mousemove&#34;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">dragging</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+      <span class="c1">// 记录鼠标移动后的位置
+</span><span class="c1"></span>      <span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">;</span>
+      <span class="kr">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">;</span>
+      <span class="c1">// 计算鼠标移动的距离（移动后-单击时的位置）
+</span><span class="c1"></span>      <span class="kr">const</span> <span class="nx">deltaX</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">-</span> <span class="nx">position</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+      <span class="kr">const</span> <span class="nx">deltaY</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">-</span> <span class="nx">position</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+      <span class="c1">// 获取元素当前位置
+</span><span class="c1"></span>      <span class="kr">const</span> <span class="nx">left</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
+      <span class="kr">const</span> <span class="nx">top</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">||</span> <span class="mi">0</span><span class="p">);</span>
+      <span class="c1">// 将移动距离赋给元素，别忘加&#39;px&#39;
+</span><span class="c1"></span>      <span class="nx">root</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">left</span> <span class="o">+</span> <span class="nx">deltaX</span> <span class="o">+</span> <span class="s2">&#34;px&#34;</span><span class="p">;</span>
+      <span class="nx">root</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">top</span> <span class="o">+</span> <span class="nx">deltaY</span> <span class="o">+</span> <span class="s2">&#34;px&#34;</span><span class="p">;</span>
+      <span class="c1">// 记录移动后的当前位置，用于下一次计算
+</span><span class="c1"></span>      <span class="nx">position</span> <span class="o">=</span> <span class="p">[</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">];</span>
+    <span class="p">});</span>
+    <span class="c1">// 给document添加mouseup的事件监听器
+</span><span class="c1"></span>    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;mouseup&#34;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 鼠标松开，停止拖拽
+</span><span class="c1"></span>      <span class="nx">dragging</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">});</span>
+  <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-03-16
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/dom/">DOM</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95js%E5%9F%BA%E7%A1%80/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">前端面试JS基础</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/leetcode/">
+            <span class="next-text nav-default">LeetCode</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

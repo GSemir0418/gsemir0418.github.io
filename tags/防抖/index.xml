@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>防抖 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/%E9%98%B2%E6%8A%96/</link>
+    <description>Recent content in 防抖 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 28 Mar 2022 10:48:18 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E9%98%B2%E6%8A%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手写防抖与节流</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/</link>
+      <pubDate>Mon, 28 Mar 2022 10:48:18 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/</guid>
+      <description>0 区别与联系 相同：在不影响客户体验的前提下，将频繁的回调函数，进行次数缩减，避免大量计算导致的页面卡顿 不同：防抖是将多次执行变为最后一次执行</description>
+    </item>
+    
+  </channel>
+</rss>

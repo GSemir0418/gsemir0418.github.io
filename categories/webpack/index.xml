@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Webpack on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/categories/webpack/</link>
+    <description>Recent content in Webpack on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 06 Feb 2022 15:15:48 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/webpack/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Webpack全解</title>
+      <link>https://gsemir0418.github.io/post/webpack%E5%85%A8%E8%A7%A3/</link>
+      <pubDate>Sun, 06 Feb 2022 15:15:48 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/webpack%E5%85%A8%E8%A7%A3/</guid>
+      <description>1 AST、Babel和依赖 1.1 Babel原理 babel过程 parse：把代码变成AST traverse：遍历AST进行修改 generate：把</description>
+    </item>
+    
+  </channel>
+</rss>

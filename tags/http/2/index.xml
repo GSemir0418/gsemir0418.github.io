@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTTP/2 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/http/2/</link>
+    <description>Recent content in HTTP/2 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language><atom:link href="https://gsemir0418.github.io/tags/http/2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>多路复用</title>
+      <link>https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
+      <pubDate>Sun, 23 Jan 2022 09:51:58 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
+      <description>1 HTTP/2的帧 ​ HTTP/1.1的请求响应过程是基于字符串的，而HTTP/2的请求响应过程是基于帧的。 ​ HTTP/2引入了帧（Frame</description>
+    </item>
+    
+  </channel>
+</rss>

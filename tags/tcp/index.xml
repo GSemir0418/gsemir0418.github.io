@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TCP on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/tcp/</link>
+    <description>Recent content in TCP on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 02 Sep 2021 14:34:53 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/tcp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DNS、TCP与HTTP</title>
+      <link>https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Thu, 02 Sep 2021 14:34:53 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</guid>
+      <description>1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统 当我们在地址栏属于域名并访问时，会先在浏览器缓存中找对应域</description>
+    </item>
+    
+  </channel>
+</rss>

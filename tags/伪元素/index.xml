@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>伪元素 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/%E4%BC%AA%E5%85%83%E7%B4%A0/</link>
+    <description>Recent content in 伪元素 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 14 Mar 2022 08:40:24 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E4%BC%AA%E5%85%83%E7%B4%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>伪类和伪元素</title>
+      <link>https://gsemir0418.github.io/post/%E4%BC%AA%E7%B1%BB%E5%92%8C%E4%BC%AA%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Mon, 14 Mar 2022 08:40:24 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E4%BC%AA%E7%B1%BB%E5%92%8C%E4%BC%AA%E5%85%83%E7%B4%A0/</guid>
+      <description>1 伪类和伪元素 伪元素在CSS3之前就已经存在，只是没有伪元素的说法，都是归纳为伪类，所有很多人分不清楚伪类和伪元素。比如常用的:before</description>
+    </item>
+    
+  </channel>
+</rss>

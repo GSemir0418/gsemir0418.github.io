@@ -6,9 +6,36 @@
     <description>Recent content in Web性能优化 on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 11 Nov 2021 16:23:10 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Jan 2022 13:50:23 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>代码写法优化</title>
+      <title>CookieFree与CDN</title>
+      <link>https://gsemir0418.github.io/post/cookiefree%E4%B8%8Ecdn/</link>
+      <pubDate>Sun, 23 Jan 2022 13:50:23 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/cookiefree%E4%B8%8Ecdn/</guid>
+      <description>1 资源合并 在浏览器中，针对图标的解决方案按流行时间来排序：CSS Sprites、IconFont、SVG Symbols 1.1 CSS雪碧图 雪碧图的英文是CSS</description>
+    </item>
+    
+    <item>
+      <title>多路复用</title>
+      <link>https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
+      <pubDate>Sun, 23 Jan 2022 09:51:58 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
+      <description>1 HTTP/2的帧 ​ HTTP/1.1的请求响应过程是基于字符串的，而HTTP/2的请求响应过程是基于帧的。 ​ HTTP/2引入了帧（Frame</description>
+    </item>
+    
+    <item>
+      <title>连接复用</title>
+      <link>https://gsemir0418.github.io/post/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/</link>
+      <pubDate>Thu, 20 Jan 2022 14:46:29 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/</guid>
+      <description>1 DNS预解析 假设index.html的部分代码为： 1 2 &amp;lt;script src=&amp;#34;http://a.com/1.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&amp;#34;http://b.com/2.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; 那么客户端会对a.com进行DNS的解析，拿到ip后请求1.js，然后再对b</description>
+    </item>
+    
+    <item>
+      <title>代码优化</title>
       <link>https://gsemir0418.github.io/post/%E4%BB%A3%E7%A0%81%E5%86%99%E6%B3%95%E4%BC%98%E5%8C%96/</link>
       <pubDate>Thu, 11 Nov 2021 16:23:10 +0800</pubDate>
       
@@ -35,12 +62,12 @@
     </item>
     
     <item>
-      <title>Web性能优化-基础</title>
+      <title>DNS、TCP与HTTP</title>
       <link>https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Thu, 02 Sep 2021 14:34:53 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</guid>
-      <description>1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip hosts相当于手动给操作系统添加i</description>
+      <description>1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统 当我们在地址栏属于域名并访问时，会先在浏览器缓存中找对应域</description>
     </item>
     
   </channel>

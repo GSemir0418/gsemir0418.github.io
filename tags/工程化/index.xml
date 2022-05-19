@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工程化 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/</link>
+    <description>Recent content in 工程化 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 22 Apr 2022 12:20:21 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>前端面试工程化</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%8C%96/</link>
+      <pubDate>Fri, 22 Apr 2022 12:20:21 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%8C%96/</guid>
+      <description>1 常见loader和plugin有哪些，二者的区别是什么？ 常见loader babel-loader 把ES6+转义为ES5 ts-loader 把TS编译为JS，并提示类型错误 markdown-loader 把ma</description>
+    </item>
+    
+  </channel>
+</rss>

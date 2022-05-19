@@ -34,5 +34,14 @@
       <description>utils/request.js 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 /** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request</description>
     </item>
     
+    <item>
+      <title>Umi多环境配置</title>
+      <link>https://gsemir0418.github.io/post/umi%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Fri, 14 May 2021 13:33:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/umi%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+      <description>0 各环境接口 生产环境 203服务器——10.30.20.203:9725 supplant——10.30.20.203:8080 supos——1</description>
+    </item>
+    
   </channel>
 </rss>

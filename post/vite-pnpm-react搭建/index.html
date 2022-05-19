@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Vite Pnpm React搭建 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 pnpm 1.1 安装与配置 安装 1 2 3 4 5 6 7 8 9 10 // HomeBrew $ brew install pnpm // powershell $env:PNPM_VERSION=&amp;#39;7.0.0-beta.2&amp;#39; ; iwr https://get.pnpm.io/install.ps1 -useb | iex // npm $ npm install -g pnpm@next-7 // curl $ curl -fsSL https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - //wget $ wget -qO- https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - 配置淘宝源 1 $ pnpm config" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/vite-pnpm-react%E6%90%AD%E5%BB%BA/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Vite Pnpm React搭建" />
+<meta property="og:description" content="1 pnpm 1.1 安装与配置 安装 1 2 3 4 5 6 7 8 9 10 // HomeBrew $ brew install pnpm // powershell $env:PNPM_VERSION=&#39;7.0.0-beta.2&#39; ; iwr https://get.pnpm.io/install.ps1 -useb | iex // npm $ npm install -g pnpm@next-7 // curl $ curl -fsSL https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - //wget $ wget -qO- https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - 配置淘宝源 1 $ pnpm config" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/vite-pnpm-react%E6%90%AD%E5%BB%BA/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-15T13:33:55+08:00" />
+<meta property="article:modified_time" content="2022-05-19T12:14:50+08:00" />
+
+<meta itemprop="name" content="Vite Pnpm React搭建">
+<meta itemprop="description" content="1 pnpm 1.1 安装与配置 安装 1 2 3 4 5 6 7 8 9 10 // HomeBrew $ brew install pnpm // powershell $env:PNPM_VERSION=&#39;7.0.0-beta.2&#39; ; iwr https://get.pnpm.io/install.ps1 -useb | iex // npm $ npm install -g pnpm@next-7 // curl $ curl -fsSL https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - //wget $ wget -qO- https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - 配置淘宝源 1 $ pnpm config"><meta itemprop="datePublished" content="2021-04-15T13:33:55+08:00" />
+<meta itemprop="dateModified" content="2022-05-19T12:14:50+08:00" />
+<meta itemprop="wordCount" content="4508">
+<meta itemprop="keywords" content="vite,pnpm," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vite Pnpm React搭建"/>
+<meta name="twitter:description" content="1 pnpm 1.1 安装与配置 安装 1 2 3 4 5 6 7 8 9 10 // HomeBrew $ brew install pnpm // powershell $env:PNPM_VERSION=&#39;7.0.0-beta.2&#39; ; iwr https://get.pnpm.io/install.ps1 -useb | iex // npm $ npm install -g pnpm@next-7 // curl $ curl -fsSL https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - //wget $ wget -qO- https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - 配置淘宝源 1 $ pnpm config"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Vite Pnpm React搭建</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-04-15 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/"> 项目实战 </a>
+            </div>
+          <span class="more-meta"> 4508 words </span>
+          <span class="more-meta"> 9 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-pnpm">1 pnpm</a>
+      <ul>
+        <li><a href="#11-安装与配置">1.1 安装与配置</a></li>
+        <li><a href="#12-基本使用">1.2 基本使用</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-vite">2 Vite</a>
+      <ul>
+        <li><a href="#21-搭建">2.1 搭建</a></li>
+        <li><a href="#22-配置项目">2.2 配置项目</a>
+          <ul>
+            <li><a href="#221-mobx的安装与基本使用">2.2.1 mobx的安装与基本使用</a></li>
+            <li><a href="#222-配置less与antd支持">2.2.2 配置<code>less</code>与<code>antd</code>支持</a></li>
+            <li><a href="#223-二次封装axios">2.2.3 二次封装axios</a></li>
+            <li><a href="#224-开发环境proxy代理">2.2.4 开发环境<code>proxy</code>代理</a></li>
+            <li><a href="#225-路由配置">2.2.5 路由配置</a></li>
+            <li><a href="#225-自定义字体配置">2.2.5 自定义字体配置</a></li>
+            <li><a href="#226-eslint与prettier配置">2.2.6 eslint与prettier配置</a></li>
+            <li><a href="#227-husky配置github提交代码规范">2.2.7 husky配置github提交代码规范</a></li>
+            <li><a href="#228-vite多环境构建配置">2.2.8 vite多环境构建配置</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-pnpm">1 pnpm</h1>
+<h2 id="11-安装与配置">1.1 安装与配置</h2>
+<ul>
+<li>安装</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">// HomeBrew
+$ brew install pnpm
+// powershell
+<span class="nv">$env</span>:PNPM_VERSION<span class="o">=</span><span class="s1">&#39;7.0.0-beta.2&#39;</span> <span class="p">;</span> iwr https://get.pnpm.io/install.ps1 -useb <span class="p">|</span> iex
+// npm
+$ npm install -g pnpm@next-7
+// curl
+$ curl -fsSL https://get.pnpm.io/install.sh <span class="p">|</span> <span class="nv">PNPM_VERSION</span><span class="o">=</span>7.0.0-beta.2 sh -
+//wget
+$ wget -qO- https://get.pnpm.io/install.sh <span class="p">|</span> <span class="nv">PNPM_VERSION</span><span class="o">=</span>7.0.0-beta.2 sh -
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>配置淘宝源</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ pnpm config <span class="nb">set</span> registry http://registry.npm.taobao.org
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="12-基本使用">1.2 基本使用</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ pnpm install
+$ pnpm add -D/-O xxx
+$ pnpm remove xxx
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="2-vite">2 Vite</h1>
+<h2 id="21-搭建">2.1 搭建</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ pnpm create vite
+</code></pre></td></tr></table>
+</div>
+</div><p>根据命令提示操作即可</p>
+<h2 id="22-配置项目">2.2 配置项目</h2>
+<h3 id="221-mobx的安装与基本使用">2.2.1 mobx的安装与基本使用</h3>
+<blockquote>
+<p><a href="https://www.mobxjs.com/">关于 MobX | MobX 中文文档 | MobX 中文网 (mobxjs.com)</a></p>
+</blockquote>
+<ul>
+<li>安装依赖</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ pnpm install mobx mobx-react
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>创建stores层文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// stores/countStore.ts
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">makeAutoObservable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;mobx&#34;</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">Count</span> <span class="p">{</span>
+  <span class="kr">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// makeAutoObservable(target, overrides?, options?) 
+</span><span class="c1"></span>    <span class="c1">// makeAutoObservable与makeObservable类似，不同点是它会默认推断所有属性，比makeObservable更容易维护。
+</span><span class="c1"></span>    <span class="c1">// 注意：makeAutoObservable不能用于super或subclassed的类。
+</span><span class="c1"></span>    <span class="nx">makeAutoObservable</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">// 实例属性变为observable
+</span><span class="c1"></span>  <span class="nx">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="c1">// 实例方法变为autoAction
+</span><span class="c1"></span>  <span class="nx">add</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">num</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+<span class="c1">// 导出Count类的实例
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="k">new</span> <span class="nx">Count</span><span class="p">();</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// stores/index.tsx
+</span><span class="c1"></span><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">React</span> <span class="kr">from</span> <span class="s2">&#34;react&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">configure</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;mobx&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">countStore</span> <span class="kr">from</span> <span class="s2">&#34;./CountStore&#34;</span><span class="p">;</span>
+
+<span class="nx">configure</span><span class="p">({</span> <span class="nx">enforceActions</span><span class="o">:</span> <span class="s2">&#34;always&#34;</span> <span class="p">});</span>
+
+<span class="c1">// 要将每个store整合为一个
+</span><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">stores</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">countStore</span> <span class="p">};</span>
+<span class="c1">// 创建上下文对象，将全部store文件存入全局上下文环境中，供各组件使用
+</span><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">storeContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="nx">stores</span><span class="p">);</span>
+<span class="c1">// 封装useStores hook，提供使用上下文环境的接口
+</span><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">useStores</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useContext</span><span class="p">(</span><span class="nx">storeContext</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用（mobx异步方法的使用见下文）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// App.tsx
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">observer</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;mobx-react&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">useStores</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;./store&#34;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">countStore</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useStores</span><span class="p">();</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">num</span><span class="p">,</span> <span class="nx">add</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">countStore</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span><span class="nx">count</span><span class="o">:</span><span class="p">{</span><span class="nx">num</span><span class="p">}&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">add</span><span class="p">()}&gt;</span>
+        <span class="o">+</span><span class="mi">1</span>
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+<span class="c1">// observer函数/装饰器可以用来将React组件转变成响应式组件。
+</span><span class="c1">// observer是由单独的mobx-react包提供的。写法有两种，第一种，将组件用observer包裹起来；第二种，对组件加装饰器@observer。
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="nx">observer</span><span class="p">(</span><span class="nx">App</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="222-配置less与antd支持">2.2.2 配置<code>less</code>与<code>antd</code>支持</h3>
+<ul>
+<li>安装<code>less</code>、<code>antd</code>与按需加载的插件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ pnpm add antd @ant-design/icons
+$ pnpm add less vite-plugin-imp -D
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>修改<code>vite.config.ts</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;vite&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">react</span> <span class="kr">from</span> <span class="s2">&#34;@vitejs/plugin-react&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">vitePluginImp</span> <span class="kr">from</span> <span class="s2">&#34;vite-plugin-imp&#34;</span><span class="p">;</span>
+
+<span class="c1">// https://vitejs.dev/config/
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+  <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nx">react</span><span class="p">(),</span>
+    <span class="nx">vitePluginImp</span><span class="p">({</span>
+      <span class="nx">optimize</span>: <span class="kt">true</span><span class="p">,</span>
+      <span class="nx">libList</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nx">libName</span><span class="o">:</span> <span class="s2">&#34;antd&#34;</span><span class="p">,</span>
+          <span class="nx">libDirectory</span><span class="o">:</span> <span class="s2">&#34;es&#34;</span><span class="p">,</span>
+          <span class="nx">style</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="sb">`antd/es/</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">/style`</span><span class="p">,</span>
+        <span class="p">},</span>
+      <span class="p">],</span>
+    <span class="p">}),</span>
+  <span class="p">],</span>
+  <span class="nx">css</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">preprocessorOptions</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">less</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">javascriptEnabled</span>: <span class="kt">true</span><span class="p">,</span> <span class="c1">// 支持内联 JavaScript
+</span><span class="c1"></span>      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="223-二次封装axios">2.2.3 二次封装axios</h3>
+<ul>
+<li>安装</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ pnpm add axios
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>封装<code>(src/api/request.ts)</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">notification</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;antd&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">axios</span><span class="p">,</span> <span class="p">{</span> <span class="nx">AxiosInstance</span><span class="p">,</span> <span class="nx">AxiosRequestConfig</span><span class="p">,</span> <span class="nx">AxiosResponse</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;axios&#34;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">codeMessage</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="mi">200</span><span class="o">:</span> <span class="s2">&#34;服务器成功返回请求的数据。&#34;</span><span class="p">,</span>
+  <span class="mi">201</span><span class="o">:</span> <span class="s2">&#34;新建或修改数据成功。&#34;</span><span class="p">,</span>
+  <span class="mi">202</span><span class="o">:</span> <span class="s2">&#34;一个请求已经进入后台排队（异步任务）。&#34;</span><span class="p">,</span>
+  <span class="mi">204</span><span class="o">:</span> <span class="s2">&#34;删除数据成功。&#34;</span><span class="p">,</span>
+  <span class="mi">400</span><span class="o">:</span> <span class="s2">&#34;发出的请求有错误，服务器没有进行新建或修改数据的操作。&#34;</span><span class="p">,</span>
+  <span class="mi">401</span><span class="o">:</span> <span class="s2">&#34;用户没有权限（令牌、用户名、密码错误）。&#34;</span><span class="p">,</span>
+  <span class="mi">403</span><span class="o">:</span> <span class="s2">&#34;用户得到授权，但是访问是被禁止的。&#34;</span><span class="p">,</span>
+  <span class="mi">404</span><span class="o">:</span> <span class="s2">&#34;发出的请求针对的是不存在的记录，服务器没有进行操作。&#34;</span><span class="p">,</span>
+  <span class="mi">406</span><span class="o">:</span> <span class="s2">&#34;请求的格式不可得。&#34;</span><span class="p">,</span>
+  <span class="mi">410</span><span class="o">:</span> <span class="s2">&#34;请求的资源被永久删除，且不会再得到的。&#34;</span><span class="p">,</span>
+  <span class="mi">422</span><span class="o">:</span> <span class="s2">&#34;当创建一个对象时，发生一个验证错误。&#34;</span><span class="p">,</span>
+  <span class="mi">500</span><span class="o">:</span> <span class="s2">&#34;服务器发生错误，请检查服务器。&#34;</span><span class="p">,</span>
+  <span class="mi">502</span><span class="o">:</span> <span class="s2">&#34;网关错误。&#34;</span><span class="p">,</span>
+  <span class="mi">503</span><span class="o">:</span> <span class="s2">&#34;服务不可用，服务器暂时过载或维护。&#34;</span><span class="p">,</span>
+  <span class="mi">504</span><span class="o">:</span> <span class="s2">&#34;网关超时。&#34;</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kr">class</span> <span class="nx">MyAxios</span> <span class="p">{</span>
+  <span class="nx">instance</span>: <span class="kt">AxiosInstance</span><span class="p">;</span>
+
+  <span class="kr">constructor</span><span class="p">(</span><span class="nx">config</span>: <span class="kt">AxiosRequestConfig</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">instance</span> <span class="o">=</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <span class="c1">// 全局请求拦截
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">instance</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+      <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">config</span><span class="p">,</span>
+      <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">error</span>
+    <span class="p">);</span>
+    <span class="c1">// 全局响应拦截
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">instance</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+      <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span>
+      <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// 在响应拦截器中添加统一的错误处理
+</span><span class="c1"></span>        <span class="kr">const</span> <span class="p">{</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">request</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">error</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">response</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kr">const</span> <span class="nx">errorText</span> <span class="o">=</span> <span class="nx">codeMessage</span><span class="p">[</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">]</span> <span class="o">||</span> <span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span><span class="p">;</span>
+          <span class="kr">const</span> <span class="p">{</span> <span class="nx">status</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">response</span><span class="p">;</span>
+          <span class="kr">const</span> <span class="p">{</span> <span class="nx">responseURL</span>: <span class="kt">url</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">request</span><span class="p">;</span>
+          <span class="nx">notification</span><span class="p">.</span><span class="nx">open</span><span class="p">({</span>
+            <span class="nx">message</span><span class="o">:</span> <span class="sb">`请求错误 </span><span class="si">${</span><span class="nx">status</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">url</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+            <span class="nx">description</span>: <span class="kt">errorText</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">notification</span><span class="p">.</span><span class="nx">open</span><span class="p">({</span>
+            <span class="nx">message</span><span class="o">:</span> <span class="s2">&#34;网络错误&#34;</span><span class="p">,</span>
+            <span class="nx">description</span><span class="o">:</span> <span class="s2">&#34;您的网络发生异常，无法连接服务器&#34;</span><span class="p">,</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// request作为原型方法继承给实例
+</span><span class="c1"></span>  <span class="nx">request</span><span class="p">(</span><span class="nx">config</span>: <span class="kt">AxiosRequestConfig</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">AxiosResponse</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">AxiosResponse</span><span class="p">&gt;((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">instance</span>
+        <span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">resolve</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">myAxios</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyAxios</span><span class="p">({</span>
+  <span class="c1">// 根据环境变量改变前缀
+</span><span class="c1"></span>  <span class="nx">baseURL</span><span class="o">:</span> <span class="s2">&#34;/api&#34;</span><span class="p">,</span>
+  <span class="nx">timeout</span>: <span class="kt">0</span><span class="p">,</span>
+  <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">Authorization</span><span class="o">:</span> <span class="sb">`Bearer d38de888-cb73-4cf1-a335-d3f47312f148`</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">myAxios</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>搭配mobx使用</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// store/AsyncStore.ts
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">makeAutoObservable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;mobx&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">getList</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;../api/equipAPI&#34;</span><span class="p">;</span>
+<span class="kr">class</span> <span class="nx">AsyncStore</span> <span class="p">{</span>
+  <span class="kr">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">makeAutoObservable</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">equips</span>: <span class="kt">any</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="nx">setEquip</span><span class="p">(</span><span class="nx">data</span>: <span class="kt">any</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">equips</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// 异步方法可以使用generator，会被mobx解析为flow类型
+</span><span class="c1"></span>  <span class="o">*</span><span class="nx">getEquipList</span><span class="p">()</span><span class="o">:</span> <span class="kt">any</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">resp</span> <span class="o">=</span> <span class="k">yield</span> <span class="nx">getList</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setEquip</span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="k">new</span> <span class="nx">AsyncStore</span><span class="p">();</span>
+
+<span class="c1">// store/index.ts中注册asyncStore
+</span><span class="c1"></span>
+<span class="c1">// view/page2/index.tsx
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Button</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;antd&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">observer</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;mobx-react&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">useStores</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;../../store&#34;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">Page2</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">asyncStore</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useStores</span><span class="p">();</span>
+  <span class="c1">// 异步方法不能在store中解构取出
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="p">{</span> <span class="nx">equips</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">asyncStore</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Button</span>
+        <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">asyncStore</span><span class="p">.</span><span class="nx">getEquipList</span><span class="p">();</span>
+        <span class="p">}}</span>
+      <span class="p">&gt;</span>
+        <span class="err">请求</span>
+      <span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">equips</span><span class="p">.</span><span class="nx">toString</span><span class="p">()}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">observer</span><span class="p">(</span><span class="nx">Page2</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="224-开发环境proxy代理">2.2.4 开发环境<code>proxy</code>代理</h3>
+<ul>
+<li><code>vite.config.ts</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+  <span class="nx">server</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">proxy</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&#34;/api&#34;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">target</span><span class="o">:</span> <span class="s2">&#34;http://10.30.20.203:8080&#34;</span><span class="p">,</span>
+        <span class="c1">// changeOrigin: true,
+</span><span class="c1"></span>        <span class="nx">rewrite</span><span class="o">:</span> <span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">path</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^\/api/</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">),</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="225-路由配置">2.2.5 路由配置</h3>
+<ul>
+<li>安装<code>react-router-dom</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ pnpm add react-router-dom
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>src下创建路由配置文件<code>src/config/routes</code>，利用react路由的懒加载——即对组件进行分割打包成多个chunk来减少一次性加载的资源大小，从而加快首屏渲染速度，提升用户体验</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">lazy</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;react&#34;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">routes</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nx">path</span><span class="o">:</span> <span class="s2">&#34;/&#34;</span><span class="p">,</span>
+    <span class="nx">exact</span>: <span class="kt">true</span><span class="p">,</span>
+    <span class="nx">component</span>: <span class="kt">lazy</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="kr">import</span><span class="p">(</span><span class="s2">&#34;../view/home&#34;</span><span class="p">)),</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Home&#34;</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nx">path</span><span class="o">:</span> <span class="s2">&#34;/home&#34;</span><span class="p">,</span>
+    <span class="nx">component</span>: <span class="kt">lazy</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="kr">import</span><span class="p">(</span><span class="s2">&#34;../view/home&#34;</span><span class="p">)),</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Home&#34;</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nx">path</span><span class="o">:</span> <span class="s2">&#34;/page1&#34;</span><span class="p">,</span>
+    <span class="nx">component</span>: <span class="kt">lazy</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="kr">import</span><span class="p">(</span><span class="s2">&#34;../view/page1&#34;</span><span class="p">)),</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;Page1&#34;</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">];</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">routes</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>封装<code>router.tsx</code>作为路由文件入口。由于路由是以懒加载的形式渲染的，所以切换页面时可能会产生延迟，因此使用<code>Suspense</code>组件将路由组件包裹，并在fallback中声明懒加载组件加载完成前做的事，优化整个页面的交互</li>
+<li>注意Route中的<code>component</code>属性改为了<code>element</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Suspense</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;react&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Route</span><span class="p">,</span> <span class="nx">Routes</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;react-router-dom&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">routes</span> <span class="kr">from</span> <span class="s2">&#34;./config/routes&#34;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">Router</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">Route</span> <span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">path</span><span class="p">}</span> <span class="na">path</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">path</span><span class="p">}</span> <span class="na">element</span><span class="o">=</span><span class="p">{&lt;</span><span class="nt">item.component</span> <span class="p">/&gt;}</span> <span class="p">/&gt;</span>
+    <span class="p">);</span>
+  <span class="p">});</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">Suspense</span> <span class="na">fallback</span><span class="o">=</span><span class="p">{&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="nx">Loading</span><span class="p">...&lt;/</span><span class="nt">div</span><span class="p">&gt;}&gt;</span>
+      <span class="p">&lt;</span><span class="nt">Routes</span><span class="p">&gt;{</span><span class="nx">myRoutes</span><span class="p">}&lt;/</span><span class="nt">Routes</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">Suspense</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Router</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>App.tsx</code>，注意使用<code>HashRouter</code>或<code>BrowserRouter</code>组件包裹<code>Router</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="nx">Router</span> <span class="kr">from</span> <span class="s2">&#34;./router&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">HashRouter</span><span class="p">,</span> <span class="nx">Link</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;react-router-dom&#34;</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">App() {</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;App&#34;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">HashRouter</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">Link</span> <span class="na">to</span><span class="o">=</span><span class="s">&#34;/&#34;</span><span class="p">&gt;</span><span class="nx">Home</span> <span class="nx">Page</span><span class="p">&lt;/</span><span class="nt">Link</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">Link</span> <span class="na">to</span><span class="o">=</span><span class="s">&#34;/page1&#34;</span><span class="p">&gt;</span><span class="nx">Page1</span><span class="p">&lt;/</span><span class="nt">Link</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">Link</span> <span class="na">to</span><span class="o">=</span><span class="s">&#34;/page2&#34;</span><span class="p">&gt;</span><span class="nx">Page2</span><span class="p">&lt;/</span><span class="nt">Link</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">Router</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">HashRouter</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="225-自定义字体配置">2.2.5 自定义字体配置</h3>
+<ul>
+<li>
+<p>将字体文件放在<code>assets/fonts</code>下</p>
+</li>
+<li>
+<p>index.html中添加style标签，注册自定义字体族</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+    <span class="p">@</span><span class="k">font-face</span> <span class="p">{</span>
+      <span class="nt">font-family</span><span class="o">:</span> <span class="nt">CustomFont</span><span class="o">;</span>
+      <span class="nt">src</span><span class="o">:</span> <span class="nt">local</span><span class="o">(</span><span class="s2">&#34;CustomFont&#34;</span><span class="o">),</span>
+        <span class="nt">url</span><span class="o">(./</span><span class="nt">assets</span><span class="o">/</span><span class="nt">fonts</span><span class="o">/</span><span class="nt">Montserrat-Regular</span><span class="p">.</span><span class="nc">ttf</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s2">&#34;truetype&#34;</span><span class="o">);</span>
+      <span class="nt">font-weight</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
+      <span class="nt">font-style</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
+    <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="226-eslint与prettier配置">2.2.6 eslint与prettier配置</h3>
+<ul>
+<li>安装eslint与prettier</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ pnpm add -D @typescript-eslint/eslint-plugin eslint eslint-plugin-react @typescript-eslint/parser prettier 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>.eslintrc.js</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// react17以上的版本，使用plugin:react/jsx-runtime
+</span><span class="c1"></span>  <span class="kr">extends</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;eslint:recommended&#39;</span><span class="p">,</span> <span class="s1">&#39;plugin:react/jsx-runtime&#39;</span><span class="p">],</span>
+  <span class="c1">// 代码运行环境
+</span><span class="c1"></span>  <span class="nx">env</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">browser</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">commonjs</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">es6</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="nx">parser</span><span class="o">:</span> <span class="s1">&#39;@typescript-eslint/parser&#39;</span><span class="p">,</span>
+  <span class="nx">parserOptions</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">ecmaFeatures</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">jsx</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nx">modules</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nx">sourceType</span><span class="o">:</span> <span class="s1">&#39;module&#39;</span><span class="p">,</span>
+    <span class="nx">ecmaVersion</span><span class="o">:</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;react&#39;</span><span class="p">,</span> <span class="s1">&#39;@typescript-eslint&#39;</span><span class="p">],</span>
+  <span class="nx">settings</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;import/resolver&#39;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">node</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">extensions</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;.tsx&#39;</span><span class="p">,</span> <span class="s1">&#39;.ts&#39;</span><span class="p">,</span> <span class="s1">&#39;.js&#39;</span><span class="p">,</span> <span class="s1">&#39;.json&#39;</span><span class="p">],</span>
+        <span class="nx">alias</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;@&#39;</span><span class="p">,</span> <span class="s1">&#39;./src&#39;</span><span class="p">]],</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="nx">rules</span><span class="o">:</span> <span class="p">{</span>
+    <span class="cm">/*
+</span><span class="cm">     * 建议规则
+</span><span class="cm">     */</span>
+    <span class="c1">// 必须使用全等
+</span><span class="c1"></span>    <span class="nx">eqeqeq</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 不建议使用consolelog
+</span><span class="c1"></span>    <span class="s1">&#39;no-console&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="c1">// 不建议使用alert
+</span><span class="c1"></span>    <span class="s1">&#39;no-alert&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 强制对多行注释使用特定风格，块注释或行注释
+</span><span class="c1"></span>    <span class="c1">// &#39;multiline-comment-style&#39;: 2,
+</span><span class="c1"></span>    <span class="c1">// 不建议使用不必要的分号
+</span><span class="c1"></span>    <span class="s1">&#39;no-extra-semi&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 不建议使用短符号进行类型转换（禁用隐式转换）
+</span><span class="c1"></span>    <span class="s1">&#39;no-implicit-coercion&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 不建议注释与代码在同一行
+</span><span class="c1"></span>    <span class="s1">&#39;no-inline-comments&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 不建议在三元操作数中间换行
+</span><span class="c1"></span>    <span class="c1">// &#39;no-nested-ternary&#39;: 2,
+</span><span class="c1"></span>    <span class="c1">// 不建议将变量初始化为undefined
+</span><span class="c1"></span>    <span class="s1">&#39;no-undef-init&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 不建议在有更简单的可替代的表达式时(||)使用三元操作符
+</span><span class="c1"></span>    <span class="s1">&#39;no-unneeded-ternary&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 不建议变量定义却不使用
+</span><span class="c1"></span>    <span class="s1">&#39;no-unused-expressions&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 不建议使用var
+</span><span class="c1"></span>    <span class="s1">&#39;no-var&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 推荐对象字面量简写语法
+</span><span class="c1"></span>    <span class="s1">&#39;object-shorthand&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="c1">// 推荐回调函数使用箭头函数形式
+</span><span class="c1"></span>    <span class="s1">&#39;prefer-arrow-callback&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="c1">// 优先使用对象与数组的解构语法
+</span><span class="c1"></span>    <span class="s1">&#39;prefer-destructuring&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="c1">// 建议使用模板字符串而非字符串拼接
+</span><span class="c1"></span>    <span class="s1">&#39;prefer-template&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 在注释内容前建议添加空格
+</span><span class="c1"></span>    <span class="s1">&#39;spaced-comment&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+
+    <span class="cm">/*
+</span><span class="cm">     * 布局风格
+</span><span class="cm">     */</span>
+    <span class="c1">// 在数组开括号后和闭括号前强制换行
+</span><span class="c1"></span>    <span class="s1">&#39;array-bracket-newline&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">multiline</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}],</span>
+    <span class="c1">// 建议数组方括号中使用一致的空格？
+</span><span class="c1"></span>    <span class="s1">&#39;array-bracket-spacing&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// 建议多项数据的最后一项保留逗号
+</span><span class="c1"></span>    <span class="s1">&#39;comma-dangle&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;always-multiline&#39;</span><span class="p">],</span>
+    <span class="c1">// 建议逗号前添加空格
+</span><span class="c1"></span>    <span class="s1">&#39;comma-spacing&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">before</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">after</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}],</span>
+    <span class="c1">// 箭头函数前后应有空格
+</span><span class="c1"></span>    <span class="s1">&#39;arrow-spacing&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 强制使用一致的空格，默认逗号放在数组元素、对象属性或变量声明之后
+</span><span class="c1"></span>    <span class="s1">&#39;comma-style&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 不建议在计算属性（obj[foo] || { [foo]: 1 }）中使用空格
+</span><span class="c1"></span>    <span class="s1">&#39;computed-property-spacing&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 强制在点号之前或之后换行
+</span><span class="c1"></span>    <span class="c1">// &#39;dot-location&#39;: [&#39;error&#39;, &#39;object&#39;],
+</span><span class="c1"></span>    <span class="c1">// 函数调用时，名称与括号之间不建议存在空格
+</span><span class="c1"></span>    <span class="s1">&#39;func-call-spacing&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// 在迭代器函数名与*号之间是否存在空格
+</span><span class="c1"></span>    <span class="cm">/* &#39;generator-star-spacing&#39;: [&#39;error&#39;, &#39;before&#39;], */</span>
+    <span class="c1">// 缩进为2
+</span><span class="c1"></span>    <span class="nx">indent</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">{</span> <span class="nx">SwitchCase</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}],</span>
+    <span class="c1">// jsx元素中的属性使用双引号
+</span><span class="c1"></span>    <span class="s1">&#39;jsx-quotes&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;prefer-double&#39;</span><span class="p">],</span>
+    <span class="c1">// 对象的key和value之间要有空格
+</span><span class="c1"></span>    <span class="s1">&#39;key-spacing&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">beforeColon</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">afterColon</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}],</span>
+    <span class="c1">// 强制在关键字（else this function）前后使用一致的空格
+</span><span class="c1"></span>    <span class="s1">&#39;keyword-spacing&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">before</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}],</span>
+    <span class="c1">// 允许注释周围存在空行
+</span><span class="c1"></span>    <span class="s1">&#39;lines-around-comment&#39;</span><span class="o">:</span> <span class="p">[</span>
+      <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+      <span class="c1">// 在对象字面量的开始位置、在块语句的结束位置允许注释
+</span><span class="c1"></span>      <span class="p">{</span> <span class="nx">allowObjectStart</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">allowBlockStart</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="c1">// 要求调用无参构造函数时带括号
+</span><span class="c1"></span>    <span class="s1">&#39;new-parens&#39;</span><span class="o">:</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+    <span class="c1">// 要求方法链中每个调用都有一个换行符
+</span><span class="c1"></span>    <span class="s1">&#39;newline-per-chained-call&#39;</span><span class="o">:</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+    <span class="c1">// 空格只允许一个
+</span><span class="c1"></span>    <span class="s1">&#39;no-multi-spaces&#39;</span><span class="o">:</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+    <span class="c1">// 不允许出现多个空行
+</span><span class="c1"></span>    <span class="s1">&#39;no-multiple-empty-lines&#39;</span><span class="o">:</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+    <span class="c1">// 行尾禁止出现空格
+</span><span class="c1"></span>    <span class="s1">&#39;no-trailing-spaces&#39;</span><span class="o">:</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+    <span class="c1">// 属性前（foo. bar）不允许出现空格
+</span><span class="c1"></span>    <span class="s1">&#39;no-whitespace-before-property&#39;</span><span class="o">:</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+    <span class="c1">// enforce consistent line breaks after opening and before closing braces
+</span><span class="c1"></span>    <span class="c1">// &#39;object-curly-newline&#39;: [&#39;error&#39;, { multiline: true }],
+</span><span class="c1"></span>    <span class="c1">// 花括号前后要有空格
+</span><span class="c1"></span>    <span class="s1">&#39;object-curly-spacing&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;always&#39;</span><span class="p">],</span>
+    <span class="c1">// 当代码块只有一条语句时，省略花括号
+</span><span class="c1"></span>    <span class="nx">curly</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;multi-or-nest&#39;</span><span class="p">],</span>
+    <span class="c1">// 换行时换行符放在操作符后面（即操作符后换行）
+</span><span class="c1"></span>    <span class="s1">&#39;operator-linebreak&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;after&#39;</span><span class="p">],</span>
+    <span class="c1">// 建议对象的属性在各自的独立行
+</span><span class="c1"></span>    <span class="s1">&#39;object-property-newline&#39;</span><span class="o">:</span> <span class="p">[</span>
+      <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+      <span class="p">{</span> <span class="nx">allowAllPropertiesOnSameLine</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="c1">// 在剩余和扩展运算符及其表达式之间不需要空格（... a）
+</span><span class="c1"></span>    <span class="s1">&#39;rest-spread-spacing&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;never&#39;</span><span class="p">],</span>
+    <span class="c1">// 分号前无空格，分号后有空格（for循环）
+</span><span class="c1"></span>    <span class="s1">&#39;semi-spacing&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">before</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">after</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}],</span>
+    <span class="c1">// 强制分号出现在行尾
+</span><span class="c1"></span>    <span class="s1">&#39;semi-style&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;last&#39;</span><span class="p">],</span>
+    <span class="c1">// 要求块语句之前有空格（func() {}，try {}，if() {}）
+</span><span class="c1"></span>    <span class="s1">&#39;space-before-blocks&#39;</span><span class="o">:</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+    <span class="c1">// 函数圆括号之前是否存在空格
+</span><span class="c1"></span>    <span class="s1">&#39;space-before-function-paren&#39;</span><span class="o">:</span> <span class="p">[</span>
+      <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+      <span class="p">{</span> <span class="nx">anonymous</span><span class="o">:</span> <span class="s1">&#39;always&#39;</span><span class="p">,</span> <span class="nx">named</span><span class="o">:</span> <span class="s1">&#39;never&#39;</span><span class="p">,</span> <span class="nx">asyncArrow</span><span class="o">:</span> <span class="s1">&#39;always&#39;</span> <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="c1">// 禁止圆括号内出现空格
+</span><span class="c1"></span>    <span class="s1">&#39;space-in-parens&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;never&#39;</span><span class="p">],</span>
+    <span class="c1">// 要求操作符周围有空格（1 === 1）
+</span><span class="c1"></span>    <span class="s1">&#39;space-infix-ops&#39;</span><span class="o">:</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+    <span class="c1">// 要求一元操作符（new delete typeof ! ++）在之前或之后存在空格
+</span><span class="c1"></span>    <span class="s1">&#39;space-unary-ops&#39;</span><span class="o">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">{</span> <span class="nx">words</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}],</span>
+    <span class="c1">// 要求包裹正则表达式
+</span><span class="c1"></span>    <span class="s1">&#39;wrap-regex&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="c1">// Enforce spacing around the * in yield* expressions
+</span><span class="c1"></span>    <span class="cm">/* &#39;yield-star-spacing&#39;: [&#39;error&#39;, &#39;before&#39;], */</span>
+  <span class="p">},</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>.prettierrc.js</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// 对象花括号内部前后有空格
+</span><span class="c1"></span>  <span class="nx">bracketSpacing</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="c1">// 缩进 2
+</span><span class="c1"></span>  <span class="nx">tabWidth</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="c1">// 句尾分号
+</span><span class="c1"></span>  <span class="nx">semi</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="c1">// 使用单引号
+</span><span class="c1"></span>  <span class="nx">singleQuote</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="c1">// 最后一项后的逗号
+</span><span class="c1"></span>  <span class="nx">trailingComma</span><span class="o">:</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span>
+  <span class="c1">// 元素的‘&gt;’单独一行
+</span><span class="c1"></span>  <span class="nx">bracketSameLine</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">arrowParens</span><span class="o">:</span> <span class="s1">&#39;avoid&#39;</span><span class="p">,</span>
+  <span class="c1">// jsx中使用双引号
+</span><span class="c1"></span>  <span class="nx">jsxSingleQuote</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">stylelintIntegration</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nx">eslintIntegration</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="227-husky配置github提交代码规范">2.2.7 husky配置github提交代码规范</h3>
+<ul>
+<li>
+<p>安装husky</p>
+</li>
+<li>
+<blockquote>
+<p><a href="https://typicode.github.io/husky/#/?id=install">Husky - Git hooks (typicode.github.io)</a></p>
+</blockquote>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ pnpm add husky -D
+<span class="c1"># 初始化husky，将git hooks交由husky执行</span>
+$ npx husky install
+husky - Git hooks installed
+<span class="c1"># 在package.json添加命令</span>
+$ npm set-script prepare <span class="s2">&#34;husky install&#34;</span>
+<span class="c1"># 会在每次pnpm install时自动执行，神奇呀！</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>安装pre-commit，在commit之前（<code>git add</code>后），代码会自动判断暂存区的代码是否符合规范，并对暂存区指定文件进行格式化</p>
+</li>
+<li>
+<blockquote>
+<p><a href="https://github.com/okonet/lint-staged#examples">okonet/lint-staged: 🚫💩 — Run linters on git staged files (github.com)</a></p>
+</blockquote>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 自动格式化lint-staged</span>
+$ pnpm add lint-staged -D
+$ npx husky add .husky/pre-commit <span class="s2">&#34;npx lint-staged&#34;</span>
+husky - created .husky/pre-commit
+<span class="c1"># 提交一下</span>
+$ git add .husky/pre-commit
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>创建<code>.lintstagedrc.json</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+	<span class="nt">&#34;*.{js,jsx,ts,tsx}&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;npx prettier --write&#34;</span><span class="p">,</span> <span class="s2">&#34;npx eslint --fix&#34;</span><span class="p">],</span>
+  <span class="c1">// 暂无stylelint
+</span><span class="c1"></span>	<span class="nt">&#34;*.{css,less,scss}&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;npx prettier --write&#34;</span><span class="p">,</span> <span class="s2">&#34;npx stylelint --fix&#34;</span><span class="p">],</span>
+	<span class="nt">&#34;*.{json,md}&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;npx prettier --write&#34;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>安装<code>commitlint</code>，在pre-commit之后运行，检查commit的内容</p>
+</li>
+<li>
+<blockquote>
+<p><a href="https://commitlint.js.org/#/guides-local-setup">Local setup (commitlint.js.org)</a></p>
+</blockquote>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 安装anglar的提交规范</span>
+$ pnpm add @commitlint/config-conventional @commitlint/cli -D
+<span class="c1"># 配置commitlint去使用conventional的配置</span>
+$ <span class="nb">echo</span> <span class="s2">&#34;module.exports = { extends: [&#39;@commitlint/config-conventional&#39;] };&#34;</span> &gt; commitlint.config.js
+<span class="c1"># 添加commit-msg钩子，会在pre-commit之后运行，检查commit message的内容</span>
+$ npx husky add .husky/commit-msg <span class="s1">&#39;npx --no -- commitlint --edit $1&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="228-vite多环境构建配置">2.2.8 vite多环境构建配置</h3>
+<p>3 布局</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-05-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/vite/">vite</a>
+          <a href="/tags/pnpm/">pnpm</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/react%E5%9F%BA%E7%A1%80/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">React基础</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E5%B1%95%E7%A4%BA%E5%B9%B3%E5%8F%B0%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/">
+            <span class="next-text nav-default">展示平台说明文档</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Nextjs配置TypeORM">
 <meta itemprop="description" content="1 创建Next.js项目 1 yarn create next-app --typescript 按照提示填写项目名称后， 项目就搭建完成了，以下是项目文件结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 . ├── README.md"><meta itemprop="datePublished" content="2022-01-11T16:25:49+08:00" />
 <meta itemprop="dateModified" content="2022-01-11T16:25:49+08:00" />
-<meta itemprop="wordCount" content="2848">
+<meta itemprop="wordCount" content="3022">
 <meta itemprop="keywords" content="nodejs,Next.js,TypeORM," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Nextjs配置TypeORM"/>
 <meta name="twitter:description" content="1 创建Next.js项目 1 yarn create next-app --typescript 按照提示填写项目名称后， 项目就搭建完成了，以下是项目文件结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 . ├── README.md"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/nextjs%E5%85%A8%E8%A7%A3/"> Nextjs全解 </a>
             </div>
-          <span class="more-meta"> 2848 words </span>
-          <span class="more-meta"> 6 mins read </span>
+          <span class="more-meta"> 3022 words </span>
+          <span class="more-meta"> 7 mins read </span>
         
       </div>
     </header>
@@ -230,11 +230,31 @@
 </code></pre></td></tr></table>
 </div>
 </div><ul>
-<li>windows系统需要将<code>$PWD</code>去掉</li>
-<li>如果下载慢，先搜阿里云镜像（需要登录阿里云），再搜Docker加速</li>
-<li>容器搭建结束后会返回容器的id</li>
-<li><code>docker ps -a</code>查看全部容器运行状态</li>
-<li><code>docker logs id</code>查看容器启动日志</li>
+<li>
+<p>释义：</p>
+<ul>
+<li>-v 本地目录:容器目录 或 -v 容器目录——表示将本机某目录，挂载到镜像中某目录下</li>
+<li>-d——后台运行容器</li>
+<li>-p——端口映射，指定主机的5432端口映射到容器的5432端口</li>
+<li>-it——以交互模式运行启动容器　</li>
+<li>-e——指定容器环境变量</li>
+</ul>
+</li>
+<li>
+<p>windows系统需要将<code>$PWD</code>去掉</p>
+</li>
+<li>
+<p>如果下载慢，先搜阿里云镜像（需要登录阿里云），再搜Docker加速</p>
+</li>
+<li>
+<p>容器搭建结束后会返回容器的id</p>
+</li>
+<li>
+<p><code>docker ps -a</code>查看全部容器运行状态</p>
+</li>
+<li>
+<p><code>docker logs id</code>查看容器启动日志</p>
+</li>
 </ul>
 <ol start="3">
 <li>验证是否成功启动</li>
@@ -448,6 +468,10 @@
 </span><span class="lnt">32
 </span><span class="lnt">33
 </span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">MigrationInterface</span><span class="p">,</span> <span class="nx">QueryRunner</span><span class="p">,</span> <span class="nx">Table</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;typeorm&#34;</span><span class="p">;</span>
@@ -455,6 +479,7 @@
 <span class="kr">export</span> <span class="kr">class</span> <span class="nx">CreatePost1641976068405</span> <span class="kr">implements</span> <span class="nx">MigrationInterface</span> <span class="p">{</span>
   <span class="kr">public</span> <span class="kr">async</span> <span class="nx">up</span><span class="p">(</span><span class="nx">queryRunner</span>: <span class="kt">QueryRunner</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
     <span class="c1">// 升级数据库
+</span><span class="c1"></span>    <span class="c1">// return可选，但await要记得添加上
 </span><span class="c1"></span>    <span class="k">return</span> <span class="k">await</span> <span class="nx">queryRunner</span><span class="p">.</span><span class="nx">createTable</span><span class="p">(</span>
       <span class="k">new</span> <span class="nx">Table</span><span class="p">({</span>
         <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;posts&#34;</span><span class="p">,</span>
@@ -481,7 +506,10 @@
 
   <span class="kr">public</span> <span class="kr">async</span> <span class="nx">down</span><span class="p">(</span><span class="nx">queryRunner</span>: <span class="kt">QueryRunner</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
     <span class="c1">// 降级数据库
-</span><span class="c1"></span>    <span class="k">return</span> <span class="k">await</span> <span class="nx">queryRunner</span><span class="p">.</span><span class="nx">dropTable</span><span class="p">(</span><span class="s2">&#34;posts&#34;</span><span class="p">);</span>
+</span><span class="c1"></span>    <span class="c1">// revert报错无法继续回退的情况，可以利用try catch来解决
+</span><span class="c1"></span>    <span class="k">try</span><span class="p">{</span>
+      <span class="k">return</span> <span class="k">await</span> <span class="nx">queryRunner</span><span class="p">.</span><span class="nx">dropTable</span><span class="p">(</span><span class="s2">&#34;posts&#34;</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{}</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
@@ -897,7 +925,11 @@ posts数据填充完成!
           <a href="/tags/typeorm/">TypeORM</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">连接复用</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/node%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
             <span class="next-text nav-default">Node包管理工具</span>
             <span class="next-text nav-mobile">Next</span>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Web性能优化-基础 - Even - A super concise theme for Hugo</title>
+  <title>DNS、TCP与HTTP - Even - A super concise theme for Hugo</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="gsemir" /><meta name="description" content="1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip hosts相当于手动给操作系统添加i" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="gsemir" /><meta name="description" content="1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统 当我们在地址栏属于域名并访问时，会先在浏览器缓存中找对应域" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -39,20 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Web性能优化-基础" />
-<meta property="og:description" content="1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip hosts相当于手动给操作系统添加i" />
+<meta property="og:title" content="DNS、TCP与HTTP" />
+<meta property="og:description" content="1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统 当我们在地址栏属于域名并访问时，会先在浏览器缓存中找对应域" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-09-02T14:34:53+08:00" />
 <meta property="article:modified_time" content="2021-09-02T00:00:00+08:00" />
 
-<meta itemprop="name" content="Web性能优化-基础">
-<meta itemprop="description" content="1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip hosts相当于手动给操作系统添加i"><meta itemprop="datePublished" content="2021-09-02T14:34:53+08:00" />
+<meta itemprop="name" content="DNS、TCP与HTTP">
+<meta itemprop="description" content="1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统 当我们在地址栏属于域名并访问时，会先在浏览器缓存中找对应域"><meta itemprop="datePublished" content="2021-09-02T14:34:53+08:00" />
 <meta itemprop="dateModified" content="2021-09-02T00:00:00+08:00" />
-<meta itemprop="wordCount" content="1271">
-<meta itemprop="keywords" content="前端,web,HTTP," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Web性能优化-基础"/>
-<meta name="twitter:description" content="1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip hosts相当于手动给操作系统添加i"/>
+<meta itemprop="wordCount" content="1582">
+<meta itemprop="keywords" content="面试,HTTP&#34;,TCP,DNS," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="DNS、TCP与HTTP"/>
+<meta name="twitter:description" content="1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统 当我们在地址栏属于域名并访问时，会先在浏览器缓存中找对应域"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -129,15 +129,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Web性能优化-基础</h1>
+      <h1 class="post-title">DNS、TCP与HTTP</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2021-09-02 </span>
         <div class="post-category">
             <a href="/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"> Web性能优化 </a>
             </div>
-          <span class="more-meta"> 1271 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 1582 words </span>
+          <span class="more-meta"> 4 mins read </span>
         
       </div>
     </header>
@@ -150,7 +150,7 @@
     <li><a href="#1-dns与tcp">1 DNS与TCP</a>
       <ul>
         <li><a href="#11-dns与hosts">1.1 DNS与hosts</a></li>
-        <li><a href="#12-三次握手">1.2 三次握手</a></li>
+        <li><a href="#12-三次握手与四次挥手">1.2 三次握手与四次挥手</a></li>
       </ul>
     </li>
     <li><a href="#2-http超文本传输协议">2 HTTP（超文本传输协议）</a>
@@ -174,31 +174,45 @@
     <div class="post-content">
       <h1 id="1-dns与tcp">1 DNS与TCP</h1>
 <h2 id="11-dns与hosts">1.1 DNS与hosts</h2>
-<p>DNS（Domain Name System）：域名系统，每个域名对应一个ip</p>
-<p>hosts相当于手动给操作系统添加ip缓存</p>
-<h2 id="12-三次握手">1.2 三次握手</h2>
-<p>TCP（Transmission Control Protocol）：传输控制协议</p>
-<p>建立TCP连接过程的三次握手，x、y一般从0开始</p>
+<p>DNS（Domain Name System）：域名系统</p>
+<p><img src="/dnstcp/dns.png" alt="image-20220120133818490"></p>
+<p>当我们在地址栏属于域名并访问时，会先在<strong>浏览器缓存</strong>中找对应域名的ip，如果没有，则去<strong>操作系统</strong>的缓存中查找，其实就是操作系统的<code>hosts</code>文件，hosts文件相当于手动给操作系统添加ip缓存；如果都找不到，则去请求<strong>ISP</strong>（互联网服务提供商），得到对应域名的ip地址。</p>
+<h2 id="12-三次握手与四次挥手">1.2 三次握手与四次挥手</h2>
+<p><strong>TCP（Transmission Control Protocol）：传输控制协议</strong></p>
+<ul>
+<li>建立TCP连接过程的三次握手，<code>SYN</code>表示同步信息，<code>ACK</code>表示获悉，x、y一般从0开始</li>
+</ul>
+<ol>
+<li>A-&gt;B，<code>SYN(x)</code></li>
+<li>B-&gt;A，<code>ACK(x+1)SYN(y)</code>——确保A能向B发送信息，B能收到A的信息，</li>
+<li>A-&gt;B，<code>ACK(y+1)</code>——确保A能收（为什么一定需要第三次）</li>
+<li>A正式开始发送HTTP请求</li>
+</ol>
+<ul>
+<li>关闭TCP连接过程的四次挥手，<code>FIN</code>表示finish，x、y一般不为0</li>
+</ul>
 <ol>
 <li>
-<p>A能发</p>
+<p>A-&gt;B，<code>FIN(x)</code>——A请求结束通讯</p>
 </li>
 <li>
-<p>B能收，B能发</p>
+<p>B-&gt;A，<code>ACK(x+1)</code>——确保B知道A要请求结束了</p>
 </li>
 <li>
-<p>A能收（为什么一定需要第三次）</p>
+<p>B-&gt;A，<code>FIN(y)</code>——B结束响应，并关闭TCP连接</p>
 </li>
-</ol>
-<p>关闭TCP连接过程的四次挥手，x、y一般不为0</p>
-<ol>
-<li>A：我请求结束了</li>
-<li>B：我知道你请求结束了</li>
-<li>B：我响应结束了</li>
-<li>A：我知道你响应结束了</li>
-</ol>
-<p>为什么B不能一起发送呢：因为第二次和第三次中间，服务端可能夹杂其他响应数据（B可能还没说完）</p>
+<li>
+<p>A-&gt;B，<code>ACK(y+1)</code>——确保A知道B要结束响应了</p>
+<ul>
+<li>
+<p>为什么2、3两步骤B不能一起发送？因为第二次和第三次中间，服务端<strong>可能夹杂其他响应数据</strong>（B可能还没说完）</p>
+</li>
+<li>
 <p>不一定是客户端发起FIN，服务端也可以发起FIN</p>
+</li>
+</ul>
+</li>
+</ol>
 <h1 id="2-http超文本传输协议">2 HTTP（超文本传输协议）</h1>
 <h2 id="21-http请求">2.1 HTTP请求</h2>
 <table>
@@ -211,7 +225,7 @@
 <tbody>
 <tr>
 <td style="text-align:center">请求行</td>
-<td>动词<code>(GET、POST、PUT、DELETE..)</code> URL HTTP/1.1<code>(HTTP版本号)</code></td>
+<td>动词<code>(GET、POST、PUT、DELETE..)</code> URL HTTP/1.1<code>(HTTP版本号)</code><br/>其中URL支持查询字符串，但不支持锚点</td>
 </tr>
 <tr>
 <td style="text-align:center">请求头</td>
@@ -238,7 +252,7 @@
 <tbody>
 <tr>
 <td style="text-align:center">响应行</td>
-<td>HTTP/1.1 200<code>(状态码)</code> OK<code>(状态码的解释)</code></td>
+<td>HTTP/1.1 200<code>(状态码)</code> OK<code>(状态信息）</code></td>
 </tr>
 <tr>
 <td style="text-align:center">响应头</td>
@@ -292,9 +306,10 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
-          <a href="/tags/web/">web</a>
-          <a href="/tags/http/">HTTP</a>
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/http/">HTTP&#34;</a>
+          <a href="/tags/tcp/">TCP</a>
+          <a href="/tags/dns/">DNS</a>
           </div>
       <nav class="post-nav">
         <a class="prev" href="/post/lodash%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">

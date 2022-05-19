@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>多路复用 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 HTTP/2的帧 ​ HTTP/1.1的请求响应过程是基于字符串的，而HTTP/2的请求响应过程是基于帧的。 ​ HTTP/2引入了帧（Frame" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="多路复用" />
+<meta property="og:description" content="1 HTTP/2的帧 ​ HTTP/1.1的请求响应过程是基于字符串的，而HTTP/2的请求响应过程是基于帧的。 ​ HTTP/2引入了帧（Frame" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-23T09:51:58+08:00" />
+<meta property="article:modified_time" content="2022-01-23T09:51:58+08:00" />
+
+<meta itemprop="name" content="多路复用">
+<meta itemprop="description" content="1 HTTP/2的帧 ​ HTTP/1.1的请求响应过程是基于字符串的，而HTTP/2的请求响应过程是基于帧的。 ​ HTTP/2引入了帧（Frame"><meta itemprop="datePublished" content="2022-01-23T09:51:58+08:00" />
+<meta itemprop="dateModified" content="2022-01-23T09:51:58+08:00" />
+<meta itemprop="wordCount" content="731">
+<meta itemprop="keywords" content="面试,HTTP/2,多路复用," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="多路复用"/>
+<meta name="twitter:description" content="1 HTTP/2的帧 ​ HTTP/1.1的请求响应过程是基于字符串的，而HTTP/2的请求响应过程是基于帧的。 ​ HTTP/2引入了帧（Frame"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">多路复用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-23 </span>
+        <div class="post-category">
+            <a href="/categories/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"> Web性能优化 </a>
+            </div>
+          <span class="more-meta"> 731 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-http2的帧">1 HTTP/2的帧</a></li>
+    <li><a href="#2-http2的请求与响应">2 HTTP/2的请求与响应</a></li>
+    <li><a href="#3-http2的流与多路复用">3 HTTP/2的流与多路复用</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-http2的帧">1 HTTP/2的帧</h1>
+<p>​		HTTP/1.1的请求响应过程是基于字符串的，而HTTP/2的请求响应过程是基于<strong>帧</strong>的。</p>
+<p>​		HTTP/2引入了<strong>帧（Frame）<strong>的概念，可以将一次请求响应过程</strong>拆分成若干帧</strong>，每一帧包含<code>Length+Type+Flags+StreamID+Payload</code>五部分。前四个部分是固定的<strong>9字节</strong>长度，采用<strong>二进制</strong>的形式，起到<strong>标识</strong>的作用；第五部分Payload的最大长度为16kb到16Mb，具体的最大长度由终端自行决定，其中包括请求响应<strong>头</strong>和请求响应头<strong>体</strong>的内容。</p>
+<h1 id="2-http2的请求与响应">2 HTTP/2的请求与响应</h1>
+<p>HTTP/2保留了请求和响应的概念，请求头和响应头会被发送方压缩后，分成几个<strong>连续的Frame</strong>传输，头字段会出现在这些Frame的<code>Payload</code>中，接收方拼合这些Frame后，解压缩即可得到真正的请求头或响应头。</p>
+<ul>
+<li>
+<p>请求示例</p>
+<ul>
+<li>
+<p>前三行数据为二进制翻译后的帧标识部分，<code>+</code>表示true，<code>-</code>表示false</p>
+</li>
+<li>
+<p>头部字段名全部改为小写，不允许出现大写，例如<code>accept = text/html</code></p>
+</li>
+<li>
+<p>引入了伪头部字段的概念，出现在头部字段的前面，必须以冒号开头，例如<code>:method = GET</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>HTTP/1.1</th>
+<th>HTTP/2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /resource HTTP/1.1</code><br/><code>Host: example.org</code><br/><code>Accept: image/jpeg</code></td>
+<td><code>HEADERS</code><br/> <code>+ END_STREAM</code><br/> <code>+ END_HEADERS</code><br/><br/> <code>:method = GET</code><br/> <code>:scheme = https</code><br/> <code>:path = /resource</code><br/> <code>host = example.org</code><br/> <code>accept = image/jpeg</code></td>
+</tr>
+<tr>
+<td><code>POST /resource HTTP/1.1</code><br><code>Host: example.org</code><br><code>Content-Type: image/jpeg</code><br><code>Content-Length: 123</code><br><br><code>{消息体}</code></td>
+<td><code>HEADERS</code><br> <code>- END_STREAM</code><br> <code>- END_HEADERS</code><br> <code>:method = POST</code><br> <code>:path = /resource</code><br> <code>:scheme = https</code><br><br><code>CONTINUATION</code><br> <code>+ END_HEADERS</code><br> <code>content-type = image/jpeg</code><br> <code>host = example.org</code><br> <code>content-length = 123</code><br><br><code>DATA</code><br> <code>+ END_STREAM</code><br> <code>{消息体}</code></td>
+</tr>
+<tr>
+<td><code>HTTP/1.1 200 OK</code><br><code>Content-Type: image/jpeg</code><br><code>Content-Length: 123</code><br><br><code>{响应体}</code></td>
+<td><code>HEADERS</code><br> <code>- END_STREAM</code><br> <code>+ END_HEADERS</code><br> <code>:status = 200</code><br> <code>content-type = image/jpeg</code><br> <code>content-length = 123</code><br><br><code>DATA</code><br> <code>+ END_STREAM</code><br> <code>{响应体}</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="3-http2的流与多路复用">3 HTTP/2的流与多路复用</h1>
+<ul>
+<li>HTTP/2引入了<strong>流（Stream）<strong>的概念，一个Stream由</strong>双向传输</strong>的<strong>连续且有序</strong>的Frame(s)组成，</li>
+<li>一个TCP连接可以<strong>同时包含</strong>多个Stream（比如100个），<strong>一个Stream只用于一次</strong>请求和一次响应，</li>
+<li>Stream之间<strong>相互独立</strong>，通过StreamID区别请求。</li>
+<li>Stream支持<strong>复用</strong>，即多路复用。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-01-23
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/http/2/">HTTP/2</a>
+          <a href="/tags/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">多路复用</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cookiefree%E4%B8%8Ecdn/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">CookieFree与CDN</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/">
+            <span class="next-text nav-default">连接复用</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

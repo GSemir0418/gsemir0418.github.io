@@ -6,13 +6,31 @@
     <description>Recent content in css on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 10 Nov 2021 19:45:19 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/css/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 14 Mar 2022 08:40:24 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/css/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>每日一题 CSS</title>
-      <link>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-css/</link>
+      <title>伪类和伪元素</title>
+      <link>https://gsemir0418.github.io/post/%E4%BC%AA%E7%B1%BB%E5%92%8C%E4%BC%AA%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Mon, 14 Mar 2022 08:40:24 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E4%BC%AA%E7%B1%BB%E5%92%8C%E4%BC%AA%E5%85%83%E7%B4%A0/</guid>
+      <description>1 伪类和伪元素 伪元素在CSS3之前就已经存在，只是没有伪元素的说法，都是归纳为伪类，所有很多人分不清楚伪类和伪元素。比如常用的:before</description>
+    </item>
+    
+    <item>
+      <title>前端面试CSS</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95css/</link>
+      <pubDate>Mon, 07 Mar 2022 09:57:22 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95css/</guid>
+      <description>1 BFC是什么 是什么：块级格式化上下文 怎么做： 触发条件： 浮动元素（元素的float非none） 绝对定位元素（元素的position为abso</description>
+    </item>
+    
+    <item>
+      <title>BFC</title>
+      <link>https://gsemir0418.github.io/post/bfc/</link>
       <pubDate>Wed, 10 Nov 2021 19:45:19 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-css/</guid>
+      <guid>https://gsemir0418.github.io/post/bfc/</guid>
       <description>1 BFC 1.1 BFC是什么 常见定位方案 普通流：元素按照其在HTML中的先后位置至上而下布局，行内元素由左至右排列，占满一行后换行，块级元素占满整行。</description>
     </item>
     

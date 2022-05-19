@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>前端面试React - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 虚拟DOM的原理是什么 1.1 是什么 虚拟DOM就是虚拟节点。React用JS对象来模拟DOM节点，然后将其渲染成真实的DOM节点 1.2 怎么做 模拟（J" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95react/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="前端面试React" />
+<meta property="og:description" content="1 虚拟DOM的原理是什么 1.1 是什么 虚拟DOM就是虚拟节点。React用JS对象来模拟DOM节点，然后将其渲染成真实的DOM节点 1.2 怎么做 模拟（J" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95react/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-31T09:54:46+08:00" />
+<meta property="article:modified_time" content="2022-05-19T12:18:55+08:00" />
+
+<meta itemprop="name" content="前端面试React">
+<meta itemprop="description" content="1 虚拟DOM的原理是什么 1.1 是什么 虚拟DOM就是虚拟节点。React用JS对象来模拟DOM节点，然后将其渲染成真实的DOM节点 1.2 怎么做 模拟（J"><meta itemprop="datePublished" content="2022-03-31T09:54:46+08:00" />
+<meta itemprop="dateModified" content="2022-05-19T12:18:55+08:00" />
+<meta itemprop="wordCount" content="1563">
+<meta itemprop="keywords" content="面试,React," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="前端面试React"/>
+<meta name="twitter:description" content="1 虚拟DOM的原理是什么 1.1 是什么 虚拟DOM就是虚拟节点。React用JS对象来模拟DOM节点，然后将其渲染成真实的DOM节点 1.2 怎么做 模拟（J"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">前端面试React</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-31 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
+            </div>
+          <span class="more-meta"> 1563 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-虚拟dom的原理是什么">1 虚拟DOM的原理是什么</a>
+      <ul>
+        <li><a href="#11-是什么">1.1 是什么</a></li>
+        <li><a href="#12-怎么做">1.2 怎么做</a></li>
+        <li><a href="#13-解决了什么问题">1.3 解决了什么问题</a></li>
+        <li><a href="#14-优点">1.4 优点</a></li>
+        <li><a href="#15-缺点">1.5 缺点</a></li>
+        <li><a href="#16-如何解决缺点">1.6 如何解决缺点</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-dom-diff算法是怎样的">2 DOM diff算法是怎样的</a>
+      <ul>
+        <li><a href="#21-是什么">2.1 是什么</a></li>
+        <li><a href="#22-怎么做">2.2 怎么做</a></li>
+        <li><a href="#23-双端交叉diff算法vue">2.3 双端交叉diff算法（Vue）</a></li>
+        <li><a href="#24-react-dom-diff和vue-dom-diff的区别">2.4 React DOM diff和Vue DOM diff的区别</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-虚拟dom的原理是什么">1 虚拟DOM的原理是什么</h1>
+<h2 id="11-是什么">1.1 是什么</h2>
+<ul>
+<li>虚拟DOM就是<strong>虚拟节点</strong>。React用<code>JS对象</code>来<strong>模拟</strong>DOM节点，然后将其<strong>渲染</strong>成真实的DOM节点</li>
+</ul>
+<h2 id="12-怎么做">1.2 怎么做</h2>
+<ol>
+<li>
+<p><strong>模拟</strong>（<code>JSX =&gt; 虚拟DOM对象</code>）</p>
+<ul>
+<li>
+<p>用JSX语法写出来的div其实就是一个虚拟节点</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;x&#34;</span><span class="p">}&gt;</span>
+	<span class="p">&lt;</span><span class="nt">span</span> <span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;red&#39;</span><span class="p">}&gt;</span><span class="nx">hi</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>	
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>通过调用<code>React.createElement()</code>，可以将JSX语法转译得到一个虚拟DOM对象</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&#34;div&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;x&#34;</span><span class="p">},</span> 
+	<span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&#34;span&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nx">className</span><span class="o">:</span> <span class="s2">&#34;red&#34;</span><span class="p">},</span> <span class="s2">&#34;hi&#34;</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="p">{</span> 
+	<span class="nx">tag</span><span class="o">:</span> <span class="s1">&#39;div&#39;</span><span class="p">,</span> 
+	<span class="nx">props</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;x&#39;</span> <span class="p">},</span> 
+	<span class="nx">children</span><span class="o">:</span> <span class="p">[</span>
+		<span class="p">{</span>
+			<span class="nx">tag</span><span class="o">:</span> <span class="s1">&#39;span&#39;</span><span class="p">,</span>
+			<span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+				<span class="nx">className</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span>
+			<span class="p">},</span>
+			<span class="nx">children</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;hi&#39;</span> <span class="p">]</span>
+		<span class="p">}</span>
+	<span class="p">]</span> 
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>渲染</strong>（<code>虚拟DOM =&gt; 真实DOM</code>）</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">render</span><span class="p">(</span><span class="nx">vdom</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 如果是字符串或者数字，创建一个文本节点
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">vdom</span> <span class="o">===</span> <span class="s1">&#39;string&#39;</span> <span class="o">||</span> <span class="k">typeof</span> <span class="nx">vdom</span> <span class="o">===</span> <span class="s1">&#39;number&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span><span class="nx">vdom</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">props</span><span class="p">,</span> <span class="nx">children</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">vdom</span>
+  <span class="c1">// 创建真实DOM
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">tag</span><span class="p">)</span>
+  <span class="c1">// 设置属性
+</span><span class="c1"></span>  <span class="nx">setProps</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">props</span><span class="p">)</span>
+  <span class="c1">// 递归遍历子节点，并获取创建真实DOM，插入到当前节点
+</span><span class="c1"></span>  <span class="nx">children</span>
+    <span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">render</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">element</span><span class="p">))</span>
+
+  <span class="c1">// 虚拟 DOM 中缓存真实 DOM 节点
+</span><span class="c1"></span>  <span class="nx">vdom</span><span class="p">.</span><span class="nx">dom</span> <span class="o">=</span> <span class="nx">element</span>
+
+  <span class="c1">// 返回 DOM 节点
+</span><span class="c1"></span>  <span class="k">return</span> <span class="nx">element</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">setProps</span> <span class="c1">// 略
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">setProp</span> <span class="c1">// 略
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>如果节点发生变化，并不会直接把新虚拟节点渲染到真实节点，而是先通过<code>diff</code>算法得到一个<code>patch</code>（补丁）再更新到真实节点上</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="13-解决了什么问题">1.3 解决了什么问题</h2>
+<ul>
+<li>DOM操作性能问题，通过虚拟DOM和diff算法减少不必要的DOM操作，保证性能下限</li>
+<li>DOM操作不方便问题，以前各种<code>DOM API</code>要记，现在只有<code>setState</code>就可以解决DOM更新的问题</li>
+</ul>
+<h2 id="14-优点">1.4 优点</h2>
+<ul>
+<li>为React带来了<strong>跨平台能力</strong>，因为虚拟节点的存在，除了可以将其渲染为真实节点，还可以渲染为其他东西</li>
+<li>让DOM操作的整体性能更好，能（通过diff）减少不必要的DOM操作</li>
+</ul>
+<h2 id="15-缺点">1.5 缺点</h2>
+<ul>
+<li>React为虚拟DOM创造了<strong>合成事件</strong>，与原生DOM事件不太一样
+<ul>
+<li>所有React事件都绑定到根元素，自动实现事件委托</li>
+<li>如果混用合成事件和原生DOM事件，有可能会出bug</li>
+</ul>
+</li>
+</ul>
+<h2 id="16-如何解决缺点">1.6 如何解决缺点</h2>
+<p>不用React，用Vue3。。。</p>
+<h1 id="2-dom-diff算法是怎样的">2 DOM diff算法是怎样的</h1>
+<h2 id="21-是什么">2.1 是什么</h2>
+<p><strong>DOM diff 就是对比两颗虚拟DOM树的算法</strong>。当组件变化时，会render出一个新的虚拟DOM，diff算法对比新旧虚拟DOM之后，得到一个<code>patch</code>，然后React用<code>patch</code>来更新真实DOM</p>
+<h2 id="22-怎么做">2.2 怎么做</h2>
+<ul>
+<li>
+<p>先对比<strong>根节点</strong></p>
+<ul>
+<li>如果根节点的<strong>类型</strong>变了（div =&gt; span），那么就认为整棵树都变了，不再对比子节点，直接删除对应的真实DOM树，根据虚拟DOM树创建新的真实DOM树</li>
+<li>如果根节点的类型没变，再对比<strong>属性</strong>是否发生改变
+<ul>
+<li>如果属性没变，就保留，继续进行子节点的diff</li>
+<li>如果属性变了，就只更新该节点的属性，不再重新创建新节点
+<ul>
+<li>更新style时，如果多个css属性只有一个改变了，那么React只更新改变的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>然后对子节点继续做以上操作</p>
+</li>
+<li>
+<p>举例</p>
+<ol>
+<li>情况1</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>A<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>B<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>A<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>B<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>C<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>React依次对比<code>A-A</code>，<code>B-B</code>，<code>null-C</code>，发现C是新增的，最终会创建真实C节点插入页面</li>
+</ul>
+<ol start="2">
+<li>情况2</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>B<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>C<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>A<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>B<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>C<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>其实只需要创建 A 文本，保留 B 和 C 即可，但React不是这样的
+<ul>
+<li>React 对比<code>B-A</code>，会删除 B 文本新建 A 文本；</li>
+<li>对比<code>C-B</code>，会删除 C 文本，新建 B 文本；（注意，并不是边对比边删除新建，而是把操作汇总到 patch 里再进行 DOM 操作）；</li>
+<li>对比<code>null-C</code>，会新建 C 文本。</li>
+</ul>
+</li>
+<li>这也是React需要key的原因：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;ul&gt;
+  &lt;li key=&#34;b&#34;&gt;B&lt;/li&gt;
+  &lt;li key=&#34;c&#34;&gt;C&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ul&gt;
+  &lt;li key=&#34;a&#34;&gt;A&lt;/li&gt;
+  &lt;li key=&#34;b&#34;&gt;B&lt;/li&gt;
+  &lt;li key=&#34;c&#34;&gt;C&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>React 先对比 key 发现 key 只新增了一个，于是保留 b 和 c，新建 a</li>
+</ul>
+</li>
+</ul>
+<h2 id="23-双端交叉diff算法vue">2.3 双端交叉diff算法（Vue）</h2>
+<ul>
+<li>将新旧DOM树<strong>同一节点的子节点们</strong>分别处理为新旧两个数组</li>
+<li>头头、尾尾、新头旧尾、旧头新尾、key</li>
+<li>失败就按流程继续对比，成功就重新进入循环，直到任意一数组的头指针超过尾指针</li>
+</ul>
+<blockquote>
+<p><a href="https://canyuegongzi.github.io/web/vue/3.html#%E5%85%B7%E4%BD%93%E7%9A%84diff%E5%88%86%E6%9E%90">Diff算法 | Marvin (canyuegongzi.github.io)</a></p>
+</blockquote>
+<h2 id="24-react-dom-diff和vue-dom-diff的区别">2.4 React DOM diff和Vue DOM diff的区别</h2>
+<ol>
+<li>React是<strong>从左向右遍历</strong>对比，Vue是<strong>双端交叉</strong>对比</li>
+<li>Vue整体的diff效率比React更高，
+<ul>
+<li>假设有n个子节点，我们只是把最后的子节点移动至第一个
+<ul>
+<li>则React需要借助Map进行key搜索找到匹配项，然后复用节点</li>
+<li>Vue会发现移动，直接复用该节点</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-05-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/react/">React</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%8C%96/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">前端面试工程化</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E6%89%8B%E5%86%99%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/">
+            <span class="next-text nav-default">手写发布订阅</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

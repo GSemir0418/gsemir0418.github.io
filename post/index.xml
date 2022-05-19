@@ -6,7 +6,187 @@
     <description>Recent content in Posts on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 11 Jan 2022 16:25:49 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Apr 2022 14:39:41 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>前端面试TS</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95ts/</link>
+      <pubDate>Fri, 22 Apr 2022 14:39:41 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95ts/</guid>
+      <description>1 TS和JS的区别是什么 语法层面 TypeScript = JavaScript + Type （TS是JS的超集） 执行环境层面 浏览器、Node.js可以直接执行JS，但不能执行TS 编译层面 TS</description>
+    </item>
+    
+    <item>
+      <title>前端面试工程化</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%8C%96/</link>
+      <pubDate>Fri, 22 Apr 2022 12:20:21 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%8C%96/</guid>
+      <description>1 常见loader和plugin有哪些，二者的区别是什么？ 常见loader babel-loader 把ES6+转义为ES5 ts-loader 把TS编译为JS，并提示类型错误 markdown-loader 把ma</description>
+    </item>
+    
+    <item>
+      <title>前端面试React</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95react/</link>
+      <pubDate>Thu, 31 Mar 2022 09:54:46 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95react/</guid>
+      <description>1 虚拟DOM的原理是什么 1.1 是什么 虚拟DOM就是虚拟节点。React用JS对象来模拟DOM节点，然后将其渲染成真实的DOM节点 1.2 怎么做 模拟（J</description>
+    </item>
+    
+    <item>
+      <title>手写发布订阅</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/</link>
+      <pubDate>Tue, 29 Mar 2022 09:58:50 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/</guid>
+      <description>发布订阅是一种设计模式，所谓设计模式就是写代码的套路 发布订阅模式主要包含三个API，分别是on、emit/trigger、off 1 2 3 4 5 6</description>
+    </item>
+    
+    <item>
+      <title>手写AJAX</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99ajax/</link>
+      <pubDate>Tue, 29 Mar 2022 09:19:07 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99ajax/</guid>
+      <description>1 创建对象 1 var xhr = new XMLHttpRequest() 2 写url 1 xhr.open(&amp;#39;GET&amp;#39;, &amp;#39;/xxx&amp;#39;) 3 监听onreadystatechange事件 xhr对象的readyState属性取值包括0~4，0表</description>
+    </item>
+    
+    <item>
+      <title>手写数组去重</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/</link>
+      <pubDate>Mon, 28 Mar 2022 17:46:37 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/</guid>
+      <description>1 Set 1 2 3 const uniq = (arr) =&amp;gt; Array.from(new Set(arr)) // or const uniq = (arr) =&amp;gt; [...new Set(arr)] 2 计数排序 1 2 3 4 5 6 7 8 9 10 11 const uniq = (arr) =&amp;gt; { if(!arr.length) return [] const map = {} for(let i = 0; i &amp;lt;= arr.length; i++) { if(!arr[i] || map[arr[i]]) continue // 利用对象中k</description>
+    </item>
+    
+    <item>
+      <title>手写防抖与节流</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/</link>
+      <pubDate>Mon, 28 Mar 2022 10:48:18 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/</guid>
+      <description>0 区别与联系 相同：在不影响客户体验的前提下，将频繁的回调函数，进行次数缩减，避免大量计算导致的页面卡顿 不同：防抖是将多次执行变为最后一次执行</description>
+    </item>
+    
+    <item>
+      <title>前端面试JS基础</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95js%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 21 Mar 2022 09:54:46 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95js%E5%9F%BA%E7%A1%80/</guid>
+      <description>1 JS的数据类型有哪些 8种 数字（number）、字符串（string）、布尔（boolean）、空（null）、未定义（undefined）</description>
+    </item>
+    
+    <item>
+      <title>前端面试DOM</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95dom/</link>
+      <pubDate>Wed, 16 Mar 2022 14:39:41 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95dom/</guid>
+      <description>1 请简述DOM事件模型（DOM Event） 每个事件都先经历从上到下（根元素=&amp;gt;最底层子节点）的捕获阶段，再经历从下到上（最底层子节点=</description>
+    </item>
+    
+    <item>
+      <title>LeetCode</title>
+      <link>https://gsemir0418.github.io/post/leetcode/</link>
+      <pubDate>Mon, 14 Mar 2022 13:09:52 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/leetcode/</guid>
+      <description>1 两数之和 1.1 题目介绍 给定一个整数数组nums和一个整数目标值target，请你在该数组中找出和为目标值target的那两个整数，并返回它们的</description>
+    </item>
+    
+    <item>
+      <title>伪类和伪元素</title>
+      <link>https://gsemir0418.github.io/post/%E4%BC%AA%E7%B1%BB%E5%92%8C%E4%BC%AA%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Mon, 14 Mar 2022 08:40:24 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E4%BC%AA%E7%B1%BB%E5%92%8C%E4%BC%AA%E5%85%83%E7%B4%A0/</guid>
+      <description>1 伪类和伪元素 伪元素在CSS3之前就已经存在，只是没有伪元素的说法，都是归纳为伪类，所有很多人分不清楚伪类和伪元素。比如常用的:before</description>
+    </item>
+    
+    <item>
+      <title>前端面试HTTP</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95http/</link>
+      <pubDate>Tue, 08 Mar 2022 09:57:38 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95http/</guid>
+      <description>1 GET和POST的区别有哪些 1.1 幂等性 首先最根本的不同是语义上的不同，GET是读，POST是写，造成两者幂等性的不同 由于GET是读，POST</description>
+    </item>
+    
+    <item>
+      <title>前端面试CSS</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95css/</link>
+      <pubDate>Mon, 07 Mar 2022 09:57:22 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95css/</guid>
+      <description>1 BFC是什么 是什么：块级格式化上下文 怎么做： 触发条件： 浮动元素（元素的float非none） 绝对定位元素（元素的position为abso</description>
+    </item>
+    
+    <item>
+      <title>前端面试HTML</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95html/</link>
+      <pubDate>Mon, 07 Mar 2022 09:27:22 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95html/</guid>
+      <description>1 讲讲HTML中的语义化标签 是什么：语义化标签是一种写HTML标签的方法论/方式 怎么做：实现方式是遇到标题就用h1到h6，遇到段落用p，遇到</description>
+    </item>
+    
+    <item>
+      <title>Nextjs项目部署到阿里云</title>
+      <link>https://gsemir0418.github.io/post/nextjs%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/</link>
+      <pubDate>Thu, 03 Mar 2022 09:05:41 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/nextjs%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/</guid>
+      <description>1 Node应用Docker化 创建Dockerfile脚本文件 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 下载一个含有node12的操作系统FROMnode</description>
+    </item>
+    
+    <item>
+      <title>Nextjs博客系统</title>
+      <link>https://gsemir0418.github.io/post/nextjs%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Sat, 12 Feb 2022 23:55:48 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/nextjs%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</guid>
+      <description>1 数据库设计与搭建 1.1 需求分析 主要的表有users、posts、comments users(id/username/passwordDigest) posts(id/userId/title/content) comments(id/userId/postId/content) 1.2 创建表 创建并启动容器，清除之前的开发环境，创建数据库 1</description>
+    </item>
+    
+    <item>
+      <title>Webpack全解</title>
+      <link>https://gsemir0418.github.io/post/webpack%E5%85%A8%E8%A7%A3/</link>
+      <pubDate>Sun, 06 Feb 2022 15:15:48 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/webpack%E5%85%A8%E8%A7%A3/</guid>
+      <description>1 AST、Babel和依赖 1.1 Babel原理 babel过程 parse：把代码变成AST traverse：遍历AST进行修改 generate：把</description>
+    </item>
+    
+    <item>
+      <title>CookieFree与CDN</title>
+      <link>https://gsemir0418.github.io/post/cookiefree%E4%B8%8Ecdn/</link>
+      <pubDate>Sun, 23 Jan 2022 13:50:23 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/cookiefree%E4%B8%8Ecdn/</guid>
+      <description>1 资源合并 在浏览器中，针对图标的解决方案按流行时间来排序：CSS Sprites、IconFont、SVG Symbols 1.1 CSS雪碧图 雪碧图的英文是CSS</description>
+    </item>
+    
+    <item>
+      <title>多路复用</title>
+      <link>https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
+      <pubDate>Sun, 23 Jan 2022 09:51:58 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
+      <description>1 HTTP/2的帧 ​ HTTP/1.1的请求响应过程是基于字符串的，而HTTP/2的请求响应过程是基于帧的。 ​ HTTP/2引入了帧（Frame</description>
+    </item>
+    
+    <item>
+      <title>连接复用</title>
+      <link>https://gsemir0418.github.io/post/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/</link>
+      <pubDate>Thu, 20 Jan 2022 14:46:29 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/</guid>
+      <description>1 DNS预解析 假设index.html的部分代码为： 1 2 &amp;lt;script src=&amp;#34;http://a.com/1.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&amp;#34;http://b.com/2.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; 那么客户端会对a.com进行DNS的解析，拿到ip后请求1.js，然后再对b</description>
+    </item>
+    
     <item>
       <title>Nextjs配置TypeORM</title>
       <link>https://gsemir0418.github.io/post/nextjs%E9%85%8D%E7%BD%AEtypeorm/</link>
@@ -71,15 +251,6 @@
     </item>
     
     <item>
-      <title>每日一题-JavaScript</title>
-      <link>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98javascript/</link>
-      <pubDate>Wed, 08 Dec 2021 09:57:36 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98javascript/</guid>
-      <description>1 JS继承 原型与原型链 函数本身作为原型对象的构造函数 所有对象的祖先原型都是Object.prototype 实例对象会改变原型对象的引用类型属</description>
-    </item>
-    
-    <item>
       <title>JS运算符</title>
       <link>https://gsemir0418.github.io/post/js%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
       <pubDate>Thu, 02 Dec 2021 14:17:20 +0800</pubDate>
@@ -125,16 +296,7 @@
     </item>
     
     <item>
-      <title>Webpack全解</title>
-      <link>https://gsemir0418.github.io/post/webpack%E5%85%A8%E8%A7%A3/</link>
-      <pubDate>Sun, 21 Nov 2021 17:30:49 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/post/webpack%E5%85%A8%E8%A7%A3/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>代码写法优化</title>
+      <title>代码优化</title>
       <link>https://gsemir0418.github.io/post/%E4%BB%A3%E7%A0%81%E5%86%99%E6%B3%95%E4%BC%98%E5%8C%96/</link>
       <pubDate>Thu, 11 Nov 2021 16:23:10 +0800</pubDate>
       
@@ -161,11 +323,11 @@
     </item>
     
     <item>
-      <title>每日一题 CSS</title>
-      <link>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-css/</link>
+      <title>BFC</title>
+      <link>https://gsemir0418.github.io/post/bfc/</link>
       <pubDate>Wed, 10 Nov 2021 19:45:19 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/post/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-css/</guid>
+      <guid>https://gsemir0418.github.io/post/bfc/</guid>
       <description>1 BFC 1.1 BFC是什么 常见定位方案 普通流：元素按照其在HTML中的先后位置至上而下布局，行内元素由左至右排列，占满一行后换行，块级元素占满整行。</description>
     </item>
     
@@ -233,12 +395,12 @@
     </item>
     
     <item>
-      <title>Web性能优化-基础</title>
+      <title>DNS、TCP与HTTP</title>
       <link>https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Thu, 02 Sep 2021 14:34:53 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</guid>
-      <description>1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统，每个域名对应一个ip hosts相当于手动给操作系统添加i</description>
+      <description>1 DNS与TCP 1.1 DNS与hosts DNS（Domain Name System）：域名系统 当我们在地址栏属于域名并访问时，会先在浏览器缓存中找对应域</description>
     </item>
     
     <item>
@@ -476,12 +638,30 @@
     </item>
     
     <item>
+      <title>Umi多环境配置</title>
+      <link>https://gsemir0418.github.io/post/umi%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Fri, 14 May 2021 13:33:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/umi%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+      <description>0 各环境接口 生产环境 203服务器——10.30.20.203:9725 supplant——10.30.20.203:8080 supos——1</description>
+    </item>
+    
+    <item>
       <title>React基础</title>
       <link>https://gsemir0418.github.io/post/react%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Thu, 29 Apr 2021 23:11:51 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/react%E5%9F%BA%E7%A1%80/</guid>
       <description>1 React定义组件 1.1 函数式组件 函数式组件适用于简单组件的定义，其首字母需大写，且虚拟DOM元素必须有结束标签 函数组件中的this指向为wi</description>
+    </item>
+    
+    <item>
+      <title>Vite Pnpm React搭建</title>
+      <link>https://gsemir0418.github.io/post/vite-pnpm-react%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Thu, 15 Apr 2021 13:33:55 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/vite-pnpm-react%E6%90%AD%E5%BB%BA/</guid>
+      <description>1 pnpm 1.1 安装与配置 安装 1 2 3 4 5 6 7 8 9 10 // HomeBrew $ brew install pnpm // powershell $env:PNPM_VERSION=&amp;#39;7.0.0-beta.2&amp;#39; ; iwr https://get.pnpm.io/install.ps1 -useb | iex // npm $ npm install -g pnpm@next-7 // curl $ curl -fsSL https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - //wget $ wget -qO- https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - 配置淘宝源 1 $ pnpm config</description>
     </item>
     
     <item>

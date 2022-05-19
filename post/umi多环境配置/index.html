@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Umi多环境配置 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="0 各环境接口 生产环境 203服务器——10.30.20.203:9725 supplant——10.30.20.203:8080 supos——1" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/umi%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Umi多环境配置" />
+<meta property="og:description" content="0 各环境接口 生产环境 203服务器——10.30.20.203:9725 supplant——10.30.20.203:8080 supos——1" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/umi%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-14T13:33:55+08:00" />
+<meta property="article:modified_time" content="2022-05-19T12:17:11+08:00" />
+
+<meta itemprop="name" content="Umi多环境配置">
+<meta itemprop="description" content="0 各环境接口 生产环境 203服务器——10.30.20.203:9725 supplant——10.30.20.203:8080 supos——1"><meta itemprop="datePublished" content="2021-05-14T13:33:55+08:00" />
+<meta itemprop="dateModified" content="2022-05-19T12:17:11+08:00" />
+<meta itemprop="wordCount" content="1628">
+<meta itemprop="keywords" content="umi,config," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Umi多环境配置"/>
+<meta name="twitter:description" content="0 各环境接口 生产环境 203服务器——10.30.20.203:9725 supplant——10.30.20.203:8080 supos——1"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Umi多环境配置</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-05-14 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/"> 项目实战 </a>
+            </div>
+          <span class="more-meta"> 1628 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-各环境接口">0 各环境接口</a></li>
+    <li><a href="#1-umi多环境配置">1 umi多环境配置</a></li>
+    <li><a href="#2-请求与响应">2 请求与响应</a></li>
+    <li><a href="#-todo-导入导出接口处理">// TODO 导入导出接口处理</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="0-各环境接口">0 各环境接口</h1>
+<ul>
+<li>生产环境
+<ul>
+<li>203服务器——<code>10.30.20.203:9725</code></li>
+<li>supplant——<code>10.30.20.203:8080</code></li>
+<li>supos——<code>10.145.101.93:8080</code></li>
+</ul>
+</li>
+<li>测试环境
+<ul>
+<li>supplant——<code>10.30.20.101:8080</code></li>
+</ul>
+</li>
+<li>开发环境</li>
+</ul>
+<h1 id="1-umi多环境配置">1 umi多环境配置</h1>
+<ul>
+<li><code>config.ts/config.js</code>公共配置，例如</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;umi&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">join</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;path&#39;</span>
+<span class="kr">import</span> <span class="nx">defaultSettings</span> <span class="nx">from</span> <span class="s1">&#39;./defaultSettings&#39;</span>
+<span class="kr">import</span> <span class="nx">proxy</span> <span class="nx">from</span> <span class="s1">&#39;./proxy&#39;</span>
+
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">REACT_APP_ENV</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+  <span class="nx">hash</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nx">antd</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="nx">dva</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">hmr</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">locale</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">siderWidth</span><span class="o">:</span> <span class="mi">208</span><span class="p">,</span>
+    <span class="p">...</span><span class="nx">defaultSettings</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="nx">locale</span><span class="o">:</span> <span class="p">{</span>
+    <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;zh-CN&#39;</span><span class="p">,</span>
+    <span class="nx">antd</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">baseNavigator</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="nx">targets</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">ie</span><span class="o">:</span> <span class="mi">11</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="nx">theme</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;primary-color&#39;</span><span class="o">:</span> <span class="nx">defaultSettings</span><span class="p">.</span><span class="nx">primaryColor</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="nx">esbuild</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="nx">title</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">ignoreMomentLocale</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nx">proxy</span><span class="o">:</span> <span class="nx">proxy</span><span class="p">[</span><span class="nx">REACT_APP_ENV</span> <span class="o">||</span> <span class="s1">&#39;dev&#39;</span><span class="p">],</span>
+  <span class="nx">manifest</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">basePath</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="nx">fastRefresh</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="nx">nodeModulesTransform</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="nx">webpack5</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="nx">exportStatic</span><span class="o">:</span> <span class="p">{},</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>config.dev.js</code> 开发环境的打包配置，引入公共配置后重写覆盖即可</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">config</span> <span class="nx">from</span> <span class="s1">&#39;./config&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;umi&#39;</span>
+<span class="kr">import</span> <span class="nx">routes</span> <span class="nx">from</span> <span class="s1">&#39;./routes&#39;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+    <span class="nx">routes</span><span class="p">,</span>
+	<span class="p">...</span><span class="nx">config</span><span class="p">,</span>
+ 	<span class="nx">multitabs</span><span class="o">:</span> <span class="p">{},</span>
+    <span class="nx">define</span><span class="o">:</span> <span class="p">{</span>
+    	<span class="s1">&#39;process.env.LOCAL_PREFIX&#39;</span><span class="o">:</span> <span class="s1">&#39;http://10.30.20.203:8080&#39;</span><span class="p">,</span>
+  	<span class="p">},</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>config.prod.js</code> supplant生产环境的打包配置</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">config</span> <span class="nx">from</span> <span class="s1">&#39;./config&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;umi&#39;</span>
+<span class="kr">import</span> <span class="nx">prodRoutes</span> <span class="nx">from</span> <span class="s1">&#39;./prodRoutes&#39;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+	<span class="p">...</span><span class="nx">config</span><span class="p">,</span>
+ 	<span class="nx">publicPath</span><span class="o">:</span> <span class="s1">&#39;/scmbps/&#39;</span><span class="p">,</span>
+  	<span class="nx">base</span><span class="o">:</span> <span class="s1">&#39;/scmbps&#39;</span><span class="p">,</span>
+    <span class="nx">routes</span><span class="o">:</span> <span class="nx">prodRoutes</span><span class="p">,</span>
+    <span class="nx">define</span><span class="o">:</span> <span class="p">{</span>
+    	<span class="s1">&#39;process.env.LOCAL_PREFIX&#39;</span><span class="o">:</span> <span class="s1">&#39;http://10.30.20.203:8080&#39;</span><span class="p">,</span>
+  	<span class="p">},</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>config.test.js</code> 测试环境的打包配置</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">config</span> <span class="nx">from</span> <span class="s1">&#39;./config&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;umi&#39;</span>
+<span class="kr">import</span> <span class="nx">prodRoutes</span> <span class="nx">from</span> <span class="s1">&#39;./prodRoutes&#39;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+	<span class="p">...</span><span class="nx">config</span><span class="p">,</span>
+ 	<span class="nx">publicPath</span><span class="o">:</span> <span class="s1">&#39;/scmbps/&#39;</span><span class="p">,</span>
+  	<span class="nx">base</span><span class="o">:</span> <span class="s1">&#39;/scmbps&#39;</span><span class="p">,</span>
+    <span class="nx">routes</span><span class="o">:</span> <span class="nx">prodRoutes</span><span class="p">,</span>
+    <span class="nx">define</span><span class="o">:</span> <span class="p">{</span>
+    	<span class="s1">&#39;process.env.LOCAL_PREFIX&#39;</span><span class="o">:</span> <span class="s1">&#39;http://10.30.20.101:8080&#39;</span><span class="p">,</span>
+  	<span class="p">},</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>config.supos.js</code> supos生产环境的打包配置</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">config</span> <span class="nx">from</span> <span class="s1">&#39;./config&#39;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;umi&#39;</span>
+<span class="kr">import</span> <span class="nx">prodRoutes</span> <span class="nx">from</span> <span class="s1">&#39;./prodRoutes&#39;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+	<span class="p">...</span><span class="nx">config</span><span class="p">,</span>
+ 	<span class="nx">publicPath</span><span class="o">:</span> <span class="s1">&#39;/scmbps/&#39;</span><span class="p">,</span>
+  	<span class="nx">base</span><span class="o">:</span> <span class="s1">&#39;/scmbps&#39;</span><span class="p">,</span>
+    <span class="nx">routes</span><span class="o">:</span> <span class="nx">prodRoutes</span><span class="p">,</span>
+    <span class="nx">define</span><span class="o">:</span> <span class="p">{</span>
+    	<span class="s1">&#39;process.env.LOCAL_PREFIX&#39;</span><span class="o">:</span> <span class="s1">&#39;http://10.145.101.93:8080&#39;</span><span class="p">,</span>
+  	<span class="p">},</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>package.json</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="err">...</span>
+<span class="s2">&#34;scripts&#34;</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nt">&#34;build:dev&#34;</span><span class="p">:</span> <span class="s2">&#34;cross-env UMI_ENV=dev umi build&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;build:test&#34;</span><span class="p">:</span> <span class="s2">&#34;cross-env UMI_ENV=test umi build&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;build:prod&#34;</span><span class="p">:</span> <span class="s2">&#34;cross-env UMI_ENV=prod umi build&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;build:supos&#34;</span><span class="p">:</span> <span class="s2">&#34;cross-env UMI_ENV=supos umi build&#34;</span><span class="p">,</span>
+    <span class="err">...</span>
+<span class="p">}</span>
+<span class="err">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>打包时只需输入不同环境的打包指令即可，比如<code>yarn build:dev</code></p>
+<h1 id="2-请求与响应">2 请求与响应</h1>
+<blockquote>
+<p>​		基于umi-request二次封装request，提供统一的错误处理；添加请求与响应拦截器，解决请求头携带权限问题与导入导出的blob数据处理问题</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// request.js
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">extend</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;umi-request&#39;</span>
+<span class="kr">import</span> <span class="nx">Notification</span> <span class="nx">from</span> <span class="s1">&#39;./Notification&#39;</span>
+
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">LOCAL_PREFIX</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span>
+<span class="c1">// 错误信息
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">codeMessage</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="mi">200</span><span class="o">:</span> <span class="s1">&#39;服务器成功返回请求的数据。&#39;</span><span class="p">,</span>
+  <span class="mi">201</span><span class="o">:</span> <span class="s1">&#39;新建或修改数据成功。&#39;</span><span class="p">,</span>
+  <span class="mi">202</span><span class="o">:</span> <span class="s1">&#39;一个请求已经进入后台排队（异步任务）。&#39;</span><span class="p">,</span>
+  <span class="mi">204</span><span class="o">:</span> <span class="s1">&#39;删除数据成功。&#39;</span><span class="p">,</span>
+  <span class="mi">400</span><span class="o">:</span> <span class="s1">&#39;发出的请求有错误，服务器没有进行新建或修改数据的操作。&#39;</span><span class="p">,</span>
+  <span class="mi">401</span><span class="o">:</span> <span class="s1">&#39;用户没有权限（令牌、用户名、密码错误）。&#39;</span><span class="p">,</span>
+  <span class="mi">403</span><span class="o">:</span> <span class="s1">&#39;用户得到授权，但是访问是被禁止的。&#39;</span><span class="p">,</span>
+  <span class="mi">404</span><span class="o">:</span> <span class="s1">&#39;发出的请求针对的是不存在的记录，服务器没有进行操作。&#39;</span><span class="p">,</span>
+  <span class="mi">406</span><span class="o">:</span> <span class="s1">&#39;请求的格式不可得。&#39;</span><span class="p">,</span>
+  <span class="mi">410</span><span class="o">:</span> <span class="s1">&#39;请求的资源被永久删除，且不会再得到的。&#39;</span><span class="p">,</span>
+  <span class="mi">422</span><span class="o">:</span> <span class="s1">&#39;当创建一个对象时，发生一个验证错误。&#39;</span><span class="p">,</span>
+  <span class="mi">500</span><span class="o">:</span> <span class="s1">&#39;服务器发生错误，请检查服务器。&#39;</span><span class="p">,</span>
+  <span class="mi">502</span><span class="o">:</span> <span class="s1">&#39;网关错误。&#39;</span><span class="p">,</span>
+  <span class="mi">503</span><span class="o">:</span> <span class="s1">&#39;服务不可用，服务器暂时过载或维护。&#39;</span><span class="p">,</span>
+  <span class="mi">504</span><span class="o">:</span> <span class="s1">&#39;网关超时。&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="cm">/** 异常处理程序 */</span>
+<span class="kr">const</span> <span class="nx">errorHandler</span> <span class="o">=</span> <span class="nx">error</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">response</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">error</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">response</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">errorText</span> <span class="o">=</span> <span class="nx">codeMessage</span><span class="p">[</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">]</span> <span class="o">||</span> <span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">url</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">response</span>
+    <span class="nx">Notification</span><span class="p">(</span><span class="sb">`请求错误 </span><span class="si">${</span><span class="nx">status</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">url</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">errorText</span><span class="p">,</span> <span class="s1">&#39;small&#39;</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">)</span> <span class="nx">Notification</span><span class="p">(</span><span class="s1">&#39;网络错误&#39;</span><span class="p">,</span> <span class="s1">&#39;您的网络发生异常，无法连接服务器&#39;</span><span class="p">,</span> <span class="s1">&#39;small&#39;</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="nx">response</span>
+<span class="p">}</span>
+
+<span class="cm">/** 配置request请求时的默认参数 */</span>
+<span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">extend</span><span class="p">({</span>
+  <span class="c1">// 全局的前缀
+</span><span class="c1"></span>  <span class="nx">prefix</span><span class="o">:</span> <span class="nx">LOCAL_PREFIX</span><span class="p">,</span>
+  <span class="c1">// 默认错误处理
+</span><span class="c1"></span>  <span class="nx">errorHandler</span><span class="p">,</span>
+  <span class="c1">// credentials: &#39;include&#39;, // 默认请求是否带上cookie
+</span><span class="c1"></span><span class="p">})</span>
+
+<span class="cm">/** request拦截器 解决请求权限的问题**/</span>
+<span class="nx">request</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">c_token</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;ticket&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">c_token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">Authorization</span><span class="o">:</span> <span class="sb">`Bearer </span><span class="si">${</span><span class="nx">c_token</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="o">:</span> <span class="p">{</span> <span class="p">...</span><span class="nx">options</span><span class="p">,</span> <span class="nx">headers</span> <span class="p">}</span> <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">return</span> <span class="p">{</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="o">:</span> <span class="p">{</span> <span class="p">...</span><span class="nx">options</span> <span class="p">}</span> <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="cm">/** response拦截器 处理post请求导出数据的问题**/</span>
+<span class="nx">request</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="kr">async</span> <span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 通过content-type判断是否为下载的数据
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;content-type&#39;</span><span class="p">)</span> <span class="o">!==</span> <span class="s1">&#39;application/json;charset=UTF-8&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">await</span> <span class="nx">response</span>
+      <span class="p">.</span><span class="nx">blob</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">blob</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// 构造a标签
+</span><span class="c1"></span>        <span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+        <span class="c1">// 获取 blob 本地文件链接 (blob 为纯二进制对象，不能够直接保存到磁盘上)
+</span><span class="c1"></span>        <span class="kr">const</span> <span class="nx">downUrl</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">)</span>
+        <span class="kd">let</span> <span class="nx">filename</span> <span class="o">=</span> <span class="s1">&#39;download.xls&#39;</span>
+        <span class="k">if</span> <span class="p">(</span>
+          <span class="nx">response</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;content-disposition&#39;</span><span class="p">)</span>
+          <span class="c1">// &amp;&amp; response.headers.get(&#39;content-disposition&#39;).indexOf(&#39;filename=&#39;) !== -1
+</span><span class="c1"></span>        <span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// 截取文件名
+</span><span class="c1"></span>          <span class="nx">filename</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;content-disposition&#39;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;filename=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+          <span class="nx">a</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">downUrl</span>
+          <span class="nx">a</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="sb">`</span><span class="si">${</span><span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">filename</span><span class="p">)</span><span class="si">}</span><span class="sb">.xls`</span> <span class="o">||</span> <span class="s1">&#39;download.xls&#39;</span>
+          <span class="nx">a</span><span class="p">.</span><span class="nx">click</span><span class="p">()</span>
+          <span class="c1">// 释放 blob 本地文件链接
+</span><span class="c1"></span>          <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">revokeObjectURL</span><span class="p">(</span><span class="nx">downUrl</span><span class="p">)</span>
+          <span class="c1">// 删除a标签
+</span><span class="c1"></span>          <span class="nx">a</span><span class="p">.</span><span class="nx">remove</span><span class="p">()</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
+      <span class="p">})</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">return</span> <span class="nx">response</span>
+<span class="p">})</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">request</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="-todo-导入导出接口处理">// TODO 导入导出接口处理</h1>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-05-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/umi/">umi</a>
+          <a href="/tags/config/">config</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A4%A7%E5%B1%8F%E6%8A%80%E6%9C%AF/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">可视化大屏技术</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/react%E5%9F%BA%E7%A1%80/">
+            <span class="next-text nav-default">React基础</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

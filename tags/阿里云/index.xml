@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>阿里云 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/%E9%98%BF%E9%87%8C%E4%BA%91/</link>
+    <description>Recent content in 阿里云 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 03 Mar 2022 09:05:41 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E9%98%BF%E9%87%8C%E4%BA%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nextjs项目部署到阿里云</title>
+      <link>https://gsemir0418.github.io/post/nextjs%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/</link>
+      <pubDate>Thu, 03 Mar 2022 09:05:41 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/nextjs%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/</guid>
+      <description>1 Node应用Docker化 创建Dockerfile脚本文件 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 下载一个含有node12的操作系统FROMnode</description>
+    </item>
+    
+  </channel>
+</rss>

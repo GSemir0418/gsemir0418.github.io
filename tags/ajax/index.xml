@@ -6,7 +6,16 @@
     <description>Recent content in ajax on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 23 Nov 2021 15:53:56 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/ajax/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Mar 2022 09:19:07 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/ajax/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手写AJAX</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99ajax/</link>
+      <pubDate>Tue, 29 Mar 2022 09:19:07 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99ajax/</guid>
+      <description>1 创建对象 1 var xhr = new XMLHttpRequest() 2 写url 1 xhr.open(&amp;#39;GET&amp;#39;, &amp;#39;/xxx&amp;#39;) 3 监听onreadystatechange事件 xhr对象的readyState属性取值包括0~4，0表</description>
+    </item>
+    
     <item>
       <title>fetch与axios</title>
       <link>https://gsemir0418.github.io/post/fetch%E4%B8%8Eaxios/</link>

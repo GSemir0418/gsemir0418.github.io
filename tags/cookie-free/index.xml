@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cookie free on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/cookie-free/</link>
+    <description>Recent content in cookie free on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 23 Jan 2022 13:50:23 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/cookie-free/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CookieFree与CDN</title>
+      <link>https://gsemir0418.github.io/post/cookiefree%E4%B8%8Ecdn/</link>
+      <pubDate>Sun, 23 Jan 2022 13:50:23 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/cookiefree%E4%B8%8Ecdn/</guid>
+      <description>1 资源合并 在浏览器中，针对图标的解决方案按流行时间来排序：CSS Sprites、IconFont、SVG Symbols 1.1 CSS雪碧图 雪碧图的英文是CSS</description>
+    </item>
+    
+  </channel>
+</rss>

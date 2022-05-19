@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>BFC - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 BFC 1.1 BFC是什么 常见定位方案 普通流：元素按照其在HTML中的先后位置至上而下布局，行内元素由左至右排列，占满一行后换行，块级元素占满整行。" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/bfc/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="BFC" />
+<meta property="og:description" content="1 BFC 1.1 BFC是什么 常见定位方案 普通流：元素按照其在HTML中的先后位置至上而下布局，行内元素由左至右排列，占满一行后换行，块级元素占满整行。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/bfc/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-10T19:45:19+08:00" />
+<meta property="article:modified_time" content="2021-11-11T09:07:24+08:00" />
+
+<meta itemprop="name" content="BFC">
+<meta itemprop="description" content="1 BFC 1.1 BFC是什么 常见定位方案 普通流：元素按照其在HTML中的先后位置至上而下布局，行内元素由左至右排列，占满一行后换行，块级元素占满整行。"><meta itemprop="datePublished" content="2021-11-10T19:45:19+08:00" />
+<meta itemprop="dateModified" content="2021-11-11T09:07:24+08:00" />
+<meta itemprop="wordCount" content="1095">
+<meta itemprop="keywords" content="面试,css,BFC," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="BFC"/>
+<meta name="twitter:description" content="1 BFC 1.1 BFC是什么 常见定位方案 普通流：元素按照其在HTML中的先后位置至上而下布局，行内元素由左至右排列，占满一行后换行，块级元素占满整行。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">BFC</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-10 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
+            </div>
+          <span class="more-meta"> 1095 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-bfc">1 BFC</a>
+      <ul>
+        <li><a href="#11-bfc是什么">1.1 BFC是什么</a></li>
+        <li><a href="#12-bfc怎么触发">1.2 BFC怎么触发</a></li>
+        <li><a href="#13-bfc解决的是什么问题">1.3 BFC解决的是什么问题</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading"></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-bfc">1 BFC</h1>
+<h2 id="11-bfc是什么">1.1 BFC是什么</h2>
+<ul>
+<li>
+<p>常见定位方案</p>
+<ol>
+<li>普通流：元素按照其在HTML中的先后位置至上而下布局，行内元素由左至右排列，占满一行后换行，块级元素占满整行。所有元素默认都是普通流定位</li>
+<li>浮动：元素首先按照普通流的位置出现，然后根据浮动的方向尽可能的向左边或右边偏移</li>
+<li>绝对定位：元素会整体脱离普通流，绝对定位元素不会对其兄弟元素产生影响</li>
+</ol>
+<ul>
+<li>BFC是属于<strong>普通流</strong>的</li>
+</ul>
+</li>
+<li>
+<p><code>Block Formatting Context</code>块级元素格式化上下文，通俗地讲就是“<strong>被隔离的区间</strong>”，BFC元素的<strong>子元素</strong>不会对<strong>外面的</strong>其他元素产生影响</p>
+</li>
+</ul>
+<h2 id="12-bfc怎么触发">1.2 BFC怎么触发</h2>
+<ul>
+<li>body：默认就是BFC</li>
+<li>浮动元素：float：right｜left，即非none</li>
+<li>绝对定位元素：position：absolute｜fixed，即非relative</li>
+<li>overflow：hidden｜scroll｜auto，即非visible</li>
+<li>display：inline-block｜table-cell｜table-caption｜flex｜grid，即非block和inline</li>
+<li>contain：layout｜content｜paint</li>
+</ul>
+<h2 id="13-bfc解决的是什么问题">1.3 BFC解决的是什么问题</h2>
+<ul>
+<li><strong>外边距重叠</strong>（兄弟，间距）
+<ul>
+<li>定义两个div，分别指定两个盒子的margin-bottom和margin-top属性为10，理论上两者的间距应为20，但实际上间距为10，即出现了margin重合现象，如果两个元素的外边距不同，则取最大值，如果相同则仅为其中一个</li>
+<li>可以分别在两个div外包裹一个父元素container，指定container的css属性为以上任意属性值即可触发BFC，使得两个container中的div被分别“隔离”，解决margin重合的问题。</li>
+</ul>
+</li>
+<li><strong>margin塌陷</strong>（父子，高度）
+<ul>
+<li>定义父元素box，子元素box1，当子元素box1指定了margin-top属性为20px后，理论上子元素向下20px，父元素保持不动，但实际上父元素与子元素都向下移动了20px</li>
+<li>可以让父元素box变成BFC来解决</li>
+<li>出现这个问题的原因是子元素的margin没有参照，可以给父元素添加border-top属性，也可以解决这个问题</li>
+</ul>
+</li>
+<li><strong>高度坍塌，清除浮动</strong>（父子，浮动）
+<ul>
+<li>定义父元素的宽度与子元素的宽高，当子元素是浮动布局时，理论上虽然父元素没有定义高度，但子元素可以自动将父元素“撑开”。但实际上子元素的浮动属性使其脱离了文档流，导致父元素出现高度坍塌的情况</li>
+<li>将父元素变成BFC，使得子元素无法影响到父元素，实现了<strong>清除浮动</strong>的作用</li>
+</ul>
+</li>
+<li><strong>阻止元素被浮动元素覆盖</strong>（兄弟，浮动）
+<ul>
+<li>定义两个div，一个是正常元素，另外一个是浮动元素，那么浮动元素就会覆盖到正常元素上面</li>
+<li>将正常元素变为BFC元素，这样两个元素就不会互相干扰</li>
+</ul>
+</li>
+</ul>
+<h1 id="heading"></h1>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-11-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/css/">css</a>
+          <a href="/tags/bfc/">BFC</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">浏览器渲染原理</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/koa%E5%85%A8%E8%A7%A3/">
+            <span class="next-text nav-default">Koa全解</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>发布订阅 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/</link>
+    <description>Recent content in 发布订阅 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 29 Mar 2022 09:58:50 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手写发布订阅</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/</link>
+      <pubDate>Tue, 29 Mar 2022 09:58:50 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/</guid>
+      <description>发布订阅是一种设计模式，所谓设计模式就是写代码的套路 发布订阅模式主要包含三个API，分别是on、emit/trigger、off 1 2 3 4 5 6</description>
+    </item>
+    
+  </channel>
+</rss>
