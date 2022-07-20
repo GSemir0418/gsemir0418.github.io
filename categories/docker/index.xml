@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/categories/docker/</link>
+    <description>Recent content in docker on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 20 Jul 2022 13:05:57 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>云服务器docker部署</title>
+      <link>https://gsemir0418.github.io/post/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Wed, 20 Jul 2022 13:05:57 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E9%83%A8%E7%BD%B2/</guid>
+      <description>1 云服务器配置 购买阿里云的服务器 配置ssh密钥对 将宿主机的ssh公钥作为密钥对添加至ECS实例中 1 $ cat ~/.ssh/id_rsa.pub 登录至云服务器，第一次使用ssh-c</description>
+    </item>
+    
+    <item>
+      <title>Docker学习</title>
+      <link>https://gsemir0418.github.io/post/docker%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Tue, 19 Jul 2022 09:47:28 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/docker%E5%AD%A6%E4%B9%A0/</guid>
+      <description>目标：使用docker搭建自用开发环境 1 docker核心概念 核心概念主要包括dockerfile、container、image、volum</description>
+    </item>
+    
+  </channel>
+</rss>

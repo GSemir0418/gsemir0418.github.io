@@ -6,7 +6,25 @@
     <description>Recent content in 项目实战 on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 14 May 2021 13:33:55 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Jun 2022 13:21:32 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>大文件切片上传</title>
+      <link>https://gsemir0418.github.io/post/%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%87%E7%89%87%E4%B8%8A%E4%BC%A0/</link>
+      <pubDate>Tue, 28 Jun 2022 13:21:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%87%E7%89%87%E4%B8%8A%E4%BC%A0/</guid>
+      <description>​ 针对大文件上传的业务场景，前后端采用切片上传的方案，即前端将大文件分割为固定大小的chunk，并循环请求给后端；后端每获取一部分，就写入到</description>
+    </item>
+    
+    <item>
+      <title>Vue3&#43;tsx&#43;vite项目搭建</title>
+      <link>https://gsemir0418.github.io/post/vu3-vite-tsx%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Thu, 09 Jun 2022 15:58:46 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/vu3-vite-tsx%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/</guid>
+      <description>React:GSemir0418/react-vite-ts-starter: big screen, vite, ts (github.com) Vue3:GSemir0418/vue3-tsx-vite-starter: 基于pnpm+vue3+vite+tsx搭建的项目初始化模板 (github.com) 1 项目搭建 1.1 创建Vite-vue-ts项目 1 2 3 4 pnpm create vite vue3-tsx-vite-starter -- --template vue-ts</description>
+    </item>
+    
     <item>
       <title>Umi多环境配置</title>
       <link>https://gsemir0418.github.io/post/umi%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
@@ -17,12 +35,12 @@
     </item>
     
     <item>
-      <title>Vite Pnpm React搭建</title>
+      <title>react&#43;vite&#43;ts搭建</title>
       <link>https://gsemir0418.github.io/post/vite-pnpm-react%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Thu, 15 Apr 2021 13:33:55 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/vite-pnpm-react%E6%90%AD%E5%BB%BA/</guid>
-      <description>1 pnpm 1.1 安装与配置 安装 1 2 3 4 5 6 7 8 9 10 // HomeBrew $ brew install pnpm // powershell $env:PNPM_VERSION=&amp;#39;7.0.0-beta.2&amp;#39; ; iwr https://get.pnpm.io/install.ps1 -useb | iex // npm $ npm install -g pnpm@next-7 // curl $ curl -fsSL https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - //wget $ wget -qO- https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - 配置淘宝源 1 $ pnpm config</description>
+      <description>1 pnpm 1.1 安装与配置 安装 1 2 3 4 5 6 7 8 9 10 // HomeBrew $ brew install pnpm // powershell $env:PNPM_VERSION=&amp;#39;7.0.0-beta.2&amp;#39; ; iwr https://get.pnpm.io/install.ps1 -useb | iex // npm $ npm install -g pnpm@next-7 // curl $ curl -fsSL https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - // wget $ wget -qO- https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-beta.2 sh - 配置淘宝源 1 $ pnpm</description>
     </item>
     
   </channel>

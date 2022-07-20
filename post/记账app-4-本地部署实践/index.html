@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>记账app_4_本地部署实践 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 部署思路与宿主机部署流程 1.1 部署思路 后端部署思路 上传Dockerfile 上传源代码 用Dockerfile构建运行环境 在运行环境里运行源代码 使" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-4-%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="记账app_4_本地部署实践" />
+<meta property="og:description" content="1 部署思路与宿主机部署流程 1.1 部署思路 后端部署思路 上传Dockerfile 上传源代码 用Dockerfile构建运行环境 在运行环境里运行源代码 使" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-4-%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-13T14:24:32+08:00" />
+<meta property="article:modified_time" content="2022-05-18T14:24:32+08:00" />
+
+<meta itemprop="name" content="记账app_4_本地部署实践">
+<meta itemprop="description" content="1 部署思路与宿主机部署流程 1.1 部署思路 后端部署思路 上传Dockerfile 上传源代码 用Dockerfile构建运行环境 在运行环境里运行源代码 使"><meta itemprop="datePublished" content="2022-05-13T14:24:32+08:00" />
+<meta itemprop="dateModified" content="2022-05-18T14:24:32+08:00" />
+<meta itemprop="wordCount" content="2909">
+<meta itemprop="keywords" content="Rails,vue3,tsx,aliyun," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="记账app_4_本地部署实践"/>
+<meta name="twitter:description" content="1 部署思路与宿主机部署流程 1.1 部署思路 后端部署思路 上传Dockerfile 上传源代码 用Dockerfile构建运行环境 在运行环境里运行源代码 使"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">记账app_4_本地部署实践</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-05-13 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/"> 全栈项目 </a>
+            </div>
+          <span class="more-meta"> 2909 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-部署思路与宿主机部署流程">1 部署思路与宿主机部署流程</a>
+      <ul>
+        <li><a href="#11-部署思路">1.1 部署思路</a></li>
+        <li><a href="#12-本地部署实践">1.2 本地部署实践</a>
+          <ul>
+            <li><a href="#120-添加首页">1.2.0 添加首页</a></li>
+            <li><a href="#121-打包">1.2.1 打包</a></li>
+            <li><a href="#122-dockerfile">1.2.2 Dockerfile</a></li>
+            <li><a href="#123-宿主机项目构建与运行">1.2.3 宿主机项目构建与运行</a></li>
+            <li><a href="#124-部署流程">1.2.4 部署流程</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#2-密钥管理">2 密钥管理</a>
+      <ul>
+        <li><a href="#21-基本思路">2.1 基本思路</a></li>
+        <li><a href="#22-生产环境masterkey">2.2 生产环境master.key</a></li>
+        <li><a href="#23-多环境密钥">2.3 多环境密钥</a></li>
+        <li><a href="#24-总结">2.4 总结</a></li>
+        <li><a href="#25-解决missing-secret_key_base的报错">2.5 解决Missing secret_key_base的报错</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-配置生产环境数据库">3 配置生产环境数据库</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-部署思路与宿主机部署流程">1 部署思路与宿主机部署流程</h1>
+<h2 id="11-部署思路">1.1 部署思路</h2>
+<ul>
+<li>
+<p>后端部署思路</p>
+<ol>
+<li>上传Dockerfile</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li>
+<p>上传源代码</p>
+</li>
+<li>
+<p>用Dockerfile构建运行环境</p>
+</li>
+<li>
+<p>在运行环境里运行源代码</p>
+</li>
+<li>
+<p>使用Nginx做转发，优势如下</p>
+<ol>
+<li>负载均衡：可以用多个应用去服务用户</li>
+</ol>
+</li>
+<li>
+<p>0宕机时间：新旧应用负载均衡，最终新应用完全替代旧应用，实现应用的不停机更新</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>前端部署思路</p>
+<ol>
+<li>
+<p>将代码中的路径替换成CDN路径</p>
+</li>
+<li>
+<p>上传打包好的CSS和JS代码到CDN</p>
+</li>
+<li>
+<p>将html文件上传到后端服务器</p>
+</li>
+<li>
+<p>使用Nginx处理html文件请求</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="12-本地部署实践">1.2 本地部署实践</h2>
+<ul>
+<li>思路
+<ul>
+<li>本地采用docker部署，首先在linux中<strong>打包</strong>代码（Rails源代码及Dockerfile）并拷贝到宿主机环境，之后在宿主机中运行docker命令，<strong>构建</strong>ruby运行容器，最终在宿主机的docker<strong>启动</strong>项目即可</li>
+</ul>
+</li>
+</ul>
+<h3 id="120-添加首页">1.2.0 添加首页</h3>
+<ul>
+<li>
+<p>添加跟路由，替换rails自带的欢迎页</p>
+<blockquote>
+<p>config/routes.rb</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
+	<span class="n">get</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">to</span> <span class="s1">&#39;home#index&#39;</span>
+  <span class="n">namespace</span> <span class="ss">:api</span> <span class="k">do</span>
+    <span class="o">...</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>生成对应的controller：<code>bin/rails g controller home index</code></p>
+<blockquote>
+<p>app/controllers/home_controller.rb</p>
+</blockquote>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">HomeController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">index</span>
+    <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span> <span class="ss">message</span><span class="p">:</span> <span class="s1">&#39;Welcome&#39;</span> <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="121-打包">1.2.1 打包</h3>
+<ul>
+<li>
+<p>将docker开发环境中的rails代码选择性地拷贝到公共目录，供宿主机访问</p>
+</li>
+<li>
+<p>bin目录下创建<code>pack_for_host.sh</code>文件</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nv">dir</span><span class="o">=</span>oh-my-env
+<span class="c1"># 以时间作为版本 注意空格</span>
+<span class="nv">time</span><span class="o">=</span><span class="k">$(</span>date +<span class="s2">&#34;%Y%m%d-%H%M%S&#34;</span><span class="k">)</span>
+<span class="nv">dist</span><span class="o">=</span>tmp/mangosteen-<span class="nv">$time</span>.tar.gz
+<span class="nv">current_dir</span><span class="o">=</span><span class="k">$(</span>dirname <span class="nv">$0</span><span class="k">)</span>
+<span class="c1"># 打包的目标路径</span>
+<span class="nv">deploy_dir</span><span class="o">=</span>/workspaces/<span class="nv">$dir</span>/mangosteen_deploy
+
+<span class="c1"># 删除之前存在的</span>
+yes <span class="p">|</span> rm tmp/mangosteen-*.tar.gz<span class="p">;</span>
+yes <span class="p">|</span> rm <span class="nv">$deploy_dir</span>/mangosteen-*.tar.gz<span class="p">;</span>
+
+<span class="c1"># 打包 除了tmp/cache中的文件 打包到dist目录 *表示所有不以点开头的文件</span>
+tar --exclude<span class="o">=</span><span class="s2">&#34;tmp/cache/*&#34;</span> -czv -f <span class="nv">$dist</span> *
+mkdir -p <span class="nv">$deploy_dir</span>
+<span class="c1"># 将Dockerfile与docker命令文件复制过去</span>
+cp <span class="nv">$current_dir</span>/../config/host.Dockerfile <span class="nv">$deploy_dir</span>/Dockerfile
+cp <span class="nv">$current_dir</span>/setup_host.sh <span class="nv">$deploy_dir</span>/
+<span class="c1"># 将dist文件（tar包移动出来）</span>
+mv <span class="nv">$dist</span> <span class="nv">$deploy_dir</span>
+<span class="nb">echo</span> <span class="nv">$time</span> &gt; <span class="nv">$deploy_dir</span>/version
+<span class="nb">echo</span> <span class="s1">&#39;DONE&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>为此文件添加可执行权限：<code>chmod +x bin/pack_for_host.sh</code></li>
+</ul>
+<h3 id="122-dockerfile">1.2.2 Dockerfile</h3>
+<ul>
+<li>
+<p>准备ruby运行容器的dockerfile，供宿主机构建容器用</p>
+<blockquote>
+<p>config/host.Dockerfile</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="c"># 基于ruby3.0.0镜像构建ruby运行环境的容器</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> ruby:3.0.0</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="c"># 设置rails环境变量为production</span><span class="err">
+</span><span class="err"></span><span class="k">ENV</span> RAILS_ENV production<span class="err">
+</span><span class="err"></span><span class="k">RUN</span> mkdir /mangosteen<span class="err">
+</span><span class="err"></span><span class="c"># 配置bundle源</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> bundle config mirror.https://rubygems.org https://gems.ruby-china.com<span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /mangosteen</span><span class="err">
+</span><span class="err"></span><span class="c"># 将源代码放入当前工作目录中（ADD会自动解压缩tar包）</span><span class="err">
+</span><span class="err"></span><span class="k">ADD</span> mangosteen-*.tar.gz ./<span class="err">
+</span><span class="err"></span><span class="c"># 安装依赖（先配置 安装时排除开发和测试环境的依赖）</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> bundle config <span class="nb">set</span> --local without <span class="s1">&#39;development test&#39;</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> bundle install<span class="err">
+</span><span class="err"></span><span class="c"># bundle exec rails server 是专门用在开发环境的</span><span class="err">
+</span><span class="err"></span><span class="c"># 生产环境用puma</span><span class="err">
+</span><span class="err"></span><span class="c"># 只在docker exec或start时自动执行，build时不执行</span><span class="err">
+</span><span class="err"></span><span class="k">ENTRYPOINT</span> bundle <span class="nb">exec</span> puma<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="123-宿主机项目构建与运行">1.2.3 宿主机项目构建与运行</h3>
+<ul>
+<li>
+<p>构建部署容器的命令</p>
+<blockquote>
+<p>bin/setup_host.sh</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nv">DB_PASSWORD</span><span class="o">=</span><span class="m">123456</span>
+<span class="nv">container_name</span><span class="o">=</span>mangosteen-prod-1
+<span class="nv">version</span><span class="o">=</span><span class="k">$(</span>cat mangosteen_deploy/version<span class="k">)</span>
+
+<span class="nb">echo</span> <span class="s1">&#39;docker build ...&#39;</span>
+docker build mangosteen_deploy -t mangosteen:<span class="nv">$version</span>
+<span class="nb">echo</span> <span class="s1">&#39;docker run ...&#39;</span>
+docker run -d -p 3000:3000 --network<span class="o">=</span>network1 -e <span class="nv">DB_PASSWORD</span><span class="o">=</span><span class="nv">$DB_PASSWORD</span> --name<span class="o">=</span><span class="nv">$container_name</span> mangosteen:<span class="nv">$version</span>
+<span class="nb">echo</span> <span class="s1">&#39;docker exec ...&#39;</span>
+<span class="c1"># 创建数据库 同步数据表</span>
+docker <span class="nb">exec</span> -it <span class="nv">$container_name</span> bin/rails db:create db:migrate
+<span class="nb">echo</span> <span class="s1">&#39;DONE&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>为此文件添加可执行权限：<code>chmod +x bin/setup_host.sh</code></p>
+</li>
+</ul>
+<h3 id="124-部署流程">1.2.4 部署流程</h3>
+<ul>
+<li>
+<p>在容器中执行： <code>bin/pack_for_host.sh</code></p>
+</li>
+<li>
+<p>将宿主机的oh-my-env目录下，可以看到mangosteen_deploy文件</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">.
+├── Dockerfile 
+├── mangosteen-.tar.gz
+├── setup_host.sh 
+└── version <span class="c1"># 版本号（时间戳）</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>在此目录下执行（用zsh或bash）：<code>mangosteen_deploy/setup_host.sh</code></p>
+</li>
+<li>
+<p>构建完成后在docker desktop会发现多了一个容器，但是启动失败了，失败原因：<code>docker logs containerID</code></p>
+</li>
+<li>
+<p>如果是rails报错missing &lsquo;secret_base_key&rsquo;，说明我们部署的过程是没有问题的</p>
+</li>
+<li>
+<p>不适用于M1芯片的系统，会遇到了glibc版本不对的问题</p>
+</li>
+</ul>
+<h1 id="2-密钥管理">2 密钥管理</h1>
+<h2 id="21-基本思路">2.1 基本思路</h2>
+<ul>
+<li>
+<p>web应用中经常会做一些<strong>对称加密</strong>，例如JWT和Session ID的加密解密</p>
+</li>
+<li>
+<p>这些keys不可以存在github中，也不要存在自己电脑中传来传去，都不是安全的</p>
+</li>
+<li>
+<p>所以rails为我们提供了master.key，master.key相当于加解密的钥匙，rails会对密钥们基于master.key二次加密</p>
+</li>
+<li>
+<p>我们需要将密钥们写入<strong>临时文件</strong>，经<code>master.key</code>加密后生成<code>credentials.yml.enc(encrypted)</code>，随即销毁临时文件，只有这两个文件同时存在时，rails才会将真正的密钥们解密出来</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">master.key + keys =&gt; encrypted
+encrypted + master.key =&gt; keys
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>可以将加密后的.enc文件放到git中，注意一定要将master.key排除出git（rails帮忙了）</li>
+</ul>
+<h2 id="22-生产环境masterkey">2.2 生产环境master.key</h2>
+<ul>
+<li>
+<p>rails生成或编辑keys：</p>
+<ul>
+<li>
+<p><code>bin/rails credentials:edit</code>，默认使用vim编辑</p>
+</li>
+<li>
+<p><code>EDITOR=&quot;code --wait&quot; bin/rails credentials:edit</code>，指定使用vscode编辑</p>
+</li>
+</ul>
+</li>
+<li>
+<p>执行后，在config下生成<code>master.key</code>与<code>credentials.yml.enc</code>，同时会打开一个临时文件，存储着所有的密钥，关闭即销毁</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="c"># aws:</span><span class="w">
+</span><span class="w"></span><span class="c">#   access_key_id: 123</span><span class="w">
+</span><span class="w"></span><span class="c">#   secret_access_key: 345</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c"># Used as the base secret for all MessageVerifiers in Rails, including the one protecting cookies.</span><span class="w">
+</span><span class="w"></span><span class="nt">secret_key_base</span><span class="p">:</span><span class="w"> </span><span class="l">56dea1725f6fb01a30ce9e93c35aae44dab3a59a89e69a2300ef2973edc78948fa9847a6e399e8bfae304e8cf47843e9f23d3ce8ebf1543ecdc853f5d291d8b6</span><span class="w">
+</span><span class="w"></span><span class="nt">demo</span><span class="p">:</span><span class="w"> </span><span class="l">gsqzs666</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>关闭后，<code>credentials.yml.enc</code>文件会自动更新</p>
+</li>
+<li>
+<p>rails读keys：</p>
+<ul>
+<li>
+<p>打开rails控制台：<code>bin/rails c</code></p>
+</li>
+<li>
+<p>输入代码：<code>Rails.application.credentials.secret_key_base</code>或者<code>Rails.application.credentials.config</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">3.0.0 :002 &gt; Rails.application.credentials.config
+ <span class="o">=</span>&gt; <span class="o">{</span>:secret_key_base<span class="o">=</span>&gt;<span class="s2">&#34;a6fe29e67764ee2add4bbf7714478a2bf709b9bf5434cf1859ba84b2f9d2efa18cbbb07c99488823b0bf4299811600b6e972d8f1bdde019a4790b520c369d8a1&#34;</span>, :demo<span class="o">=</span>&gt;<span class="s2">&#34;gsemir&#34;</span><span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="23-多环境密钥">2.3 多环境密钥</h2>
+<ul>
+<li>
+<p>开发环境的master.key可以随意，只要保证生产环境的production.key只有负责部署的最高权限那个人能访问就可以避免安全问题</p>
+</li>
+<li>
+<p>rails生成并编辑生产环境的keys，注意默认并没有生成<code>secret_key_base</code>，需要手动添加</p>
+<ul>
+<li><code>EDITOR=&quot;code --wait&quot; rails credentials:edit --environment production</code></li>
+</ul>
+</li>
+<li>
+<p>执行后，在config/credentials下创建了<code>production.key</code>和对应的<code>production.yml.enc</code></p>
+</li>
+<li>
+<p>rails读生产环境的keys：</p>
+<ul>
+<li>
+<p>打开rails生产环境控制台：<code>RAILS_ENV=production bin/rails c</code></p>
+</li>
+<li>
+<p>输入代码：<code>Rails.application.credentials.secret_key_base</code>或者<code>Rails.application.credentials.config</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="24-总结">2.4 总结</h2>
+<ul>
+<li>
+<p>开发环境</p>
+<ul>
+<li>
+<p>使用master.key和credentials.yml.enc</p>
+</li>
+<li>
+<p>master.key一定ignore</p>
+</li>
+<li>
+<p>如果.enc被ignore，那就多人公用master.key</p>
+</li>
+<li>
+<p>如果.enc不被ignore，那就把密钥直接拷贝给每个人，每个人创建自己的master.key</p>
+</li>
+</ul>
+</li>
+<li>
+<p>生产环境</p>
+<ul>
+<li>
+<p>使用production.key和production.yml.enc</p>
+</li>
+<li>
+<p>.env不要ignore</p>
+</li>
+<li>
+<p>production.key一定ignore，内容写到部署机的环境变量中</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="25-解决missing-secret_key_base的报错">2.5 解决Missing secret_key_base的报错</h2>
+<ul>
+<li>
+<p>添加生产环境的production.key（步骤见上文）</p>
+</li>
+<li>
+<p>更改setup_host，在执行docker run的时候添加环境变量占位符</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">...
+docker run -d -e RAILS_MASTER_KEY=$RAILS_MASTER_KEY ...
+...
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>每次在宿主机执行构建脚本前，加上production.key</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">RAILS_MASTER_KEY</span><span class="o">=</span>xxxxxx mangosteen_deploy/setup_host.sh
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-配置生产环境数据库">3 配置生产环境数据库</h1>
+<blockquote>
+<p><code>config/database.yml</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nn">...</span><span class="w">
+</span><span class="w"></span><span class="nt">production</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="cp">*default</span><span class="w">
+</span><span class="w">  </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l">mangosteen_production</span><span class="w">
+</span><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">mangosteen</span><span class="w">
+</span><span class="w">  </span><span class="c"># 需要通过环境变量传入</span><span class="w">
+</span><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;%= ENV[&#34;DB_PASSWORD&#34;] %&gt;</span><span class="w">
+</span><span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">&lt;%= ENV[&#34;DB_HOST&#34;] %&gt;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>再次更改setup_host，在执行docker run的时候添加环境变量占位符</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">...
+docker run -d -e <span class="nv">DB_PASSWORD</span><span class="o">=</span><span class="nv">$DB_PASSWORD</span> -e <span class="nv">DB_HOST</span><span class="o">=</span><span class="nv">$DB_HOST</span>...
+...
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>创建生产环境数据库</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># exec containerId/name 表示让一个容器执行一个命令</span>
+$ docker <span class="nb">exec</span> -it mangosteen-prod-1 bin/rails db:create db:migrate
+<span class="c1"># 手动进入容器创建也行</span>
+$ docker <span class="nb">exec</span> -it mangosteen-prod-1 bash
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>每次在宿主机执行构建脚本前，加上production.key、DB_HOST和DB_PASSWORD值</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">RAILS_MASTER_KEY</span><span class="o">=</span>xxxxxx <span class="nv">DB_HOST</span><span class="o">=</span>xxx <span class="nv">DB_PASSWORD</span><span class="o">=</span>xxx mangosteen_deploy/setup_host.sh
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-05-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/rails/">Rails</a>
+          <a href="/tags/vue3/">vue3</a>
+          <a href="/tags/tsx/">tsx</a>
+          <a href="/tags/aliyun/">aliyun</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E8%AE%B0%E8%B4%A6app-5-%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">记账app_5_云服务器部署</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E8%AE%B0%E8%B4%A6app-2-api%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/">
+            <span class="next-text nav-default">记账app_3_rspec单元测试</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

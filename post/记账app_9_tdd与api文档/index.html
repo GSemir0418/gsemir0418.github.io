@@ -1,0 +1,2745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>记账app_9_TDD与API文档 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 初步实现用Rails&#43;qq邮箱发送邮件 Rails已经内置发邮件的功能 Action Mailer Basics — Ruby on Rails Guides 1.1 创建Mailer 1 $ bin/rails generate mailer User Mailer全局配置 1 2" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_9_tdd%E4%B8%8Eapi%E6%96%87%E6%A1%A3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="记账app_9_TDD与API文档" />
+<meta property="og:description" content="1 初步实现用Rails&#43;qq邮箱发送邮件 Rails已经内置发邮件的功能 Action Mailer Basics — Ruby on Rails Guides 1.1 创建Mailer 1 $ bin/rails generate mailer User Mailer全局配置 1 2" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_9_tdd%E4%B8%8Eapi%E6%96%87%E6%A1%A3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-06-10T14:24:32+08:00" />
+<meta property="article:modified_time" content="2022-07-12T14:24:32+08:00" />
+
+<meta itemprop="name" content="记账app_9_TDD与API文档">
+<meta itemprop="description" content="1 初步实现用Rails&#43;qq邮箱发送邮件 Rails已经内置发邮件的功能 Action Mailer Basics — Ruby on Rails Guides 1.1 创建Mailer 1 $ bin/rails generate mailer User Mailer全局配置 1 2"><meta itemprop="datePublished" content="2022-06-10T14:24:32+08:00" />
+<meta itemprop="dateModified" content="2022-07-12T14:24:32+08:00" />
+<meta itemprop="wordCount" content="9209">
+<meta itemprop="keywords" content="Rails,vue3,tsx,aliyun," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="记账app_9_TDD与API文档"/>
+<meta name="twitter:description" content="1 初步实现用Rails&#43;qq邮箱发送邮件 Rails已经内置发邮件的功能 Action Mailer Basics — Ruby on Rails Guides 1.1 创建Mailer 1 $ bin/rails generate mailer User Mailer全局配置 1 2"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">记账app_9_TDD与API文档</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-06-10 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/"> 全栈项目 </a>
+            </div>
+          <span class="more-meta"> 9209 words </span>
+          <span class="more-meta"> 19 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-初步实现用railsqq邮箱发送邮件">1 初步实现用Rails+qq邮箱发送邮件</a>
+      <ul>
+        <li><a href="#11-创建mailer">1.1 创建Mailer</a></li>
+        <li><a href="#12-开启qq的smtp服务">1.2 开启qq的smtp服务</a></li>
+        <li><a href="#13-配置邮件服务器">1.3 配置邮件服务器</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-tdd测试驱动开发">2 TDD——测试驱动开发</a>
+      <ul>
+        <li><a href="#21-测试验证码是否正常发送">2.1 测试验证码是否正常发送</a></li>
+        <li><a href="#22-完善测试">2.2 完善测试</a>
+          <ul>
+            <li><a href="#221-tdd完善测试内容及业务功能">2.2.1 TDD完善测试内容及业务功能</a></li>
+            <li><a href="#222-利用生命周期函数优化controller代码">2.2.2 利用生命周期函数优化Controller代码</a></li>
+            <li><a href="#223-利用enum解决kind字段的映射问题">2.2.3 利用enum解决kind字段的映射问题</a></li>
+            <li><a href="#224-区别acceptance与requests测试">2.2.4 区别acceptance与requests测试</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#3-登录接口">3 登录接口</a>
+      <ul>
+        <li><a href="#31-jwt概念">3.1 JWT概念</a>
+          <ul>
+            <li><a href="#311-cookie">3.1.1 cookie</a></li>
+            <li><a href="#312-session">3.1.2 session</a></li>
+            <li><a href="#313-jwtjson-web-token">3.1.3 JWT（json web token）</a></li>
+          </ul>
+        </li>
+        <li><a href="#32-jwt后端实现">3.2 JWT后端实现</a>
+          <ul>
+            <li><a href="#321-tdd实现登录接口">3.2.1 TDD实现登录接口</a></li>
+            <li><a href="#322-tdd实现获取当前用户接口">3.2.2 TDD实现获取当前用户接口</a></li>
+          </ul>
+        </li>
+        <li><a href="#33-中间件与鉴权">3.3 中间件与鉴权</a>
+          <ul>
+            <li><a href="#331-jwt中间件">3.3.1 JWT中间件</a></li>
+            <li><a href="#332-tdd实现items接口">3.3.2 TDD实现Items接口</a></li>
+            <li><a href="#333-鉴权">3.3.3 鉴权</a></li>
+          </ul>
+        </li>
+        <li><a href="#34-jwt续期与refresh-token">3.4 JWT续期与Refresh Token</a>
+          <ul>
+            <li><a href="#341-jwt过期">3.4.1 jwt过期</a></li>
+            <li><a href="#342-jwt续期">3.4.2 jwt续期</a></li>
+          </ul>
+        </li>
+        <li><a href="#35-补充登录api文档">3.5 补充登录Api文档</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-其他接口">4 其他接口</a>
+      <ul>
+        <li><a href="#41-tdd创建账目接口">4.1 TDD创建账目接口</a>
+          <ul>
+            <li><a href="#411-修改数据库字段">4.1.1 修改数据库字段</a></li>
+            <li><a href="#412-统一时间格式iso8601">4.1.2 统一时间格式（ISO8601）</a></li>
+            <li><a href="#413-自定义校验tags_id">4.1.3 自定义校验tags_id</a></li>
+          </ul>
+        </li>
+        <li><a href="#42-tdd账目统计接口">4.2 TDD账目统计接口</a>
+          <ul>
+            <li><a href="#421-按时间分组">4.2.1 按时间分组</a></li>
+            <li><a href="#422-按tag_id分组">4.2.2 按tag_id分组</a></li>
+            <li><a href="#423-更新summary文档">4.2.3 更新summary文档</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-初步实现用railsqq邮箱发送邮件">1 初步实现用Rails+qq邮箱发送邮件</h1>
+<p>Rails已经内置发邮件的功能</p>
+<blockquote>
+<p><a href="https://guides.rubyonrails.org/action_mailer_basics.html#walkthrough-to-generating-a-mailer">Action Mailer Basics — Ruby on Rails Guides</a></p>
+</blockquote>
+<h2 id="11-创建mailer">1.1 创建Mailer</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ bin/rails generate mailer User
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Mailer全局配置</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/mailers/application_mailer.rb</span>
+<span class="k">class</span> <span class="nc">ApplicationMailer</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
+	<span class="c1"># 全局发送邮件地址</span>
+  <span class="n">default</span> <span class="ss">from</span><span class="p">:</span> <span class="s2">&#34;845217811@qq.com&#34;</span>
+  <span class="c1"># html默认布局</span>
+  <span class="n">layout</span> <span class="s1">&#39;mailer&#39;</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>User邮件配置</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/mailers/user_mailer.rb</span>
+<span class="k">class</span> <span class="nc">UserMailer</span> <span class="o">&lt;</span> <span class="no">ApplicationMailer</span>
+  <span class="k">def</span> <span class="nf">welcome_email</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+    <span class="c1"># 给模板传递变量</span>
+    <span class="vi">@code</span> <span class="o">=</span> <span class="n">code</span>
+    <span class="n">mail</span><span class="p">(</span><span class="ss">to</span><span class="p">:</span> <span class="s2">&#34;845217811@qq.com&#34;</span><span class="p">,</span> <span class="ss">subject</span><span class="p">:</span> <span class="s1">&#39;Welcome to My Awesome Site&#39;</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>修改邮件内容</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># app/views/user_mailer/welcome_email.html.erb
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta content=&#34;text/html; charset=UTF-8&#34; http-equiv=&#34;Content-Type&#34;&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      	&lt;%# 使用传递的变量 %&gt;
+        hi &lt;%= @code %&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="12-开启qq的smtp服务">1.2 开启qq的smtp服务</h2>
+<ul>
+<li>
+<p><strong>smtp</strong>：简单邮件传输协议</p>
+</li>
+<li>
+<p>生成<strong>授权码</strong>：登录qq邮箱，点击「设置」=&gt;「账户」=&gt;「开启IMAP/SMTP服务」=&gt;「短信验证」</p>
+</li>
+<li>
+<p>应用<strong>密钥管理</strong>保存生成的授权码</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">EDITOR</span><span class="o">=</span><span class="s2">&#34;code --wait&#34;</span> bin/rails credentials:edit
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>临时文件中写入</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">email_password</span><span class="p">:</span><span class="w"> </span><span class="l">ycmbmysnijqcbfgb</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>然后在 Rails 中使用 <code>Rails.application.credentials.email_password</code> 获取对应的值</li>
+</ul>
+<h2 id="13-配置邮件服务器">1.3 配置邮件服务器</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># config/environments/development.rb</span>
+<span class="o">...</span>
+<span class="c1"># 是否抛出邮件错误</span>
+<span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">raise_delivery_errors</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="c1"># 是否使用缓存</span>
+<span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">perform_caching</span> <span class="o">=</span> <span class="kp">false</span>
+<span class="c1"># </span>
+<span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">smtp_settings</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">address</span><span class="p">:</span>							<span class="s1">&#39;smtp.qq.com&#39;</span><span class="p">,</span>
+  <span class="ss">port</span><span class="p">:</span> 								<span class="mi">587</span><span class="p">,</span>
+  <span class="ss">domain</span><span class="p">:</span>								<span class="s1">&#39;smtp.qq.com&#39;</span><span class="p">,</span>
+  <span class="ss">user_name</span><span class="p">:</span> 						<span class="s1">&#39;845217811@qq.com&#39;</span><span class="p">,</span>
+  <span class="ss">password</span><span class="p">:</span>							<span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">email_password</span><span class="p">,</span>
+  <span class="ss">authentication</span><span class="p">:</span>				<span class="s1">&#39;plain&#39;</span><span class="p">,</span>
+  <span class="ss">anable_starttls_auto</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>
+  <span class="ss">open_timeout</span><span class="p">:</span>					<span class="mi">10</span><span class="p">,</span>
+  <span class="ss">read_timeout</span><span class="p">:</span>					<span class="mi">10</span>
+<span class="p">}</span>
+<span class="o">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>利用控制台测试邮件发送功能</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ bin/rails console
+<span class="c1"># 使用UserMailer内置方法即可</span>
+$ UserMailer.welcome_email<span class="o">(</span><span class="s1">&#39;123456&#39;</span><span class="o">)</span>.deliver
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="2-tdd测试驱动开发">2 TDD——测试驱动开发</h1>
+<p>我们目前使用的测试库是<code>Rspect</code>，如果需要在测试后自动生成Api文档，则需额外安装<code>rspec_api_documentation</code></p>
+<blockquote>
+<p><a href="https://github.com/zipmark/rspec_api_documentation">zipmark/rspec_api_documentation: Automatically generate API documentation from RSpec (github.com)</a></p>
+</blockquote>
+<h2 id="21-测试验证码是否正常发送">2.1 测试验证码是否正常发送</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Add &#34;gem &#39;rspec_api_documentation&#39;&#34; to your Gemfile</span>
+$ bundle install
+<span class="c1"># 创建api文档测试文件夹</span>
+$ mkdir spec/acceptance
+<span class="c1"># 创建验证码测试文件</span>
+$ code spec/acceptance/validation_codes_spec.rb
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>编写测试</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/acceptance/validation_codes_spec.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;rails_helper&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;rspec_api_documentation/dsl&#39;</span>
+
+<span class="n">resource</span> <span class="s2">&#34;验证码&#34;</span> <span class="k">do</span>
+  <span class="n">post</span> <span class="s2">&#34;/api/v1/validation_codes&#34;</span> <span class="k">do</span>
+    <span class="c1"># 用于形成文档中的参数表格</span>
+    <span class="n">parameter</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:string</span>
+    <span class="c1"># 用于声明请求参数</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span> <span class="p">{</span> <span class="s1">&#39;1@qq.com&#39;</span> <span class="p">}</span>
+    <span class="n">example</span> <span class="s2">&#34;请求发送验证码&#34;</span> <span class="k">do</span>
+      <span class="n">do_request</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">status</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">200</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response_body</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="s1">&#39; &#39;</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>配置rspec，统一测试时的请求头</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/spec_helper.rb</span>
+<span class="o">...</span>
+<span class="no">Rspec</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="o">.</span><span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">spec</span><span class="o">|</span>
+    <span class="c1"># 如果是acceptance类型的测试</span>
+    <span class="k">if</span> <span class="n">spec</span><span class="o">.</span><span class="n">metadata</span><span class="o">[</span><span class="ss">:type</span><span class="o">].</span><span class="n">equal?</span> <span class="ss">:acceptance</span>
+      <span class="n">header</span> <span class="s1">&#39;Accept&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span>
+      <span class="n">header</span> <span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="o">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>验证validation_code接口的邮箱参数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/validation_code.rb</span>
+<span class="k">class</span> <span class="nc">ValidationCode</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span>
+  <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>根据测试功能修改controller</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/controllers/api/v1/validation_codes_controller.rb</span>
+<span class="k">class</span> <span class="nc">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">ValidationCodesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="no">SecureRandom</span><span class="o">.</span><span class="n">random_number</span><span class="o">.</span><span class="n">to_s</span><span class="o">[</span><span class="mi">2</span><span class="o">..</span><span class="mi">7</span><span class="o">]</span>
+    <span class="n">validation_code</span> <span class="o">=</span> <span class="no">ValidationCode</span><span class="o">.</span><span class="n">new</span> <span class="ss">email</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">,</span> <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;sign_in&#39;</span><span class="p">,</span> <span class="ss">code</span><span class="p">:</span> <span class="n">code</span>
+    <span class="k">if</span> <span class="n">validation_code</span><span class="o">.</span><span class="n">save</span>
+      <span class="n">render</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">200</span>
+    <span class="k">else</span>
+      <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span><span class="ss">errors</span><span class="p">:</span> <span class="n">validation_code</span><span class="o">.</span><span class="n">errors</span><span class="p">},</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">400</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>形成Api文档</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ bin/rake docs:generate
+<span class="c1"># docker开发环境无法直接浏览生成的html</span>
+$ npx http-server doc/api
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>解决Api文档中请求体与响应体无法正常显示的问题</p>
+<ul>
+<li>请求体</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/spec_helper.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;rspec_api_documentation&#39;</span>
+<span class="no">RspecApiDocumentation</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="c1"># 配置文档中请求体的格式为json</span>
+  <span class="n">config</span><span class="o">.</span><span class="n">request_body_formatter</span> <span class="o">=</span> <span class="ss">:json</span>
+<span class="k">end</span>
+<span class="o">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>响应体</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 将代码克隆到vendor中，别忘删除掉.git</span>
+$ git clone https://github.com/jrg-team/rspec_api_documentation.git vendor/rspec_api_documentation
+<span class="c1"># Gemfile</span>
+gem <span class="s1">&#39;rspec_api_documentation&#39;</span>, path: <span class="s1">&#39;./vendor/rspec_api_documentation&#39;</span>
+$ bundle
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="22-完善测试">2.2 完善测试</h2>
+<h3 id="221-tdd完善测试内容及业务功能">2.2.1 TDD完善测试内容及业务功能</h3>
+<p>​		上面只是测试了请求与响应，另外还需要测试是否调用了UserMailer的方法（至于是否成功发送到用户的邮箱，那是另外一个单元测试需要做的），以及重复发送请求的响应（429）</p>
+<ul>
+<li>先写测试：在do_request发送请求之前添加</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># 测试是否调用了UserMailer中的welcome_email方法</span>
+<span class="n">expect</span><span class="p">(</span><span class="no">UserMailer</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:welcome_email</span><span class="p">)</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>改写UserMailer</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">UserMailer</span> <span class="o">&lt;</span> <span class="no">ApplicationMailer</span>
+    <span class="k">def</span> <span class="nf">welcome_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+        <span class="c1"># 先按创建时间排序，以确保code是最新的</span>
+        <span class="c1"># 再根据传入的email到数据库中查询响应的code</span>
+        <span class="n">validation_code</span> <span class="o">=</span> <span class="no">ValidationCode</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="ss">create_at</span><span class="p">:</span> <span class="ss">:desc</span><span class="p">)</span><span class="o">.</span><span class="n">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+        <span class="c1"># 给模板传递变量</span>
+        <span class="vi">@code</span> <span class="o">=</span> <span class="n">validation_code</span><span class="o">.</span><span class="n">code</span>
+        <span class="c1"># 发送邮件</span>
+        <span class="n">mail</span><span class="p">(</span><span class="ss">to</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span> <span class="ss">subject</span><span class="p">:</span> <span class="s1">&#39;验证码&#39;</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>改写controller</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">ValidationCodesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">create</span>
+    	<span class="o">...</span>
+      <span class="k">if</span> <span class="n">validation_code</span><span class="o">.</span><span class="n">save</span>
+        <span class="no">UserMailer</span><span class="o">.</span><span class="n">welcome_email</span><span class="p">(</span><span class="n">validation_code</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+        <span class="n">render</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">200</span>
+      <span class="o">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="222-利用生命周期函数优化controller代码">2.2.2 利用生命周期函数优化Controller代码</h3>
+<p>Controller在应用程序中主要作为逻辑层，所以与数据有关的操作（生成code，发送email）应放入Model中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/validation_code.rb</span>
+<span class="k">class</span> <span class="nc">ValidationCode</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span>
+    <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+
+    <span class="c1"># 在创建这条记录之前，调用generate_code方法生成随机code</span>
+    <span class="n">before_create</span> <span class="ss">:generate_code</span>
+    <span class="c1"># 在save这条记录之后，调用send_email方法发送邮件</span>
+    <span class="n">after_create</span> <span class="ss">:send_email</span>
+
+    <span class="k">def</span> <span class="nf">generate_code</span>
+        <span class="c1"># self相当于js中的this，指代当前实例对象</span>
+        <span class="nb">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="no">SecureRandom</span><span class="o">.</span><span class="n">random_number</span><span class="o">.</span><span class="n">to_s</span><span class="o">[</span><span class="mi">2</span><span class="o">..</span><span class="mi">7</span><span class="o">]</span>
+    <span class="k">end</span>
+    <span class="k">def</span> <span class="nf">send_email</span>
+        <span class="no">UserMailer</span><span class="o">.</span><span class="n">welcome_email</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># app/controllers/api/v1/validation_codes_controller.rb</span>
+<span class="k">class</span> <span class="nc">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">ValidationCodesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="n">validation_code</span> <span class="o">=</span> <span class="no">ValidationCode</span><span class="o">.</span><span class="n">new</span> <span class="ss">email</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">,</span> <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;sign_in&#39;</span>
+      <span class="k">if</span> <span class="n">validation_code</span><span class="o">.</span><span class="n">save</span>
+        <span class="n">render</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">200</span>
+      <span class="k">else</span>
+        <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span> <span class="ss">errors</span><span class="p">:</span> <span class="n">validation_code</span><span class="o">.</span><span class="n">errors</span> <span class="p">},</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">400</span>
+      <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="223-利用enum解决kind字段的映射问题">2.2.3 利用enum解决kind字段的映射问题</h3>
+<ul>
+<li>
+<p>由于在创建数据库时，kind字段类型指定为integer，所以需要配置kind字段的enum映射关系，这样ruby就会自动帮我们做数据映射，保证无论是在后端还是返回给前端的都是字符串类型的数据</p>
+</li>
+<li>
+<p>在model中定义即可</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/validation_code.rb</span>
+<span class="n">enum</span> <span class="ss">kind</span><span class="p">:</span> <span class="p">{</span> <span class="ss">sign_in</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="ss">reset_password</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="224-区别acceptance与requests测试">2.2.4 区别acceptance与requests测试</h3>
+<ul>
+<li>
+<p>对于「60秒内不能重复发送请求」的需求，在测试时不属于acceptance的范畴。acceptance是用来生成接口文档的，因此只在其中写正确操作逻辑下的单元测试</p>
+</li>
+<li>
+<p>所以将重复请求的单元测试写到requests中</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/requests/validation_codes_spec.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;rails_helper&#39;</span>
+
+<span class="no">RSpec</span><span class="o">.</span><span class="n">describe</span> <span class="s2">&#34;ValidationCodes&#34;</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:request</span> <span class="k">do</span>
+  <span class="n">describe</span> <span class="s2">&#34;验证码&#34;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&#34;60秒内不能重复发送&#34;</span> <span class="k">do</span>
+      <span class="n">post</span> <span class="s1">&#39;/api/v1/validation_codes&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span>
+        <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;845217811@qq.com&#39;</span>
+      <span class="p">}</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+      <span class="n">post</span> <span class="s1">&#39;/api/v1/validation_codes&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span>
+        <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;845217811@qq.com&#39;</span>
+      <span class="p">}</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">429</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>TDD实现重复发送请求的校验</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/controllers/api/v1/validation_codes_controller.rb</span>
+<span class="o">...</span>
+<span class="c1"># 重复请求验证码的校验</span>
+<span class="k">if</span> <span class="no">ValidationCode</span><span class="o">.</span><span class="n">exists?</span><span class="p">(</span><span class="ss">email</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">,</span> <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;sign_in&#39;</span><span class="p">,</span> <span class="ss">created_at</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="n">minute</span><span class="o">.</span><span class="n">ago</span><span class="o">..</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+  <span class="n">render</span> <span class="n">status</span> <span class="mi">429</span>
+  <span class="k">return</span> 
+<span class="k">end</span>
+<span class="o">...</span>
+
+<span class="c1"># 测试</span>
+<span class="err">$</span> <span class="n">rspec</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-登录接口">3 登录接口</h1>
+<h2 id="31-jwt概念">3.1 JWT概念</h2>
+<h3 id="311-cookie">3.1.1 cookie</h3>
+<p>因为HTTP是无状态的协议（<strong>每次客户端和服务端会话完成时，服务端不会保存任何会话信息</strong>），每个请求都是完全独立的，服务端无法确认当前访问者的身份信息，无法分辨上一次的请求发送者和这一次的发送者是不是同一个人。所以服务器与浏览器为了进行会话跟踪（知道是谁在访问我），就必须主动的去维护一个状态，这个状态用于告知服务端前后两个请求是否来自同一浏览器。而这个状态需要通过 cookie 或者 session 去实现。</p>
+<p>当登录成功后，服务器会将登录信息（）添加到Set-Cookie响应头字段（可以有多个）中下发给客户端，客户端会将这个登录信息保存在浏览器的cookie中，后续对这个域名发起请求时会<strong>自动</strong>携带全部cookie作为请求头字段</p>
+<h3 id="312-session">3.1.2 session</h3>
+<p>配合cookie使用，用户在服务端记录用户登录状态</p>
+<p>当用户登录成功时，服务器端会维护一份对应登录用户<strong>加密</strong>后的session信息（例如userID），用于校验不同用户的登录状态</p>
+<h3 id="313-jwtjson-web-token">3.1.3 JWT（json web token）</h3>
+<p>当用户量过大时，session会占用服务器过多资源，所以提出了JWT的用户认证方案</p>
+<p>JWT属于一种特殊的token</p>
+<p>JWT 是自包含的（自包含了用户信息和加密的数据），因此减少或者不需要查询数据库，从而减轻服务端压力</p>
+<ul>
+<li>
+<p>认证流程</p>
+<ul>
+<li>
+<p>用户输入用户名/密码登录，服务端认证成功后，会返回给客户端一个 JWT</p>
+</li>
+<li>
+<p>客户端将 token 保存到本地（通常使用 localstorage，也可以使用 cookie）</p>
+</li>
+<li>
+<p>当用户希望访问一个受保护的路由或者资源的时候，需要请求头的 Authorization 字段中使用Bearer 模式添加 JWT</p>
+</li>
+<li>
+<p>服务端的保护路由将会检查请求头 Authorization 中的 JWT 信息，如果合法（即解密后的signature中的信息与payload的信息一致），则允许用户的行为</p>
+</li>
+</ul>
+</li>
+<li>
+<p>JWT的结构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">header</span> <span class="o">=</span> <span class="nx">base64</span><span class="p">({</span> <span class="nx">alg</span><span class="o">:</span> <span class="s1">&#39;加密算法&#39;</span> <span class="p">})</span>
+<span class="kr">const</span> <span class="nx">payload</span> <span class="o">=</span> <span class="nx">base64</span><span class="p">({</span> <span class="nx">uid</span><span class="o">:</span> <span class="mi">1001</span> <span class="p">})</span>
+<span class="kr">const</span> <span class="nx">signature</span> <span class="o">=</span> <span class="nx">加密函数</span><span class="p">(</span><span class="nx">加密用私钥</span><span class="p">,</span> <span class="nx">header</span><span class="p">,</span> <span class="nx">payload</span><span class="p">)</span> <span class="c1">// base64防止出现中文字符
+</span><span class="c1"></span><span class="nx">JWT</span> <span class="o">=</span> <span class="nx">header</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="nx">payload</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="nx">signature</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>由于JWT前两部分没有加密，仅仅转化为base64格式，所以前端是可以读（<code>window.atob</code>）到其中的数据的，例如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">jwt</span> <span class="o">=</span> <span class="nx">eyJhbGciOiJIUzI1NiJ9</span><span class="p">.</span><span class="nx">eyJ1c2VyX2lkIjoiMDJmYWRhOTktNDVlZS00MTM0LWEwMGUtZWQyYjFkMjhhNTQxIiwiZXhwIjoxNjU2ODMxNjA3fQ</span><span class="p">.</span><span class="nx">signatrue</span>
+<span class="nx">header</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">atob</span><span class="p">(</span><span class="s1">&#39;eyJhbGciOiJIUzI1NiJ9&#39;</span><span class="p">)</span>
+<span class="p">=&gt;</span> <span class="s1">&#39;{&#34;alg&#34;:&#34;HS256&#34;}&#39;</span>
+<span class="nx">payload</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">atob</span><span class="p">(</span><span class="s1">&#39;eyJ1c2VyX2lkIjoiMDJmYWRhOTktNDVlZS00MTM0LWEwMGUtZWQyYjFkMjhhNTQxIiwiZXhwIjoxNjU2ODMxNjA3fQ&#39;</span><span class="p">)</span>
+<span class="p">=&gt;</span> <span class="s1">&#39;{&#34;user_id&#34;:&#34;xxx&#34;,&#34;exp&#34;:1656831607}&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="32-jwt后端实现">3.2 JWT后端实现</h2>
+<h3 id="321-tdd实现登录接口">3.2.1 TDD实现登录接口</h3>
+<p>bin/rails g controller api/v1/sessions_controller</p>
+<ul>
+<li>登录接口单元测试</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/requests/api/v1/sessions_spec.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;rails_helper&#39;</span>
+
+<span class="no">RSpec</span><span class="o">.</span><span class="n">describe</span> <span class="s2">&#34;Sessions&#34;</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:request</span> <span class="k">do</span>
+  <span class="n">describe</span> <span class="s2">&#34;会话&#34;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&#34;登录（创建）会话&#34;</span> <span class="k">do</span>
+      <span class="c1"># 在数据库中创建一个假用户</span>
+      <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="ss">email</span><span class="p">:</span><span class="s1">&#39;845217811@qq.com&#39;</span>
+      <span class="c1"># code临时规定为&#39;123456&#39;</span>
+      <span class="n">post</span> <span class="s1">&#39;/api/v1/session&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span>
+        <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;845217811@qq.com&#39;</span><span class="p">,</span> <span class="ss">code</span><span class="p">:</span><span class="s1">&#39;123456&#39;</span>
+      <span class="p">}</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+      <span class="c1"># 期待测试通过，且响应体存在JWT字符串</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;JWT&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be_a</span><span class="p">(</span><span class="nb">String</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>登录接口实现</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/controllers/api/v1/sessions_controller.rb</span>
+<span class="k">class</span> <span class="nc">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+    <span class="c1"># 由于单元测试写死了code为123456，因此需要为测试环境单独写逻辑</span>
+    <span class="k">if</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">test?</span>
+        <span class="k">return</span> <span class="n">render</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">401</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:code</span><span class="o">]</span> <span class="o">!=</span> <span class="s1">&#39;123456&#39;</span>
+    <span class="k">else</span>
+        <span class="n">canSignin</span> <span class="o">=</span> <span class="no">ValidationCodes</span><span class="o">.</span><span class="n">exists?</span> <span class="ss">email</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">,</span> <span class="ss">code</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:code</span><span class="o">]</span><span class="p">,</span> <span class="ss">used_at</span><span class="p">:</span> <span class="kp">nil</span>
+        <span class="k">return</span> <span class="n">render</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">401</span> <span class="k">unless</span> <span class="n">canSignin</span>
+        <span class="c1"># unless 也可以写做 if not</span>
+    <span class="k">end</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_email</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span>
+    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
+        <span class="n">render</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span><span class="ss">errors</span><span class="p">:</span> <span class="s1">&#39;用户不存在&#39;</span><span class="p">}</span>
+    <span class="k">else</span>
+        <span class="c1"># 登录成功的条件有两条：</span>
+        <span class="c1"># 1 validation存在且没有被验证过（Validation.exists? used_at: nil）</span>
+        <span class="c1"># 2 数据库存在此用户（User.find_by_email）</span>
+        <span class="n">render</span> <span class="ss">stauts</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span><span class="ss">jwt</span><span class="p">:</span> <span class="s1">&#39;xxxxxxxxxxxxx&#39;</span><span class="p">}</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>jwt encode</li>
+</ul>
+<blockquote>
+<p><a href="https://github.com/jwt/ruby-jwt">jwt/ruby-jwt: A ruby implementation of the RFC 7519 OAuth JSON Web Token (JWT) standard. (github.com)</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># Gemfile</span>
+<span class="n">gem</span> <span class="s1">&#39;jwt&#39;</span>
+<span class="c1"># console</span>
+<span class="err">$</span> <span class="n">bundle</span>
+<span class="c1"># app/controllers/api/v1/sessions_controller.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;jwt&#39;</span>
+<span class="k">class</span> <span class="nc">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+    <span class="k">def</span> <span class="nf">create</span>
+       <span class="o">...</span>
+            <span class="c1"># 加密私钥使用rails管理</span>
+      			<span class="c1"># EDITOR=&#34;code --wait&#34; bin/rails credentials:edit</span>
+            <span class="c1"># hmac_secret = &#39;b70db9f7-e84f-45fe-bd16-db83684d8c0e&#39;</span>
+            <span class="n">hmac_secret</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">hmac_secret</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span> <span class="p">}</span>
+            <span class="c1"># encode方法接受三个参数 分别是 payload数据，加密用私钥，加密算法</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="no">JWT</span><span class="o">.</span><span class="n">encode</span> <span class="n">payload</span><span class="p">,</span> <span class="n">hmac_secret</span><span class="p">,</span> <span class="s1">&#39;HS256&#39;</span>
+            <span class="n">render</span> <span class="ss">stauts</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span> <span class="ss">jwt</span><span class="p">:</span> <span class="n">token</span> <span class="p">}</span>
+        <span class="o">...</span> 
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="322-tdd实现获取当前用户接口">3.2.2 TDD实现获取当前用户接口</h3>
+<p><code>bin/rails g controller api/v1/me_controller</code></p>
+<ul>
+<li>获取当前用户接口单元测试</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;rails_helper&#39;</span>
+
+<span class="no">RSpec</span><span class="o">.</span><span class="n">describe</span> <span class="s2">&#34;Me&#34;</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:request</span> <span class="k">do</span>
+  <span class="n">describe</span> <span class="s2">&#34;获取当前登录用户&#34;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&#34;获取&#34;</span> <span class="k">do</span>
+      <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="ss">email</span><span class="p">:</span><span class="s1">&#39;845217811@qq.com&#39;</span>
+      <span class="c1"># 先登录</span>
+      <span class="n">post</span> <span class="s1">&#39;/api/v1/session&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span>
+        <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;845217811@qq.com&#39;</span><span class="p">,</span> <span class="ss">code</span><span class="p">:</span><span class="s1">&#39;123456&#39;</span>
+      <span class="p">}</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+      <span class="n">jwt</span> <span class="o">=</span> <span class="n">json</span><span class="o">[</span><span class="s1">&#39;jwt&#39;</span><span class="o">]</span>
+      <span class="c1"># 再获取当前登录用户，记得设置请求头</span>
+      <span class="n">get</span> <span class="s1">&#39;/api/v1/me&#39;</span><span class="p">,</span> <span class="ss">headers</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;Authorization&#34;</span><span class="p">:</span> <span class="s2">&#34;Bearer </span><span class="si">#{</span><span class="n">jwt</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">}</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+      <span class="c1"># 期待返回的用户id与我们创建的用户id一致</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resource&#39;</span><span class="o">][</span><span class="s1">&#39;id&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>获取当前用户接口实现（jwt decode）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/controllers/api/v1/mes_controller.rb</span>
+<span class="k">class</span> <span class="nc">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">MesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+    <span class="k">def</span> <span class="nf">show</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">[</span><span class="s2">&#34;Authorization&#34;</span><span class="o">]</span>
+        <span class="c1"># 去掉 &#39;Bearer&#39;</span>
+        <span class="n">jwt</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="k">rescue</span> <span class="s1">&#39;&#39;</span>
+        <span class="c1"># rescue就相当于js中的try/catch的catch</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="no">JWT</span><span class="o">.</span><span class="n">decode</span> <span class="n">jwt</span><span class="p">,</span> <span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">hmac_secret</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="p">{</span> <span class="ss">algorithm</span><span class="p">:</span> <span class="s1">&#39;HS256&#39;</span> <span class="p">}</span> <span class="k">rescue</span> <span class="kp">nil</span>
+        <span class="k">return</span> <span class="n">head</span> <span class="mi">400</span> <span class="k">if</span> <span class="n">payload</span><span class="o">.</span><span class="n">nil?</span>
+        <span class="n">user_id</span> <span class="o">=</span> <span class="n">payload</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="s1">&#39;user_id&#39;</span><span class="o">]</span> <span class="k">rescue</span> <span class="kp">nil</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span> <span class="n">user_id</span>
+        <span class="k">return</span> <span class="n">head</span> <span class="mi">404</span> <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
+        <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span> <span class="ss">resource</span><span class="p">:</span> <span class="n">user</span> <span class="p">}</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="33-中间件与鉴权">3.3 中间件与鉴权</h2>
+<h3 id="331-jwt中间件">3.3.1 JWT中间件</h3>
+<blockquote>
+<p><a href="https://guides.rubyonrails.org/rails_on_rack.html#action-dispatcher-middleware-stack">Rails on Rack — Ruby on Rails Guides</a></p>
+</blockquote>
+<p>经过登录接口的开发过程，我们熟悉了jwt的加密解密以及登录的测试流程</p>
+<ul>
+<li>
+<p>我们会发现，在<strong>处理任何响应时都需要</strong>从请求头中取出jwt，对其解密并从中提取user_id。这个过程是比较频繁的</p>
+</li>
+<li>
+<p>可以将这个逻辑抽离为<strong>中间件</strong>，在<strong>执行controller之前</strong>对jwt进行<strong>解析并提取</strong>用户信息</p>
+</li>
+<li>
+<p>什么是中间件</p>
+<ul>
+<li>出现在：</li>
+<li><strong>用户</strong>——<code>访问</code>——<strong>路由</strong>——<code>执行</code>——<strong>controller</strong>——<code>处理请求</code>——<strong>响应</strong>——<code>返回</code>——<strong>用户</strong></li>
+<li>这个过程中间的东西就是<strong>中间件</strong></li>
+<li><code>执行</code>和<code>返回</code>就是中间件常出现的位置</li>
+</ul>
+</li>
+<li>
+<p><code>bin/rails middleware</code> 显示全部中间件</p>
+</li>
+<li>
+<p><code>touch lib/auto_jwt.rb</code> 在lib下创建中间件文件（lib是自己给自己写的库，vendor是别人给自己写的库）</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># lib/auto_jwt.rb</span>
+<span class="k">class</span> <span class="nc">AutoJwt</span>
+    <span class="c1"># 包括两个方法，initialize和call</span>
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+        <span class="vi">@app</span> <span class="o">=</span> <span class="n">app</span>
+    <span class="k">end</span>
+    <span class="c1"># 中间件被调用时需要执行的方法</span>
+    <span class="c1"># 参数的env包括请求与响应的所有信息</span>
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+        <span class="c1"># 获取header中的jwt</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">env</span><span class="o">[</span><span class="s1">&#39;HTTP_AUTHORIZATION&#39;</span><span class="o">]</span>
+        <span class="n">jwt</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="k">rescue</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="no">JWT</span><span class="o">.</span><span class="n">decode</span> <span class="n">jwt</span><span class="p">,</span> <span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">hmac_secret</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="p">{</span> <span class="ss">algorithm</span><span class="p">:</span> <span class="s1">&#39;HS256&#39;</span> <span class="p">}</span> <span class="k">rescue</span> <span class="kp">nil</span>
+        <span class="c1"># 将解析出来的user_id写入env中</span>
+        <span class="n">env</span><span class="o">[</span><span class="s1">&#39;current_user_id&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">payload</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="s1">&#39;user_id&#39;</span><span class="o">]</span> <span class="k">rescue</span> <span class="kp">nil</span>
+        <span class="c1"># 继续执行controller，如果不写这句，controller的逻辑就自动跳过了</span>
+        <span class="c1"># @status, @headers, @response就是controller返回的响应数据</span>
+        <span class="vi">@status</span><span class="p">,</span> <span class="vi">@headers</span><span class="p">,</span> <span class="vi">@response</span> <span class="o">=</span> <span class="vi">@app</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span> 
+        <span class="o">[</span><span class="vi">@status</span><span class="p">,</span> <span class="vi">@headers</span><span class="p">,</span> <span class="vi">@response</span><span class="o">]</span>
+        <span class="c1"># call方法必须返回状态码、响应头、响应体</span>
+        <span class="c1"># [200, {}, [&#39;Hello World&#39;, &#39;Hi&#39;]]</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>全局配置中间件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># config/application.rb</span>
+<span class="o">...</span>
+<span class="n">require_relative</span> <span class="s2">&#34;../lib/auto_jwt&#34;</span>
+
+<span class="no">Bundler</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="o">*</span><span class="no">Rails</span><span class="o">.</span><span class="n">groups</span><span class="p">)</span>
+
+<span class="k">module</span> <span class="nn">Mangosteen1</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Rails</span><span class="o">::</span><span class="no">Application</span>
+    <span class="o">...</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">use</span> <span class="no">AutoJwt</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用中间件返回的用户数据</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/controllers/api/v1/mes_controller.rb</span>
+<span class="k">class</span> <span class="nc">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">MesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+    <span class="k">def</span> <span class="nf">show</span>
+        <span class="c1"># 在request中拿到中间件解析出来的user_id</span>
+        <span class="c1"># user_id = payload[0][&#39;user_id&#39;] rescue nil</span>
+        <span class="n">user_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;current_user_id&#39;</span><span class="o">]</span> <span class="k">rescue</span> <span class="kp">nil</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span> <span class="n">user_id</span>
+        <span class="k">return</span> <span class="n">head</span> <span class="mi">404</span> <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
+        <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span> <span class="ss">resource</span><span class="p">:</span> <span class="n">user</span> <span class="p">}</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>测试</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 执行指定的测试用例</span>
+$ rspec -e <span class="s2">&#34;获取当前登录用户&#34;</span>
+<span class="c1"># 也可以指定行数</span>
+$ rspec spec/requests/api/v1/me_spec.rb:5
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="332-tdd实现items接口">3.3.2 TDD实现Items接口</h3>
+<ul>
+<li>初步实现按时间筛选items的功能</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/requests/api/v1/items_spec.rb</span>
+<span class="n">it</span> <span class="s2">&#34;按时间筛选&#34;</span> <span class="k">do</span>
+  <span class="c1"># 三条数据 两条符合</span>
+  <span class="n">item1</span> <span class="o">=</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">created_at</span><span class="p">:</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="n">item2</span> <span class="o">=</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">created_at</span><span class="p">:</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="n">item3</span> <span class="o">=</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">created_at</span><span class="p">:</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="c1"># 按时间筛选</span>
+  <span class="n">get</span> <span class="s1">&#39;/api/v1/items?created_after=2018-01-01&amp;created_before=2018-01-03&#39;</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">2</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">][</span><span class="s1">&#39;id&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="n">item1</span><span class="o">.</span><span class="n">id</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">][</span><span class="mi">1</span><span class="o">][</span><span class="s1">&#39;id&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="n">item2</span><span class="o">.</span><span class="n">id</span>
+<span class="k">end</span>
+<span class="c1"># app/controllers/api/v1/items_controller.rb</span>
+<span class="k">def</span> <span class="nf">index</span>
+  <span class="c1"># ruby使用A..B表示范围</span>
+  <span class="n">items</span> <span class="o">=</span> <span class="no">Item</span><span class="o">.</span><span class="n">where</span><span class="p">({</span><span class="ss">created_at</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:created_after</span><span class="o">]..</span><span class="n">params</span><span class="o">[</span><span class="ss">:created_before</span><span class="o">]</span><span class="p">})</span><span class="o">.</span><span class="n">page</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>测试边界条件——<code>created_after=created_at</code>
+<ul>
+<li><code>Time.new</code>默认使用当前时区（+8），而参数默认使用标准时区（+0）</li>
+<li>统一为标准时区</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="no">Time</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;+00:00&#39;</span><span class="p">)</span>
+<span class="no">Time</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">)</span>
+<span class="s1">&#39;2018-01-01&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/requests/api/v1/items_spec.rb</span>
+<span class="n">it</span> <span class="s2">&#34;按时间筛选(created_at===created_after)&#34;</span> <span class="k">do</span>
+  <span class="c1"># 指定时间为标准时区时间</span>
+  <span class="c1"># item1 = Item.create amount: 100, created_at: Time.new(2018, 1, 1, 0, 0, 0, &#39;Z&#39;)</span>
+  <span class="c1"># item1 = Item.create amount: 100, created_at: Time.new(2018, 1, 1, 0, 0, 0, &#39;+00:00&#39;)</span>
+  <span class="n">item1</span> <span class="o">=</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">created_at</span><span class="p">:</span> <span class="s1">&#39;2018-01-01&#39;</span>
+  <span class="n">get</span> <span class="s1">&#39;/api/v1/items?created_after=2018-01-01&amp;created_before=2018-01-03&#39;</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">1</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">][</span><span class="s1">&#39;id&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="n">item1</span><span class="o">.</span><span class="n">id</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>测试边界条件——只传一个参数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/requests/api/v1/items_spec.rb</span>
+<span class="n">it</span> <span class="s2">&#34;按时间筛选(只传created_after)&#34;</span> <span class="k">do</span>
+  <span class="c1"># 指定时间为标准时区时间</span>
+  <span class="n">item1</span> <span class="o">=</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">created_at</span><span class="p">:</span> <span class="s1">&#39;2018-01-01&#39;</span>
+  <span class="n">item2</span> <span class="o">=</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">created_at</span><span class="p">:</span> <span class="s1">&#39;2017-01-01&#39;</span>
+  <span class="n">get</span> <span class="s1">&#39;/api/v1/items?created_after=2018-01-01&#39;</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">1</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">][</span><span class="s1">&#39;id&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="n">item1</span><span class="o">.</span><span class="n">id</span>
+<span class="k">end</span>
+<span class="n">it</span> <span class="s2">&#34;按时间筛选(只传created_before)&#34;</span> <span class="k">do</span>
+  <span class="c1"># 指定时间为标准时区时间</span>
+  <span class="n">item1</span> <span class="o">=</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">created_at</span><span class="p">:</span> <span class="s1">&#39;2018-01-01&#39;</span>
+  <span class="n">item2</span> <span class="o">=</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">created_at</span><span class="p">:</span> <span class="s1">&#39;2019-01-01&#39;</span>
+  <span class="n">get</span> <span class="s1">&#39;/api/v1/items?created_before=2018-01-03&#39;</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">1</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">][</span><span class="s1">&#39;id&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="n">item1</span><span class="o">.</span><span class="n">id</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>更新API文档</li>
+</ul>
+<p>当单元测试通过后，就可以写acceptance测试来更新Api文档了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># 创建验证码测试文件</span>
+<span class="err">$</span> <span class="n">code</span> <span class="n">spec</span><span class="o">/</span><span class="n">acceptance</span><span class="o">/</span><span class="n">items_spec</span><span class="o">.</span><span class="n">rb</span>
+
+<span class="c1"># spec/acceptance/items_spec.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;rails_helper&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;rspec_api_documentation/dsl&#39;</span>
+
+<span class="n">resource</span> <span class="s2">&#34;账目&#34;</span> <span class="k">do</span>
+    <span class="n">get</span> <span class="s2">&#34;/api/v1/items&#34;</span> <span class="k">do</span>
+        <span class="c1"># 描述请求 parameter</span>
+        <span class="n">parameter</span> <span class="ss">:page</span><span class="p">,</span> <span class="s1">&#39;页码&#39;</span>
+        <span class="n">parameter</span> <span class="ss">:created_after</span><span class="p">,</span> <span class="s1">&#39;创建时间起点（筛选条件）&#39;</span>
+        <span class="n">parameter</span> <span class="ss">:created_before</span><span class="p">,</span> <span class="s1">&#39;创建时间终点（筛选条件）&#39;</span>
+
+        <span class="c1"># 描述响应 response_field</span>
+        <span class="c1"># response_field :id, &#39;ID&#39;, scope: :resources</span>
+        <span class="c1"># response_field :amount, &#39;金额（单位：分）&#39;, scope: :resources</span>
+        <span class="c1"># 以上两句有相同的scope，所以可以简写为下面的</span>
+        <span class="n">with_options</span> <span class="ss">:scope</span> <span class="o">=&gt;</span> <span class="ss">:resources</span> <span class="k">do</span>
+            <span class="n">response_field</span> <span class="ss">:id</span><span class="p">,</span> <span class="s1">&#39;ID&#39;</span>
+            <span class="n">response_field</span> <span class="ss">:amount</span><span class="p">,</span> <span class="s1">&#39;金额（单位：分）&#39;</span>
+        <span class="k">end</span>
+
+        <span class="c1"># 构造示例请求</span>
+        <span class="n">let</span><span class="p">(</span><span class="ss">:created_after</span><span class="p">)</span> <span class="p">{</span><span class="s1">&#39;2021-01-01&#39;</span><span class="p">}</span>
+        <span class="n">let</span><span class="p">(</span><span class="ss">:created_before</span><span class="p">)</span> <span class="p">{</span><span class="s1">&#39;2022-01-01&#39;</span><span class="p">}</span>
+        <span class="n">example</span> <span class="s2">&#34;获取账目&#34;</span> <span class="k">do</span>
+            <span class="mi">11</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">created_at</span><span class="p">:</span> <span class="s1">&#39;2021-6-30&#39;</span> <span class="k">end</span>
+            <span class="n">do_request</span>
+            <span class="n">expect</span><span class="p">(</span><span class="n">status</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">200</span>
+            <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response_body</span>
+            <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">10</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># 创建文档</span>
+<span class="err">$</span> <span class="n">bin</span><span class="o">/</span><span class="n">rake</span> <span class="ss">docs</span><span class="p">:</span><span class="n">generate</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="333-鉴权">3.3.3 鉴权</h3>
+<p>每个账目都是属于对应用户的，这就需要我们在每次请求数据时<strong>确认登录状态</strong>及<strong>用户信息</strong></p>
+<ul>
+<li>以分页单元测试为例</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/requests/api/v1/items_spec.rb</span>
+<span class="n">it</span> <span class="s2">&#34;能成功创建并分页返回数据&#34;</span> <span class="k">do</span>
+  <span class="c1"># 构造用户</span>
+  <span class="n">user1</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;1@qq.com&#39;</span>
+  <span class="n">user2</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;2@qq.com&#39;</span>
+  <span class="c1"># 为每个用户构造数据</span>
+  <span class="mi">11</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user1</span><span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="o">]</span> <span class="p">}</span>
+  <span class="mi">11</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user2</span><span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="o">]</span> <span class="p">}</span>
+  <span class="n">expect</span><span class="p">(</span><span class="no">Item</span><span class="o">.</span><span class="n">count</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">22</span>
+  <span class="c1"># 用户登录，获取user1的jwt</span>
+  <span class="n">post</span> <span class="s1">&#39;/api/v1/session&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span>
+    <span class="ss">email</span><span class="p">:</span> <span class="n">user1</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="ss">code</span><span class="p">:</span><span class="s1">&#39;123456&#39;</span>
+    <span class="p">}</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="n">jwt</span> <span class="o">=</span> <span class="n">json</span><span class="o">[</span><span class="s1">&#39;jwt&#39;</span><span class="o">]</span>
+  <span class="c1"># get获取user1的items时要带上权限请求头</span>
+  <span class="n">get</span> <span class="s1">&#39;/api/v1/items&#39;</span><span class="p">,</span> <span class="ss">headers</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;Authorization&#34;</span><span class="p">:</span> <span class="s2">&#34;Bearer </span><span class="si">#{</span><span class="n">jwt</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">}</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">10</span>
+  <span class="n">get</span> <span class="s1">&#39;/api/v1/items?page=2&#39;</span><span class="p">,</span> <span class="ss">headers</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;Authorization&#34;</span><span class="p">:</span> <span class="s2">&#34;Bearer </span><span class="si">#{</span><span class="n">jwt</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">}</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">1</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>修改controller，获取items前鉴权</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/controllers/api/v1/items_controller.rb</span>
+<span class="k">def</span> <span class="nf">index</span>
+  <span class="c1"># 获取items前鉴权，获取登录用户id</span>
+  <span class="n">current_user_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;current_user_id&#39;</span><span class="o">]</span>
+  <span class="k">return</span> <span class="n">head</span> <span class="mi">401</span> <span class="k">if</span> <span class="n">current_user_id</span><span class="o">.</span><span class="n">nil?</span>
+  <span class="c1"># ruby使用A..B表示范围</span>
+  <span class="n">items</span> <span class="o">=</span> <span class="no">Item</span><span class="o">.</span><span class="n">where</span><span class="p">({</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">current_user_id</span><span class="p">})</span>
+  	<span class="o">.</span><span class="n">where</span><span class="p">({</span><span class="ss">created_at</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:created_after</span><span class="o">]..</span><span class="n">params</span><span class="o">[</span><span class="ss">:created_before</span><span class="o">]</span><span class="p">})</span>
+  	<span class="o">.</span><span class="n">page</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span>
+  <span class="c1"># 也可以Item.page(params[:page]).per(100)自定义pageSize</span>
+  <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span> <span class="ss">resources</span><span class="p">:</span> <span class="n">items</span><span class="p">,</span> <span class="ss">pager</span><span class="p">:</span> <span class="p">{</span>
+  <span class="ss">page</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span> <span class="o">||</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="ss">per_page</span><span class="p">:</span> <span class="no">Item</span><span class="o">.</span><span class="n">default_per_page</span><span class="p">,</span>
+  <span class="ss">count</span><span class="p">:</span> <span class="no">Item</span><span class="o">.</span><span class="n">count</span>
+<span class="p">}}</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>每次测试都需要重复的进行登录操作，从而获取jwt，放入请求头，非常麻烦</li>
+<li>考虑到每个jwt都属于用户自己，所以干脆让每个用户能够<strong>生成自己的jwt与Auth请求头</strong>即可</li>
+<li>在user的model层添加<code>generate_jwt</code>和<code>generate_auth_header</code>两个实例方法</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/user.rb</span>
+<span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span>
+  <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+  <span class="k">def</span> <span class="nf">generate_jwt</span>
+    <span class="n">hmac_secret</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">hmac_secret</span>
+    <span class="c1"># self相当于this</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">user_id</span><span class="p">:</span> <span class="nb">self</span><span class="o">.</span><span class="n">id</span> <span class="p">}</span>
+    <span class="c1"># ruby会自动返回最后一句</span>
+    <span class="no">JWT</span><span class="o">.</span><span class="n">encode</span> <span class="n">payload</span><span class="p">,</span> <span class="n">hmac_secret</span><span class="p">,</span> <span class="s1">&#39;HS256&#39;</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">generate_auth_header</span>
+    <span class="p">{</span><span class="s2">&#34;Authorization&#34;</span><span class="p">:</span> <span class="s2">&#34;Bearer </span><span class="si">#{</span><span class="nb">self</span><span class="o">.</span><span class="n">generate_jwt</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>重构相关代码</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/controllers/api/v1/sessions_controller.rb</span>
+<span class="n">render</span> <span class="ss">stauts</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span> <span class="ss">jwt</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">generate_jwt</span> <span class="p">}</span>
+
+<span class="c1"># spec/requests/api/v1/items_spec.rb</span>
+<span class="n">it</span> <span class="s2">&#34;能成功创建并分页返回数据&#34;</span> <span class="k">do</span>
+  <span class="c1"># 构造用户</span>
+  <span class="n">user1</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;1@qq.com&#39;</span>
+  <span class="n">user2</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;2@qq.com&#39;</span>
+  <span class="c1"># 为每个用户构造数据</span>
+  <span class="mi">11</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user1</span><span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="o">]</span> <span class="p">}</span>
+  <span class="mi">11</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user2</span><span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="o">]</span> <span class="p">}</span>
+  <span class="n">expect</span><span class="p">(</span><span class="no">Item</span><span class="o">.</span><span class="n">count</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">22</span>
+  <span class="c1"># get获取user1的items时要带上权限请求头</span>
+  <span class="n">get</span> <span class="s1">&#39;/api/v1/items&#39;</span><span class="p">,</span> <span class="ss">headers</span><span class="p">:</span> <span class="n">user1</span><span class="o">.</span><span class="n">generate_auth_header</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">10</span>
+  <span class="n">get</span> <span class="s1">&#39;/api/v1/items?page=2&#39;</span><span class="p">,</span> <span class="ss">headers</span><span class="p">:</span> <span class="n">user1</span><span class="o">.</span><span class="n">generate_auth_header</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">1</span>
+<span class="k">end</span>
+<span class="c1"># 其他测试略</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>更新文档</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/acceptance/items_spec.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;rails_helper&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;rspec_api_documentation/dsl&#39;</span>
+
+<span class="n">resource</span> <span class="s2">&#34;账目&#34;</span> <span class="k">do</span>
+    <span class="n">get</span> <span class="s2">&#34;/api/v1/items&#34;</span> <span class="k">do</span>
+        <span class="c1"># 指定验证方式 基础验证（Bear） 值用变量表示</span>
+        <span class="n">authentication</span> <span class="ss">:basic</span><span class="p">,</span> <span class="ss">:auth</span>
+        <span class="o">...</span>
+        <span class="n">let</span><span class="p">(</span><span class="ss">:created_after</span><span class="p">)</span> <span class="p">{</span><span class="s1">&#39;2021-01-01&#39;</span><span class="p">}</span>
+        <span class="n">let</span><span class="p">(</span><span class="ss">:created_before</span><span class="p">)</span> <span class="p">{</span><span class="s1">&#39;2022-01-01&#39;</span><span class="p">}</span>
+        <span class="n">let</span><span class="p">(</span><span class="ss">:current_user</span><span class="p">)</span> <span class="p">{</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;1@qq.com&#39;</span> <span class="p">}</span>
+        <span class="n">let</span><span class="p">(</span><span class="ss">:auth</span><span class="p">)</span> <span class="p">{</span> <span class="s2">&#34;Bearer </span><span class="si">#{</span><span class="n">current_user</span><span class="o">.</span><span class="n">generate_jwt</span><span class="si">}</span><span class="s2">&#34;</span> <span class="p">}</span>
+        <span class="n">example</span> <span class="s2">&#34;获取账目&#34;</span> <span class="k">do</span>
+            <span class="mi">11</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">created_at</span><span class="p">:</span> <span class="s1">&#39;2020-10-30&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">current_user</span><span class="o">.</span><span class="n">id</span> <span class="k">end</span>
+            <span class="n">do_request</span>
+            <span class="n">expect</span><span class="p">(</span><span class="n">status</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">200</span>
+            <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response_body</span>
+            <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">10</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="34-jwt续期与refresh-token">3.4 JWT续期与Refresh Token</h2>
+<h3 id="341-jwt过期">3.4.1 jwt过期</h3>
+<ul>
+<li>jwt过期时间一般设置为2h~24h后</li>
+<li>只需在jwt的payload中添加exp字段，接收以秒为单位的int数据，这里设置为2h后过期</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/user.rb</span>
+<span class="k">def</span> <span class="nf">generate_jwt</span>
+	<span class="o">...</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">user_id</span><span class="p">:</span> <span class="nb">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="ss">exp</span><span class="p">:</span> <span class="p">(</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="o">+</span> <span class="mi">2</span><span class="o">.</span><span class="n">hours</span><span class="p">)</span><span class="o">.</span><span class="n">to_i</span> <span class="p">}</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在AutoJwt中间件修改逻辑</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># lib/auto_jwt.rb</span>
+<span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+  <span class="c1"># jwt跳过以下路径</span>
+  <span class="k">return</span> <span class="vi">@app</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span> <span class="k">if</span> <span class="o">[</span><span class="s1">&#39;/api/v1/session&#39;</span><span class="o">].</span><span class="n">include?</span><span class="p">(</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;PATH_INFO&#39;</span><span class="o">]</span><span class="p">)</span>
+ 	<span class="o">...</span>
+  <span class="c1"># payload = JWT.decode jwt, Rails.application.credentials.hmac_secret, true, { algorithm: &#39;HS256&#39; } rescue nil</span>
+  <span class="c1"># JWT.decode方法会自动进行过期时间检查</span>
+  <span class="c1"># 改写为更全面的rescue，区别过期报错与其他报错</span>
+  <span class="k">begin</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="no">JWT</span><span class="o">.</span><span class="n">decode</span> <span class="n">jwt</span><span class="p">,</span> <span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">hmac_secret</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="p">{</span> <span class="ss">algorithm</span><span class="p">:</span> <span class="s1">&#39;HS256&#39;</span> <span class="p">}</span>
+  <span class="k">rescue</span> <span class="no">JWT</span><span class="o">::</span><span class="no">ExpiredSignature</span>
+    <span class="k">return</span> <span class="o">[</span><span class="mi">401</span><span class="p">,</span> <span class="p">{},</span> <span class="o">[</span><span class="no">JSON</span><span class="o">.</span><span class="n">generate</span><span class="p">({</span><span class="ss">reason</span><span class="p">:</span> <span class="s1">&#39;jwt expired&#39;</span><span class="p">})</span><span class="o">]]</span>
+  <span class="k">rescue</span>
+    <span class="k">return</span> <span class="o">[</span><span class="mi">401</span><span class="p">,</span> <span class="p">{},</span> <span class="o">[</span><span class="no">JSON</span><span class="o">.</span><span class="n">generate</span><span class="p">({</span><span class="ss">reason</span><span class="p">:</span> <span class="s1">&#39;jwt invalid&#39;</span><span class="p">})</span><span class="o">]]</span>
+  <span class="k">end</span>
+ 	<span class="o">...</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>jwt过期测试</p>
+</li>
+<li>
+<p>使用rails内置的时间测试库，模拟控制程序时间</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/requests/api/v1/me_spec.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;active_support/testing/time_helpers&#39;</span>
+
+<span class="no">RSpec</span><span class="o">.</span><span class="n">describe</span> <span class="s2">&#34;Me&#34;</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:request</span> <span class="k">do</span>
+  <span class="kp">include</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Testing</span><span class="o">::</span><span class="no">TimeHelpers</span>
+    <span class="o">...</span>
+    <span class="n">it</span> <span class="s2">&#34;jwt过期&#34;</span> <span class="k">do</span>
+      <span class="c1"># 先把时间倒回到三小时前，创建jwt</span>
+      <span class="n">travel_to</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="o">-</span> <span class="mi">3</span><span class="o">.</span><span class="n">hours</span>
+      <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="ss">email</span><span class="p">:</span><span class="s1">&#39;845217811@qq.com&#39;</span>
+      <span class="n">jwt</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">generate_jwt</span>
+      <span class="c1"># 回到现在</span>
+      <span class="n">travel_back</span>
+      <span class="n">get</span> <span class="s1">&#39;/api/v1/me&#39;</span><span class="p">,</span> <span class="ss">headers</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;Authorization&#34;</span><span class="p">:</span> <span class="s2">&#34;Bearer </span><span class="si">#{</span><span class="n">jwt</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">}</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">401</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>修改了jwt过期时间及中间件逻辑，重新运行rspec单元测试，在<code>/api/v1/items</code>接口创建数据的单元测试报错，如果我们想暂时跳过这个单元测试内容，可以在<code>it</code>前加<code>x</code>，将这个测试用例置为pendding状态即可</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/requests/api/v1/items_spec.rb</span>
+<span class="n">describe</span> <span class="s1">&#39;POST /items&#39;</span> <span class="k">do</span>
+  <span class="n">xit</span> <span class="s1">&#39;能够创建一条数据&#39;</span> <span class="k">do</span>
+    <span class="o">...</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="342-jwt续期">3.4.2 jwt续期</h3>
+<ul>
+<li>当jwt过期后（2h），如果让用户登录以申请新的jwt，会严重影响用户体验</li>
+<li>此时<strong>基于refreshToken的jwt续期方案</strong>就应运而生了，流程如下
+<ul>
+<li>用户成功登录后，会将jwt及<code>refreshToken</code>返回给客户端，这个<code>token</code>需要维护在服务端，记录<code>用户id</code>、<code>token内容</code>及<code>创建token的时间</code></li>
+<li>当jwt过期时，如果距<code>token</code>的创建时间范围在七天内（一般有效期7天），那么自动申请新的jwt返回给客户端，自动完成jwt的续期</li>
+</ul>
+</li>
+</ul>
+<h2 id="35-补充登录api文档">3.5 补充登录Api文档</h2>
+<ul>
+<li>创建acceptance测试用例</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/acceptance/sessions_spec.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;rails_helper&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;rspec_api_documentation/dsl&#39;</span>
+
+<span class="n">resource</span> <span class="s2">&#34;会话&#34;</span> <span class="k">do</span>
+  <span class="n">post</span> <span class="s2">&#34;/api/v1/session&#34;</span> <span class="k">do</span>
+    <span class="n">parameter</span> <span class="ss">:email</span><span class="p">,</span> <span class="s1">&#39;邮箱&#39;</span><span class="p">,</span> <span class="ss">required</span><span class="p">:</span> <span class="kp">true</span>
+    <span class="n">parameter</span> <span class="ss">:code</span><span class="p">,</span> <span class="s1">&#39;验证码&#39;</span><span class="p">,</span> <span class="ss">required</span><span class="p">:</span> <span class="kp">true</span>
+    <span class="n">response_field</span> <span class="ss">:jwt</span><span class="p">,</span> <span class="s1">&#39;用于认证用户身份的token&#39;</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span> <span class="p">{</span> <span class="s1">&#39;1@qq.com&#39;</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:code</span><span class="p">)</span> <span class="p">{</span> <span class="s1">&#39;123456&#39;</span> <span class="p">}</span>
+    <span class="n">example</span> <span class="s2">&#34;登录&#34;</span> <span class="k">do</span>
+      <span class="n">do_request</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">status</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">200</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response_body</span>
+      <span class="n">expect</span><span class="o">[</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;jwt&#39;</span><span class="o">]].</span><span class="n">to</span> <span class="n">be_a</span> <span class="nb">String</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>实现首次登录自动创建用户功能</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/controllers/api/v1/sessions_controller.rb</span>
+<span class="o">...</span>
+<span class="c1"># 首次登录自动创建用户</span>
+<span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_or_create_by</span> <span class="ss">email</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span>
+<span class="n">render</span> <span class="ss">stauts</span><span class="p">:</span> <span class="ss">:ok</span><span class="p">,</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span> <span class="ss">jwt</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">generate_jwt</span> <span class="p">}</span>
+<span class="c1"># if user.nil?</span>
+<span class="c1">#     render status: 404, json: {errors: &#39;用户不存在&#39;}</span>
+<span class="c1"># else</span>
+<span class="c1">#     render stauts: 200, json: { jwt: user.generate_jwt }</span>
+<span class="c1"># end </span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>补全测试</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/requests/api/v1/sessions_spec.rb</span>
+<span class="n">it</span> <span class="s2">&#34;首次登录&#34;</span> <span class="k">do</span>
+  <span class="c1"># 直接登录 期待自动创建用户</span>
+  <span class="n">post</span> <span class="s1">&#39;/api/v1/session&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span>
+    <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;845217811@qq.com&#39;</span><span class="p">,</span> <span class="ss">code</span><span class="p">:</span><span class="s1">&#39;123456&#39;</span>
+  <span class="p">}</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="c1"># 期待测试通过，且响应体存在JWT字符串</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;jwt&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be_a</span><span class="p">(</span><span class="nb">String</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4-其他接口">4 其他接口</h1>
+<ul>
+<li>创建流程
+<ol>
+<li>创建model，执行db:migrate同步数据库</li>
+<li>创建controller</li>
+<li>写测试</li>
+<li>写代码</li>
+<li>写文档</li>
+</ol>
+</li>
+<li>tags相关接口略，详见commit</li>
+</ul>
+<blockquote>
+<p><a href="https://github.com/GSemir0418/account-record-rails/tree/be693cbeb5cc4196d9393b0f1318871c8b9b8b96">GSemir0418/account-record-rails at be693cbeb5cc4196d9393b0f1318871c8b9b8b96 (github.com)</a></p>
+</blockquote>
+<h2 id="41-tdd创建账目接口">4.1 TDD创建账目接口</h2>
+<h3 id="411-修改数据库字段">4.1.1 修改数据库字段</h3>
+<ul>
+<li>发现缺少<code>kind</code>字段，需要修改数据表字段</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># console</span>
+<span class="err">$</span> <span class="n">bin</span><span class="o">/</span><span class="n">rails</span> <span class="n">g</span> <span class="n">migration</span> <span class="no">AddKindToItem</span>
+
+<span class="c1"># db/migrate/20220708093801_add_kind_to_item.rb</span>
+<span class="k">class</span> <span class="nc">AddKindToItem</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span><span class="o">[</span><span class="mi">7</span><span class="o">.</span><span class="mi">0</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">change</span>
+    <span class="n">add_column</span> <span class="ss">:items</span><span class="p">,</span> <span class="ss">:kind</span><span class="p">,</span> <span class="ss">:integer</span><span class="p">,</span> <span class="ss">default</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">null</span><span class="p">:</span> <span class="kp">false</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># console</span>
+<span class="err">$</span> <span class="n">bin</span><span class="o">/</span><span class="n">rails</span> <span class="ss">db</span><span class="p">:</span><span class="n">migrate</span> <span class="no">RAILS_ENV</span><span class="o">=</span><span class="nb">test</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在model层为kind声明枚举数据</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/item.rb</span>
+<span class="k">class</span> <span class="nc">Item</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span>
+    <span class="n">enum</span> <span class="ss">kind</span><span class="p">:</span> <span class="p">{</span><span class="ss">expense</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">income</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="412-统一时间格式iso8601">4.1.2 统一时间格式（ISO8601）</h3>
+<ul>
+<li>
+<p>限制必填项<code>tags_id</code>，<code>amount</code>，<code>kind</code>，<code>happen_at</code></p>
+</li>
+<li>
+<p>测试</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/requests/api/v1/items_spec.rb</span>
+<span class="n">it</span> <span class="s1">&#39;登录创建数据&#39;</span> <span class="k">do</span>
+  <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;1@qq.com&#39;</span>
+  <span class="n">expect</span> <span class="p">{</span>
+    <span class="n">post</span> <span class="s1">&#39;/api/v1/items&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span>
+      	<span class="ss">amount</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span> 
+      	<span class="ss">tags_id</span><span class="p">:</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">]</span><span class="p">,</span>
+      	<span class="c1"># 时间格式统一为标准时间</span>
+      	<span class="ss">happen_at</span><span class="p">:</span> <span class="s1">&#39;2018-10-01T00:00:00+00:00&#39;</span>
+      <span class="p">},</span> 
+    	<span class="ss">headers</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">generate_auth_header</span>
+    <span class="p">}</span><span class="o">.</span><span class="n">to</span> <span class="n">change</span> <span class="p">{</span><span class="no">Item</span><span class="o">.</span><span class="n">count</span><span class="p">}</span><span class="o">.</span><span class="n">by</span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">201</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resource&#39;</span><span class="o">][</span><span class="s1">&#39;amount&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resource&#39;</span><span class="o">][</span><span class="s1">&#39;user_id&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resource&#39;</span><span class="o">][</span><span class="s1">&#39;id&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be_an</span><span class="p">(</span><span class="no">Numeric</span><span class="p">)</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resource&#39;</span><span class="o">][</span><span class="s1">&#39;happen_at&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="s2">&#34;2018-10-01T00:00:00.000Z&#34;</span>
+<span class="k">end</span>
+<span class="n">it</span> <span class="s1">&#39;创建时amount、happen_at数据必填&#39;</span> <span class="k">do</span>
+  <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;1@qq.com&#39;</span>
+  <span class="n">post</span> <span class="s1">&#39;/api/v1/items&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{},</span> 
+  <span class="ss">headers</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">generate_auth_header</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">422</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="c1"># kind有默认值1，暂时不测</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;errors&#39;</span><span class="o">][</span><span class="s1">&#39;amount&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="s2">&#34;can&#39;t be blank&#34;</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;errors&#39;</span><span class="o">][</span><span class="s1">&#39;happen_at&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="s2">&#34;can&#39;t be blank&#34;</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>代码实现</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/item.rb</span>
+<span class="k">class</span> <span class="nc">Item</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span>
+    <span class="n">enum</span> <span class="ss">kind</span><span class="p">:</span> <span class="p">{</span><span class="ss">expense</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">income</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+    <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+    <span class="n">validates</span> <span class="ss">:kind</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+    <span class="n">validates</span> <span class="ss">:happen_at</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+    <span class="c1"># 稍后会自定义tags_id校验</span>
+    <span class="n">validates</span> <span class="ss">:tags_id</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+<span class="k">end</span>
+
+<span class="c1"># app/controllers/api/v1/items_controller.rb</span>
+<span class="k">def</span> <span class="nf">create</span>
+  <span class="c1"># 由于tags_id是数组类型，在使用params.permit方法是需要声明tags_id的类型（写在最后）</span>
+  <span class="n">item</span> <span class="o">=</span> <span class="no">Item</span><span class="o">.</span><span class="n">new</span> <span class="n">params</span><span class="o">.</span><span class="n">permit</span><span class="p">(</span><span class="ss">:amount</span><span class="p">,</span> <span class="ss">:happen_at</span><span class="p">,</span> <span class="ss">tags_id</span><span class="p">:</span><span class="o">[]</span> <span class="p">)</span>
+  <span class="n">item</span><span class="o">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;current_user_id&#39;</span><span class="o">]</span>
+  <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">save</span>
+    <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span> <span class="ss">resource</span><span class="p">:</span> <span class="n">item</span> <span class="p">},</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">201</span>
+  <span class="k">else</span> 
+    <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span> <span class="ss">errors</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">errors</span> <span class="p">},</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">422</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="413-自定义校验tags_id">4.1.3 自定义校验tags_id</h3>
+<ul>
+<li>关于tags_id字段，存在一个问题</li>
+<li>实际上，一个用户在创建账目时，只能使用自己（当前用户）的tags作为标签，不允许使用其他用户的tags</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/item.rb</span>
+<span class="k">class</span> <span class="nc">Item</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span>
+    <span class="n">enum</span> <span class="ss">kind</span><span class="p">:</span> <span class="p">{</span><span class="ss">expense</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">income</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+    <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+    <span class="n">validates</span> <span class="ss">:kind</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+    <span class="n">validates</span> <span class="ss">:happen_at</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+    <span class="c1"># validates :tags_id, presence: true</span>
+    <span class="c1"># 有s的是默认校验，传值即可</span>
+    <span class="c1"># 没有s的是自定义校验，指定校验方法</span>
+    <span class="n">validate</span> <span class="ss">:check_tags_id_belong_to_user</span>
+
+    <span class="k">def</span> <span class="nf">check_tags_id_belong_to_user</span>
+        <span class="c1"># 遍历当前用户的全部tags</span>
+        <span class="n">all_tag_ids</span> <span class="o">=</span> <span class="no">Tag</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">user_id</span><span class="p">:</span> <span class="nb">self</span><span class="o">.</span><span class="n">user_id</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">tag</span><span class="o">|</span> <span class="n">tag</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="c1"># 传入的tags_id如果与all_tag_ids不存在交集</span>
+        <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">tags_id</span> <span class="o">&amp;</span> <span class="n">all_tag_ids</span> <span class="o">!=</span> <span class="nb">self</span><span class="o">.</span><span class="n">tags_id</span>
+            <span class="c1"># 说明不是当前用户的tags，报错</span>
+            <span class="nb">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">add</span> <span class="ss">:tags_id</span><span class="p">,</span> <span class="s2">&#34;不属于当前用户&#34;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># spec/requests/api/v1/items_spec.rb</span>
+<span class="n">it</span> <span class="s1">&#39;创建时的tags_id不属于用户&#39;</span> <span class="k">do</span>
+  <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;1@qq.com&#39;</span>
+  <span class="n">tag1</span> <span class="o">=</span> <span class="no">Tag</span><span class="o">.</span><span class="n">create</span> <span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="ss">sign</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+  <span class="n">tag2</span> <span class="o">=</span> <span class="no">Tag</span><span class="o">.</span><span class="n">create</span> <span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="ss">sign</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+  <span class="n">post</span> <span class="s1">&#39;/api/v1/items&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span>
+    <span class="ss">tags_id</span><span class="p">:</span> <span class="o">[</span><span class="n">tag1</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="n">tag2</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span><span class="p">,</span>
+    <span class="ss">amount</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span> 
+    <span class="ss">happen_at</span><span class="p">:</span> <span class="s1">&#39;2018-10-01T00:00:00+00:00&#39;</span>
+    <span class="p">},</span> 
+  <span class="ss">headers</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">generate_auth_header</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">422</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;errors&#39;</span><span class="o">][</span><span class="s1">&#39;tags_id&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="s2">&#34;不属于当前用户&#34;</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="42-tdd账目统计接口">4.2 TDD账目统计接口</h2>
+<ul>
+<li>定义路由</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># config/routes.rb</span>
+<span class="o">...</span>
+<span class="c1"># resources :items</span>
+<span class="n">resources</span> <span class="ss">:items</span> <span class="k">do</span>
+	<span class="n">collection</span> <span class="k">do</span> 
+		<span class="n">get</span> <span class="ss">:summary</span>
+	<span class="k">end</span>
+<span class="k">end</span>
+<span class="o">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="421-按时间分组">4.2.1 按时间分组</h3>
+<ul>
+<li>测试</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">describe</span> <span class="s1">&#39;统计账目&#39;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s1">&#39;按天分组&#39;</span> <span class="k">do</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create!</span> <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;1@qq.com&#39;</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="no">Tag</span><span class="o">.</span><span class="n">create!</span> <span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;tag1&#39;</span><span class="p">,</span> <span class="ss">sign</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+        <span class="c1"># 只有时间（北京时间+08:00）不同的六条数据</span>
+        <span class="no">Item</span><span class="o">.</span><span class="n">create!</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;expense&#39;</span><span class="p">,</span> <span class="ss">tags_id</span><span class="p">:</span> <span class="o">[</span><span class="n">tag</span><span class="o">.</span><span class="n">id</span><span class="o">]</span><span class="p">,</span> <span class="ss">happen_at</span><span class="p">:</span> <span class="s1">&#39;2018-06-18T00:00:00+08:00&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+        <span class="no">Item</span><span class="o">.</span><span class="n">create!</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;expense&#39;</span><span class="p">,</span> <span class="ss">tags_id</span><span class="p">:</span> <span class="o">[</span><span class="n">tag</span><span class="o">.</span><span class="n">id</span><span class="o">]</span><span class="p">,</span> <span class="ss">happen_at</span><span class="p">:</span> <span class="s1">&#39;2018-06-18T00:00:00+08:00&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+        <span class="no">Item</span><span class="o">.</span><span class="n">create!</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;expense&#39;</span><span class="p">,</span> <span class="ss">tags_id</span><span class="p">:</span> <span class="o">[</span><span class="n">tag</span><span class="o">.</span><span class="n">id</span><span class="o">]</span><span class="p">,</span> <span class="ss">happen_at</span><span class="p">:</span> <span class="s1">&#39;2018-06-20T00:00:00+08:00&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+        <span class="no">Item</span><span class="o">.</span><span class="n">create!</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;expense&#39;</span><span class="p">,</span> <span class="ss">tags_id</span><span class="p">:</span> <span class="o">[</span><span class="n">tag</span><span class="o">.</span><span class="n">id</span><span class="o">]</span><span class="p">,</span> <span class="ss">happen_at</span><span class="p">:</span> <span class="s1">&#39;2018-06-20T00:00:00+08:00&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+        <span class="no">Item</span><span class="o">.</span><span class="n">create!</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;expense&#39;</span><span class="p">,</span> <span class="ss">tags_id</span><span class="p">:</span> <span class="o">[</span><span class="n">tag</span><span class="o">.</span><span class="n">id</span><span class="o">]</span><span class="p">,</span> <span class="ss">happen_at</span><span class="p">:</span> <span class="s1">&#39;2018-06-19T00:00:00+08:00&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+        <span class="no">Item</span><span class="o">.</span><span class="n">create!</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;expense&#39;</span><span class="p">,</span> <span class="ss">tags_id</span><span class="p">:</span> <span class="o">[</span><span class="n">tag</span><span class="o">.</span><span class="n">id</span><span class="o">]</span><span class="p">,</span> <span class="ss">happen_at</span><span class="p">:</span> <span class="s1">&#39;2018-06-19T00:00:00+08:00&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">get</span> <span class="s1">&#39;/api/v1/items/summary&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span>
+          <span class="ss">happened_after</span><span class="p">:</span> <span class="s1">&#39;2018-01-01&#39;</span><span class="p">,</span>
+          <span class="ss">happened_before</span><span class="p">:</span> <span class="s1">&#39;2019-01-01&#39;</span><span class="p">,</span>
+          <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;expense&#39;</span><span class="p">,</span>
+          <span class="ss">group_by</span><span class="p">:</span> <span class="s1">&#39;happen_at&#39;</span>
+        <span class="p">},</span> <span class="ss">headers</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">generate_auth_header</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span> <span class="mi">200</span>
+        <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">3</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">][</span><span class="s1">&#39;happen_at&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="s1">&#39;2018-06-18&#39;</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">][</span><span class="s1">&#39;amount&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">300</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">][</span><span class="mi">1</span><span class="o">][</span><span class="s1">&#39;happen_at&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="s1">&#39;2018-06-19&#39;</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">][</span><span class="mi">1</span><span class="o">][</span><span class="s1">&#39;amount&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">300</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">][</span><span class="mi">2</span><span class="o">][</span><span class="s1">&#39;happen_at&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="s1">&#39;2018-06-20&#39;</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">][</span><span class="mi">2</span><span class="o">][</span><span class="s1">&#39;amount&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">300</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;total&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">900</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>controller</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">summary</span>
+  <span class="c1"># 最后的hash be like {2018-06-18:300,2018-06-19:300,2018-06-20:300,}</span>
+  <span class="nb">hash</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span>
+  <span class="c1"># 1.拿到该用户在时间范围内全部的支出/收入的items</span>
+  <span class="n">items</span> <span class="o">=</span> <span class="no">Item</span>
+  	<span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;current_user_id&#39;</span><span class="o">]</span><span class="p">)</span>
+  	<span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">kind</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:kind</span><span class="o">]</span><span class="p">)</span>
+  	<span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">happen_at</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:happened_after</span><span class="o">]..</span><span class="n">params</span><span class="o">[</span><span class="ss">:happened_before</span><span class="o">]</span><span class="p">)</span>
+  <span class="c1"># 2.遍历items，借助hash累加每天的amount</span>
+  <span class="n">items</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
+  	<span class="c1"># 规范格式（%F相当于%Y-%m-%d的简写）</span>
+  	<span class="n">key</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">happen_at</span><span class="o">.</span><span class="n">in_time_zone</span><span class="p">(</span><span class="s1">&#39;Beijing&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%F&#39;</span><span class="p">)</span>
+  	<span class="c1"># 如果hash[key]没有值，则初始化为零，相当于hash[key] = hash[key] || 0</span>
+  	<span class="nb">hash</span><span class="o">[</span><span class="n">key</span><span class="o">]</span> <span class="o">||=</span> <span class="mi">0</span>
+  	<span class="c1"># 加上当前金额</span>
+  	<span class="nb">hash</span><span class="o">[</span><span class="n">key</span><span class="o">]</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">amount</span>
+  <span class="k">end</span>
+  <span class="c1"># 3.将hash遍历为数组（map），并排序</span>
+  <span class="n">groups</span> <span class="o">=</span> <span class="nb">hash</span>
+  	<span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="p">{</span><span class="s2">&#34;happen_at&#34;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="ss">amount</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span> <span class="p">}</span>
+  	<span class="c1"># &lt;=&gt; spaceship operator 返回-1 0 1</span>
+  	<span class="c1"># sort!表示改变当前数组，不创建新数组</span>
+  	<span class="o">.</span><span class="n">sort</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span><span class="o">[</span><span class="ss">:happen_at</span><span class="o">]</span> <span class="o">&lt;=&gt;</span> <span class="n">b</span><span class="o">[</span><span class="ss">:happen_at</span><span class="o">]</span> <span class="p">}</span>
+  <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span>
+  	<span class="ss">groups</span><span class="p">:</span> <span class="n">groups</span><span class="p">,</span>
+  	<span class="c1"># 求和利用items.sum(求和的字段)</span>
+  	<span class="ss">total</span><span class="p">:</span> <span class="n">items</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="ss">:amount</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="422-按tag_id分组">4.2.2 按tag_id分组</h3>
+<ul>
+<li>测试</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">it</span> <span class="s1">&#39;按标签ID分组&#39;</span> <span class="k">do</span>
+      <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create!</span> <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;1@qq.com&#39;</span>
+      <span class="n">tag1</span> <span class="o">=</span> <span class="no">Tag</span><span class="o">.</span><span class="n">create!</span> <span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;tag1&#39;</span><span class="p">,</span> <span class="ss">sign</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+      <span class="n">tag2</span> <span class="o">=</span> <span class="no">Tag</span><span class="o">.</span><span class="n">create!</span> <span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;tag2&#39;</span><span class="p">,</span> <span class="ss">sign</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+      <span class="n">tag3</span> <span class="o">=</span> <span class="no">Tag</span><span class="o">.</span><span class="n">create!</span> <span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;tag3&#39;</span><span class="p">,</span> <span class="ss">sign</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+      <span class="no">Item</span><span class="o">.</span><span class="n">create!</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;expense&#39;</span><span class="p">,</span> <span class="ss">tags_id</span><span class="p">:</span> <span class="o">[</span><span class="n">tag1</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">tag2</span><span class="o">.</span><span class="n">id</span><span class="o">]</span><span class="p">,</span> <span class="ss">happen_at</span><span class="p">:</span> <span class="s1">&#39;2018-06-18T00:00:00+08:00&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+      <span class="no">Item</span><span class="o">.</span><span class="n">create!</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;expense&#39;</span><span class="p">,</span> <span class="ss">tags_id</span><span class="p">:</span> <span class="o">[</span><span class="n">tag2</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">tag3</span><span class="o">.</span><span class="n">id</span><span class="o">]</span><span class="p">,</span> <span class="ss">happen_at</span><span class="p">:</span> <span class="s1">&#39;2018-06-18T00:00:00+08:00&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+      <span class="no">Item</span><span class="o">.</span><span class="n">create!</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;expense&#39;</span><span class="p">,</span> <span class="ss">tags_id</span><span class="p">:</span> <span class="o">[</span><span class="n">tag3</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">tag1</span><span class="o">.</span><span class="n">id</span><span class="o">]</span><span class="p">,</span> <span class="ss">happen_at</span><span class="p">:</span> <span class="s1">&#39;2018-06-18T00:00:00+08:00&#39;</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+      <span class="c1"># tag3: 500, tag1: 400, tag2: 300</span>
+      <span class="n">get</span> <span class="s1">&#39;/api/v1/items/summary&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span>
+        <span class="ss">happened_after</span><span class="p">:</span> <span class="s1">&#39;2018-01-01&#39;</span><span class="p">,</span>
+        <span class="ss">happened_before</span><span class="p">:</span> <span class="s1">&#39;2019-01-01&#39;</span><span class="p">,</span>
+        <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;expense&#39;</span><span class="p">,</span>
+        <span class="ss">group_by</span><span class="p">:</span> <span class="s1">&#39;tag_id&#39;</span>
+      <span class="p">},</span> <span class="ss">headers</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">generate_auth_header</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span> <span class="mi">200</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">3</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">][</span><span class="s1">&#39;tag_id&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="n">tag3</span><span class="o">.</span><span class="n">id</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">][</span><span class="s1">&#39;amount&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">500</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">][</span><span class="mi">1</span><span class="o">][</span><span class="s1">&#39;tag_id&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="n">tag1</span><span class="o">.</span><span class="n">id</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">][</span><span class="mi">1</span><span class="o">][</span><span class="s1">&#39;amount&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">400</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">][</span><span class="mi">2</span><span class="o">][</span><span class="s1">&#39;tag_id&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="n">tag2</span><span class="o">.</span><span class="n">id</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;groups&#39;</span><span class="o">][</span><span class="mi">2</span><span class="o">][</span><span class="s1">&#39;amount&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">300</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;total&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">600</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>controller</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">summary</span>
+  <span class="nb">hash</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span>
+  <span class="n">items</span> <span class="o">=</span> <span class="no">Item</span>
+  <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;current_user_id&#39;</span><span class="o">]</span><span class="p">)</span>
+  <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">kind</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:kind</span><span class="o">]</span><span class="p">)</span>
+  <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">happen_at</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:happened_after</span><span class="o">]..</span><span class="n">params</span><span class="o">[</span><span class="ss">:happened_before</span><span class="o">]</span><span class="p">)</span>
+  <span class="n">items</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
+    <span class="c1"># 按时间分组，hash的key为happen_at</span>
+    <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:group_by</span><span class="o">]</span> <span class="o">==</span> <span class="s1">&#39;happen_at&#39;</span> 
+      <span class="n">key</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">happen_at</span><span class="o">.</span><span class="n">in_time_zone</span><span class="p">(</span><span class="s1">&#39;Beijing&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%F&#39;</span><span class="p">)</span>
+      <span class="nb">hash</span><span class="o">[</span><span class="n">key</span><span class="o">]</span> <span class="o">||=</span> <span class="mi">0</span>
+      <span class="nb">hash</span><span class="o">[</span><span class="n">key</span><span class="o">]</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">amount</span>
+      <span class="c1"># 按tag_id分组，hash的key为tags_id，此时需要遍历内部的tag_id</span>
+    <span class="k">else</span>
+      <span class="n">item</span><span class="o">.</span><span class="n">tags_id</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">tag_id</span><span class="o">|</span>
+        <span class="nb">hash</span><span class="o">[</span><span class="n">tag_id</span><span class="o">]</span> <span class="o">||=</span> <span class="mi">0</span>
+        <span class="nb">hash</span><span class="o">[</span><span class="n">tag_id</span><span class="o">]</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">amount</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  <span class="n">groups</span> <span class="o">=</span> <span class="nb">hash</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="p">{</span><span class="s2">&#34;</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:group_by</span><span class="o">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="ss">amount</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span> <span class="p">}</span>
+  <span class="c1"># 按时间升序排序</span>
+  <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:group_by</span><span class="o">]</span> <span class="o">==</span> <span class="s1">&#39;happen_at&#39;</span>
+    <span class="n">groups</span><span class="o">.</span><span class="n">sort!</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span><span class="o">[</span><span class="ss">:happen_at</span><span class="o">]</span> <span class="o">&lt;=&gt;</span> <span class="n">b</span><span class="o">[</span><span class="ss">:happen_at</span><span class="o">]</span> <span class="p">}</span>
+    <span class="c1"># 按tag_id的金额降序排序，注意else if写作elsif</span>
+  <span class="k">elsif</span> <span class="n">params</span><span class="o">[</span><span class="ss">:group_by</span><span class="o">]</span> <span class="o">==</span> <span class="s1">&#39;tag_id&#39;</span> 
+    <span class="n">groups</span><span class="o">.</span><span class="n">sort!</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">b</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span> <span class="o">&lt;=&gt;</span> <span class="n">a</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span> <span class="p">}</span>
+  <span class="k">end</span>
+  <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span>
+    <span class="ss">groups</span><span class="p">:</span> <span class="n">groups</span><span class="p">,</span>
+    <span class="ss">total</span><span class="p">:</span> <span class="n">items</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="ss">:amount</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="423-更新summary文档">4.2.3 更新summary文档</h3>
+<p>略</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-07-12
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/rails/">Rails</a>
+          <a href="/tags/vue3/">vue3</a>
+          <a href="/tags/tsx/">tsx</a>
+          <a href="/tags/aliyun/">aliyun</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%87%E7%89%87%E4%B8%8A%E4%BC%A0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">大文件切片上传</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/vu3-vite-tsx%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/">
+            <span class="next-text nav-default">Vue3&#43;tsx&#43;vite项目搭建</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

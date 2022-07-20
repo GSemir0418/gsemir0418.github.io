@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tsx on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/tsx/</link>
+    <description>Recent content in tsx on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 14 Jul 2022 14:24:32 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/tsx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>记账app_11_联调与axios封装</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_11_%E8%81%94%E8%B0%83%E4%B8%8Eaxios%E5%B0%81%E8%A3%85/</link>
+      <pubDate>Thu, 14 Jul 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_11_%E8%81%94%E8%B0%83%E4%B8%8Eaxios%E5%B0%81%E8%A3%85/</guid>
+      <description>1 发送验证码接口联调 1.1 前端：请求验证码 pnpm i axios安装axios，在首页发送验证码的请求 配置vite开发服务器代理 1 2 3 4 5 6 7 8 9 10 11 12</description>
+    </item>
+    
+    <item>
+      <title>记账app_10_远程部署后端与文档</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_10_%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E5%90%8E%E7%AB%AF%E4%B8%8E%E6%96%87%E6%A1%A3/</link>
+      <pubDate>Tue, 12 Jul 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_10_%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E5%90%8E%E7%AB%AF%E4%B8%8E%E6%96%87%E6%A1%A3/</guid>
+      <description>1 远程部署脚本 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 # bin/pack_for_remote.sh # 服务器的us</description>
+    </item>
+    
+    <item>
+      <title>记账app_9_TDD与API文档</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_9_tdd%E4%B8%8Eapi%E6%96%87%E6%A1%A3/</link>
+      <pubDate>Fri, 10 Jun 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_9_tdd%E4%B8%8Eapi%E6%96%87%E6%A1%A3/</guid>
+      <description>1 初步实现用Rails+qq邮箱发送邮件 Rails已经内置发邮件的功能 Action Mailer Basics — Ruby on Rails Guides 1.1 创建Mailer 1 $ bin/rails generate mailer User Mailer全局配置 1 2</description>
+    </item>
+    
+    <item>
+      <title>记账app_8_组件封装</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_8_%E7%BB%84%E4%BB%B6%E5%B0%81%E8%A3%85/</link>
+      <pubDate>Thu, 26 May 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_8_%E7%BB%84%E4%BB%B6%E5%B0%81%E8%A3%85/</guid>
+      <description>1 Button组件 1.1 Icon Icon组件接受svg的id作为参数，所以需要让definedComponent方法与TypeScript都知道此组件</description>
+    </item>
+    
+    <item>
+      <title>记账app_7_开发前端页面</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_7_%E5%BC%80%E5%8F%91%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2/</link>
+      <pubDate>Tue, 24 May 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_7_%E5%BC%80%E5%8F%91%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2/</guid>
+      <description>1 封装WelcomeLayout组件 Welcome页面的四个子组件代码基本一致，考虑将其整体抽离为一个布局组件 属性 和 插槽 都是父子组件传参的方</description>
+    </item>
+    
+    <item>
+      <title>记账app_6_搭建前端项目</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-6-%E6%90%AD%E5%BB%BA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Thu, 19 May 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-6-%E6%90%AD%E5%BB%BA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/</guid>
+      <description>1 项目搭建 1.1 创建Vite-vue-ts项目 1 2 3 4 pnpm create vite@2.9.0 mangosteen-fe-1 -- --template vue-ts`(报错就换npm) cd mangosteen-fe-1 pnpm install pnpm run dev pnpm run build 报node_modules</description>
+    </item>
+    
+    <item>
+      <title>记账app_5_云服务器部署</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-5-%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Wed, 18 May 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-5-%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/</guid>
+      <description>1 云服务器配置 购买阿里云的服务器 配置ssh密钥对 将github的ssh公钥作为密钥对添加至ECS实例中 1 $ cat ~/.ssh/id_rsa.pub 登录至云服务器，第一次使用ss</description>
+    </item>
+    
+    <item>
+      <title>记账app_4_本地部署实践</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-4-%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Fri, 13 May 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-4-%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/</guid>
+      <description>1 部署思路与宿主机部署流程 1.1 部署思路 后端部署思路 上传Dockerfile 上传源代码 用Dockerfile构建运行环境 在运行环境里运行源代码 使</description>
+    </item>
+    
+    <item>
+      <title>记账app_3_rspec单元测试</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-2-api%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Wed, 11 May 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-2-api%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/</guid>
+      <description>0 curl测试接口 发送GET请求 curl GET http://localhost:3000/api/v1/stags?page=1 发送POST请求 curl -X POST http://localhost:3000/api/v1/tags 添加请求头 -H ‘Content-Type: application/json&#39; 添加消息体 -d &amp;lsquo;{&amp;ldquo;amount&amp;rdquo;: 99}&amp;rsquo; 弊端：1.难写 2.难</description>
+    </item>
+    
+    <item>
+      <title>记账app_2_API初步实现</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-3-rspec%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Mon, 09 May 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-3-rspec%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</guid>
+      <description>1 REST Representational State Transfer 一种网络软件的架构风格 不是标准，不是协议，不是接口，只是一种风格 提出者Roy层参与过HTTP规格文档的撰写 怎么做 以资源（名词，例如</description>
+    </item>
+    
+    <item>
+      <title>记账app_1_开发准备</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-1-%E5%BC%80%E5%8F%91%E5%87%86%E5%A4%87/</link>
+      <pubDate>Thu, 05 May 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-1-%E5%BC%80%E5%8F%91%E5%87%86%E5%A4%87/</guid>
+      <description>1 技术选型 Vue3 + TSX + Rails7 Vue3 + TSX的优点 像使用React一样使用Vue3 踩坑的乐趣 缺点 无法利用模板的性能优化： 静态提升、修补标记、树结构打平、加</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>记账app_11_联调与axios封装 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 发送验证码接口联调 1.1 前端：请求验证码 pnpm i axios安装axios，在首页发送验证码的请求 配置vite开发服务器代理 1 2 3 4 5 6 7 8 9 10 11 12" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_11_%E8%81%94%E8%B0%83%E4%B8%8Eaxios%E5%B0%81%E8%A3%85/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="记账app_11_联调与axios封装" />
+<meta property="og:description" content="1 发送验证码接口联调 1.1 前端：请求验证码 pnpm i axios安装axios，在首页发送验证码的请求 配置vite开发服务器代理 1 2 3 4 5 6 7 8 9 10 11 12" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_11_%E8%81%94%E8%B0%83%E4%B8%8Eaxios%E5%B0%81%E8%A3%85/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-14T14:24:32+08:00" />
+<meta property="article:modified_time" content="2022-07-14T14:24:32+08:00" />
+
+<meta itemprop="name" content="记账app_11_联调与axios封装">
+<meta itemprop="description" content="1 发送验证码接口联调 1.1 前端：请求验证码 pnpm i axios安装axios，在首页发送验证码的请求 配置vite开发服务器代理 1 2 3 4 5 6 7 8 9 10 11 12"><meta itemprop="datePublished" content="2022-07-14T14:24:32+08:00" />
+<meta itemprop="dateModified" content="2022-07-14T14:24:32+08:00" />
+<meta itemprop="wordCount" content="1100">
+<meta itemprop="keywords" content="Rails,vue3,tsx,aliyun," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="记账app_11_联调与axios封装"/>
+<meta name="twitter:description" content="1 发送验证码接口联调 1.1 前端：请求验证码 pnpm i axios安装axios，在首页发送验证码的请求 配置vite开发服务器代理 1 2 3 4 5 6 7 8 9 10 11 12"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">记账app_11_联调与axios封装</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-07-14 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/"> 全栈项目 </a>
+            </div>
+          <span class="more-meta"> 1100 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-发送验证码接口联调">1 发送验证码接口联调</a>
+      <ul>
+        <li><a href="#11-前端请求验证码">1.1 前端：请求验证码</a></li>
+        <li><a href="#12-后端修复邮件发送bug">1.2 后端：修复邮件发送bug</a></li>
+        <li><a href="#13-前端实现60s倒计时限制子组件的方法暴露给父组件">1.3 前端：实现60s倒计时限制（子组件的方法暴露给父组件）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-发送验证码接口联调">1 发送验证码接口联调</h1>
+<h2 id="11-前端请求验证码">1.1 前端：请求验证码</h2>
+<ul>
+<li><code>pnpm i axios</code>安装axios，在首页发送验证码的请求</li>
+<li>配置vite开发服务器代理</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// vite.config.ts
+</span><span class="c1"></span><span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+	<span class="p">...</span>
+  <span class="nx">server</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">proxy</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&#34;/api/v1&#34;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">target</span><span class="o">:</span> <span class="s2">&#34;http://121.41.82.157:3000/&#34;</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>发送验证码请求</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// src/views/SignInPage.tsx
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">axios</span> <span class="kr">from</span> <span class="s2">&#34;axios&#34;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">SignInPage</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
+  <span class="nx">setup</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="kr">const</span> <span class="nx">onSendValidationCode</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&#34;/api/v1/validation_codes&#34;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">email</span>: <span class="kt">formData.email</span><span class="p">,</span>
+      <span class="p">});</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">...</span>
+      <span class="p">&lt;</span><span class="nt">FormItem</span>
+        <span class="na">label</span><span class="o">=</span><span class="s">&#34;验证码&#34;</span>
+        <span class="na">type</span><span class="o">=</span><span class="s">&#34;validationCode&#34;</span>
+        <span class="na">...</span>
+        <span class="na">v</span><span class="err">-</span><span class="na">model</span><span class="o">=</span><span class="p">{</span><span class="nx">formData</span><span class="p">.</span><span class="nx">validationCode</span><span class="p">}</span>
+        <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onSendValidationCode</span><span class="p">}</span>
+        <span class="p">/&gt;</span>
+      <span class="p">...</span>
+    <span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="c1">// 需要配置type=&#34;validationCode&#34;的FormItem以及Button组件，支持onClick属性
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="12-后端修复邮件发送bug">1.2 后端：修复邮件发送bug</h2>
+<ul>
+<li>点击发送后，实际上并未发送成功</li>
+<li>validation_codes的<code>send_email</code>并没有调用<code>deliver</code>发送邮件的方法</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/validation_code.rb</span>
+<span class="k">class</span> <span class="nc">ValidationCode</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span>
+  <span class="o">...</span>
+	<span class="k">def</span> <span class="nf">send_email</span>
+		<span class="no">UserMailer</span><span class="o">.</span><span class="n">welcome_email</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">email</span><span class="p">)</span><span class="o">.</span><span class="n">deliver</span>
+	<span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>而且也没有配置生产环境的邮箱<code>SMTP</code>服务器，只需把开发环境的复制即可</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">raise_delivery_errors</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">perform_caching</span> <span class="o">=</span> <span class="kp">false</span>
+<span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">delivery_method</span> <span class="o">=</span> <span class="ss">:smtp</span>
+<span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">smtp_settings</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">address</span><span class="p">:</span>							<span class="s1">&#39;smtp.qq.com&#39;</span><span class="p">,</span>
+  <span class="ss">port</span><span class="p">:</span> 								<span class="mi">587</span><span class="p">,</span>
+  <span class="ss">domain</span><span class="p">:</span>								<span class="s1">&#39;smtp.qq.com&#39;</span><span class="p">,</span>
+  <span class="ss">user_name</span><span class="p">:</span> 						<span class="s1">&#39;845217811@qq.com&#39;</span><span class="p">,</span>
+  <span class="ss">password</span><span class="p">:</span>							<span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">email_password</span><span class="p">,</span>
+  <span class="ss">authentication</span><span class="p">:</span>				<span class="s1">&#39;plain&#39;</span><span class="p">,</span>
+  <span class="ss">anable_starttls_auto</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>
+  <span class="ss">open_timeout</span><span class="p">:</span>					<span class="mi">10</span><span class="p">,</span>
+  <span class="ss">read_timeout</span><span class="p">:</span>					<span class="mi">10</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>此外，还需要将密钥都复制到生产环境
+<ul>
+<li><code>EDITOR=&quot;code --wait&quot; bin/rails credentials:edit</code></li>
+<li>将里面的密钥拷贝，关闭</li>
+<li><code>EDITOR=&quot;code --wait&quot; bin/rails credentials:edit --environment production</code></li>
+<li>粘贴，关闭</li>
+</ul>
+</li>
+</ul>
+<h2 id="13-前端实现60s倒计时限制子组件的方法暴露给父组件">1.3 前端：实现60s倒计时限制（子组件的方法暴露给父组件）</h2>
+<ul>
+<li>在FormItem(validationCode)中定义倒计时逻辑与状态，并暴露给父组件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// src/shared/Form.tsx
+</span><span class="c1"></span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">FormItem</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
+  <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="nx">countFrom</span><span class="o">:</span> <span class="p">{</span>
+      <span class="kr">type</span><span class="o">:</span> <span class="nb">Number</span><span class="p">,</span>
+      <span class="k">default</span><span class="o">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="nx">emits</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">],</span>
+  <span class="nx">setup</span><span class="o">:</span> <span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="c1">// 计时器
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">&lt;</span><span class="nt">number</span><span class="p">&gt;();</span>
+    <span class="c1">// 倒计时数字，默认值为父组件指定的countFrom
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">&lt;</span><span class="nt">number</span><span class="p">&gt;(</span><span class="nx">props</span><span class="p">.</span><span class="nx">countFrom</span><span class="p">);</span>
+    <span class="c1">// 判断显示内容与按钮状态的字段
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">isCounting</span> <span class="o">=</span> <span class="nx">computed</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="o">!!</span><span class="nx">timer</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+    <span class="c1">// 子组件倒计时逻辑
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">startCount</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">timer</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">count</span><span class="p">.</span><span class="nx">value</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">count</span><span class="p">.</span><span class="nx">value</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">timer</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+          <span class="nx">timer</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+          <span class="nx">count</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">props</span><span class="p">.</span><span class="nx">countFrom</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="c1">// 将方法作为子组件实例方法，暴露给父组件，供父组件调用
+</span><span class="c1"></span>    <span class="nx">context</span><span class="p">.</span><span class="nx">expose</span><span class="p">({</span> <span class="nx">startCount</span> <span class="p">});</span>
+    <span class="kr">const</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">computed</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">switch</span> <span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="kr">type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s2">&#34;validationCode&#34;</span><span class="o">:</span>
+          <span class="k">return</span> <span class="p">(</span>
+            <span class="p">&lt;&gt;</span>
+              <span class="p">&lt;</span><span class="nt">input</span>
+                <span class="na">class</span><span class="o">=</span><span class="p">{[</span><span class="nx">s</span><span class="p">.</span><span class="nx">formItem</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">input</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">validationCodeInput</span><span class="p">]}</span>
+                <span class="na">placeholder</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">placeholder</span><span class="p">}</span>
+              <span class="p">/&gt;</span>
+              <span class="p">&lt;</span><span class="nt">Button</span>
+                <span class="na">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">isCounting</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span>
+                <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">onClick</span><span class="p">}</span>
+                <span class="na">class</span><span class="o">=</span><span class="p">{[</span><span class="nx">s</span><span class="p">.</span><span class="nx">formItem</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">button</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">validationCodeButton</span><span class="p">]}</span>
+              <span class="p">&gt;</span>
+                <span class="p">{</span><span class="nx">isCounting</span><span class="p">.</span><span class="nx">value</span> <span class="o">?</span> <span class="nx">count</span><span class="p">.</span><span class="nx">value</span> <span class="o">:</span> <span class="s2">&#34;发送验证码&#34;</span><span class="p">}</span>
+              <span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;</span>
+            <span class="p">&lt;/&gt;</span>
+          <span class="p">);</span>
+      	<span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">...</span>
+
+<span class="c1">// src/shared/Button.tsx定义disabled状态
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">defineComponent</span><span class="p">,</span> <span class="nx">PropType</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;vue&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">s</span> <span class="kr">from</span> <span class="s2">&#34;./Button.module.scss&#34;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">Button</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
+  <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="nx">disabled</span><span class="o">:</span> <span class="p">{</span>
+      <span class="kr">type</span><span class="o">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+      <span class="k">default</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="nx">setup</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// button的内容应该是从外部插槽定义的
+</span><span class="c1"></span>    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">button</span>
+        <span class="na">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">disabled</span><span class="p">}</span>
+        <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">onClick</span><span class="p">}</span>
+        <span class="na">class</span><span class="o">=</span><span class="p">{[</span><span class="nx">s</span><span class="p">.</span><span class="nx">button</span><span class="p">,</span> <span class="nx">s</span><span class="p">[</span><span class="nx">props</span><span class="p">.</span><span class="nx">level</span><span class="p">]]}</span>
+      <span class="p">&gt;</span>
+        <span class="p">{</span><span class="nx">context</span><span class="p">.</span><span class="nx">slots</span><span class="p">.</span><span class="k">default</span><span class="o">?</span><span class="p">.()}</span>
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>父组件中，在单击获取验证码后，调用子组件暴露的xxx方法，设置子组件的倒计时状态</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// src/views/SignInPage.tsx
+</span><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">SignInPage</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
+  <span class="nx">setup</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">validationCodeRef</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">&lt;</span><span class="nt">any</span><span class="p">&gt;();</span>
+    <span class="p">...</span>
+    <span class="kr">const</span> <span class="nx">onSendValidationCode</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span>
+        <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&#34;/api/v1/validation_codes&#34;</span><span class="p">,</span> <span class="p">{</span>
+          <span class="nx">email</span>: <span class="kt">formData.email</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">validationCodeRef</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">startCount</span><span class="p">();</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">errors</span><span class="p">.</span><span class="nx">email</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">email</span><span class="p">;</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">errors</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">...</span>
+      <span class="p">&lt;</span><span class="nt">FormItem</span>
+        <span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">validationCodeRef</span><span class="p">}</span>
+        <span class="na">label</span><span class="o">=</span><span class="s">&#34;验证码&#34;</span>
+        <span class="na">type</span><span class="o">=</span><span class="s">&#34;validationCode&#34;</span>
+        <span class="na">v</span><span class="err">-</span><span class="na">model</span><span class="o">=</span><span class="p">{</span><span class="nx">formData</span><span class="p">.</span><span class="nx">validationCode</span><span class="p">}</span>
+        <span class="na">countFrom</span><span class="o">=</span><span class="p">{</span><span class="mi">60</span><span class="p">}</span>
+        <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;请输入六位数字&#34;</span>
+        <span class="na">error</span><span class="o">=</span><span class="p">{</span><span class="nx">errors</span><span class="p">.</span><span class="nx">email</span><span class="o">?</span><span class="p">.[</span><span class="mi">0</span><span class="p">]}</span>
+        <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onSendValidationCode</span><span class="p">}</span>
+        <span class="p">/&gt;</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-07-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/rails/">Rails</a>
+          <a href="/tags/vue3/">vue3</a>
+          <a href="/tags/tsx/">tsx</a>
+          <a href="/tags/aliyun/">aliyun</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/docker%E5%AD%A6%E4%B9%A0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Docker学习</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E8%AE%B0%E8%B4%A6app_10_%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E5%90%8E%E7%AB%AF%E4%B8%8E%E6%96%87%E6%A1%A3/">
+            <span class="next-text nav-default">记账app_10_远程部署后端与文档</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

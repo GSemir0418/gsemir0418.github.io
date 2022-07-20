@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Docker学习 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="目标：使用docker搭建自用开发环境 1 docker核心概念 核心概念主要包括dockerfile、container、image、volum" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/docker%E5%AD%A6%E4%B9%A0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Docker学习" />
+<meta property="og:description" content="目标：使用docker搭建自用开发环境 1 docker核心概念 核心概念主要包括dockerfile、container、image、volum" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/docker%E5%AD%A6%E4%B9%A0/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-19T09:47:28+08:00" />
+<meta property="article:modified_time" content="2022-07-19T09:47:28+08:00" />
+
+<meta itemprop="name" content="Docker学习">
+<meta itemprop="description" content="目标：使用docker搭建自用开发环境 1 docker核心概念 核心概念主要包括dockerfile、container、image、volum"><meta itemprop="datePublished" content="2022-07-19T09:47:28+08:00" />
+<meta itemprop="dateModified" content="2022-07-19T09:47:28+08:00" />
+<meta itemprop="wordCount" content="1174">
+<meta itemprop="keywords" content="docker,dockerfile,devcontainer," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Docker学习"/>
+<meta name="twitter:description" content="目标：使用docker搭建自用开发环境 1 docker核心概念 核心概念主要包括dockerfile、container、image、volum"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Docker学习</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-07-19 </span>
+        <div class="post-category">
+            <a href="/categories/docker/"> docker </a>
+            </div>
+          <span class="more-meta"> 1174 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-docker核心概念">1 docker核心概念</a></li>
+    <li><a href="#2-docker常用命令">2 docker常用命令</a></li>
+    <li><a href="#3-docker连接数据库">3 docker连接数据库</a></li>
+    <li><a href="#4-搭建个人开发环境">4 搭建个人开发环境</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>目标：使用docker搭建自用开发环境</p>
+</blockquote>
+<h1 id="1-docker核心概念">1 docker核心概念</h1>
+<ul>
+<li>
+<p>核心概念主要包括<code>dockerfile</code>、<code>container</code>、<code>image</code>、<code>volume</code></p>
+</li>
+<li>
+<p><code>dockerfile</code></p>
+<ul>
+<li>docker构建image的<strong>说明书</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> 指定镜像tag</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> 运行命令<span class="err">
+</span><span class="err"></span><span class="k">ADD</span> 复制宿主机文件<span class="err">
+</span><span class="err"></span><span class="k">ENV</span> 添加环境变量<span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> 访问容器时的初始目录</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>image</code>(镜像)</p>
+<ul>
+<li>相当于一张<strong>系统盘</strong></li>
+</ul>
+</li>
+<li>
+<p><code>container</code>(容器)</p>
+<ul>
+<li>相当于一台<strong>虚拟机</strong></li>
+</ul>
+</li>
+<li>
+<p><code>volume</code>(数据卷)</p>
+<ul>
+<li>相当于虚拟机的硬盘，可以用来<strong>持久化</strong>容器内数据</li>
+<li>因为每次rebuild都相当于重装系统，其内部数据会被清空</li>
+<li><code>docker volume create [name]</code>创建数据卷</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-docker常用命令">2 docker常用命令</h1>
+<ul>
+<li>
+<p><code>build</code></p>
+<ul>
+<li>基于<code>dockerfile</code>构建image</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ <span class="c1"># docker build [dockerfile目录] -t [标签名]</span>
+$ docker build . -t xxx/yyy:0.1
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>查看与删除image</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker image ls
+$ docker image rm <span class="o">[</span>tag<span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>run</code></p>
+<ul>
+<li>运行image启动container</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker run -dit <span class="o">[</span>image_tag<span class="o">]</span> --name <span class="o">[</span>container_name<span class="o">]</span> -p <span class="o">[</span>宿主机端口:容器端口<span class="o">]</span> -e <span class="o">[</span><span class="nv">环境变量</span><span class="o">=</span>值<span class="o">]</span> --network<span class="o">=</span>net1
+$ docker run -v volume_name:/容器内需持久化的路径
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-d 表示deamon，即启动后不需自动关闭</li>
+<li>以mysql容器为例</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker run --name some-mysql -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="m">123456</span> -d mysql:5.7.38
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>exec</code></p>
+<ul>
+<li>访问container</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker <span class="nb">exec</span> -it <span class="o">[</span>container_id<span class="o">]</span> bash/zsh
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>退出container</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ <span class="nb">exec</span> / ctrl + D
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>pull</code></p>
+<ul>
+<li>拉取镜像</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker pull alpine:latest
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>start</code></p>
+<ul>
+<li>
+<p><code>docker ps -a</code>查看全部容器</p>
+</li>
+<li>
+<p><code>docker start [container_id]</code>启动容器</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>stop</code></p>
+<ul>
+<li>同start</li>
+</ul>
+</li>
+<li>
+<p><code>logs</code></p>
+<ul>
+<li><code>docker logs container_id</code>查看容器日志</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-docker连接数据库">3 docker连接数据库</h1>
+<ul>
+<li>创建局域网</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker network create net1
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>创建数据库容器，指定局域网</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker run -d <span class="se">\
+</span><span class="se"></span>		容器名称
+    --name db-for-test <span class="se">\
+</span><span class="se"></span>    环境变量
+    -e <span class="nv">POSTGRES_USER</span><span class="o">=</span>gsemir <span class="se">\
+</span><span class="se"></span>    -e <span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span><span class="m">123456</span> <span class="se">\
+</span><span class="se"></span>    -e <span class="nv">POSTGRES_DB</span><span class="o">=</span>test_dev <span class="se">\
+</span><span class="se"></span>    -e <span class="nv">PGDATA</span><span class="o">=</span>/var/lib/postgresql/data/pgdata <span class="se">\
+</span><span class="se"></span>   	关联数据卷
+    -v mangosteen-data:/var/lib/postgresql/data <span class="se">\
+</span><span class="se"></span>    指定网络 与服务端容器在同一网络下 此时容器的名称就可以作为ip地址供服务端访问
+    --network<span class="o">=</span>net1 <span class="se">\
+</span><span class="se"></span>    镜像tag
+    postgres:14
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>服务端安装相关库，并连接到局域网</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ apk --no-cache add postgresql-libs
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>开启数据库容器，完成数据库连接</li>
+</ul>
+<h1 id="4-搭建个人开发环境">4 搭建个人开发环境</h1>
+<ul>
+<li>镜像目录</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">.
+├── .devcontainer						
+│		└── devcontainer.json		<span class="c1"># 配置容器运行启动时的参数</span>
+├── tmp											<span class="c1"># 宿主与容器共享目录</span>
+├── .Dockerfile							<span class="c1"># mac/linux版本的dockerfile	</span>
+├── windows.Dockerfile			<span class="c1">#	windows版本的dockerfile</span>
+├── .zshrc									<span class="c1">#	容器zsh配置</span>
+├── zsh-autosuggestions			<span class="c1">#	zsh插件</span>
+└── zsh-syntax-highlighting	<span class="c1"># zsh插件</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>devcontainer.json
+<ul>
+<li><code>devcontainer.json</code>中的配置项，实际上相当于运行<code>docker run</code>命令的配置项</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;GSemirDev&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;dockerFile&#34;</span><span class="p">:</span> <span class="s2">&#34;../.Dockerfile&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;extensions&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;dbaeumer.vscode-eslint&#34;</span><span class="p">,</span> <span class="s2">&#34;esbenp.prettier-vscode&#34;</span><span class="p">],</span>
+  <span class="nt">&#34;runArgs&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&#34;--network=network1&#34;</span><span class="p">,</span> <span class="c1">// 方便连接数据库
+</span><span class="c1"></span>    <span class="s2">&#34;--dns=114.114.114.114&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;--privileged&#34;</span> <span class="c1">// docker in docker时会用到
+</span><span class="c1"></span>  <span class="p">],</span>
+  <span class="nt">&#34;containerEnv&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;DISPLAY&#34;</span><span class="p">:</span> <span class="s2">&#34;host.docker.internal:0.0&#34;</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;mounts&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&#34;source=g-repos,target=/root/repos,type=volume&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;source=g-zsh-plugin,target=/root/.oh-my-zsh/custom/plugins,type=volume&#34;</span>
+  <span class="p">],</span>
+  <span class="nt">&#34;remoteUser&#34;</span><span class="p">:</span> <span class="s2">&#34;root&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>dockerfile</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> alpine:latest@sha256:c3c58223e2af75154c4a7852d6924b4cc51a00c821553bbd9b3319481131b2e0</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /tmp</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> rm -rf /etc/apk/repositories <span class="o">&amp;&amp;</span><span class="se">\
+</span><span class="se"></span>    touch /etc/apk/repositories <span class="o">&amp;&amp;</span><span class="se">\
+</span><span class="se"></span>    <span class="nb">echo</span> <span class="s1">&#39;https://mirrors.aliyun.com/alpine/v3.16/main&#39;</span> &gt;&gt; /etc/apk/repositories <span class="o">&amp;&amp;</span><span class="se">\
+</span><span class="se"></span>    <span class="nb">echo</span> <span class="s1">&#39;https://mirrors.aliyun.com/alpine/v3.16/community&#39;</span> &gt;&gt; /etc/apk/repositories <span class="o">&amp;&amp;</span><span class="se">\
+</span><span class="se"></span>    apk update <span class="o">&amp;&amp;</span><span class="se">\
+</span><span class="se"></span>    apk --no-cache --update add nodejs git zsh curl yarn npm tree<span class="err">
+</span><span class="err"></span><span class="c"># zsh</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> sh -c <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span class="k">)</span><span class="s2">&#34;</span><span class="err">
+</span><span class="err"></span><span class="k">ENV</span> SHELL /bin/zsh <span class="err">
+</span><span class="err"></span><span class="k">ADD</span> zsh-autosuggestions ~/.oh-my-zsh/custom/plugins<span class="err">
+</span><span class="err"></span><span class="k">ADD</span> zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins<span class="err">
+</span><span class="err"></span><span class="k">ADD</span> .zshrc /root/.zshrc<span class="err">
+</span><span class="err"></span><span class="c"># js dev</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> npm config <span class="nb">set</span> registry http://registry.npm.taobao.org/ <span class="o">&amp;&amp;</span><span class="se">\
+</span><span class="se"></span>    yarn config <span class="nb">set</span> registry http://registry.npm.taobao.org/<span class="err">
+</span><span class="err"></span><span class="k">RUN</span> npm i -g pnpm <span class="o">&amp;&amp;</span><span class="se">\
+</span><span class="se"></span>    pnpm config <span class="nb">set</span> registry http://registry.npm.taobao.org/<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>上传自己的<code>image</code>到<code>docker hub</code></p>
+<ol>
+<li>构建image，指定tag名称</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker build . -t gsemir/dev-env:0.1
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>登录docker</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker login
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>push</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker push gsemir/dev-env:0.1
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>修改tag版本为latest</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker tag gsemir/dev-env:0.1 gsemir/dev-env:latest
+</code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>再次push</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ docker push gsemir/dev-env:latest
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-07-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/docker/">docker</a>
+          <a href="/tags/dockerfile/">dockerfile</a>
+          <a href="/tags/devcontainer/">devcontainer</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E9%83%A8%E7%BD%B2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">云服务器docker部署</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E8%AE%B0%E8%B4%A6app_11_%E8%81%94%E8%B0%83%E4%B8%8Eaxios%E5%B0%81%E8%A3%85/">
+            <span class="next-text nav-default">记账app_11_联调与axios封装</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

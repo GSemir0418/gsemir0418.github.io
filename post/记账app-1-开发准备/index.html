@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>记账app_1_开发准备 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 技术选型 Vue3 &#43; TSX &#43; Rails7 Vue3 &#43; TSX的优点 像使用React一样使用Vue3 踩坑的乐趣 缺点 无法利用模板的性能优化： 静态提升、修补标记、树结构打平、加" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-1-%E5%BC%80%E5%8F%91%E5%87%86%E5%A4%87/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="记账app_1_开发准备" />
+<meta property="og:description" content="1 技术选型 Vue3 &#43; TSX &#43; Rails7 Vue3 &#43; TSX的优点 像使用React一样使用Vue3 踩坑的乐趣 缺点 无法利用模板的性能优化： 静态提升、修补标记、树结构打平、加" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-1-%E5%BC%80%E5%8F%91%E5%87%86%E5%A4%87/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-05T14:24:32+08:00" />
+<meta property="article:modified_time" content="2022-05-17T14:24:32+08:00" />
+
+<meta itemprop="name" content="记账app_1_开发准备">
+<meta itemprop="description" content="1 技术选型 Vue3 &#43; TSX &#43; Rails7 Vue3 &#43; TSX的优点 像使用React一样使用Vue3 踩坑的乐趣 缺点 无法利用模板的性能优化： 静态提升、修补标记、树结构打平、加"><meta itemprop="datePublished" content="2022-05-05T14:24:32+08:00" />
+<meta itemprop="dateModified" content="2022-05-17T14:24:32+08:00" />
+<meta itemprop="wordCount" content="2002">
+<meta itemprop="keywords" content="Rails,vue3,tsx,aliyun," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="记账app_1_开发准备"/>
+<meta name="twitter:description" content="1 技术选型 Vue3 &#43; TSX &#43; Rails7 Vue3 &#43; TSX的优点 像使用React一样使用Vue3 踩坑的乐趣 缺点 无法利用模板的性能优化： 静态提升、修补标记、树结构打平、加"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">记账app_1_开发准备</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-05-05 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/"> 全栈项目 </a>
+            </div>
+          <span class="more-meta"> 2002 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-技术选型">1 技术选型</a></li>
+    <li><a href="#2-项目架构">2 项目架构</a></li>
+    <li><a href="#3-docker搭建开发环境">3 docker搭建开发环境</a></li>
+    <li><a href="#4-创建项目">4 创建项目</a></li>
+    <li><a href="#5-后端开发">5 后端开发</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-技术选型">1 技术选型</h1>
+<ul>
+<li>
+<p>Vue3 + TSX + Rails7</p>
+</li>
+<li>
+<p>Vue3 + TSX的优点</p>
+<ul>
+<li>
+<p>像使用React一样使用Vue3</p>
+</li>
+<li>
+<p>踩坑的乐趣</p>
+</li>
+</ul>
+</li>
+<li>
+<p>缺点</p>
+<ul>
+<li>无法利用模板的性能优化： 静态提升、修补标记、树结构打平、加速SSR激活</li>
+</ul>
+</li>
+<li>
+<p>如何做技术选型</p>
+<ul>
+<li>
+<p>要好招聘：提高程序员的可替代性</p>
+</li>
+<li>
+<p>要好用：自己用过或认识的人用过，反馈不错</p>
+</li>
+<li>
+<p>要有长期维护者：付费维护者&gt;免费维护者&gt;兼职维护者</p>
+</li>
+<li>
+<p>无利益冲突：华为、俄罗斯</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-项目架构">2 项目架构</h1>
+<p>nginx Rails PostgreSql Vue3 Pinia axios</p>
+<ul>
+<li>Ruby简易教程
+<ul>
+<li>Ruby的类</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">User</span>
+  <span class="c1"># 构造函数</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+    <span class="c1"># @name相当于this.name</span>
+    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="c1"># 控制塔打印可以使用p、print或puts</span>
+    <span class="c1"># 双引号中可以插入表达式或变量</span>
+    <span class="nb">p</span> <span class="s2">&#34;hi, </span><span class="si">#{</span><span class="n">target</span><span class="si">}</span><span class="s2">, I am </span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">&#34;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># 函数参数的括号无论在声明时还是调用时都可以省略</span>
+<span class="n">u1</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span> <span class="s2">&#34;gsq&#34;</span> 
+<span class="n">u1</span><span class="o">.</span><span class="n">hi</span> <span class="s2">&#34;zs&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Ruby数组
+<ul>
+<li>需求：收集1-6之间的偶数</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># JS的思路</span>
+<span class="n">even_numbers</span> <span class="o">=</span> <span class="o">[]</span>
+<span class="c1"># 遍历时接受一个代码块</span>
+<span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+  <span class="c1"># even?是方法</span>
+  <span class="c1"># if也可以写在句尾 省略end</span>
+  <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> 
+    <span class="c1"># 相当于even_numbers.push(n)</span>
+    <span class="n">even_numbers</span> <span class="o">&lt;&lt;</span> <span class="n">n</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+<span class="nb">p</span> <span class="n">even_numbers</span>
+
+<span class="c1"># Ruby写法，使用select，省略do end，使用{}代码块</span>
+<span class="n">even_numbers</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="o">].</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span>
+
+<span class="c1"># &amp;表示当前的值(同sass)，此时使用括号</span>
+<span class="n">even_numbers</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="o">].</span><span class="n">select</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span>
+
+<span class="c1"># 数组可以简写</span>
+<span class="n">even_numbers</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span>
+
+<span class="c1"># 不创建新数组的写法</span>
+<span class="c1"># select!只适用于数组，因此要先将range类型其转为数组</span>
+<span class="n">even_numbers</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
+<span class="c1"># 叹号表示此操作将改变原数组</span>
+<span class="n">even_numbers</span><span class="o">.</span><span class="n">select!</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-docker搭建开发环境">3 docker搭建开发环境</h1>
+<blockquote>
+<p><a href="mailto:git@github.com">git@github.com</a>:GSemir0418/oh-my-env.git</p>
+</blockquote>
+<ol>
+<li>
+<p>安装最新版 Docker 客户端</p>
+</li>
+<li>
+<p>打开 Docker 客户端的配置</p>
+<ol>
+<li>找到 Docker Engine 选项卡，配置 registry-mirrors（自行搜索教程）</li>
+</ol>
+<blockquote>
+<p><a href="https://www.runoob.com/docker/docker-mirror-acceleration.html">Docker 镜像加速 | 菜鸟教程 (runoob.com)</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JSON" data-lang="JSON"><span class="s2">&#34;registry-mirrors&#34;</span><span class="err">:</span> <span class="p">[</span>
+    <span class="s2">&#34;http://docker.mirrors.ustc.edu.cn&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;https://62wvf5vn.mirror.aliyuncs.com&#34;</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>找到 Resources 选项卡，配置 Proxies（可跳过）</li>
+</ol>
+</li>
+<li>
+<p><code>git clone git@github.com:GSemir0418/oh-my-env.git</code> 将 oh-my-env 下载到本地</p>
+</li>
+<li>
+<p>打开 Windows/Mac 的终端，运行 <code>docker network create network1</code></p>
+</li>
+<li>
+<p>打开 VSCode</p>
+<ol>
+<li>安装 Remote - Container 插件</li>
+<li>打开 oh-my-env 目录</li>
+<li>输入 Ctrl + Shift + P，然后输入 Reopen，回车，等待</li>
+</ol>
+</li>
+<li>
+<p>等上一步启动完毕之后，新建终端</p>
+<ol>
+<li>运行 <code>nvm use system</code> 和 <code>node --version</code> 得到 node 运行环境</li>
+<li>运行 <code>rvm use 3</code> 和 <code>ruby --version</code> 得到 ruby 运行环境</li>
+<li>运行<code>bundle --version</code>检查bundle（相当于ruby中的npm）是否可用</li>
+<li>运行<code>irb</code>（运行ruby的学习环境）</li>
+</ol>
+</li>
+</ol>
+<h1 id="4-创建项目">4 创建项目</h1>
+<ul>
+<li>
+<p>配置gem和bundle国内源</p>
+<ul>
+<li>
+<p>gem是封装起来的Ruby应用程序或代码库，相当于nodejs的package，对应的文件是Gemfile</p>
+</li>
+<li>
+<p>bundle是用来管理项目中所有的gem依赖，相当于nodejs的npm</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
+$ bundle config mirror.https://rubygems.org https://gems.ruby-china.com
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>安装rails及postgresql的驱动</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ gem install rails -v 7.0.2.3
+$ pacman -S postgresql-libs
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在repos目录下创建rails项目</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ <span class="nb">cd</span> ~/repos
+// 仅使用api模式，指定数据库，忽略测试（后面自己配），指定项目名称
+$ rails new --api --database<span class="o">=</span>postgresql --skip-test mangosteen-1
+$ code mangosteen-1
+// 新建终端
+$ bundle exe rails server
+// server可简写为s
+// 也可以 /bin/rails s 来启动服务
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>启动数据库容器</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">在宿主机中创建并启动数据库容器
+docker run -d \
+		容器名称
+    --name db-for-mangosteen \
+    环境变量
+    -e POSTGRES_USER=mangosteen \
+    -e POSTGRES_PASSWORD=123456 \
+    -e POSTGRES_DB=mangosteen_dev \
+    -e PGDATA=/var/lib/postgresql/data/pgdata \
+    新增数据卷
+    -v mangosteen-data:/var/lib/postgresql/data \
+    指定网络 与rails容器在同一网络下 此时容器的名称就可以作为ip地址供rails访问
+    --network=network1 \
+    镜像名称 版本14
+    postgres:14
+    
+供复制：
+docker run -d      --name db-for-mangosteen      -e POSTGRES_USER=mangosteen      -e POSTGRES_PASSWORD=123456      -e POSTGRES_DB=mangosteen_dev      -e PGDATA=/var/lib/postgresql/data/pgdata      -v mangosteen-data:/var/lib/postgresql/data      --network=network1      postgres:14
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>连接数据库</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># 修改config/database.yaml</span><span class="w">
+</span><span class="w"></span><span class="nt">development</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="cp">*default</span><span class="w">
+</span><span class="w">  </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l">mangosteen_dev</span><span class="w">
+</span><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">mangosteen</span><span class="w">
+</span><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="m">123456</span><span class="w">
+</span><span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">db-for-mangosteen</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="5-后端开发">5 后端开发</h1>
+<ul>
+<li>
+<p>设计数据库的两种思路</p>
+<ul>
+<li>
+<p>自上而下：先想大概，再添细节</p>
+</li>
+<li>
+<p>自下而上：用到什么加什么</p>
+</li>
+<li>
+<p>两种思路可以混合</p>
+</li>
+</ul>
+</li>
+<li>
+<p>工具</p>
+<ul>
+<li>
+<p>建模工具：<code>bin/rails g model user email:string name:string</code></p>
+<ul>
+<li>
+<p>生成app/model/user.rb</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>生成db/migrate/create_users.rb作为数据库操作工具（<code>ActiveRecord::Migration</code> ）只需写好其change方法即可</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">CreateUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span><span class="o">[</span><span class="mi">7</span><span class="o">.</span><span class="mi">0</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">change</span>
+    <span class="n">create_table</span> <span class="ss">:users</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:email</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:name</span>
+
+      <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span>
+      <span class="c1"># 相当于</span>
+      <span class="c1"># createTable(&#39;users&#39;, (api)=&gt;{</span>
+      <span class="c1"># 	api.string(&#39;email&#39;)</span>
+      <span class="c1"># })</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>同步到数据库：<code>bin/rails db:migrate</code></p>
+</li>
+<li>
+<p>反悔命令：<code>bin/rails db:rollback step=1</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>尝试实现创建user的功能</p>
+<ul>
+<li>
+<p>编写路由：config/routes.rb，指定controller</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
+  <span class="n">get</span> <span class="s1">&#39;/users/:id&#39;</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;users#show&#39;</span>
+  <span class="n">post</span> <span class="s1">&#39;/users/&#39;</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;users#create&#39;</span>
+  <span class="c1"># 相当于 post(&#39;users&#39;, { to: &#39;users#create&#39; })</span>
+  <span class="c1"># to属性的值表示该路由对应哪一个controller中的哪一个方法</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>创建Controller</p>
+<ul>
+<li>
+<p>脚手架：<code>bin/rails g controller users show create</code>，同时会自动生成routes相关内容，删掉即可</p>
+</li>
+<li>
+<p>生成 app/controllers/users_controller.rb ，编写show和create方法具体实现</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">show</span>
+    <span class="nb">p</span> <span class="s1">&#39;访问了show&#39;</span>
+  <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="nb">p</span> <span class="s1">&#39;访问了create&#39;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>使用curl命令测试get和post接口，记得重启项目</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">curl -X POST http://127.0.0.1:3000/users
+curl GET http://127.0.0.1:3000/users/1
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>创建用户并验证</p>
+<ul>
+<li>
+<p>app/controllers/users_controller.rb</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">create</span>
+  <span class="n">u1</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span> <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;gsq@xxx.com&#39;</span><span class="p">,</span> <span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;gsq&#39;</span>
+  <span class="k">if</span> <span class="n">u1</span><span class="o">.</span><span class="n">save</span>
+    <span class="c1"># 输出JSON视图</span>
+    <span class="n">render</span> <span class="ss">json</span><span class="p">:</span><span class="n">u1</span>
+  <span class="k">else</span>
+    <span class="n">render</span> <span class="ss">json</span><span class="p">:</span><span class="n">u1</span><span class="o">.</span><span class="n">errors</span>
+  <span class="k">end</span>
+ <span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>app/model/user.rb 在model中实现验证</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span>
+    <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-05-17
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/rails/">Rails</a>
+          <a href="/tags/vue3/">vue3</a>
+          <a href="/tags/tsx/">tsx</a>
+          <a href="/tags/aliyun/">aliyun</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E8%AE%B0%E8%B4%A6app-3-rspec%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">记账app_2_API初步实现</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95ts/">
+            <span class="next-text nav-default">前端面试TS</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

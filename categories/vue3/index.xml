@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vue3 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/categories/vue3/</link>
+    <description>Recent content in Vue3 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 08 Jun 2022 10:39:08 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/vue3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vue3组件通信</title>
+      <link>https://gsemir0418.github.io/post/vue3%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</link>
+      <pubDate>Wed, 08 Jun 2022 10:39:08 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/vue3%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</guid>
+      <description>数据双向绑定： 单向绑定：Model==&amp;gt;View，数据的变化会导致视图更新 双向绑定：Model&amp;lt;=&amp;gt;View，单向绑定的基</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="gsemir" /><meta name="description" content="1 BFC是什么 是什么：块级格式化上下文 怎么做： 触发条件： 浮动元素（元素的float非none） 绝对定位元素（元素的position为abso" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="gsemir" /><meta name="description" content="1 BFC是什么 是什么：块级格式化上下文，通俗地讲就是“被隔离的区间”，BFC元素的子元素不会对外面的其他元素产生影响 怎么做： 触发条件： 浮动元" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="前端面试CSS" />
-<meta property="og:description" content="1 BFC是什么 是什么：块级格式化上下文 怎么做： 触发条件： 浮动元素（元素的float非none） 绝对定位元素（元素的position为abso" />
+<meta property="og:description" content="1 BFC是什么 是什么：块级格式化上下文，通俗地讲就是“被隔离的区间”，BFC元素的子元素不会对外面的其他元素产生影响 怎么做： 触发条件： 浮动元" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95css/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-03-07T09:57:22+08:00" />
-<meta property="article:modified_time" content="2022-03-07T09:57:22+08:00" />
+<meta property="article:modified_time" content="2022-07-19T14:06:22+08:00" />
 
 <meta itemprop="name" content="前端面试CSS">
-<meta itemprop="description" content="1 BFC是什么 是什么：块级格式化上下文 怎么做： 触发条件： 浮动元素（元素的float非none） 绝对定位元素（元素的position为abso"><meta itemprop="datePublished" content="2022-03-07T09:57:22+08:00" />
-<meta itemprop="dateModified" content="2022-03-07T09:57:22+08:00" />
-<meta itemprop="wordCount" content="620">
+<meta itemprop="description" content="1 BFC是什么 是什么：块级格式化上下文，通俗地讲就是“被隔离的区间”，BFC元素的子元素不会对外面的其他元素产生影响 怎么做： 触发条件： 浮动元"><meta itemprop="datePublished" content="2022-03-07T09:57:22+08:00" />
+<meta itemprop="dateModified" content="2022-07-19T14:06:22+08:00" />
+<meta itemprop="wordCount" content="1567">
 <meta itemprop="keywords" content="面试,CSS," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="前端面试CSS"/>
-<meta name="twitter:description" content="1 BFC是什么 是什么：块级格式化上下文 怎么做： 触发条件： 浮动元素（元素的float非none） 绝对定位元素（元素的position为abso"/>
+<meta name="twitter:description" content="1 BFC是什么 是什么：块级格式化上下文，通俗地讲就是“被隔离的区间”，BFC元素的子元素不会对外面的其他元素产生影响 怎么做： 触发条件： 浮动元"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
             </div>
-          <span class="more-meta"> 620 words </span>
-          <span class="more-meta"> 2 mins read </span>
+          <span class="more-meta"> 1567 words </span>
+          <span class="more-meta"> 4 mins read </span>
         
       </div>
     </header>
@@ -148,13 +148,11 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#1-bfc是什么">1 BFC是什么</a></li>
-    <li><a href="#2-如何实现垂直居中">2 如何实现垂直居中</a></li>
+    <li><a href="#2-如何实现水平垂直居中">2 如何实现(水平)垂直居中</a></li>
     <li><a href="#3-css选择器优先级如何确定">3 CSS选择器优先级如何确定</a></li>
     <li><a href="#4-如何清除浮动">4 如何清除浮动</a></li>
     <li><a href="#5-两种盒模型box-sizing的区别">5 两种盒模型（box-sizing）的区别</a></li>
-    <li><a href="#6-css选择器">6 CSS选择器</a></li>
-    <li><a href="#7-css模块化">7 CSS模块化</a></li>
-    <li><a href="#8-css3新增属性与新增选择器">8 CSS3新增属性与新增选择器</a></li>
+    <li><a href="#6">6</a></li>
   </ul>
 </nav>
   </div>
@@ -163,7 +161,7 @@
       <h1 id="1-bfc是什么">1 BFC是什么</h1>
 <ol>
 <li>
-<p><strong>是什么</strong>：块级格式化上下文</p>
+<p><strong>是什么</strong>：块级格式化上下文，通俗地讲就是“<strong>被隔离的区间</strong>”，BFC元素的<strong>子元素</strong>不会对<strong>外面的</strong>其他元素产生影响</p>
 </li>
 <li>
 <p><strong>怎么做</strong>：</p>
@@ -183,16 +181,192 @@
 <p><strong>解决了什么问题</strong>：</p>
 <ol>
 <li>清除浮动（Why not .clearfix）</li>
-<li>防止垂直方向margin合并</li>
+<li><strong>外边距重叠</strong>（兄弟，间距）
+<ul>
+<li>定义两个div，分别指定两个盒子的margin-bottom和margin-top属性为10，理论上两者的间距应为20，但实际上间距为10，即出现了margin重合现象，如果两个元素的外边距不同，则取最大值，如果相同则仅为其中一个</li>
+<li>可以分别在两个div外包裹一个父元素container，指定container的css属性为以上任意属性值即可触发BFC，使得两个container中的div被分别“隔离”，解决margin重合的问题。</li>
+</ul>
+</li>
+<li><strong>margin塌陷</strong>（父子，高度）
+<ul>
+<li>定义父元素box，子元素box1，当子元素box1指定了margin-top属性为20px后，理论上子元素向下20px，父元素保持不动，但实际上父元素与子元素都向下移动了20px</li>
+<li>可以让父元素box变成BFC来解决</li>
+<li>出现这个问题的原因是子元素的margin没有参照，可以给父元素添加border-top属性，也可以解决这个问题</li>
+</ul>
+</li>
+<li><strong>高度坍塌，清除浮动</strong>（父子，浮动）
+<ul>
+<li>定义父元素的宽度与子元素的宽高，当子元素是浮动布局时，理论上虽然父元素没有定义高度，但子元素可以自动将父元素“撑开”。但实际上子元素的浮动属性使其脱离了文档流，导致父元素出现高度坍塌的情况</li>
+<li>将父元素变成BFC，使得子元素无法影响到父元素，实现了<strong>清除浮动</strong>的作用</li>
+</ul>
+</li>
+<li><strong>阻止元素被浮动元素覆盖</strong>（兄弟，浮动）
+<ul>
+<li>定义两个div，一个是正常元素，另外一个是浮动元素，那么浮动元素就会覆盖到正常元素上面</li>
+<li>将正常元素变为BFC元素，这样两个元素就不会互相干扰</li>
+</ul>
+</li>
 </ol>
 </li>
 </ol>
-<h1 id="2-如何实现垂直居中">2 如何实现垂直居中</h1>
+<h1 id="2-如何实现水平垂直居中">2 如何实现(水平)垂直居中</h1>
 <ul>
-<li>如果<code>.parent</code>的<code>height</code>不写，只需<code>padding:10px 0</code>就能将<code>.child</code>垂直居中</li>
-<li>如果<code>.parent</code>的<code>height</code>写死了，就很难把<code>.chlid</code>居中
+<li>如果<code>.parent</code>的<code>height</code>不确定，只需<code>padding:10px 0</code>就能将<code>.child</code>垂直居中</li>
+<li>如果<code>.parent</code>的<code>height</code>是确定的，就很难把<code>.chlid</code>居中
 <ul>
-<li>table自带的功能（<code>vertical-align: middle</code>）</li>
+<li>
+<p>table自带的功能</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>content<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>div装成table</p>
+<ul>
+<li>外部div的<code>display:table</code>，内部div的<code>display:table-cell; vertical-align:middle</code></li>
+</ul>
+</li>
+<li>
+<p>(子元素高度也确定)<code>相对定位 + margin-top: -50%*height</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">parent</span><span class="p">{</span>
+  <span class="k">height</span><span class="p">:</span> <span class="mi">600</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">child</span><span class="p">{</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+  <span class="k">top</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+  <span class="c">/* left: 50%; */</span>
+  <span class="c">/* width: 300px; */</span>
+  <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+  <span class="c">/* margin-left: -150px; */</span>
+  <span class="k">margin-top</span><span class="p">:</span> <span class="mi">-50</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>（子元素高度<strong>不</strong>确定）<code>translate(-50%,-50%)</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">parent</span><span class="p">{</span>
+  <span class="k">height</span><span class="p">:</span> <span class="mi">600</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">child</span><span class="p">{</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+  <span class="k">top</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+  <span class="k">left</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span> 
+  <span class="k">transform</span><span class="p">:</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">-50</span><span class="kt">%</span><span class="p">,</span><span class="mi">-50</span><span class="kt">%</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>（子元素高度确定）<code>定位0 + margin:auto</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">parent</span><span class="p">{</span>
+  <span class="k">height</span><span class="p">:</span> <span class="mi">600</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">child</span><span class="p">{</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+  <span class="k">width</span><span class="p">:</span> <span class="mi">300</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">height</span><span class="p">:</span> <span class="mi">200</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">right</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">margin</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>flex</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">parent</span><span class="p">{</span>
+  <span class="k">height</span><span class="p">:</span> <span class="mi">600</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+  <span class="k">justify-content</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+  <span class="k">align-items</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">child</span><span class="p">{</span>
+  <span class="k">width</span><span class="p">:</span> <span class="mi">300</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 </li>
 </ul>
@@ -203,24 +377,50 @@
 <li>属性后面加!important的优先级最高，但是要少用</li>
 </ol>
 <h1 id="4-如何清除浮动">4 如何清除浮动</h1>
+<ul>
+<li>方法一，给父元素添加.clearfix</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">clearfix</span><span class="p">:</span><span class="nd">after</span><span class="p">{</span>
+  <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span> <span class="c">/*或者 table*/</span>
+  <span class="k">clear</span><span class="p">:</span> <span class="kc">both</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>方法二，利用BFC（overflow: hidden&hellip;）</li>
+</ul>
 <h1 id="5-两种盒模型box-sizing的区别">5 两种盒模型（box-sizing）的区别</h1>
 <ol>
 <li>
-<p>先说第一种：content-box，width制定的是content区域宽度，而不是实际宽度，公式为</p>
+<p>先说第一种：content-box，width指定的是content区域宽度，而不是实际宽度，公式为</p>
 <ol>
 <li>
 <blockquote>
-<p><strong>实际宽度 = width + padding + border</strong></p>
+<ul>
+<li><strong>实际宽度 = width + padding + border</strong></li>
+</ul>
 </blockquote>
 </li>
 </ol>
 </li>
 <li>
-<p>再说第二种：border-box，width制定的是左右边框外侧的距离，公式为</p>
+<p>再说第二种：border-box，width指定的是左右边框外侧的距离（IE默认盒模型），公式为</p>
 <ol>
 <li>
 <blockquote>
-<p><strong>实际宽度 = width</strong></p>
+<ul>
+<li><strong>实际宽度 = width</strong></li>
+</ul>
 </blockquote>
 </li>
 </ol>
@@ -229,13 +429,10 @@
 <p>相同点：用来<strong>指定元素高度/宽度的计算标准</strong></p>
 </li>
 <li>
-<p>不同点：计算高度或宽度的方式不同，border-box更好用，符合我们的第一直觉</p>
+<p>不同点：计算高度或宽度的方式不同，<strong>border-box更好用</strong>，符合我们的第一直觉</p>
 </li>
 </ol>
-<h1 id="6-css选择器">6 CSS选择器</h1>
-<p>三大特性</p>
-<h1 id="7-css模块化">7 CSS模块化</h1>
-<h1 id="8-css3新增属性与新增选择器">8 CSS3新增属性与新增选择器</h1>
+<h1 id="6">6</h1>
 
     </div>
 
@@ -247,7 +444,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2022-03-07
+        2022-07-19
         
     </span>
   </p>

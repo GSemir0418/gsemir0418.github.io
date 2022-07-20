@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>大文件切片上传 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="GSemir" /><meta name="description" content="​ 针对大文件上传的业务场景，前后端采用切片上传的方案，即前端将大文件分割为固定大小的chunk，并循环请求给后端；后端每获取一部分，就写入到" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%87%E7%89%87%E4%B8%8A%E4%BC%A0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="大文件切片上传" />
+<meta property="og:description" content="​ 针对大文件上传的业务场景，前后端采用切片上传的方案，即前端将大文件分割为固定大小的chunk，并循环请求给后端；后端每获取一部分，就写入到" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%87%E7%89%87%E4%B8%8A%E4%BC%A0/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-06-28T13:21:32+08:00" />
+<meta property="article:modified_time" content="2022-06-28T13:21:32+08:00" />
+
+<meta itemprop="name" content="大文件切片上传">
+<meta itemprop="description" content="​ 针对大文件上传的业务场景，前后端采用切片上传的方案，即前端将大文件分割为固定大小的chunk，并循环请求给后端；后端每获取一部分，就写入到"><meta itemprop="datePublished" content="2022-06-28T13:21:32+08:00" />
+<meta itemprop="dateModified" content="2022-06-28T13:21:32+08:00" />
+<meta itemprop="wordCount" content="1420">
+<meta itemprop="keywords" content="nodejs,upload,express," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="大文件切片上传"/>
+<meta name="twitter:description" content="​ 针对大文件上传的业务场景，前后端采用切片上传的方案，即前端将大文件分割为固定大小的chunk，并循环请求给后端；后端每获取一部分，就写入到"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">大文件切片上传</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-06-28 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/"> 项目实战 </a>
+            </div>
+          <span class="more-meta"> 1420 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-客户端">1 客户端</a>
+          <ul>
+            <li><a href="#11-初始化">1.1 初始化</a></li>
+            <li><a href="#12-项目结构">1.2 项目结构</a></li>
+            <li><a href="#13-dom结构">1.3 dom结构</a></li>
+            <li><a href="#14-整体代码行文结构">1.4 整体代码行文结构</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-express服务端">2 Express服务端</a>
+          <ul>
+            <li><a href="#21-初始化">2.1 初始化</a></li>
+            <li><a href="#22-项目结构">2.2 项目结构</a></li>
+            <li><a href="#23-代码行文结构">2.3 代码行文结构</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>​		针对大文件上传的业务场景，前后端采用<strong>切片上传</strong>的方案，即前端将大文件分割为固定大小的chunk，并循环请求给后端；后端每获取一部分，就写入到服务器指定文件中，最终实现大文件上传。</p>
+<blockquote>
+<p><a href="https://github.com/GSemir0418/file-slice-upload">GSemir0418/file-slice-upload: 大文件切片上传方案，前端vite+js，后端express (github.com)</a></p>
+</blockquote>
+<h2 id="1-客户端">1 客户端</h2>
+<h3 id="11-初始化">1.1 初始化</h3>
+<p><code>npm init -y </code></p>
+<p><code>yarn add vite -D</code></p>
+<h3 id="12-项目结构">1.2 项目结构</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.
+├── index.html		项目首页
+├── node_modules
+├── package.json	
+├── src
+│   ├── app.js		项目入口文件，主要方法都写到这里
+│   └── config.js	字段映射等配置
+└── yarn.lock
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="13-dom结构">1.3 dom结构</h3>
+<p><code>&lt;input type='file' /&gt;</code>在Edge中点击后不会弹出文件资源管理器，至今未解决，暂时用Chrome替代</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">progress</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;uploadProgress&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;0&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">progress</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;file&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;videoUploader&#34;</span> <span class="na">label</span><span class="o">=</span><span class="s">&#34;选择视频&#34;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;uploadInfo&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;uploadBtn&#34;</span><span class="p">&gt;</span>上传视频<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://unpkg.com/axios/dist/axios.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;./src/app.js&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;module&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="14-整体代码行文结构">1.4 整体代码行文结构</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="p">{</span> <span class="nx">INFO</span><span class="p">,</span> <span class="nx">ALLOWED_TYPE</span><span class="p">,</span> <span class="nx">CHUNK_SIZE</span><span class="p">,</span> <span class="nx">API</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&#34;./config&#34;</span><span class="p">;</span>
+<span class="c1">// 立即执行函数，可以将docment参数注入到内部函数中形成闭包，以达到简写的效果
+</span><span class="c1"></span><span class="p">((</span><span class="nx">d</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 获取dom元素
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">oUploader</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;#videoUploader&#34;</span><span class="p">);</span>
+  <span class="p">...</span>
+  
+  <span class="c1">// 记录当前上传大小
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">uploadedSize</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="c1">// 绑定事件函数
+</span><span class="c1"></span>  <span class="kd">function</span> <span class="nx">bindEvent</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">oBtn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="nx">upload</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 上传事件函数
+</span><span class="c1"></span>  <span class="kr">async</span> <span class="kd">function</span> <span class="nx">upload</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 解构取出上传的文件及信息
+</span><span class="c1"></span>    <span class="c1">// 上传文件判空等前端校验
+</span><span class="c1"></span>    <span class="c1">// 校验通过，开始上传
+</span><span class="c1"></span>    <span class="c1">// 上传文件名处理（MD5）
+</span><span class="c1"></span>    <span class="c1">// 利用while循环切片并发送请求
+</span><span class="c1"></span>    <span class="k">while</span> <span class="p">(</span><span class="nx">uploadedSize</span> <span class="o">&lt;</span> <span class="nx">size</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">fileChunk</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">uploadedSize</span><span class="p">,</span> <span class="nx">uploadedSize</span> <span class="o">+</span> <span class="nx">CHUNK_SIZE</span><span class="p">);</span>
+      <span class="c1">// 构造请求参数
+</span><span class="c1"></span>      <span class="kr">const</span> <span class="nx">formData</span> <span class="o">=</span> <span class="nx">createFormData</span><span class="p">({</span>
+        <span class="nx">name</span><span class="p">,</span>
+        <span class="nx">fileName</span><span class="p">,</span>
+        <span class="nx">type</span><span class="p">,</span>
+        <span class="nx">size</span><span class="p">,</span>
+        <span class="nx">uploadedSize</span><span class="p">,</span>
+        <span class="nx">chunk</span><span class="o">:</span> <span class="nx">fileChunk</span><span class="p">,</span>
+      <span class="p">});</span>
+      <span class="c1">// axios发送请求
+</span><span class="c1"></span>      <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">response</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">API</span><span class="p">,</span> <span class="nx">formData</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">oInfo</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">INFO</span><span class="p">[</span><span class="s2">&#34;UPLOAD_FAILED&#34;</span><span class="p">]</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="c1">// chunk上传结束后，更新已上传的size，并同步进度条
+</span><span class="c1"></span>      <span class="nx">uploadedSize</span> <span class="o">+=</span> <span class="nx">fileChunk</span><span class="p">.</span><span class="nx">size</span><span class="p">;</span>
+      <span class="nx">oProgress</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">uploadedSize</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 全部chunk上传结束后，显示成功，清空数据，展示video元素
+</span><span class="c1"></span>  <span class="p">}</span>
+
+  <span class="c1">// 构造请求参数的函数
+</span><span class="c1"></span>  <span class="kd">function</span> <span class="nx">createFormData</span><span class="p">({</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">uploadedSize</span><span class="p">,</span> <span class="nx">chunk</span> <span class="p">})</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">postData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
+    <span class="nx">postData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;name&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+    <span class="p">...</span>
+    <span class="k">return</span> <span class="nx">postData</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 构造video元素的函数
+</span><span class="c1"></span>  <span class="kd">function</span> <span class="nx">createVideoElement</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">oVideo</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&#34;video&#34;</span><span class="p">);</span>
+    <span class="nx">oVideo</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
+    <span class="p">...</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">oVideo</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">bindEvent</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="nx">init</span><span class="p">();</span>
+<span class="p">})(</span><span class="nb">document</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2-express服务端">2 Express服务端</h2>
+<h3 id="21-初始化">2.1 初始化</h3>
+<p><code>npm init</code></p>
+<p><code>yarn add express express-fileupload</code></p>
+<p><code>yarn global add nodemon</code></p>
+<h3 id="22-项目结构">2.2 项目结构</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.
+├── app.js
+├── node_modules
+├── package.json
+├── upload_tem
+│   └── 1656466982424_1.mp4.mp4
+└── yarn.lock
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="23-代码行文结构">2.3 代码行文结构</h3>
+<p>主要熟悉一下express常见中间件及node常用方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;express&#34;</span><span class="p">);</span>
+<span class="c1">// 请求体数据处理中间件
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">bodyParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;body-parser&#34;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;express-fileupload&#34;</span><span class="p">);</span>
+<span class="c1">// extname是获取文件后缀名的
+</span><span class="c1"></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">extname</span><span class="p">,</span> <span class="nx">resolve</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;path&#34;</span><span class="p">);</span>
+<span class="c1">// existsSync检查文件是否存在; appendFileSync同步添加数据
+</span><span class="c1"></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">existsSync</span><span class="p">,</span> <span class="nx">appendFileSync</span><span class="p">,</span> <span class="nx">writeFileSync</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;fs&#34;</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="c1">// 解析并返回的请求体对象配置为任意类型
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="nx">extended</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}));</span>
+<span class="c1">// 解析json格式的请求体
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+<span class="c1">// 请求体中上传数据的处理，返回的数据在req.files中
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">uploader</span><span class="p">());</span>
+<span class="c1">// 指定静态文件url
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">,</span> <span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="s2">&#34;upload_tem&#34;</span><span class="p">));</span>
+
+<span class="c1">// 跨域处理
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s2">&#34;*&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Access-Control-Allow-origin&#34;</span><span class="p">,</span> <span class="s2">&#34;*&#34;</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Access-Control-Allow-methods&#34;</span><span class="p">,</span> <span class="s2">&#34;POST,GET&#34;</span><span class="p">);</span>
+  <span class="nx">next</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="c1">// 处理上传响应
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&#34;/upload_video&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">,</span> <span class="nx">uploadedSize</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">chunk</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">files</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+      <span class="nx">code</span><span class="o">:</span> <span class="mi">1001</span><span class="p">,</span>
+      <span class="nx">msg</span><span class="o">:</span> <span class="s2">&#34;No file Fond&#34;</span><span class="p">,</span>
+    <span class="p">});</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// 处理fileName 添加后缀名
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">filename</span> <span class="o">=</span> <span class="nx">fileName</span> <span class="o">+</span> <span class="nx">extname</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+  <span class="c1">// 声明文件保存路径
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">filePath</span> <span class="o">=</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">&#34;./upload_tem/&#34;</span> <span class="o">+</span> <span class="nx">filename</span><span class="p">);</span>
+
+  <span class="c1">// 根据uploadedSize判断新建或追加数据文件
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">uploadedSize</span> <span class="o">!==</span> <span class="s2">&#34;0&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 注意是字符串0
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">filePath</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+        <span class="nx">code</span><span class="o">:</span> <span class="mi">1002</span><span class="p">,</span>
+        <span class="nx">msg</span><span class="o">:</span> <span class="s2">&#34;No file exists&#34;</span><span class="p">,</span>
+      <span class="p">});</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// append数据到文件，结束本次上传
+</span><span class="c1"></span>    <span class="nx">appendFileSync</span><span class="p">(</span><span class="nx">filePath</span><span class="p">,</span> <span class="nx">chunk</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+      <span class="nx">code</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+      <span class="nx">msg</span><span class="o">:</span> <span class="s2">&#34;chunk appended&#34;</span><span class="p">,</span>
+      <span class="c1">// 将服务器静态数据文件路径发送给前端
+</span><span class="c1"></span>      <span class="nx">video_url</span><span class="o">:</span> <span class="s2">&#34;http://localhost:8000/&#34;</span> <span class="o">+</span> <span class="nx">filename</span><span class="p">,</span>
+    <span class="p">});</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// 如果uploadedSize为0，表示没有正在上传的数据
+</span><span class="c1"></span>  <span class="c1">// 则创建并写入这个文件
+</span><span class="c1"></span>  <span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">filePath</span><span class="p">,</span> <span class="nx">chunk</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span> <span class="nx">code</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span> <span class="nx">msg</span><span class="o">:</span> <span class="s2">&#34;file created&#34;</span> <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="c1">// 开启服务器 监听8000端口
+</span><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8000</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Server is running&#34;</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">GSemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-06-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nodejs/">nodejs</a>
+          <a href="/tags/upload/">upload</a>
+          <a href="/tags/express/">express</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E8%AE%B0%E8%B4%A6app_10_%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E5%90%8E%E7%AB%AF%E4%B8%8E%E6%96%87%E6%A1%A3/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">记账app_10_远程部署后端与文档</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E8%AE%B0%E8%B4%A6app_9_tdd%E4%B8%8Eapi%E6%96%87%E6%A1%A3/">
+            <span class="next-text nav-default">记账app_9_TDD与API文档</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

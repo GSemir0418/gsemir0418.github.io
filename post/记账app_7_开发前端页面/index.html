@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>记账app_7_开发前端页面 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 封装WelcomeLayout组件 Welcome页面的四个子组件代码基本一致，考虑将其整体抽离为一个布局组件 属性 和 插槽 都是父子组件传参的方" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_7_%E5%BC%80%E5%8F%91%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="记账app_7_开发前端页面" />
+<meta property="og:description" content="1 封装WelcomeLayout组件 Welcome页面的四个子组件代码基本一致，考虑将其整体抽离为一个布局组件 属性 和 插槽 都是父子组件传参的方" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_7_%E5%BC%80%E5%8F%91%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-24T14:24:32+08:00" />
+<meta property="article:modified_time" content="2022-05-26T14:24:32+08:00" />
+
+<meta itemprop="name" content="记账app_7_开发前端页面">
+<meta itemprop="description" content="1 封装WelcomeLayout组件 Welcome页面的四个子组件代码基本一致，考虑将其整体抽离为一个布局组件 属性 和 插槽 都是父子组件传参的方"><meta itemprop="datePublished" content="2022-05-24T14:24:32+08:00" />
+<meta itemprop="dateModified" content="2022-05-26T14:24:32+08:00" />
+<meta itemprop="wordCount" content="3809">
+<meta itemprop="keywords" content="Rails,vue3,tsx,aliyun," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="记账app_7_开发前端页面"/>
+<meta name="twitter:description" content="1 封装WelcomeLayout组件 Welcome页面的四个子组件代码基本一致，考虑将其整体抽离为一个布局组件 属性 和 插槽 都是父子组件传参的方"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">记账app_7_开发前端页面</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-05-24 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/"> 全栈项目 </a>
+            </div>
+          <span class="more-meta"> 3809 words </span>
+          <span class="more-meta"> 8 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-封装welcomelayout组件">1 封装WelcomeLayout组件</a></li>
+    <li><a href="#2-动画svg-sprites与滑动手势">2 动画、SVG Sprites与滑动手势</a>
+      <ul>
+        <li><a href="#21-路由与动画">2.1 路由与动画</a></li>
+        <li><a href="#22-svg-sprites">2.2 SVG Sprites</a></li>
+        <li><a href="#23-封装useswipe-hook">2.3 封装useSwipe Hook</a></li>
+        <li><a href="#24-滑动切换路由">2.4 滑动切换路由</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-业务与轮子">3 业务与轮子</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-封装welcomelayout组件">1 封装WelcomeLayout组件</h1>
+<blockquote>
+<p>Welcome页面的四个子组件代码基本一致，考虑将其整体抽离为一个布局组件</p>
+</blockquote>
+<ul>
+<li>
+<p>属性 和 插槽</p>
+<ul>
+<li>
+<p>都是父子组件传参的方式</p>
+</li>
+<li>
+<p>插槽传参是通过<strong>子组件</strong>的形式，而属性是通过<strong>标签属性</strong>来传递的</p>
+</li>
+<li>
+<p>slot是<code>setup</code>函数中<code>context</code>参数的一个属性，在子组件定义与父组件使用插槽时，都要以<strong>函数形式</strong>声明</p>
+</li>
+<li>
+<p>父组件在使用时，注意slots对象中的属性都是<strong>返回值为jsx的回调函数</strong>，使用**<code>v-slots</code>属性**向子组件传参</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>用法详见：<a href="https://github.com/vuejs/babel-plugin-jsx">vuejs/babel-plugin-jsx: JSX for Vue 3 (github.com)</a> Slot部分</p>
+</blockquote>
+<ul>
+<li>
+<p>使用插槽</p>
+<ul>
+<li>先定义再使用</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// First.tsx
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">...</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">First</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
+  <span class="nx">setup</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">slots</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">icon</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="p">{</span><span class="nx">pig</span><span class="p">}</span> <span class="p">/&gt;,</span>
+      <span class="nx">title</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span><span class="err">会赚钱</span><span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span><span class="err">还要会省钱</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;,</span>
+      <span class="nx">buttons</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;&gt;...&lt;/&gt;,</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">WelcomeLayout</span> <span class="na">v</span><span class="err">-</span><span class="na">slots</span><span class="o">=</span><span class="p">{</span><span class="nx">slots</span><span class="p">}</span> <span class="p">/&gt;;</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>也可以插入标签内使用</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// First.tsx
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">...</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">First</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
+  <span class="nx">setup</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">WelcomeLayout</span><span class="p">&gt;</span>
+    	<span class="p">{{</span>
+      	<span class="nx">icon</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="p">{</span><span class="nx">pig</span><span class="p">}</span> <span class="p">/&gt;,</span>
+      	<span class="nx">title</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span><span class="err">会赚钱</span><span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span><span class="err">还要会省钱</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;,</span>
+      	<span class="nx">buttons</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;&gt;...&lt;/&gt;,</span>
+      <span class="p">}}</span>
+    	<span class="p">&lt;/</span><span class="nt">WelcomeLayout</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>定义插槽</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// WelcomeLayout.tsx
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">...</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">WelcomeLayout</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
+  <span class="nx">setup</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">slots</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">context</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">wrapper</span><span class="p">}&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">card</span><span class="p">}&gt;</span>
+          <span class="p">{</span><span class="nx">slots</span><span class="p">.</span><span class="nx">icon</span><span class="o">?</span><span class="p">.()}</span>
+          <span class="p">{</span><span class="nx">slots</span><span class="p">.</span><span class="nx">title</span><span class="o">?</span><span class="p">.()}</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">actions</span><span class="p">}&gt;{</span><span class="nx">slots</span><span class="p">.</span><span class="nx">buttons</span><span class="o">?</span><span class="p">.()}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>优化</p>
+<ul>
+<li>
+<p>如果没用到ref，可以使用render替换setup，或者直接变成一个函数的形式（React）</p>
+<blockquote>
+<p>用法详见：<a href="https://github.com/vuejs/babel-plugin-jsx">vuejs/babel-plugin-jsx: JSX for Vue 3 (github.com)</a> with render部分</p>
+</blockquote>
+</li>
+<li>
+<p>优化First等欢迎页子组件（这不就是React吗）</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">...</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">Second</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">WelcomeLayout</span><span class="p">&gt;</span>
+      <span class="c1">// 这里不是模板字符串，而是对象的含义
+</span><span class="c1"></span>      <span class="p">{{</span>
+        <span class="nx">icon</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="p">{</span><span class="nx">clock</span><span class="p">}</span> <span class="p">/&gt;,</span>
+        <span class="nx">title</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span><span class="err">每日提醒</span><span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span><span class="err">不遗漏每一笔账单</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;,</span>
+        <span class="nx">buttons</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;&gt;...&lt;/&gt;,</span>
+      <span class="p">}}</span>
+    <span class="p">&lt;/</span><span class="nt">WelcomeLayout</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>优化WelcomeLayout.tsx，注意类型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">FunctionalComponent</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;vue&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">s</span> <span class="kr">from</span> <span class="s2">&#34;./WelcomeLayout.module.scss&#34;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">WelcomeLayout</span>: <span class="kt">FunctionalComponent</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">slots</span><span class="o">:</span> <span class="p">{</span> <span class="nx">icon</span><span class="p">,</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">buttons</span> <span class="p">}</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">context</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">...</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">card</span><span class="p">}&gt;</span>
+      <span class="p">{</span><span class="nx">icon</span><span class="o">?</span><span class="p">.()}</span>
+      <span class="p">{</span><span class="nx">title</span><span class="o">?</span><span class="p">.()}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>   
+  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="2-动画svg-sprites与滑动手势">2 动画、SVG Sprites与滑动手势</h1>
+<h2 id="21-路由与动画">2.1 路由与动画</h2>
+<ul>
+<li>
+<p>需求：切换Welcome子路由时加上过渡动画</p>
+</li>
+<li>
+<p>为了让动画只应用于中间的路由画面，需要将子组件的card与footer分离（代码略）</p>
+</li>
+<li>
+<p>GIt技巧——将远程仓库中的某次提交作为补丁应用到本地仓库</p>
+<ol>
+<li>
+<p><code>git log</code>复制某次commit id</p>
+</li>
+<li>
+<p><code>git format-patch -1 &lt;id&gt;</code>生成这次commit的补丁</p>
+</li>
+<li>
+<p><code>mv 0001-.patch ../.././</code>将补丁移入本地仓库</p>
+</li>
+<li>
+<p><code>git am &lt; 0001-.patch</code> 本地仓库应用这次补丁</p>
+</li>
+</ol>
+</li>
+<li>
+<p>首先需要将子路由的components分离，vue-router支持单页面多重RouterView</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// config/routes.tsx
+</span><span class="c1"></span><span class="p">...</span>
+<span class="nx">component</span>: <span class="kt">Welcome</span><span class="p">,</span>
+<span class="nx">children</span><span class="o">:</span> <span class="p">[</span>
+  <span class="c1">// 将components分为两部分，分别命名为main和footer
+</span><span class="c1"></span>	<span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="nx">components</span><span class="o">:</span> <span class="p">{</span> <span class="nx">main</span>: <span class="kt">First</span><span class="p">,</span> <span class="nx">footer</span>: <span class="kt">FirstActions</span> <span class="p">},</span> <span class="p">}</span>
+	<span class="p">...</span>
+<span class="p">]</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在Welcome使用时指定RouterView的name属性即可</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="p">&lt;</span><span class="nt">main</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">main</span><span class="p">}&gt;</span>
+	<span class="p">&lt;</span><span class="nt">RouterView</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">footer</span><span class="p">&gt;</span>
+	<span class="p">&lt;</span><span class="nt">RouterView</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;footer&#34;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>TSX的Transition方案</li>
+</ul>
+<blockquote>
+<p><a href="https://router.vuejs.org/zh/guide/advanced/transitions.html#%E5%9F%BA%E4%BA%8E%E8%B7%AF%E7%94%B1%E7%9A%84%E5%8A%A8%E6%80%81%E8%BF%87%E6%B8%A1">过渡动效 | Vue Router (vuejs.org)</a></p>
+</blockquote>
+<ul>
+<li>Template写法</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="c">&lt;!--</span> <span class="nx">使用动态过渡名称</span> <span class="o">--&gt;</span>
+<span class="p">&lt;</span><span class="nt">router-view</span> <span class="nt">v-slot</span><span class="s">=&#34;{ Component, route }&#34;&gt;
+</span><span class="s">  &lt;transition :name=&#34;route.meta.transition&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">component</span> <span class="nt">:is</span><span class="s">=&#34;Component&#34;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">transition</span><span class="p">&gt;</span>
+<span class="o">&lt;</span><span class="err">/router-view&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>针对TSX，我们可以参考slots的tsx写法
+<ul>
+<li><code>RouterView</code>的<code>slots</code>接受一个函数，函数的参数包含<strong>渲染的路由组件</strong>与<strong>路由属性</strong>，返回值为一个<strong>新组件</strong>（注意，返回的组件需要利用vue提供的<code>h</code>方法手动渲染，(好像也不需要&hellip;)）。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="p">&lt;</span><span class="nt">RouterView</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;main&#34;</span><span class="p">&gt;</span>
+	<span class="p">{</span>
+    <span class="p">({</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">route</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="nx">h</span><span class="p">(</span><span class="nx">Component</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">RouterView</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>注意：在RouterView的类型定义中找到其slots函数的类型</p>
+</li>
+<li>
+<p>那么就可以在<code>Component</code>外包上过渡组件<code>Transition</code>，并指定四个状态的css</p>
+</li>
+<li>
+<p>注意：如果指定了Transition的name，那么动画的css需要写到全局样式中。这里我们使用自定义动画，此时样式就可以写为CSS Modules的形式了</p>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://vuejs.org/guide/built-ins/transition.html#css-based-transitions">Transition | Vue.js (vuejs.org)</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-scss" data-lang="scss"><span class="c1">// Welcome.module.scss
+</span><span class="c1">// 激活路由切换后，滑入滑出的样式
+</span><span class="c1"></span><span class="nc">.slide_fade_enter_active</span><span class="o">,</span>
+<span class="nc">.slide_fade_leave_active</span> <span class="p">{</span>
+  <span class="na">position</span><span class="o">:</span> <span class="ni">absolute</span><span class="p">;</span>
+  <span class="na">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="na">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="na">width</span><span class="o">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+  <span class="na">height</span><span class="o">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+  <span class="na">transition</span><span class="o">:</span> <span class="ni">all</span> <span class="mi">0</span><span class="mf">.5</span><span class="kt">s</span> <span class="ni">ease-out</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 进入和离开屏幕的位置
+</span><span class="c1"></span><span class="nc">.slide_fade_enter_from</span> <span class="p">{</span>
+  <span class="na">transform</span><span class="o">:</span> <span class="nf">translateX</span><span class="p">(</span><span class="mi">100</span><span class="kt">vw</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nc">.slide_fade_leave_to</span> <span class="p">{</span>
+  <span class="na">transform</span><span class="o">:</span> <span class="nf">translateX</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="kt">vw</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>最终版</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="p">&lt;</span><span class="nt">RouterView</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;main&#34;</span><span class="p">&gt;</span>
+	<span class="p">{({</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">route</span> <span class="p">}</span><span class="o">:</span> <span class="p">{</span> <span class="nx">Component</span>: <span class="kt">VNode</span><span class="p">;</span> <span class="nx">route</span>: <span class="kt">RouteLocationNormalizedLoaded</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
+		<span class="p">&lt;</span><span class="nt">Transition</span>
+			<span class="na">enterFromClass</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">slide_fade_enter_from</span><span class="p">}</span>
+			<span class="na">enterActiveClass</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">slide_fade_enter_active</span><span class="p">}</span>
+			<span class="na">leaveToClass</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">slide_fade_leave_to</span><span class="p">}</span>
+			<span class="na">leaveActiveClass</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">slide_fade_leave_active</span><span class="p">}</span>
+		<span class="p">&gt;</span>
+			<span class="p">{</span><span class="nx">Component</span><span class="p">}</span>
+		<span class="p">&lt;/</span><span class="nt">Transition</span><span class="p">&gt;</span>
+	<span class="p">)}</span>
+<span class="p">&lt;/</span><span class="nt">RouterView</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="22-svg-sprites">2.2 SVG Sprites</h2>
+<ul>
+<li>
+<p>在渲染Welcome页面时，图片是先渲染再请求的，这就导致图片的加载存在卡顿现象</p>
+</li>
+<li>
+<p>安装依赖</p>
+<ul>
+<li>
+<p><code>pnpm i svgo</code>  用于优化 SVG 文件</p>
+</li>
+<li>
+<p><code>pnpm i svgstore</code>  用于制作 SVG Sprites</p>
+</li>
+</ul>
+</li>
+<li>
+<p>编写Vite插件</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// vite_plugins/svgstore.js
+</span><span class="c1"></span><span class="cm">/* eslint-disable */</span>
+<span class="kr">import</span> <span class="nx">path</span> <span class="nx">from</span> <span class="s2">&#34;path&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">fs</span> <span class="nx">from</span> <span class="s2">&#34;fs&#34;</span><span class="p">;</span>
+<span class="c1">// 用于制作 SVG Sprites
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">store</span> <span class="nx">from</span> <span class="s2">&#34;svgstore&#34;</span><span class="p">;</span>
+<span class="c1">// 用于优化 SVG 文件
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">optimize</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&#34;svgo&#34;</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">svgstore</span> <span class="o">=</span> <span class="p">(</span><span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">inputFolder</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">inputFolder</span> <span class="o">||</span> <span class="s2">&#34;src/assets/icons&#34;</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;svgstore&#34;</span><span class="p">,</span>
+    <span class="c1">// 仅起到标识作用,因为此时打包文件还不存在
+</span><span class="c1"></span>    <span class="nx">resolveId</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">id</span> <span class="o">===</span> <span class="s2">&#34;@svgstore&#34;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s2">&#34;svg_bundle.js&#34;</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">load</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">id</span> <span class="o">===</span> <span class="s2">&#34;svg_bundle.js&#34;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="nx">store</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">iconsDir</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">inputFolder</span><span class="p">);</span>
+        <span class="c1">// 遍历icons目录，将全部svg作为symbol，整合制作为一个大svg
+</span><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">file</span> <span class="k">of</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span><span class="p">(</span><span class="nx">iconsDir</span><span class="p">))</span> <span class="p">{</span>
+          <span class="kr">const</span> <span class="nx">filepath</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">iconsDir</span><span class="p">,</span> <span class="nx">file</span><span class="p">);</span>
+          <span class="kr">const</span> <span class="nx">svgid</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">file</span><span class="p">).</span><span class="nx">name</span><span class="p">;</span>
+          <span class="kd">let</span> <span class="nx">code</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">filepath</span><span class="p">,</span> <span class="p">{</span> <span class="nx">encoding</span><span class="o">:</span> <span class="s2">&#34;utf-8&#34;</span> <span class="p">});</span>
+          <span class="nx">sprites</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">svgid</span><span class="p">,</span> <span class="nx">code</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">// 优化svg雪碧图代码
+</span><span class="c1"></span>        <span class="kr">const</span> <span class="p">{</span> <span class="nx">data</span><span class="o">:</span> <span class="nx">code</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">optimize</span><span class="p">(</span>
+          <span class="nx">sprites</span><span class="p">.</span><span class="nx">toString</span><span class="p">({</span> <span class="nx">inline</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">inline</span> <span class="p">}),</span>
+          <span class="p">{</span>
+            <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span>
+              <span class="s2">&#34;cleanupAttrs&#34;</span><span class="p">,</span>
+              <span class="s2">&#34;removeDoctype&#34;</span><span class="p">,</span>
+              <span class="s2">&#34;removeComments&#34;</span><span class="p">,</span>
+              <span class="s2">&#34;removeTitle&#34;</span><span class="p">,</span>
+              <span class="s2">&#34;removeDesc&#34;</span><span class="p">,</span>
+              <span class="s2">&#34;removeEmptyAttrs&#34;</span><span class="p">,</span>
+              <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;removeAttrs&#34;</span><span class="p">,</span>
+                <span class="nx">params</span><span class="o">:</span> <span class="p">{</span> <span class="nx">attrs</span><span class="o">:</span> <span class="s2">&#34;(data-name|data-xxx)&#34;</span> <span class="p">},</span>
+              <span class="p">},</span>
+            <span class="p">],</span>
+          <span class="p">}</span>
+        <span class="p">);</span>
+        <span class="k">return</span> <span class="sb">`const div = document.createElement(&#39;div&#39;)
+</span><span class="sb">div.innerHTML = \`</span><span class="si">${</span><span class="nx">code</span><span class="si">}</span><span class="sb">\`
+</span><span class="sb">const svg = div.getElementsByTagName(&#39;svg&#39;)[0]
+</span><span class="sb">// 将大svg隐藏
+</span><span class="sb">if (svg) {
+</span><span class="sb">  svg.style.position = &#39;absolute&#39;
+</span><span class="sb">  svg.style.width = 0
+</span><span class="sb">  svg.style.height = 0
+</span><span class="sb">  svg.style.overflow = &#39;hidden&#39;
+</span><span class="sb">  svg.setAttribute(&#34;aria-hidden&#34;, &#34;true&#34;)
+</span><span class="sb">}
+</span><span class="sb">// listen dom ready event
+</span><span class="sb">// 将大svg作为根节点第一个元素
+</span><span class="sb">document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+</span><span class="sb">  if (document.body.firstChild) {
+</span><span class="sb">    document.body.insertBefore(div, document.body.firstChild)
+</span><span class="sb">  } else {
+</span><span class="sb">    document.body.appendChild(div)
+</span><span class="sb">  }
+</span><span class="sb">})`</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>需要做一些配置</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="c1">// tsconfig.node.json
+</span><span class="c1">// 因为插件是运行在node环境中的，因此需要在tsconfig中配置
+</span><span class="c1"></span><span class="s2">&#34;include&#34;</span><span class="err">:</span> <span class="p">[</span>
+	<span class="s2">&#34;vite.config.ts&#34;</span><span class="p">,</span>
+	<span class="s2">&#34;src/vite_plugins/**/*&#34;</span><span class="p">,</span>
+<span class="p">]</span><span class="err">,</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// vite.config.ts
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">svgstore</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./src/vite_plugins/svgstore&#39;</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+    <span class="nx">vueJsx</span><span class="p">({</span>
+      <span class="nx">transformOn</span>: <span class="kt">true</span><span class="p">,</span>
+      <span class="nx">mergeProps</span>: <span class="kt">true</span>
+    <span class="p">}),</span>
+    <span class="c1">// 将插件导入并使用
+</span><span class="c1"></span>    <span class="nx">svgstore</span><span class="p">(),</span>
+  <span class="p">]</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// main.ts
+</span><span class="c1">// 在main.ts中引入
+</span><span class="c1"></span><span class="kr">import</span> <span class="s1">&#39;@svgstore&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// Welcome.tsx
+</span><span class="c1"></span><span class="p">{</span><span class="cm">/* import logo from &#39;logo.svg&#39; */</span><span class="p">}</span>
+<span class="p">{</span><span class="cm">/* &lt;img src={logo} /&gt; */</span><span class="p">}</span>
+<span class="p">&lt;</span><span class="nt">svg</span><span class="p">&gt;</span>
+	<span class="p">&lt;</span><span class="nt">use</span> <span class="na">xlinkHref</span><span class="o">=</span><span class="s">&#34;#logo&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">use</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="23-封装useswipe-hook">2.3 封装useSwipe Hook</h2>
+<ul>
+<li>
+<p>移动端的每个页面都要支持滑动事件，为此我们封装为<code>useSwipe hook</code>（也就是Vue中的Composition API）</p>
+</li>
+<li>
+<p><code>hook/Composition API</code>：界面中<strong>重复的部分</strong>连同<strong>其功能</strong>一起提取为<strong>可重用的代码段</strong></p>
+</li>
+<li>
+<p><code>useSwipe</code>本质上就是给传入的组件添加触控事件监听器，通过计算滑动初始位置与结束位置的差，得到移动的距离和方向，进而执行对应的响应</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">computed</span><span class="p">,</span> <span class="nx">ComputedRef</span><span class="p">,</span> <span class="nx">onMounted</span><span class="p">,</span> <span class="nx">onUnmounted</span><span class="p">,</span> <span class="nx">Ref</span><span class="p">,</span> <span class="nx">ref</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;vue&#34;</span><span class="p">;</span>
+<span class="kr">type</span> <span class="nx">Point</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">x</span>: <span class="kt">number</span><span class="p">;</span> <span class="nx">y</span>: <span class="kt">number</span> <span class="p">};</span>
+<span class="kr">type</span> <span class="nx">UseSwipe</span> <span class="o">=</span> <span class="p">(</span><span class="nx">el</span>: <span class="kt">Ref</span><span class="p">&lt;</span><span class="nt">HTMLElement</span> <span class="err">|</span> <span class="na">null</span><span class="p">&gt;)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">isMoving</span>: <span class="kt">Ref</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;;</span>
+  <span class="nx">distance</span>: <span class="kt">ComputedRef</span><span class="o">&lt;</span><span class="p">{</span> <span class="nx">x</span>: <span class="kt">number</span><span class="p">;</span> <span class="nx">y</span>: <span class="kt">number</span> <span class="p">}</span> <span class="o">|</span> <span class="kc">null</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nx">direction</span>: <span class="kt">ComputedRef</span><span class="o">&lt;</span><span class="s2">&#34;&#34;</span> <span class="o">|</span> <span class="s2">&#34;right&#34;</span> <span class="o">|</span> <span class="s2">&#34;left&#34;</span> <span class="o">|</span> <span class="s2">&#34;down&#34;</span> <span class="o">|</span> <span class="s2">&#34;up&#34;</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">useSwipe</span>: <span class="kt">UseSwipe</span> <span class="o">=</span> <span class="p">(</span><span class="nx">mainRef</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 滑动开始坐标
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">startPosition</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">&lt;</span><span class="nt">Point</span> <span class="err">|</span> <span class="na">null</span><span class="p">&gt;(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="c1">// 滑动结束坐标
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">endPosition</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">&lt;</span><span class="nt">Point</span> <span class="err">|</span> <span class="na">null</span><span class="p">&gt;(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="c1">// 滑动标记
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">isMoving</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="c1">// 触控距离
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">distance</span> <span class="o">=</span> <span class="nx">computed</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">startPosition</span><span class="p">.</span><span class="nx">value</span> <span class="o">||</span> <span class="o">!</span><span class="nx">endPosition</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">x</span>: <span class="kt">endPosition.value.x</span> <span class="o">-</span> <span class="nx">startPosition</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span>
+      <span class="nx">y</span>: <span class="kt">endPosition.value.y</span> <span class="o">-</span> <span class="nx">startPosition</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">});</span>
+  <span class="c1">// 触控方向
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">computed</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">distance</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">distance</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+    <span class="c1">// 判断x方向移动的距离与y方向移动的距离
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">y</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="s2">&#34;right&#34;</span> <span class="o">:</span> <span class="s2">&#34;left&#34;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">y</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="s2">&#34;down&#34;</span> <span class="o">:</span> <span class="s2">&#34;up&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+  <span class="c1">// 三个事件的回调
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">onTouchStart</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">isMoving</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="nx">endPosition</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="nx">startPosition</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="c1">// 只取第一根手指(touches[0])的移动数据
+</span><span class="c1"></span>      <span class="nx">x</span>: <span class="kt">e.touches</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">screenX</span><span class="p">,</span>
+      <span class="nx">y</span>: <span class="kt">e.touches</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">screenY</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">};</span>
+  <span class="kr">const</span> <span class="nx">onTouchMove</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">startPosition</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// endPosition实时更新
+</span><span class="c1"></span>    <span class="nx">endPosition</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">x</span>: <span class="kt">e.touches</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">screenX</span><span class="p">,</span> <span class="nx">y</span>: <span class="kt">e.touches</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">screenY</span> <span class="p">};</span>
+  <span class="p">};</span>
+  <span class="kr">const</span> <span class="nx">onTouchEnd</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">isMoving</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="c1">// 在useSwipe所在的组件挂载后 添加touch的事件监听
+</span><span class="c1"></span>  <span class="nx">onMounted</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">mainRef</span><span class="p">.</span><span class="nx">value</span><span class="o">?</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;touchstart&#34;</span><span class="p">,</span> <span class="nx">onTouchStart</span><span class="p">);</span>
+    <span class="nx">mainRef</span><span class="p">.</span><span class="nx">value</span><span class="o">?</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;touchmove&#34;</span><span class="p">,</span> <span class="nx">onTouchMove</span><span class="p">);</span>
+    <span class="nx">mainRef</span><span class="p">.</span><span class="nx">value</span><span class="o">?</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;touchend&#34;</span><span class="p">,</span> <span class="nx">onTouchEnd</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="c1">// 卸载组件后移除事件绑定
+</span><span class="c1"></span>  <span class="nx">onUnmounted</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">mainRef</span><span class="p">.</span><span class="nx">value</span><span class="o">?</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s2">&#34;touchstart&#34;</span><span class="p">,</span> <span class="nx">onTouchStart</span><span class="p">);</span>
+    <span class="nx">mainRef</span><span class="p">.</span><span class="nx">value</span><span class="o">?</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s2">&#34;touchmove&#34;</span><span class="p">,</span> <span class="nx">onTouchMove</span><span class="p">);</span>
+    <span class="nx">mainRef</span><span class="p">.</span><span class="nx">value</span><span class="o">?</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s2">&#34;touchend&#34;</span><span class="p">,</span> <span class="nx">onTouchEnd</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">isMoving</span><span class="p">,</span>
+    <span class="nx">distance</span><span class="p">,</span>
+    <span class="nx">direction</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="nx">setup</span><span class="p">(){</span>
+	<span class="kr">const</span> <span class="nx">main</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">&lt;</span><span class="nt">HTMLElement</span> <span class="err">|</span> <span class="na">null</span><span class="p">&gt;(</span><span class="kc">null</span><span class="p">)</span>
+	<span class="kr">const</span> <span class="p">{</span> <span class="nx">distance</span><span class="p">,</span> <span class="nx">direction</span><span class="p">,</span> <span class="nx">isMoving</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useSwipe</span><span class="p">(</span><span class="nx">main</span><span class="p">)</span>
+	<span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">main</span><span class="p">}</span> <span class="p">/&gt;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="24-滑动切换路由">2.4 滑动切换路由</h2>
+<ul>
+<li>
+<p>统一类型定义写法</p>
+<ul>
+<li>推荐</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">&lt;</span><span class="nt">HTMLElement</span><span class="p">&gt;()</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>不推荐</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">&lt;</span><span class="nt">HTMLElement</span> <span class="err">|</span> <span class="na">null</span><span class="p">&gt;(</span><span class="kc">null</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>为每个路由添加name，方便跳转</p>
+</li>
+<li>
+<p>在Welcome.tsx中监听main元素的滑动事件（<code>useSwipe(main)</code>）</p>
+</li>
+<li>
+<p>扩展useSwipe，提供useSwipe的<strong>生命周期机制</strong></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">interface</span> <span class="nx">Options</span> <span class="p">{</span>
+  <span class="c1">// 生命周期
+</span><span class="c1"></span>  <span class="nx">beforeStart</span><span class="o">?:</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nx">afterStart</span><span class="o">?:</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nx">beforeMove</span><span class="o">?:</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nx">afterMove</span><span class="o">?:</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nx">beforeEnd</span><span class="o">?:</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+  <span class="nx">afterEnd</span><span class="o">?:</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">type</span> <span class="nx">UseSwipe</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="nx">el</span>: <span class="kt">Ref</span><span class="p">&lt;</span><span class="nt">HTMLElement</span> <span class="err">|</span> <span class="na">null</span><span class="p">&gt;,</span>
+  <span class="nx">options?</span>: <span class="kt">Options</span>
+<span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">isMoving</span>: <span class="kt">Ref</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;;</span>
+  <span class="nx">distance</span>: <span class="kt">ComputedRef</span><span class="o">&lt;</span><span class="p">{</span> <span class="nx">x</span>: <span class="kt">number</span><span class="p">;</span> <span class="nx">y</span>: <span class="kt">number</span> <span class="p">}</span> <span class="o">|</span> <span class="kc">null</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nx">direction</span>: <span class="kt">ComputedRef</span><span class="o">&lt;</span><span class="s2">&#34;&#34;</span> <span class="o">|</span> <span class="s2">&#34;right&#34;</span> <span class="o">|</span> <span class="s2">&#34;left&#34;</span> <span class="o">|</span> <span class="s2">&#34;down&#34;</span> <span class="o">|</span> <span class="s2">&#34;up&#34;</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">useSwipe</span>: <span class="kt">UseSwipe</span> <span class="o">=</span> <span class="p">(</span><span class="nx">mainRef</span><span class="p">,</span> <span class="nx">options</span><span class="o">?</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="c1">// 三个事件的回调,生命周期hook贯穿其中
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">onTouchStart</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">beforeStart</span><span class="o">?</span><span class="p">.(</span><span class="nx">e</span><span class="p">);</span>
+    <span class="p">...</span>
+    <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">afterStart</span><span class="o">?</span><span class="p">.(</span><span class="nx">e</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="kr">const</span> <span class="nx">onTouchMove</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">beforeMove</span><span class="o">?</span><span class="p">.(</span><span class="nx">e</span><span class="p">);</span>
+    <span class="p">...</span>
+    <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">afterMove</span><span class="o">?</span><span class="p">.(</span><span class="nx">e</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="kr">const</span> <span class="nx">onTouchEnd</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">TouchEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">beforeEnd</span><span class="o">?</span><span class="p">.(</span><span class="nx">e</span><span class="p">);</span>
+    <span class="p">...</span>
+    <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">afterEnd</span><span class="o">?</span><span class="p">.(</span><span class="nx">e</span><span class="p">);</span>
+  <span class="p">};</span>
+	<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>现在就可以在滑动之前（<code>beforeStart</code>）<strong>禁用浏览器的默认滑动事件</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">const</span> <span class="p">{</span> <span class="nx">direction</span><span class="p">,</span> <span class="nx">isMoving</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useSwipe</span><span class="p">(</span><span class="nx">mainRef</span><span class="p">,</span> <span class="p">{</span>
+	<span class="nx">beforeStart</span><span class="o">:</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">(),</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在**<code>watchEffect</code><strong>中</strong>监听**<code>isMoving</code>和<code>direction</code>的变化（自动监听），从而执行路由切换逻辑</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// 路由切换逻辑
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">pushRoute</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">route</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s2">&#34;Welcome1&#34;</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&#34;/welcome/2&#34;</span><span class="p">);</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">route</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s2">&#34;Welcome2&#34;</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&#34;/welcome/3&#34;</span><span class="p">);</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">route</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s2">&#34;Welcome3&#34;</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&#34;/welcome/4&#34;</span><span class="p">);</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">route</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s2">&#34;Welcome4&#34;</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&#34;/start&#34;</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 执行路由切换
+</span><span class="c1"></span><span class="nx">watchEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">isMoving</span><span class="p">.</span><span class="nx">value</span> <span class="o">&amp;&amp;</span> <span class="nx">direction</span><span class="p">.</span><span class="nx">value</span> <span class="o">===</span> <span class="s2">&#34;left&#34;</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">pushRoute</span><span class="p">();</span>
+	<span class="p">}</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>经过测试后发现，由于滑动事件<strong>触发过于频繁</strong>，导致一瞬间就切换到了最后一页</p>
+</li>
+<li>
+<p>因此需要添加<strong>节流处理</strong></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// shared/throttle.tsx
+</span><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">throttle</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span>: <span class="kt">Function</span><span class="p">,</span> <span class="nx">delay</span>: <span class="kt">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">timer</span>: <span class="kt">number</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">(...</span><span class="nx">args</span>: <span class="kt">any</span><span class="p">[])</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">fn</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
+      <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">timer</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+      <span class="p">},</span> <span class="nx">delay</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>优化路由切换逻辑后的最终代码</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">defineComponent</span><span class="p">,</span> <span class="nx">Transition</span><span class="p">,</span> <span class="nx">ref</span><span class="p">,</span> <span class="nx">VNode</span><span class="p">,</span> <span class="nx">watchEffect</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;vue&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">RouteLocationNormalizedLoaded</span><span class="p">,</span>
+  <span class="nx">RouterView</span><span class="p">,</span>
+  <span class="nx">useRoute</span><span class="p">,</span>
+  <span class="nx">useRouter</span><span class="p">,</span>
+<span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;vue-router&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">s</span> <span class="kr">from</span> <span class="s2">&#34;./Welcome.module.scss&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">useSwipe</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;../hooks/useSwipe&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">throttle</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;../shared/throttle&#34;</span><span class="p">;</span>
+<span class="c1">// 定义每个路由名称与其下一个路由路径映射
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">welcomeRouteMap</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">Welcome1</span><span class="o">:</span> <span class="s2">&#34;/welcome/2&#34;</span><span class="p">,</span>
+  <span class="nx">Welcome2</span><span class="o">:</span> <span class="s2">&#34;/welcome/3&#34;</span><span class="p">,</span>
+  <span class="nx">Welcome3</span><span class="o">:</span> <span class="s2">&#34;/welcome/4&#34;</span><span class="p">,</span>
+  <span class="nx">Welcome4</span><span class="o">:</span> <span class="s2">&#34;/start&#34;</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">Welcome</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
+  <span class="nx">setup</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">mainRef</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">&lt;</span><span class="nt">HTMLElement</span> <span class="err">|</span> <span class="na">null</span><span class="p">&gt;(</span><span class="kc">null</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">direction</span><span class="p">,</span> <span class="nx">isMoving</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useSwipe</span><span class="p">(</span><span class="nx">mainRef</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">beforeStart</span><span class="o">:</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">(),</span>
+    <span class="p">});</span>
+    <span class="kr">const</span> <span class="nx">route</span> <span class="o">=</span> <span class="nx">useRoute</span><span class="p">();</span>
+    <span class="kr">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">useRouter</span><span class="p">();</span>
+    <span class="c1">// 将路由切换函数节流处理
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">pushRoute</span> <span class="o">=</span> <span class="nx">throttle</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">routeName</span> <span class="o">=</span> <span class="nx">route</span><span class="p">.</span><span class="nx">name</span> <span class="o">?</span> <span class="nx">route</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">:</span> <span class="s2">&#34;Welcome1&#34;</span><span class="p">;</span>
+      <span class="c1">// 使用replace代替push 防止回退
+</span><span class="c1"></span>      <span class="c1">// router.push(welcomeRouteMap[routeName]);
+</span><span class="c1"></span>      <span class="nx">router</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">welcomeRouteMap</span><span class="p">[</span><span class="nx">routeName</span><span class="p">]);</span>
+    <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+    <span class="nx">watchEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// 每当isMoving或者direction的值发生变动，都会执行
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">isMoving</span><span class="p">.</span><span class="nx">value</span> <span class="o">&amp;&amp;</span> <span class="nx">direction</span><span class="p">.</span><span class="nx">value</span> <span class="o">===</span> <span class="s2">&#34;left&#34;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">pushRoute</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">wrapper</span><span class="p">}&gt;</span>
+        <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">svg</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">use</span> <span class="na">xlinkHref</span><span class="o">=</span><span class="s">&#34;#mangosteen&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">use</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">GS记账</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">main</span> <span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">mainRef</span><span class="p">}&gt;</span>
+          <span class="p">&lt;</span><span class="nt">RouterView</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;main&#34;</span><span class="p">&gt;</span>
+            <span class="p">{({</span>
+              <span class="nx">Component</span><span class="p">,</span>
+              <span class="nx">route</span><span class="p">,</span>
+            <span class="p">}</span><span class="o">:</span> <span class="p">{</span>
+              <span class="nx">Component</span>: <span class="kt">VNode</span><span class="p">;</span>
+              <span class="nx">route</span>: <span class="kt">RouteLocationNormalizedLoaded</span><span class="p">;</span>
+            <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
+              <span class="p">&lt;</span><span class="nt">Transition</span>
+                <span class="na">enterFromClass</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">slide_fade_enter_from</span><span class="p">}</span>
+                <span class="na">enterActiveClass</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">slide_fade_enter_active</span><span class="p">}</span>
+                <span class="na">leaveToClass</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">slide_fade_leave_to</span><span class="p">}</span>
+                <span class="na">leaveActiveClass</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">slide_fade_leave_active</span><span class="p">}</span>
+              <span class="p">&gt;</span>
+                <span class="p">{</span><span class="nx">Component</span><span class="p">}</span>
+              <span class="p">&lt;/</span><span class="nt">Transition</span><span class="p">&gt;</span>
+            <span class="p">)}</span>
+          <span class="p">&lt;/</span><span class="nt">RouterView</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">footer</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">RouterView</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;footer&#34;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-业务与轮子">3 业务与轮子</h1>
+<p>我的思想是对的</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-05-26
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/rails/">Rails</a>
+          <a href="/tags/vue3/">vue3</a>
+          <a href="/tags/tsx/">tsx</a>
+          <a href="/tags/aliyun/">aliyun</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E8%AE%B0%E8%B4%A6app_8_%E7%BB%84%E4%BB%B6%E5%B0%81%E8%A3%85/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">记账app_8_组件封装</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E8%AE%B0%E8%B4%A6app-6-%E6%90%AD%E5%BB%BA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/">
+            <span class="next-text nav-default">记账app_6_搭建前端项目</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

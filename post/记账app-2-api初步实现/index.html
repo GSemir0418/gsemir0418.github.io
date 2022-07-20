@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>记账app_3_rspec单元测试 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="0 curl测试接口 发送GET请求 curl GET http://localhost:3000/api/v1/stags?page=1 发送POST请求 curl -X POST http://localhost:3000/api/v1/tags 添加请求头 -H ‘Content-Type: application/json&#39; 添加消息体 -d &amp;lsquo;{&amp;ldquo;amount&amp;rdquo;: 99}&amp;rsquo; 弊端：1.难写 2.难" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-2-api%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="记账app_3_rspec单元测试" />
+<meta property="og:description" content="0 curl测试接口 发送GET请求 curl GET http://localhost:3000/api/v1/stags?page=1 发送POST请求 curl -X POST http://localhost:3000/api/v1/tags 添加请求头 -H ‘Content-Type: application/json&#39; 添加消息体 -d &lsquo;{&ldquo;amount&rdquo;: 99}&rsquo; 弊端：1.难写 2.难" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-2-api%E5%88%9D%E6%AD%A5%E5%AE%9E%E7%8E%B0/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-11T14:24:32+08:00" />
+<meta property="article:modified_time" content="2022-05-17T14:24:32+08:00" />
+
+<meta itemprop="name" content="记账app_3_rspec单元测试">
+<meta itemprop="description" content="0 curl测试接口 发送GET请求 curl GET http://localhost:3000/api/v1/stags?page=1 发送POST请求 curl -X POST http://localhost:3000/api/v1/tags 添加请求头 -H ‘Content-Type: application/json&#39; 添加消息体 -d &lsquo;{&ldquo;amount&rdquo;: 99}&rsquo; 弊端：1.难写 2.难"><meta itemprop="datePublished" content="2022-05-11T14:24:32+08:00" />
+<meta itemprop="dateModified" content="2022-05-17T14:24:32+08:00" />
+<meta itemprop="wordCount" content="1302">
+<meta itemprop="keywords" content="Rails,vue3,tsx,aliyun," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="记账app_3_rspec单元测试"/>
+<meta name="twitter:description" content="0 curl测试接口 发送GET请求 curl GET http://localhost:3000/api/v1/stags?page=1 发送POST请求 curl -X POST http://localhost:3000/api/v1/tags 添加请求头 -H ‘Content-Type: application/json&#39; 添加消息体 -d &lsquo;{&ldquo;amount&rdquo;: 99}&rsquo; 弊端：1.难写 2.难"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">记账app_3_rspec单元测试</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-05-11 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/"> 全栈项目 </a>
+            </div>
+          <span class="more-meta"> 1302 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-curl测试接口">0 curl测试接口</a></li>
+    <li><a href="#1-安装rspec">1 安装RSpec</a></li>
+    <li><a href="#2-测试controlleritems">2 测试controller（items）</a></li>
+    <li><a href="#3-bdd开发验证码的controller">3 BDD开发验证码的controller</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="0-curl测试接口">0 curl测试接口</h1>
+<ul>
+<li>发送GET请求</li>
+</ul>
+<p><code>curl GET http://localhost:3000/api/v1/stags?page=1</code></p>
+<ul>
+<li>发送POST请求</li>
+</ul>
+<p><code>curl -X POST http://localhost:3000/api/v1/tags</code></p>
+<p>添加请求头 -H ‘Content-Type: application/json'</p>
+<p>添加消息体 -d &lsquo;{&ldquo;amount&rdquo;: 99}&rsquo;</p>
+<ul>
+<li>弊端：1.难写 2.难批量 3.难重复操作</li>
+</ul>
+<h1 id="1-安装rspec">1 安装RSpec</h1>
+<ul>
+<li>为什么选择</li>
+</ul>
+<blockquote>
+<p><a href="https://www.ruby-toolbox.com/categories/testing_frameworks">Category: Test Frameworks - The Ruby Toolbox (ruby-toolbox.com)</a></p>
+</blockquote>
+<ol>
+<li>
+<p>比较老牌的rails测试框架，应用的项目多</p>
+</li>
+<li>
+<p>修复issue快，持续维护</p>
+</li>
+<li>
+<p>pull request接受率高，接受大家的意见</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>单元测试内容</p>
+<ul>
+<li>主要测controller，简单测M和V，不测Rails自带的功能</li>
+</ul>
+</li>
+<li>
+<p>安装</p>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://github.com/rspec/rspec-rails/tree/6-0-maintenance">rspec/rspec-rails at 6-0-maintenance (github.com)</a></p>
+</blockquote>
+<ol>
+<li>将<code>gem 'rspec-rails', '~&gt;5.0.0'</code>复制到Gemfile中</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">group</span> <span class="ss">:development</span><span class="p">,</span> <span class="ss">:test</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s2">&#34;debug&#34;</span><span class="p">,</span> <span class="ss">platforms</span><span class="p">:</span> <span class="o">%</span><span class="n">i</span><span class="o">[</span> <span class="n">mri</span> <span class="n">mingw</span> <span class="n">x64_mingw</span> <span class="o">]</span> 
+  <span class="n">gem</span> <span class="s1">&#39;rspec-rails&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 5.0.0&#39;</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>
+<p>运行<code>bundle</code>，安装依赖</p>
+</li>
+<li>
+<p>初始化rspec：<code>bin/rails g rspec:install</code></p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">bin/rails g rspec:install
+			create  .rspec
+      create  spec
+      create  spec/spec_helper.rb
+      create  spec/rails_helper.rb
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>配置测试数据库</li>
+</ol>
+<p><code>config/database.yml</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nn">...</span><span class="w">
+</span><span class="w"></span><span class="nt">test</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="cp">*default</span><span class="w">
+</span><span class="w">  </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l">mangosteen_test</span><span class="w">
+</span><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">mangosteen</span><span class="w">
+</span><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="m">123456</span><span class="w">
+</span><span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">db-for-mangosteen</span><span class="w">
+</span><span class="w"></span><span class="nn">...</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>
+<p>创建数据库：（也可以自己进入docker手动创建）<code>RAILS_ENV=test bin/rails db:create</code></p>
+</li>
+<li>
+<p>同步测试环境数据表：<code>RAILS_ENV=test bin/rails db:migrate</code></p>
+</li>
+<li>
+<p>创建user的model测试文件：<code>bin/rails g rspec:model user</code></p>
+</li>
+</ol>
+<p><code>spec/models/user_spec.rb</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># 一些辅助功能可以写在这里，例如登录功能</span>
+<span class="nb">require</span> <span class="s1">&#39;rails_helper&#39;</span>
+
+<span class="no">RSpec</span><span class="o">.</span><span class="n">describe</span> <span class="no">User</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:model</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s1">&#39;有email&#39;</span> <span class="k">do</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span> <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;gsq@zs.com&#39;</span>
+    <span class="c1"># to be 相当于对比值是否相等</span>
+    <span class="c1"># to eq 相当于对比两个对象，当然也包括对象的地址</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be</span> <span class="s1">&#39;gsq@zs.com&#39;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="8">
+<li>运行单元测试：<code>bundle exe rspec</code></li>
+</ol>
+<h1 id="2-测试controlleritems">2 测试controller（items）</h1>
+<ul>
+<li>使用RSpec的request test功能</li>
+</ul>
+<blockquote>
+<p><a href="https://relishapp.com/rspec/rspec-rails/v/5-1/docs">RSpec Rails 5.1 - RSpec Rails - RSpec - Relish (relishapp.com)</a></p>
+</blockquote>
+<ol>
+<li>创建测试文件：<code>bin/rails g rspec:request items</code></li>
+</ol>
+<p><code>spec/requests/items_spec.rb</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;rails_helper&#39;</span>
+
+<span class="no">RSpec</span><span class="o">.</span><span class="n">describe</span> <span class="s2">&#34;Items&#34;</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:request</span> <span class="k">do</span>
+  <span class="c1"># 每次测试用例运行完毕，都会自动清空数据表</span>
+  <span class="n">describe</span> <span class="s2">&#34;GET /items&#34;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&#34;能成功创建并分页返回数据&#34;</span> <span class="k">do</span>
+      <span class="c1"># 创建11条数据</span>
+      <span class="mi">11</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="no">Item</span><span class="o">.</span><span class="n">create</span> <span class="ss">amount</span><span class="p">:</span> <span class="mi">99</span> <span class="p">}</span>
+      <span class="c1"># 此时期待数据库中有11条数据，表示创建成功</span>
+      <span class="n">expect</span><span class="p">(</span><span class="no">Item</span><span class="o">.</span><span class="n">count</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">11</span>
+
+      <span class="c1"># 接下来构造请求</span>
+      <span class="n">get</span> <span class="s1">&#39;/api/v1/items&#39;</span>
+      <span class="c1"># 期待状态码为200 即请求成功</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+      <span class="c1"># 将返回数据反序列化</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+      <span class="c1"># 期待返回的数据条数为10(因为默认pageSize为10)，看是否成功返回</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">10</span>
+
+      <span class="c1"># 同理测试分页接口</span>
+      <span class="n">get</span> <span class="s1">&#39;/api/v1/items?page=2&#39;</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resources&#39;</span><span class="o">].</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="mi">1</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="n">describe</span> <span class="s1">&#39;POST /items&#39;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s1">&#39;能够创建一条数据&#39;</span> <span class="k">do</span>
+      <span class="c1"># 测试是否在数据表中创建了一条数据 利用change</span>
+      <span class="n">expect</span> <span class="p">{</span>
+        <span class="n">post</span> <span class="s1">&#39;/api/v1/items&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span><span class="ss">amount</span><span class="p">:</span> <span class="mi">99</span><span class="p">}</span>
+      <span class="p">}</span><span class="o">.</span><span class="n">to</span> <span class="n">change</span> <span class="p">{</span><span class="no">Item</span><span class="o">.</span><span class="n">count</span><span class="p">}</span><span class="o">.</span><span class="n">by</span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">201</span><span class="p">)</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+      <span class="c1"># 测试返回数据的值是否一致</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resource&#39;</span><span class="o">][</span><span class="s1">&#39;amount&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span>
+      <span class="c1"># 是否有id（只能间接测试）</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;resource&#39;</span><span class="o">][</span><span class="s1">&#39;id&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be_an</span><span class="p">(</span><span class="no">Numeric</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-bdd开发验证码的controller">3 BDD开发验证码的controller</h1>
+<ul>
+<li>生成6位验证码随机数</li>
+</ul>
+<p>（<code>bin/rails console</code>进入console模式进行测试）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># 方案一 直接rand方法，但是基于当前时间的随机数不够安全</span>
+<span class="nb">rand</span><span class="o">.</span><span class="n">to_s</span><span class="o">[</span><span class="mi">2</span><span class="o">..</span><span class="mi">7</span><span class="o">]</span>
+<span class="c1"># 方案二 SecureRandom方法生成十六进制的数字，再调用它的random_number方法转为随机十进制数字，最后截取</span>
+<span class="no">SecureRandom</span><span class="o">.</span><span class="n">random_number</span><span class="o">.</span><span class="n">to_s</span><span class="o">[</span><span class="mi">2</span><span class="o">..</span><span class="mi">7</span><span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>app/controllers/api/v1/validation_codes_controller.rb</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">ValidationCodesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="n">validation_code</span> <span class="o">=</span> <span class="no">ValidationCode</span><span class="o">.</span><span class="n">new</span> <span class="ss">email</span><span class="p">:</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">,</span>
+      <span class="ss">kind</span><span class="p">:</span> <span class="s1">&#39;log_in&#39;</span><span class="p">,</span> <span class="ss">code</span><span class="p">:</span> <span class="no">SecureRandom</span><span class="o">.</span><span class="n">random_number</span><span class="o">.</span><span class="n">to_s</span><span class="o">[</span><span class="mi">2</span><span class="o">..</span><span class="mi">7</span><span class="o">]</span>
+    <span class="k">if</span> <span class="n">validation_code</span><span class="o">.</span><span class="n">save</span>
+      <span class="n">head</span> <span class="mi">200</span>
+    <span class="k">else</span> 
+      <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span><span class="ss">errors</span><span class="p">:</span> <span class="n">validation_code</span><span class="o">.</span><span class="n">errors</span><span class="p">}</span>
+    <span class="k">end</span>
+    <span class="c1"># TODO:目前仅实现在数据库中创建了validation_code，真正的发送功能待实现</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>创建vallidation_codes的测试文件：<code>bin/rails g rspec:request validation_codes</code></li>
+</ul>
+<p><code>spec/requests/validation_codes_spec.rb</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;rails_helper&#39;</span>
+
+<span class="no">RSpec</span><span class="o">.</span><span class="n">describe</span> <span class="s2">&#34;ValidationCodes&#34;</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:request</span> <span class="k">do</span>
+  <span class="n">describe</span> <span class="s2">&#34;验证码&#34;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&#34;能够被发送&#34;</span> <span class="k">do</span>
+      <span class="n">post</span> <span class="s1">&#39;/api/v1/validation_codes&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span>
+        <span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;845217811@qq.com&#39;</span>
+      <span class="p">}</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>执行单元测试：<code>bundle exec rspec</code></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-05-17
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/rails/">Rails</a>
+          <a href="/tags/vue3/">vue3</a>
+          <a href="/tags/tsx/">tsx</a>
+          <a href="/tags/aliyun/">aliyun</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E8%AE%B0%E8%B4%A6app-4-%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">记账app_4_本地部署实践</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E8%AE%B0%E8%B4%A6app-3-rspec%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+            <span class="next-text nav-default">记账app_2_API初步实现</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

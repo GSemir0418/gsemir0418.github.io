@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dockerfile on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/dockerfile/</link>
+    <description>Recent content in dockerfile on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 19 Jul 2022 09:47:28 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/dockerfile/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker学习</title>
+      <link>https://gsemir0418.github.io/post/docker%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Tue, 19 Jul 2022 09:47:28 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/docker%E5%AD%A6%E4%B9%A0/</guid>
+      <description>目标：使用docker搭建自用开发环境 1 docker核心概念 核心概念主要包括dockerfile、container、image、volum</description>
+    </item>
+    
+  </channel>
+</rss>

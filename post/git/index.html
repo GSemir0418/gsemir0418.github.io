@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/post/git/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-08-15T22:02:28+08:00" />
-<meta property="article:modified_time" content="2021-11-12T15:45:00+08:00" />
+<meta property="article:modified_time" content="2022-07-15T15:45:00+08:00" />
 
 <meta itemprop="name" content="Git相关">
 <meta itemprop="description" content="0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &#34;gsemir0418&#34; git config --global user.email &#34;845217811@qq.com&#34; // 查看全局配置 git config --list 0.2 配置SSH公"><meta itemprop="datePublished" content="2021-08-15T22:02:28+08:00" />
-<meta itemprop="dateModified" content="2021-11-12T15:45:00+08:00" />
-<meta itemprop="wordCount" content="1982">
+<meta itemprop="dateModified" content="2022-07-15T15:45:00+08:00" />
+<meta itemprop="wordCount" content="2185">
 <meta itemprop="keywords" content="GitHub," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Git相关"/>
 <meta name="twitter:description" content="0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &#34;gsemir0418&#34; git config --global user.email &#34;845217811@qq.com&#34; // 查看全局配置 git config --list 0.2 配置SSH公"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/github/"> GitHub </a>
             </div>
-          <span class="more-meta"> 1982 words </span>
-          <span class="more-meta"> 4 mins read </span>
+          <span class="more-meta"> 2185 words </span>
+          <span class="more-meta"> 5 mins read </span>
         
       </div>
     </header>
@@ -180,6 +180,7 @@
         <li><a href="#92-业务场景">9.2 业务场景</a></li>
       </ul>
     </li>
+    <li><a href="#10-git-reset">10 git reset</a></li>
   </ul>
 </nav>
   </div>
@@ -564,6 +565,41 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 </div>
 </div></li>
 </ul>
+<h1 id="10-git-reset">10 git reset</h1>
+<ol>
+<li>
+<p><strong>git reset &ndash;soft 版本号</strong></p>
+<ul>
+<li><code>git reset --soft HEAD^</code> //回到上一个版本</li>
+<li>不删除工作区改动的代码，撤销commit，<strong>不撤销git add .</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>git reset &ndash;mixed 版本号</strong></p>
+<ul>
+<li>
+<p><code>git reset --mixed HEAD^</code> //回到上一个版本</p>
+</li>
+<li>
+<p>不删除工作区改动的代码，撤销commit，撤销git add .</p>
+<p><strong>git reset &ndash;hard 版本号</strong></p>
+<p><code>git reset --hard HEAD^</code> //回到上一个版本</p>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<p>不删除工作区改动的代码，撤销commit，撤销git add .</p>
+<p><strong>git reset &ndash;hard 版本号</strong></p>
+<p><code>git reset --hard HEAD^</code> //回到上一个版本</p>
+</li>
+<li>
+<p><strong>删除</strong>工作区的代码，撤销commit，撤销git add . 回到上一次commit的状态</p>
+</li>
+</ul>
+</li>
+</ol>
 
     </div>
 
@@ -575,7 +611,7 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2021-11-12
+        2022-07-15
         
     </span>
   </p>
