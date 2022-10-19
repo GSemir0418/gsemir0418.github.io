@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vue on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/vue/</link>
+    <description>Recent content in Vue on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 21 Jul 2021 12:20:21 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/vue/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>前端面试Vue2</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95vue2/</link>
+      <pubDate>Wed, 21 Jul 2021 12:20:21 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95vue2/</guid>
+      <description>1 Vue2的生命周期钩子有哪些？数据请求放在哪个钩子？ 共11个 create（before+ed）*2 由于SSR会调用create，这种情况下</description>
+    </item>
+    
+    <item>
+      <title>前端面试Vue3</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95vue3/</link>
+      <pubDate>Wed, 21 Jul 2021 12:20:21 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95vue3/</guid>
+      <description>1 Vue3为什么使用Proxy 弥补 Object.defineProperty 的两个不足 动态创建的 data 属性需要用 Vue.set 来赋值，Vue 3 用了 Proxy 就不需要了 基于性能考虑，Vue 2 篡改了数组的 7 个</description>
+    </item>
+    
+  </channel>
+</rss>

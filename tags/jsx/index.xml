@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jsx on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/jsx/</link>
+    <description>Recent content in jsx on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 10 Aug 2022 09:54:46 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/jsx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JSX的本质是什么</title>
+      <link>https://gsemir0418.github.io/post/jsx%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BB%80%E4%B9%88/</link>
+      <pubDate>Wed, 10 Aug 2022 09:54:46 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/jsx%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BB%80%E4%B9%88/</guid>
+      <description>JSX 简介 – React (reactjs.org) 官网写的非常清楚： 概念： JSX，是一个 JavaScript 的语法扩展，我们利用JSX这个语法糖来更好地描述 UI 和数据的交互形式。 React元素渲染机</description>
+    </item>
+    
+  </channel>
+</rss>

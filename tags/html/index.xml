@@ -6,11 +6,11 @@
     <description>Recent content in HTML on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 07 Mar 2022 09:27:22 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/html/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Mar 2021 09:27:22 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/html/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>前端面试HTML</title>
       <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95html/</link>
-      <pubDate>Mon, 07 Mar 2022 09:27:22 +0800</pubDate>
+      <pubDate>Sun, 07 Mar 2021 09:27:22 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95html/</guid>
       <description>1 讲讲HTML中的语义化标签 是什么：语义化标签是一种写HTML标签的方法论/方式 怎么做：实现方式是遇到标题就用h1到h6，遇到段落用p，遇到</description>

@@ -17,15 +17,6 @@
     </item>
     
     <item>
-      <title>前端面试CSS</title>
-      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95css/</link>
-      <pubDate>Mon, 07 Mar 2022 09:57:22 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95css/</guid>
-      <description>1 BFC是什么 是什么：块级格式化上下文，通俗地讲就是“被隔离的区间”，BFC元素的子元素不会对外面的其他元素产生影响 怎么做： 触发条件： 浮动元</description>
-    </item>
-    
-    <item>
       <title>BFC</title>
       <link>https://gsemir0418.github.io/post/bfc/</link>
       <pubDate>Wed, 10 Nov 2021 19:45:19 +0800</pubDate>
@@ -41,6 +32,15 @@
       
       <guid>https://gsemir0418.github.io/post/css%E5%B8%83%E5%B1%80/</guid>
       <description>1 flex弹性布局 Flex布局的目标是提供一种更有效的方式来布局、对齐和分配容器中子元素的空间，即使它们的大小是未知的或动态的。 flex布局</description>
+    </item>
+    
+    <item>
+      <title>前端面试CSS</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95css/</link>
+      <pubDate>Sun, 07 Mar 2021 09:57:22 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95css/</guid>
+      <description>1 BFC是什么 是什么：块级格式化上下文，通俗地讲就是“被隔离的区间”，BFC元素的子元素不会对外面的其他元素产生影响 怎么做： 触发条件： 浮动元</description>
     </item>
     
   </channel>

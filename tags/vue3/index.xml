@@ -6,7 +6,25 @@
     <description>Recent content in vue3 on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 14 Jul 2022 14:24:32 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/vue3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Sep 2022 14:24:32 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/vue3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>记账app_13_axios实践</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_13_axios%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Tue, 06 Sep 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_13_axios%E5%AE%9E%E8%B7%B5/</guid>
+      <description>之前的笔记太过啰嗦，接下来只会记录思路及重要代码 1 Tag 1.1 长按编辑 思路：onTouchstart事件触发后，计时器开始计时，到时执行编辑逻辑；o</description>
+    </item>
+    
+    <item>
+      <title>记账app_12_登录鉴权与自制Mock系统</title>
+      <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_12_%E7%99%BB%E5%BD%95%E9%89%B4%E6%9D%83%E4%B8%8E%E8%87%AA%E5%88%B6mock%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Tue, 30 Aug 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_12_%E7%99%BB%E5%BD%95%E9%89%B4%E6%9D%83%E4%B8%8E%E8%87%AA%E5%88%B6mock%E7%B3%BB%E7%BB%9F/</guid>
+      <description>1 登录鉴权与路由守卫 1.1 登录跳转 return_to属性标识了登录成功后所要返回的路由路径，有三种途径可以实现return_to localStorage 1 2 const returnTo = localStorage.getItem(&amp;#39;return_to&amp;#39;) router.push(returnTo</description>
+    </item>
+    
     <item>
       <title>记账app_11_联调与axios封装</title>
       <link>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_11_%E8%81%94%E8%B0%83%E4%B8%8Eaxios%E5%B0%81%E8%A3%85/</link>
@@ -122,6 +140,15 @@
       
       <guid>https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app-1-%E5%BC%80%E5%8F%91%E5%87%86%E5%A4%87/</guid>
       <description>1 技术选型 Vue3 + TSX + Rails7 Vue3 + TSX的优点 像使用React一样使用Vue3 踩坑的乐趣 缺点 无法利用模板的性能优化： 静态提升、修补标记、树结构打平、加</description>
+    </item>
+    
+    <item>
+      <title>前端面试Vue3</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95vue3/</link>
+      <pubDate>Wed, 21 Jul 2021 12:20:21 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95vue3/</guid>
+      <description>1 Vue3为什么使用Proxy 弥补 Object.defineProperty 的两个不足 动态创建的 data 属性需要用 Vue.set 来赋值，Vue 3 用了 Proxy 就不需要了 基于性能考虑，Vue 2 篡改了数组的 7 个</description>
     </item>
     
   </channel>

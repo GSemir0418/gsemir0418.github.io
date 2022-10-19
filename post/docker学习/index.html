@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Docker学习">
 <meta itemprop="description" content="目标：使用docker搭建自用开发环境 1 docker核心概念 核心概念主要包括dockerfile、container、image、volum"><meta itemprop="datePublished" content="2022-07-19T09:47:28+08:00" />
 <meta itemprop="dateModified" content="2022-07-19T09:47:28+08:00" />
-<meta itemprop="wordCount" content="1174">
+<meta itemprop="wordCount" content="1212">
 <meta itemprop="keywords" content="docker,dockerfile,devcontainer," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Docker学习"/>
 <meta name="twitter:description" content="目标：使用docker搭建自用开发环境 1 docker核心概念 核心概念主要包括dockerfile、container、image、volum"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/docker/"> docker </a>
             </div>
-          <span class="more-meta"> 1174 words </span>
+          <span class="more-meta"> 1212 words </span>
           <span class="more-meta"> 3 mins read </span>
         
       </div>
@@ -176,6 +176,7 @@
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> 指定镜像tag</span><span class="err">
@@ -183,6 +184,7 @@
 </span><span class="err"></span><span class="k">ADD</span> 复制宿主机文件<span class="err">
 </span><span class="err"></span><span class="k">ENV</span> 添加环境变量<span class="err">
 </span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> 访问容器时的初始目录</span><span class="err">
+</span><span class="err"></span><span class="k">VOLUME</span> <span class="p">[</span><span class="err">指定匿名卷，防止run或rebuild时忘记-v绑定数据卷</span><span class="p">]</span><span class="err">
 </span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -601,9 +603,9 @@ $ docker run -v volume_name:/容器内需持久化的路径
           <a href="/tags/devcontainer/">devcontainer</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E9%83%A8%E7%BD%B2/">
+        <a class="prev" href="/post/%E6%89%8B%E5%86%99promise.all/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">云服务器docker部署</span>
+            <span class="prev-text nav-default">手写Promise.all</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
         <a class="next" href="/post/%E8%AE%B0%E8%B4%A6app_11_%E8%81%94%E8%B0%83%E4%B8%8Eaxios%E5%B0%81%E8%A3%85/">

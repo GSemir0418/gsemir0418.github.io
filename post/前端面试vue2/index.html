@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>前端面试Vue2 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 Vue2的生命周期钩子有哪些？数据请求放在哪个钩子？ 共11个 create（before&#43;ed）*2 由于SSR会调用create，这种情况下" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95vue2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="前端面试Vue2" />
+<meta property="og:description" content="1 Vue2的生命周期钩子有哪些？数据请求放在哪个钩子？ 共11个 create（before&#43;ed）*2 由于SSR会调用create，这种情况下" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95vue2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-21T12:20:21+08:00" />
+<meta property="article:modified_time" content="2021-07-21T12:20:21+08:00" />
+
+<meta itemprop="name" content="前端面试Vue2">
+<meta itemprop="description" content="1 Vue2的生命周期钩子有哪些？数据请求放在哪个钩子？ 共11个 create（before&#43;ed）*2 由于SSR会调用create，这种情况下"><meta itemprop="datePublished" content="2021-07-21T12:20:21+08:00" />
+<meta itemprop="dateModified" content="2021-07-21T12:20:21+08:00" />
+<meta itemprop="wordCount" content="961">
+<meta itemprop="keywords" content="面试,Vue,Vue2," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="前端面试Vue2"/>
+<meta name="twitter:description" content="1 Vue2的生命周期钩子有哪些？数据请求放在哪个钩子？ 共11个 create（before&#43;ed）*2 由于SSR会调用create，这种情况下"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">前端面试Vue2</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-21 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
+            </div>
+          <span class="more-meta"> 961 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-vue2的生命周期钩子有哪些数据请求放在哪个钩子">1 Vue2的生命周期钩子有哪些？数据请求放在哪个钩子？</a></li>
+    <li><a href="#2-vue2组件间通信方式有哪些">2 Vue2组件间通信方式有哪些</a></li>
+    <li><a href="#3-vuex用过吗怎么理解">3 Vuex用过吗，怎么理解</a></li>
+    <li><a href="#4-vuerouter用过吗怎么理解">4 VueRouter用过吗？怎么理解？</a></li>
+    <li><a href="#5-vue2是如何实现双向绑定的">5 Vue2是如何实现双向绑定的</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-vue2的生命周期钩子有哪些数据请求放在哪个钩子">1 Vue2的生命周期钩子有哪些？数据请求放在哪个钩子？</h1>
+<ul>
+<li>共11个</li>
+</ul>
+<p><code>create（before+ed）*2</code>  由于SSR会调用create，这种情况下不适合数据请求</p>
+<p><code>mount*2</code></p>
+<p><code>update*2</code></p>
+<p><code>destroy*2</code></p>
+<p><code>activated</code>  被keep-alive缓存的组件激活时调用</p>
+<p><code>deactivated</code> &hellip;.失活时</p>
+<p><code>errorCaptured</code>组件或组件后代报错时，上报一下当前页面有哪些崩溃</p>
+<h1 id="2-vue2组件间通信方式有哪些">2 Vue2组件间通信方式有哪些</h1>
+<ol>
+<li>
+<p>父子组件：使用「props 和事件」进行通信</p>
+</li>
+<li>
+<p>爷孙组件：</p>
+<ol>
+<li>使用两次父子组件间通信来实现</li>
+<li>使用「provide（爷） + inject（孙）」来通信</li>
+</ol>
+</li>
+<li>
+<p>任意组件：使用 eventBus = new Vue() 来通信</p>
+<ol>
+<li>主要API 是 <code>eventBus.$on</code> 和 <code>eventBus.$emit</code></li>
+<li>缺点是事件多了就很乱，难以维护</li>
+</ol>
+</li>
+<li>
+<p>任意组件：使用 Vuex 通信（Vue 3 可用 Pinia 代替 Vuex）</p>
+</li>
+</ol>
+<h1 id="3-vuex用过吗怎么理解">3 Vuex用过吗，怎么理解</h1>
+<ul>
+<li>
+<p><strong>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式 + 库</strong></p>
+</li>
+<li>
+<p>说出核心概念的名字和作用：store/State/Getter/Mutation/Action/Module</p>
+</li>
+</ul>
+<ol>
+<li>store 是个大容器，包含以下所有内容</li>
+<li>State 用来读取状态，带有一个 mapState 辅助函数</li>
+<li>Getter 用来读取派生状态，附有一个 mapGetters 辅助函数</li>
+<li>Mutation 用于同步提交状态变更，附有一个 mapMutations 辅助函数</li>
+<li>Action 用于异步变更状态，但它提交的是 mutation，而不是直接变更状态。</li>
+<li>Module 用来给 store 划分模块，方便维护代码</li>
+</ol>
+<ul>
+<li>常见追问：Mutation 和 Action 为什么要分开？
+<ul>
+<li>答案：为了让代码更易于维护。（可是 Pinia 就把 Mutation 和 Action 合并了呀）</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-vuerouter用过吗怎么理解">4 VueRouter用过吗？怎么理解？</h1>
+<ul>
+<li>
+<p><strong>Vue Router 是 Vue.js 的官方路由。它与 Vue.js 核心深度集成，让用 Vue.js 构建单页应用变得轻而易举。</strong></p>
+</li>
+<li>
+<p>说出核心概念的名字和作用：</p>
+<ul>
+<li>
+<p><code>router-link</code>单击跳转</p>
+</li>
+<li>
+<p><code>router-view</code> 容纳路由视图</p>
+</li>
+<li>
+<p><code>children</code> 嵌套路由</p>
+</li>
+<li>
+<p>Hash 模式和 History 模式</p>
+</li>
+<li>
+<p>路由守卫（钩子）</p>
+</li>
+<li>
+<p>懒加载 import(&lsquo;App&rsquo;)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>常见追问：</p>
+<ol>
+<li>Hash 模式和 History 模式的区别？
+<ol>
+<li>一个用的 Hash，一个用的 History API</li>
+<li>一个不需要后端 nginx 配合，一个需要</li>
+</ol>
+</li>
+<li>导航守卫如何实现登录控制？router.beforeEach</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">router</span><span class="p">.</span><span class="nx">beforeEach</span><span class="p">((</span><span class="nx">to</span><span class="p">,</span> <span class="nx">from</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">to</span><span class="p">.</span><span class="nx">path</span> <span class="o">===</span> <span class="s1">&#39;/login&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="nx">next</span><span class="p">()</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">to是受控页面</span> <span class="o">&amp;&amp;</span> <span class="nx">没有登录</span><span class="p">)</span> <span class="k">return</span> <span class="nx">next</span><span class="p">(</span><span class="s1">&#39;/login?return_to=...&#39;</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="5-vue2是如何实现双向绑定的">5 Vue2是如何实现双向绑定的</h1>
+<ul>
+<li>
+<p>一般使用<code>v-model</code>实现，是<code>v-bind:value</code>和<code>v-on:input</code>的语法糖</p>
+<ol>
+<li>
+<p><code>v-bind:value </code>实现了 <code>data =&gt; UI</code> 的单向绑定</p>
+<ul>
+<li>通过<code>Object.defineProperty API</code>给 data（递归）创建 getter 和 setter ，用于监听 data 的改变，data一变就会安排改变UI</li>
+</ul>
+</li>
+<li>
+<p><code>v-on:input</code> 实现了 <code>UI =&gt; data</code> 的单向绑定</p>
+<ul>
+<li>通过 <code>template compiler</code> 给DOM 添加事件监听，DOM input 的值变了就会去修改data</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-07-21
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/vue/">Vue</a>
+          <a href="/tags/vue2/">Vue2</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/node%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Node技术架构</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95vue3/">
+            <span class="next-text nav-default">前端面试Vue3</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

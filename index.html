@@ -126,115 +126,115 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E9%83%A8%E7%BD%B2/">云服务器docker部署</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/ts%E5%AD%A6%E4%B9%A06-%E6%B3%9B%E5%9E%8B/">TS学习6-泛型</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2022-07-20 </span>
+      <span class="post-time"> 2022-10-15 </span>
       <div class="post-category">
-          <a href="/categories/docker/"> docker </a>
+          <a href="/categories/typescript/"> TypeScript </a>
           </div>
-        <span class="more-meta"> 1455 words </span>
+        <span class="more-meta"> 1139 words </span>
         <span class="more-meta"> 3 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      1 云服务器配置 购买阿里云的服务器 配置ssh密钥对 将宿主机的ssh公钥作为密钥对添加至ECS实例中 1 $ cat ~/.ssh/id_rsa.pub 登录至云服务器，第一次使用ssh-c
+      1 泛型就像函数 1 2 3 4 5 const fn = (a, b) =&gt; a + b const result = fn(1, 2) // 3 type F&lt;A, B&gt; = A | B type Result = F&lt;string, number&gt; // string | number 函数的本质：推后执行的、部分待定的代码段 泛型的本质：
     </div>
     <div class="read-more">
-      <a href="/post/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E9%83%A8%E7%BD%B2/" class="read-more-link">Read more...</a>
+      <a href="/post/ts%E5%AD%A6%E4%B9%A06-%E6%B3%9B%E5%9E%8B/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/docker%E5%AD%A6%E4%B9%A0/">Docker学习</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/ts%E5%AD%A6%E4%B9%A05-%E5%87%BD%E6%95%B0/">TS学习5-函数</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2022-07-19 </span>
+      <span class="post-time"> 2022-10-14 </span>
       <div class="post-category">
-          <a href="/categories/docker/"> docker </a>
+          <a href="/categories/typescript/"> TypeScript </a>
           </div>
-        <span class="more-meta"> 1174 words </span>
+        <span class="more-meta"> 1385 words </span>
         <span class="more-meta"> 3 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      目标：使用docker搭建自用开发环境 1 docker核心概念 核心概念主要包括dockerfile、container、image、volum
+      1 复习对象语法 字面量形式 1 2 3 4 type Person = { name: string age: number } 索引签名 1 2 3 4 type Hash = { [k: string]: unknown length: number } 映射类型（多用于泛型） 1 2 3 4 type Hash = { [k in string]: unknown length: number // 报
     </div>
     <div class="read-more">
-      <a href="/post/docker%E5%AD%A6%E4%B9%A0/" class="read-more-link">Read more...</a>
+      <a href="/post/ts%E5%AD%A6%E4%B9%A05-%E5%87%BD%E6%95%B0/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E8%AE%B0%E8%B4%A6app_11_%E8%81%94%E8%B0%83%E4%B8%8Eaxios%E5%B0%81%E8%A3%85/">记账app_11_联调与axios封装</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/ts%E5%AD%A6%E4%B9%A04-%E7%B1%BB%E5%9E%8B%E5%85%BC%E5%AE%B9/">TS学习4-类型兼容</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2022-07-14 </span>
+      <span class="post-time"> 2022-10-13 </span>
       <div class="post-category">
-          <a href="/categories/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/"> 全栈项目 </a>
+          <a href="/categories/typescript/"> TypeScript </a>
           </div>
-        <span class="more-meta"> 1100 words </span>
+        <span class="more-meta"> 79 words </span>
+        <span class="more-meta"> 1 min read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      顶类型 unknown 所有类型的集合 任何值都可以赋给unknown类型 1 2 3 let a: unknown let b: string = &#39;1&#39; a = b 底类型 never 可以被赋给任何类型 1 2 3 let a: never = undefined as never let b: string = &#39;1&#39;
+    </div>
+    <div class="read-more">
+      <a href="/post/ts%E5%AD%A6%E4%B9%A04-%E7%B1%BB%E5%9E%8B%E5%85%BC%E5%AE%B9/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/ts%E5%AD%A6%E4%B9%A03-%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%B1%BB%E5%9E%8B/">TS学习3-联合类型和交叉类型</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-10-12 </span>
+      <div class="post-category">
+          <a href="/categories/typescript/"> TypeScript </a>
+          </div>
+        <span class="more-meta"> 1334 words </span>
         <span class="more-meta"> 3 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      1 发送验证码接口联调 1.1 前端：请求验证码 pnpm i axios安装axios，在首页发送验证码的请求 配置vite开发服务器代理 1 2 3 4 5 6 7 8 9 10 11 12
+      TS = JS + 类型系统 TS类型系统的运算主要有两种：或（|）运算和与（&amp;）运算 1 联合类型（并集） 1.1 示例 | 可以属于x类型，也可以属于y类型 1
     </div>
     <div class="read-more">
-      <a href="/post/%E8%AE%B0%E8%B4%A6app_11_%E8%81%94%E8%B0%83%E4%B8%8Eaxios%E5%B0%81%E8%A3%85/" class="read-more-link">Read more...</a>
+      <a href="/post/ts%E5%AD%A6%E4%B9%A03-%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%B1%BB%E5%9E%8B/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E8%AE%B0%E8%B4%A6app_10_%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E5%90%8E%E7%AB%AF%E4%B8%8E%E6%96%87%E6%A1%A3/">记账app_10_远程部署后端与文档</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/ts%E5%AD%A6%E4%B9%A02-ts%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B/">TS学习2-TS中的类型</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2022-07-12 </span>
+      <span class="post-time"> 2022-10-11 </span>
       <div class="post-category">
-          <a href="/categories/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/"> 全栈项目 </a>
+          <a href="/categories/typescript/"> TypeScript </a>
           </div>
-        <span class="more-meta"> 1922 words </span>
+        <span class="more-meta"> 1627 words </span>
         <span class="more-meta"> 4 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      1 远程部署脚本 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 # bin/pack_for_remote.sh # 服务器的us
+      1 JS与TS的数据类型 JS（8种） number boolean string bigint symbol null undefined object (含Array Function Date..) TS JS 8种 void never enum unknown any 自定义类型interface type(type严格来讲
     </div>
     <div class="read-more">
-      <a href="/post/%E8%AE%B0%E8%B4%A6app_10_%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E5%90%8E%E7%AB%AF%E4%B8%8E%E6%96%87%E6%A1%A3/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%87%E7%89%87%E4%B8%8A%E4%BC%A0/">大文件切片上传</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-06-28 </span>
-      <div class="post-category">
-          <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/"> 项目实战 </a>
-          </div>
-        <span class="more-meta"> 1420 words </span>
-        <span class="more-meta"> 3 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      ​ 针对大文件上传的业务场景，前后端采用切片上传的方案，即前端将大文件分割为固定大小的chunk，并循环请求给后端；后端每获取一部分，就写入到
-    </div>
-    <div class="read-more">
-      <a href="/post/%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%87%E7%89%87%E4%B8%8A%E4%BC%A0/" class="read-more-link">Read more...</a>
+      <a href="/post/ts%E5%AD%A6%E4%B9%A02-ts%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

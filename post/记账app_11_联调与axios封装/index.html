@@ -49,7 +49,7 @@
 <meta itemprop="name" content="记账app_11_联调与axios封装">
 <meta itemprop="description" content="1 发送验证码接口联调 1.1 前端：请求验证码 pnpm i axios安装axios，在首页发送验证码的请求 配置vite开发服务器代理 1 2 3 4 5 6 7 8 9 10 11 12"><meta itemprop="datePublished" content="2022-07-14T14:24:32+08:00" />
 <meta itemprop="dateModified" content="2022-07-14T14:24:32+08:00" />
-<meta itemprop="wordCount" content="1100">
+<meta itemprop="wordCount" content="3782">
 <meta itemprop="keywords" content="Rails,vue3,tsx,aliyun," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="记账app_11_联调与axios封装"/>
 <meta name="twitter:description" content="1 发送验证码接口联调 1.1 前端：请求验证码 pnpm i axios安装axios，在首页发送验证码的请求 配置vite开发服务器代理 1 2 3 4 5 6 7 8 9 10 11 12"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/"> 全栈项目 </a>
             </div>
-          <span class="more-meta"> 1100 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 3782 words </span>
+          <span class="more-meta"> 8 mins read </span>
         
       </div>
     </header>
@@ -152,6 +152,28 @@
         <li><a href="#11-前端请求验证码">1.1 前端：请求验证码</a></li>
         <li><a href="#12-后端修复邮件发送bug">1.2 后端：修复邮件发送bug</a></li>
         <li><a href="#13-前端实现60s倒计时限制子组件的方法暴露给父组件">1.3 前端：实现60s倒计时限制（子组件的方法暴露给父组件）</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-axios封装">2 Axios封装</a>
+      <ul>
+        <li><a href="#21-封装思路">2.1 封装思路</a></li>
+        <li><a href="#22-422的错误处理">2.2 422的错误处理</a></li>
+        <li><a href="#23-后端邮箱名错误处理">2.3 （后端）邮箱名错误处理</a></li>
+        <li><a href="#24-后端报错信息i18n">2.4 （后端）报错信息i18n</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-防止重复请求验证码">3 防止重复请求验证码</a>
+      <ul>
+        <li><a href="#31-方案">3.1 方案</a></li>
+        <li><a href="#32-封装usebool-hook">3.2 封装useBool hook</a></li>
+        <li><a href="#33-完善登录功能">3.3 完善登录功能</a></li>
+        <li><a href="#34-查看服务器日志">3.4 查看服务器日志</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-双重校验">4 双重校验</a>
+      <ul>
+        <li><a href="#41-为什么双重校验">4.1 为什么双重校验</a></li>
+        <li><a href="#42-后端登录接口校验">4.2 后端登录接口校验</a></li>
       </ul>
     </li>
   </ul>
@@ -560,6 +582,817 @@
         <span class="p">/&gt;</span>
 <span class="p">...</span>
 </code></pre></td></tr></table>
+</div>
+</div><h1 id="2-axios封装">2 Axios封装</h1>
+<h2 id="21-封装思路">2.1 封装思路</h2>
+<ul>
+<li>可以自行封装<strong>HttpClient中间层</strong>，即HttpClient类
+<ul>
+<li>符合个人使用习惯</li>
+<li>减少对请求工具的依赖，可以随意替换</li>
+</ul>
+</li>
+<li>将<strong>请求工具（axios、fetch等）<strong>作为其</strong>instance属性</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">HttpClient</span> <span class="p">{</span>
+  <span class="nx">instance</span>: <span class="kt">AxiosInstance</span><span class="p">;</span>
+  <span class="c1">// 构造函数接收baseURL，传入axios
+</span><span class="c1"></span>  <span class="kr">constructor</span><span class="p">(</span><span class="nx">baseURL</span>: <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">instance</span> <span class="o">=</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+      <span class="nx">baseURL</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>请求方法（get、post、delete等）封装为自定义方法</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">HttpClient</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="c1">// 泛型表示返回值的类型, 默认为unknown
+</span><span class="c1"></span>  <span class="kr">get</span><span class="p">&lt;</span><span class="nt">R</span> <span class="err">=</span> <span class="na">unknown</span><span class="p">&gt;(</span>
+    <span class="nx">url</span>: <span class="kt">string</span><span class="p">,</span>
+    <span class="nx">query?</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;,</span>
+    <span class="c1">// 防止属性覆盖，使用Omit将相关属性剔除
+</span><span class="c1"></span>    <span class="nx">config?</span>: <span class="kt">Omit</span><span class="p">&lt;</span><span class="nt">AxiosRequestConfig</span><span class="err">,</span> <span class="err">&#34;</span><span class="na">url</span><span class="err">&#34;</span> <span class="err">|</span> <span class="err">&#34;</span><span class="na">params</span><span class="err">&#34;</span> <span class="err">|</span> <span class="err">&#34;</span><span class="na">method</span><span class="err">&#34;</span><span class="p">&gt;</span>
+  <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">instance</span><span class="p">.</span><span class="nx">request</span><span class="p">&lt;</span><span class="nt">R</span><span class="p">&gt;({</span>
+      <span class="p">...</span><span class="nx">config</span><span class="p">,</span>
+      <span class="nx">url</span><span class="p">,</span>
+      <span class="nx">params</span>: <span class="kt">query</span><span class="p">,</span>
+      <span class="nx">method</span><span class="o">:</span> <span class="s2">&#34;get&#34;</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+  <span class="nx">post</span><span class="p">&lt;</span><span class="nt">R</span> <span class="err">=</span> <span class="na">unknown</span><span class="p">&gt;(</span>
+    <span class="nx">url</span>: <span class="kt">string</span><span class="p">,</span>
+    <span class="nx">data?</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">JSONValue</span><span class="p">&gt;,</span>
+    <span class="nx">config?</span>: <span class="kt">Omit</span><span class="p">&lt;</span><span class="nt">AxiosRequestConfig</span><span class="err">,</span> <span class="err">&#34;</span><span class="na">url</span><span class="err">&#34;</span> <span class="err">|</span> <span class="err">&#34;</span><span class="na">data</span><span class="err">&#34;</span> <span class="err">|</span> <span class="err">&#34;</span><span class="na">method</span><span class="err">&#34;</span><span class="p">&gt;</span>
+  <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">instance</span><span class="p">.</span><span class="nx">request</span><span class="p">&lt;</span><span class="nt">R</span><span class="p">&gt;({</span>
+      <span class="p">...</span><span class="nx">config</span><span class="p">,</span>
+      <span class="nx">url</span><span class="p">,</span>
+      <span class="nx">data</span><span class="p">,</span>
+      <span class="nx">method</span><span class="o">:</span> <span class="s2">&#34;post&#34;</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>将HttpClient<strong>实例导出</strong>即可</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// 导出实例
+</span><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">http</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpClient</span><span class="p">(</span><span class="s2">&#34;/api/v1&#34;</span><span class="p">);</span>
+<span class="c1">// 使用
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">http</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&#34;/validation_codes&#34;</span><span class="p">,</span> <span class="p">{</span>
+  	<span class="nx">email</span>: <span class="kt">formData.email</span><span class="p">,</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>**拦截器（统一的错误处理、token、loading）**可以在导出的这个实例上进行封装</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// 拦截器
+</span><span class="c1"></span><span class="nx">http</span><span class="p">.</span><span class="nx">instance</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">use</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{},</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{});</span>
+<span class="nx">http</span><span class="p">.</span><span class="nx">instance</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+  <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// 记得return 否则会阻塞在这
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">response</span>
+  <span class="p">},</span> 
+  <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="nx">error</span>
+    <span class="c1">// or return Promise.reject(error)
+</span><span class="c1"></span>    <span class="c1">// 不能return error 否则会认为错误已经解决
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="22-422的错误处理">2.2 422的错误处理</h2>
+<p>响应拦截器接收两个函数，分别对应<strong>请求成功与失败的处理函数</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// 拦截器
+</span><span class="c1"></span><span class="nx">http</span><span class="p">.</span><span class="nx">instance</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+  <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// 由于错误除了响应错误还可能有网络、语法等类型
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 因此需要做一下断言（也可以不做。。）
+</span><span class="c1"></span>      <span class="kr">const</span> <span class="nx">axiosError</span> <span class="o">=</span> <span class="nx">error</span> <span class="kr">as</span> <span class="nx">AxiosError</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">axiosError</span><span class="p">.</span><span class="nx">response</span><span class="o">?</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">429</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;你太频繁了&#34;</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="23-后端邮箱名错误处理">2.3 （后端）邮箱名错误处理</h2>
+<ul>
+<li>
+<p>当前端的email参数不合法时（如123），服务器会500</p>
+</li>
+<li>
+<p>先添加测试</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">it</span> <span class="s2">&#34;email格式不合法会报422&#34;</span> <span class="k">do</span>
+  <span class="n">post</span> <span class="s1">&#39;/api/v1/validation_codes&#39;</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span>
+  	<span class="ss">email</span><span class="p">:</span> <span class="s1">&#39;123&#39;</span>
+  <span class="p">}</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_http_status</span><span class="p">(</span><span class="mi">422</span><span class="p">)</span>
+  <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="o">[</span><span class="s1">&#39;errors&#39;</span><span class="o">][</span><span class="s1">&#39;email&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span><span class="p">(</span><span class="s1">&#39;is invalid&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>增加email合法性校验</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/validation_code.rb</span>
+<span class="c1"># email需包含@字符</span>
+<span class="c1"># \A表示开头 \z表示结尾 .表示任意字符 i表示忽略大小写</span>
+<span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="p">{</span><span class="ss">with</span><span class="p">:</span> <span class="sr">/\A.+@.+\z/i</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>修改controller状态码为422</p>
+</li>
+<li>
+<p>重新部署</p>
+</li>
+<li>
+<p>前端展示错误提示</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">const</span> <span class="nx">onSendValidationCode</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">http</span>
+		<span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&#34;/validation_codes&#34;</span><span class="p">,</span> <span class="p">{</span>
+			<span class="nx">email</span>: <span class="kt">formData.email</span><span class="p">,</span>
+		<span class="p">})</span>
+		<span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">422</span><span class="p">)</span>
+				<span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">errors</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">errors</span><span class="p">);</span>
+				<span class="k">throw</span> <span class="nx">e</span><span class="p">;</span>
+		<span class="p">});</span>
+	<span class="nx">validationCodeRef</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">startCount</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="24-后端报错信息i18n">2.4 （后端）报错信息i18n</h2>
+<ul>
+<li>config/application.rb</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Mangosteen1</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Rails</span><span class="o">::</span><span class="no">Application</span>
+    <span class="o">...</span>
+    <span class="c1"># i18n</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">i18n</span><span class="o">.</span><span class="n">default_locale</span> <span class="o">=</span> <span class="s1">&#39;zh-CN&#39;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>config/locales/zh-CN.yml</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">zh-CN</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">activerecord</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">errors</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="c"># rails自带错误提示信息的国际化</span><span class="w">
+</span><span class="w">      </span><span class="nt">message</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">invalid</span><span class="p">:</span><span class="w"> </span><span class="l">格式不正确</span><span class="w">
+</span><span class="w">      </span><span class="c"># 针对不同model的错误提示国际化</span><span class="w">
+</span><span class="w">      </span><span class="nt">models</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">validation_code</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">attributes</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="nt">email</span><span class="p">:</span><span class="w">
+</span><span class="w">              </span><span class="nt">invalid</span><span class="p">:</span><span class="w"> </span><span class="l">邮件地址格式不正确</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>前端就不需要做提示信息的映射了</li>
+</ul>
+<h1 id="3-防止重复请求验证码">3 防止重复请求验证码</h1>
+<h2 id="31-方案">3.1 方案</h2>
+<p>思路很简单，就是在发起请求后，禁用按钮；在请求结束后，恢复禁用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// src/views/SignInPage.tsx
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">onSendValidationCode</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="nx">refValidationCodeDisable</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">http</span>
+  	<span class="p">...</span>
+		<span class="p">.</span><span class="k">finally</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+			<span class="nx">refValidationCodeDisable</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+		<span class="p">});</span>
+	<span class="nx">validationCodeRef</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">startCount</span><span class="p">();</span>
+<span class="p">};</span>
+<span class="p">...</span>
+<span class="c1">// 验证码表单项要支持disabled属性
+</span><span class="c1"></span><span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">refValidationCodeDisable</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span>
+
+<span class="c1">// src/shared/Form.tsx
+</span><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">FormItem</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
+  <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="nx">disabled</span><span class="o">:</span> <span class="p">{</span>
+      <span class="kr">type</span><span class="o">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+      <span class="k">default</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="nx">setup</span><span class="o">:</span> <span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="p">...</span>
+        <span class="k">case</span> <span class="s2">&#34;validationCode&#34;</span><span class="o">:</span>
+          <span class="k">return</span> <span class="p">(</span>
+            <span class="p">&lt;&gt;</span>
+              <span class="p">&lt;</span><span class="nt">input</span>
+                <span class="na">...</span>
+                <span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">modelValue</span><span class="p">}</span>
+                <span class="na">onInput</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span>
+                  <span class="nx">context</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+                <span class="p">}</span>
+              <span class="p">/&gt;</span>
+              <span class="p">&lt;</span><span class="nt">Button</span>
+                <span class="na">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">isCounting</span><span class="p">.</span><span class="nx">value</span> <span class="o">||</span> <span class="nx">props</span><span class="p">.</span><span class="nx">disabled</span><span class="p">}</span>
+                <span class="na">...</span>
+              <span class="p">&gt;</span>
+                <span class="p">{</span><span class="nx">isCounting</span><span class="p">.</span><span class="nx">value</span> <span class="o">?</span> <span class="nx">count</span><span class="p">.</span><span class="nx">value</span> <span class="o">:</span> <span class="s2">&#34;发送验证码&#34;</span><span class="p">}</span>
+              <span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;</span>
+            <span class="p">&lt;/&gt;</span>
+          <span class="p">);</span>
+		<span class="p">...</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="32-封装usebool-hook">3.2 封装useBool hook</h2>
+<p>当页面中遇到需要<strong>类似flag</strong>功能的<strong>变量</strong>时，可以使用useBool</p>
+<ul>
+<li>src/shared/useBool.tsx</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ref</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;vue&#34;</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">useBool</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialValue</span>: <span class="kt">boolean</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="kt">bool</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">(</span><span class="nx">initialValue</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">ref</span>: <span class="kt">bool</span><span class="p">,</span>
+    <span class="nx">toggle</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="kt">bool</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="o">!</span><span class="kt">bool</span><span class="p">.</span><span class="nx">value</span><span class="p">),</span>
+    <span class="nx">on</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="kt">bool</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kc">true</span><span class="p">),</span>
+    <span class="nx">off</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="kt">bool</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="kc">false</span><span class="p">),</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>src/views/SignInPage.tsx</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">const</span> <span class="p">{</span> 
+  <span class="nx">ref</span>: <span class="kt">validationCodeDisable</span><span class="p">,</span>
+  <span class="nx">on</span><span class="p">,</span>
+  <span class="nx">off</span>
+<span class="p">}</span> <span class="o">=</span> <span class="nx">useBool</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">onSendValidationCode</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">on</span><span class="p">()</span>
+  <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">http</span>
+  	<span class="p">...</span>
+		<span class="p">.</span><span class="k">finally</span><span class="p">(</span><span class="nx">off</span><span class="p">);</span>
+	<span class="nx">validationCodeRef</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">startCount</span><span class="p">();</span>
+<span class="p">};</span>
+<span class="p">...</span>
+<span class="c1">// 验证码表单项要支持disabled属性
+</span><span class="c1"></span><span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="nx">validationCodeDisable</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="33-完善登录功能">3.3 完善登录功能</h2>
+<ul>
+<li>当前端校验或后端校验失败时（总之<strong>当errors中有错误存在</strong>时），不应该发送登录请求</li>
+<li>由于<code>errors</code>对象的结构较复杂，单纯的非空校验无法准确判断是否没有报错。因此需要提供一个<strong>判断是否有错误信息的函数</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// src/shared/validate.ts
+</span><span class="c1"></span><span class="p">...</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">hasErrors</span> <span class="o">=</span> <span class="p">(</span><span class="nx">errors</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="err">[]</span><span class="p">&gt;)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">errors</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">result</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>src/views/SignInPage.tsx</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">const</span> <span class="nx">onSubmit</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">Event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 取消默认行为(提交后会刷新)
+</span><span class="c1"></span>  <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+  <span class="c1">// 为什么用assign？
+</span><span class="c1"></span>  <span class="c1">// 先重置为空，再校验
+</span><span class="c1"></span>  <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">errors</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">email</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">code</span><span class="o">:</span> <span class="p">[],</span>
+  <span class="p">});</span>
+  <span class="c1">// 前端校验
+</span><span class="c1"></span>  <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span>
+    <span class="nx">errors</span><span class="p">,</span>
+    <span class="nx">validate</span><span class="p">(</span><span class="nx">formData</span><span class="p">,</span> <span class="p">[</span>
+      <span class="p">{</span> <span class="nx">key</span><span class="o">:</span> <span class="s2">&#34;email&#34;</span><span class="p">,</span> <span class="kr">type</span><span class="o">:</span> <span class="s2">&#34;required&#34;</span><span class="p">,</span> <span class="nx">message</span><span class="o">:</span> <span class="s2">&#34;必填&#34;</span> <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="s2">&#34;email&#34;</span><span class="p">,</span>
+        <span class="kr">type</span><span class="o">:</span> <span class="s2">&#34;pattern&#34;</span><span class="p">,</span>
+        <span class="nx">regExp</span><span class="o">:</span> <span class="sr">/.+@.+/</span><span class="p">,</span>
+        <span class="nx">message</span><span class="o">:</span> <span class="s2">&#34;必须是邮箱地址&#34;</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="p">{</span> <span class="nx">key</span><span class="o">:</span> <span class="s2">&#34;validationCode&#34;</span><span class="p">,</span> <span class="kr">type</span><span class="o">:</span> <span class="s2">&#34;required&#34;</span><span class="p">,</span> <span class="nx">message</span><span class="o">:</span> <span class="s2">&#34;必填&#34;</span> <span class="p">},</span>
+    <span class="p">])</span>
+  <span class="p">);</span>
+  <span class="c1">// 没报错才会发送请求
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">hasErrors</span><span class="p">(</span><span class="nx">errors</span><span class="p">))</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">http</span>
+    <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="p">{</span> <span class="nx">jwt</span>: <span class="kt">string</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&#34;/session&#34;</span><span class="p">,</span> <span class="nx">formData</span><span class="p">)</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">422</span><span class="p">)</span>
+        <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">errors</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">errors</span><span class="p">);</span>
+      <span class="k">throw</span> <span class="nx">e</span><span class="p">;</span>
+    <span class="p">});</span>
+    <span class="c1">// 登录成功保存jwt
+</span><span class="c1"></span>    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&#34;jwt&#34;</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">jwt</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="34-查看服务器日志">3.4 查看服务器日志</h2>
+<p>点击登录后，此时后端叒崩溃了。。。。。</p>
+<p>登录服务器，exec进入后端container</p>
+<p><code>docker exec -it mangosteen-prod-1 bash</code></p>
+<p><code>tail -f log/production.log</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[5f962cbf-63a2-43c6-9600-d92ac2fe64e7] NameError (uninitialized constant Api::V1::SessionsController::ValidationCodes):
+[5f962cbf-63a2-43c6-9600-d92ac2fe64e7]
+[5f962cbf-63a2-43c6-9600-d92ac2fe64e7] app/controllers/api/v1/sessions_controller.rb:12:in `create&#39;
+[5f962cbf-63a2-43c6-9600-d92ac2fe64e7] lib/auto_jwt.rb:10:in `call&#39;
+</code></pre></td></tr></table>
+</div>
+</div><p>根据NameError报错信息，定位到<code>app/controllers/api/v1/sessions_controller.rb:12:in 'create'</code></p>
+<p>发现多写了个s。。。属于Typo Error</p>
+<p>改好重新部署即可</p>
+<h1 id="4-双重校验">4 双重校验</h1>
+<h2 id="41-为什么双重校验">4.1 为什么双重校验</h2>
+<p>对于一个表单来说，前端是一定会做校验（非空、格式）的</p>
+<p>为了防止黑客利用curl+post跳过前端校验，从而在数据库中插入不合法的数据</p>
+<p>因此后端校验是必须的</p>
+<h2 id="42-后端登录接口校验">4.2 后端登录接口校验</h2>
+<ul>
+<li>ActiveModel - 不在数据库中的数据模型，（无save方法）</li>
+<li>ActiveRecord - 在数据库中的数据模型</li>
+<li>Session在数据库中没有对应的表，属于ActiveModel，需要手写其验证器</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/session.rb</span>
+<span class="k">class</span> <span class="nc">Session</span>
+    <span class="kp">include</span> <span class="no">ActiveModel</span><span class="o">::</span><span class="no">Model</span>
+    <span class="c1"># Rails会默认读取ActiveRecord的表与字段</span>
+    <span class="c1"># 由于数据库不存在Session的model，只能手动指定字段与其访问器（get set）</span>
+    <span class="kp">attr_accessor</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:code</span>
+    <span class="c1"># 默认的必填与格式校验</span>
+    <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:code</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+    <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="p">{</span><span class="ss">with</span><span class="p">:</span> <span class="sr">/\A.+@.+\z/i</span><span class="p">}</span>
+    <span class="c1"># 自定义校验</span>
+    <span class="n">validate</span> <span class="ss">:check_validation_code</span>
+    <span class="k">def</span> <span class="nf">check_validation_code</span>
+        <span class="c1"># 区分生产与开发环境</span>
+        <span class="k">return</span> <span class="k">if</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">test?</span> <span class="ow">and</span> <span class="nb">self</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="s1">&#39;123456&#39;</span>
+        <span class="c1"># 前面做了presence的校验，由于校验是依次执行的，所以即使code为空这里也会被执行</span>
+        <span class="k">return</span> <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">empty?</span>
+        <span class="c1"># 如果code不存在 则报错code 404</span>
+        <span class="nb">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">add</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:not_found</span> <span class="k">unless</span>
+            <span class="no">ValidationCode</span><span class="o">.</span><span class="n">exists?</span> <span class="ss">email</span><span class="p">:</span> <span class="nb">self</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="ss">code</span><span class="p">:</span> <span class="nb">self</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="ss">used_at</span><span class="p">:</span> <span class="kp">nil</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>校验单独在model中自定义，因此controller层逻辑更加清晰</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># app/controllers/api/v1/sessions_controller.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;jwt&#39;</span>
+
+<span class="k">class</span> <span class="nc">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+    <span class="k">def</span> <span class="nf">create</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="no">Session</span><span class="o">.</span><span class="n">new</span> <span class="n">params</span><span class="o">.</span><span class="n">permit</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:code</span>
+        <span class="k">if</span> <span class="n">session</span><span class="o">.</span><span class="n">valid?</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_or_create_by</span> <span class="ss">email</span><span class="p">:</span> <span class="n">session</span><span class="o">.</span><span class="n">email</span>
+            <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span><span class="ss">jwt</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">generate_jwt</span><span class="p">}</span>
+        <span class="k">else</span>
+            <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="p">{</span><span class="ss">errors</span><span class="p">:</span> <span class="n">session</span><span class="o">.</span><span class="n">errors</span><span class="p">},</span> <span class="ss">status</span><span class="p">:</span> <span class="ss">:unprocessable_entity</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>记得报错信息国际化</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="c"># config/locales/zh-CN.yml</span><span class="w">
+</span><span class="w"></span><span class="nt">zh-CN</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">activerecord</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">errors</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="c"># rails自带错误提示信息的国际化</span><span class="w">
+</span><span class="w">      </span><span class="nt">message</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">invalid</span><span class="p">:</span><span class="w"> </span><span class="l">格式不正确</span><span class="w">
+</span><span class="w">        </span><span class="nt">blank</span><span class="p">:</span><span class="w"> </span><span class="l">必填</span><span class="w">
+</span><span class="w">        </span><span class="nt">not_found</span><span class="p">:</span><span class="w"> </span><span class="l">找不到对应的记录</span><span class="w">
+</span><span class="w">      </span><span class="c"># 针对不同model的错误提示国际化</span><span class="w">
+</span><span class="w">      </span><span class="nt">models</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">validation_code</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">attributes</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="nt">email</span><span class="p">:</span><span class="w">
+</span><span class="w">              </span><span class="nt">invalid</span><span class="p">:</span><span class="w"> </span><span class="l">邮件地址格式不正确</span><span class="w">
+</span><span class="w">  </span><span class="nt">activemodel</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">errors</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">messages</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">invalid</span><span class="p">:</span><span class="w"> </span><span class="l">格式不正确</span><span class="w">
+</span><span class="w">        </span><span class="nt">blank</span><span class="p">:</span><span class="w"> </span><span class="l">必填</span><span class="w">
+</span><span class="w">        </span><span class="nt">not_found</span><span class="p">:</span><span class="w"> </span><span class="l">找不到对应的记录</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div>
     </div>

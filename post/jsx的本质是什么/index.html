@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>JSX的本质是什么 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="JSX 简介 – React (reactjs.org) 官网写的非常清楚： 概念： JSX，是一个 JavaScript 的语法扩展，我们利用JSX这个语法糖来更好地描述 UI 和数据的交互形式。 React元素渲染机" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/jsx%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BB%80%E4%B9%88/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="JSX的本质是什么" />
+<meta property="og:description" content="JSX 简介 – React (reactjs.org) 官网写的非常清楚： 概念： JSX，是一个 JavaScript 的语法扩展，我们利用JSX这个语法糖来更好地描述 UI 和数据的交互形式。 React元素渲染机" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/jsx%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BB%80%E4%B9%88/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-10T09:54:46+08:00" />
+<meta property="article:modified_time" content="2022-08-10T12:18:55+08:00" />
+
+<meta itemprop="name" content="JSX的本质是什么">
+<meta itemprop="description" content="JSX 简介 – React (reactjs.org) 官网写的非常清楚： 概念： JSX，是一个 JavaScript 的语法扩展，我们利用JSX这个语法糖来更好地描述 UI 和数据的交互形式。 React元素渲染机"><meta itemprop="datePublished" content="2022-08-10T09:54:46+08:00" />
+<meta itemprop="dateModified" content="2022-08-10T12:18:55+08:00" />
+<meta itemprop="wordCount" content="758">
+<meta itemprop="keywords" content="面试,React,jsx," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JSX的本质是什么"/>
+<meta name="twitter:description" content="JSX 简介 – React (reactjs.org) 官网写的非常清楚： 概念： JSX，是一个 JavaScript 的语法扩展，我们利用JSX这个语法糖来更好地描述 UI 和数据的交互形式。 React元素渲染机"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">JSX的本质是什么</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-08-10 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
+            </div>
+          <span class="more-meta"> 758 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p><a href="https://zh-hans.reactjs.org/docs/introducing-jsx.html">JSX 简介 – React (reactjs.org)</a></p>
+</blockquote>
+<p>官网写的非常清楚：</p>
+<ul>
+<li>概念：
+<ul>
+<li>JSX，是一个 JavaScript 的语法扩展，我们利用<code>JSX</code>这个语法糖来更好地描述 <code>UI</code> 和数据的交互形式。</li>
+</ul>
+</li>
+<li>React元素渲染机制：
+<ul>
+<li>在编译之后，JSX 表达式会被Babel转为**<code>React.createElement()</code> 的函数调用**，并且对其取值后得到 <strong>JavaScript 对象</strong>。</li>
+<li>可以说，<strong>JSX的本质就是React.createElement的函数调用</strong></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;greeting&#34;</span><span class="p">&gt;</span>
+    <span class="nx">Hello</span><span class="p">,</span> <span class="nx">world</span><span class="o">!</span>
+    <span class="p">{</span><span class="nx">a</span><span class="p">}</span>
+  <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">);</span>
+<span class="c1">// 等价于
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span>
+  <span class="s1">&#39;h1&#39;</span><span class="p">,</span>
+  <span class="p">{</span><span class="nx">className</span><span class="o">:</span> <span class="s1">&#39;greeting&#39;</span><span class="p">},</span>
+  <span class="s1">&#39;Hello, world!&#39;</span><span class="p">,</span>
+  <span class="nx">a</span>
+<span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>createElement 函数有 3 个入参，这 3 个入参包含了我们在创建一个 React 元素的全部信息。
+<ul>
+<li>type：用于标识节点的类型。可以是原生态的 div 、span 这样的 HTML 标签，也可以是 React 组件，还可以是 React fragment（空元素）。</li>
+<li>config：一个对象，组件所有的属性（不包含默认的一些属性）都会以键值对的形式存储在 config 对象中。</li>
+<li>children：泛指第二个参数后的所有参数，它记录的是组件标签之间嵌套的内容，也就是所谓的“子节点”“子元素”。</li>
+</ul>
+</li>
+<li>这里就解答了「为什么jsx中不允许写语句，只允许写表达式」
+<ul>
+<li>基于React元素渲染机制，因为jsx会被编译为react元素对象，其中调用时，我们写的大括号中的内容会作为<code>React.createElement()</code>的第三个参数，<strong>作为函数的参数，自然不允许使用语句</strong></li>
+</ul>
+</li>
+<li>createElement方法最后返回一个<strong>调用ReactElement执行方法</strong>，并传入处理过的参数，返回一个<code>ReactElement实例</code>，即<code>虚拟DOM</code>（以 JavaScript 对象形式存在的对 DOM 的描述）</li>
+<li>最后调用<code>ReactDOM.render</code>方法将虚拟DOM转换为真实DOM，并挂载到页面中</li>
+<li>为什么onclick变成了onClick
+<ul>
+<li>因为 JSX 语法上更接近 JavaScript 而不是 HTML，所以 React DOM 使用 <code>camelCase</code>（小驼峰命名）来定义属性的名称，而不使用 HTML 属性名称的命名约定。</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-08-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/react/">React</a>
+          <a href="/tags/jsx/">jsx</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6%E4%B8%8E%E9%9D%9E%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">受控组件与非受控组件</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/setstate%E7%A9%B6%E7%AB%9F%E6%98%AF%E5%90%8C%E6%AD%A5%E8%BF%98%E6%98%AF%E5%BC%82%E6%AD%A5/">
+            <span class="next-text nav-default">setState究竟是同步还是异步</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

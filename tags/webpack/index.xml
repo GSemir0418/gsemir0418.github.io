@@ -6,16 +6,7 @@
     <description>Recent content in Webpack on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 22 Apr 2022 12:20:21 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/webpack/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>前端面试工程化</title>
-      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%8C%96/</link>
-      <pubDate>Fri, 22 Apr 2022 12:20:21 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%8C%96/</guid>
-      <description>1 常见loader和plugin有哪些，二者的区别是什么？ 常见loader babel-loader 把ES6+转义为ES5 ts-loader 把TS编译为JS，并提示类型错误 markdown-loader 把ma</description>
-    </item>
-    
+    <lastBuildDate>Sun, 06 Feb 2022 15:15:48 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/webpack/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Webpack全解</title>
       <link>https://gsemir0418.github.io/post/webpack%E5%85%A8%E8%A7%A3/</link>
@@ -23,6 +14,15 @@
       
       <guid>https://gsemir0418.github.io/post/webpack%E5%85%A8%E8%A7%A3/</guid>
       <description>1 AST、Babel和依赖 1.1 Babel原理 babel过程 parse：把代码变成AST traverse：遍历AST进行修改 generate：把</description>
+    </item>
+    
+    <item>
+      <title>前端面试工程化</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%8C%96/</link>
+      <pubDate>Thu, 22 Apr 2021 12:20:21 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%8C%96/</guid>
+      <description>1 常见loader和plugin有哪些，二者的区别是什么？ 常见loader babel-loader 把ES6+转义为ES5 ts-loader 把TS编译为JS，并提示类型错误 markdown-loader 把ma</description>
     </item>
     
   </channel>

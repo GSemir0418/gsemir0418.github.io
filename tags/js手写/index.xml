@@ -6,7 +6,16 @@
     <description>Recent content in JS手写 on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 29 Mar 2022 09:58:50 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/js%E6%89%8B%E5%86%99/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jul 2022 09:19:07 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/js%E6%89%8B%E5%86%99/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手写Promise.all</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99promise.all/</link>
+      <pubDate>Wed, 20 Jul 2022 09:19:07 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99promise.all/</guid>
+      <description>1 要点 知道要在Promise上写而不是在原型上写 知道 all 的参数（Promise的数组）和返回值（新Promise对象） 知道用数组来记录结果 知道</description>
+    </item>
+    
     <item>
       <title>手写发布订阅</title>
       <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/</link>
@@ -53,12 +62,21 @@
     </item>
     
     <item>
+      <title>手写bind</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99bind/</link>
+      <pubDate>Tue, 23 Nov 2021 16:15:44 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99bind/</guid>
+      <description>1 简版bind bind是Function.prototype上的方法 1 Function.prototype.bind2 = () =&amp;gt; {} 接收的第一个参数是新的this，返回一个新函数 1 2 3 Function.prototype.bind2 = (newThis) =&amp;gt;</description>
+    </item>
+    
+    <item>
       <title>手写深拷贝</title>
       <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D/</link>
       <pubDate>Tue, 23 Nov 2021 16:15:44 +0800</pubDate>
       
       <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D/</guid>
-      <description>1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函数属性 不支持</description>
+      <description>1 什么是深拷贝 b是a的一份拷贝，且b中没有对a中对象的引用 2 JSON序列化与反序列化 const b = JSON.parse(JSON.stringify(a)) 最简单，但存在如下缺点 不支持函数，会直接忽略函数</description>
     </item>
     
   </channel>

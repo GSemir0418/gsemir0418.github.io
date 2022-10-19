@@ -6,14 +6,41 @@
     <description>Recent content in React on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 31 Mar 2022 09:54:46 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Aug 2022 13:54:46 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>前端面试React</title>
-      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95react/</link>
-      <pubDate>Thu, 31 Mar 2022 09:54:46 +0800</pubDate>
+      <title>useReducer与useContext实践</title>
+      <link>https://gsemir0418.github.io/post/usereducer%E4%B8%8Eusecontext/</link>
+      <pubDate>Thu, 11 Aug 2022 13:54:46 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95react/</guid>
-      <description>1 虚拟DOM的原理是什么 1.1 是什么 虚拟DOM就是虚拟节点。React用JS对象来模拟DOM节点，然后将其渲染成真实的DOM节点 1.2 怎么做 模拟（J</description>
+      <guid>https://gsemir0418.github.io/post/usereducer%E4%B8%8Eusecontext/</guid>
+      <description>思路： 父组件：直接引入并使用ctx.Provider，为子组件提供useReducer返回的[state, dispatch]两个属性 子组件：</description>
+    </item>
+    
+    <item>
+      <title>受控组件与非受控组件</title>
+      <link>https://gsemir0418.github.io/post/%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6%E4%B8%8E%E9%9D%9E%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6/</link>
+      <pubDate>Thu, 11 Aug 2022 09:54:46 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6%E4%B8%8E%E9%9D%9E%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6/</guid>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 import { useState, useRef } from &amp;#34;react&amp;#34;; export default function App() { const [value, setValue] = useState(&amp;#34;&amp;#34;); const inputRef = useRef(null); const handleOnChange = (e) =&amp;gt; { setValue(e.target.value); }; const handleOnSubmit = (e) =&amp;gt; { e.preventDefault(); conso</description>
+    </item>
+    
+    <item>
+      <title>JSX的本质是什么</title>
+      <link>https://gsemir0418.github.io/post/jsx%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BB%80%E4%B9%88/</link>
+      <pubDate>Wed, 10 Aug 2022 09:54:46 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/jsx%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BB%80%E4%B9%88/</guid>
+      <description>JSX 简介 – React (reactjs.org) 官网写的非常清楚： 概念： JSX，是一个 JavaScript 的语法扩展，我们利用JSX这个语法糖来更好地描述 UI 和数据的交互形式。 React元素渲染机</description>
+    </item>
+    
+    <item>
+      <title>setState究竟是同步还是异步</title>
+      <link>https://gsemir0418.github.io/post/setstate%E7%A9%B6%E7%AB%9F%E6%98%AF%E5%90%8C%E6%AD%A5%E8%BF%98%E6%98%AF%E5%BC%82%E6%AD%A5/</link>
+      <pubDate>Wed, 10 Aug 2022 09:54:46 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/setstate%E7%A9%B6%E7%AB%9F%E6%98%AF%E5%90%8C%E6%AD%A5%E8%BF%98%E6%98%AF%E5%BC%82%E6%AD%A5/</guid>
+      <description>setState传函数 答案：react</description>
     </item>
     
     <item>
@@ -113,6 +140,15 @@
       
       <guid>https://gsemir0418.github.io/post/react%E5%9F%BA%E7%A1%80/</guid>
       <description>1 React定义组件 1.1 函数式组件 函数式组件适用于简单组件的定义，其首字母需大写，且虚拟DOM元素必须有结束标签 函数组件中的this指向为wi</description>
+    </item>
+    
+    <item>
+      <title>前端面试React</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95react/</link>
+      <pubDate>Wed, 31 Mar 2021 09:54:46 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95react/</guid>
+      <description>1 虚拟DOM的原理是什么 1.1 是什么 虚拟DOM就是虚拟节点。React用JS对象来模拟DOM节点，然后将其渲染成真实的DOM节点 1.2 怎么做 模拟（J</description>
     </item>
     
   </channel>

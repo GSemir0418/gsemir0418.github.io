@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="gsemir" /><meta name="description" content="1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函数属性 不支持" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="gsemir" /><meta name="description" content="1 什么是深拷贝 b是a的一份拷贝，且b中没有对a中对象的引用 2 JSON序列化与反序列化 const b = JSON.parse(JSON.stringify(a)) 最简单，但存在如下缺点 不支持函数，会直接忽略函数" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,19 +40,19 @@
 
 
 <meta property="og:title" content="手写深拷贝" />
-<meta property="og:description" content="1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函数属性 不支持" />
+<meta property="og:description" content="1 什么是深拷贝 b是a的一份拷贝，且b中没有对a中对象的引用 2 JSON序列化与反序列化 const b = JSON.parse(JSON.stringify(a)) 最简单，但存在如下缺点 不支持函数，会直接忽略函数" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-23T16:15:44+08:00" />
-<meta property="article:modified_time" content="2021-11-23T16:15:44+08:00" />
+<meta property="article:modified_time" content="2022-07-20T16:15:44+08:00" />
 
 <meta itemprop="name" content="手写深拷贝">
-<meta itemprop="description" content="1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函数属性 不支持"><meta itemprop="datePublished" content="2021-11-23T16:15:44+08:00" />
-<meta itemprop="dateModified" content="2021-11-23T16:15:44+08:00" />
-<meta itemprop="wordCount" content="354">
+<meta itemprop="description" content="1 什么是深拷贝 b是a的一份拷贝，且b中没有对a中对象的引用 2 JSON序列化与反序列化 const b = JSON.parse(JSON.stringify(a)) 最简单，但存在如下缺点 不支持函数，会直接忽略函数"><meta itemprop="datePublished" content="2021-11-23T16:15:44+08:00" />
+<meta itemprop="dateModified" content="2022-07-20T16:15:44+08:00" />
+<meta itemprop="wordCount" content="880">
 <meta itemprop="keywords" content="深拷贝,JS手写," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="手写深拷贝"/>
-<meta name="twitter:description" content="1 什么是深拷贝 b是a的一份拷贝，b中没有对a中对象的引用 2 JSON序列化与反序列化 最简单，但存在如下缺点 不支持函数，会直接忽略函数属性 不支持"/>
+<meta name="twitter:description" content="1 什么是深拷贝 b是a的一份拷贝，且b中没有对a中对象的引用 2 JSON序列化与反序列化 const b = JSON.parse(JSON.stringify(a)) 最简单，但存在如下缺点 不支持函数，会直接忽略函数"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
             </div>
-          <span class="more-meta"> 354 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 880 words </span>
+          <span class="more-meta"> 2 mins read </span>
         
       </div>
     </header>
@@ -156,22 +156,183 @@
 </div>
     <div class="post-content">
       <h1 id="1-什么是深拷贝">1 什么是深拷贝</h1>
-<p>b是a的一份拷贝，b中没有对a中对象的引用</p>
+<ul>
+<li>b是a的一份<strong>拷贝</strong>，且b中<strong>没有对a中对象的引用</strong></li>
+</ul>
 <h1 id="2-json序列化与反序列化">2 JSON序列化与反序列化</h1>
+<ul>
+<li>
+<p><code>const b = JSON.parse(JSON.stringify(a))</code></p>
+</li>
+<li>
 <p>最简单，但存在如下缺点</p>
-<p>不支持函数，会直接忽略函数属性</p>
-<p>不支持undefined，也会直接忽略</p>
-<p>不支持引用，如果a对象中存在a.self = a，即自己引用自己，执行序列化时会报错，因为JSON不支持环状结构，只支持树形结构。</p>
-<p>不支持Date类型，会转换成<code>ISO8601</code>字符串（“2021-11-23T08:37:34.035Z”）</p>
-<p>不支持正则表达式，会变成空对象</p>
-<p>&hellip;只要是JSON不支持的类型，都可以作为此方法的缺点。</p>
+<ul>
+<li>
+<p><strong>不支持函数</strong>，会直接忽略函数属性</p>
+</li>
+<li>
+<p><strong>不支持undefined</strong>，也会直接忽略</p>
+</li>
+<li>
+<p><strong>不支持引用</strong>，如果a对象中存在a.self = a，即自己引用自己，执行序列化时会报错，因为JSON<strong>不支持环状</strong>结构，只支持树形结构。</p>
+</li>
+<li>
+<p><strong>不支持Date类型</strong>，会转换成<code>ISO8601</code>字符串（“2021-11-23T08:37:34.035Z”）</p>
+</li>
+<li>
+<p><strong>不支持正则表达式</strong>，会变成空对象</p>
+</li>
+<li>
+<p>&hellip;只要是<strong>JSON不支持的类型</strong>，都可以作为此方法的缺点。</p>
+</li>
+</ul>
+</li>
+</ul>
 <h1 id="3-递归">3 递归</h1>
-<p>思路</p>
+<ul>
+<li>
 <p>看节点的类型</p>
-<p>如果是基本类型就直接拷贝</p>
-<p>​	基本类型（8）：number、boolean、string、null、undefined、symbol、object、bigint</p>
+<ul>
+<li>
+<p>如果是基本类型（除object）就直接返回即可</p>
+<ul>
+<li>基本类型（8）：number、boolean、string、null、undefined、symbol、bigint、（object）</li>
+</ul>
+</li>
+<li>
 <p>如果是object就分情况讨论</p>
+<ul>
+<li>Array、Function（普通函数和箭头函数）、Date、RegExp</li>
+<li>对于object类型的对象，要<strong>递归深拷贝</strong>其内部的全部<strong>自有</strong>属性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>对于<code>a.self = a</code>的自引用情况，可以使用一个<code>Map</code>来记录拷贝的属性（key和value均为拷贝的值），如果发现自引用了，就直接返回a</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 利用Map对每一次拷贝做记录
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">deepClone</span> <span class="o">=</span> <span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">v</span> <span class="k">instanceof</span> <span class="nb">Object</span><span class="p">)</span> <span class="p">{</span><span class="c1">// object
+</span><span class="c1"></span>    <span class="c1">// 如果发现自引用(key对象存在)，直接返回v
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">v</span><span class="p">)){</span> <span class="k">return</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">v</span><span class="p">)}</span>
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="kc">undefined</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">v</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">)</span> <span class="p">{</span><span class="c1">// object-Array
+</span><span class="c1"></span>      <span class="nx">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">()</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">v</span> <span class="k">instanceof</span> <span class="nb">Function</span><span class="p">){</span><span class="c1">// object-Function
+</span><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="nx">v</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="p">{</span><span class="c1">// 普通函数(都有prototype属性)
+</span><span class="c1"></span>        <span class="nx">result</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="nx">v</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">)}</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span><span class="c1">// 箭头函数
+</span><span class="c1"></span>        <span class="nx">result</span> <span class="o">=</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">v</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)}</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">v</span> <span class="k">instanceof</span> <span class="nb">Date</span><span class="p">)</span> <span class="p">{</span><span class="c1">// object-Date
+</span><span class="c1"></span>      <span class="c1">// Date的数据减0会转为时间戳，再利用这个时间戳构造新的Date
+</span><span class="c1"></span>      <span class="nx">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">v</span> <span class="o">-</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">v</span> <span class="k">instanceof</span> <span class="nb">RegExp</span><span class="p">)</span> <span class="p">{</span><span class="c1">// object-RegExp
+</span><span class="c1"></span>      <span class="nx">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">v</span><span class="p">.</span><span class="nx">source</span><span class="p">,</span> <span class="nx">v</span><span class="p">.</span><span class="nx">flags</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// object-Object
+</span><span class="c1"></span>      <span class="nx">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="c1">// 将拷贝的值与结果存入map
+</span><span class="c1"></span>    <span class="nx">cache</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span>
+    <span class="c1">// 对内部自有属性进行递归拷贝
+</span><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">v</span><span class="p">){</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">v</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">)){</span>
+        <span class="nx">result</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">deepClone</span><span class="p">(</span><span class="nx">v</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">result</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span><span class="c1">// 基本数据类型
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">v</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 测试用例
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">number</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">bool</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span> <span class="nx">str</span><span class="o">:</span> <span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="nx">empty1</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">empty2</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> 
+  <span class="nx">array</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;frank&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;jacky&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">19</span><span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nx">date</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+  <span class="nx">regex</span><span class="o">:</span> <span class="sr">/\.(j|t)sx/i</span><span class="p">,</span>
+  <span class="nx">obj</span><span class="o">:</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;frank&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">},</span>
+  <span class="nx">f1</span><span class="o">:</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">,</span>
+  <span class="nx">f2</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 自引用
+</span><span class="c1"></span><span class="nx">a</span><span class="p">.</span><span class="nx">self</span> <span class="o">=</span> <span class="nx">a</span>
 
+<span class="kr">const</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">deepClone</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+
+<span class="nx">b</span><span class="p">.</span><span class="nx">self</span> <span class="o">===</span> <span class="nx">b</span> <span class="c1">// true
+</span><span class="c1"></span><span class="nx">b</span><span class="p">.</span><span class="nx">self</span> <span class="o">=</span> <span class="s1">&#39;hi&#39;</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">self</span> <span class="o">!==</span> <span class="s1">&#39;hi&#39;</span> <span class="c1">//true
+</span></code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
@@ -182,7 +343,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2021-11-23
+        2022-07-20
         
     </span>
   </p>
@@ -195,9 +356,9 @@
           <a href="/tags/js%E6%89%8B%E5%86%99/">JS手写</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/golang/">
+        <a class="prev" href="/post/%E6%89%8B%E5%86%99bind/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Golang</span>
+            <span class="prev-text nav-default">手写bind</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
         <a class="next" href="/post/fetch%E4%B8%8Eaxios/">

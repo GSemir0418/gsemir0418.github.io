@@ -1,0 +1,54 @@
+---
+title: "HTTP/1.1TCP连接复用"
+date: 2022-01-20T14:46:29+08:00
+draft: false
+lastmod: 2022-01-20T14:46:29+08:00
+author: "gsemir"
+categories: ["Web性能优化"]
+tags: ["面试","DNS","连接复用","并行化连接"]
+---
+
+# 1 DNS预解析
+
+- 假设index.html的部分代码为：
+
+  - ```html
+    <script src="http://a.com/1.js"></script>
+    <script src="http://b.com/2.js"></script>
+    ```
+
+  - 那么客户端会对`a.com`进行DNS的解析，拿到ip后请求`1.js`，然后再对`b.com`进行DNS解析，再请求`2.js`
+
+  - 这其中存在2次DNS的解析，且第二次DNS解析过程要等第一次请求回来的js下载并执行完毕后再开始
+
+  - 解决方案：在一开始先统一解析全部DNS
+
+- 再index.html的`<head>`中：
+
+  - ```html
+    <link rel="dns-prefetch" href="https://a.com/">
+    <link rel="dns-prefetch" href="https://b.com/">
+    ```
+
+# 2 TCP连接优化
+
+## 2.1 连接复用
+
+- 在**HTTP请求头与响应头**添加`Connection: keep-alive`即可实现**TCP连接复用**，即在一定时间间隔内，TCP连接不会关闭。
+- 设置**间隔时间**：`KeepAlive: timeout=5,max=100`，客户端和服务端均可自定义timeout和max，以**服务端**为准
+- 如果浏览器支持的**HTTP版本在1.1及以上**，`Connection: keep-alive`是自动添加的。实际上绝大部分浏览器已经升级到了HTTP/1.1及以上，因此客户端无需优化；服务端方面例如Apache、nginx都有相关配置，如果是nodejs也可以手动添加至响应头。
+
+## 2.2 并行化连接
+
+- 在需要请求很多css文件的情况下，使用**并行连接**同时请求这些文件，会大大提升页面加载效率。而TCP连接复用属于**串行**的请求
+
+- 既然并发连接效率远高于TCP连接复用，那么为什么不都使用并行连接的形式呢？
+- 这是由于**浏览器处理并行连接的数量**是有限的（一般是4-12个），当达到最大并行请求数量后，后面的请求会自动复用前面的连接。
+- 浏览器并行连接处理的请求响应数量，主要受限于**域名**的限制，因此可以通过**添加cdn域名的方式，突破并行连接上限**。同一个网站，可以分成多个cdn，从而同时进行多次并行连接。
+- 浏览器虽然**不会**对域名数量做限制，但会有一个最大TCP连接数量的限制。
+
+![image-20220123094224555](/Users/gsemir/Documents/blogs/blogs-backup-2/static/tcp/tcp1.png)
+
+## 2.3 应用
+
+实际应用中，对于ajax可以利用`Promise.all`同时多次请求；对于css可以分成多个css文件及对应`link标签`等。

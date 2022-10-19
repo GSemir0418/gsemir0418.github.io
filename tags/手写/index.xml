@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>手写 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/%E6%89%8B%E5%86%99/</link>
+    <description>Recent content in 手写 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 07 Mar 2021 09:57:22 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E6%89%8B%E5%86%99/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>前端面试手写</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E5%86%99/</link>
+      <pubDate>Sun, 07 Mar 2021 09:57:22 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%89%8B%E5%86%99/</guid>
+      <description>1 实现sleep函数 要求： 1 2 3 4 5 (async () =&amp;gt; { console.log(&amp;#39;hello&amp;#39;) await sleep(2000) console.log(&amp;#39;world&amp;#39;) })() 题解 1 const sleep = (ms) =&amp;gt; new Promise((resolve)=&amp;gt;setTimeout(resolve, ms)) 2 实现&#39;Hello World!&#39;.reverse() 1 String.prototype.reverse = function reverse() { return this.split(&amp;#39;&amp;#39;).reverse().join(&amp;#39;&amp;#39;)} 3 事件代理、监听、DOM自定</description>
+    </item>
+    
+  </channel>
+</rss>

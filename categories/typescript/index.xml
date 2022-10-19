@@ -6,7 +6,61 @@
     <description>Recent content in TypeScript on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 24 Dec 2021 15:15:48 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Oct 2022 14:24:32 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/categories/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TS学习6-泛型</title>
+      <link>https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A06-%E6%B3%9B%E5%9E%8B/</link>
+      <pubDate>Sat, 15 Oct 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A06-%E6%B3%9B%E5%9E%8B/</guid>
+      <description>1 泛型就像函数 1 2 3 4 5 const fn = (a, b) =&amp;gt; a + b const result = fn(1, 2) // 3 type F&amp;lt;A, B&amp;gt; = A | B type Result = F&amp;lt;string, number&amp;gt; // string | number 函数的本质：推后执行的、部分待定的代码段 泛型的本质：</description>
+    </item>
+    
+    <item>
+      <title>TS学习5-函数</title>
+      <link>https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A05-%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Fri, 14 Oct 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A05-%E5%87%BD%E6%95%B0/</guid>
+      <description>1 复习对象语法 字面量形式 1 2 3 4 type Person = { name: string age: number } 索引签名 1 2 3 4 type Hash = { [k: string]: unknown length: number } 映射类型（多用于泛型） 1 2 3 4 type Hash = { [k in string]: unknown length: number // 报</description>
+    </item>
+    
+    <item>
+      <title>TS学习4-类型兼容</title>
+      <link>https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A04-%E7%B1%BB%E5%9E%8B%E5%85%BC%E5%AE%B9/</link>
+      <pubDate>Thu, 13 Oct 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A04-%E7%B1%BB%E5%9E%8B%E5%85%BC%E5%AE%B9/</guid>
+      <description>顶类型 unknown 所有类型的集合 任何值都可以赋给unknown类型 1 2 3 let a: unknown let b: string = &amp;#39;1&amp;#39; a = b 底类型 never 可以被赋给任何类型 1 2 3 let a: never = undefined as never let b: string = &amp;#39;1&amp;#39;</description>
+    </item>
+    
+    <item>
+      <title>TS学习3-联合类型和交叉类型</title>
+      <link>https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A03-%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Wed, 12 Oct 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A03-%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%B1%BB%E5%9E%8B/</guid>
+      <description>TS = JS + 类型系统 TS类型系统的运算主要有两种：或（|）运算和与（&amp;amp;）运算 1 联合类型（并集） 1.1 示例 | 可以属于x类型，也可以属于y类型 1</description>
+    </item>
+    
+    <item>
+      <title>TS学习2-TS中的类型</title>
+      <link>https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A02-ts%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Tue, 11 Oct 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A02-ts%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B/</guid>
+      <description>1 JS与TS的数据类型 JS（8种） number boolean string bigint symbol null undefined object (含Array Function Date..) TS JS 8种 void never enum unknown any 自定义类型interface type(type严格来讲</description>
+    </item>
+    
+    <item>
+      <title>TS学习1-运行与调试</title>
+      <link>https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A01-%E8%BF%90%E8%A1%8C%E4%B8%8E%E8%B0%83%E8%AF%95/</link>
+      <pubDate>Mon, 10 Oct 2022 14:24:32 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A01-%E8%BF%90%E8%A1%8C%E4%B8%8E%E8%B0%83%E8%AF%95/</guid>
+      <description>1 如何运行TypeScript 浏览器或node不能直接运行TS，需要借助工具进行类型擦除后方可正常运行 Deno（node亲兄弟）可以直接（R</description>
+    </item>
+    
     <item>
       <title>TypeScript学习</title>
       <link>https://gsemir0418.github.io/post/typescript%E5%AD%A6%E4%B9%A0/</link>

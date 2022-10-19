@@ -17,11 +17,11 @@
     </item>
     
     <item>
-      <title>JavaScript函数</title>
-      <link>https://gsemir0418.github.io/post/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/</link>
+      <title>JavaScript函数（未完成）</title>
+      <link>https://gsemir0418.github.io/post/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0%E6%9C%AA%E5%AE%8C%E6%88%90/</link>
       <pubDate>Wed, 15 Dec 2021 20:40:20 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/post/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://gsemir0418.github.io/post/js%E4%B8%93%E7%B2%BE-%E5%87%BD%E6%95%B0%E6%9C%AA%E5%AE%8C%E6%88%90/</guid>
       <description>1 函数和闭包 javascript中全部函数均有返回值 对象中的函数叫做方法 1.1 函数的环境 函数返回值的影响因素 函数调用时输入的参数 params 函数定义时的环</description>
     </item>
     

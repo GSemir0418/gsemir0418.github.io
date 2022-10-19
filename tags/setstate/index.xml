@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>setState on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/setstate/</link>
+    <description>Recent content in setState on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 10 Aug 2022 09:54:46 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/setstate/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>setState究竟是同步还是异步</title>
+      <link>https://gsemir0418.github.io/post/setstate%E7%A9%B6%E7%AB%9F%E6%98%AF%E5%90%8C%E6%AD%A5%E8%BF%98%E6%98%AF%E5%BC%82%E6%AD%A5/</link>
+      <pubDate>Wed, 10 Aug 2022 09:54:46 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/setstate%E7%A9%B6%E7%AB%9F%E6%98%AF%E5%90%8C%E6%AD%A5%E8%BF%98%E6%98%AF%E5%BC%82%E6%AD%A5/</guid>
+      <description>setState传函数 答案：react</description>
+    </item>
+    
+  </channel>
+</rss>

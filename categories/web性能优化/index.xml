@@ -17,21 +17,12 @@
     </item>
     
     <item>
-      <title>多路复用</title>
-      <link>https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
+      <title>HTTP/2多路复用</title>
+      <link>https://gsemir0418.github.io/post/http2%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
       <pubDate>Sun, 23 Jan 2022 09:51:58 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
+      <guid>https://gsemir0418.github.io/post/http2%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
       <description>1 HTTP/2的帧 ​ HTTP/1.1的请求响应过程是基于字符串的，而HTTP/2的请求响应过程是基于帧的。 ​ HTTP/2引入了帧（Frame</description>
-    </item>
-    
-    <item>
-      <title>连接复用</title>
-      <link>https://gsemir0418.github.io/post/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/</link>
-      <pubDate>Thu, 20 Jan 2022 14:46:29 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/post/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/</guid>
-      <description>1 DNS预解析 假设index.html的部分代码为： 1 2 &amp;lt;script src=&amp;#34;http://a.com/1.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&amp;#34;http://b.com/2.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; 那么客户端会对a.com进行DNS的解析，拿到ip后请求1.js，然后再对b</description>
     </item>
     
     <item>

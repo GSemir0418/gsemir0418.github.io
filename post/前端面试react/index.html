@@ -43,13 +43,13 @@
 <meta property="og:description" content="1 虚拟DOM的原理是什么 1.1 是什么 虚拟DOM就是虚拟节点。React用JS对象来模拟DOM节点，然后将其渲染成真实的DOM节点 1.2 怎么做 模拟（J" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95react/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-03-31T09:54:46+08:00" />
-<meta property="article:modified_time" content="2022-05-19T12:18:55+08:00" />
+<meta property="article:published_time" content="2021-03-31T09:54:46+08:00" />
+<meta property="article:modified_time" content="2021-05-19T12:18:55+08:00" />
 
 <meta itemprop="name" content="前端面试React">
-<meta itemprop="description" content="1 虚拟DOM的原理是什么 1.1 是什么 虚拟DOM就是虚拟节点。React用JS对象来模拟DOM节点，然后将其渲染成真实的DOM节点 1.2 怎么做 模拟（J"><meta itemprop="datePublished" content="2022-03-31T09:54:46+08:00" />
-<meta itemprop="dateModified" content="2022-05-19T12:18:55+08:00" />
-<meta itemprop="wordCount" content="1563">
+<meta itemprop="description" content="1 虚拟DOM的原理是什么 1.1 是什么 虚拟DOM就是虚拟节点。React用JS对象来模拟DOM节点，然后将其渲染成真实的DOM节点 1.2 怎么做 模拟（J"><meta itemprop="datePublished" content="2021-03-31T09:54:46+08:00" />
+<meta itemprop="dateModified" content="2021-05-19T12:18:55+08:00" />
+<meta itemprop="wordCount" content="4178">
 <meta itemprop="keywords" content="面试,React," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="前端面试React"/>
 <meta name="twitter:description" content="1 虚拟DOM的原理是什么 1.1 是什么 虚拟DOM就是虚拟节点。React用JS对象来模拟DOM节点，然后将其渲染成真实的DOM节点 1.2 怎么做 模拟（J"/>
@@ -132,12 +132,12 @@
       <h1 class="post-title">前端面试React</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2022-03-31 </span>
+        <span class="post-time"> 2021-03-31 </span>
         <div class="post-category">
             <a href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"> 面试题 </a>
             </div>
-          <span class="more-meta"> 1563 words </span>
-          <span class="more-meta"> 4 mins read </span>
+          <span class="more-meta"> 4178 words </span>
+          <span class="more-meta"> 9 mins read </span>
         
       </div>
     </header>
@@ -165,6 +165,27 @@
         <li><a href="#24-react-dom-diff和vue-dom-diff的区别">2.4 React DOM diff和Vue DOM diff的区别</a></li>
       </ul>
     </li>
+    <li><a href="#3-react有哪些生命周期钩子函数">3 React有哪些生命周期钩子函数</a></li>
+    <li><a href="#4-react如何实现组件间通信">4 React如何实现组件间通信</a></li>
+    <li><a href="#5-如何理解reduxdva">5 如何理解Redux（DVA）</a></li>
+    <li><a href="#6-什么是高阶组件-hoc">6 什么是高阶组件 HOC？</a></li>
+    <li><a href="#7-react-hooks如何模拟组件声明周期">7 React Hooks如何模拟组件声明周期</a></li>
+    <li><a href="#8-react-router实现原理">8 React-router实现原理</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#81-前端路由原理监听浏览器url变化截获url地址然后进行url路由匹配从而渲染路由组件">8.1 前端路由原理：监听浏览器URL变化，截获URL地址，然后进行URL路由匹配，从而渲染路由组件</a></li>
+            <li><a href="#82-两种路由实现方式history和hash">8.2 两种路由实现方式：history和hash</a></li>
+            <li><a href="#83-router组件">8.3 Router组件</a></li>
+            <li><a href="#84-route">8.4 Route</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#9-mixin-hoc-与hooks">9 Mixin HOC 与hooks</a></li>
+    <li><a href="#10-usestate为什么不能在条件或循环中使用">10 useState为什么不能在条件或循环中使用</a></li>
+    <li><a href="#11-react工作流程">11 react工作流程</a></li>
+    <li><a href="#12-class组件与函数组件的异同与好处">12 class组件与函数组件的异同与好处</a></li>
   </ul>
 </nav>
   </div>
@@ -489,6 +510,272 @@
 </ul>
 </li>
 </ol>
+<h1 id="3-react有哪些生命周期钩子函数">3 React有哪些生命周期钩子函数</h1>
+<blockquote>
+<p><a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">React lifecycle methods diagram (wojtekmaj.pl)</a></p>
+</blockquote>
+<p><code>constructor</code> =&gt; <code>getDerivedStateFormProps</code> =&gt; <code>shouldComponentUpdate</code> =&gt; <code>render</code> =&gt; <code>getSnapshotBeforeUpdate</code> =&gt; <code>componentDidMount</code> =&gt; <code>componentDidUpdate</code> =&gt; <code>componentWillUnmount</code></p>
+<ul>
+<li>挂载时调用 constructor，更新时不调用</li>
+<li>更新时调用 shouldComponentUpdate 和 getSnapshotBeforeUpdate，挂载时不调用</li>
+<li>should&hellip; 在 render 前调用，getSnapshot&hellip; 在 render 后调用</li>
+<li>请求放在 componentDidMount 里</li>
+</ul>
+<h1 id="4-react如何实现组件间通信">4 React如何实现组件间通信</h1>
+<ul>
+<li>
+<p>父子组件通信：props + 函数，</p>
+<ul>
+<li>父组件给子组件传用props</li>
+<li>子组件调用父组件传过来的函数（props.sdata(data)），通过参数传值即可</li>
+</ul>
+</li>
+<li>
+<p>爷孙组件通信：两层父子通信或者使用 Context.Provider 和 Context.Consumer</p>
+</li>
+<li>
+<p>任意组件通信：其实就变成了状态管理了</p>
+<ul>
+<li>
+<p>Redux</p>
+</li>
+<li>
+<p>Mobx</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="5-如何理解reduxdva">5 如何理解Redux（DVA）</h1>
+<ul>
+<li>
+<p><strong>redux是一个状态管理库/容器</strong>，<strong>集中式管理react应用中多个组件共享的状态。</strong></p>
+</li>
+<li>
+<p>核心概念</p>
+<ul>
+<li><code>State</code> 页面或模块需要共享或持久化的数据，只读的</li>
+<li><code>Action = type + payload</code> 普通js对象，约定type属性用来描述执行的动作</li>
+<li><code>Reducer</code> 纯函数，接收旧的 state 和 action，返回新的 state。</li>
+<li><code>Dispatch</code> 将action派发给store</li>
+<li><code>Store</code> 将action、state、reducer联系在一起的对象</li>
+<li><code>Middleware</code></li>
+</ul>
+</li>
+<li>
+<p><code>React-redux</code>核心概念</p>
+<ul>
+<li><code>Provider</code> 将store提供给子组件</li>
+<li><code>connect()()</code> 将组件与store进行关联，把 <strong>redux 的 dispatch 和 state</strong> 映射为 <strong>react 组件的 props</strong>，接收三个参数</li>
+<li><code>mapStateToProps</code> 将state合并包装到组件的props属性上</li>
+<li><code>mapDispatchToProps</code> 将dispatch合并包装到组件的props属性上，如果不传，组件默认接收dispatch，传的话，写起来可以省略dispatch，更具语义性？</li>
+</ul>
+</li>
+<li>
+<p>中间件<code>redux-thunk</code></p>
+<ul>
+<li>可以在redux中进行异步操作</li>
+</ul>
+</li>
+<li>
+<p>中间件<code>redux-promise</code></p>
+</li>
+<li>
+<p><code>dva</code></p>
+<ul>
+<li>比redux多了两个概念<code>Effect</code>、<code>Subscription</code></li>
+<li>Effect被称为副作用，涉及到异步操作都可以写到这里，采用generator相关概念，使得异步操作更加优雅？</li>
+<li>Subscription订阅数据源，比如路由、键盘输入等</li>
+</ul>
+</li>
+</ul>
+<h1 id="6-什么是高阶组件-hoc">6 什么是高阶组件 HOC？</h1>
+<ul>
+<li>
+<p><strong>参数是函数/组件，返回值也是函数/组件的函数。</strong></p>
+</li>
+<li>
+<p>用法举例说明即可：</p>
+<ul>
+<li>
+<p>React.forwardRef</p>
+<ul>
+<li>函数组件不支持ref，不能持久化保存对元素的引用</li>
+<li>但使用forwardRef包裹一下，第二个参数就成了ref</li>
+<li>可以将ref透传(forward)给内部的button</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">Button</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">forwardRef</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span> <span class="nx">ref</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="p">(</span>
+		<span class="p">&lt;</span><span class="nt">button</span> <span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}&gt;{</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">}&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+	<span class="p">)</span>
+<span class="p">})</span>
+
+<span class="kr">const</span> <span class="nx">ref</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createRef</span><span class="p">()</span>
+<span class="p">&lt;</span><span class="nt">Button</span> <span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}&gt;</span><span class="nx">Click</span><span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>ReactRedux 的 connect</p>
+</li>
+<li>
+<p>ReactRouter 的 withRouter（class组件），能够赋予组件match、location、history三个属性</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>参考阅读：<a href="https://juejin.cn/post/6940422320427106335#heading-0">「react进阶」一文吃透React高阶组件(HOC) - 掘金 (juejin.cn)</a></p>
+<h1 id="7-react-hooks如何模拟组件声明周期">7 React Hooks如何模拟组件声明周期</h1>
+<ul>
+<li>模拟 componentDidMount =&gt; useEffect(()=&gt;{},[]) 依赖为空数组</li>
+<li>模拟 componentDidUpdate =&gt; useEffect(()=&gt;{}) 不加依赖</li>
+<li>模拟 componentWillUnmount =&gt; useEffect(()=&gt;{ return()=&gt;{}}, []) 依赖空数组+内部return函数</li>
+</ul>
+<h1 id="8-react-router实现原理">8 React-router实现原理</h1>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/78176856">聊一聊 React-Router - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<h3 id="81-前端路由原理监听浏览器url变化截获url地址然后进行url路由匹配从而渲染路由组件">8.1 前端路由原理：监听浏览器URL变化，截获URL地址，然后进行URL路由匹配，从而渲染路由组件</h3>
+<h3 id="82-两种路由实现方式history和hash">8.2 两种路由实现方式：history和hash</h3>
+<h4 id="821-hash">8.2.1 hash</h4>
+<ul>
+<li>在html5 标准落地之前，都是通过监听 <code>hashchange</code> 事件，当 URL 变化时，进行页面跳转。</li>
+<li>hash的路由地址会有<code>#</code></li>
+<li>在路由变化（点击跳转或历史跳转）时，触发<code>hashchange</code>事件，匹配到对应的路由规则，通过<code>location.hash</code>改变页面路由，以DOM替换的方式更改页面内容</li>
+<li>手动刷新不会向服务器发送请求，也不会触发hashchange事件</li>
+<li><code>#</code>后面的数据不会发送到服务器，因此服务器不用担心出现404的问题</li>
+<li>兼容性好</li>
+<li>锚点定位会失效</li>
+<li>不利于SEO</li>
+</ul>
+<h4 id="822-history">8.2.2 history</h4>
+<ul>
+<li>通过 html5-mode 实现单页路由的 URL 没有 <code>#</code>。
+<ul>
+<li>history 模式是通过<strong>调用 window.history 对象</strong>上的一系列方法来实现页面的无刷新跳转。</li>
+<li>利用了 HTML5 History Interface 中新增的<strong>pushState() 和 replaceState()</strong> 方法。</li>
+<li>这两个方法应用于浏览器的历史记录栈，在当前已有的 back、forward、go 的基础之上，它们提供了<strong>对历史记录进行修改</strong>的功能。只是当它们执行修改时，虽然改变了当前的 URL，但浏览器不会向后端发送请求。</li>
+</ul>
+</li>
+<li>但当用户刷新页面之类的操作时，浏览器还是会给服务器发送请求，此时如果请求路径非根路径，nginx就会出现404的问题</li>
+<li>为了避免出现这种情况，所以这个实现需要服务器（nginx）的支持，需要把所有路由都重定向到根页面。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
+  <span class="kn">root</span> <span class="s">路径</span><span class="p">;</span>
+  <span class="kn">index</span> <span class="s">index.html</span> <span class="s">index.htm</span><span class="p">;</span>
+  <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri/</span> <span class="s">/index.html</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="83-router组件">8.3 Router组件</h3>
+<p>react-router 的工作方式，是在<strong>组件树顶层</strong>放一个 <strong>Router 组件</strong>，然后在组件树中散落着很多 <strong>Route 组件</strong>（注意比 Router 少一个“r”），顶层的 Router 组件负责<strong>分析监听</strong> URL 的变化，在它之下的 Route 组件可以<strong>直接读取</strong>这些信息。<strong>Router 是“提供者”，Route是“消费者”</strong>。</p>
+<h3 id="84-route">8.4 Route</h3>
+<p><code>Route</code>只是一个具有渲染方法的普通 React 组件，路由匹配成功则渲染该组件。</p>
+<h1 id="9-mixin-hoc-与hooks">9 Mixin HOC 与hooks</h1>
+<p>三者都是<strong>对代码逻辑进行复用的方案</strong></p>
+<ul>
+<li>
+<p>Mixin：</p>
+<ul>
+<li>
+<p>Mixin类似Object.assgin方法，用赋值的方式将mixin对象中的方法都挂载到原对象上</p>
+</li>
+<li>
+<p>React中，只有当使用createClass来创建组件时才能用</p>
+</li>
+<li>
+<p>存在逻辑与状态被覆盖的问题</p>
+</li>
+</ul>
+</li>
+<li>
+<p>HOC</p>
+<ul>
+<li>高阶组件，即接受一个组件，返回一个新组件</li>
+<li>可以处理组件的props、state（反向继承），渲染劫持等</li>
+<li>当大量使用HOC时，会出现多层嵌套的问题，影响调试</li>
+</ul>
+</li>
+<li>
+<p>hooks</p>
+<ul>
+<li>解决以上问题（多个hooks互不影响、避免嵌套）</li>
+<li>使用函数组件代替class组件</li>
+</ul>
+</li>
+</ul>
+<h1 id="10-usestate为什么不能在条件或循环中使用">10 useState为什么不能在条件或循环中使用</h1>
+<ul>
+<li>
+<p>手写useState思路：</p>
+<ul>
+<li>
+<p>useState接收初始值，返回state和setState的数组；</p>
+</li>
+<li>
+<p>state主要用于维护状态值，而setState则是改变对应的state和刷新组件的作用；</p>
+</li>
+<li>
+<p>重新渲染组件可以使用<code>ReactDOM.render(&lt;Demo/&gt;, rootElement)</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>在组件中，useState维护多个state是<strong>有序的（可能是数组，链表）</strong>，react对<strong>useState的标识是用index去记录的</strong>，如果在if中使用useState可能会导致顺序出错</p>
+</li>
+<li>
+<p><strong>确保 Hook 在每一次渲染中都按照同样的顺序被调用</strong>。</p>
+</li>
+<li>
+<p>为什么useState是数组结构的形式返回的，能不能以Object的形式返回？</p>
+<ul>
+<li>因为useState维护多个state是<strong>有序的</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="11-react工作流程">11 react工作流程</h1>
+<ul>
+<li>
+<p>工作流程：</p>
+<ul>
+<li>生成react <strong>root节点</strong></li>
+<li><strong>reconciler 协调</strong>生成需要更新的子节点</li>
+<li>将节点更新<strong>commit</strong> 到视图</li>
+</ul>
+</li>
+<li>
+<p>fiber：</p>
+<ul>
+<li>
+<p><strong>Fiber是React更新时的最小单元</strong>，是一种<strong>包含指针的数据结构</strong>，从数据结构上看Fiber架构 ≈ 树 + 链表。</p>
+</li>
+<li>
+<p>Fiber单元是从 jsx createElement之后根据ReactElement生成的，相比  ReactElement，Fiber单元具备动态工作能力。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="12-class组件与函数组件的异同与好处">12 class组件与函数组件的异同与好处</h1>
 
     </div>
 
@@ -500,7 +787,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2022-05-19
+        2021-05-19
         
     </span>
   </p>
@@ -513,13 +800,13 @@
           <a href="/tags/react/">React</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%8C%96/">
+        <a class="prev" href="/post/vite-pnpm-react%E6%90%AD%E5%BB%BA/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">前端面试工程化</span>
+            <span class="prev-text nav-default">react&#43;vite&#43;ts搭建</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/%E6%89%8B%E5%86%99%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/">
-            <span class="next-text nav-default">手写发布订阅</span>
+        <a class="next" href="/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95js%E5%9F%BA%E7%A1%80/">
+            <span class="next-text nav-default">前端面试JS基础</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>

@@ -6,7 +6,16 @@
     <description>Recent content in Promise on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 14 Dec 2021 09:59:48 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/promise/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jul 2022 09:19:07 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/promise/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手写Promise.all</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99promise.all/</link>
+      <pubDate>Wed, 20 Jul 2022 09:19:07 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99promise.all/</guid>
+      <description>1 要点 知道要在Promise上写而不是在原型上写 知道 all 的参数（Promise的数组）和返回值（新Promise对象） 知道用数组来记录结果 知道</description>
+    </item>
+    
     <item>
       <title>手写Promise</title>
       <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99promise/</link>

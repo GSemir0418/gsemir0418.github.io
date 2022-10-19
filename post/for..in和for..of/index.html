@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gsemir0418.github.io/post/for..in%E5%92%8Cfor..of/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-23T10:38:31+08:00" />
-<meta property="article:modified_time" content="2021-11-23T10:38:31+08:00" />
+<meta property="article:modified_time" content="2022-08-12T10:38:31+08:00" />
 
 <meta itemprop="name" content="for..in和for..of">
 <meta itemprop="description" content="1 for&hellip;in 1.1 概念 for...in语句以任意顺序遍历一个对象的除Symbol以外的可枚举属性。 1.2 语法 1 2 for (variable in object) statement variable 在每次迭代时，variable会"><meta itemprop="datePublished" content="2021-11-23T10:38:31+08:00" />
-<meta itemprop="dateModified" content="2021-11-23T10:38:31+08:00" />
-<meta itemprop="wordCount" content="2136">
+<meta itemprop="dateModified" content="2022-08-12T10:38:31+08:00" />
+<meta itemprop="wordCount" content="3794">
 <meta itemprop="keywords" content="JavaScript,for..in,for..of," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="for..in和for..of"/>
 <meta name="twitter:description" content="1 for&hellip;in 1.1 概念 for...in语句以任意顺序遍历一个对象的除Symbol以外的可枚举属性。 1.2 语法 1 2 for (variable in object) statement variable 在每次迭代时，variable会"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"> JS基础知识整理 </a>
             </div>
-          <span class="more-meta"> 2136 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 3794 words </span>
+          <span class="more-meta"> 8 mins read </span>
         
       </div>
     </header>
@@ -155,7 +155,7 @@
         <li><a href="#14-示例">1.4 示例</a></li>
       </ul>
     </li>
-    <li><a href="#2-forof">2 *for&hellip;of</a>
+    <li><a href="#2-forof">2 for&hellip;of</a>
       <ul>
         <li><a href="#21-概念">2.1 概念</a></li>
         <li><a href="#22-语法">2.2 语法</a></li>
@@ -164,6 +164,32 @@
       </ul>
     </li>
     <li><a href="#3-区别">3 区别</a></li>
+    <li><a href="#4-迭代协议">4 迭代协议</a>
+      <ul>
+        <li><a href="#41-可迭代协议">4.1 可迭代协议</a></li>
+        <li><a href="#42-可迭代对象示例">4.2 可迭代对象示例</a>
+          <ul>
+            <li><a href="#421-内置可迭代对象">4.2.1 内置可迭代对象：</a></li>
+            <li><a href="#422-自定义可迭代对象">4.2.2 自定义可迭代对象：</a></li>
+            <li><a href="#423-接受可迭代对象的内置api">4.2.3 接受可迭代对象的内置API</a></li>
+            <li><a href="#424-需要可迭代对象的语法">4.2.4 需要可迭代对象的语法</a></li>
+          </ul>
+        </li>
+        <li><a href="#43-迭代器协议">4.3 迭代器协议</a></li>
+        <li><a href="#44-迭代器示例">4.4 迭代器示例</a>
+          <ul>
+            <li><a href="#441-自定义迭代器">4.4.1 自定义迭代器</a></li>
+            <li><a href="#442-使用class改写">4.4.2 使用class改写</a></li>
+            <li><a href="#443-使用generator">4.4.3 使用Generator</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#5-生成器">5 生成器</a>
+      <ul>
+        <li><a href="#51-特点">5.1 特点</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -194,14 +220,14 @@
 </li>
 </ul>
 <h2 id="13-描述">1.3 描述</h2>
-<p><code>for...in</code> 循环只遍历可枚举属性。循环将遍历对象本身的所有可枚举属性，以及对象从其构造函数原型中继承的属性（更接近原型链中对象的属性覆盖原型属性）。</p>
+<p><code>for...in</code> 循环只遍历可枚举属性。循环将遍历对象本身的所有可枚举属性，<strong>以及</strong>对象从其构造函数<strong>原型中继承的属性</strong>（更接近原型链中对象的属性覆盖原型属性）。</p>
 <p><strong>提示：</strong><code>for...in</code><strong>不应该用于迭代一个 Array</strong>。</p>
 <ul>
 <li>数组索引只是具有整数名称的枚举属性，并且与通用对象属性相同。不能保证<code>for ... in</code>将以<strong>任何特定的顺序</strong>返回索引。</li>
-<li><code>for ... in</code>循环语句<strong>将返回所有可枚举</strong>属性，不仅是数组索引，还包括非整数类型的名称和继承的那些。</li>
+<li><code>for ... in</code>循环语句<strong>将返回所有可枚举</strong>属性，不仅是<strong>数组索引</strong>，还包括非整数类型的<strong>名称</strong>和<strong>继承</strong>的那些。</li>
 </ul>
 <p>因为迭代的顺序是依赖于执行环境的，所以数组遍历<strong>不一定按次序</strong>访问元素。因此当迭代访问顺序很重要的数组时，最好用整数索引去进行<code>for</code>循环（或者使用<code>Array.prototype.forEach()</code>或<code>for...of</code>循环）。</p>
-<p>如果你只要考虑对象本身的属性，而不是它的原型，那么使用 <code>getOwnPropertyNames()</code>或执行<code>hasOwnProperty()</code>来确定某属性是否是对象本身的属性（也能使用<code>propertyIsEnumerable</code>。</p>
+<p>如果你只要考虑对象本身的属性，而不是它的原型，那么使用 <code>getOwnPropertyNames()</code>或执行<code>hasOwnProperty()</code>来确定某属性是否是对象本身的属性（也能使用<code>propertyIsEnumerable</code>)。</p>
 <p><code>for-in</code>循环的每次迭代都会产生更多开销，因此要比其他循环类型慢，一般速度为其他类型循环的 1/7。因此，除非明确需要迭代一个<strong>属性数量未知</strong>的对象，否则应避免使用for-in循环。如果需要遍历一个数量有限的已知属性列表，使用其他循环会更快，</p>
 <h2 id="14-示例">1.4 示例</h2>
 <div class="highlight"><div class="chroma">
@@ -262,9 +288,9 @@
 </span><span class="c1">// &#34;obj.color = red&#34;
 </span></code></pre></td></tr></table>
 </div>
-</div><h1 id="2-forof">2 *for&hellip;of</h1>
+</div><h1 id="2-forof">2 for&hellip;of</h1>
 <h2 id="21-概念">2.1 概念</h2>
-<p><strong><code>for...of</code>语句</strong>在可迭代对象（包括 Array，Map，Set，String，TypedArray，arguments对象等等）上创建一个迭代循环，调用自定义迭代钩子，并为每个不同属性的值执行语句</p>
+<p><strong><code>for...of</code>语句</strong>在<strong>可迭代对象</strong>（包括 <code>Array</code>，<code>Map</code>，<code>Set</code>，<code>String</code>，<code>TypedArray</code>，<code>arguments对象</code>等等）上创建一个迭代循环，调用自定义迭代钩子，并为每个不同属性的值执行语句</p>
 <h2 id="22-语法">2.2 语法</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -294,7 +320,7 @@
 <p>特点</p>
 <ul>
 <li>
-<p>跟<code>forEach</code>相比，可以正确响应break, continue, return。</p>
+<p>跟<code>forEach</code>相比，可以正确响应<code>break, continue, return</code>。</p>
 </li>
 <li>
 <p>for-of 循环不仅<strong>支持数组</strong>，还支持大多数<strong>类数组对象</strong>，例如 DOM nodelist 对象。</p>
@@ -511,7 +537,346 @@
 <span class="cm">/*该循环迭代并记录iterable作为可迭代对象定义的迭代值，这些是数组元素3, 5, 7，而不是任何对象的属性。*/</span>
 </code></pre></td></tr></table>
 </div>
+</div><h1 id="4-迭代协议">4 迭代协议</h1>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols">迭代协议 - JavaScript | MDN (mozilla.org)</a></p>
+</blockquote>
+<p>迭代协议作为 ECMAScript 2015 的一组<strong>补充规范</strong>，分为<strong>可迭代协议</strong>与<strong>迭代器协议</strong></p>
+<h2 id="41-可迭代协议">4.1 可迭代协议</h2>
+<ul>
+<li>可迭代协议指出，要成为<strong>可迭代</strong>对象， 一个对象必须实现 <strong><code>@@iterator</code></strong> 方法。这意味着<strong>对象</strong>（或者它<strong>原型链</strong>上的某个对象）<strong>必须有一个键为 <code>@@iterator</code> 的属性</strong>，可通过常量 <code>Symbol.iterator</code>访问该属性：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">someString</span> <span class="o">=</span> <span class="s2">&#34;hi&#34;</span><span class="p">;</span>
+<span class="k">typeof</span> <span class="nx">someString</span><span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">];</span>          <span class="c1">// &#34;function&#34;
+</span></code></pre></td></tr></table>
 </div>
+</div><ul>
+<li>人话总结：<strong>一个对象或者原型链上有<code>@@iterator</code>（Symbol.iterable）属性，那么就称其为可迭代对象</strong></li>
+</ul>
+<h2 id="42-可迭代对象示例">4.2 可迭代对象示例</h2>
+<h3 id="421-内置可迭代对象">4.2.1 内置可迭代对象：</h3>
+<p>目前所有的内置可迭代对象如下：<code>String</code>、<code>Array</code>、<code>TypedArray</code>、<code>Map</code>和<code>Set</code>，它们的原型对象都实现了 <code>@@iterator</code> 方法。</p>
+<h3 id="422-自定义可迭代对象">4.2.2 自定义可迭代对象：</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">myIterable</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="nx">myIterable</span><span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="o">*</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">yield</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">yield</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">yield</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="p">[...</span><span class="nx">myIterable</span><span class="p">];</span> <span class="c1">// [1, 2, 3]
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="423-接受可迭代对象的内置api">4.2.3 接受可迭代对象的内置API</h3>
+<ul>
+<li><code>new Map([iterable])</code>、<code>new WeakMap([iterable])</code></li>
+<li><code>new Set([iterable])</code>、<code>new WeakSet([iterable])</code></li>
+<li><code>Promise.all([iterable])</code>、<code>Promise.race([iterable])</code></li>
+<li><code>Array.from([iterable])</code></li>
+</ul>
+<h3 id="424-需要可迭代对象的语法">4.2.4 需要可迭代对象的语法</h3>
+<p>一些语句和表达式：</p>
+<ul>
+<li>for..of</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">value</span> <span class="k">of</span> <span class="p">[</span><span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>展开语法</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="p">[...</span><span class="s2">&#34;abc&#34;</span><span class="p">];</span> <span class="c1">// [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;]
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>yield*</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span><span class="o">*</span> <span class="nx">gen</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">yield</span><span class="o">*</span> <span class="p">[</span><span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="nx">gen</span><span class="p">().</span><span class="nx">next</span><span class="p">();</span> <span class="c1">// { value: &#34;a&#34;, done: false }
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>解构赋值</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Set</span><span class="p">([</span><span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]);</span>
+<span class="nx">a</span> <span class="c1">// &#34;a&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="43-迭代器协议">4.3 迭代器协议</h2>
+<ul>
+<li>只有实现了一个拥有以下语义的 <code>next()</code> 方法，一个对象才能成为<strong>迭代器</strong>：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>next</code></td>
+<td style="text-align:left">一个无参数的或者可以接受一个参数的函数，返回一个应当拥有以下两个属性的对象：<br><code>done</code>（boolean）<br>如果迭代器可以产生序列中的下一个值，则为 <code>false</code>。（这等价于没有指定 <code>done</code> 这个属性。）<br>如果迭代器已将序列迭代完毕，则为 <code>true</code>。这种情况下，<code>value</code> 是可选的，如果它依然存在，即为迭代结束之后的默认返回值。<br><br><code>value</code><br>迭代器返回的任何 JavaScript 值。done 为 true 时可省略。<br><br><code>next()</code> 方法必须返回一个对象，该对象应当有两个属性： <code>done</code> 和 <code>value</code>，如果返回了一个非对象值（比如 <code>false</code> 或 <code>undefined</code>），则会抛出一个 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/TypeError"><code>TypeError</code></a> 异常（<code>&quot;iterator.next() returned a non-object value&quot;</code>）。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>人话翻译：迭代器指的是<strong>具有next()方法的类或函数</strong>。<code>next()</code>是一个<strong>无参数</strong>或者可以接受<strong>一个参数</strong>的函数，返回一个<strong>拥有done和value属性</strong>的<strong>对象</strong></li>
+</ul>
+<h2 id="44-迭代器示例">4.4 迭代器示例</h2>
+<h3 id="441-自定义迭代器">4.4.1 自定义迭代器</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">makeIterator</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">nextIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">{</span>
+       <span class="nx">next</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+           <span class="k">return</span> <span class="nx">nextIndex</span> <span class="o">&lt;</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">?</span> <span class="p">{</span>
+               <span class="nx">value</span><span class="o">:</span> <span class="nx">array</span><span class="p">[</span><span class="nx">nextIndex</span><span class="o">++</span><span class="p">],</span>
+               <span class="nx">done</span><span class="o">:</span> <span class="kc">false</span>
+           <span class="p">}</span> <span class="o">:</span> <span class="p">{</span>
+               <span class="nx">done</span><span class="o">:</span> <span class="kc">true</span>
+           <span class="p">};</span>
+       <span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">it</span> <span class="o">=</span> <span class="nx">makeIterator</span><span class="p">([</span><span class="s1">&#39;gsq&#39;</span><span class="p">,</span> <span class="s1">&#39;zs&#39;</span><span class="p">]);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">it</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// &#39;gsq&#39;
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">it</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// &#39;zs&#39;
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">it</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">done</span><span class="p">);</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="442-使用class改写">4.4.2 使用class改写</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">MyIterator</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span>
+  <span class="p">}</span>
+  <span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]()</span> <span class="p">{</span>
+    <span class="c1">// 注意这里index没有定义为原型属性
+</span><span class="c1"></span>    <span class="c1">// 每个迭代之间的index是相互独立的
+</span><span class="c1"></span>    <span class="c1">// 使得多次迭代更安全？
+</span><span class="c1"></span>    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">next</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="p">{</span><span class="nx">value</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="nx">index</span><span class="o">++</span><span class="p">],</span> <span class="nx">done</span><span class="o">:</span> <span class="kc">false</span><span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="p">{</span><span class="nx">done</span><span class="o">:</span> <span class="kc">true</span><span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">mi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyIterator</span><span class="p">([</span><span class="s1">&#39;gsq&#39;</span><span class="p">,</span> <span class="s1">&#39;zs&#39;</span><span class="p">]);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">mi</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// &#39;gsq&#39;
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">mi</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// &#39;zs&#39;
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">mi</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">done</span><span class="p">);</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="443-使用generator">4.4.3 使用Generator</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span><span class="o">*</span> <span class="nx">myGeneratorIterator</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">nextIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="nx">nextIndex</span> <span class="o">&lt;</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">yield</span> <span class="nx">array</span><span class="p">[</span><span class="nx">nextIndex</span><span class="o">++</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">gen</span> <span class="o">=</span> <span class="nx">makeSimpleGenerator</span><span class="p">([</span><span class="s1">&#39;gsq&#39;</span><span class="p">,</span> <span class="s1">&#39;zs&#39;</span><span class="p">]);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">gen</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// &#39;gsq&#39;
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">gen</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// &#39;zs&#39;
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">gen</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">done</span><span class="p">);</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p>生成器对象既是<strong>可迭代对象</strong>也是<strong>迭代器</strong></p>
+<h1 id="5-生成器">5 生成器</h1>
+<ul>
+<li>生成器与普通函数相差无几</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span><span class="o">*</span> <span class="nx">gen</span><span class="p">(){</span>
+	<span class="k">yield</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="51-特点">5.1 特点</h2>
+<ol>
+<li>生成器函数<strong>在执行时能暂停</strong>，后面又能<strong>从暂停处继续执行</strong></li>
+<li><strong>调用一个生成器函数</strong>并不会马上执行内部的语句，而是返回一个这个<strong>生成器的迭代器对象</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">gen</span><span class="p">()</span> 
+<span class="k">typeof</span> <span class="nx">a</span><span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]</span> <span class="c1">// &#39;function&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>当返回的迭代器的<code>next()</code>方法被首次调用时，其内的语句会执行到第一个出现<code>yield</code>的位置为止</li>
+<li><code>yield</code>后紧跟<strong>迭代器要返回的值</strong></li>
+<li>如果使用了<code>yield*</code>，则表示将执行权移交给另一个生成器函数（当前生成器暂停执行）</li>
+<li>调用<code>next()</code>方法时，如果传入了参数，那么这个参数会传给上一条执行的<code>yield</code>语句左边的变量</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="o">*</span><span class="nx">gen</span><span class="p">(){</span>
+    <span class="k">yield</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="nx">x</span> <span class="o">=</span> <span class="k">yield</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
+    <span class="k">yield</span> <span class="nx">x</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">gen_obj</span><span class="o">=</span><span class="nx">gen</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">gen_obj</span><span class="p">.</span><span class="nx">next</span><span class="p">());</span><span class="c1">// 执行 yield 10，返回 10
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">gen_obj</span><span class="p">.</span><span class="nx">next</span><span class="p">());</span><span class="c1">// 执行 yield &#39;foo&#39;，返回 &#39;foo&#39;
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">gen_obj</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span><span class="c1">// 将 100 赋给上一条 yield &#39;foo&#39; 的左值，即执行 x=100，返回 100
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">gen_obj</span><span class="p">.</span><span class="nx">next</span><span class="p">());</span><span class="c1">// 执行完毕，value 为 undefined，done 为 true
+</span></code></pre></td></tr></table>
+</div>
+</div><ol start="7">
+<li>当在生成器函数中显式 <code>return</code> 时，会导致生成器立即变为<strong>完成状态</strong>，即调用 <code>next()</code> 方法返回的对象的 <code>done</code> 为 <code>true</code>。如果 <code>return</code> 后面跟了一个值，那么这个值会作为<strong>当前</strong>调用 <code>next()</code> 方法返回的 value 值。可以理解为，return就是生成器<strong>最后一个yield</strong></li>
+</ol>
+
     </div>
 
     <div class="post-copyright">
@@ -522,7 +887,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2021-11-23
+        2022-08-12
         
     </span>
   </p>

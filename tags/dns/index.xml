@@ -6,16 +6,7 @@
     <description>Recent content in DNS on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 20 Jan 2022 14:46:29 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/dns/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>连接复用</title>
-      <link>https://gsemir0418.github.io/post/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/</link>
-      <pubDate>Thu, 20 Jan 2022 14:46:29 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/post/%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8/</guid>
-      <description>1 DNS预解析 假设index.html的部分代码为： 1 2 &amp;lt;script src=&amp;#34;http://a.com/1.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&amp;#34;http://b.com/2.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; 那么客户端会对a.com进行DNS的解析，拿到ip后请求1.js，然后再对b</description>
-    </item>
-    
+    <lastBuildDate>Thu, 02 Sep 2021 14:34:53 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/dns/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DNS、TCP与HTTP</title>
       <link>https://gsemir0418.github.io/post/web%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%9F%BA%E7%A1%80/</link>

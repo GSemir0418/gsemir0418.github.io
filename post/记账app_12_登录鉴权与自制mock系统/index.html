@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>记账app_12_登录鉴权与自制Mock系统 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 登录鉴权与路由守卫 1.1 登录跳转 return_to属性标识了登录成功后所要返回的路由路径，有三种途径可以实现return_to localStorage 1 2 const returnTo = localStorage.getItem(&amp;#39;return_to&amp;#39;) router.push(returnTo" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_12_%E7%99%BB%E5%BD%95%E9%89%B4%E6%9D%83%E4%B8%8E%E8%87%AA%E5%88%B6mock%E7%B3%BB%E7%BB%9F/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="记账app_12_登录鉴权与自制Mock系统" />
+<meta property="og:description" content="1 登录鉴权与路由守卫 1.1 登录跳转 return_to属性标识了登录成功后所要返回的路由路径，有三种途径可以实现return_to localStorage 1 2 const returnTo = localStorage.getItem(&#39;return_to&#39;) router.push(returnTo" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/%E8%AE%B0%E8%B4%A6app_12_%E7%99%BB%E5%BD%95%E9%89%B4%E6%9D%83%E4%B8%8E%E8%87%AA%E5%88%B6mock%E7%B3%BB%E7%BB%9F/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-30T14:24:32+08:00" />
+<meta property="article:modified_time" content="2022-08-30T14:24:32+08:00" />
+
+<meta itemprop="name" content="记账app_12_登录鉴权与自制Mock系统">
+<meta itemprop="description" content="1 登录鉴权与路由守卫 1.1 登录跳转 return_to属性标识了登录成功后所要返回的路由路径，有三种途径可以实现return_to localStorage 1 2 const returnTo = localStorage.getItem(&#39;return_to&#39;) router.push(returnTo"><meta itemprop="datePublished" content="2022-08-30T14:24:32+08:00" />
+<meta itemprop="dateModified" content="2022-08-30T14:24:32+08:00" />
+<meta itemprop="wordCount" content="2738">
+<meta itemprop="keywords" content="Rails,vue3,tsx,aliyun," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="记账app_12_登录鉴权与自制Mock系统"/>
+<meta name="twitter:description" content="1 登录鉴权与路由守卫 1.1 登录跳转 return_to属性标识了登录成功后所要返回的路由路径，有三种途径可以实现return_to localStorage 1 2 const returnTo = localStorage.getItem(&#39;return_to&#39;) router.push(returnTo"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">记账app_12_登录鉴权与自制Mock系统</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-08-30 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/"> 全栈项目 </a>
+            </div>
+          <span class="more-meta"> 2738 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-登录鉴权与路由守卫">1 登录鉴权与路由守卫</a>
+      <ul>
+        <li><a href="#11-登录跳转">1.1 登录跳转</a></li>
+        <li><a href="#12-路由守卫">1.2 路由守卫</a></li>
+        <li><a href="#13-登录检查">1.3 登录检查</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-自制前端mock系统">2 自制前端mock系统</a>
+      <ul>
+        <li><a href="#21-封装mock">2.1 封装mock</a></li>
+        <li><a href="#22-使用mock">2.2 使用mock</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-封装tags-hook组件">3 封装Tags hook&amp;组件</a>
+      <ul>
+        <li><a href="#31-完善itemcreate组件加载更多">3.1 完善ItemCreate组件（加载更多）</a></li>
+        <li><a href="#32-usetags">3.2 useTags</a></li>
+        <li><a href="#33-tags组件">3.3 Tags组件</a></li>
+        <li><a href="#34-小问题">3.4 小问题</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-登录鉴权与路由守卫">1 登录鉴权与路由守卫</h1>
+<h2 id="11-登录跳转">1.1 登录跳转</h2>
+<ul>
+<li>
+<p><code>return_to</code>属性标识了<strong>登录成功后所要返回的路由</strong>路径，有三种途径可以实现return_to</p>
+<ul>
+<li>
+<p><code>localStorage</code></p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">const</span> <span class="nx">returnTo</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;return_to&#39;</span><span class="p">)</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">returnTo</span> <span class="o">||</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>状态管理（刷新会失效）</p>
+</li>
+<li>
+<p><code>queryString</code>，即<code>/sign_in?return_to=/tags</code></p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;/sign_in?return_to=&#39;</span><span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">route</span><span class="p">.</span><span class="nx">fullpath</span><span class="p">))</span>
+<span class="kr">const</span> <span class="nx">returnTo</span> <span class="o">=</span> <span class="nx">route</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">return_to</span><span class="o">?</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">returnTo</span> <span class="o">||</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>记录跳过欢迎页的状态</p>
+<ul>
+<li>只要用户第一次跳过欢迎页，那么后面的欢迎页就<strong>自动跳过</strong>了</li>
+<li>How：需要在<code>localStorage</code>中定义<code>SkipFeatures</code>状态，一般值为<strong>时间戳</strong>，以确保用户能看到最新的广告（呸）</li>
+<li>When：当用户点击<strong>跳过</strong>或<strong>完成</strong>按钮时</li>
+</ul>
+</li>
+<li>
+<p>欢迎（广告）页需要添加<strong>路由守卫</strong>。当用户访问欢迎页路由时，如果SkipFeatures状态存在，那么自动跳转到首页</p>
+</li>
+</ul>
+<h2 id="12-路由守卫">1.2 路由守卫</h2>
+<blockquote>
+<p><a href="https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E8%B7%AF%E7%94%B1%E7%8B%AC%E4%BA%AB%E7%9A%84%E5%AE%88%E5%8D%AB">导航守卫 | Vue Router (vuejs.org)</a></p>
+</blockquote>
+<ul>
+<li>src/config/routes.ts</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">routes</span>: <span class="kt">RouteRecordRaw</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nx">path</span><span class="o">:</span> <span class="s2">&#34;/welcome&#34;</span><span class="p">,</span>
+    <span class="nx">component</span>: <span class="kt">Welcome</span><span class="p">,</span>
+    <span class="c1">// 路由守卫
+</span><span class="c1"></span>    <span class="nx">beforeEnter</span><span class="o">:</span> <span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="kr">from</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// 还可以请求权限等，总之在进入路由之前的操作都可以在此进行
+</span><span class="c1"></span>      <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">&#34;skipFeatures&#34;</span><span class="p">)</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">?</span> <span class="nx">next</span><span class="p">(</span><span class="s2">&#34;/start&#34;</span><span class="p">)</span> <span class="o">:</span> <span class="nx">next</span><span class="p">();</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+	<span class="p">...</span>
+<span class="p">];</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="13-登录检查">1.3 登录检查</h2>
+<ul>
+<li>利用<strong>路由守卫</strong>，对<strong>记账等</strong>业务页面进行<strong>登录检查</strong>，否则<strong>跳转到登录页面</strong></li>
+<li>以/items为例</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="p">{</span>
+	<span class="nx">path</span><span class="o">:</span> <span class="s2">&#34;/items&#34;</span><span class="p">,</span>
+	<span class="nx">beforeEnter</span>: <span class="kt">async</span> <span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="kr">from</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+		<span class="k">await</span> <span class="nx">http</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s2">&#34;/me&#34;</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+			<span class="nx">next</span><span class="p">(</span><span class="sb">`/sign_in?return_to=</span><span class="si">${</span><span class="nx">to</span><span class="p">.</span><span class="nx">path</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+		<span class="p">});</span>
+		<span class="nx">next</span><span class="p">()</span>
+	<span class="p">},</span>
+<span class="p">},</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>登录后的每次请求，都应该将jwt放到请求头中</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// src/shared/HttpClient.tsx
+</span><span class="c1"></span><span class="nx">http</span><span class="p">.</span><span class="nx">instance</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">config</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">&#34;jwt&#34;</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">config</span><span class="p">.</span><span class="nx">headers</span><span class="o">!</span><span class="p">.</span><span class="nx">Authorization</span> <span class="o">=</span> <span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">config</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>对于除了<code>/</code>、<code>/welcome</code>和<code>/sign_in</code>其他路由，都需要添加路由守卫来验证权限，出现大量重复的代码</li>
+<li>因此鉴权可以写在<strong>全局的路由守卫</strong>上</li>
+<li>然后少数几个路由作为鉴权守卫的<strong>白名单</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// src/main.ts
+</span><span class="c1"></span><span class="p">...</span>
+<span class="kr">const</span> <span class="nx">whiteList</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="err">&#34;</span><span class="na">exact</span><span class="err">&#34;</span> <span class="err">|</span> <span class="err">&#34;</span><span class="na">startsWith</span><span class="err">&#34;</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&#34;/&#34;</span><span class="o">:</span> <span class="s2">&#34;exact&#34;</span><span class="p">,</span>
+  <span class="s2">&#34;/start&#34;</span><span class="o">:</span> <span class="s2">&#34;exact&#34;</span><span class="p">,</span>
+  <span class="s2">&#34;/welcome&#34;</span><span class="o">:</span> <span class="s2">&#34;startsWith&#34;</span><span class="p">,</span>
+  <span class="s2">&#34;/sign_in&#34;</span><span class="o">:</span> <span class="s2">&#34;startsWith&#34;</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="c1">// 全局路由守卫
+</span><span class="c1">// 返回true或false或url
+</span><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">beforeEach</span><span class="p">((</span><span class="nx">to</span><span class="p">,</span> <span class="kr">from</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">whiteList</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">whiteList</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">===</span> <span class="s2">&#34;exact&#34;</span> <span class="o">&amp;&amp;</span> <span class="nx">to</span><span class="p">.</span><span class="nx">path</span> <span class="o">===</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">===</span> <span class="s2">&#34;startsWith&#34;</span> <span class="o">&amp;&amp;</span> <span class="nx">to</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">http</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s2">&#34;/me&#34;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span>
+  	<span class="p">()</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  	<span class="p">()</span> <span class="o">=&gt;</span> <span class="s2">&#34;/sign_in?return_to=&#34;</span> <span class="o">+</span> <span class="nx">to</span><span class="p">.</span><span class="nx">path</span>
+  <span class="p">);</span>
+<span class="p">});</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>问题：每次路由跳转都会请求当前用户，非常浪费资源</p>
+<ul>
+<li>解决：可以把请求的promise提取到最外层，只在第一次访问时请求，后面只是读取这个promise中的值</li>
+</ul>
+</li>
+<li>
+<p>问题：在登录后应该刷新当前用户，即刷新promise</p>
+<ul>
+<li>解决：封装me.ts，提供promise和refreshMe等接口</li>
+</ul>
+</li>
+<li>
+<p>最终方案</p>
+<ul>
+<li>src/main.ts</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="p">...</span>
+<span class="nx">fetchMe</span><span class="p">();</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">beforeEach</span><span class="p">((</span><span class="nx">to</span><span class="p">,</span> <span class="kr">from</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">whiteList</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">whiteList</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">value</span> <span class="o">===</span> <span class="s2">&#34;exact&#34;</span> <span class="o">&amp;&amp;</span> <span class="nx">to</span><span class="p">.</span><span class="nx">path</span> <span class="o">===</span> <span class="nx">key</span><span class="p">)</span> 
+    <span class="o">||</span> <span class="p">(</span><span class="nx">value</span> <span class="o">===</span> <span class="s2">&#34;startsWith&#34;</span> <span class="o">&amp;&amp;</span> <span class="nx">to</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">mePromise</span><span class="o">?</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span>
+    <span class="p">()</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">()</span> <span class="o">=&gt;</span> <span class="s2">&#34;/sign_in?return_to=&#34;</span> <span class="o">+</span> <span class="nx">to</span><span class="p">.</span><span class="nx">path</span>
+  <span class="p">);</span>
+<span class="p">});</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>src/shared/me.tsx</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">AxiosResponse</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;axios&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">http</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;./HttpClient&#34;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="kd">let</span> <span class="nx">mePromise</span>: <span class="kt">Promise</span><span class="p">&lt;</span><span class="nt">AxiosResponse</span><span class="err">&lt;</span>
+        <span class="p">{</span><span class="na">resources</span><span class="err">:</span> <span class="p">{</span><span class="na">id</span><span class="err">:</span> <span class="na">number</span><span class="p">}}</span><span class="err">,</span> <span class="na">any</span>
+      <span class="p">&gt;</span><span class="o">&gt;</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">refreshMe</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">mePromise</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="kr">get</span><span class="o">&lt;</span><span class="p">{</span> <span class="nx">resources</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span>: <span class="kt">number</span> <span class="p">}</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&#34;/me&#34;</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">mePromise</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">fetchMe</span> <span class="o">=</span> <span class="nx">refreshMe</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>src/views/SignInPage.tsx</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">const</span> <span class="nx">onSubmit</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">Event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">hasErrors</span><span class="p">(</span><span class="nx">errors</span><span class="p">))</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&#34;jwt&#34;</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">jwt</span><span class="p">);</span>
+    <span class="nx">refreshMe</span><span class="p">();</span>
+    <span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">route</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">return_to</span><span class="o">?</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">||</span> <span class="s2">&#34;/&#34;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id="2-自制前端mock系统">2 自制前端mock系统</h1>
+<ul>
+<li>思路：基于vite开发服务器与响应拦截器，如果识别到是mock请求（请求参数中有标识），则拦截响应，并返回假的响应数据</li>
+</ul>
+<h2 id="21-封装mock">2.1 封装mock</h2>
+<ul>
+<li>将mock封装为一个函数，接收响应体
+<ul>
+<li>如果mock成功，则返回假数据，结束响应；如果mock失败，则返回false，不会影响正常响应；</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// src/shared/HttpClient.tsx
+</span><span class="c1"></span><span class="nx">http</span><span class="p">.</span><span class="nx">instance</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+  <span class="p">(</span><span class="nx">resp</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  	<span class="c1">// 篡改response
+</span><span class="c1"></span>    <span class="nx">mock</span><span class="p">(</span><span class="nx">resp</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">resp</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// 对请求失败的情况也尝试mock
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">mock</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span> <span class="p">{</span>
+      <span class="c1">// return表示错误已被解决
+</span><span class="c1"></span>      <span class="k">return</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// throw表示此处并没有解决错误
+</span><span class="c1"></span>      <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+
+<span class="c1">// src/mock/mock.tsx
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">AxiosResponse</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;axios&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">mockSession</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;./mockSession&#34;</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">mock</span> <span class="o">=</span> <span class="p">(</span><span class="nx">response</span>: <span class="kt">AxiosResponse</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 如果不是本地开发环境的host，那么不会mock数据
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span>
+    <span class="nx">location</span><span class="p">.</span><span class="nx">hostname</span> <span class="o">!==</span> <span class="s2">&#34;localhost&#34;</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">location</span><span class="p">.</span><span class="nx">hostname</span> <span class="o">!==</span> <span class="s2">&#34;127.0.0.1&#34;</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">location</span><span class="p">.</span><span class="nx">hostname</span> <span class="o">!==</span> <span class="s2">&#34;192.168.3.57&#34;</span>
+  <span class="p">)</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="c1">// _m就是mock的标识
+</span><span class="c1"></span>  <span class="k">switch</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">_m</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="s2">&#34;session&#34;</span><span class="o">:</span>
+      <span class="c1">// 状态码和响应体就是mock出来的数据
+</span><span class="c1"></span>      <span class="c1">// 解构赋值 相当于
+</span><span class="c1"></span>      <span class="c1">// response.status = mockSession(response.config)[0]
+</span><span class="c1"></span>      <span class="p">[</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">]</span> <span class="o">=</span> <span class="nx">mockSession</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">config</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// src/mock/mockSession.tsx
+</span><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">faker</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;@faker-js/faker&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">AxiosRequestConfig</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;axios&#34;</span><span class="p">;</span>
+
+<span class="kr">type</span> <span class="nx">Mock</span> <span class="o">=</span> <span class="p">(</span><span class="nx">config?</span>: <span class="kt">AxiosRequestConfig</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="kt">number</span><span class="p">,</span> <span class="kt">any</span><span class="p">];</span>
+<span class="nx">faker</span><span class="p">.</span><span class="nx">setLocale</span><span class="p">(</span><span class="s2">&#34;zh_CN&#34;</span><span class="p">);</span>
+
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">mockSession</span>: <span class="kt">Mock</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="nx">jwt</span>: <span class="kt">faker.random.word</span><span class="p">()</span> <span class="p">}];</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="22-使用mock">2.2 使用mock</h2>
+<ul>
+<li>以登录接口为例</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// src/views/SignInPage.tsx
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">http</span>
+  <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="p">{</span> <span class="nx">jwt</span>: <span class="kt">string</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&#34;/session&#34;</span><span class="p">,</span> <span class="nx">formData</span><span class="p">,</span> <span class="p">{</span>
+  	<span class="nx">params</span><span class="o">:</span> <span class="p">{</span> <span class="nx">_m</span><span class="o">:</span> <span class="s2">&#34;session&#34;</span> <span class="p">},</span> <span class="c1">// mock标识
+</span><span class="c1"></span>  	<span class="nx">timeout</span>: <span class="kt">1000</span><span class="p">,</span><span class="c1">// 超时时间，因为服务器压根没开，不用等太久
+</span><span class="c1"></span>  <span class="p">})</span>         
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>以记账接口为例，获取全部tags</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// src/mock/mock.tsx
+</span><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">mock</span> <span class="o">=</span> <span class="p">(</span><span class="nx">response</span>: <span class="kt">AxiosResponse</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">config</span><span class="o">?</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">_m</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="s2">&#34;tagIndex&#34;</span><span class="o">:</span>
+      <span class="p">[</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">]</span> <span class="o">=</span> <span class="nx">mockTagIndex</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">config</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// src/components/item/ItemCreate.tsx
+</span><span class="c1"></span><span class="nx">setup</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 挂载获取数据
+</span><span class="c1"></span>  <span class="nx">onMounted</span><span class="p">(</span><span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">http</span><span class="p">.</span><span class="kr">get</span><span class="o">&lt;</span><span class="p">{</span> <span class="nx">resources</span>: <span class="kt">Tag</span><span class="p">[]</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">(</span>
+      <span class="s2">&#34;/tags&#34;</span><span class="p">,</span>
+      <span class="p">{</span> <span class="nx">kind</span><span class="o">:</span> <span class="s2">&#34;expenses&#34;</span><span class="p">,</span> <span class="nx">_m</span><span class="o">:</span> <span class="s2">&#34;tagIndex&#34;</span> <span class="p">},</span>
+      <span class="p">{</span> <span class="nx">timeout</span>: <span class="kt">1000</span> <span class="p">}</span>
+    <span class="p">);</span>
+    <span class="nx">refExpensesTags</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">resources</span><span class="p">;</span>
+  <span class="p">});</span>
+  <span class="nx">onMounted</span><span class="p">(</span><span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">http</span><span class="p">.</span><span class="kr">get</span><span class="o">&lt;</span><span class="p">{</span> <span class="nx">resources</span>: <span class="kt">Tag</span><span class="p">[]</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">(</span>
+      <span class="s2">&#34;/tags&#34;</span><span class="p">,</span>
+      <span class="p">{</span> <span class="nx">kind</span><span class="o">:</span> <span class="s2">&#34;income&#34;</span><span class="p">,</span> <span class="nx">_m</span><span class="o">:</span> <span class="s2">&#34;tagIndex&#34;</span> <span class="p">},</span>
+      <span class="p">{</span> <span class="nx">timeout</span>: <span class="kt">1000</span> <span class="p">}</span>
+    <span class="p">);</span>
+    <span class="nx">refIncomeTags</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">resources</span><span class="p">;</span>
+  <span class="p">});</span>
+  <span class="kr">const</span> <span class="nx">refExpensesTags</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">&lt;</span><span class="nt">Tag</span><span class="err">[]</span><span class="p">&gt;([]);</span>
+  <span class="kr">const</span> <span class="nx">refIncomeTags</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">&lt;</span><span class="nt">Tag</span><span class="err">[]</span><span class="p">&gt;([]);</span>
+
+<span class="c1">// src/mock/mockTagIndex.tsx
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">Mock</span> <span class="o">=</span> <span class="p">(</span><span class="nx">config?</span>: <span class="kt">AxiosRequestConfig</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="kt">number</span><span class="p">,</span> <span class="kt">any</span><span class="p">];</span>
+<span class="kr">type</span> <span class="nx">CreateItem</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="nx">config</span>: <span class="kt">AxiosRequestConfig</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">,</span>
+  <span class="nx">n</span>: <span class="kt">number</span><span class="p">,</span>
+  <span class="nx">attr?</span>: <span class="kt">any</span>
+<span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Tag</span><span class="p">[];</span>
+<span class="c1">// 自动生成tags
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">createItem</span>: <span class="kt">CreateItem</span> <span class="o">=</span> <span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">attr</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">createId</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">id</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">({</span> <span class="nx">length</span>: <span class="kt">n</span> <span class="p">}).</span><span class="nx">map</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="nx">id</span>: <span class="kt">createId</span><span class="p">(),</span>
+    <span class="nx">kind</span>: <span class="kt">config?.params.kind</span><span class="p">,</span>
+    <span class="nx">sign</span>: <span class="kt">faker.internet.emoji</span><span class="p">(),</span>
+    <span class="nx">name</span>: <span class="kt">faker.random.word</span><span class="p">(),</span>
+    <span class="p">...</span><span class="nx">attr</span><span class="p">,</span>
+  <span class="p">}));</span>
+<span class="p">};</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">mockTagIndex</span>: <span class="kt">Mock</span> <span class="o">=</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">config</span><span class="o">?</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">kind</span> <span class="o">===</span> <span class="s2">&#34;expenses&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="nx">resources</span>: <span class="kt">createItem</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="p">}];</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="nx">resources</span>: <span class="kt">createItem</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="p">}];</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-封装tags-hook组件">3 封装Tags hook&amp;组件</h1>
+<ol>
+<li>先把重复的数据请求<strong>逻辑抽离</strong>成hooks</li>
+<li>再把html、css抽离为<strong>组件</strong></li>
+<li>也可以直接使用hooks<strong>返回组件</strong></li>
+</ol>
+<h2 id="31-完善itemcreate组件加载更多">3.1 完善ItemCreate组件（加载更多）</h2>
+<ul>
+<li>构造分页假数据</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// src/mock/mockTagIndex.tsx
+</span><span class="c1"></span><span class="p">...</span>
+<span class="c1">// 自动生成pager
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">per_page</span> <span class="o">=</span> <span class="mi">25</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">26</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">createPager</span> <span class="o">=</span> <span class="p">(</span><span class="nx">page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+  <span class="nx">page</span><span class="p">,</span>
+  <span class="nx">per_page</span><span class="p">,</span>
+  <span class="nx">count</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">mockTagIndex</span>: <span class="kt">Mock</span> <span class="o">=</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">kind</span><span class="p">,</span> <span class="nx">page</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">config</span><span class="o">?</span><span class="p">.</span><span class="nx">params</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">kind</span> <span class="o">===</span> <span class="s2">&#34;expenses&#34;</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="o">!</span><span class="nx">page</span> <span class="o">||</span> <span class="nx">page</span> <span class="o">===</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+      <span class="mi">200</span><span class="p">,</span>
+      <span class="p">{</span>
+        <span class="nx">resources</span>: <span class="kt">createItem</span><span class="p">(</span><span class="nx">kind</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+        <span class="nx">pager</span>: <span class="kt">createPager</span><span class="p">(</span><span class="nx">page</span><span class="p">),</span>
+      <span class="p">},</span>
+    <span class="p">];</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">kind</span> <span class="o">===</span> <span class="s2">&#34;expenses&#34;</span> <span class="o">&amp;&amp;</span> <span class="nx">page</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+      <span class="mi">200</span><span class="p">,</span>
+      <span class="p">{</span>
+        <span class="nx">resources</span>: <span class="kt">createItem</span><span class="p">(</span><span class="nx">kind</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="nx">pager</span>: <span class="kt">createPager</span><span class="p">(</span><span class="nx">page</span><span class="p">),</span>
+      <span class="p">},</span>
+    <span class="p">];</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="nx">resources</span>: <span class="kt">createItem</span><span class="p">(</span><span class="nx">kind</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="p">}];</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>无论是onMounted还是onLoadMore，都是在请求数据，没有任何区别</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">const</span> <span class="nx">fetchTags</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="kr">const</span> <span class="nx">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">http</span><span class="p">.</span><span class="kr">get</span><span class="p">&lt;</span><span class="nt">Resources</span><span class="err">&lt;</span><span class="na">Tag</span><span class="p">&gt;</span><span class="o">&gt;</span><span class="p">(</span>
+		<span class="s2">&#34;/tags&#34;</span><span class="p">,</span>
+		<span class="p">{</span>
+			<span class="nx">kind</span><span class="o">:</span> <span class="s2">&#34;expenses&#34;</span><span class="p">,</span>
+			<span class="nx">_m</span><span class="o">:</span> <span class="s2">&#34;tagIndex&#34;</span><span class="p">,</span>
+			<span class="nx">page</span>: <span class="kt">refPage.value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+		<span class="p">},</span>
+		<span class="p">{</span>
+			<span class="nx">timeout</span>: <span class="kt">1000</span><span class="p">,</span>
+		<span class="p">}</span>
+	<span class="p">);</span>
+	<span class="kr">const</span> <span class="p">{</span> <span class="nx">pager</span><span class="p">,</span> <span class="nx">resources</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+	<span class="nx">refExpensesTags</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">resources</span><span class="p">);</span>
+	<span class="nx">refPage</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="nx">refHasMore</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span>
+		<span class="p">(</span><span class="nx">pager</span><span class="p">.</span><span class="nx">page</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nx">pager</span><span class="p">.</span><span class="nx">per_page</span> <span class="o">+</span> <span class="nx">resources</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="nx">pager</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="c1">// 此时
+</span><span class="c1"></span><span class="nx">onMounted</span><span class="p">(</span><span class="nx">fetchTags</span><span class="p">)</span>
+<span class="nx">onLoadMore</span> <span class="o">=</span> <span class="nx">fetchTags</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>于是可以将请求数据的逻辑封装为hooks</li>
+</ul>
+<h2 id="32-usetags">3.2 useTags</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// src/hooks/useTags.tsx
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">Fetcher</span> <span class="o">=</span> <span class="p">(</span><span class="nx">page</span>: <span class="kt">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">AxiosResponse</span><span class="err">&lt;</span><span class="na">Resources</span><span class="err">&lt;</span><span class="na">Tag</span><span class="p">&gt;</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">useTags</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fetcher</span>: <span class="kt">Fetcher</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 接收数据请求函数
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">hasMore</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">tags</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">&lt;</span><span class="nt">Tag</span><span class="err">[]</span><span class="p">&gt;([]);</span>
+  <span class="kr">const</span> <span class="nx">fetchTags</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetcher</span><span class="p">(</span><span class="nx">page</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">pager</span><span class="p">,</span> <span class="nx">resources</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+    <span class="nx">tags</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">resources</span><span class="p">);</span>
+    <span class="nx">page</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="nx">hasMore</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span>
+      <span class="p">(</span><span class="nx">pager</span><span class="p">.</span><span class="nx">page</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nx">pager</span><span class="p">.</span><span class="nx">per_page</span> <span class="o">+</span> <span class="nx">resources</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="nx">pager</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+  <span class="p">};</span>
+  <span class="c1">// 第一次挂载请求数据
+</span><span class="c1"></span>  <span class="nx">onMounted</span><span class="p">(</span><span class="nx">fetchTags</span><span class="p">);</span>
+  <span class="c1">// 将变量返回出去
+</span><span class="c1"></span>  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">page</span><span class="p">,</span>
+    <span class="nx">hasMore</span><span class="p">,</span>
+    <span class="nx">tags</span><span class="p">,</span>
+    <span class="nx">fetchTags</span><span class="p">,</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="33-tags组件">3.3 Tags组件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">defineComponent</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;vue&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Icon</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;./Icon&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">useTags</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;../hooks/useTags&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">http</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;./HttpClient&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Button</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;./Button&#34;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">s</span> <span class="kr">from</span> <span class="s2">&#34;./Tags.module.scss&#34;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">Tags</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
+  <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">kind</span><span class="o">:</span> <span class="p">{</span>
+      <span class="kr">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+      <span class="nx">required</span>: <span class="kt">true</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="nx">setup</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">kind</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">props</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">fetchTags</span><span class="p">,</span> <span class="nx">tags</span><span class="p">,</span> <span class="nx">hasMore</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useTags</span><span class="p">((</span><span class="nx">page</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">http</span><span class="p">.</span><span class="kr">get</span><span class="p">&lt;</span><span class="nt">Resources</span><span class="err">&lt;</span><span class="na">Tag</span><span class="p">&gt;</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="s2">&#34;/tags&#34;</span><span class="p">,</span>
+        <span class="p">{</span>
+          <span class="nx">kind</span><span class="p">,</span>
+          <span class="nx">_m</span><span class="o">:</span> <span class="s2">&#34;tagIndex&#34;</span><span class="p">,</span>
+          <span class="nx">page</span>: <span class="kt">page</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nx">timeout</span>: <span class="kt">1000</span><span class="p">,</span>
+        <span class="p">}</span>
+      <span class="p">);</span>
+    <span class="p">});</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">&lt;&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">tags_wrapper</span><span class="p">}&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">tag</span><span class="p">}&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">sign</span><span class="p">}&gt;</span>
+              <span class="p">&lt;</span><span class="nt">Icon</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;add&#34;</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">createTag</span><span class="p">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">name</span><span class="p">}&gt;</span><span class="err">新增</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">{</span><span class="nx">tags</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">tag</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{[</span><span class="nx">s</span><span class="p">.</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">selected</span><span class="p">]}&gt;</span>
+              <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">sign</span><span class="p">}&gt;{</span><span class="nx">tag</span><span class="p">.</span><span class="nx">sign</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">name</span><span class="p">}&gt;{</span><span class="nx">tag</span><span class="p">.</span><span class="nx">name</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">))}</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="p">{</span><span class="nx">s</span><span class="p">.</span><span class="nx">more</span><span class="p">}&gt;</span>
+          <span class="p">{</span><span class="nx">hasMore</span><span class="p">.</span><span class="nx">value</span> <span class="o">?</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">Button</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">fetchTags</span><span class="p">}&gt;</span><span class="err">加载更多</span><span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;</span>
+          <span class="p">)</span> <span class="o">:</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span><span class="err">没有更多</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+          <span class="p">)}</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/&gt;</span>
+    <span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="34-小问题">3.4 小问题</h2>
+<ul>
+<li>
+<p>在切换“支出”与“收入”的Tab时，组件并没有切换</p>
+</li>
+<li>
+<p>这是因为组件<strong>被缓存</strong>了，Vue 发现组件名称相同的组件，会<strong>更新</strong>组件属性，而不是切换</p>
+</li>
+<li>
+<p>解决方案</p>
+<ol>
+<li>两个Tags组件分别添加<strong>key</strong>属性加以区分，但每次切换都要重新请求数据，影响交互体验</li>
+<li>通过<strong>v-show</strong>切换</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="c1">// src/shared/Tabs.tsx
+</span><span class="c1"></span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">{</span><span class="nx">nodeArr</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">v</span><span class="err">-</span><span class="na">show</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">props</span><span class="o">?</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="nx">props</span><span class="p">.</span><span class="nx">selected</span><span class="p">}&gt;{</span><span class="nx">item</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">))}</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-08-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/rails/">Rails</a>
+          <a href="/tags/vue3/">vue3</a>
+          <a href="/tags/tsx/">tsx</a>
+          <a href="/tags/aliyun/">aliyun</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E8%AE%B0%E8%B4%A6app_13_axios%E5%AE%9E%E8%B7%B5/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">记账app_13_axios实践</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/js%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/">
+            <span class="next-text nav-default">JS执行过程</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

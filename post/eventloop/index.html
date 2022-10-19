@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>EventLoop - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="微任务、宏任务与Event-Loop - 掘金 (juejin.cn) 概念： Event Loop即事件循环，是指浏览器或Node的一种解决javaScript单线程运行时不会阻" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/eventloop/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="EventLoop" />
+<meta property="og:description" content="微任务、宏任务与Event-Loop - 掘金 (juejin.cn) 概念： Event Loop即事件循环，是指浏览器或Node的一种解决javaScript单线程运行时不会阻" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/eventloop/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-21T09:54:46+08:00" />
+<meta property="article:modified_time" content="2022-07-21T12:18:55+08:00" />
+
+<meta itemprop="name" content="EventLoop">
+<meta itemprop="description" content="微任务、宏任务与Event-Loop - 掘金 (juejin.cn) 概念： Event Loop即事件循环，是指浏览器或Node的一种解决javaScript单线程运行时不会阻"><meta itemprop="datePublished" content="2022-07-21T09:54:46+08:00" />
+<meta itemprop="dateModified" content="2022-07-21T12:18:55+08:00" />
+<meta itemprop="wordCount" content="1973">
+<meta itemprop="keywords" content="面试,node,eventloop," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="EventLoop"/>
+<meta name="twitter:description" content="微任务、宏任务与Event-Loop - 掘金 (juejin.cn) 概念： Event Loop即事件循环，是指浏览器或Node的一种解决javaScript单线程运行时不会阻"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">EventLoop</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-07-21 </span>
+        <div class="post-category">
+            <a href="/categories/nodejs/"> nodejs </a>
+            </div>
+          <span class="more-meta"> 1973 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#微任务与宏任务">微任务与宏任务</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p><a href="https://juejin.cn/post/6844903657264136200">微任务、宏任务与Event-Loop - 掘金 (juejin.cn)</a></p>
+</blockquote>
+<ul>
+<li>
+<p>概念： <code>Event Loop</code>即事件循环，是指浏览器或<code>Node</code>的一种解决<code>javaScript</code>单线程运行时不会阻塞的一种机制，也就是我们经常使用<strong>异步</strong>的原理。</p>
+<ul>
+<li><strong>调用栈（Call Stack）</strong>
+<ul>
+<li>在<code>JavaScript</code>运行的时候，主线程会形成一个栈，这个栈主要是解释器用来最终函数执行流的一种机制。通常这个栈被称为调用栈<code>Call Stack</code>，或者执行栈（<code>Execution Context Stack</code>）。</li>
+</ul>
+</li>
+<li><strong>任务队列（Task Queue）</strong>
+<ul>
+<li><code>JavaScript</code>将所有执行任务分为了<strong>同步任务</strong>和<strong>异步任务</strong>，异步任务分为<strong>宏任务</strong>与<strong>微任务</strong></li>
+<li>同步任务的执行，其实就是跟前面那个案例一样，按照代码顺序和调用顺序，支持进入调用栈中并执行，执行结束后就移除调用栈。</li>
+<li>而异步任务的执行，首先它依旧会进入调用栈中，然后发起调用，然后解释器会将其<strong>响应回调任务</strong>放入一个<strong>任务队列</strong>，紧接着调用栈会将这个任务移除。当主线程清空后，即所有同步任务结束后，解释器会读取任务队列，并依次将<strong>已完成的异步任务</strong>加入调用栈中并执行。</li>
+<li>异步任务并不是直接进入任务队列</li>
+<li>任务队列分为<strong>宏任务队列</strong>与<strong>微任务队列</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>浏览器端事件循环流程：</p>
+<ol>
+<li>从宏任务队列中，按照<strong>入队顺序</strong>，找到第一个执行的宏任务（整体代码<code>script</code>），放入调用栈，开始执行；</li>
+<li>执行完该宏任务下<strong>所有同步任务</strong>后，即调用栈清空后，该宏任务被推出宏任务队列，然后微任务队列开始按照入队顺序，依次执行其中的微任务，<strong>直至微任务队列清空为止</strong>；</li>
+<li>当微任务队列清空后，一个事件循环结束；</li>
+<li>接着从宏任务队列中，找到下一个执行的宏任务，开始第二个事件循环，直至宏任务队列清空为止。</li>
+</ol>
+</li>
+<li>
+<p>背景：JavaScript是一个单线程的脚本语言，单线程就意味着，所有任务需要排队，前一个任务结束，才会执行后一个任务。为了解决排除等待问题，在<code>JavaScript</code>中，异步任务被分为两种，一种宏任务（<code>MacroTask</code>）也叫<code>Task</code>，一种叫微任务（<code>MicroTask</code>）。</p>
+</li>
+<li>
+<p>原理：</p>
+<ul>
+<li>任务（<code>Task</code>）与微任务（<code>MicroTask</code>）
+<ul>
+<li>常见宏任务：<code>script</code> 、<code>setTimeout</code>、<code>setInterval</code> 、<code>setImmediate</code> 、<code>I/O</code> 、<code>UI rendering</code>。</li>
+<li>常见微任务：<code>MutationObserver</code>、<code>Promise.then()或catch()</code>、<code>Promise为基础开发的其它技术，比如fetch API</code>、<code>V8</code>的垃圾回收过程、<code>Node独有的process.nextTick</code>。</li>
+</ul>
+</li>
+<li>浏览器：
+<ul>
+<li>一开始整个脚本作为一个宏任务执行</li>
+<li>执行过程中同步代码直接执行，宏任务进入宏任务队列，微任务进入微任务队列</li>
+<li>当前宏任务执行完出队，检查微任务列表，有则依次执行，直到全部执行完</li>
+<li>执行浏览器UI线程的渲染工作</li>
+<li>检查是否有<code>Web Worker</code>任务，有则执行</li>
+<li>执行完本轮的宏任务，回到2，依此循环，直到宏任务和微任务队列都为空</li>
+</ul>
+</li>
+<li>node：</li>
+</ul>
+</li>
+</ul>
+<h2 id="微任务与宏任务">微任务与宏任务</h2>
+<p>这个就像去银行办业务一样，因为柜员同时职能处理一个来办理业务的客户，这时每一个来<strong>办理业务的人</strong>就可以认为是银行柜员的一个<strong>宏任务</strong>来存在的，当柜员处理完当前客户的问题以后，选择接待下一位，广播报号，也就是下一个宏任务的开始。
+所以多个宏任务合在一起就可以认为说有一个任务队列在这，里边是当前银行中所有排号的客户。
+<strong>任务队列中的都是已经完成的异步操作，而不是说注册一个异步任务就会被放在这个任务队列中，就像在银行中排号，如果叫到你的时候你不在，那么你当前的号牌就作废了，柜员会选择直接跳过进行下一个客户的业务处理，等你回来以后还需要重新取号</strong></p>
+<p><strong>而且一个宏任务在执行的过程中，是可以添加一些微任务的，<strong>就像在柜台办理业务，你前边的一位老大爷可能在存款，在存款这个业务办理完以后，柜员会问老大爷还有没有其他需要办理的业务，这时老大爷想了一下：“最近P2P爆雷有点儿多，是不是要选择稳一些的理财呢”，然后告诉柜员说，要办一些理财的业务，这时候柜员肯定不能告诉老大爷说：“您再上后边取个号去，重新排队”。
+所以本来快轮到你来办理业务，会因为老大爷临时添加的“<strong>理财业务</strong>”而往后推。
+也许老大爷在办完理财以后还想</strong>再办一个信用卡</strong>？或者 <strong>再买点儿纪念币</strong>？
+无论是什么需求，只要是柜员能够帮她办理的，都会在处理你的业务之前来做这些事情，这些都可以认为是<strong>微任务</strong>。</p>
+<ul>
+<li>一个进程中只有一个主线程</li>
+<li>进程是CPU资源分配的最小单位，线程是CPU调度的最小单位</li>
+<li>进程好比一个工厂，有单独专属自己的工厂资源（内存空间）</li>
+<li>线程好比工厂中的工人，一个工厂由一个或多个工人组成，线程是一个进程中代码的不同执行路线</li>
+<li>多个工厂之间相互独立</li>
+<li>以Chrome浏览器中为例，当你打开一个 Tab 页时，其实就是创建了一个进程，一个进程中可以有多个线程（下文会详细介绍），比如渲染线程、JS 引擎线程、HTTP 请求线程等等。当你发起一个请求时，其实就是创建了一个线程，当请求结束后，该线程可能就会被销毁。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-07-21
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/node/">node</a>
+          <a href="/tags/eventloop/">eventloop</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/proxy/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Proxy</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E9%83%A8%E7%BD%B2/">
+            <span class="next-text nav-default">云服务器docker部署</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

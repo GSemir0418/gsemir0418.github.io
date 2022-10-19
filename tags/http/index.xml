@@ -6,22 +6,13 @@
     <description>Recent content in HTTP on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 08 Mar 2022 09:57:38 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Jan 2022 09:51:58 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/http/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>前端面试HTTP</title>
-      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95http/</link>
-      <pubDate>Tue, 08 Mar 2022 09:57:38 +0800</pubDate>
-      
-      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95http/</guid>
-      <description>1 GET和POST的区别有哪些 1.1 幂等性 首先最根本的不同是语义上的不同，GET是读，POST是写，造成两者幂等性的不同 由于GET是读，POST</description>
-    </item>
-    
-    <item>
-      <title>多路复用</title>
-      <link>https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
+      <title>HTTP/2多路复用</title>
+      <link>https://gsemir0418.github.io/post/http2%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
       <pubDate>Sun, 23 Jan 2022 09:51:58 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
+      <guid>https://gsemir0418.github.io/post/http2%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
       <description>1 HTTP/2的帧 ​ HTTP/1.1的请求响应过程是基于字符串的，而HTTP/2的请求响应过程是基于帧的。 ​ HTTP/2引入了帧（Frame</description>
     </item>
     
@@ -50,6 +41,15 @@
       
       <guid>https://gsemir0418.github.io/post/nodehttp%E6%A8%A1%E5%9D%97/</guid>
       <description>0 准备工作 1 ts-node-dev 当文件更新时自动重启node 避免每次改完代码都要重新运行的麻烦 可以用TS开发Node.js程序，且会自动重启 不宜在生产环境使用</description>
+    </item>
+    
+    <item>
+      <title>前端面试HTTP</title>
+      <link>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95http/</link>
+      <pubDate>Mon, 08 Mar 2021 09:57:38 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95http/</guid>
+      <description>1 GET和POST的区别有哪些 1.1 幂等性 首先最根本的不同是语义上的不同，GET是读，POST是写，造成两者幂等性的不同 由于GET是读，POST</description>
     </item>
     
   </channel>

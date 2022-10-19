@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>node on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/node/</link>
+    <description>Recent content in node on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 21 Jul 2022 09:54:46 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/node/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>EventLoop</title>
+      <link>https://gsemir0418.github.io/post/eventloop/</link>
+      <pubDate>Thu, 21 Jul 2022 09:54:46 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/eventloop/</guid>
+      <description>微任务、宏任务与Event-Loop - 掘金 (juejin.cn) 概念： Event Loop即事件循环，是指浏览器或Node的一种解决javaScript单线程运行时不会阻</description>
+    </item>
+    
+  </channel>
+</rss>

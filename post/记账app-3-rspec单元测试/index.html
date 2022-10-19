@@ -49,7 +49,7 @@
 <meta itemprop="name" content="记账app_2_API初步实现">
 <meta itemprop="description" content="1 REST Representational State Transfer 一种网络软件的架构风格 不是标准，不是协议，不是接口，只是一种风格 提出者Roy层参与过HTTP规格文档的撰写 怎么做 以资源（名词，例如"><meta itemprop="datePublished" content="2022-05-09T14:24:32+08:00" />
 <meta itemprop="dateModified" content="2022-05-11T14:24:32+08:00" />
-<meta itemprop="wordCount" content="1384">
+<meta itemprop="wordCount" content="1388">
 <meta itemprop="keywords" content="Rails,vue3,tsx,aliyun," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="记账app_2_API初步实现"/>
 <meta name="twitter:description" content="1 REST Representational State Transfer 一种网络软件的架构风格 不是标准，不是协议，不是接口，只是一种风格 提出者Roy层参与过HTTP规格文档的撰写 怎么做 以资源（名词，例如"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE/"> 全栈项目 </a>
             </div>
-          <span class="more-meta"> 1384 words </span>
+          <span class="more-meta"> 1388 words </span>
           <span class="more-meta"> 3 mins read </span>
         
       </div>
@@ -184,15 +184,15 @@
 <p>怎么做</p>
 </li>
 <li>
-<p>以资源（名词，例如用户）为中心</p>
+<p><strong>以资源（名词，例如用户）为中心</strong></p>
 </li>
 <li>
-<p>充分利用HTTP现有功能，如动词、状态码、头部字段</p>
+<p><strong>充分利用HTTP现有功能</strong>，如动词、状态码、头部字段</p>
 </li>
 <li>
 <p>举例</p>
 <ul>
-<li>创建item（PUT适用于带id创建实体的情况）</li>
+<li>创建item（<strong>PUT适用于带id创建实体的情况</strong>）</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -277,19 +277,19 @@
 <p>总结RESTful</p>
 <ul>
 <li>
-<p>看见路径就知道请求什么东西</p>
+<p><strong>看见路径就知道请求什么东西</strong></p>
 </li>
 <li>
-<p>看见动词就知道是什么操作</p>
+<p><strong>看见动词就知道是什么操作</strong></p>
 </li>
 <li>
-<p>看见状态码就知道结果是什么</p>
+<p><strong>看见状态码就知道结果是什么</strong></p>
 </li>
 </ul>
 </li>
 </ul>
 <blockquote>
-<p>200 - 成功	201 - 创建成功	404 - 未找到	403 - 没有权限</p>
+<p>200 - 成功	201 - 创建成功	404 - 未找到	403 - 登陆了但没有权限</p>
 <p>401 - 未登录	422 - 无法处理，参数有问题	402 - 需付费</p>
 <p>412 - 不满足前置条件	429 - （一段时间内）请求太频繁</p>
 <p>400 - 其他所有错误，详细原因可以放在 body 里</p>

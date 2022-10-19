@@ -7,11 +7,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language><atom:link href="https://gsemir0418.github.io/tags/http/2/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>多路复用</title>
-      <link>https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
+      <title>HTTP/2多路复用</title>
+      <link>https://gsemir0418.github.io/post/http2%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
       <pubDate>Sun, 23 Jan 2022 09:51:58 +0800</pubDate>
       
-      <guid>https://gsemir0418.github.io/post/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
+      <guid>https://gsemir0418.github.io/post/http2%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
       <description>1 HTTP/2的帧 ​ HTTP/1.1的请求响应过程是基于字符串的，而HTTP/2的请求响应过程是基于帧的。 ​ HTTP/2引入了帧（Frame</description>
     </item>
     

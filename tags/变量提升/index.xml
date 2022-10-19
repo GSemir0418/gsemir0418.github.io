@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>变量提升 on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/</link>
+    <description>Recent content in 变量提升 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 15 Aug 2022 09:54:46 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JS执行过程</title>
+      <link>https://gsemir0418.github.io/post/js%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Mon, 15 Aug 2022 09:54:46 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/js%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/</guid>
+      <description>1 V8核心模块 1.1 解析器（Parser） 在 V8 引擎拿到 JS 代码之后，解析器（Parser）会对其进行词法分析和语法分析。 词法分析：将JS代码拆分为</description>
+    </item>
+    
+  </channel>
+</rss>

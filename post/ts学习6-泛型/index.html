@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>TS学习6-泛型 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 泛型就像函数 1 2 3 4 5 const fn = (a, b) =&amp;gt; a &#43; b const result = fn(1, 2) // 3 type F&amp;lt;A, B&amp;gt; = A | B type Result = F&amp;lt;string, number&amp;gt; // string | number 函数的本质：推后执行的、部分待定的代码段 泛型的本质：" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A06-%E6%B3%9B%E5%9E%8B/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="TS学习6-泛型" />
+<meta property="og:description" content="1 泛型就像函数 1 2 3 4 5 const fn = (a, b) =&gt; a &#43; b const result = fn(1, 2) // 3 type F&lt;A, B&gt; = A | B type Result = F&lt;string, number&gt; // string | number 函数的本质：推后执行的、部分待定的代码段 泛型的本质：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/ts%E5%AD%A6%E4%B9%A06-%E6%B3%9B%E5%9E%8B/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-15T14:24:32+08:00" />
+<meta property="article:modified_time" content="2022-10-15T14:24:32+08:00" />
+
+<meta itemprop="name" content="TS学习6-泛型">
+<meta itemprop="description" content="1 泛型就像函数 1 2 3 4 5 const fn = (a, b) =&gt; a &#43; b const result = fn(1, 2) // 3 type F&lt;A, B&gt; = A | B type Result = F&lt;string, number&gt; // string | number 函数的本质：推后执行的、部分待定的代码段 泛型的本质："><meta itemprop="datePublished" content="2022-10-15T14:24:32+08:00" />
+<meta itemprop="dateModified" content="2022-10-15T14:24:32+08:00" />
+<meta itemprop="wordCount" content="1139">
+<meta itemprop="keywords" content="TypeScript," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TS学习6-泛型"/>
+<meta name="twitter:description" content="1 泛型就像函数 1 2 3 4 5 const fn = (a, b) =&gt; a &#43; b const result = fn(1, 2) // 3 type F&lt;A, B&gt; = A | B type Result = F&lt;string, number&gt; // string | number 函数的本质：推后执行的、部分待定的代码段 泛型的本质："/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">TS学习6-泛型</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-10-15 </span>
+        <div class="post-category">
+            <a href="/categories/typescript/"> TypeScript </a>
+            </div>
+          <span class="more-meta"> 1139 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1-泛型就像函数">1 泛型就像函数</a></li>
+            <li><a href="#2-为什么会有泛型">2 为什么会有泛型</a></li>
+            <li><a href="#3-实践">3 实践</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="1-泛型就像函数">1 泛型就像函数</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">const</span> <span class="nx">fn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+<span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// 3
+</span><span class="c1"></span>
+<span class="kr">type</span> <span class="nx">F</span><span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">A</span> <span class="o">|</span> <span class="nx">B</span>
+<span class="kr">type</span> <span class="nx">Result</span> <span class="o">=</span> <span class="nx">F</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">number</span><span class="p">&gt;</span> <span class="c1">// string | number
+</span></code></pre></td></tr></table>
+</div>
+</div><p>函数的本质：<strong>推后执行</strong>的、<strong>部分待定</strong>的<strong>代码段</strong></p>
+<p>泛型的本质：<strong>推后执行</strong>的、<strong>部分待定</strong>的<strong>类型</strong></p>
+<h3 id="2-为什么会有泛型">2 为什么会有泛型</h3>
+<p>例如一个函数，接受的类型不确定（联合类型），从而返回值的类型也是不确定的，此时就可以使用泛型</p>
+<p>使用switch区分参数类型，返回值类型也无法得到严格控制</p>
+<p>没有泛型的类型系统，就如同没有函数的编程语言</p>
+<h3 id="3-实践">3 实践</h3>
+<h4 id="31-在泛型中使用extends">3.1 在泛型中使用extends</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// 要求：传入的泛型如果属于string就返回true，否则返回false
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">R1</span> <span class="o">=</span> <span class="nx">LikeString</span><span class="o">&lt;</span><span class="s1">&#39;hi&#39;</span><span class="o">&gt;</span> <span class="c1">// true
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">R2</span> <span class="o">=</span> <span class="nx">LikeString</span><span class="p">&lt;</span><span class="nt">true</span><span class="p">&gt;</span> <span class="c1">// false
+</span><span class="c1">// A extends B 相当于 A &lt;= B, 读作“继承”或“包含于”
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">LikeString</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kr">extends</span> <span class="kt">string</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span>
+
+<span class="c1">// 再来一个例子
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">R3</span> <span class="o">=</span> <span class="nx">LikePerson</span><span class="o">&lt;</span><span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="nx">age</span>: <span class="kt">10</span><span class="p">}</span><span class="o">&gt;</span> <span class="c1">// true
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">R4</span> <span class="o">=</span> <span class="nx">LikePerson</span><span class="o">&lt;</span><span class="p">{</span><span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;male&#39;</span><span class="p">}</span><span class="o">&gt;</span> <span class="c1">// false
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">Person</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">name</span>: <span class="kt">string</span> 
+    <span class="nx">age</span>: <span class="kt">number</span>
+<span class="p">}</span>
+<span class="kr">type</span> <span class="nx">LikePerson</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kr">extends</span> <span class="nx">Person</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>若<code>T</code>为<code>never</code>，则表达式的值为<code>never</code>（never是底类型，相当于0乘以任何数都为0）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="kr">type</span> <span class="nx">R</span> <span class="o">=</span> <span class="nx">LikeString</span><span class="p">&lt;</span><span class="nt">never</span><span class="p">&gt;</span> <span class="c1">// never
+</span><span class="c1">// 理论上来讲，never是最小的集合，是属于string的
+</span><span class="c1">// 但结果既不是true也不是false，而是never
+</span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>若<code>T</code>为联合类型，则分开计算（相当于乘法分配律）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">type</span> <span class="nx">ToArray</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kr">extends</span> <span class="kt">unknown</span> <span class="o">?</span> <span class="nx">T</span><span class="p">[]</span> <span class="o">:</span> <span class="kt">never</span>
+<span class="kr">type</span> <span class="nx">Result</span> <span class="o">=</span> <span class="nx">ToArray</span><span class="p">&lt;</span><span class="nt">string</span> <span class="err">|</span> <span class="na">number</span><span class="p">&gt;</span> <span class="c1">// string[] | number[]
+</span><span class="c1">// 使用
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">a</span>: <span class="kt">T</span><span class="p">)</span><span class="o">:</span> <span class="nx">ToArray</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="p">{}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="32-在泛型中使用keyof">3.2 在泛型中使用keyof</h4>
+<ul>
+<li><code>keyof</code>关键字：返回一个对象全部key的集合</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// 要求：返回传入类型的key值
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">Person</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">name</span>: <span class="kt">string</span> 
+    <span class="nx">age</span>: <span class="kt">number</span>
+<span class="p">}</span>
+<span class="c1">// keyof: 返回一个对象全部key的集合
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">GetKeys</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">keyof</span> <span class="nx">T</span>
+<span class="kr">type</span> <span class="nx">Result</span> <span class="o">=</span> <span class="nx">GetKeys</span><span class="p">&lt;</span><span class="nt">Person</span><span class="p">&gt;</span> <span class="c1">// &#39;name&#39; | &#39;age&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="33-在泛型中使用extends和keyof">3.3 在泛型中使用extends和keyof</h4>
+<ul>
+<li>泛型约束：在参数列表中添加限制</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// 要求：返回传入类型中对应key的类型
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">Person</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">name</span>: <span class="kt">string</span> 
+    <span class="nx">age</span>: <span class="kt">number</span>
+<span class="p">}</span>
+<span class="c1">// 泛型约束：在参数列表中添加限制
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">GetKeyType</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">K</span> <span class="na">extends</span> <span class="na">keyof</span> <span class="na">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span>
+<span class="kr">type</span> <span class="nx">Result</span> <span class="o">=</span> <span class="nx">GetKeyType</span><span class="p">&lt;</span><span class="nt">Person</span><span class="err">,</span> <span class="err">&#39;</span><span class="na">name</span><span class="err">&#39;</span><span class="p">&gt;</span> <span class="c1">// stirng
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="34-映射类型in">3.4 映射类型in</h4>
+<ul>
+<li>遍历并返回类型全部字段</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">type</span> <span class="nx">Person</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span>: <span class="kt">string</span><span class="p">;</span> <span class="nx">age</span>: <span class="kt">number</span><span class="p">}</span>
+<span class="kr">type</span> <span class="nx">Copy</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="k">keyof</span> <span class="nx">T</span><span class="p">]</span><span class="o">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="kr">type</span> <span class="nx">R</span> <span class="o">=</span> <span class="nx">Copy</span><span class="p">&lt;</span><span class="nt">Person</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>实现工具类Required、Partial、Readonly、Record</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="kr">type</span> <span class="nx">Readonly2</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="kr">readonly</span> <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="k">keyof</span> <span class="nx">T</span><span class="p">]</span><span class="o">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="kr">type</span> <span class="nx">Partial2</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="k">keyof</span> <span class="nx">T</span><span class="p">]</span><span class="o">?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="kr">type</span> <span class="nx">Required2</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="k">keyof</span> <span class="nx">T</span><span class="p">]</span><span class="o">-?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="kr">type</span> <span class="nx">Record2</span><span class="p">&lt;</span><span class="nt">K</span> <span class="na">extends</span> <span class="na">number</span> <span class="err">|</span> <span class="na">string</span> <span class="err">|</span> <span class="na">symbol</span><span class="err">,</span> <span class="na">V</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">K</span><span class="p">]</span><span class="o">:</span> <span class="nx">V</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>实现工具类Exclude、Extract、Pick、Omit</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// 从A中排除B（差集）
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">Exclude2</span><span class="p">&lt;</span><span class="nt">A</span> <span class="err">,</span> <span class="na">B</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">A</span> <span class="kr">extends</span> <span class="nx">B</span> <span class="o">?</span> <span class="kt">never</span> <span class="o">:</span> <span class="nx">A</span>
+<span class="kr">type</span> <span class="nx">R4</span> <span class="o">=</span> <span class="nx">Exclude2</span><span class="p">&lt;</span><span class="nt">1</span> <span class="err">|</span> <span class="na">2</span> <span class="err">|</span> <span class="na">3</span><span class="err">,</span> <span class="na">1</span> <span class="err">|</span> <span class="na">2</span><span class="p">&gt;</span> <span class="c1">// 3
+</span><span class="c1">// 提取公共的集合（交集）
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">Extract2</span><span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">A</span> <span class="kr">extends</span> <span class="nx">B</span> <span class="o">?</span> <span class="nx">A</span> : <span class="kt">never</span>
+<span class="kr">type</span> <span class="nx">R5</span> <span class="o">=</span> <span class="nx">Extract2</span><span class="p">&lt;</span><span class="nt">1</span> <span class="err">|</span> <span class="na">2</span> <span class="err">|</span> <span class="na">3</span><span class="err">,</span> <span class="na">2</span> <span class="err">|</span> <span class="na">4</span><span class="p">&gt;</span> <span class="c1">// 2
+</span><span class="c1">// 选取类型中的某些属性
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">Pick2</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">Key</span> <span class="na">extends</span> <span class="na">keyof</span> <span class="na">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="nx">Key</span><span class="p">]</span><span class="o">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="kr">type</span> <span class="nx">R7</span> <span class="o">=</span> <span class="nx">Pick</span><span class="p">&lt;</span><span class="nt">Person</span><span class="err">,</span> <span class="err">&#39;</span><span class="na">name</span><span class="err">&#39;</span> <span class="err">|</span> <span class="err">&#39;</span><span class="na">age</span><span class="err">&#39;</span><span class="p">&gt;</span> <span class="c1">// {name: string, age: number}
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>实现Omit（排除属性）的两种思路</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="c1">// 思路一，利用Pick和Exclude
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">Omit2</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">Key</span> <span class="na">extends</span> <span class="na">keyof</span> <span class="na">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="nx">Pick</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">Exclude</span><span class="err">&lt;</span><span class="na">keyof</span> <span class="na">T</span><span class="err">,</span> <span class="na">Key</span><span class="p">&gt;</span><span class="o">&gt;</span>
+<span class="c1">// 思路二，正向思维,as断言
+</span><span class="c1">// 前半段key in keyof T是必须要写的 因为是映射类型的形式
+</span><span class="c1">// 后半段 key extends K ? never : key 用来排除K中的key
+</span><span class="c1"></span><span class="kr">type</span> <span class="nx">Omit21</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">K</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">key</span> <span class="k">in</span> <span class="k">keyof</span> <span class="nx">T</span> <span class="kr">as</span> <span class="nx">key</span> <span class="kr">extends</span> <span class="nx">K</span> <span class="o">?</span> <span class="kt">never</span> <span class="o">:</span> <span class="nx">key</span><span class="p">]</span><span class="o">:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="35-总结">3.5 总结</h4>
+<p>从类型中创造类型</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-10-15
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/typescript/">TypeScript</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/ts%E5%AD%A6%E4%B9%A05-%E5%87%BD%E6%95%B0/">
+            <span class="next-text nav-default">TS学习5-函数</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

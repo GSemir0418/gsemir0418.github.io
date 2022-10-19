@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>JS执行过程 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gsemir" /><meta name="description" content="1 V8核心模块 1.1 解析器（Parser） 在 V8 引擎拿到 JS 代码之后，解析器（Parser）会对其进行词法分析和语法分析。 词法分析：将JS代码拆分为" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.89.2 with theme even" />
+
+
+<link rel="canonical" href="https://gsemir0418.github.io/post/js%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="JS执行过程" />
+<meta property="og:description" content="1 V8核心模块 1.1 解析器（Parser） 在 V8 引擎拿到 JS 代码之后，解析器（Parser）会对其进行词法分析和语法分析。 词法分析：将JS代码拆分为" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gsemir0418.github.io/post/js%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-15T09:54:46+08:00" />
+<meta property="article:modified_time" content="2022-08-15T12:18:55+08:00" />
+
+<meta itemprop="name" content="JS执行过程">
+<meta itemprop="description" content="1 V8核心模块 1.1 解析器（Parser） 在 V8 引擎拿到 JS 代码之后，解析器（Parser）会对其进行词法分析和语法分析。 词法分析：将JS代码拆分为"><meta itemprop="datePublished" content="2022-08-15T09:54:46+08:00" />
+<meta itemprop="dateModified" content="2022-08-15T12:18:55+08:00" />
+<meta itemprop="wordCount" content="2315">
+<meta itemprop="keywords" content="面试,变量提升,调用栈," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JS执行过程"/>
+<meta name="twitter:description" content="1 V8核心模块 1.1 解析器（Parser） 在 V8 引擎拿到 JS 代码之后，解析器（Parser）会对其进行词法分析和语法分析。 词法分析：将JS代码拆分为"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GSemir</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GSemir</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">JS执行过程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-08-15 </span>
+        <div class="post-category">
+            <a href="/categories/js%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"> JS基础知识整理 </a>
+            </div>
+          <span class="more-meta"> 2315 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-v8核心模块">1 V8核心模块</a>
+      <ul>
+        <li><a href="#11-解析器parser">1.1 解析器（Parser）</a></li>
+        <li><a href="#12-解释器ignition与字节码">1.2 解释器（Ignition）与字节码</a></li>
+        <li><a href="#13-编译器turbofan与热代码">1.3 编译器（TurboFan）与热代码</a></li>
+        <li><a href="#14-总结">1.4 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-js执行机制">2 JS执行机制</a>
+      <ul>
+        <li><a href="#21-作用域链与执行上下文">2.1 作用域链与执行上下文</a>
+          <ul>
+            <li><a href="#211-作用域链">2.1.1 作用域链</a></li>
+            <li><a href="#212-执行上下文">2.1.2 执行上下文</a></li>
+          </ul>
+        </li>
+        <li><a href="#22-分析阶段">2.2 分析阶段</a>
+          <ul>
+            <li><a href="#分析阶段">分析阶段</a></li>
+          </ul>
+        </li>
+        <li><a href="#23-执行过程">2.3 执行过程</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="1-v8核心模块">1 V8核心模块</h1>
+<p><img src="/Users/gsemir/Documents/blogs/blogs-backup-2/static/jsv8/jsv81.png" alt="jsv8"></p>
+<h2 id="11-解析器parser">1.1 解析器（Parser）</h2>
+<ul>
+<li>在 V8 引擎拿到 JS 代码之后，<strong>解析器</strong>（Parser）会对其进行<strong>词法分析</strong>和<strong>语法分析</strong>。
+<ul>
+<li>词法分析：将JS代码拆分为<code>{ type: '类型/属性', value: '对应字符值' }</code></li>
+<li>语法分析：
+<ul>
+<li>在JS代码被转为Token后，解析器继续生成对应的<strong>AST</strong>（抽象语法树）</li>
+<li>通过词法作用域规则，确定变量的作用域关系，<strong>即作用域链</strong>。</li>
+<li>AST应用于Vue、React中虚拟DOM的表示，以及Babel对ES6转译过程的描述</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>V8通过<strong>预解析</strong>提升解析效率</li>
+</ul>
+<h2 id="12-解释器ignition与字节码">1.2 解释器（Ignition）与字节码</h2>
+<ul>
+<li>
+<p>在解析器将JS代码解析为AST后，<strong>解释器</strong>（Ignition）根据AST来生成<strong>字节码</strong></p>
+<ol>
+<li><strong>解释器</strong>在将 AST 转为字节码 之后，<strong>逐行执行</strong>，这个执行过程肯定是比直接执行机器码要慢的，所以在执行方面，速度上会比较慢；</li>
+<li>但是 JS 源码通过解析器转 AST，然后再通过解释器转字节码，这个转译过程是比编译器直接将 JS 源码转机器码要快很多的，全流程看来，整个时间上是差不了多少的，但是却<strong>减小了大量的内存占用</strong>，何乐而不为。</li>
+</ol>
+</li>
+<li>
+<p><strong>字节码</strong>：字节码其实是机器码的抽象，各种字节码的相互构成，可以实现 JS 所需的所有功能，当然首先一点，字节码比机器码占用的内存要小很多很多，基本是机器码所在内存的几十甚至几百分之一，</p>
+</li>
+<li>
+<p>总结：采用字节码的编译执行方案，<strong>牺牲了执行速度，提升解析编译速度，保证速度差不多的同时，减少大量内存的占用</strong></p>
+</li>
+</ul>
+<h2 id="13-编译器turbofan与热代码">1.3 编译器（TurboFan）与热代码</h2>
+<ul>
+<li>接下来解决执行速度慢的问题。在 V8 模块中会有专门的<strong>监控模块</strong>，来监控同一代码是否多次被调用，如果被多次调用，那么就会被标记为<strong>热代码</strong>（HotSpot）
+<ol>
+<li>当存在热代码的时候，V8 会借着 TurboFan 将为热代码的字节码转为机器码并缓存下来，这样一来，当再次执行这段被优化的代码时，<strong>只需要执行编译后的机器码</strong>就可以了，这样就大大提升了代码的执行效率。当然热代码相对来说还是少部分的，所以缓存也并不会占用太大内存，并且提升了执行效率，同样此处也是牺牲空间换时间。</li>
+<li>如果热代码在某次执行的时候，突然其中的某个属性被修改了，那么编译成机器码的热代码会被退回到 AST这一步，这个时候解释器会重新解释执行被修改的代码。</li>
+</ol>
+</li>
+</ul>
+<h2 id="14-总结">1.4 总结</h2>
+<ul>
+<li>V8 对 JS 执行的过程，不仅使用到了<strong>解释器</strong>，还用到了优化<strong>编译器</strong>。这种两者结合去处理的方式（就是指解释器 Ignition 在解释执行字节码的同时，收集代码信息，当它发现某一部分代码<strong>变热</strong>了之后，TurboFan 编译器便闪亮登场，把热点的字节码转换为机器码，并把转换后的机器码保存起来，以备下次使用），业界称为 <strong>JIT (Just-In-Time)</strong>。使用这种结合的方式来处理 JS，主要是利用了 AST 形成的<strong>字节码文件较（机器码）小</strong>，而通过优化编译器编译后的热代码执行效率高，两者结合，各自发挥各自的优势，将效率尽量提升到最大。</li>
+</ul>
+<h1 id="2-js执行机制">2 JS执行机制</h1>
+<h2 id="21-作用域链与执行上下文">2.1 作用域链与执行上下文</h2>
+<ul>
+<li>
+<p>二者联系：</p>
+<ul>
+<li>
+<p><strong>执行上下文在运行时确定，随时可能改变；作用域在定义时就确定，并且不会改变</strong>。</p>
+</li>
+<li>
+<p><strong>一个作用域下可能包含若干个上下文环境</strong>。同一个作用域下，不同的调用会产生不同的执行上下文环境，继而产生不同的变量的值。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>作用域链和执行上下文的形成分别在哪个阶段（解析，预编译，解释执行？）？</p>
+</li>
+</ul>
+<h3 id="211-作用域链">2.1.1 作用域链</h3>
+<h4 id="2111-作用域">2.1.1.1 作用域</h4>
+<ul>
+<li>定义：作用域是在运行时代码中的某些特定部分中变量，函数和对象的可访问性。<strong>作用域就是一个独立的地盘，让变量不会外泄、暴露出去</strong>。也就是说作用域最大的用处就是<strong>隔离变量</strong>，不同作用域下同名变量不会有冲突。</li>
+<li>分类：
+<ul>
+<li>全局作用域：
+<ul>
+<li>在代码中任何地方都能访问到的对象拥有全局作用域</li>
+</ul>
+</li>
+<li>函数作用域：
+<ul>
+<li>是指声明在函数内部的变量，和全局作用域相反，局部作用域一般只在固定的代码片段内可访问到，最常见的例如函数内部。</li>
+<li><strong>块语句（大括号“｛｝”中间的语句），如 if 和 switch 条件语句或 for 和 while 循环语句，不像函数，它们不会创建一个新的作用域</strong>，由此引出了for循环的经典面试题</li>
+</ul>
+</li>
+<li>块级作用域：
+<ul>
+<li>块级作用域可通过新增命令let和const声明，所声明的变量在指定块的作用域外无法被访问。</li>
+<li>声明变量不会提升到代码块顶部</li>
+<li>for循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2112-作用域链">2.1.1.2 作用域链</h4>
+<ul>
+<li>
+<p><strong>作用域链就是保存在函数内部一个私有属性[[scope]]中所存储的执行期上下文对象的集合</strong>，这个集合呈链式链接，我们把这种链式链接叫做作用域链。</p>
+</li>
+<li>
+<p>简单的说就是，<strong>作用域中出现的变量如果在作用域中找不到，那么就会一层一层向父作用域找，直到找到全局作用域。这样一层一层的关系，就是作用域链</strong></p>
+</li>
+<li>
+<p>注意：因为作用域是在对象、函数或变量定义时确定的，所以作用域中的变量值是要到<strong>定义</strong>这个函数的作用域中找，<strong>与在何处调用是无关的</strong>。</p>
+</li>
+</ul>
+<h3 id="212-执行上下文">2.1.2 执行上下文</h3>
+<ul>
+<li>定义：当函数执行的时候，会创建一个称为<strong>执行期上下文的对象</strong>（AO对象），一个执行期上下文<strong>定义了一个函数执行时的环境</strong>。 函数每次执行时，对应的执行上下文都是<strong>独一无二</strong>的，所以多次调用一个函数会导致创建多个执行期上下文，当函数<strong>执行完毕</strong>，它所产生的执行期上下文会<strong>被销毁</strong>。</li>
+<li>对于任意一个EC，其内部都会初始化三个属性
+<ol>
+<li>作用域链(scope chain)</li>
+<li>VO (Variable Object)</li>
+<li>this</li>
+</ol>
+</li>
+</ul>
+<h2 id="22-分析阶段">2.2 分析阶段</h2>
+<ul>
+<li>
+<h3 id="分析阶段">分析阶段</h3>
+<ol>
+<li>创建分析对象： 用于处理执行时，访问变量和方法时候，根据一定规则进行作用域的访问。</li>
+<li>预编译：提高运行时的效率，会把把代码进行预编译，如变量提升。</li>
+</ol>
+</li>
+<li>
+<p>发生在何时</p>
+<ul>
+<li>解析阶段</li>
+</ul>
+</li>
+<li>
+<p>分类</p>
+<ul>
+<li>代码执行之前
+<ul>
+<li>声明提升</li>
+<li>函数声明整体提升</li>
+</ul>
+</li>
+<li>函数执行之前
+<ul>
+<li>创建一个AO</li>
+<li>找形参和变量声明，作为AO的key，值为undefined</li>
+<li>将实参与形参统一</li>
+<li>在函数体内找函数声明，将函数名作为AO对象的key，值为函数体</li>
+</ul>
+</li>
+<li>全局
+<ul>
+<li>创建GO</li>
+<li>找全局变量声明，作为GO的key，值为undefined</li>
+<li>找全局函数声明，作为GO的key，值为函数体</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="23-执行过程">2.3 执行过程</h2>
+<ol>
+<li>创建执行上下文：根据分析的对象创建执行上下文</li>
+<li>上下文入栈执行</li>
+<li>变量赋值</li>
+<li>方法调用</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gsemir</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-08-15
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          <a href="/tags/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/">变量提升</a>
+          <a href="/tags/%E8%B0%83%E7%94%A8%E6%A0%88/">调用栈</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E8%AE%B0%E8%B4%A6app_12_%E7%99%BB%E5%BD%95%E9%89%B4%E6%9D%83%E4%B8%8E%E8%87%AA%E5%88%B6mock%E7%B3%BB%E7%BB%9F/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">记账app_12_登录鉴权与自制Mock系统</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/requestanimationframe/">
+            <span class="next-text nav-default">requestAnimationFrame</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="https://gsemir0418.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>gsq</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

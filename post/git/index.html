@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Git相关">
 <meta itemprop="description" content="0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &#34;gsemir0418&#34; git config --global user.email &#34;845217811@qq.com&#34; // 查看全局配置 git config --list 0.2 配置SSH公"><meta itemprop="datePublished" content="2021-08-15T22:02:28+08:00" />
 <meta itemprop="dateModified" content="2022-07-15T15:45:00+08:00" />
-<meta itemprop="wordCount" content="2185">
+<meta itemprop="wordCount" content="3918">
 <meta itemprop="keywords" content="GitHub," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Git相关"/>
 <meta name="twitter:description" content="0 初始化配置 0.1 全局配置 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址 1 2 3 4 git config --global user.name &#34;gsemir0418&#34; git config --global user.email &#34;845217811@qq.com&#34; // 查看全局配置 git config --list 0.2 配置SSH公"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/github/"> GitHub </a>
             </div>
-          <span class="more-meta"> 2185 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 3918 words </span>
+          <span class="more-meta"> 8 mins read </span>
         
       </div>
     </header>
@@ -167,20 +167,36 @@
         <li><a href="#12-存在分支的情况">1.2 存在分支的情况</a></li>
       </ul>
     </li>
-    <li><a href="#2-git-add">2 git add</a></li>
-    <li><a href="#3-git-commit">3 git commit</a></li>
-    <li><a href="#4-git-fetch">4 git fetch</a></li>
-    <li><a href="#5-git-merge">5 git merge</a></li>
-    <li><a href="#6-git-pull">6 git pull</a></li>
-    <li><a href="#7-git-push">7 git push</a></li>
-    <li><a href="#8-git-remote">8 git remote</a></li>
-    <li><a href="#9-git-checkoutbranch">9 git checkout/branch</a>
+    <li><a href="#2-git-flow协同工作流">2 git flow协同工作流</a>
       <ul>
-        <li><a href="#91-基本操作">9.1 基本操作</a></li>
-        <li><a href="#92-业务场景">9.2 业务场景</a></li>
+        <li><a href="#21-单人管理模式">2.1 单人管理模式</a>
+          <ul>
+            <li><a href="#211-fork">2.1.1 fork</a></li>
+            <li><a href="#212-建立分支">2.1.2 建立分支</a></li>
+            <li><a href="#213-stash--同步分支代码">2.1.3 stash &amp; 同步分支代码</a></li>
+            <li><a href="#214-正常提交代码">2.1.4 正常提交代码</a></li>
+            <li><a href="#215-pull-request">2.1.5 Pull Request</a></li>
+            <li><a href="#216-code-review">2.1.6 Code Review</a></li>
+            <li><a href="#217-同步本地与主仓库代码">2.1.7 同步本地与主仓库代码</a></li>
+          </ul>
+        </li>
+        <li><a href="#22-多人协同模式">2.2 多人协同模式</a></li>
       </ul>
     </li>
-    <li><a href="#10-git-reset">10 git reset</a></li>
+    <li><a href="#3-git-add">3 git add</a></li>
+    <li><a href="#4-git-commit">4 git commit</a></li>
+    <li><a href="#5-git-fetch">5 git fetch</a></li>
+    <li><a href="#6-git-merge">6 git merge</a></li>
+    <li><a href="#7-git-pull">7 git pull</a></li>
+    <li><a href="#8-git-push">8 git push</a></li>
+    <li><a href="#9-git-remote">9 git remote</a></li>
+    <li><a href="#10-git-checkoutbranch">10 git checkout/branch</a>
+      <ul>
+        <li><a href="#101-基本操作">10.1 基本操作</a></li>
+        <li><a href="#102-业务场景">10.2 业务场景</a></li>
+      </ul>
+    </li>
+    <li><a href="#11-git-reset">11 git reset</a></li>
   </ul>
 </nav>
   </div>
@@ -349,7 +365,271 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 <li><code>git add . &amp;&amp; git commit -m &quot;注释&quot;</code> 将改动提交</li>
 <li><code>git push origin 分支名 </code>推送到远程</li>
 </ol>
-<h1 id="2-git-add">2 git add</h1>
+<h1 id="2-git-flow协同工作流">2 git flow协同工作流</h1>
+<h2 id="21-单人管理模式">2.1 单人管理模式</h2>
+<ul>
+<li>
+<p>单人管理模式即组长建立与管理主仓库，组员不在主仓库的分支上开发，而是 <strong>fork</strong> 到自己 workspace 下。每次开发，需要先<strong>checkout</strong> 一个新的分支，<strong>commit</strong> 之后推送到自己的仓库，再向主仓库提<strong>Merge Request</strong>。所以开发过程中对于大多数项目来说，都会经过如下步骤：</p>
+<ul>
+<li>
+<p>Fork(Once)</p>
+</li>
+<li>
+<p>Create a branch</p>
+</li>
+<li>
+<p>Add commits</p>
+</li>
+<li>
+<p>Open a Merge Request</p>
+</li>
+<li>
+<p>Code review</p>
+</li>
+<li>
+<p>Merge</p>
+</li>
+<li>
+<p>Deploy</p>
+</li>
+</ul>
+</li>
+<li>
+<p>流程详解如下</p>
+</li>
+</ul>
+<h3 id="211-fork">2.1.1 fork</h3>
+<ul>
+<li>
+<p>主仓库一般有两个分支，master和dev，日常开发工作在dev分支（<strong>设置为default</strong>）</p>
+</li>
+<li>
+<p>协同办公的组员，将主仓库<strong>fork</strong>到自己的github，将dev分支clone到本地</p>
+</li>
+<li>
+<p>将主仓库的远程地址添加进来</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git remote add upstream 主仓库url
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>push和pull时，分别使用自己的仓库和主仓库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git push origin HEAD:分支
+$ git pull upstream dev
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="212-建立分支">2.1.2 建立分支</h3>
+<ul>
+<li>
+<p>(<strong>此步骤之后的所有操作，就是日常工作的操作流程了</strong>)查看当前分支</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 查看所在分支</span>
+$ git branch
+* dev
+<span class="c1"># 查看本地和远程的全部分支</span>
+$ git branch -a 
+* dev
+	remotes/origin/HEAD -&gt; origin/dev
+	remotes/origin/dev
+	remotes/origin/master
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>新建分支</p>
+<ul>
+<li>当正式开始coding前，先不要在dev分支上直接开始，<strong>先pull</strong>一下主仓库保证代码为最新，之后新建一个当天开发用的分支（from dev）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git pull upstream dev
+
+$ git checkout -b todaywork
+Swiched to a new branch <span class="s1">&#39;check&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Coding&hellip;</li>
+</ul>
+</li>
+</ul>
+<h3 id="213-stash--同步分支代码">2.1.3 stash &amp; 同步分支代码</h3>
+<ul>
+<li>
+<p>stash</p>
+<ul>
+<li>当开发完成一个功能，或者这一天结束了，想要提交代码前，要先pull主仓库的代码</li>
+<li>但直接pull代码会带来冲突，此时可以使用stash命令，将提交或者代码放入暂存区</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git stash save <span class="s2">&#34;202207251044&#34;</span>
+$ git pull upstream dev
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>主仓库最新代码拉取下来后，将暂存区内容拿出来</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># stash命令</span>
+$ git stash list <span class="c1"># 查看stash了哪些存储</span>
+$ git stash show <span class="c1"># 显示做了哪些改动</span>
+$ git stash apply stash@<span class="o">{</span><span class="nv">$num</span><span class="o">}</span> <span class="c1"># 将某个暂存取出</span>
+$ git stash drop stash@<span class="o">{</span><span class="nv">$num</span><span class="o">}</span> <span class="c1"># 丢弃stash@{$num}存储，从列表中删除这个存储</span>
+$ git stash clear <span class="c1"># 删除所有缓存的stash</span>
+<span class="c1"># 一般使用pop，相当于apply(0) + drop(0)</span>
+$ git stash pop
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>解决本地冲突即可，stash会智能显示代码中的冲突</li>
+</ul>
+</li>
+</ul>
+<h3 id="214-正常提交代码">2.1.4 正常提交代码</h3>
+<ul>
+<li>
+<p>add&amp;commit&amp;push</p>
+<ul>
+<li>接下来要将代码提交至本地仓库，首先要查看代码状态</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git status / git diff
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>提交代码</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&#34;feat: xxx&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>push到自己的远程仓库</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git push origin todaywork
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="215-pull-request">2.1.5 Pull Request</h3>
+<ul>
+<li>提PR
+<ul>
+<li>我们到自己的远程仓库里，向主仓库提交分支合并请求，<strong>一般是自己这次工作创建的分支（todaywork）合并到主仓库的dev分支。</strong></li>
+<li>选择好分支后，可以描述这次的合并请求，加title和description，在合并选项里<strong>可以选择在合并请求同意后删除这个分支</strong>，这个看个人情况，选或是不选，一般自己新建的工作分支可以选择勾上。之后就可以submit提交了，等待项目负责人的回应。这里也可以选择右上角的Assign——&gt;Edit，来选择管理人员，效果相当于“@提醒一下”。</li>
+</ul>
+</li>
+</ul>
+<h3 id="216-code-review">2.1.6 Code Review</h3>
+<ul>
+<li>之后就是在项目负责人那边查看这个合并请求，进行Code Review，主要是：
+<ul>
+<li>发现错误：人都会不可避免的出现一些纰漏，而这些纰漏在另一个人眼中也许显而易见。</li>
+<li>健壮性检查：代码是否健壮，是否有潜在安全、性能风险。代码是否可以回滚。</li>
+<li>质量保证：在一般情况下，新提交的代码一定需要写测试，测试不只可以保证你的提交符合预期，还可以在后人改你的代码时多一层保障。</li>
+<li>统一风格：对于整个团队来说，代码风格的统一很重要。</li>
+<li>完善注释：包括 commit message、代码中复杂实现是否有解释性的注释、紧急 hack 是否明确标注等。</li>
+<li>互相学习</li>
+</ul>
+</li>
+<li>哪些人需要参与 Review
+<ol>
+<li>项目的维护者</li>
+<li>上下游影响的相关人员</li>
+</ol>
+</li>
+<li>Reviewer人员还可以对相关的代码做评论，点赞等等，再所有人觉得代码没有问题之后，便可以接收这次合并请求，你的分支就合并到了主仓库的主分支上，你的代码就算是加上去了。</li>
+<li>当然，主仓库管理人也可以对你的合并请求提出问题，做出相关评论，暂时不合并你的分支，甚至取消这个请求，这时你就需要查看评论和问题，修改代码，再次push你自己的这个分支（提交请求合并的分支），另一边也能及时看到变化（显示两次commit）。如果你的合并请求被取消了，只能重新再提交请求。</li>
+</ul>
+<h3 id="217-同步本地与主仓库代码">2.1.7 同步本地与主仓库代码</h3>
+<ul>
+<li>
+<p>最后，在自己的workspace下，既可以将工作分支合并到自己的dev分支中，也可以直接删除工作分支，pull主仓库来同步最新代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 方案一</span>
+$ git checkout dev
+$ git merge todaywork
+$ git branch -d todaywork
+<span class="c1"># 方案二</span>
+$ git branch -d todaywork
+$ git pull upstream dev
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="22-多人协同模式">2.2 多人协同模式</h2>
+<p>// TODO</p>
+<h1 id="3-git-add">3 git add</h1>
 <ul>
 <li>提交所有变化</li>
 </ul>
@@ -384,7 +664,7 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git add .
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="3-git-commit">3 git commit</h1>
+</div><h1 id="4-git-commit">4 git commit</h1>
 <ul>
 <li>取消上次commit
 <ul>
@@ -397,8 +677,8 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 </li>
 <li>如果commit注释写错了，只是想改一下注释，只需要<code>git commit --amend</code></li>
 </ul>
-<h1 id="4-git-fetch">4 git fetch</h1>
-<h1 id="5-git-merge">5 git merge</h1>
+<h1 id="5-git-fetch">5 git fetch</h1>
+<h1 id="6-git-merge">6 git merge</h1>
 <ul>
 <li>将所在分支与指定分支合并</li>
 </ul>
@@ -410,8 +690,8 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git merge &lt;分支名&gt;
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="6-git-pull">6 git pull</h1>
-<h1 id="7-git-push">7 git push</h1>
+</div><h1 id="7-git-pull">7 git pull</h1>
+<h1 id="8-git-push">8 git push</h1>
 <ul>
 <li>提交代码到指定远程仓库</li>
 </ul>
@@ -424,7 +704,18 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 </code></pre></td></tr></table>
 </div>
 </div><p>加了参数-u后，以后可以直接用git push 代替</p>
-<h1 id="8-git-remote">8 git remote</h1>
+<ul>
+<li>使用本地分支强行覆盖远程分支</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git push origin master -f
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="9-git-remote">9 git remote</h1>
 <ul>
 <li>添加远程仓库</li>
 </ul>
@@ -469,8 +760,8 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git remote -v
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="9-git-checkoutbranch">9 git checkout/branch</h1>
-<h2 id="91-基本操作">9.1 基本操作</h2>
+</div><h1 id="10-git-checkoutbranch">10 git checkout/branch</h1>
+<h2 id="101-基本操作">10.1 基本操作</h2>
 <ul>
 <li>查看本地有哪些分支</li>
 </ul>
@@ -537,7 +828,7 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git push origin --delete &lt;分支名&gt;
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="92-业务场景">9.2 业务场景</h2>
+</div><h2 id="102-业务场景">10.2 业务场景</h2>
 <ul>
 <li>
 <p>要将修改的业务代码<strong>同时push到其他分支</strong>：（<code>dev</code>分支的改动同步到<code>debug</code>分支）</p>
@@ -565,7 +856,7 @@ User <a href="mailto:a@b.com">a@b.com</a></p>
 </div>
 </div></li>
 </ul>
-<h1 id="10-git-reset">10 git reset</h1>
+<h1 id="11-git-reset">11 git reset</h1>
 <ol>
 <li>
 <p><strong>git reset &ndash;soft 版本号</strong></p>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bind on Even - A super concise theme for Hugo</title>
+    <link>https://gsemir0418.github.io/tags/bind/</link>
+    <description>Recent content in bind on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 23 Nov 2021 16:15:44 +0800</lastBuildDate><atom:link href="https://gsemir0418.github.io/tags/bind/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手写bind</title>
+      <link>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99bind/</link>
+      <pubDate>Tue, 23 Nov 2021 16:15:44 +0800</pubDate>
+      
+      <guid>https://gsemir0418.github.io/post/%E6%89%8B%E5%86%99bind/</guid>
+      <description>1 简版bind bind是Function.prototype上的方法 1 Function.prototype.bind2 = () =&amp;gt; {} 接收的第一个参数是新的this，返回一个新函数 1 2 3 Function.prototype.bind2 = (newThis) =&amp;gt;</description>
+    </item>
+    
+  </channel>
+</rss>
